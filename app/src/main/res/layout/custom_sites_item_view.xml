@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/dash_red"
+    android:layout_margin="5dp"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/site_loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:textColor="@color/eonWhite"
+        android:text="Location" />
+    <TextView
+        android:id="@+id/site_cust_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:textSize="17dp"
+        android:textColor="@color/eonWhite"
+        android:text="Cust_name" />
+    <TextView
+        android:id="@+id/faulty_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="16dp"
+        android:text="Faulty Devices"
+        android:textSize="15dp"
+        android:textColor="@color/eonWhite"
+        />
+    <TextView
+        android:id="@+id/faulty_drs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="16dp"
+        android:text="Faulty DRS "
+        android:textSize="15dp"
+        android:textColor="@color/eonWhite" />
+</LinearLayout>

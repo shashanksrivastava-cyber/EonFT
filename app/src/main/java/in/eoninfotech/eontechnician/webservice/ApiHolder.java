@@ -1,0 +1,658 @@
+package in.eoninfotech.eontechnician.webservice;
+
+
+import com.google.android.gms.location.LocationSettingsResponse;
+
+import in.eoninfotech.eontechnician.Responses.ActivityResponse;
+import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
+import in.eoninfotech.eontechnician.Responses.CallSheetListResponse;
+import in.eoninfotech.eontechnician.Responses.CallSheetResponse;
+import in.eoninfotech.eontechnician.Responses.ClientDataResponse;
+import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
+import in.eoninfotech.eontechnician.Responses.ClientResponse;
+import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
+import in.eoninfotech.eontechnician.Responses.CollectionReportResponse;
+import in.eoninfotech.eontechnician.Responses.DRSResponse;
+import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
+import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.Responses.FaultResponse;
+import in.eoninfotech.eontechnician.Responses.FaultyDevices;
+import in.eoninfotech.eontechnician.Responses.IncentiveResponse;
+import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
+import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.LogResponse;
+import in.eoninfotech.eontechnician.Responses.LoginResponse;
+import in.eoninfotech.eontechnician.Responses.MonthListResponse;
+import in.eoninfotech.eontechnician.Responses.MyPojo;
+import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
+import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
+import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
+import in.eoninfotech.eontechnician.Responses.RemovalResponse;
+import in.eoninfotech.eontechnician.Responses.ReplaceReason;
+import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
+import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
+import in.eoninfotech.eontechnician.Responses.StockResponse;
+import in.eoninfotech.eontechnician.Responses.TechResponse;
+import in.eoninfotech.eontechnician.Responses.TechnicianMonthResponse;
+import in.eoninfotech.eontechnician.Responses.UnderMaintenanceResponse;
+import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
+import in.eoninfotech.eontechnician.Responses.VTSResponse;
+import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
+import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
+import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.Responses.YearListResponse;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+
+/***************************************************************************/
+// Copyright EON Infotech Ltd., published work, created 2017.          //
+// This computer program includes Confidential, Proprietary information  //
+// and is a trade secret of EON Infotech Ltd. All use, disclosure and/or //
+// reproduction is prohibited unless authorised in writing by an         //
+// authorised officer of EON Infotech Ltd. All rights reserved.          //
+
+/**************************************************************************/
+public interface ApiHolder {
+
+//http://10.10.10.4/android/eonApp/2.7/client-locations.php?customer=4
+
+//http://10.10.10.4/android/eonApp/2.7/pcb-problems.php
+
+    /*@Multipart
+    @POST("device_old_tst.php")
+    Call<UpdateDataResponse> uploadFile(@Part MultipartBody.Part image,
+                                        @Part("tech_name") RequestBody tech_name,
+                                        @Part("vts_old") RequestBody vts_old,
+                                        @Part("vts_new") RequestBody vts_new,
+                                        @Part("drs_new") RequestBody drs_new,
+                                        @Part("drs_old") RequestBody drs_old,
+                                        @Part("client_id") RequestBody clint_id,
+                                        @Part("client_id") RequestBody reason_,
+                                        @Part("remarks") RequestBody remarks);*/
+    @FormUrlEncoded
+    @POST("bill-detail.php")
+    Call<UpdateDataResponse> view_bill(@Field("order_no") String order_no);
+
+    @Multipart
+    @POST("call-sheet.php")
+    Call<UpdateDataResponse> call_sheet(@Part MultipartBody.Part image,
+                                        @Part("tech_name") RequestBody tech_name,
+                                        @Part("date") RequestBody date,
+                                        @Part("remarks") RequestBody remark);
+
+    @Multipart
+    @POST("view-call-sheets.php")
+    Call<CallSheetResponse> callsheet_list(@Part("tech_name") RequestBody tech_name,
+                                           @Part("month") RequestBody month,
+                                           @Part ("year") RequestBody year);
+
+    @Multipart
+    @POST("month-call-sheets.php")
+    Call<CallSheetListResponse> callsheetlist(@Part("tech_name") RequestBody tech_name,
+                                               @Part("month") RequestBody month,
+                                              @Part ("year") RequestBody year);
+
+    @FormUrlEncoded
+    @POST("change-password.php")
+    Call<UpdateDataResponse> change_pwd(@Field("user_name") String tech_name,
+                                        @Field("old_password") String old_pwd,
+                                        @Field("new_password") String new_pwd);
+    @Multipart
+    @POST("device_old.php")
+    Call<UpdateDataResponse> uploadFile(
+                             @Part MultipartBody.Part image,
+                             @Part("tech_name") RequestBody tech_name,
+                             @Part("vts_old") RequestBody vts_old,
+                             @Part("vts_new") RequestBody vts_new,
+                             @Part("drs_new") RequestBody drs_new,
+                             @Part("drs_old") RequestBody drs_old,
+                             @Part("client_id") RequestBody clint_id,
+                             @Part("reason_replacement") RequestBody reason_replace,
+                             @Part("remarks") RequestBody remarks);
+
+    @FormUrlEncoded
+    @POST("device_other.php")
+    Call<UpdateDataResponse> device_other(
+                             @Field("tech_name") String tech_name,
+                             @Field("vts_old") String vts_old,
+                             @Field("change_value") String change_value,
+                             @Field("remarks") String remarks,
+                             @Field("client_id") String client_id,
+                             @Field("tel_support") String tel_support);
+
+    @FormUrlEncoded
+    @POST("eon_details.php")
+    Call<UpdateDataResponse> critical_sites(@Field("tech_name") String tech_name,
+                                            @Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("incentive.php")
+    Call<UpdateDataResponse> incentive(@Field("tech_name") String tech_name,
+                                       @Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("list-incentives.php")
+    Call<IncentiveResponse> incentive_list(@Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("mark-attendance.php")
+    Call<AttResponse> log_attendance(
+                      @Field("tech_name") String username,
+                      @Field("time") String time,
+                      @Field("date") String date,
+                      @Field("latitude") String lati,
+                      @Field("longitude") String longi,
+                      @Field("address") String address,
+                      @Field("log_status") String log_,
+                      @Field("version") String version,
+                      @Field("remarks") String remarks,
+                      @Field("client_id") String client_id,
+                      @Field("client_loc") String client_loc);
+
+    @FormUrlEncoded
+    @POST("pending-bill.php")
+    Call<UpdateDataResponse> pending_bill(@Field("sales_person") String tech_name);
+
+    @FormUrlEncoded
+    @POST("plan_list.php")
+    Call<UpdateDataResponse> plan_detail(@Field("name") String tech_name,
+                                         @Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("replacement-reasons.php")
+    Call<UpdateDataResponse> get_replacement_reasons(@Field("sale_id") String sale_id);
+
+    @FormUrlEncoded
+    @POST("sales-report.php")
+    Call<UpdateDataResponse> view_entry(@Field("sales_person") String tech_name,
+                                        @Field("from_date") String from_date,
+                                        @Field("to_date") String to_date);
+
+    @FormUrlEncoded
+    @POST("sales-orders.php")
+    Call<UpdateDataResponse> order_list(@Field("sales_person") String tech_name);
+
+    @FormUrlEncoded
+    @POST("sales-client-data.php")
+    Call<UpdateDataResponse> sales_client_detail(@Field("sales_person") String sales_person);
+
+    @FormUrlEncoded
+    @POST("sales-target.php")
+    Call<UpdateDataResponse> sales_target(@Field("sales_person") String sales_person);
+
+    @FormUrlEncoded
+    @POST("sale-detail.php")
+    Call<UpdateDataResponse> edit_sale_detail(@Field("sale_id") String sale_id);
+
+    @FormUrlEncoded
+    @POST("stock-report.php")
+    Call<StockResponse> stock_report(@Field("tech_name") String tech_name,
+                                     @Field("date") String date);
+
+    @FormUrlEncoded
+    @POST("tech_plans.php")
+    Call<UpdateDataResponse> update_next_day_plan(@Field("tech_name") String tech_name,
+                                                  @Field("date") String date,
+                                                  @Field("cust_name") String cust_name,
+                                                  @Field("cust_id") String cust_id,
+                                                  @Field("veh_chk") String veh_chk,
+                                                  @Field("drs_chk") String drs_chk,
+                                                  @Field("spoken_to_client") String spoken_to_client,
+                                                  @Field("client_name") String client_name,
+                                                  @Field("client_number") String client_number,
+                                                  @Field("remarks") String remarks);
+
+    @FormUrlEncoded
+    @POST("technicians_plan.php")
+    Call<UpdateDataResponse> admin_show_plan(@Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("update_installation.php")
+    Call<UpdateDataResponse> update_requirement(@Field("sale_id") String sale_id,
+                                                @Field("sales_person_name") String username,
+                                                @Field("date") String date,
+                                                @Field("order_no") String order_no,
+                                                @Field("install_type") String install_type,
+                                                @Field("duration") String duration,
+                                                @Field("cust_type") String cust_type,
+                                                @Field("cust_name") String cust_name,
+                                                @Field("cust_street_name") String cust_street_name,
+                                                @Field("cust_city") String cust_city,
+                                                @Field("cust_office_number") String cust_office_number,
+                                                @Field("cust_district") String cust_district,
+                                                @Field("cust_state") String cust_state,
+                                                @Field("cust_pincode") String cust_pincode,
+                                                @Field("cust_p_name") String cust_p_name,
+                                                @Field("cust_p_number") String cust_p_number,
+                                                @Field("cust_p_id") String cust_p_id,
+                                                @Field("cust_s_name") String cust_s_name,
+                                                @Field("cust_s_number") String cust_s_number,
+                                                @Field("cust_s_id") String cust_s_id,
+                                                @Field("install_street_name") String install_street_name,
+                                                @Field("install_city") String install_city,
+                                                @Field("install_office_number") String install_office_number,
+                                                @Field("install_district") String install_district,
+                                                @Field("install_state") String install_state,
+                                                @Field("install_pincode") String install_pincode,
+                                                @Field("vehicle_type") String vehicle_type,
+                                                @Field("battery_voltage") String battery_voltage,
+                                                @Field("vts_quantity") String vts_quantity,
+                                                @Field("accessory") String accessory,
+                                                @Field("drs_quantity") String drs_quantity,
+                                                @Field("fuel_sensor_quantity") String fuel_sensor_quantity,
+                                                @Field("door_sensor_quantity") String door_sensor_quantity,
+                                                @Field("priority_reason") String priority_rsn,
+                                                @Field("remarks") String remarks,
+                                                @Field("ignition") String ignition,
+                                                @Field("high_count") String high_count,
+                                                @Field("normal_count") String normal_count,
+                                                @Field("low_count") String low_count);
+
+    @FormUrlEncoded
+    @POST("view_tech_plan.php")
+    Call<UpdateDataResponse> view_next_plan(@Field("tech_name") String tech_name,
+                                            @Field("key") String key);
+
+    @FormUrlEncoded
+    @POST("vts_installation.php")
+    Call<UpdateDataResponse> vts_requirement(@Field("sales_person_name") String username,
+                                             @Field("date") String date,
+                                             @Field("order_no") String order_no,
+                                             @Field("install_type") String install_type,
+                                             @Field("duration") String duration,
+                                             @Field("cust_type") String cust_type,
+                                             @Field("cust_name") String cust_name,
+                                             @Field("cust_street_name") String cust_street_name,
+                                             @Field("cust_city") String cust_city,
+                                             @Field("cust_office_number") String cust_office_number,
+                                             @Field("cust_district") String cust_district,
+                                             @Field("cust_state") String cust_state,
+                                             @Field("cust_pincode") String cust_pincode,
+                                             @Field("cust_p_name") String cust_p_name,
+                                             @Field("cust_p_number") String cust_p_number,
+                                             @Field("cust_p_id") String cust_p_id,
+                                             @Field("cust_s_name") String cust_s_name,
+                                             @Field("cust_s_number") String cust_s_number,
+                                             @Field("cust_s_id") String cust_s_id,
+                                             @Field("install_street_name") String install_street_name,
+                                             @Field("install_city") String install_city,
+                                             @Field("install_office_number") String install_office_number,
+                                             @Field("install_district") String install_district,
+                                             @Field("install_state") String install_state,
+                                             @Field("install_pincode") String install_pincode,
+                                             @Field("vehicle_type") String vehicle_type,
+                                             @Field("battery_voltage") String battery_voltage,
+                                             @Field("vts_quantity") String vts_quantity,
+                                             @Field("accessory") String accessory,
+                                             @Field("drs_quantity") String drs_quantity,
+                                             @Field("fuel_sensor_quantity") String fuel_sensor_quantity,
+                                             @Field("door_sensor_quantity") String door_sensor_quantity,
+                                             @Field("priority_reason") String priority_rsn,
+                                             @Field("remarks") String remarks,
+                                             @Field("ignition") String ignition,
+                                             @Field("high_count") String high_count,
+                                             @Field("normal_count") String normal_count,
+                                             @Field("low_count") String low_count);
+
+    @Multipart
+    @POST("vts_bill.php")
+    Call<UpdateDataResponse> billing_intimation(@Part MultipartBody.Part image,
+                                                @Part("sales_person_name") RequestBody username,
+                                                @Part("date") RequestBody date,
+                                                @Part("order_no") RequestBody order_no,
+                                                @Part("install_type") RequestBody install_type,
+                                                @Part("cust_type") RequestBody cust_type,
+                                                @Part("cust_name") RequestBody cust_name,
+                                                @Part("cust_street_name") RequestBody cust_street_name,
+                                                @Part("cust_city") RequestBody cust_city,
+                                                @Part("cust_office_number") RequestBody cust_office_number,
+                                                @Part("cust_district") RequestBody cust_district,
+                                                @Part("cust_state") RequestBody cust_state,
+                                                @Part("cust_pincode") RequestBody cust_pincode,
+                                                @Part("cust_p_name") RequestBody cust_p_name,
+                                                @Part("cust_p_number") RequestBody cust_p_number,
+                                                @Part("cust_p_id") RequestBody cust_p_id,
+                                                @Part("cust_s_name") RequestBody cust_s_name,
+                                                @Part("cust_s_number") RequestBody cust_s_number,
+                                                @Part("cust_s_id") RequestBody cust_s_id,
+                                                @Part("units_billed") RequestBody units_billed,
+                                                @Part("hardware_with_voice_price") RequestBody hardware_price,
+                                                @Part("monthly_recurring_price") RequestBody monthly_recurring,
+                                                @Part("setup_charges") RequestBody setup_charges,
+                                                @Part("installation_price") RequestBody installation,
+                                                @Part("accessories_price") RequestBody accessories,
+                                                @Part("other_price") RequestBody other_price,
+                                                @Part("hardware_with_voice_tax") RequestBody hardware_tax,
+                                                @Part("monthly_recurring_tax") RequestBody monthly_recurring_tax,
+                                                @Part("setup_charges_tax") RequestBody setup_charges_tax,
+                                                @Part("installation_tax") RequestBody installation_tax,
+                                                @Part("accessories_tax") RequestBody accessories_tax,
+                                                @Part("other_tax") RequestBody other_tax,
+                                                @Part("amc_charges") RequestBody amc_charges,
+                                                @Part("start_date_amc") RequestBody start_date_amc,
+                                                @Part("remarks") RequestBody remarks,
+                                                @Part("gst_no") RequestBody gst_no,
+                                                @Part("pan_number") RequestBody pan_number,
+                                                @Part("hardware_without_voice_price") RequestBody withoutvoice_price,
+                                                @Part("hardware_without_voice_tax") RequestBody withoutvoice_tax,
+                                                @Part("hardware_pump_price") RequestBody pump_price,
+                                                @Part("hardware_pump_tax") RequestBody pump_tax,
+                                                @Part("sale_id") RequestBody sale_id);
+
+    @GET("work-type.php")
+    Call<WorkTypeResponse> reqeuestworkType();
+
+    @GET("vehicle-type.php")
+    Call<VehicleTypeResponse> reqeuestvehicleType();
+
+    @GET("clients-list.php")
+    Call<ClientResponse> reqeuestClientList();
+
+    @GET("stock-clients.php")
+    Call<ClientResponse> reqeuestStockClientList();
+
+    @GET("eon-technicians.php")
+    Call<TechResponse> requestTechList();
+
+    @GET("fault-list.php")
+    Call<FaultResponse> reqeuestFaultList();
+
+    @GET("collected-items.php")
+    Call<CollectedItemsResponse> reqeuestCollectedItemList();
+
+    @GET("replacement-reasons.php")
+    Call<ReplaceReason> reqeuestReplaceReason();
+
+    @GET("removal-reasons.php")
+    Call<RemovalResponse> reqeuestRemovalReason();
+
+    @GET("damage-reasons.php")
+    Call<RemovalResponse> reqeuestDamageReason();
+
+    @GET("disconnection-reasons.php")
+    Call<DisconnectionResponse> reqeuestDisconnection();
+
+    @GET("payment-methods.php")
+    Call<PaymentMethodResponse> reqeuestPMethod();
+
+    @FormUrlEncoded
+    @POST("client-locations.php")
+    Call<ClientLocationResponse> reqeuestClientLocation(
+    @Field("customer") String customer);
+
+    @FormUrlEncoded
+    @POST("vts-detail.php")
+    Call<VTSResponse> reqeuestVtsDetail(
+            @Field("vid") String id);
+
+    @FormUrlEncoded
+    @POST("vts-detail.php")
+    Call<VTSResponse> reqeuestVtsDetails(
+            @Field("vid") String id);
+
+    @FormUrlEncoded
+    @POST("check-drs.php")
+    Call<DRSResponse> reqeuestDrsDetail(
+            @Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("technicians-work.php")
+    Call<InstallResponse> postInstallationData(
+                          @Field("work_type") String worktype,
+                          @Field("tech_name") String techName,
+                          @Field("client_id") String clientId,
+                          @Field("client_loc_id") String c_loc_id,
+                          @Field("reg_no") String regNo,
+                          @Field("veh_type") String vehType,
+                          @Field("device_type") String devType,
+                          @Field("old_vts_id") String oldVtsId,
+                          @Field("new_vts_id") String newVtsId,
+                          @Field("is_drs") String isDrs,
+                          @Field("new_drs_id") String newDrsId,
+                          @Field("old_drs_id") String oldDrsId,
+                          @Field("drs_direction") String drsDirection,
+                          @Field("reason_replacement") String replaceReason,
+                          @Field("removal_reason") String removalReason,
+                          @Field("items_collected") String itemsCollected,
+                          @Field("others") String others,
+                          @Field("tel_support") String telSupport,
+                          @Field("activity_date") String date,
+                          @Field("activity_time") String time,
+                          @Field("remarks") String remarks,
+                          @Field("disconnection_reason") String dis_reason,
+                          @Field("ignition_sensor") String ignition_sensor,
+                          @Field("fuel_sensor") String fuel_sensor,
+                          @Field("door_sensor") String door_sensor,
+                          @Field("veh_condition") String veh_condition,
+                          @Field("mgt_set") String mgt_set,
+                          @Field("sim_provider") String sim_provider,
+                          @Field("old_sim_no") String old_sim_no,
+                          @Field("new_sim_no") String new_sim_no,
+                          @Field("sim_reason") String sim_reason,
+                          @Field("not_available_reason") String not_available_reason,
+                          @Field("not_available_activity") String not_available_activity,
+                          @Field("is_demo") String is_demo,
+                          @Field("missing_type")String missing_type,
+                          @Field("collection_amount")String collection_amount,
+                          @Field("collection_date")String collection_date,
+                          @Field ("collection_type")String collection_type,
+                          @Field("collection_image")String collection_image,
+                          @Field("missing_reason")String missing_reason,
+                          @Field("removal_type")String removal_type,
+                          @Field("cut_off")String cut_off,
+                          @Field("serial_no")String serial_no,
+                          @Field("contact_person")String contact_person,
+                          @Field("contact_no")String contact_no,
+                          @Field("payment_type")String payment_type);
+
+    @Multipart
+    @POST("technicians-work.php")
+    Call<InstallResponse> postInstallationsData(
+                          @Part("work_type") RequestBody worktype,
+                          @Part("tech_name") RequestBody techName,
+                          @Part("client_id") RequestBody clientId,
+                          @Part("client_loc_id") RequestBody c_loc_id,
+                          @Part("reg_no") RequestBody regNo,
+                          @Part("veh_type") RequestBody vehType,
+                          @Part("device_type") RequestBody devType,
+                          @Part("old_vts_id") RequestBody oldVtsId,
+                          @Part("new_vts_id") RequestBody newVtsId,
+                          @Part("is_drs") RequestBody isDrs,
+                          @Part("new_drs_id") RequestBody newDrsId,
+                          @Part("old_drs_id") RequestBody oldDrsId,
+                          @Part("drs_direction") RequestBody drsDirection,
+                          @Part("reason_replacement") RequestBody replaceReason,
+                          @Part("removal_reason") RequestBody removalReason,
+                          @Part("items_collected") RequestBody itemsCollected,
+                          @Part("others") RequestBody others,
+                          @Part("tel_support") RequestBody telSupport,
+                          @Part("activity_date") RequestBody date,
+                          @Part("activity_time") RequestBody time,
+                          @Part("remarks") RequestBody remarks,
+                          @Part("disconnection_reason") RequestBody dis_reason,
+                          @Part("ignition_sensor") RequestBody ignition_sensor,
+                          @Part("fuel_sensor") RequestBody fuel_sensor,
+                          @Part("door_sensor") RequestBody door_sensor,
+                          @Part("veh_condition") RequestBody veh_condition,
+                          @Part("mgt_set") RequestBody mgt_set,
+                          @Part("sim_provider") RequestBody sim_provider,
+                          @Part("old_sim_no") RequestBody old_sim_no,
+                          @Part("new_sim_no") RequestBody new_sim_no,
+                          @Part("sim_reason") RequestBody sim_reason,
+                          @Part("not_available_reason") RequestBody not_available_reason,
+                          @Part("not_available_activity") RequestBody not_available_activity,
+                          @Part("is_demo") RequestBody is_demo,
+                          @Part("missing_type")RequestBody missing_type,
+                          @Part("collection_amount")RequestBody collection_amount,
+                          @Part("collection_date")RequestBody collection_date,
+                          @Part ("collection_type")RequestBody collection_type,
+                          @Part MultipartBody.Part collection_image,
+                          @Part("missing_reason")RequestBody missing_reason,
+                          @Part("removal_type")RequestBody removal_type,
+                          @Part("cut_off")RequestBody cut_off,
+                          @Part("serial_no")RequestBody serial_no,
+                          @Part("contact_person")RequestBody contact_person,
+                          @Part("contact_no")RequestBody contact_no,
+                          @Part("payment_type")RequestBody payment_type);
+
+
+    @FormUrlEncoded
+    @POST("faulty-vts.php")
+    Call<UpdateDataResponse> faulty_vts(@Field("technician") String technician);
+
+    @FormUrlEncoded
+    @POST("view-activities.php")
+    Call<ActivityResponse> view_activities(@Field("date") String date,
+                                           @Field("tech_name") String techName);
+    @GET("tech-of-month.php")
+    Call<TechnicianMonthResponse> requestTechnicianoftheMonth();
+
+    @FormUrlEncoded
+    @POST("tech-dashboard.php")
+    Call<DashBoardResponse> dashBoardResponse(@Field("zone") String zone);
+
+    @FormUrlEncoded
+    @POST("under-maintenance.php")
+    Call<UnderMaintenanceResponse> underMainResponse(@Field("zone") String zone);
+
+    @FormUrlEncoded
+    @POST("devices-detail.php")
+    Call<FaultyDevices> faultyDevicesResponse(@Field("zone") String zone);
+
+    @FormUrlEncoded
+    @POST("faulty-drs-details.php")
+    Call<FaultyDevices> faultyDRSResponse(@Field("zone") String zone);
+
+    @FormUrlEncoded
+    @POST("login-api.php")
+    Call<LoginResponse> loginResponse(
+                        @Field("username") String username,
+                        @Field("password") String password,
+                        @Field("imei_no") String imei_no);
+
+    @FormUrlEncoded
+    @POST("log-status.php")
+    Call<LogResponse> logResponse(
+                      @Field("tech_name") String tech_name,
+                      @Field("date") String date);
+
+    @GET("sim-replacement-reasons.php")
+    Call<SimReplaceResponse> reqeuestSimReplaceResponse();
+
+    @GET("sim-operators.php")
+    Call<SimOperatorResponse> reqeuestSimOperatorResponse();
+
+    @GET("not-available-reasons.php")
+    Call<VehNotAvailReasonResponse> requestVehNotAvailReasonResponse();
+
+    @GET("removal-activities.php")
+    Call<RemovalActivityResponse> requestRemovalActivityResponse();
+
+    @GET("not-available-activites.php")
+    Call<NotAvailActivityResponse> notAvailActivityResponse();
+
+    @GET("months-list.php")
+    Call<MonthListResponse> monthResponse();
+
+    @GET("years-list.php")
+    Call<YearListResponse> yearResponse();
+
+    @FormUrlEncoded
+    @POST("check-faults.php")
+    Call<MyPojo> readUserData(@Field("tech") String tech_name);
+
+    @FormUrlEncoded
+    @POST("pvt-clients.php")
+    Call<MyPojo> readPvtData(@Field("tech") String tech_name);
+
+    @FormUrlEncoded
+    @POST("fault-messages.php")
+    Call<InstInstructionResponse> instructionResponse(
+                                  @Field("srv") String server,
+                                  @Field("db") String database,
+                                  @Field("cust_id") String cust_id,
+                                  @Field("loc_id") String loc_id);
+
+    @FormUrlEncoded
+    @POST("stock-update.php")
+    Call<InstallResponse> stockResponse(
+                          @Field("client_id") String client_id,
+                          @Field("vts_wrk") String vts_wrk,
+                          @Field("vts_falt") String vts_falt,
+                          @Field("mtrs_7") String mtrs_7,
+                          @Field("mtrs_2") String mtrs_2,
+                          @Field("drs") String drs,
+                          @Field("mgt_set") String mgt_set,
+                          @Field("tech_name") String tech_name,
+                          @Field("y_cable") String y_cable,
+                          @Field("remarks") String remarks,
+                          @Field("vts_w_id") String vts_w_id,
+                          @Field("vts_f_id") String vts_f_id,
+                          @Field("drs_id") String drs_id);
+
+    @FormUrlEncoded
+    @POST("stock-client-data.php")
+    Call<ClientDataResponse> reqeuestClientDataResponse(
+                             @Field("tech_name") String tech_name,
+                             @Field("client_id") String client_id);
+
+    @FormUrlEncoded
+    @POST("collection-report.php")
+    Call<CollectionReportResponse> requestCollectionReportResponse (
+                                   @Field("tech_name") String tech_name,
+                                   @Field("from_date") String from_date,
+                                   @Field("to_date") String to_date);
+
+    @FormUrlEncoded
+    @POST("incentives.php")
+    Call<IncentiveResponse> incentiveResponse (
+                            @Field("tech_name") String tech_name,
+                            @Field("zone") String zone,
+                            @Field("month") String month,
+                            @Field ("year") String year);
+
+    @FormUrlEncoded
+    @POST("atd-summary.php")
+    Call<AttendanceResponse> attendanceResponse (
+                              @Field("tech_name") String tech_name,
+                              @Field("month") String month,
+                              @Field("year") String year);
+
+    @FormUrlEncoded
+    @POST("locations.php")
+    Call<LocationsResponse> locationResponse (
+                             @Field("tech_name") String tech_name,
+                             @Field("location") String location,
+                             @Field("imei_no") String imei_no,
+                             @Field("latitude") String latitude,
+                             @Field("longitude") String longitude,
+                             @Field("mac_address") String mac_address);
+
+    @FormUrlEncoded
+    @POST("tracking-details.php")
+    Call<TrackingResponse> trackingResponse (
+                            @Field("username") String username,
+                            @Field("imei_no") String imei_no);
+
+    @FormUrlEncoded
+    @POST("messages.php")
+    Call<MessageResponse> messageResponse (
+                            @Field("tech_name") String tech_name,
+                            @Field("date") String date,
+                            @Field("status") String status,
+                            @Field("msg_type") String msg_type);
+
+    @FormUrlEncoded
+    @POST("update-message-status.php")
+    Call<InstallResponse> updateResponse (
+                          @Field("message_id") String message_id);
+
+
+}

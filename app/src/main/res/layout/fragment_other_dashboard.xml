@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="2dp"
+    android:background="#ffffff"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:id="@+id/relay"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/et_frame">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/new_in_clients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/curnt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="16dp"
+        android:paddingTop="5dp"
+        android:text="20th, February"
+        android:textColor="@color/eonBlue"
+        android:textSize="16sp"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/txt_content_unavailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:text="Please Select Technician to view Details"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/addDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/relay"
+        android:layout_marginTop="5dp"
+        android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/curnt_date"
+        android:id="@+id/addPerformance"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_drawable">
+
+        <TextView
+            android:id="@+id/addName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/row4"
+            android:text="Your ADD Performence"
+            android:textColor="@color/eonBlue"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textStyle="bold"/>
+
+        <View
+            android:id="@+id/row4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_below="@+id/addLinearQuantity"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addPerformance"
+            android:id="@+id/addLinear"
+            android:weightSum="2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
+
+            <TextView
+                android:id="@+id/target_month"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/curnt_date"
+                android:text="Today"
+                android:textColor="@color/eonBlue"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/target_month"
+                android:text="Last 21 Days"
+                android:textColor="@color/eonBlue"
+                android:textSize="14sp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_below="@+id/addLinearQuantity"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addLinear"
+            android:id="@+id/addLinearQuantity"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/addTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="39"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/add_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="45"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_below="@+id/addLinearQuantity"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/addPerformance"
+        android:layout_marginTop="5dp">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/piechart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </com.github.mikephil.charting.charts.PieChart>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="#00FFFFFF"
+        android:clickable="true"
+        android:id="@+id/llayoutProgress"
+        android:gravity="center"
+        android:focusable="true">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="20"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="2dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:id="@+id/relay"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/et_frame">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/new_in_clients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog"
+            android:visibility="visible"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_content_unavailable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:text="Please Select Technician to view Details"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/addDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/relay"
+        android:layout_marginTop="45dp"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"/>
+
+                <TextView
+                    android:id="@+id/addName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your ADD Performence"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:padding="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/addName"
+                    android:clipToPadding="false"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/bankcardId"
+                        android:layout_width="120dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="10dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/et_card">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:background="@drawable/cerclebackgroundblue"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_performance" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="ADD"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/grey500" />
+
+                            <TextView
+                                android:id="@+id/addTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="120dp"
+                        android:layout_height="130dp"
+                        android:layout_margin="10dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:background="@drawable/et_card">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:background="@drawable/cerclebackgroundblue"
+                                android:padding="10dp"
+                                android:src="@drawable/ic_calendar_21" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:textSize="16sp"
+                                android:text="ADD 21"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/grey500" />
+
+                            <TextView
+                                android:id="@+id/add_value"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginTop="5dp"
+                                android:text=""
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardTotal"
+                        android:layout_width="300dp"
+                        android:layout_height="70dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="200dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total VTS"
+                                    android:textSize="16sp"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/eonWhite" />
+
+                                <TextView
+                                    android:id="@+id/total_vts"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text=""
+                                    android:textColor="@color/eonWhite"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total DRS"
+                                    android:layout_marginTop="5dp"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/eonWhite"/>
+
+                                <TextView
+                                    android:id="@+id/total_drs"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:fontFamily="sans-serif-light"
+                                    android:text=""
+                                    android:textColor="@color/eonWhite"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_one_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/cardTotal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/disable_gps"
+                                android:drawablePadding="10dp"
+                                android:text="Faulty VTS"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite"/>
+
+                            <TextView
+                                android:id="@+id/faulty_vts"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:padding="5dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/vtsSpv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_gravity="right|center_vertical"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="67"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_two_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_one_login"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_drs_na"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:drawablePadding="10dp"
+                                android:text="Faulty DRS"
+                                android:textColor="@color/eonWhite"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/faulty_drs"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:padding="5dp"
+                                android:text=""
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/drsSpv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="13"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_three_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_two_login"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_maintenance"
+                                android:drawablePadding="10dp"
+                                android:text="Under Maintenance"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite" />
+
+                            <TextView
+                                android:id="@+id/faulty_um"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text=""
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/umSpv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="147"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/slide_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_margin="10dp"
+            android:background="@drawable/et_frame">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="14sp"
+                        android:text="Client Name : "
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/site_cust_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:textSize="14sp"
+                    android:text="Cust_Name"
+                    android:layout_weight="1.5"
+                    android:textColor="@color/c"
+                    android:padding="2dp"
+                    android:layout_marginTop="5dp"/>
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:textSize="14sp"
+                    android:text="Location : "
+                    android:layout_weight="0.25"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/site_loc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:textSize="14sp"
+                    android:text="Location"
+                    android:layout_weight="1.5"
+                    android:textColor="@color/c"
+                    android:padding="2dp"/>
+
+            </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@color/grey500"
+                    android:layout_marginTop="10dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:id="@+id/tvBought"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:paddingRight="2dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Faulty VTS :"
+                        android:textSize="14sp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="3dp"
+                        android:visibility="gone"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/faulty_vts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="45"
+                        android:textSize="14sp"
+                        android:layout_marginTop="2dp"
+                        android:padding="3dp"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/tvBought"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_marginRight="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="Message"
+                            android:textSize="14dp"
+                            android:layout_toRightOf="@+id/quantity"
+                            android:padding="2dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/cart_badge"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginEnd="-5dp"
+                            android:layout_marginRight="-5dp"
+                            android:background="@drawable/ic_dot_5dp"
+                            android:gravity="center"
+                            android:padding="3dp"
+                            android:textColor="@android:color/white"
+                            android:text=""
+                            android:textSize="10sp"
+                            android:visibility="gone"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:id="@+id/quantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="3dp"
+                        android:paddingBottom="4dp"
+                        android:text="Faulty DRS :"
+                        android:textAllCaps="false"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        android:layout_toRightOf="@+id/faulty_vts"
+                        android:textStyle="bold"
+                        android:gravity="right"/>
+
+                    <TextView
+                        android:id="@+id/faulty_drs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text=""
+                        android:textSize="14dp"
+                        android:layout_toRightOf="@+id/quantity"
+                        android:layout_marginTop="2dp"
+                        android:padding="3dp"
+                        android:textStyle="bold"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+</LinearLayout>

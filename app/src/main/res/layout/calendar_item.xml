@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="5dip"
+    android:paddingRight="2dip"
+    android:paddingLeft="5dip"
+    android:paddingTop="3dip">
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/today"
+        android:textSize="20sp"
+        android:text="12"
+        android:textStyle="bold" >
+    </TextView>
+    <TextView
+        android:id="@+id/txt_kms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/eonBlue"
+        android:textSize="8sp" />
+    />-->
+    <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/date_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/date"
+        android:src="@drawable/ic_lens_black_24dp"
+        android:visibility="gone" />
+
+</LinearLayout>

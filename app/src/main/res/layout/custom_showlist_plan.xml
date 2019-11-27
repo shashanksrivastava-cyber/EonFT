@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="2dp"
+    android:background="@drawable/spinnr_back"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="1"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:id="@+id/tech_name_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@color/eonBlue">
+
+            <TextView
+                android:id="@+id/tech_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Technician"
+                android:textColor="@color/eonWhite"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text=""
+                android:textColor="#d50000"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Date"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+
+                android:id="@+id/view_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grey_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Customer Name"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/view_cust_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Vehicles"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/view_veh_chk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grey_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="DRS"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+
+                android:id="@+id/view_drs_chk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Client Name"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/view_client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grey_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Client Number"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/view_client_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Spoken to Client"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/view_spoken_to_client"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/grey_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Remarks"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/view_remarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout><!--created by harmantj in 2017-->

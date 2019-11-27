@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_pendency"
+            android:icon="@drawable/ic_pendency_detail"
+            android:title="Pendency Detail" />
+        <item
+            android:id="@+id/nav_requirement"
+            android:icon="@drawable/ic_requirement_24dp"
+            android:title="Requirement Detail" />
+        <item
+            android:id="@+id/nav_critical_sites"
+            android:icon="@drawable/ic_critical_sites_24dp"
+            android:title="Critical Sites" />
+
+        <item
+            android:id="@+id/nav_incentive"
+            android:icon="@drawable/ic_incentive"
+            android:title="Incentive" />
+        <item
+            android:id="@+id/nav_stock"
+            android:icon="@drawable/stock"
+            android:title="Stock" />
+        <item
+            android:id="@+id/nav_new_repair"
+            android:icon="@drawable/install"
+            android:title="New/Repair" />
+        <item
+            android:id="@+id/nav_call_sheet"
+            android:icon="@drawable/ic_incentive"
+            android:title="Call Sheet" />
+        <item
+            android:id="@+id/nav_next_plan"
+            android:icon="@drawable/ic_next_day_plan"
+            android:title="Next Day Plan" />
+        <item
+            android:id="@+id/nav_update_client_list"
+            android:icon="@drawable/upd_list"
+            android:title="Update Client List" />
+        <item
+            android:id="@+id/nav_passwrd"
+            android:icon="@drawable/ic_change_pwd_24dp"
+            android:title="Change Password" />
+    </group>
+
+</menu>

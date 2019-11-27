@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/eonWhite"
+        android:elevation="2dp"
+        android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/on"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginTop="5dp"
+                android:text="Select Image"
+                android:textColor="@color/grey500"
+                android:layout_marginLeft="18dp"
+                android:textSize="20sp"
+                android:fontFamily="sans-serif"/>
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:background="@color/grey500" />-->
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey500"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_below="@+id/on"/>
+
+            <RelativeLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:background="@color/eonWhite"
+                android:elevation="4dp"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:id="@+id/menu_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:padding="10dp"
+                    android:text="Camera"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:drawableLeft="@drawable/camera"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="sans-serif"/>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey500"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/menu_camera"/>
+
+                <TextView
+                    android:id="@+id/menu_gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view"
+                    android:padding="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:text="Gallery"
+                    android:drawableLeft="@drawable/gallery"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif"
+                    android:drawablePadding="10dp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

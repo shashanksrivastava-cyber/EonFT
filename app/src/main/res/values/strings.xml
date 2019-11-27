@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Eon FT</string>
+    <string name="PHN"> 0172-5044700/703</string>
+    <string name="support">support@eoninfotech.com</string>
+    <string name="qty">Quantity:</string>
+    <string name="srno">Serial No:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="plnt">"Select Plant:</string>
+    <string name="vehcl">"Select Device:</string>
+    <string name="search_hint">"Search</string>
+    <string name="drs">"Select DRS:</string>
+    <string name="internal_storage">internal_storage</string>
+    <string name="filled_by">  <b>Filled By :</b> </string>
+    <string name="order_no"> <b>Order No : </b> </string>
+    <string name="install_type"> <b>Install Type : </b> </string>
+    <string name="duration"> <b>Duration : </b> </string>
+    <string name="cust_type"> <b>Cust Type : </b> </string>
+    <string name="client_name"> <b>Client Name : </b> </string>
+    <string name="client_street_name"> <b>Client Street Name : </b> </string>
+    <string name="client_city"> <b>Client City : </b> </string>
+    <string name="client_office_number"> <b>Office Number : </b> </string>
+    <string name="client_district"> <b>Client District : </b> </string>
+    <string name="client_state"> <b>Client State : </b> </string>
+    <string name="client_pincode"> <b>Client Pincode : </b> </string>
+    <string name="contact_name"> <b>Contact Name : </b> </string>
+    <string name="contact_number"> <b>Contact Number : </b> </string>
+    <string name="contact_id"> <b>Contact Id : </b> </string>
+    <string name="INSTALLATION_ADDRESS"> <b>Installation Address :</b> </string>
+    <string name="street_name"> <b>Street Name : </b> </string>
+    <string name="city"> <b>City : </b> </string>
+    <string name="office_number"> <b>Office Number : </b> </string>
+    <string name="district"> <b>District : </b> </string>
+    <string name="state"> <b>State : </b> </string>
+    <string name="pincode"> <b>Pincode : </b> </string>
+    <string name="vehicle_type"> <b>Vehicle Type : </b> </string>
+    <string name="battery_voltage"> <b>Battery Voltage : </b> </string>
+    <string name="vts_quantity_pre"> <b>Vts Quantity : </b> </string>
+    <string name="ignition"> <b>Ignition : </b> </string>
+    <string name="accessory"> <b>Accessory : </b> </string>
+    <string name="drs_quantity"> <b>Drs Quantity : </b> </string>
+    <string name="fuel_sensor_quanti"> <b>Fuel Sensor Qty : </b> </string>
+    <string name="door_sensor_quanti"> <b>Door Sensor Qty : </b> </string>
+    <string name="high_count"> <b>High Count : </b> </string>
+    <string name="normal_count"> <b>Normal Count : </b> </string>
+    <string name="low_count"> <b>Low Count : </b> </string>
+    <string name="priority_reason"> <b>Priority Reason : </b> </string>
+    <string name="remarks"> <b>Remarks : </b> </string>
+    <string name="select_client">Select Client</string>
+    <string name="view_more"><font color='#F44336'>   View More...</font></string>
+
+    <string-array name="spinnerItems">
+        <item>Old</item>
+        <item>VLTD</item>
+    </string-array>
+
+</resources>

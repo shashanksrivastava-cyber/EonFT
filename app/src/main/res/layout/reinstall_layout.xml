@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearReInstall"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:background="@color/eonWhite"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Device Type"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1.7"
+            android:background="@drawable/et_frame">
+
+            <Spinner
+                android:id="@+id/vltddeviceReinst"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:entries="@array/spinnerItems"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="6dp"
+                android:background="@color/eonWhite"
+                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/reinstText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VTS Reinstalled"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+        <RadioGroup
+            android:id="@+id/radioGroupReinstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1.5"
+            android:layout_toRightOf="@+id/new_deviceTypeReinstall"
+            android:layout_marginLeft="5dp">
+
+            <RadioButton
+                android:id="@+id/old_Device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Old"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/new_Device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="New"
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"/>
+
+        </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_old_vltd_sr_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <EditText android:id="@+id/old_vltd_sr_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Old Sr.No."
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLength="20"
+            android:inputType="number"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_new_vltd_sr_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <EditText android:id="@+id/new_vltd_sr_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="New Sr. No."
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLength="20"
+            android:inputType="number"/>
+    </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_id_reinst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText android:id="@+id/old_deviceid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:maxLength="20"/>
+        </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_id_sr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/new_deviceidReinstall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="New Device ID"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:maxLength="20"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_sr_reinst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/vts_sr_no_reinst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="VTS Full Sr. No.(e.g. E124-36-EAN-R02-7974)"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLength="50"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/new_vehicleRegNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vehicle Reg No.(In Capital Letters Only)"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLength="20"
+            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+            android:inputType="textCapCharacters|textPassword"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/reinst_conf_reg_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Vehicle Reg No.(In capital Letters Only)"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLength="20"
+            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+            android:inputType="textCapCharacters"/>
+    </android.support.design.widget.TextInputLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/et_frame">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/new_in_vehicleTypeReins"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/drsReInstall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Is DRS ReInstall"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+            <RadioGroup
+                android:id="@+id/radiodrsReInstall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.5"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/noreinst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No"
+                    android:checked="true"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:id="@+id/radioyesdrsReInstall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Device Type"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+            <RadioGroup
+                android:id="@+id/reinstDeviceType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.5"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/reinst_voice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Voice"
+                    android:checked="true"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Non-Voice"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearIgnition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cut Off"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+            <RadioGroup
+                android:id="@+id/radiogroupCutOffReinst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.5"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/cut_off_no_reinst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No"
+                    android:checked="true"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Panic Button"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+            <RadioGroup
+                android:id="@+id/radioGroupPanicReinst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.5"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/panicNoReinst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No"
+                    android:checked="true"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fuel Guage"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+
+            <RadioGroup
+                android:id="@+id/radioGroupFuelReinst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.5"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/fuelNoReinst"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No"
+                    android:checked="true"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

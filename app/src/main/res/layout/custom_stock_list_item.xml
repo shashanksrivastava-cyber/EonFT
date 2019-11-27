@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:padding="2dp"
+    android:background="@drawable/spinnr_back"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="1"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Client Name"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+
+                android:id="@+id/stock_client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="8dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/eoGreyLilTransprancy"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Location"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="VTS Faulty"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_vts_faulty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/eoGreyLilTransprancy"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="DRS"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+
+                android:id="@+id/stock_drs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="VTS working"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_vts_working"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/eoGreyLilTransprancy">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="7 Meter Cable"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_meter_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="2 Meter Cable"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_meter_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/eoGreyLilTransprancy"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Magnet Set"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_mgnt_set"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_background"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="Remarks"
+                android:textColor="@color/eonBlue"
+                android:textSize="@dimen/list_head" />
+
+            <TextView
+                android:id="@+id/stock_remarks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:textSize="15dp" />
+
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout><!--created by harmantj in 2017-->

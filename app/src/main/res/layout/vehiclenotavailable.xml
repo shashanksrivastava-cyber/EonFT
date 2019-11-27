@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearVehicleNotAvail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:visibility="gone"
+    android:background="@color/eonWhite"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/new_deviceType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vehicle Not Available for :"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:textColor="@color/eonBlue"
+            android:layout_weight="3.5"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/et_frame">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/vehiclenoavailSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/vehDetail">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText android:id="@+id/vehNotAvailVtsID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="VTS ID"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:maxLength="20"/>
+        </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/vehNotAvailRegNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vehicle Reg No."
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:maxLength="20"
+            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+            android:inputType="textCapCharacters"/>
+    </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/et_frame">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/notAvailReason"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+</LinearLayout>

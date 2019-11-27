@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4789da</color>
+    <color name="colorPrimaryDark">#4789da</color>
+    <color name="colorAccent">#F44336</color>
+    <color name="eonBlue">#4588da</color>
+    <color name="eoGreyLilTransprancy">#f5eaeaec</color>
+    <color name="eonWhite">#ffffff</color>
+    <color name="today">#4588da</color>
+    <color name="greyed_out">#c7c7c7</color>
+    <color name="grey500">#9E9E9E</color>
+    <color name="c">#f57f17</color>
+    <color name="red">#F44336</color>
+    <color name="black">#000000</color>
+    <color name="dark_grey">#949494</color>
+    <color name="dark_greys">#494949</color>
+    <color name="eonblue_dark">#0D47A1</color>
+    <color name="material_green_600">#43A047</color>
+    <color name="dash_red">#DC3646</color>
+    <color name="brown">#5d4037</color>
+    <color name="maroon">#ab003c</color>
+    <color name="blue">#0A7DE9</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+
+
+</resources>
+   

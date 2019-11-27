@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearPhoneSupport"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:visibility="visible"
+    android:background="@color/eonWhite"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginRight="5dp"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Device Type"
+            android:textSize="15sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1.7"
+            android:background="@drawable/et_frame">
+
+            <Spinner
+                android:id="@+id/vltddevicephn"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:entries="@array/spinnerItems"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="6dp"
+                android:background="@color/eonWhite"
+                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_weight="2">
+
+            <RadioGroup
+                android:id="@+id/radiovltdDevicetype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1.5"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/old"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Old"
+                    android:checked="true"
+                    android:textSize="14sp"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="VLTD"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilphnVts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText android:id="@+id/phsupport_vts_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="VTS ID"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:visibility="visible"/>
+        </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilphnSr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/vltd_sr_no_phn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Device Sr. No."
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:maxLength="50"
+            android:visibility="gone"
+            android:inputType="number"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText android:id="@+id/phSupport_reg_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vehicle Reg No."
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+            android:inputType="textCapCharacters"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_frame">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/discReason"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:background="@color/eonWhite">
+        <LinearLayout
+            android:id="@+id/phoneSupportPersonDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible"
+            android:background="@color/eonWhite">
+
+            <in.eoninfotech.eontechnician.CustomTextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <EditText android:id="@+id/phSupportPersonName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact Person Name"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:drawablePadding="10dp"
+                    android:maxLength="20" />
+            </in.eoninfotech.eontechnician.CustomTextInputLayout>
+
+            <in.eoninfotech.eontechnician.CustomTextInputLayout
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText android:id="@+id/phSupportPersonPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact Person Phone No"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/ic_phone_call"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_phone_call"
+                    android:maxLength="10" />
+            </in.eoninfotech.eontechnician.CustomTextInputLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/relativeCableConnected"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <in.eoninfotech.eontechnician.view.MyTextView
+            android:id="@+id/new_deviceTypeReinstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Has Cable Connected "
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupReinstall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@+id/new_deviceTypeReinstall"
+            android:layout_marginLeft="5dp">
+
+            <RadioButton
+                android:id="@+id/old_Device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="Yes"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/new_Device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="No"
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/bottom_sheet" />
+
+        <ImageView
+            android:id="@+id/header_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:background="@color/eonWhite"/>
+        <TextView
+            android:id="@+id/markatt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Mark Attendance"
+            android:textSize="25sp"
+            android:textColor="@color/eonBlue"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"/>
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/markatt"
+            android:text=""
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/eonBlue"/>
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/markatt"
+            android:text=""
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:gravity="right"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/eonBlue"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivProfile"
+            android:layout_width="140dp"
+            android:layout_height="130dp"
+            android:layout_below="@+id/header_cover_image"
+            android:layout_centerHorizontal="true"
+            android:elevation="5dp"
+            android:layout_marginTop="-60dp"
+            android:scaleType="centerCrop"
+            android:padding="5dp"
+            android:clickable="true"
+            app:civ_border_color="@color/greyed_out"
+            app:civ_border_width="1dp"
+            android:src="@drawable/user_circle"/>
+
+        <RelativeLayout
+            android:id="@+id/profile_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_cover_image"
+            android:background="@color/eonBlue"
+            android:elevation="4dp"
+            android:paddingBottom="2dp">
+
+            <TextView
+                android:id="@+id/attd_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:text="Name"
+                android:textColor="#fff"
+                android:fontFamily="sans-serif-light"
+                android:textSize="20sp"/>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/eonWhite"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/attd_username"/>
+            <LinearLayout
+                android:id="@+id/abc"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:weightSum="2"
+                android:layout_below="@+id/view1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:elevation="7dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:id="@+id/relay"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                            android:id="@+id/new_in_clients"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:spinnerMode="dialog"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="6dp"
+                            android:background="@color/eonWhite"
+                            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                    </RelativeLayout>
+                        </FrameLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <View android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/eonWhite"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:elevation="7dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/relayLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+
+                        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                            android:id="@+id/new_in_locations"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:spinnerMode="dialog"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="6dp"
+                            android:background="@color/eonWhite"
+                            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                    </RelativeLayout>
+                        </FrameLayout>
+                    </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/eonWhite"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/abc"/>
+
+            <RadioGroup
+                android:id="@+id/radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:layout_below="@+id/view2"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <RadioButton
+                android:id="@+id/l_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="SITE IN"
+                android:fontFamily="sans-serif-light"
+                android:textSize="16sp"
+                android:textColor="@color/eonWhite"/>
+
+            <RadioButton
+                android:id="@+id/l_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SITE OUT"
+                android:layout_marginLeft="40dp"
+                android:fontFamily="sans-serif-light"
+                android:textSize="16sp"
+                android:textColor="@color/eonWhite"/>
+            </RadioGroup>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_layout"
+            android:layout_marginTop="3dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:background="@color/eonBlue"
+                android:textColor="@color/eonWhite"
+                android:padding="10dp"
+                android:text="Get Current Location"
+                android:drawableLeft="@drawable/google"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:clickable="true"
+                android:elevation="7dp"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/att_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="1dp"
+                android:padding="20dp"
+                android:text="No Address"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:textColor="@color/eonBlue" />
+
+            <EditText
+                android:id="@+id/remarks"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#fff"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:padding="15dp"
+                android:hint="Remarks"
+                android:fontFamily="sans-serif-light"
+                android:focusableInTouchMode="true"/>
+
+            <!--<Button-->
+                <!--android:id="@+id/update_data"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:layout_marginLeft="24dp"-->
+                <!--android:layout_marginRight="24dp"-->
+                <!--android:background="@drawable/attend_buttn_drwable"-->
+                <!--android:gravity="center"-->
+                <!--android:text="Submit"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="20dp" />-->
+
+            <Button
+                android:id="@+id/update_data"
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:background="@color/eonBlue"
+                android:textColor="@color/eonWhite"
+                android:clickable="true"
+                android:elevation="7dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:text="Submit"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="false"
+            android:max="100"
+            android:clickable="true"
+            android:visibility="visible"
+            android:elevation="30dp"
+            android:progress="20"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>

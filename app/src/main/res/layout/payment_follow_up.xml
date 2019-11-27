@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/linearPaymentFollowUp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:visibility="visible"
+    android:background="@color/eonWhite"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="10dp"
+        android:background="@color/eonWhite">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/eonWhite">
+
+            <in.eoninfotech.eontechnician.CustomTextInputLayout
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+                <EditText android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Person Name"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/ic_user"
+                    android:drawablePadding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="20" />
+            </in.eoninfotech.eontechnician.CustomTextInputLayout>
+
+            <in.eoninfotech.eontechnician.CustomTextInputLayout
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+                <EditText android:id="@+id/passwordd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone No"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:drawableLeft="@drawable/ic_phone_call"
+                    android:drawablePadding="10dp"
+                    android:drawableStart="@drawable/ic_phone_call"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:maxLength="20" />
+            </in.eoninfotech.eontechnician.CustomTextInputLayout>
+
+        </LinearLayout>
+</android.support.v7.widget.CardView>
+
+</LinearLayout>

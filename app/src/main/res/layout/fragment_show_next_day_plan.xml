@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/eonWhite"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="in.eoninfotech.eontechnician.fragments.ShowNextDayPlanFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/view_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/eonWhite"
+        android:divider="@color/eonWhite"
+        android:dividerHeight="16dp"/>
+
+    <TextView
+        android:id="@+id/text_no_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No record found"
+        android:textSize="24dp"/>
+
+
+</LinearLayout>

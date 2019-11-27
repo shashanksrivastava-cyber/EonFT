@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    app:cardUseCompatPadding="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/et_frame">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vehicles Under Maintenance"
+            android:textColor="@color/eonWhite"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@color/c"
+            android:padding="5dp"/>
+
+        <LinearLayout
+            android:id="@+id/linear_vts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_below="@+id/titleTextView">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:textSize="16sp"
+                android:text="Vehicle No. : "
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/site_veh_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:textSize="16sp"
+                android:text="No Data Available"
+                android:layout_weight="1.5"
+                android:padding="2dp"
+                android:layout_marginTop="5dp"/>
+
+
+        </LinearLayout>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

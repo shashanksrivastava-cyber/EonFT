@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/eonWhite"
+    tools:context="in.eoninfotech.eontechnician.activity.CallSheetActivity">
+
+    <RelativeLayout
+        android:id="@+id/relImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ivProfile"
+            android:padding="5dp"
+            android:layout_marginRight="30dp"
+            android:text="Preview"
+            android:elevation="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/eonBlue"/>
+
+        <ImageView
+            android:id="@+id/upload_img"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_alignRight="@+id/ivProfile"
+            android:layout_below="@+id/ivProfile"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"
+            android:elevation="20dp"
+            android:src="@drawable/ic_local_see_black_24dp"
+            android:visibility="visible" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:padding="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/noimage"
+            app:civ_border_color="@color/greyed_out"
+            app:civ_border_width="1dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/eonBlue"
+        android:elevation="10dp"
+        android:layout_below="@+id/relImage"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Call Sheet Detail"
+            android:padding="5dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/eonWhite"
+            android:layout_marginRight="80dp"/>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="5dp"
+            android:text="26-02-2019"
+            android:textColor="@color/eonWhite"/>
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_below="@+id/linearView"
+        android:layout_marginTop="5dp"
+        android:visibility="visible">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_content_unavailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="64dp"
+                    android:gravity="center"
+                    android:text="No Entry found for this Date"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="visible"
+                    tools:listitem="@layout/call_sheet_adapter"
+                    android:background="@color/eonWhite"/>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/circularRelative"
+        tools:context="com.example.parsaniahardik.progressanimation.MainActivity">
+
+        <ProgressBar
+            android:id="@+id/circularProgressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:layout_centerInParent="true"
+            android:progressDrawable="@drawable/circular"
+            android:secondaryProgress="100"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:text=""
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

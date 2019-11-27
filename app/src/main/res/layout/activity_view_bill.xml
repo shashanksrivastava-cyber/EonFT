@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:background="@color/eonWhite"
+    tools:context="in.eoninfotech.eontechnician.salesteam.ViewBillActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="#000000"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/from_date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="Order No."
+            android:textSize="16sp"
+            android:textColor="@color/eonWhite" />
+        <RelativeLayout
+            android:id="@+id/relay"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="4dp"
+            android:visibility="visible"
+            android:background="@drawable/black_edittext">
+
+            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                android:id="@+id/e_order_no"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:spinnerMode="dialog" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/drop" />
+
+        </RelativeLayout>
+        <!--<in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/e_order_no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+
+            android:gravity="center"
+            android:textColor="@color/black" />
+-->
+
+       <!-- <Button
+            android:id="@+id/btn_srch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="4dp"
+            android:text="SEARCH" />-->
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_new_entry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/eonWhite"
+        android:divider="@color/eonWhite"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_vertical"
+        android:dividerHeight="1dp" />
+
+    <TextView
+        android:id="@+id/text_no_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No record found"
+        android:textSize="24dp"
+        android:visibility="gone"
+         />
+
+</LinearLayout>

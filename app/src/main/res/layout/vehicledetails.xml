@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/et_frame">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/et_frame">
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Faulty Devices"
+                    android:textColor="@color/eonWhite"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#D32F2F"
+                    android:padding="5dp"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_vts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:layout_below="@+id/titleTextView">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="16sp"
+                        android:text="Vehicle No. : "
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"/>
+
+                        <TextView
+                            android:id="@+id/site_veh_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:textSize="16sp"
+                            android:text="No Data Available"
+                            android:layout_weight="1.5"
+                            android:padding="2dp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/faultyDrs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Faulty DRS"
+                    android:textColor="@color/eonWhite"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="#F44336"
+                    android:padding="5dp"
+                    android:layout_below="@id/linear_vts"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/right"
+                    android:textColor="@color/eonWhite"
+                    android:textSize="14sp"
+                    android:text="15"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/faultyDrs"/>
+
+                <LinearLayout
+                    android:id="@+id/linear_drs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:layout_below="@+id/faultyDrs"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="16sp"
+                        android:text="Vehicle No. : "
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/site_drs_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="16sp"
+                        android:text="No Data Available"
+                        android:layout_weight="1.5"
+                        android:padding="2dp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+        </android.support.v4.widget.NestedScrollView>
+
+    </FrameLayout>
+</FrameLayout>

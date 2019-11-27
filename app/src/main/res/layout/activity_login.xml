@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.flaviofaria.kenburnsview.KenBurnsView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/back_logo" />
+
+    <LinearLayout
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Eon FTApp"
+            android:textSize="20sp"
+            android:textColor="@color/eonWhite"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Field Activity Logger"
+            android:textSize="20sp"
+            android:textColor="@color/eonWhite"
+            android:gravity="center"
+            android:layout_below="@+id/appName"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/eoGreyLilTransprancy"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/name">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="Login"
+            android:textColor="@color/eonBlue"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center">
+            <requestFocus />
+        </TextView>
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_frame"
+            android:ellipsize="end"
+            android:hint="Username  "
+            android:maxLines="1"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textSize="22sp"
+            android:padding="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium">
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/passwordd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_frame"
+            android:ellipsize="end"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:textSize="22sp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"/>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:background="@drawable/login_back"
+            android:gravity="center"
+            android:text="LOGIN"
+            android:textColor="#ffffff"
+            android:textSize="24dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/app_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/eonWhite"
+            android:text="Version"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/eon_logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Eon Infotech Limited"
+            android:gravity="center"
+            android:textColor="@color/eonWhite"
+            android:textSize="22sp"
+            android:layout_above="@+id/lay"
+            android:textStyle="bold"/>
+        <include layout="@layout/bottom_contact_icon" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="#00FFFFFF"
+        android:clickable="true"
+        android:id="@+id/llayoutProgress"
+        android:gravity="center"
+        android:focusable="true">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="20"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

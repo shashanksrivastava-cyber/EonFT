@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/eonWhite"
+    tools:context="in.eoninfotech.eontechnician.fragments.CallSheetFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Call Sheet Date"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="5dp" />
+
+        <EditText
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="0dp"
+            android:background="@drawable/et_frame"
+            android:hint="Select Date"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-light"
+            android:drawableRight="@drawable/baseline_event_black_18"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible"
+        android:layout_below="@+id/linearView">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call Sheet Image"
+            android:padding="5dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginLeft="5dp"/>
+
+        <Button
+            android:id="@+id/upload_img"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Browse File"
+            android:background="@color/eonBlue"
+            android:textColor="@color/eonWhite"
+            android:fontFamily="sans-serif-light"
+            android:elevation="30dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearView1"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/et_frame"
+        android:padding="5dp"
+        android:elevation="5dp">
+
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/noimage"/>
+
+    </RelativeLayout>
+
+             <RelativeLayout
+                android:id="@+id/relRemarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/relImage">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/et_frame"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:includeFontPadding="false"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:visibility="invisible" />
+
+                    <EditText
+                        android:id="@+id/remarks"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-light"
+                        android:textColor="@color/black"
+                        android:background="@color/eonWhite" />
+                </LinearLayout>
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_alignBottom="@+id/view1"
+                    android:background="@drawable/et_frame"
+                    android:includeFontPadding="false"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:paddingTop="5dp"
+                    android:text="Remarks"
+                    android:textColor="@color/colorAccent"
+                    android:textAppearance="@android:style/TextAppearance.Small" />
+            </RelativeLayout>
+
+             <RelativeLayout
+                   xmlns:android="http://schemas.android.com/apk/res/android"
+                   xmlns:tools="http://schemas.android.com/tools"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:visibility="gone"
+                   android:id="@+id/circularRelative">
+
+                <ProgressBar
+                   android:id="@+id/circularProgressbar"
+                   style="?android:attr/progressBarStyleHorizontal"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:indeterminate="false"
+                   android:max="100"
+                   android:progress="0"
+                   android:layout_centerInParent="true"
+                   android:progressDrawable="@drawable/circular"
+                   android:secondaryProgress="100"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:gravity="center"
+            android:text=""
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+             <LinearLayout
+                android:id="@+id/update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/eonBlue"
+                android:elevation="10dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_below="@+id/relRemarks"
+                android:gravity="center"
+                android:visibility="visible">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Upload Call Sheet"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/eonWhite" />
+
+    </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

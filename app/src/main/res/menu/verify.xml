@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+                <item
+                    android:id="@+id/filter_date"
+                    android:orderInCategory="100"
+                    android:title="Filter By Date"
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/verifyRead"
+                    android:orderInCategory="100"
+                    android:title="Filter By Read"
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/verifyUnread"
+                    android:orderInCategory="100"
+                    android:title="Filter By Unread"
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/filterFaulty"
+                    android:orderInCategory="100"
+                    android:title="Filter By Faulty Message"
+                    app:showAsAction="never" />
+               <item
+                   android:id="@+id/clearFilter"
+                   android:orderInCategory="100"
+                   android:title="Clear Filter"
+                   app:showAsAction="never" />
+</menu>

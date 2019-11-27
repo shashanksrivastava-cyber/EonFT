@@ -1,0 +1,1137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrl_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/eonWhite"
+        android:orientation="vertical"
+        android:padding="4dp"
+        tools:context=".salesteam.SalesInstallationActivity">
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+            android:id="@+id/date_sales"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="(06-05-2018)"
+            android:gravity="center"
+            android:textColor="@color/black" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp">
+
+            <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="Order No."
+                android:textColor="@color/black" />
+
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/sales_order_no"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:background="@drawable/white_background"
+                android:paddingLeft="9dp" />
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="4dp">
+
+    <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="Installation Type :"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/install_type"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:background="@drawable/white_background"
+            android:paddingLeft="9dp" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/duration_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="right"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="6dp"
+                android:text="(Duration:"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/sales_duration"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="6dp"
+                android:inputType="number"
+                android:maxLength="2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="days)"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="4dp">
+
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="Customer Type :"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/cust_type"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:background="@drawable/white_background"
+            android:paddingLeft="9dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="4dp">
+
+    <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="Customer Name :"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_client_name"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:background="@drawable/white_background"
+            android:paddingLeft="9dp" />
+    </LinearLayout>
+
+        <!--<RelativeLayout
+            android:id="@+id/relay"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="4dp"
+            android:visibility="gone"
+            android:background="@drawable/black_edittext">
+
+            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                android:id="@+id/new_in_clients"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:spinnerMode="dialog" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/drop" />
+
+        </RelativeLayout>-->
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Customer Address"
+            android:textColor="@color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="6dp">
+
+                <!--    <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="4"
+                        android:text="Line1" />-->
+
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_street_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="Building name, Street name"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <!--  <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                      android:textColor="@color/black"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="4"
+                      android:text="Line2" />-->
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="City"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <!--  <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                      android:textColor="@color/black"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="4"
+                      android:text="Number" />-->
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_office_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="Office Contact Number"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <!-- <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                     android:textColor="@color/black"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="4"
+                     android:text="District" />
+     -->
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_district"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="District name"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="State"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_pincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:baselineAligned="false"
+                    android:hint="Pincode"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Primary Contact Person"
+            android:textColor="@color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="6dp">
+
+                <!-- <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="5dp"
+                     android:layout_weight="4"
+                     android:text="Name"
+                     android:textColor="@color/black" />
+ -->
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_p_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="Person name"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <!--  <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="4"
+                      android:text="Mobile"
+                      android:textColor="@color/black" />
+  -->
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_p_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint=" Person's mobile Number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+                <!--
+                                <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="4"
+                                    android:text="Email ID"
+                                    android:textColor="@color/black" />-->
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_p_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="Person's email address"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Secondary Contact Person"
+            android:textColor="@color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="6dp">
+
+                <!--   <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="5dp"
+                       android:layout_weight="4"
+                       android:text="Name"
+                       android:textColor="@color/black" />
+   -->
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_s_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint="Person name"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <!--  <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="4"
+                  android:text="Mobile"
+                  android:textColor="@color/black" /> -->
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_s_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_background"
+                    android:hint=" Person's mobile Number"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <!-- <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="4"
+                     android:text="Email ID"
+                     android:textColor="@color/black" />-->
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_cust_s_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/white_background"
+                    android:hint="Person's email address"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal">
+
+            <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:text="Installation Location Address"
+                android:textColor="@color/black" />
+
+            <!-- <Button
+                 android:id="@+id/copy_address"
+                 android:layout_width="match_parent"
+                 android:layout_height="32dp"
+                 android:layout_marginBottom="4dp"
+                 android:layout_weight="4"
+                 android:textColor="@color/eonWhite"
+                 android:background="@drawable/attend_buttn_drwable"
+                 android:text="Copy" />-->
+
+        </LinearLayout>
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/copy_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Same as Customer Address"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/dark_grey" />
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_install_street_name"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/white_background"
+            android:hint="Building name, Street name"
+            android:maxLines="1"
+            android:paddingLeft="9dp" />
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_install_city"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/white_background"
+            android:hint="City"
+            android:maxLines="1"
+            android:paddingLeft="9dp" />
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_install_office_number"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/white_background"
+            android:hint="Installation place Contact Number"
+            android:maxLines="1"
+            android:paddingLeft="9dp" />
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_install_district"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/white_background"
+            android:hint="District name"
+            android:maxLines="1"
+            android:paddingLeft="9dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp">
+
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/sales_install_state"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_background"
+                android:hint="State"
+                android:maxLines="1"
+                android:paddingLeft="9dp" />
+
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/sales_install_pincode"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_background"
+                android:hint="Pincode"
+                android:maxLines="1"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingLeft="9dp" />
+        </LinearLayout>
+
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Type of Vehicle"
+            android:textColor="@color/black" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/r_truck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Truck" />
+
+            <CheckBox
+                android:id="@+id/r_bus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bus" />
+
+            <CheckBox
+                android:id="@+id/r_tm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TM" />
+
+            <CheckBox
+                android:id="@+id/r_tipper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tipper" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="8"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/r_lcv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="LCV" />
+
+            <CheckBox
+                android:id="@+id/r_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Car" />
+
+            <CheckBox
+                android:id="@+id/r_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Other" />
+
+        </LinearLayout>
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_other_veh_type"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:hint="specify Vehicle type" />
+
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Battery Voltage"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup_battry_voltage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/r_12_volt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="12V" />
+
+            <RadioButton
+                android:id="@+id/r_24_volt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="24V" />
+
+            <RadioButton
+                android:id="@+id/r_48_volt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="48V" />
+
+            <RadioButton
+                android:id="@+id/r_volt_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Other" />
+
+        </RadioGroup>
+
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_other_voltage"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:visibility="gone"
+            android:hint="specify voltage" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp">
+
+            <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="VTS Quantity"
+                android:textColor="@color/black" />
+
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/sales_vts_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/white_background"
+                android:hint="No.of VTS"
+                android:maxLines="1"
+                android:inputType="number"
+                android:maxLength="3"
+                android:paddingLeft="9dp" />
+        </LinearLayout>
+
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="Accessories Required :"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/dark_grey" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup_accessory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/l_existing"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/r_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="YES" />
+
+            <RadioButton
+                android:id="@+id/r_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="NO" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/lay_quantity_accessory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingLeft="5dp"
+                    android:text="Ignition Sensor"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <!--  <View
+                      android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:layout_marginLeft="24dp"
+                      android:layout_marginRight="24dp"
+                      android:background="@color/dark_grey" />
+          -->
+                <RadioGroup
+                    android:id="@+id/radiogroup_ignition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:checkedButton="@+id/l_existing"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/ig_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="YES" />
+
+                    <RadioButton
+                        android:id="@+id/ig_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="NO" />
+
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="3"
+                    android:text="DRS Quantity"
+                    android:textColor="@color/black" />
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_drs_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/white_background"
+                    android:hint="No.of DRS"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="3"
+                    android:text="Fuel Sensor"
+                    android:textColor="@color/black" />
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_fuel_sensor_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/white_background"
+                    android:hint="No. of fuel sensor"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="4dp">
+
+                <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="3"
+                    android:text="Door Sensor"
+                    android:textColor="@color/black" />
+
+                <in.eoninfotech.eontechnician.view.GreyEditText
+                    android:id="@+id/sales_door_sensor_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/white_background"
+                    android:hint="No. of door sensor"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingLeft="9dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <in.eoninfotech.eontechnician.view.MyBlackBoldTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:text="Priority :"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="HIGH\n(within 3 days)"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="NORMAL\n(within 7 days)"
+                android:textColor="@color/black" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="LOW\n(within 14 days)"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/high_count"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/black" />
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/normal_count"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:inputType="number"
+                android:maxLength="3"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/black" />
+            <in.eoninfotech.eontechnician.view.GreyEditText
+                android:id="@+id/low_count"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:inputType="number"
+                android:maxLength="3"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_priority_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:gravity="left|top"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/white_background"
+            android:hint="Specify reason for High Priority"
+            android:lines="2"
+            android:paddingLeft="9dp" />
+
+        <in.eoninfotech.eontechnician.view.GreyEditText
+            android:id="@+id/sales_remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:gravity="left|top"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/white_background"
+            android:hint="Remarks"
+            android:lines="3"
+            android:paddingLeft="9dp" />
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/submit_requirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/attend_buttn_drwable"
+            android:text="Preview" />
+    </LinearLayout>
+</ScrollView>

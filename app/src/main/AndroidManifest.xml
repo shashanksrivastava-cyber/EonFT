@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="in.eoninfotech.eontechnician">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission-sdk-23   android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission
+        android:name="android.permission.SET_TIME"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.usb.host" />
+
+    <!--
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="true" />
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:resizeableActivity="false"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.StockActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".activity.SimpleServiceExample"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <service
+            android:name=".Service.JobScheduleService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <receiver android:name="AlarmReceiver"></receiver>
+        <service
+            android:name=".Service.LocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false" />
+
+        <receiver android:name=".Service.AlarmService" />
+        <receiver android:name=".BootCompletedIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".StopService">
+            <intent-filter>
+                <action android:name="com.example.Broadcast" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".Service.WakeupReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/app_name" >
+        </activity>
+
+        <action android:name="android.location.PROVIDERS_CHANGED" />
+        <receiver android:name=".GpsLocationReceiver">
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".LocationForGroundService"
+            android:exported="false" >
+        </service>
+        <activity
+            android:name=".ScheduleActivity"
+            android:screenOrientation="portrait" />
+        <provider
+            android:name=".myprovider.EonContentProvider"
+            android:authorities="in.eoninfotech.eontechnician.myprovider.EonContentProvider"
+            android:enabled="true"
+            android:exported="false" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="in.eoninfotech.eontechnician.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_path" />
+        </provider>
+
+        <service android:name=".Service.ForegroundService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".activity.LoginActivityNew"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".TabNextDayPlanActivity" />
+        <activity
+            android:name=".AdminMainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CallSheetActivity" />
+        <activity android:name=".LogViewActivity" />
+        <activity
+            android:name=".salesteam.SalesInstallationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TechnicianDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.FaultyDevicesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TabInstallmentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".salesteam.BillingDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".salesteam.SalesMainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".salesteam.ViewBillActivity" />
+        <activity android:name=".salesteam.EditInstallationDetailActivity" />
+        <activity android:name=".CardViewActivity" />
+        <activity android:name=".activity.FaultyDevicesDetailActivity" />
+        <activity android:name=".LiveFaultData" />
+        <activity android:name=".activity.LiveDataWebView" />
+        <activity android:name=".activity.FaultyDeviceDetails" />
+        <activity android:name=".activity.ImageDetailActivity" />
+        <activity android:name=".activity.ImageDetailCallSheet" />
+        <activity android:name=".activity.CallSheetList" />
+        <activity android:name=".activity.CalendarNew" />
+        <activity android:name=".activity.MessageDetails" />
+        <activity
+            android:name=".activity.PaymentCollectionReportActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity android:name=".activity.CustomCalender" />
+        <activity android:name=".activity.SendDatatoServer" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:icon="@drawable/ic_delete_white_24dp"
+            android:theme="@style/AppTheme" />
+
+        <meta-data
+            android:name="android.app.searchable"
+            android:resource="@xml/searchable" />
+
+        <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+        </intent-filter>
+
+        <service
+            android:name=".Service.LocationServices"
+            android:enabled="true"
+            android:exported="false"></service>
+    </application>
+
+</manifest>

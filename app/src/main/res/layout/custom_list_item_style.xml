@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="35dp"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="sghd"-->
+    <!--android:textColor="@color/eonBlue"-->
+    <!--android:padding="7dp"-->
+    <!--android:textSize="14sp"-->
+    <!--android:ellipsize="end"-->
+    <!--android:singleLine="true"/>-->
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:layout_weight="1"
+    android:ellipsize="end"
+    android:focusable="false"
+    android:gravity="left|center"
+    android:singleLine="true"
+    android:textSize="12sp"
+    android:text="Jalandhar"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"/>
+

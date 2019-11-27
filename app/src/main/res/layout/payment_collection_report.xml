@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="10dp"
+        android:layout_below="@+id/relImage"
+        android:background="@drawable/et_frame"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Amount (INR) : "
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/eonBlue"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp"
+                android:padding="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/totalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/eonBlue"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="20sp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_margin="1dp"
+            android:layout_weight="4"
+            android:gravity="right"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/action_filter"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_filter" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:elevation="5dp"
+        android:layout_below="@+id/relImage"
+        android:background="@drawable/et_frame"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/fromDate"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:background="@drawable/et_frame"
+                android:hint="From Date"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:drawableRight="@drawable/baseline_event_black_18" />
+
+            <EditText
+                android:id="@+id/toDate"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:background="@drawable/et_frame"
+                android:hint="To Date"
+                android:textSize="14sp"
+                android:padding="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:drawableRight="@drawable/baseline_event_black_18" />
+
+                <ImageView
+                    android:id="@+id/go"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/go"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:weightSum="3.5"
+            android:elevation="10dp"
+            android:background="@color/eonWhite">
+            <TextView
+                android:id="@+id/fromDateShow"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:hint="From Date"
+                android:textSize="14sp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1.5"
+                android:textColor="@color/eonBlue"/>
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:hint="To"
+                android:padding="5dp"
+                android:textSize="16sp"
+                android:layout_weight="3.5"
+                android:textColor="@color/eonBlue"/>
+
+            <TextView
+                android:id="@+id/toDateShow"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:hint="To Date"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:layout_weight="1.5"
+                android:textColor="@color/eonBlue"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"/>
+
+        </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp">
+
+        <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_content_unavailable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="64dp"
+                    android:gravity="center"
+                    android:text="No Entry found for this Date"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="visible"
+                    tools:listitem="@layout/adapter_payment_collection_report"
+                    android:background="@color/eonWhite"/>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

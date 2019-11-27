@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/sales_nav_dashboard"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/sales_nav_requirement"
+            android:icon="@drawable/ic_next_day_plan"
+            android:title="New Requirement" />
+        <item
+            android:id="@+id/sales_nav_bill_in"
+            android:icon="@drawable/ic_incentive"
+            android:title="Bill Intimation" />
+        <item
+            android:id="@+id/sales_nav_view_entry"
+            android:icon="@drawable/stock"
+            android:title="View Entry" />
+        <item
+            android:id="@+id/sales_nav_view_bill"
+            android:icon="@drawable/ic_pendency_detail"
+            android:title="View Bill" />
+        <item
+            android:id="@+id/sales_nav_passwrd"
+            android:icon="@drawable/ic_change_pwd_24dp"
+            android:title="Change Password" />
+
+        <item
+            android:id="@+id/menu_logouts"
+            android:title="Logout"
+            android:icon="@drawable/ic_power_settings_new_black_24dp"/>
+
+    </group>
+
+</menu>

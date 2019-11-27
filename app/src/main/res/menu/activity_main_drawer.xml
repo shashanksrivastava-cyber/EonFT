@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_tech_dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Dashboard" />
+
+    <item
+        android:id="@+id/nav_mark_site"
+        android:icon="@drawable/ic_mark_site_attendence_24dp"
+        android:title="Mark Attendance" />
+
+    <item
+        android:id="@+id/nav_live_status"
+        android:icon="@drawable/ic_critical_sites_24dp"
+        android:title="Live Status" />
+
+    <item
+        android:id="@+id/nav_new_repair"
+        android:layout_width="match_parent"
+        android:icon="@drawable/install"
+        android:title="Activities" />
+
+    <!--<item-->
+    <!--android:id="@+id/activitiesList"-->
+    <!--android:icon="@drawable/ic_view_list_black_24dp"-->
+    <!--android:title="Activities List" />-->
+    <item
+        android:id="@+id/nav_stock"
+        android:icon="@drawable/stock"
+        android:title="Stock" />
+    <!--<item-->
+    <!--android:id="@+id/nav_view_stock"-->
+    <!--android:icon="@drawable/stock"-->
+    <!--android:title="View Stock" />-->
+
+    <item
+        android:id="@+id/nav_call_sheet"
+        android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
+        android:title="Call Sheet" />
+
+    <item
+        android:id="@+id/nav_pay_col_report"
+        android:icon="@drawable/ic_incentive"
+        android:title="Payment Collection Report" />
+
+    <!--<item-->
+    <!--android:id="@+id/nav_view_call_sheet"-->
+    <!--android:icon="@drawable/ic_next_day_plan"-->
+    <!--android:title="View Call Sheet" />-->
+
+    <item
+        android:id="@+id/nav_incentive"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Incentive" />
+
+    <!--<item-->
+    <!--android:id="@+id/nav_update_client_list"-->
+    <!--android:icon="@drawable/upd_list"-->
+    <!--android:title="Update Client List" />-->
+
+    <!--<item-->
+    <!--android:id="@+id/nav_view_activity"-->
+    <!--android:icon="@drawable/ic_next_day_plan"-->
+    <!--android:title="Attendence Record" />-->
+
+    <item
+        android:id="@+id/nav_technician_of_the_month"
+        android:icon="@drawable/upd_list"
+        android:title="Technician of the Month" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:icon="@drawable/ic_power_settings_new_black_24dp"
+        android:orderInCategory="100"
+        android:title="Logout" />
+</menu>

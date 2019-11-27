@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingLeft="5dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sv_sales_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filled by "
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/sv_client_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Client Name"
+                android:textColor="#040404"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <TextView
+                    android:id="@+id/sv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Street name, city name , State , COuntry , pincode "
+                    android:textAllCaps="true"
+                    android:textColor="#040404"
+                    android:textSize="14sp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:src="@drawable/ic_adress_24dp"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Date"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Vehicle type"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="VTS Qty"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="13sp" />
+                <!-- <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1"
+                     android:textSize="13sp"
+                     android:text="DRS Qty" />
+         -->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sv_entry_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2018-04-02"
+                    android:textColor="#040404"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/sv_vehicle_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="car : bus :"
+                    android:textColor="#040404"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/sv_vts_qty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="555"
+                    android:textColor="#040404"
+                    android:textSize="13sp" />
+                <!--  <TextView
+                      android:id="@+id/sv_drs_qty"
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:textSize="13sp"
+                      android:textColor="#040404"
+                      android:text="10" />-->
+
+            </LinearLayout>
+
+            <!--  <View
+                  android:layout_width="match_parent"
+                  android:layout_height="0.1dp"
+                  android:background="#9e9e9e"
+                  />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Contact Detail"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Priority"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Remarks"
+                    android:textColor="@color/eonBlue"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/sv_person_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=" "
+                    android:textColor="#343434"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/sv_priority"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="#343434"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/sv_remarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="#343434"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_bill_24dp" />
+
+                <TextView
+                    android:id="@+id/sv_bill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  View Bill  "
+                    android:textColor="#343434"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/btn_view_bill"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:padding="2dp"
+                    android:text="View Bill"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/selector_update"
+                    android:layout_weight="1"
+                    android:layout_marginRight="3dp"
+                    android:textSize="15sp" />
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@drawable/selector_update"
+                    android:text="Edit"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
