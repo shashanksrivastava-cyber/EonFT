@@ -5,7 +5,7 @@ import in.eoninfotech.eontechnician.Responses.ClientResponse;
 import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
 import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
 import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
 import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
 import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
@@ -60,6 +60,6 @@ public interface ClientListener extends ErrorCallBacks {
 
     void pMethod(PaymentMethodResponse response);
 
-    void updateDataResponse(InstallResponse response);
+    void updateDataResponse(MainResponse response);
 
 }

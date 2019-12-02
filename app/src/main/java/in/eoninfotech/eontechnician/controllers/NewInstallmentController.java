@@ -11,7 +11,7 @@ import in.eoninfotech.eontechnician.Responses.ClientResponse;
 import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
 import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
 import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
 import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
 import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
@@ -58,7 +58,7 @@ public class NewInstallmentController extends Controller {
     Call<VehNotAvailReasonResponse>notAvailReasonCall;
     Call<VTSResponse>vtsResponseCall;
     Call<PaymentMethodResponse>pMethodCall;
-    Call<InstallResponse>updateDataCall;
+    Call<MainResponse>updateDataCall;
 
     public void reqeuestClientList(ClientListener listener) {
 
@@ -514,18 +514,20 @@ public class NewInstallmentController extends Controller {
                                      String contact_person,
                                      String contact_no,
                                      String payment_type,
+                                     String old_serial_no,
+                                     String vts_device,
                                      ClientListener listener) {
         updateDataCall = client_att.postInstallationData(worktype,techName,clientId,c_loc_id,
                 regNo,vehType,devType,oldVtsId,newVtsId,isDrs,newDrsId,oldDrsId,drsDirection,replaceReason,removalReason,itemsCollected,others, telSupport,date,time,remarks,dis_reason,ignition_sensor,fuel_sensor,door_sensor,
                 veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no,sim_reason,not_available_reason,not_available_activity,is_demo,missing_type,collection_amount,collection_date,collection_type,collectionImage,
-                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type);
-        updateDataCall.enqueue(new Callback<InstallResponse>() {
+                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type, old_serial_no, vts_device);
+        updateDataCall.enqueue(new Callback<MainResponse>() {
             @Override
-            public void onResponse(Call<InstallResponse> call, Response<InstallResponse> response) {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 listener.updateDataResponse(response.body());
             }
             @Override
-            public void onFailure(Call<InstallResponse> call, Throwable t) {
+            public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
                     TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
@@ -584,17 +586,19 @@ public class NewInstallmentController extends Controller {
                                       RequestBody contact_person,
                                       RequestBody contact_no,
                                       RequestBody payment_type,
+                                      RequestBody old_serial_no,
+                                      RequestBody vts_device,
                                       ClientListener listener) {
         updateDataCall = client_att.postInstallationsData(worktype,techName,clientId,c_loc_id,regNo,vehType,devType,oldVtsId,newVtsId, isDrs,newDrsId,oldDrsId,drsDirection, replaceReason,removalReason, itemsCollected,others, telSupport,date,time,remarks,
                 dis_reason,ignition_sensor,fuel_sensor,door_sensor, veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no, sim_reason,not_available_reason,not_available_activity,is_demo,missing_type,collection_amount,collection_date,collection_type,collection_image,
-                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type);
-        updateDataCall.enqueue(new Callback<InstallResponse>() {
+                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type, old_serial_no, vts_device);
+        updateDataCall.enqueue(new Callback<MainResponse>() {
             @Override
-            public void onResponse(Call<InstallResponse> call, Response<InstallResponse> response) {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 listener.updateDataResponse(response.body());
             }
             @Override
-            public void onFailure(Call<InstallResponse> call, Throwable t) {
+            public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
                     TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();

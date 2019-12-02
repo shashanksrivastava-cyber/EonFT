@@ -55,7 +55,7 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
 import in.eoninfotech.eontechnician.Responses.ActivityResponse;
 import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.MessageDetail;
 import in.eoninfotech.eontechnician.webservice.MessageResponse;
@@ -142,17 +142,17 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     private void updateData() {
        // refreshLayout.setRefreshing(true);
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<InstallResponse> call = log_att.updateResponse(message_id);
-        call.enqueue(new Callback<InstallResponse>() {
+        Call<MainResponse> call = log_att.updateResponse(message_id);
+        call.enqueue(new Callback<MainResponse>() {
             @Override
-            public void onResponse(Call<InstallResponse> call, Response<InstallResponse> response) {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 if(response.body().getType()==1) {
                     loadContent();
                 }else{
                 }
             }
             @Override
-            public void onFailure(Call<InstallResponse> call, Throwable t) {
+            public void onFailure(Call<MainResponse> call, Throwable t) {
               //  refreshLayout.setRefreshing(false);
             }
         });

@@ -50,7 +50,7 @@ import in.eoninfotech.eontechnician.Responses.DRSDetail;
 import in.eoninfotech.eontechnician.Responses.DRSResponse;
 import in.eoninfotech.eontechnician.Responses.FaultList;
 import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.ItemList;
 import in.eoninfotech.eontechnician.Responses.RemovalList;
 import in.eoninfotech.eontechnician.Responses.RemovalResponse;
@@ -117,7 +117,7 @@ public class NewInstallMentFragmentCommented extends Fragment {
     LinearLayout linearReplacement,linearInstall,linearReInstall,linearRemoval,linearDrs,linearFault;
     RadioGroup radioGroup,radioGroupReinstall,drsReplace,radiodeviceType,radiodireplace;
     RadioButton radionormal,radiotype,old_Device,new_Device,radionormalrep;
-    private Call<InstallResponse> locCall;
+    private Call<MainResponse> locCall;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
@@ -1182,9 +1182,9 @@ public class NewInstallMentFragmentCommented extends Fragment {
 //        locCall = loc_att.postInstallationData(s_work_id,uusername,clientId,clientLocId,
 //                s_reg_no,s_vehicletype,device_type,s_e_device_id,s_new_device_id,is_drs,s_drs_id,s_new_drs_id,drs_dirction,
 //                s_reason_repla,removalReason,itemsCollected,others,tel_support,s_date,s_Time,s_remarks,disconnection_reason,ignition_sensor,fuel_sensor,door_sensor,veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no,sim_reason);
-        locCall.enqueue(new Callback<InstallResponse>() {
-            public void onResponse(Call<InstallResponse> call, Response<InstallResponse> response) {
-                InstallResponse workTypeResponse = response.body();
+        locCall.enqueue(new Callback<MainResponse>() {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                MainResponse workTypeResponse = response.body();
                 Log.i("**work respnse", " " + response.body());
                 Toast.makeText(getContext(), "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 if (response.body().getType().equals("0")) {
@@ -1237,7 +1237,7 @@ public class NewInstallMentFragmentCommented extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<InstallResponse> call, Throwable t) {
+            public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
                     TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();

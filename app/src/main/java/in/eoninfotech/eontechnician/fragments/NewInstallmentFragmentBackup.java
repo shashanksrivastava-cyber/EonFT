@@ -77,6 +77,7 @@ import java.util.Locale;
 
 import in.eoninfotech.eontechnician.ImageCompressionAsyncTask;
 import in.eoninfotech.eontechnician.ImageUtils;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.PMethodDetail;
 import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
 import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
@@ -91,7 +92,6 @@ import in.eoninfotech.eontechnician.Responses.DisconnectionDetail;
 import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
 import in.eoninfotech.eontechnician.Responses.FaultList;
 import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
 import in.eoninfotech.eontechnician.Responses.ItemList;
 import in.eoninfotech.eontechnician.Responses.NotAvailActivityDetail;
 import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
@@ -2855,7 +2855,7 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
             e.printStackTrace();
         }}
     @Override
-    public void updateDataResponse(InstallResponse response) {
+    public void updateDataResponse(MainResponse response) {
         clearData();
         pMethod();
         try{

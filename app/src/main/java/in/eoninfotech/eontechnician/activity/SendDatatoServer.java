@@ -13,7 +13,6 @@ import java.util.Locale;
 
 import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.Responses.ActivityResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
 import in.eoninfotech.eontechnician.SplashActivity;
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;

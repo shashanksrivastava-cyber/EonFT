@@ -36,7 +36,7 @@ import in.eoninfotech.eontechnician.InstInstructionAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
 import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.InstructionDetail;
 import in.eoninfotech.eontechnician.Responses.UnderMaintenanceResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
@@ -123,17 +123,17 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
 
     private void updateData() {
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<InstallResponse> call = log_att.updateResponse(message_id);
-        call.enqueue(new Callback<InstallResponse>() {
+        Call<MainResponse> call = log_att.updateResponse(message_id);
+        call.enqueue(new Callback<MainResponse>() {
             @Override
-            public void onResponse(Call<InstallResponse> call, Response<InstallResponse> response) {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 if(response.body().getType()==1) {
                     getContent();
                 }else{
                 }
             }
             @Override
-            public void onFailure(Call<InstallResponse> call, Throwable t) {
+            public void onFailure(Call<MainResponse> call, Throwable t) {
             }
         });
     }
