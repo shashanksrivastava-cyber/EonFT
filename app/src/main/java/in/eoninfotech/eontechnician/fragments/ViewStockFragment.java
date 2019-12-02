@@ -44,7 +44,6 @@ import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
 import in.eoninfotech.eontechnician.Responses.ClientDataResponse;
 import in.eoninfotech.eontechnician.Responses.ClientDetails;
 import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
 import in.eoninfotech.eontechnician.Responses.StockClientDataResponse;
 import in.eoninfotech.eontechnician.Responses.StockResponse;
 import in.eoninfotech.eontechnician.ViewStockAdapter;

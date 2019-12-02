@@ -175,72 +175,77 @@ public class DashBoardFragment extends Fragment {
     }
      void getDashBoardDetail() {
 
-        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<DashBoardResponse> call = log_att.dashBoardResponse(zone);
-        Log.i("****call", String.valueOf(call));
-        call.enqueue(new Callback<DashBoardResponse>() {
-            @Override
-            public void onResponse(Call<DashBoardResponse> call, Response<DashBoardResponse> response) {
-                DashBoardResponse updateDataResponse = response.body();
-                dashboardList = response.body().getTechDashboardDetails();
-                if (updateDataResponse != null) {
-                    if (updateDataResponse.getType() == 1) {
-                        for (int i = 0; i < dashboardList.size(); i++) {
-                            addTime.setText(""+dashboardList.get(i).getCur_add());
-                            add_value.setText(""+dashboardList.get(i).getAdd_21());
-                            String color1  = dashboardList.get(i).getColor();
-                            String[] separated = color1.split(";");
-                            String color = separated[0];
-                            int myColor = Color.parseColor(color);
-                            addTime.setTextColor(myColor);
-                            //addTime.setBackgroundColor(myColor);
+         try {
+             ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+             Call<DashBoardResponse> call = log_att.dashBoardResponse(zone);
+             Log.i("****call", String.valueOf(call));
+             call.enqueue(new Callback<DashBoardResponse>() {
+                 @Override
+                 public void onResponse(Call<DashBoardResponse> call, Response<DashBoardResponse> response) {
+                     DashBoardResponse updateDataResponse = response.body();
+                     dashboardList = response.body().getTechDashboardDetails();
+                     if (updateDataResponse != null) {
+                         if (updateDataResponse.getType() == 1) {
+                             for (int i = 0; i < dashboardList.size(); i++) {
+                                 addTime.setText(""+dashboardList.get(i).getCur_add());
+                                 add_value.setText(""+dashboardList.get(i).getAdd_21());
+                                 String color1  = dashboardList.get(i).getColor();
+                                 String[] separated = color1.split(";");
+                                 String color = separated[0];
+                                 int myColor = Color.parseColor(color);
+                                 addTime.setTextColor(myColor);
+                                 //addTime.setBackgroundColor(myColor);
 
-                            String color2  = dashboardList.get(i).getColor21();
-                            String[] separated1 = color2.split(";");
-                            String color3 = separated1[0];
-                            int color21 = Color.parseColor(color3);
-                            add_value.setTextColor(color21);
+                                 String color2  = dashboardList.get(i).getColor21();
+                                 String[] separated1 = color2.split(";");
+                                 String color3 = separated1[0];
+                                 int color21 = Color.parseColor(color3);
+                                 add_value.setTextColor(color21);
 
-                            total_vts.setText(""+dashboardList.get(0).getTot_dev());
-                            total_drs.setText(""+dashboardList.get(0).getTot_drs());
+                                 total_vts.setText(""+dashboardList.get(0).getTot_dev());
+                                 total_drs.setText(""+dashboardList.get(0).getTot_drs());
 
-                            faulty_vts.setText(""+dashboardList.get(0).getFaulty_dev());
-                            vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
+                                 faulty_vts.setText(""+dashboardList.get(0).getFaulty_dev());
+                                 vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
 
-                            faulty_drs.setText(""+dashboardList.get(0).getFaulty_drs());
-                            drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
+                                 faulty_drs.setText(""+dashboardList.get(0).getFaulty_drs());
+                                 drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
 
-                            faulty_um.setText(""+dashboardList.get(0).getUmain());
-                            umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
+                                 faulty_um.setText(""+dashboardList.get(0).getUmain());
+                                 umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
 
-                           // add_value.setBackgroundColor(color21);
-//                            mChart.setCenterText("VTS : "+dashboardList.get(i).getTot_dev()+"\n"+"\n"+"DRS :"+dashboardList.get(i).getTot_drs());
-//                            mChart.setCenterTextSize(14f);
-//                            xData = new String[]{"Faulty VTS : " +(dashboardList.get(i).getFaulty_dev()),
-//                                    "Faulty DRS : " +(dashboardList.get(i).getFaulty_drs()),
-//                                    "Under Maint. : " +(dashboardList.get(i).getUmain())};
-                        }
-                    }
-                } else {
-                    assert updateDataResponse != null;
-                    Log.v("Response", updateDataResponse.toString());
-                    achivd=0.0f;
-                }
-                    yData.add(Float.valueOf(33));
-                    yData.add(Float.valueOf(33));
-                    yData.add(Float.valueOf(33));
-               // addData(yData);
-                //ShowProgressBar(false);
-            }
+                                // add_value.setBackgroundColor(color21);
+     //                            mChart.setCenterText("VTS : "+dashboardList.get(i).getTot_dev()+"\n"+"\n"+"DRS :"+dashboardList.get(i).getTot_drs());
+     //                            mChart.setCenterTextSize(14f);
+     //                            xData = new String[]{"Faulty VTS : " +(dashboardList.get(i).getFaulty_dev()),
+     //                                    "Faulty DRS : " +(dashboardList.get(i).getFaulty_drs()),
+     //                                    "Under Maint. : " +(dashboardList.get(i).getUmain())};
+                             }
+                         }
+                     } else {
+                         assert updateDataResponse != null;
+                         Log.v("Response", updateDataResponse.toString());
+                         achivd=0.0f;
+                     }
+                         yData.add(Float.valueOf(33));
+                         yData.add(Float.valueOf(33));
+                         yData.add(Float.valueOf(33));
+                    // addData(yData);
+                     //ShowProgressBar(false);
+                 }
 
-            @Override
-            public void onFailure(Call<DashBoardResponse> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
-               // progressDialog.hide();
-            }
-        });
-    }
+                 @Override
+                 public void onFailure(Call<DashBoardResponse> call, Throwable t) {
+                     t.printStackTrace();
+                     Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+                    // progressDialog.hide();
+                 }
+             });
+         } catch (Exception e) {
+             e.printStackTrace();
+             Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
+         }
+     }
 
     void setDateAndTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM");

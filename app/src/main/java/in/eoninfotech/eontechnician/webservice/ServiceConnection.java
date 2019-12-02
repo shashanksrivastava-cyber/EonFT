@@ -23,7 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Harman on 9/10/2017.
  */
 public class ServiceConnection {
-    public static final String BASE_URL = "http://mail.cybernetra.net:8080/android/";
+    public static final String BASE_URL = "http://mis.eon.co.in/eonmis/android/techApp/";
+//    public static final String BASE_URL = "http://mail.cybernetra.net:8080/android/";
     private static Retrofit retrofit = null;
 
 

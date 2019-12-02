@@ -54,7 +54,7 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ClientDataResponse;
 import in.eoninfotech.eontechnician.Responses.ClientDetails;
 import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.InstallResponse;
+import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.StockClientDataResponse;
 import in.eoninfotech.eontechnician.helper.EONUtil;
 import in.eoninfotech.eontechnician.helper.K;
@@ -94,7 +94,7 @@ public class StockFragment extends Fragment {
     ArrayList<ClientDetails> clientList = new ArrayList<>();
     ArrayList<String> clientDetail = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    private Call<InstallResponse> locCall;
+    private Call<MainResponse> locCall;
     ProgressBar progressBar;
 
     @Override
@@ -351,9 +351,9 @@ public class StockFragment extends Fragment {
         ApiHolder loc_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         locCall = loc_att.stockResponse(s_clientid, s_wrking_vts_qty, s_faulty_vts_qty, s_cable_7_meter, s_cable_2_meter, s_drum_sensor_qty,
                 s_magnet_set, username, s_y_cable, s_remarks, s_wrking_vts_srno, s_faulty_vts_srno, s_drum_sensor_ids);
-        locCall.enqueue(new Callback<InstallResponse>() {
-            public void onResponse(Call<InstallResponse> call, Response<InstallResponse> response) {
-                InstallResponse workTypeResponse = response.body();
+        locCall.enqueue(new Callback<MainResponse>() {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                MainResponse workTypeResponse = response.body();
                 Log.i("**work respnse", "" + response.body());
                 Toast.makeText(getContext(), "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 pDialog.hide();
@@ -369,7 +369,7 @@ public class StockFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<InstallResponse> call, Throwable t) {
+            public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
                     TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();

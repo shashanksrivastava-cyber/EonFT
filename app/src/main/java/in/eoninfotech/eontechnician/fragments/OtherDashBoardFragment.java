@@ -60,11 +60,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class OtherDashBoardFragment extends Fragment {
 
     View v;
-    int year, day,month;
+    int year, day, month;
     Calendar calen = Calendar.getInstance();
     MySearchableSpinner client;
     SharedPreferences sharedprefs;
-    String uusername, version,zone,current_date, s_time,months;
+    String uusername, version, zone, current_date, s_time, months;
     ArrayList<TechDetails> techList = new ArrayList<>();
     ArrayList<String> techDetail = new ArrayList<>();
     ArrayAdapter<String> adapter;
@@ -72,16 +72,17 @@ public class OtherDashBoardFragment extends Fragment {
     private PieChart mChart;
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
     RelativeLayout progressBar;
-    TextView t_curntday, t_target,addName,addTime,add_value,total_vts,total_drs,faulty_vts,faulty_drs,faulty_um;
+    TextView t_curntday, t_target, addName, addTime, add_value, total_vts, total_drs, faulty_vts, faulty_drs, faulty_um;
     ArrayList<Float> yData = new ArrayList<>();
-    ColorfulRingProgressView vtsSpv,drsSpv,umSpv;
-    CardView cv_one_login,cv_two_login,cv_three_login;
+    ColorfulRingProgressView vtsSpv, drsSpv, umSpv;
+    CardView cv_one_login, cv_two_login, cv_three_login;
     Float achivd, total;
     private String[] xData;
     TextView txt_content_unavailable;
     LinearLayout addDetail;
     public static final int[] BRIGHT_COLORS = {
-            Color.parseColor("#D32F2F"), Color.parseColor("#F44336"),Color.parseColor("#FFC03C")};
+            Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -168,10 +169,10 @@ public class OtherDashBoardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value","2");
-                intent.putExtra("zone",zone);
-                intent.putExtra("tab","2");
-                intent.putExtra("other","1");
+                intent.putExtra("device_value", "2");
+                intent.putExtra("zone", zone);
+                intent.putExtra("tab", "2");
+                intent.putExtra("other", "1");
                 startActivity(intent);
             }
         });
@@ -179,10 +180,10 @@ public class OtherDashBoardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value","1");
-                intent.putExtra("zone",zone);
-                intent.putExtra("tab","2");
-                intent.putExtra("other","1");
+                intent.putExtra("device_value", "1");
+                intent.putExtra("zone", zone);
+                intent.putExtra("tab", "2");
+                intent.putExtra("other", "1");
                 startActivity(intent);
             }
         });
@@ -191,10 +192,10 @@ public class OtherDashBoardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value","3");
-                intent.putExtra("zone",zone);
-                intent.putExtra("tab","2");
-                intent.putExtra("other","1");
+                intent.putExtra("device_value", "3");
+                intent.putExtra("zone", zone);
+                intent.putExtra("tab", "2");
+                intent.putExtra("other", "1");
                 startActivity(intent);
             }
         });
@@ -207,10 +208,12 @@ public class OtherDashBoardFragment extends Fragment {
         Call<TechResponse> clientCall = client_att.requestTechList();
         clientCall.enqueue(new Callback<TechResponse>() {
             public void onResponse(Call<TechResponse> call, Response<TechResponse> response) {
-                TechResponse workTypeResponse = response.body();
-                techList = response.body().gettechList();
-                Log.i("**workclientrespnse", " " + techList);
                 try {
+
+                    TechResponse workTypeResponse = response.body();
+                    techList = response.body().gettechList();
+                    Log.i("**workclientrespnse", " " + techList);
+
                     try {
                         techDetail.clear();
                     } catch (Exception e) {
@@ -236,6 +239,7 @@ public class OtherDashBoardFragment extends Fragment {
                     npe.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<TechResponse> call, Throwable t) {
                 try {
@@ -258,8 +262,9 @@ public class OtherDashBoardFragment extends Fragment {
                     return;
                 } else {
                     i = i - 1;
-                }zone = (techList.get(i).getZone());
-                addName.setText(techList.get(i).getName()+"'s ADD Performence");
+                }
+                zone = (techList.get(i).getZone());
+                addName.setText(techList.get(i).getName() + "'s ADD Performence");
                 addDetail.setVisibility(View.VISIBLE);
                 txt_content_unavailable.setVisibility(View.GONE);
                 getDashBoardDetail();
@@ -287,32 +292,32 @@ public class OtherDashBoardFragment extends Fragment {
                 if (updateDataResponse != null) {
                     if (updateDataResponse.getType() == 1) {
                         for (int i = 0; i < dashboardList.size(); i++) {
-                            addTime.setText(""+dashboardList.get(i).getCur_add());
-                            add_value.setText(""+dashboardList.get(i).getAdd_21());
-                            String color1  = dashboardList.get(i).getColor();
+                            addTime.setText("" + dashboardList.get(i).getCur_add());
+                            add_value.setText("" + dashboardList.get(i).getAdd_21());
+                            String color1 = dashboardList.get(i).getColor();
                             String[] separated = color1.split(";");
                             String color = separated[0];
                             int myColor = Color.parseColor(color);
                             addTime.setTextColor(myColor);
-                           // addTime.setBackgroundColor(myColor);
+                            // addTime.setBackgroundColor(myColor);
 
-                            String color2  = dashboardList.get(i).getColor21();
+                            String color2 = dashboardList.get(i).getColor21();
                             String[] separated1 = color2.split(";");
                             String color3 = separated1[0];
                             int color21 = Color.parseColor(color3);
                             add_value.setTextColor(color21);
-                           // add_value.setBackgroundColor(color21);
+                            // add_value.setBackgroundColor(color21);
 
-                            total_vts.setText(""+dashboardList.get(0).getTot_dev());
-                            total_drs.setText(""+dashboardList.get(0).getTot_drs());
+                            total_vts.setText("" + dashboardList.get(0).getTot_dev());
+                            total_drs.setText("" + dashboardList.get(0).getTot_drs());
 
-                            faulty_vts.setText(""+dashboardList.get(0).getFaulty_dev());
+                            faulty_vts.setText("" + dashboardList.get(0).getFaulty_dev());
                             vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
 
-                            faulty_drs.setText(""+dashboardList.get(0).getFaulty_drs());
+                            faulty_drs.setText("" + dashboardList.get(0).getFaulty_drs());
                             drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
 
-                            faulty_um.setText(""+dashboardList.get(0).getUmain());
+                            faulty_um.setText("" + dashboardList.get(0).getUmain());
                             umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
 
 //                            mChart.setCenterText("VTS : "+dashboardList.get(i).getTot_dev()+"\n"+"\n"+"DRS :"+dashboardList.get(i).getTot_drs());
@@ -327,7 +332,7 @@ public class OtherDashBoardFragment extends Fragment {
                 } else {
                     assert updateDataResponse != null;
                     Log.v("Response", updateDataResponse.toString());
-                    achivd=0.0f;
+                    achivd = 0.0f;
                 }
 //                yData.add(Float.valueOf(33));
 //                yData.add(Float.valueOf(33));
@@ -355,32 +360,32 @@ public class OtherDashBoardFragment extends Fragment {
         } else {
             current_date = day + "-" + month + "-" + year;
         }
-        if(month==1){
+        if (month == 1) {
             months = "Jan";
-        }else if(month==2){
+        } else if (month == 2) {
             months = "Feb";
-        }else if(month==3){
+        } else if (month == 3) {
             months = "Mar";
-        }else if(month==4){
+        } else if (month == 4) {
             months = "Apr";
-        }else if(month==5){
+        } else if (month == 5) {
             months = "May";
-        }else if(month==6){
+        } else if (month == 6) {
             months = "Jun";
-        }else if(month==7){
+        } else if (month == 7) {
             months = "Jul";
-        }else if(month==8){
+        } else if (month == 8) {
             months = "Aug";
-        }else if(month==9){
+        } else if (month == 9) {
             months = "Sep";
-        }else if(month==10){
+        } else if (month == 10) {
             months = "Oct";
-        }else if(month==11){
+        } else if (month == 11) {
             months = "Nov";
-        }else if(month==12){
+        } else if (month == 12) {
             months = "Dec";
         }
-      //  current_date = months+ " " +day + "," + year;
+        //  current_date = months+ " " +day + "," + year;
 //        t_curntday.setText(current_date);
 //        SimpleDateFormat dateFormatt = new SimpleDateFormat("HH:mm dd-MM-yyyy");
 //        s_time = dateFormatt.format(calen.getTime());
@@ -428,8 +433,9 @@ public class OtherDashBoardFragment extends Fragment {
             } else {
                 progressBar.setVisibility(View.GONE);
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            }}
-        catch (Exception e) {
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-        }}
+        }
     }
+}
