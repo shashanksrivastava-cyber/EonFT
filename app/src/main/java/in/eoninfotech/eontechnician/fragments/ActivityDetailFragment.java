@@ -55,7 +55,7 @@ public class ActivityDetailFragment extends Fragment {
 
     View v;
     String current_date, selected_todate, s_date;
-    String username, dist_id, version;
+    String username, dist_id, version,user_id;
     public RecyclerView recyclerView;
     public SwipeRefreshLayout refreshLayout;
     public LinearLayoutManager layoutManager;
@@ -82,7 +82,7 @@ public class ActivityDetailFragment extends Fragment {
         editor = sharedprefs.edit();
         username = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
-
+        user_id = sharedprefs.getString("s_user_id","");
         refreshLayout = v.findViewById(R.id.refresh);
         recyclerView = v.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -99,7 +99,7 @@ public class ActivityDetailFragment extends Fragment {
         progressBars = v.findViewById(R.id.progressBars);
         mShimmerViewContainer = v.findViewById(R.id.shimmer_view_container);
 
-        loadContent();
+       // loadContent();
         return v;
     }
 
@@ -177,7 +177,7 @@ public class ActivityDetailFragment extends Fragment {
 
        // refreshLayout.setRefreshing(true);
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<ActivityResponse> call = log_att.view_activities(s_date, username);
+        Call<ActivityResponse> call = log_att.view_activities(s_date, user_id);
         call.enqueue(new Callback<ActivityResponse>() {
             @Override
             public void onResponse(Call<ActivityResponse> call, Response<ActivityResponse> response) {

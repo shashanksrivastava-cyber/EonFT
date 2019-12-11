@@ -10,9 +10,9 @@ import java.io.Serializable;
 
 public class WorkTypeDetail implements Serializable {
 
-    @SerializedName("w_id")
+    @SerializedName("id")
     private int work_Id;
-    @SerializedName("w_name")
+    @SerializedName("name")
     private String work_Name;
 
     public int getWork_Id() {

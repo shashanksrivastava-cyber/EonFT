@@ -87,7 +87,7 @@ public class LoginActivityNew extends AppCompatActivity {
     TextView phn, email;
     EditText e_usrnme, e_paswrd;
     TextInputLayout user,pass;
-    String p_usr = "", p_pass = "", pp_usrnmae = "", pp_passwrd = "";
+    String p_usr = "", p_pass = "", pp_usrnmae = "", pp_passwrd = "",user_id;
     int REQUEST_CODE_PERMISSION = 10;
     private FusedLocationProviderClient locationProviderClient;
     String key = "eon180$135rddyttd";
@@ -345,18 +345,17 @@ public class LoginActivityNew extends AppCompatActivity {
         ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
         Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1);
         locCall.enqueue(new Callback<LoginResponse>() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 try{
                 LoginResponse workTypeResponse = response.body();
                 loginList = response.body().getLoginDetails();
                 Log.i("**work respnse", " " + response.body());
-
                 if (loginList.size() == 0) {
                     Toast.makeText(LoginActivityNew.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
                     progressDialog.hide();
                 } else{
                     int i=0;
+                    user_id = loginList.get(i).getUsr_id();
                     versname = loginList.get(i).getVerno();
                     usrtype = loginList.get(i).getUsrtype();
                     uusername = loginList.get(i).getUsrname();
@@ -367,6 +366,7 @@ public class LoginActivityNew extends AppCompatActivity {
                     image = loginList.get(i).getImage();
                     track_status = loginList.get(i).getTrack_status();
                     track_interval = loginList.get(i).getTrack_interval();
+                    editor.putString("s_user_id",user_id);
                     editor.putString("s_uuser", uusername);
                     editor.putString("location", location);
                     editor.putString("usrtype",usrtype);

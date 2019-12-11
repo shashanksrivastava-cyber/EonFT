@@ -12,7 +12,7 @@ public class RemovalActivityResponse {
 
     @SerializedName("type")
     Integer type;
-    @SerializedName("activities")
+    @SerializedName("removal-acts")
     ArrayList<RemovalActivityDetail> removalActivityDetails = new ArrayList<RemovalActivityDetail>();
 
 

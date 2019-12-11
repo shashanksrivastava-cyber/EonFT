@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginDetail {
 
+    @SerializedName("usr_id")
+    private String usr_id;
     @SerializedName("verno")
     private String verno;
     @SerializedName("usrtype")
@@ -108,5 +110,13 @@ public class LoginDetail {
 
     public void setTrack_interval(String track_interval) {
         this.track_interval = track_interval;
+    }
+
+    public String getUsr_id() {
+        return usr_id;
+    }
+
+    public void setUsr_id(String usr_id) {
+        this.usr_id = usr_id;
     }
 }

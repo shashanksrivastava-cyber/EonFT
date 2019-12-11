@@ -99,47 +99,6 @@ public class DashBoardFragment extends Fragment {
         setDateAndTime();
         getDashBoardDetail();
 
-//        mChart.setUsePercentValues(false);
-//        mChart.getDescription().setEnabled(false);
-//        // enable hole and configure
-//        mChart.setDrawHoleEnabled(true);
-//        mChart.setHoleRadius(30);
-//        mChart.setTransparentCircleRadius(10);
-//        mChart.setHoleColor(Color.parseColor("#FFFFFF"));
-//        mChart.setCenterTextColor(Color.parseColor("#000000"));
-//        mChart.setDrawCenterText(true);
-//        mChart.setRotationEnabled(true);
-//        mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-//
-//            @Override
-//            public void onValueSelected(Entry e, Highlight h) {
-//                if (e == null)
-//                    return;
-//                if(h.getX()==1.0) {
-//                    Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                    intent.putExtra("device_value","1");
-//                    intent.putExtra("tab","1");
-//                    intent.putExtra("other","2");
-//                    startActivity(intent);
-//                }else if(h.getX()==0.0) {
-//                    Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                    intent.putExtra("device_value","2");
-//                    intent.putExtra("tab","1");
-//                    intent.putExtra("other","2");
-//                    startActivity(intent);
-//                }else if(h.getX()==2.0) {
-//                    Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                    intent.putExtra("device_value","3");
-//                    intent.putExtra("tab","1");
-//                    intent.putExtra("other","2");
-//                    startActivity(intent);
-//                }
-//            }
-//            @Override
-//            public void onNothingSelected() {
-//            }
-//        });
-
         cv_one_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,13 +172,6 @@ public class DashBoardFragment extends Fragment {
 
                                  faulty_um.setText(""+dashboardList.get(0).getUmain());
                                  umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
-
-                                // add_value.setBackgroundColor(color21);
-     //                            mChart.setCenterText("VTS : "+dashboardList.get(i).getTot_dev()+"\n"+"\n"+"DRS :"+dashboardList.get(i).getTot_drs());
-     //                            mChart.setCenterTextSize(14f);
-     //                            xData = new String[]{"Faulty VTS : " +(dashboardList.get(i).getFaulty_dev()),
-     //                                    "Faulty DRS : " +(dashboardList.get(i).getFaulty_drs()),
-     //                                    "Under Maint. : " +(dashboardList.get(i).getUmain())};
                              }
                          }
                      } else {
@@ -291,38 +243,6 @@ public class DashBoardFragment extends Fragment {
         s_time = dateFormatt.format(calen.getTime());
     }
 
-//    private void addData(ArrayList<Float> yData) {
-//        float mult = 100;
-//        ArrayList<PieEntry> yVals1 = new ArrayList<PieEntry>();
-//
-//        for (int i = 0; i < yData.size(); i++) {
-//            try {
-//                yVals1.add(new PieEntry(yData.get(i), xData[i]));
-//            }catch (Exception e){
-//
-//            }
-//        }
-//        // create pie data set
-//        PieDataSet dataSet = new PieDataSet(yVals1, "");
-//        dataSet.setSliceSpace(3);
-//        dataSet.setSelectionShift(5);
-//
-//        // add many colors
-//        ArrayList<Integer> colors = new ArrayList<Integer>();
-//        for (int c : BRIGHT_COLORS) colors.add(c);
-//
-//        dataSet.setColors(colors);
-//        // instantiate pie data object now
-//        PieData data = new PieData(dataSet);
-//       // data.setValueFormatter(new PercentFormatter());
-//        data.setValueTextSize(0f);
-//        data.setValueTextColor(Color.WHITE);
-//        mChart.setData(data);
-//        // undo all highlights
-//        mChart.highlightValues(null);
-//        // update pie chart
-//        mChart.invalidate();
-//    }
      private void ShowProgressBar(boolean show) {
          try {
              if (show) {

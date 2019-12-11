@@ -12,8 +12,8 @@ public class FaultList implements Serializable {
 
     @SerializedName("id")
     private int Id;
-    @SerializedName("descp")
-    private String descp;
+    @SerializedName("name")
+    private String name;
 
     public int getId() {
         return Id;
@@ -23,11 +23,11 @@ public class FaultList implements Serializable {
         Id = id;
     }
 
-    public String getDescp() {
-        return descp;
+    public String getName() {
+        return name;
     }
 
-    public void setDescp(String descp) {
-        this.descp = descp;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -135,7 +135,7 @@ public class NewInstallMentFragmentCommented extends Fragment {
         vehicleType = (MySearchableSpinner)v.findViewById(R.id.new_in_vehicleType);
         progressdrs=(ProgressBar)v.findViewById(R.id.progressdrs);
         progressReinstallNew = (ProgressBar)v.findViewById(R.id.progressReinstallNew);
-        progressReplace = (ProgressBar)v.findViewById(R.id.progressReplace);
+        //progressReplace = (ProgressBar)v.findViewById(R.id.progressReplace);
 //        progressReplaceDrs = (ProgressBar)v.findViewById(R.id.progressReplaceDrs);
 //        progressReplaceDrsNew = (ProgressBar)v.findViewById(R.id.progressReplaceDrsNew);
         //progressfault = (ProgressBar)v.findViewById(R.id.progressfault);
@@ -154,8 +154,8 @@ public class NewInstallMentFragmentCommented extends Fragment {
         idExist = (ImageView)v.findViewById(R.id.idExist);
         idExistNew = (ImageView)v.findViewById(R.id.idExistNew);
         idnotExistnew = (ImageView)v.findViewById(R.id.idnotExistnew);
-        idExistReplace = (ImageView)v.findViewById(R.id.idExistReplace);
-        idnotExistReplace =(ImageView)v.findViewById(R.id.idnotExistReplace);
+//        idExistReplace = (ImageView)v.findViewById(R.id.idExistReplace);
+//        idnotExistReplace =(ImageView)v.findViewById(R.id.idnotExistReplace);
 //        idExistReplaceDRS = (ImageView)v.findViewById(R.id.idExistReplaceDRS);
 //        idnotExistReplaceDRS = (ImageView)v.findViewById(R.id.idnotExistReplaceDRS);
 //        idExistReplaceDRSNew = (ImageView)v.findViewById(R.id.idExistReplaceDRSNew);

@@ -13,7 +13,7 @@ public class VTSResponse implements Serializable {
 
         @SerializedName("type")
         Integer type;
-        @SerializedName("client")
+        @SerializedName("vts-rec")
         ArrayList<VTSDetail> vtsDetails = new ArrayList<VTSDetail>();
 
         public Integer getType() {

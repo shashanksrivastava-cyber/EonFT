@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class RemovalActivityDetail {
 
-    @SerializedName("a_id")
+    @SerializedName("id")
     String a_id;
-    @SerializedName("a_name")
+    @SerializedName("name")
     String a_name;
 
     public String getA_id() {

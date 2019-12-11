@@ -13,7 +13,7 @@ public class WorkTypeResponse implements Serializable {
 
     @SerializedName("type")
     Integer type;
-    @SerializedName("work_data")
+    @SerializedName("activites")
     ArrayList<WorkTypeDetail> worktypeList = new ArrayList<WorkTypeDetail>();
 
     public Integer getType() {

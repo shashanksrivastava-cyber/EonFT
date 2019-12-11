@@ -376,15 +376,6 @@
         </ScrollView>
     </LinearLayout>
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:clickable="true"-->
-        <!--android:id="@+id/llayoutProgress"-->
-        <!--android:gravity="center"-->
-        <!--android:focusable="true"-->
-        <!--android:background="@color/transparent_black_hex_11">-->
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -396,8 +387,6 @@
             android:max="100"
             android:clickable="true"
             android:progress="20"/>
-
-    <!--</RelativeLayout>-->
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"

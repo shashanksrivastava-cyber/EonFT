@@ -348,7 +348,7 @@ public interface ApiHolder {
                                                 @Part("hardware_pump_tax") RequestBody pump_tax,
                                                 @Part("sale_id") RequestBody sale_id);
 
-    @GET("work-type.php")
+    @GET("activities-list.php")
     Call<WorkTypeResponse> reqeuestworkType();
 
     @GET("vehicle-type.php")
@@ -394,67 +394,63 @@ public interface ApiHolder {
     Call<VTSResponse> reqeuestVtsDetail(
             @Field("vid") String id);
 
-    @FormUrlEncoded
-    @POST("vts-detail.php")
-    Call<VTSResponse> reqeuestVtsDetails(
-            @Field("vid") String id);
 
     @FormUrlEncoded
     @POST("check-drs.php")
     Call<DRSResponse> reqeuestDrsDetail(
             @Field("id") String id);
 
-    @FormUrlEncoded
-    @POST("technicians-work.php")
-    Call<MainResponse> postInstallationData(@Field("work_type") String worktype,
-                                               @Field("tech_name") String techName,
-                                               @Field("client_id") String clientId,
-                                               @Field("client_loc_id") String c_loc_id,
-                                               @Field("reg_no") String regNo,
-                                               @Field("veh_type") String vehType,
-                                               @Field("device_type") String devType,
-                                               @Field("old_vts_id") String oldVtsId,
-                                               @Field("new_vts_id") String newVtsId,
-                                               @Field("is_drs") String isDrs,
-                                               @Field("new_drs_id") String newDrsId,
-                                               @Field("old_drs_id") String oldDrsId,
-                                               @Field("drs_direction") String drsDirection,
-                                               @Field("reason_replacement") String replaceReason,
-                                               @Field("removal_reason") String removalReason,
-                                               @Field("items_collected") String itemsCollected,
-                                               @Field("others") String others,
-                                               @Field("tel_support") String telSupport,
-                                               @Field("activity_date") String date,
-                                               @Field("activity_time") String time,
-                                               @Field("remarks") String remarks,
-                                               @Field("disconnection_reason") String dis_reason,
-                                               @Field("ignition_sensor") String ignition_sensor,
-                                               @Field("fuel_sensor") String fuel_sensor,
-                                               @Field("door_sensor") String door_sensor,
-                                               @Field("veh_condition") String veh_condition,
-                                               @Field("mgt_set") String mgt_set,
-                                               @Field("sim_provider") String sim_provider,
-                                               @Field("old_sim_no") String old_sim_no,
-                                               @Field("new_sim_no") String new_sim_no,
-                                               @Field("sim_reason") String sim_reason,
-                                               @Field("not_available_reason") String not_available_reason,
-                                               @Field("not_available_activity") String not_available_activity,
-                                               @Field("is_demo") String is_demo,
-                                               @Field("missing_type") String missing_type,
-                                               @Field("collection_amount") String collection_amount,
-                                               @Field("collection_date") String collection_date,
-                                               @Field("collection_type") String collection_type,
-                                               @Field("collection_image") String collection_image,
-                                               @Field("missing_reason") String missing_reason,
-                                               @Field("removal_type") String removal_type,
-                                               @Field("cut_off") String cut_off,
-                                               @Field("serial_no") String serial_no,
-                                               @Field("contact_person") String contact_person,
-                                               @Field("contact_no") String contact_no,
-                                               @Field("payment_type") String payment_type,
-                                               @Field("old_serial_no") String old_serial_no,
-                                               @Field("vts_type") String vts_type);
-
+//    @FormUrlEncoded
+//    @POST("technicians-work.php")
+//    Call<MainResponse> postInstallationData(@Field("work_type") String worktype,
+//                                               @Field("tech_name") String techName,
+//                                               @Field("client_id") String clientId,
+//                                               @Field("client_loc_id") String c_loc_id,
+//                                               @Field("reg_no") String regNo,
+//                                               @Field("veh_type") String vehType,
+//                                               @Field("device_type") String devType,
+//                                               @Field("old_vts_id") String oldVtsId,
+//                                               @Field("new_vts_id") String newVtsId,
+//                                               @Field("is_drs") String isDrs,
+//                                               @Field("new_drs_id") String newDrsId,
+//                                               @Field("old_drs_id") String oldDrsId,
+//                                               @Field("drs_direction") String drsDirection,
+//                                               @Field("reason_replacement") String replaceReason,
+//                                               @Field("removal_reason") String removalReason,
+//                                               @Field("items_collected") String itemsCollected,
+//                                               @Field("others") String others,
+//                                               @Field("tel_support") String telSupport,
+//                                               @Field("activity_date") String date,
+//                                               @Field("activity_time") String time,
+//                                               @Field("remarks") String remarks,
+//                                               @Field("disconnection_reason") String dis_reason,
+//                                               @Field("ignition_sensor") String ignition_sensor,
+//                                               @Field("fuel_sensor") String fuel_sensor,
+//                                               @Field("door_sensor") String door_sensor,
+//                                               @Field("veh_condition") String veh_condition,
+//                                               @Field("mgt_set") String mgt_set,
+//                                               @Field("sim_provider") String sim_provider,
+//                                               @Field("old_sim_no") String old_sim_no,
+//                                               @Field("new_sim_no") String new_sim_no,
+//                                               @Field("sim_reason") String sim_reason,
+//                                               @Field("not_available_reason") String not_available_reason,
+//                                               @Field("not_available_activity") String not_available_activity,
+//                                               @Field("is_demo") String is_demo,
+//                                               @Field("missing_type") String missing_type,
+//                                               @Field("collection_amount") String collection_amount,
+//                                               @Field("collection_date") String collection_date,
+//                                               @Field("collection_type") String collection_type,
+//                                               @Field("collection_image") String collection_image,
+//                                               @Field("missing_reason") String missing_reason,
+//                                               @Field("removal_type") String removal_type,
+//                                               @Field("cut_off") String cut_off,
+//                                               @Field("serial_no") String serial_no,
+//                                               @Field("contact_person") String contact_person,
+//                                               @Field("contact_no") String contact_no,
+//                                               @Field("payment_type") String payment_type,
+//                                               @Field("old_serial_no") String old_serial_no,
+//                                               @Field("vts_type") String vts_type);
+//
     @Multipart
     @POST("technicians-work.php")
     Call<MainResponse> postInstallationsData(@Part("work_type") RequestBody worktype,
@@ -507,6 +503,58 @@ public interface ApiHolder {
                                                 @Part("vts_type") RequestBody vts_type);
 
 
+    @Multipart
+    @POST("technicians-work.php")
+    Call<MainResponse> postInstallationsData(@Part("technician_id") RequestBody technician_id,
+                                             @Part("activity_date") RequestBody activity_date,
+                                             @Part("activity_time") RequestBody activity_time,
+                                             @Part("customer") RequestBody customer,
+                                             @Part("customer_location") RequestBody customer_location,
+                                             @Part("is_demo") RequestBody is_demo,
+                                             @Part("activity_type") RequestBody activity_type,
+                                             @Part("vts_type") RequestBody vts_type,
+                                             @Part("device_type") RequestBody device_type,
+                                             @Part("old_device_id") RequestBody old_device_id,
+                                             @Part("new_device_id") RequestBody new_device_id,
+                                             @Part("old_serial_no") RequestBody old_serial_no,
+                                             @Part("new_serial_no") RequestBody new_serial_no,
+                                             @Part("reg_no") RequestBody reg_no,
+                                             @Part("veh_type") RequestBody veh_type,
+                                             @Part("is_drs") RequestBody is_drs,
+                                             @Part("old_drs") RequestBody old_drs,
+                                             @Part("new_drs") RequestBody new_drs,
+                                             @Part("drs_direction") RequestBody drs_direction,
+                                             @Part("mgt_set") RequestBody mgt_set,
+                                             @Part("ignition_sensor") RequestBody ignition_sensor,
+                                             @Part("fuel_sensor") RequestBody fuel_sensor,
+                                             @Part("door_sensor") RequestBody door_sensor,
+                                             @Part("panic_button") RequestBody panic_button,
+                                             @Part("cut_off") RequestBody cut_off,
+                                             @Part("replacement_reason") RequestBody replacement_reason,
+                                             @Part("removal_type") RequestBody removal_type,
+                                             @Part("removal_reason") RequestBody removal_reason,
+                                             @Part("disconnection_reason") RequestBody disconnection_reason,
+                                             @Part("missing_type") RequestBody missing_type,
+                                             @Part("missing_reason") RequestBody missing_reason,
+                                             @Part("not_available_activity") RequestBody not_available_activity,
+                                             @Part("not_available_reason") RequestBody not_available_reason,
+                                             @Part("collection_date") RequestBody collection_date,
+                                             @Part("payment_method") RequestBody payment_method,
+                                             @Part("amount") RequestBody amount,
+                                             @Part("payment_type") RequestBody payment_type,
+                                             @Part("contact_person") RequestBody contact_person,
+                                             @Part("contact_no") RequestBody contact_no,
+                                             @Part("sim_provider") RequestBody sim_provider,
+                                             @Part("old_sim_no") RequestBody old_sim_no,
+                                             @Part("new_sim_no") RequestBody new_sim_no,
+                                             @Part("sim_reason") RequestBody sim_reason,
+                                             @Part("veh_condition") RequestBody veh_condition,
+                                             @Part("tech_remarks") RequestBody tech_remarks,
+                                             @Part("collected_items") RequestBody collected_items,
+                                             @Part("faults_checked") RequestBody faults_checked,
+                                             @Part("fuel_reading") RequestBody fuelreading,
+                                             @Part MultipartBody.Part image);
+
     @FormUrlEncoded
     @POST("faulty-vts.php")
     Call<UpdateDataResponse> faulty_vts(@Field("technician") String technician);
@@ -514,7 +562,7 @@ public interface ApiHolder {
     @FormUrlEncoded
     @POST("view-activities.php")
     Call<ActivityResponse> view_activities(@Field("date") String date,
-                                           @Field("tech_name") String techName);
+                                           @Field("technician_id") String technician_id);
 
     @GET("tech-of-month.php")
     Call<TechnicianMonthResponse> requestTechnicianoftheMonth();
@@ -536,7 +584,7 @@ public interface ApiHolder {
     Call<FaultyDevices> faultyDRSResponse(@Field("zone") String zone);
 
     @FormUrlEncoded
-    @POST("login-api.php")
+    @POST("login.php")
     Call<LoginResponse> loginResponse(
             @Field("username") String username,
             @Field("password") String password,

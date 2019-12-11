@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ActivityResponse implements Serializable {
     @SerializedName("type")
     Integer type;
-    @SerializedName("data")
+    @SerializedName("act-rec")
     ArrayList<ActivityDetailResponse> activityList = new ArrayList<ActivityDetailResponse>();
 
     public Integer getType() {

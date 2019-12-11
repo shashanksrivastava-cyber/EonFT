@@ -9,14 +9,14 @@ android {
             storePassword 'fielddata'
         }
     }
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '27.0.1'
     defaultConfig {
         applicationId "in.eoninfotech.eontechnician"
         minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 16 // total number of version changes on play store
-        versionName "4.5"
+        targetSdkVersion 28
+        versionCode 19 // total number of version changes on play store
+        versionName "4.8"
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

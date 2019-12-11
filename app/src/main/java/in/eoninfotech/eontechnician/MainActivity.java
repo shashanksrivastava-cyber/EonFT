@@ -318,9 +318,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             @Override
             public void onDrawerStateChanged(int newState) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.
-                        INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.
+//                        INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });
         serviceStop();

@@ -2474,7 +2474,7 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
                     e.printStackTrace();}
                 if (list_change_values.size() > 0) {
                     for (int i = 0; i < list_change_values.size(); i++) {
-                        value_name.add(list_change_values.get(i).getDescp());}
+                        value_name.add(list_change_values.get(i).getName());}
                     if (list_change_values.size() > 5) {
                         lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));}
                     else {lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size()));}

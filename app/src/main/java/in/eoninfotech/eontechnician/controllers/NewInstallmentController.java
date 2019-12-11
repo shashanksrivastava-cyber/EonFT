@@ -31,6 +31,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Part;
 
 /**
  * Created by root on 11/1/19.
@@ -129,7 +130,6 @@ public class NewInstallmentController extends Controller {
                 }
             }
         });
-
     }
     public void reqeuestvehicleType(ClientListener listener) {
         vehCall = client_att.reqeuestvehicleType();
@@ -267,7 +267,6 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
-
     public void reqeuestDamageReason(ClientListener listener) {
         damageResponseCall = client_att.reqeuestDamageReason();
         damageResponseCall.enqueue(new Callback<RemovalResponse>() {
@@ -468,130 +467,202 @@ public class NewInstallmentController extends Controller {
         });
     }
 
-    public void postInstallationData(String worktype,
-                                     String techName,
-                                     String clientId,
-                                     String c_loc_id,
-                                     String regNo,
-                                     String vehType,
-                                     String devType,
-                                     String oldVtsId,
-                                     String newVtsId,
-                                     String isDrs,
-                                     String newDrsId,
-                                     String oldDrsId,
-                                     String drsDirection,
-                                     String replaceReason,
-                                     String removalReason,
-                                     String itemsCollected,
-                                     String others,
-                                     String telSupport,
-                                     String date,
-                                     String time,
-                                     String remarks,
-                                     String dis_reason,
-                                     String ignition_sensor,
-                                     String fuel_sensor,
-                                     String door_sensor,
-                                     String veh_condition,
-                                     String mgt_set,
-                                     String sim_provider,
-                                     String old_sim_no,
-                                     String new_sim_no,
-                                     String sim_reason,
-                                     String not_available_reason,
-                                     String not_available_activity,
-                                     String is_demo,
-                                     String missing_type,
-                                     String collection_amount,
-                                     String collection_date,
-                                     String collection_type,
-                                     String collectionImage,
-                                     String missing_reason,
-                                     String removal_type,
-                                     String cut_off,
-                                     String serial_no,
-                                     String contact_person,
-                                     String contact_no,
-                                     String payment_type,
-                                     String old_serial_no,
-                                     String vts_device,
-                                     ClientListener listener) {
-        updateDataCall = client_att.postInstallationData(worktype,techName,clientId,c_loc_id,
-                regNo,vehType,devType,oldVtsId,newVtsId,isDrs,newDrsId,oldDrsId,drsDirection,replaceReason,removalReason,itemsCollected,others, telSupport,date,time,remarks,dis_reason,ignition_sensor,fuel_sensor,door_sensor,
-                veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no,sim_reason,not_available_reason,not_available_activity,is_demo,missing_type,collection_amount,collection_date,collection_type,collectionImage,
-                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type, old_serial_no, vts_device);
-        updateDataCall.enqueue(new Callback<MainResponse>() {
-            @Override
-            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-                listener.updateDataResponse(response.body());
-            }
-            @Override
-            public void onFailure(Call<MainResponse> call, Throwable t) {
-                try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = (TextView) snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                    textView.setTextColor(Color.WHITE);
-                    snackbar.show();
-                } catch (Exception e) {
-                }
-            }
-        });
-    }
-    public void postInstallationsData(RequestBody worktype,
-                                      RequestBody techName,
-                                      RequestBody clientId,
-                                      RequestBody c_loc_id,
-                                      RequestBody regNo,
-                                      RequestBody vehType,
-                                      RequestBody devType,
-                                      RequestBody oldVtsId,
-                                      RequestBody newVtsId,
-                                      RequestBody isDrs,
-                                      RequestBody newDrsId,
-                                      RequestBody oldDrsId,
-                                      RequestBody drsDirection,
-                                      RequestBody replaceReason,
-                                      RequestBody removalReason,
-                                      RequestBody itemsCollected,
-                                      RequestBody others,
-                                      RequestBody telSupport,
-                                      RequestBody date,
-                                      RequestBody time,
-                                      RequestBody remarks,
-                                      RequestBody dis_reason,
+//    public void postInstallationData(String worktype,
+//                                     String techName,
+//                                     String clientId,
+//                                     String c_loc_id,
+//                                     String regNo,
+//                                     String vehType,
+//                                     String devType,
+//                                     String oldVtsId,
+//                                     String newVtsId,
+//                                     String isDrs,
+//                                     String newDrsId,
+//                                     String oldDrsId,
+//                                     String drsDirection,
+//                                     String replaceReason,
+//                                     String removalReason,
+//                                     String itemsCollected,
+//                                     String others,
+//                                     String telSupport,
+//                                     String date,
+//                                     String time,
+//                                     String remarks,
+//                                     String dis_reason,
+//                                     String ignition_sensor,
+//                                     String fuel_sensor,
+//                                     String door_sensor,
+//                                     String veh_condition,
+//                                     String mgt_set,
+//                                     String sim_provider,
+//                                     String old_sim_no,
+//                                     String new_sim_no,
+//                                     String sim_reason,
+//                                     String not_available_reason,
+//                                     String not_available_activity,
+//                                     String is_demo,
+//                                     String missing_type,
+//                                     String collection_amount,
+//                                     String collection_date,
+//                                     String collection_type,
+//                                     String collectionImage,
+//                                     String missing_reason,
+//                                     String removal_type,
+//                                     String cut_off,
+//                                     String serial_no,
+//                                     String contact_person,
+//                                     String contact_no,
+//                                     String payment_type,
+//                                     String old_serial_no,
+//                                     String vts_device,
+//                                     ClientListener listener) {
+//        updateDataCall = client_att.postInstallationData(worktype,techName,clientId,c_loc_id,
+//                regNo,vehType,devType,oldVtsId,newVtsId,isDrs,newDrsId,oldDrsId,drsDirection,replaceReason,removalReason,itemsCollected,others, telSupport,date,time,remarks,dis_reason,ignition_sensor,fuel_sensor,door_sensor,
+//                veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no,sim_reason,not_available_reason,not_available_activity,is_demo,missing_type,collection_amount,collection_date,collection_type,collectionImage,
+//                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type, old_serial_no, vts_device);
+//        updateDataCall.enqueue(new Callback<MainResponse>() {
+//            @Override
+//            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+//                listener.updateDataResponse(response.body());
+//            }
+//            @Override
+//            public void onFailure(Call<MainResponse> call, Throwable t) {
+//                try {
+//                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    snackbarView.setBackgroundColor(Color.RED);
+//                    TextView textView = (TextView) snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+//                    textView.setTextColor(Color.WHITE);
+//                    snackbar.show();
+//                } catch (Exception e) {
+//                }
+//            }
+//        });
+//    }
+//    public void postInstallationsData(RequestBody worktype,
+//                                      RequestBody techName,
+//                                      RequestBody clientId,
+//                                      RequestBody c_loc_id,
+//                                      RequestBody regNo,
+//                                      RequestBody vehType,
+//                                      RequestBody devType,
+//                                      RequestBody oldVtsId,
+//                                      RequestBody newVtsId,
+//                                      RequestBody isDrs,
+//                                      RequestBody newDrsId,
+//                                      RequestBody oldDrsId,
+//                                      RequestBody drsDirection,
+//                                      RequestBody replaceReason,
+//                                      RequestBody removalReason,
+//                                      RequestBody itemsCollected,
+//                                      RequestBody others,
+//                                      RequestBody telSupport,
+//                                      RequestBody date,
+//                                      RequestBody time,
+//                                      RequestBody remarks,
+//                                      RequestBody dis_reason,
+//                                      RequestBody ignition_sensor,
+//                                      RequestBody fuel_sensor,
+//                                      RequestBody door_sensor,
+//                                      RequestBody veh_condition,
+//                                      RequestBody mgt_set,
+//                                      RequestBody sim_provider,
+//                                      RequestBody old_sim_no,
+//                                      RequestBody new_sim_no,
+//                                      RequestBody sim_reason,
+//                                      RequestBody not_available_reason,
+//                                      RequestBody not_available_activity,
+//                                      RequestBody is_demo,
+//                                      RequestBody missing_type,
+//                                      RequestBody collection_amount,
+//                                      RequestBody collection_date,
+//                                      RequestBody collection_type,
+//                                      MultipartBody.Part collection_image,
+//                                      RequestBody missing_reason,
+//                                      RequestBody removal_type,
+//                                      RequestBody cut_off,
+//                                      RequestBody serial_no,
+//                                      RequestBody contact_person,
+//                                      RequestBody contact_no,
+//                                      RequestBody payment_type,
+//                                      RequestBody old_serial_no,
+//                                      RequestBody vts_device,
+//                                      ClientListener listener) {
+//        updateDataCall = client_att.postInstallationsData(worktype,techName,clientId,c_loc_id,regNo,vehType,devType,oldVtsId,newVtsId, isDrs,newDrsId,oldDrsId,drsDirection, replaceReason,removalReason, itemsCollected,others, telSupport,date,time,remarks,
+//                dis_reason,ignition_sensor,fuel_sensor,door_sensor, veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no, sim_reason,not_available_reason,not_available_activity,is_demo,missing_type,collection_amount,collection_date,collection_type,collection_image,
+//                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type, old_serial_no, vts_device);
+//        updateDataCall.enqueue(new Callback<MainResponse>() {
+//            @Override
+//            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+//                listener.updateDataResponse(response.body());
+//            }
+//            @Override
+//            public void onFailure(Call<MainResponse> call, Throwable t) {
+//                try {
+//                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    snackbarView.setBackgroundColor(Color.RED);
+//                    TextView textView = (TextView) snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+//                    textView.setTextColor(Color.WHITE);
+//                    snackbar.show();
+//                } catch (Exception e) {
+//                }
+//            }
+//        });
+//    }
+
+    public void postInstallationsData(RequestBody technician_id,
+                                      RequestBody activity_date,
+                                      RequestBody activity_time,
+                                      RequestBody customer,
+                                      RequestBody customer_location,
+                                      RequestBody is_demo,
+                                      RequestBody activity_type,
+                                      RequestBody vts_type,
+                                      RequestBody device_type,
+                                      RequestBody old_device_id,
+                                      RequestBody new_device_id,
+                                      RequestBody old_serial_no,
+                                      RequestBody new_serial_no,
+                                      RequestBody reg_no,
+                                      RequestBody veh_type,
+                                      RequestBody is_drs,
+                                      RequestBody old_drs,
+                                      RequestBody new_drs,
+                                      RequestBody drs_direction,
+                                      RequestBody mgt_set,
                                       RequestBody ignition_sensor,
                                       RequestBody fuel_sensor,
                                       RequestBody door_sensor,
-                                      RequestBody veh_condition,
-                                      RequestBody mgt_set,
+                                      RequestBody panic_button,
+                                      RequestBody cut_off,
+                                      RequestBody replacement_reason,
+                                      RequestBody removal_type,
+                                      RequestBody removal_reason,
+                                      RequestBody disconnection_reason,
+                                      RequestBody missing_type,
+                                      RequestBody missing_reason,
+                                      RequestBody not_available_activity,
+                                      RequestBody not_available_reason,
+                                      RequestBody collection_date,
+                                      RequestBody payment_method,
+                                      RequestBody amount,
+                                      RequestBody payment_type,
+                                      RequestBody contact_person,
+                                      RequestBody contact_no,
                                       RequestBody sim_provider,
                                       RequestBody old_sim_no,
                                       RequestBody new_sim_no,
                                       RequestBody sim_reason,
-                                      RequestBody not_available_reason,
-                                      RequestBody not_available_activity,
-                                      RequestBody is_demo,
-                                      RequestBody missing_type,
-                                      RequestBody collection_amount,
-                                      RequestBody collection_date,
-                                      RequestBody collection_type,
-                                      MultipartBody.Part collection_image,
-                                      RequestBody missing_reason,
-                                      RequestBody removal_type,
-                                      RequestBody cut_off,
-                                      RequestBody serial_no,
-                                      RequestBody contact_person,
-                                      RequestBody contact_no,
-                                      RequestBody payment_type,
-                                      RequestBody old_serial_no,
-                                      RequestBody vts_device,
+                                      RequestBody veh_condition,
+                                      RequestBody tech_remarks,
+                                      RequestBody collected_items,
+                                      RequestBody faults_checked,
+                                      RequestBody fuel_reading,
+                                      MultipartBody.Part image,
                                       ClientListener listener) {
-        updateDataCall = client_att.postInstallationsData(worktype,techName,clientId,c_loc_id,regNo,vehType,devType,oldVtsId,newVtsId, isDrs,newDrsId,oldDrsId,drsDirection, replaceReason,removalReason, itemsCollected,others, telSupport,date,time,remarks,
-                dis_reason,ignition_sensor,fuel_sensor,door_sensor, veh_condition,mgt_set,sim_provider,old_sim_no,new_sim_no, sim_reason,not_available_reason,not_available_activity,is_demo,missing_type,collection_amount,collection_date,collection_type,collection_image,
-                missing_reason,removal_type,cut_off,serial_no,contact_person,contact_no,payment_type, old_serial_no, vts_device);
+        updateDataCall = client_att.postInstallationsData(technician_id,activity_date,activity_time,customer,customer_location,is_demo,activity_type,vts_type,device_type,old_device_id,new_device_id,old_serial_no,new_serial_no,reg_no,veh_type,is_drs,old_drs,new_drs,drs_direction,mgt_set,ignition_sensor,fuel_sensor,door_sensor,panic_button,cut_off,replacement_reason,removal_type,removal_reason,disconnection_reason,missing_type,missing_reason,not_available_activity,not_available_reason,collection_date,payment_method,amount,
+                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,image);
         updateDataCall.enqueue(new Callback<MainResponse>() {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
@@ -611,6 +682,5 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
-
 }
 

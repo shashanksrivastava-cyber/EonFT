@@ -8,20 +8,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class ActivityDetailResponse {
 
+    @SerializedName("id")
+    private String id;
     @SerializedName("activity_id")
     private String activity_id;
-    @SerializedName("activity")
+    @SerializedName("activity_name")
     private String activity;
-    @SerializedName("client_name")
+    @SerializedName("customer_name")
     private String client_Name;
-    @SerializedName("client_loc")
+    @SerializedName("location_name")
     private String client_loc;
+    @SerializedName("vts_type")
+    private String vts_type;
     @SerializedName("reg_no")
     private String reg_no;
-    @SerializedName("new_vts")
+    @SerializedName("new_device_id")
     private String new_vts;
-    @SerializedName("old_vts")
+    @SerializedName("old_device_id")
     private String old_vts;
+    @SerializedName("new_serial_no")
+    private String new_serial_no;
+    @SerializedName("old_serial_no")
+    private String old_serial_no;
     @SerializedName("new_drs")
     private String new_drs;
     @SerializedName("old_drs")
@@ -40,7 +48,7 @@ public class ActivityDetailResponse {
     private String collected_amt;
     @SerializedName("collected_date")
     private String collected_date;
-    @SerializedName("collected_img ")
+    @SerializedName("image")
     private String collected_img;
     @SerializedName("collected_mtd")
     private String collected_mtd;
@@ -183,5 +191,29 @@ public class ActivityDetailResponse {
 
     public void setCollected_mtd(String collected_mtd) {
         this.collected_mtd = collected_mtd;
+    }
+
+    public String getNew_serial_no() {
+        return new_serial_no;
+    }
+
+    public void setNew_serial_no(String new_serial_no) {
+        this.new_serial_no = new_serial_no;
+    }
+
+    public String getOld_serial_no() {
+        return old_serial_no;
+    }
+
+    public void setOld_serial_no(String old_serial_no) {
+        this.old_serial_no = old_serial_no;
+    }
+
+    public String getVts_type() {
+        return vts_type;
+    }
+
+    public void setVts_type(String vts_type) {
+        this.vts_type = vts_type;
     }
 }

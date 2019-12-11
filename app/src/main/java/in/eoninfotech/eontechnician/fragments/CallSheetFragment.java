@@ -264,8 +264,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
                                     }
                                 } catch (Exception qe) {
                                     qe.printStackTrace();
-                                }
-                                openCameraIntent();
+                                }openCameraIntent();
                                 alertDialogBuilder.dismiss();
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -363,8 +362,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             current_date = day + "-0" + month + "-" + year;
         } else {
             current_date = day + "-" + month + "-" + year;
-        }
-        if(month==1){
+        }if(month==1){
             months = "Jan";
         }else if(month==2){
             months = "Feb";
@@ -672,8 +670,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
         File file = new File(Environment.getExternalStorageDirectory().getPath(), "DCIM/Camera");
         if (!file.exists()) {
             file.mkdirs();
-        }
-        String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
+        }String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
         return uriSting;
     }
 

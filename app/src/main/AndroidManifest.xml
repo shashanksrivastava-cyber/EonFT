@@ -47,6 +47,7 @@
         android:resizeableActivity="false"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"

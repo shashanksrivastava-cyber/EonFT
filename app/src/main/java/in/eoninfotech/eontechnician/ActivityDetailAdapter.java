@@ -41,10 +41,6 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
     String date;
     private final ArrayList<ActivityDetailResponse> activityDetail;
 
-//    public ActivityDetailAdapter(Context context, ArrayList<ActivityDetailResponse> activityDetail) {
-//        this.activityDetail = activityDetail;
-//        this.context = context;
-//    }
     public ActivityDetailAdapter(Context context, ArrayList<ActivityDetailResponse> activityDetail, String s_date) {
         this.activityDetail = activityDetail;
         this.context = context;
@@ -79,59 +75,65 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
         String reason = removeBr(activityDetailResponse.getReasons());
         if (activity_id.equals("2")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
-            if (activityDetailResponse.getNew_drs().equals("0"))
+            if (activityDetailResponse.getNew_drs().equals("0")&&(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getOld_vts().equals("0")))) {
+                holder.data.setText("VTS with Sr.no. " + "" + activityDetailResponse.getNew_serial_no() + " " + "is installed on" + " " + activityDetailResponse.getReg_no()
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+            } else if((activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getNew_vts() + " " + "is installed on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
-            else {
+            }else{
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getNew_vts() + " " + "is installed on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs());
             }holder.image.setImageResource(R.drawable.settings);
         }
         if (activity_id.equals("6")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
             holder.data.setText("Phone Support is given to VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + " installed on" + " " + activityDetailResponse.getReg_no()
                     + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
             holder.image.setImageResource(R.drawable.call_center);
         }
         if (activity_id.equals("5")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
             holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is removed from" + " " + activityDetailResponse.getReg_no()
                     + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
             holder.image.setImageResource(R.drawable.remove);
         }
         if (activity_id.equals("1")) {
-            if (!imageUri.contains("jpg")) {
+            if (!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))) {
                 holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
                 holder.data.setText("Fault Repair is done for VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
                 holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
-            }else{
+            }else if(!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))){
+                holder.textViewAttached.setVisibility(View.GONE);
+                holder.data.setText("Fault Repair is done for VTS Sr No. " + "" + activityDetailResponse.getOld_serial_no() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
+            }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))){
                 holder.textViewAttached.setVisibility(View.VISIBLE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
                 holder.data.setText("Fault Repair is done for VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
+            }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))){
+                holder.textViewAttached.setVisibility(View.VISIBLE);
+                holder.data.setText("Fault Repair is done for VTS Sr No. " + "" + activityDetailResponse.getOld_serial_no() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
                 holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
             }
-        }
-        if (activity_id.equals("3")) {
+        }if (activity_id.equals("3")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
-            if (activityDetailResponse.getOld_drs().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
+             if(activityDetailResponse.getNew_drs().equals("0")&&(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getOld_vts().equals("0")))){
+                 holder.data.setText("VTS with Sr.no. " + "" + activityDetailResponse.getOld_serial_no() + " " + "is replaced with" + " " + activityDetailResponse.getNew_serial_no() + " " + "on" + " " + activityDetailResponse.getReg_no()
+                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+            } else if (activityDetailResponse.getOld_drs().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is replaced with" + " " + activityDetailResponse.getNew_vts() + " " + "on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
             } else if ((activityDetailResponse.getNew_vts().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "Vehicle No. " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "& Old DRS ID " + activityDetailResponse.getOld_drs() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs());
+            }else if(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getOld_vts().equals("0"))){
+                holder.data.setText("VTS with Serial No. " + "" + activityDetailResponse.getOld_serial_no() + " " + "is replaced with" + " " + activityDetailResponse.getNew_serial_no() + " " + "on" + " " + activityDetailResponse.getReg_no()
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
             } else {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is replaced with" + " " + activityDetailResponse.getNew_vts() + " " + "on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason + "  " + "& Old DRS ID " + activityDetailResponse.getOld_drs() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs());
@@ -140,9 +142,10 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
         }
         if (activity_id.equals("4")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
-            if (activityDetailResponse.getNew_vts().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
+            if(activityDetailResponse.getNew_drs().equals("0")&&(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getNew_serial_no().equals("0")))){
+                holder.data.setText("VTS with Sr.no.  " + "" + activityDetailResponse.getOld_serial_no() + " " + "is reinstall on" + " " + activityDetailResponse.getReg_no()
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+            } else if (activityDetailResponse.getNew_vts().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is reinstall on" + " " + activityDetailResponse.getReg_no()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
             } else if (!activityDetailResponse.getNew_drs().equals("0") && (activityDetailResponse.getNew_vts().equals("0"))) {
@@ -162,8 +165,6 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
         }
         if (activity_id.equals("7")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
             if (activityDetailResponse.getOld_sim().equals("")) {
                 holder.data.setText("New SIM " + "" + activityDetailResponse.getNew_sim() + " " + "of " + " " + activityDetailResponse.getSim_opr() + " is replaced on VTS " + activityDetailResponse.getOld_vts()
                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
@@ -174,17 +175,29 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             holder.image.setImageResource(R.drawable.dual_sim);
         }
         if (activity_id.equals("8")) {
-            if (!imageUri.contains("jpg")) {
+            if (!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))) {
                 holder.textViewAttached.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
                         " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
-            }else{
+            }else if(!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))){
+                holder.textViewAttached.setVisibility(View.GONE);
+                holder.data.setText("VTS ID with Sr no " + "" + activityDetailResponse.getOld_serial_no() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
+            }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))){
                 holder.textViewAttached.setVisibility(View.VISIBLE);
-//            holder.image1.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
+                holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
+            }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))) {
+                holder.textViewAttached.setVisibility(View.VISIBLE);
+                holder.data.setText("VTS ID with Sr no " + "" + activityDetailResponse.getOld_serial_no() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
+            }
+            else{
+                holder.textViewAttached.setVisibility(View.VISIBLE);
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
                         " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
@@ -192,22 +205,15 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
         }
         if (activity_id.equals("9")) {
             holder.textViewAttached.setVisibility(View.GONE);
-//            holder.relImage.setVisibility(View.GONE);
-//            holder.image1.setVisibility(View.GONE);
             holder.data.setText("Vehicle " + "" + activityDetailResponse.getReg_no() + " " + "is not available" + "" + "due to " + " " + activityDetailResponse.getReasons());
         }if (activity_id.equals("10")) {
             if (!imageUri.contains("jpg")) {
                 holder.textViewAttached.setVisibility(View.GONE);
-//                holder.relImage.setVisibility(View.GONE);
-//                holder.image1.setVisibility(View.GONE);
                 holder.data.setText("Payment of " + "₹" + " " + "" + activityDetailResponse.getCollected_amt() + " " + "is collected from " + "" + activityDetailResponse.getClient_Name() + " " + "on" + " " + newDate
                         + " " + "through " + "" + activityDetailResponse.getCollected_mtd());
                 holder.image.setImageResource(R.drawable.get_money);
             } else {
                 holder.textViewAttached.setVisibility(View.VISIBLE);
-//                holder.relImage.setVisibility(View.VISIBLE);
-//                holder.image1.setVisibility(View.VISIBLE);
-               // ImageUtils.glideImageWithLoader(holder.image1, imageUri);
                 holder.data.setText("Payment of " + "₹" + " " + "" + activityDetailResponse.getCollected_amt() + " " + "is collected from " + "" + activityDetailResponse.getClient_Name() + " " + "on" + " " + newDate
                         + " " + "through " + "" + activityDetailResponse.getCollected_mtd());
                 holder.image.setImageResource(R.drawable.get_money);
