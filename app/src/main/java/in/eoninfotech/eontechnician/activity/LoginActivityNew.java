@@ -92,7 +92,6 @@ public class LoginActivityNew extends AppCompatActivity {
     private FusedLocationProviderClient locationProviderClient;
     String key = "eon180$135rddyttd";
     String disttid = "0";
-    // CheckBox rembrme;
     String imsiSIM1 = "";
     private AlertDialog progressDialog;
     TelephonyManager telephonyManager;
@@ -182,26 +181,7 @@ public class LoginActivityNew extends AppCompatActivity {
         versname = getVersion();
         Log.i("***v***", versname);
         t_version.setText("Version " + versname);
-//        try {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                if (getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        imsiSIM1 = telephonyManager.getDeviceId();
-//       // Toast.makeText(this, ""+imsiSIM1, Toast.LENGTH_SHORT).show();
+
         loginn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -273,40 +253,9 @@ public class LoginActivityNew extends AppCompatActivity {
                 Intent intent=new Intent(Intent.ACTION_SEND);
                 String[] recipients={"support@eoninfotech.com"};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        /*      intent.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
-                intent.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
-                intent.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");*/
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");
                 startActivity(Intent.createChooser(intent, "Send mail"));
-            }
-        });
-    }
-
-    private void getDeviceLocation() {
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Task locationTask = locationProviderClient.getLastLocation();
-        locationTask.addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                try {
-//                    loc = GetLocation.getCurrentLocation(this);
-//                    latitude = loc.latitude;
-//                    longitude = loc.longitude;
-//                    locationPrefs.setLastKnownLat(latitude);
-//                    locationPrefs.setLastKnownLng(longitude);
-                } catch (Exception e) {
-                    // Log.d(TAG, "getDeviceLocation: " + e.getMessage());
-                }
             }
         });
     }
@@ -349,7 +298,6 @@ public class LoginActivityNew extends AppCompatActivity {
                 try{
                 LoginResponse workTypeResponse = response.body();
                 loginList = response.body().getLoginDetails();
-                Log.i("**work respnse", " " + response.body());
                 if (loginList.size() == 0) {
                     Toast.makeText(LoginActivityNew.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
                     progressDialog.hide();
@@ -473,7 +421,6 @@ public class LoginActivityNew extends AppCompatActivity {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-
                     break;
                 case 1:
                     new LoginActivityNew.UpdateApp().execute("asdf");
@@ -514,7 +461,6 @@ public class LoginActivityNew extends AppCompatActivity {
                 c.setRequestMethod("GET");
                 c.setDoOutput(true);
                 c.connect();
-                Log.i("*********", str.toString());
 
                 FileOutputStream fos = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/eontech.apk"));
                 FileSize = c.getContentLength();
@@ -530,12 +476,9 @@ public class LoginActivityNew extends AppCompatActivity {
                 is.close();
             } catch (IOException ignored) {
                 ignored.printStackTrace();
-                Log.i("***************", ignored.toString());
             } catch (Exception ae) {
                 ae.printStackTrace();
-                Log.i("***************", ae.toString());
             }
-            Log.i("****", voids[0]);
             return null;
         }
 
@@ -543,19 +486,17 @@ public class LoginActivityNew extends AppCompatActivity {
             super.onProgressUpdate(values);
             pDialog.setProgress(Integer.parseInt(values[0]));
             percentage = Integer.parseInt(values[0]);
-            Log.i("********", values[0]);
         }
 
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Log.i("**********", "post Execute");
             if (percentage == 100) {
                 try {
                     Intent promptInstall = new Intent("android.intent.action.VIEW");
                     promptInstall.setDataAndType(Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/eontech.apk")), "application/vnd.android.package-archive");
                     promptInstall.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(promptInstall);
-                    //    openFolder();
+                    //openFolder();
                 } catch (Exception ae) {
                     ae.printStackTrace();
                 }

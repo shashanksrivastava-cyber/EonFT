@@ -171,22 +171,6 @@ public class ViewCallSheetFragment extends Fragment {
             }
         });
 
-//        clearFilter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                monthtobeSend="0";
-//                yeartobeSend="0";
-//                getCallSheetData();
-//            }
-//        });
-//
-//        submit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                getCallSheetData();
-//            }
-//        });
-
          return v;
     }
 

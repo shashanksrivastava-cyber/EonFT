@@ -310,7 +310,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -320,17 +319,13 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                 } else {
                     i = i - 1;
                 }
-//                String  abc  = String.valueOf(client.getSelectedItem());
-//                    if(abc.equalsIgnoreCase("others")){
-//                                location.setEnabled(false);
-//                    }else {
-                        clientId = String.valueOf(clientList.get(i).getClient_Id());
-                        s_clientname = clientList.get(i).getClient_Name();
-                        if(clientId.equals("500")){
-                            location.setEnabled(false);
-                        }else {
-                            location.setEnabled(true);
-                        }
+                clientId = String.valueOf(clientList.get(i).getClient_Id());
+                s_clientname = clientList.get(i).getClient_Name();
+                if(clientId.equals("500")){
+                    location.setEnabled(false);
+                }else {
+                    location.setEnabled(true);
+                }
                 addLocation();
             }catch(Exception e){
                 }
@@ -401,8 +396,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                     myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                     myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     myDialog.show();
-                }else {
-                    try {
+                    }else {
+                        try {
                         gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
                     } catch (Exception ex) {
                     }
@@ -422,97 +417,52 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                                 }).setNegativeButton("Cancel", null)
                                 .show();
                     } else {
-                        // getLocation();
-//                    if (mLastLocation != null) {
-//                        latitude = mLastLocation.getLatitude();
-//                        longitude = mLastLocation.getLongitude();
-//
-//                        lati = locationPrefs.setLastLoc(String.valueOf(mLastLocation.getLatitude()));
-//                        lngi = locationPrefs.setLastLoc(String.valueOf(mLastLocation.getLongitude()));
                         getAddress();
                     }
-                }
-                try {
+                    }
+                    try {
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
                     }else{
-                       // getLocation();
-                       // getAddress();
                     }
-                    // getLocation();
-                } catch (Exception e) {
+                   } catch (Exception e) {
                     e.printStackTrace();
-               // }
-                }
+                  }
             }
         });
 
         btn.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-                                       if (s_clientname.equalsIgnoreCase("SELECT Client") || (s_clientname.equals(null))) {
-                                           Toast.makeText(getContext(), "Please Select Client", Toast.LENGTH_LONG).show();
-                                       }else if(s_clientname.equalsIgnoreCase("Others") && (location.getSelectedItem().toString().equalsIgnoreCase("Select Location"))){
-                                           clientLocId = "0";
-                                           int selectedId = radioGroup.getCheckedRadioButtonId();
-                                           if (selectedId == R.id.l_in) {
-                                               s_log_status = "IN";
-                                           } else if (selectedId == R.id.l_out) {
-                                               s_log_status = "OUT";
-                                           }
-                                           e_remarks = remarks.getText().toString();
-                                           sendData();
+                if (s_clientname.equalsIgnoreCase("SELECT Client") || (s_clientname.equals(null))) {
+                    Toast.makeText(getContext(), "Please Select Client", Toast.LENGTH_LONG).show();
+                }else if(s_clientname.equalsIgnoreCase("Others") && (location.getSelectedItem().toString().equalsIgnoreCase("Select Location"))){
+                    clientLocId = "0";
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    if (selectedId == R.id.l_in) {
+                        s_log_status = "IN";
+                    } else if (selectedId == R.id.l_out) {
+                        s_log_status = "OUT";
+                    }
+                    e_remarks = remarks.getText().toString();
+                    sendData();
 
-                                       }else if (location.getSelectedItem().toString().equalsIgnoreCase("Select Location")) {
-                                           Toast.makeText(getContext(), "Please Select Client Location", Toast.LENGTH_LONG).show();
-                                       } else {
-                                           //   s_update_date = t_date.getText().toString();
-                                           int selectedId = radioGroup.getCheckedRadioButtonId();
-                                           if (selectedId == R.id.l_in) {
-                                               s_log_status = "IN";
-                                           } else if (selectedId == R.id.l_out) {
-                                               s_log_status = "OUT";
-                                           }
-                                           e_remarks = remarks.getText().toString();
-                                           sendData();
-//                                           try {
-//                                               if (isMockSettingsON(getActivity()) && areThereMockPermissionApps(getActivity())) {
-//                                                   Toast.makeText(getActivity(), "Fake Location is ON", Toast.LENGTH_LONG).show();
-//                                               } else if (longitude == 0.0 || latitude == 0.0) {
-//                                                   btn.setClickable(true);
-//                                                   pDialog.dismiss();
-//                                                   new AlertDialog.Builder(getActivity())
-//                                                           .setTitle("Enable GPS!")
-//                                                           .setMessage(
-//                                                                   "There is problem fetching your location. Please turn on your gps.")
-//                                                           .setPositiveButton("Settings",
-//                                                                   new DialogInterface.OnClickListener() {
-//                                                                       public void onClick(DialogInterface dialog,
-//                                                                                           int which) {
-//                                                                           Intent viewIntent = new Intent(
-//                                                                                   Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//                                                                           getActivity().startActivity(viewIntent);
-//                                                                       }
-//                                                                   })
-//                                                           .setNegativeButton("Cancel",
-//                                                                   new DialogInterface.OnClickListener() {
-//                                                                       public void onClick(DialogInterface dialog,
-//                                                                                           int which) {
-//                                                                           // ((Activity) context).finish();
-//                                                                       }
-//                                                                   }).setIcon(android.R.drawable.ic_dialog_alert).show()
-//                                                           .setCancelable(false);
-//                                               } else {
-//                                                   sendData();
-//                                               }
-//                                           } catch (NullPointerException npe) {
-//                                               btn.setClickable(true);
-////                                               pDialog.dismiss();
-//                                           }
-                                      }
-                                       }
-                               });
+                }else if (location.getSelectedItem().toString().equalsIgnoreCase("Select Location")) {
+                    Toast.makeText(getContext(), "Please Select Client Location", Toast.LENGTH_LONG).show();
+                } else {
+                    //   s_update_date = t_date.getText().toString();
+                    int selectedId = radioGroup.getCheckedRadioButtonId();
+                    if (selectedId == R.id.l_in) {
+                        s_log_status = "IN";
+                    } else if (selectedId == R.id.l_out) {
+                        s_log_status = "OUT";
+                    }
+                    e_remarks = remarks.getText().toString();
+                    sendData();
+                }
+            }
+        });
         return v;
     }
     private void getLocation() {
@@ -534,14 +484,13 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                     Toast.makeText(getApplicationContext(),
                             "This device is not supported.", Toast.LENGTH_LONG)
                             .show();
-                   // finish();
                 }
                 return false;
             }
             return true;
         }
     private void sendData() {
-      ShowProgressBar(true);
+        ShowProgressBar(true);
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<AttResponse> call = log_att.log_attendance(username, s_time, s_update_date, String.valueOf(latitude), String.valueOf(longitude), address, s_log_status, versionName, e_remarks,clientId,clientLocId);
         Log.i("****call", String.valueOf(call));
@@ -562,14 +511,12 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                         ShowProgressBar(false);
                     }
                 btn.setClickable(true);
-               // pDialog.dismiss();
                 ShowProgressBar(false);
             }
             @Override
             public void onFailure(Call<AttResponse> call, Throwable t) {
                 t.printStackTrace();
                 btn.setClickable(true);
-               // pDialog.dismiss();
                 ShowProgressBar(false);
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
@@ -606,12 +553,10 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch (Exception ex) {
-        }
-        try {
+        }try {
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch (Exception ex) {
-        }
-        if (!gps_enabled && !network_enabled) {
+        }if (!gps_enabled && !network_enabled) {
             // notify user
             new AlertDialog.Builder(getActivity())
                     .setMessage("There is problem fetching your location. Please turn on your GPS.")
@@ -633,36 +578,13 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                         loc = GetLocations.getCurrentLocation(getActivity());
                         latitude = loc.latitude;
                         longitude = loc.longitude;
-//                        long time = loc.time;
-//                        Date date = new Date(time);
-//                        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-//                        String text = sdf.format(date);
-//                        String[] separatedGps = text.split(" ");
-//                        String gpsdate = separatedGps[0];
-//                        String gpsTime  = separatedGps[1];
-//                        s_time = gpsTime;
-//                        s_update_date = gpsdate;
-                       // Toast.makeText(getActivity(), ""+text, Toast.LENGTH_SHORT).show();
                         lati = String.valueOf(latitude);
                         lngi = String.valueOf(longitude);
 
                         if (lati.equals("0.0") && (lngi.equals("0.0"))) {
                                 locTry = locTry+1;
                                 ShowProgressBar(false);
-                            }
-//                        locationRequest = new LocationRequest();
-//                        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//                        locationRequest.setInterval(UPDATE_INTERVAL);
-//                        locationRequest.setFastestInterval(FASTEST_INTERVAL);
-//                        if (ActivityCompat.checkSelfPermission(getActivity(),
-//                                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                               &&  ActivityCompat.checkSelfPermission(getActivity(),
-//                                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                        }
-//
-//                       // LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest,this);
-//                        latitude = locations.getLatitude();
-//                        longitude = locations.getLongitude();
+                        }
                         else {
                             locationPrefs.setLastKnownLat(latitude);
                             locationPrefs.setLastKnownLng(longitude);
@@ -719,11 +641,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
             case REQUEST_CHECK_SETTINGS:
                 switch (resultCode) {
                     case Activity.RESULT_OK:
-                        // All required changes were successfully made
-                        //getLocation();
                         break;
                     case Activity.RESULT_CANCELED:
-                        // The user was asked to change settings, but chose not to
                         break;
                     default:
                         break;
@@ -755,7 +674,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
             }
     }
     public static boolean isMockSettingsON(Context context) {
-        // returns true if mock location enabled, false if not enabled.
         return !Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.ALLOW_MOCK_LOCATION).equals("0");
     }
@@ -950,17 +868,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         if (!gps_enabled && !network_enabled) {
             // notify user
             Toast.makeText(getActivity(), "There is problem fetching your location.Please turn on your GPS.", Toast.LENGTH_SHORT).show();
-//            new AlertDialog.Builder(getActivity())
-//                    .setMessage("There is problem fetching your location. Please turn on your GPS.")
-//                    .setPositiveButton("Enable Location", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-//                            getActivity().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-//                        }
-//                    }).setNegativeButton("Cancel", null)
-//                    .show();
         }else{
-               // getLocation();
+
             }
     }
     @Override

@@ -71,7 +71,6 @@ public class OtherDashBoardFragment extends Fragment {
     private AlertDialog progressDialog;
     private PieChart mChart;
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
-    RelativeLayout progressBar;
     TextView t_curntday, t_target, addName, addTime, add_value, total_vts, total_drs, faulty_vts, faulty_drs, faulty_um;
     ArrayList<Float> yData = new ArrayList<>();
     ColorfulRingProgressView vtsSpv, drsSpv, umSpv;
@@ -95,7 +94,6 @@ public class OtherDashBoardFragment extends Fragment {
         Log.i("****stat dist n usr***", version + " " + uusername);
         client = v.findViewById(R.id.new_in_clients);
         mChart = v.findViewById(R.id.piechart);
-        progressBar = v.findViewById(R.id.llayoutProgress);
         addTime = v.findViewById(R.id.addTime);
         add_value = v.findViewById(R.id.add_value);
         addDetail = v.findViewById(R.id.addDetail);
@@ -117,7 +115,7 @@ public class OtherDashBoardFragment extends Fragment {
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         setDateAndTime();
         addTechnicians();
-        ShowProgressBar(false);
+        //ShowProgressBar(false);
 
         cv_one_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -331,17 +329,17 @@ public class OtherDashBoardFragment extends Fragment {
         }
     }
 
-    private void ShowProgressBar(boolean show) {
-        try {
-            if (show) {
-                progressBar.setVisibility(View.VISIBLE);
-                getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            } else {
-                progressBar.setVisibility(View.GONE);
-                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    private void ShowProgressBar(boolean show) {
+//        try {
+//            if (show) {
+//                progressBar.setVisibility(View.VISIBLE);
+//                getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+//            } else {
+//                progressBar.setVisibility(View.GONE);
+//                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

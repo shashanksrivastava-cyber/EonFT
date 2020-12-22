@@ -146,9 +146,11 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar" />
+
         <activity
             android:name=".activity.LoginActivityNew"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

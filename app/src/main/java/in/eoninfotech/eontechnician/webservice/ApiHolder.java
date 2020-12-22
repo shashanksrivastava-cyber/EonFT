@@ -400,57 +400,7 @@ public interface ApiHolder {
     Call<DRSResponse> reqeuestDrsDetail(
             @Field("id") String id);
 
-//    @FormUrlEncoded
-//    @POST("technicians-work.php")
-//    Call<MainResponse> postInstallationData(@Field("work_type") String worktype,
-//                                               @Field("tech_name") String techName,
-//                                               @Field("client_id") String clientId,
-//                                               @Field("client_loc_id") String c_loc_id,
-//                                               @Field("reg_no") String regNo,
-//                                               @Field("veh_type") String vehType,
-//                                               @Field("device_type") String devType,
-//                                               @Field("old_vts_id") String oldVtsId,
-//                                               @Field("new_vts_id") String newVtsId,
-//                                               @Field("is_drs") String isDrs,
-//                                               @Field("new_drs_id") String newDrsId,
-//                                               @Field("old_drs_id") String oldDrsId,
-//                                               @Field("drs_direction") String drsDirection,
-//                                               @Field("reason_replacement") String replaceReason,
-//                                               @Field("removal_reason") String removalReason,
-//                                               @Field("items_collected") String itemsCollected,
-//                                               @Field("others") String others,
-//                                               @Field("tel_support") String telSupport,
-//                                               @Field("activity_date") String date,
-//                                               @Field("activity_time") String time,
-//                                               @Field("remarks") String remarks,
-//                                               @Field("disconnection_reason") String dis_reason,
-//                                               @Field("ignition_sensor") String ignition_sensor,
-//                                               @Field("fuel_sensor") String fuel_sensor,
-//                                               @Field("door_sensor") String door_sensor,
-//                                               @Field("veh_condition") String veh_condition,
-//                                               @Field("mgt_set") String mgt_set,
-//                                               @Field("sim_provider") String sim_provider,
-//                                               @Field("old_sim_no") String old_sim_no,
-//                                               @Field("new_sim_no") String new_sim_no,
-//                                               @Field("sim_reason") String sim_reason,
-//                                               @Field("not_available_reason") String not_available_reason,
-//                                               @Field("not_available_activity") String not_available_activity,
-//                                               @Field("is_demo") String is_demo,
-//                                               @Field("missing_type") String missing_type,
-//                                               @Field("collection_amount") String collection_amount,
-//                                               @Field("collection_date") String collection_date,
-//                                               @Field("collection_type") String collection_type,
-//                                               @Field("collection_image") String collection_image,
-//                                               @Field("missing_reason") String missing_reason,
-//                                               @Field("removal_type") String removal_type,
-//                                               @Field("cut_off") String cut_off,
-//                                               @Field("serial_no") String serial_no,
-//                                               @Field("contact_person") String contact_person,
-//                                               @Field("contact_no") String contact_no,
-//                                               @Field("payment_type") String payment_type,
-//                                               @Field("old_serial_no") String old_serial_no,
-//                                               @Field("vts_type") String vts_type);
-//
+
     @Multipart
     @POST("technicians-work.php")
     Call<MainResponse> postInstallationsData(@Part("work_type") RequestBody worktype,
@@ -666,6 +616,7 @@ public interface ApiHolder {
     @FormUrlEncoded
     @POST("incentives.php")
     Call<IncentiveResponse> incentiveResponse(
+            @Field("tech_id")String tech_id,
             @Field("tech_name") String tech_name,
             @Field("zone") String zone,
             @Field("month") String month,
@@ -680,13 +631,12 @@ public interface ApiHolder {
 
     @FormUrlEncoded
     @POST("locations.php")
-    Call<LocationsResponse> locationResponse(
-            @Field("tech_name") String tech_name,
-            @Field("location") String location,
-            @Field("imei_no") String imei_no,
-            @Field("latitude") String latitude,
-            @Field("longitude") String longitude,
-            @Field("mac_address") String mac_address);
+    Call<LocationsResponse> locationResponse(@Field("tech_name") String tech_name,
+                                            @Field("location") String location,
+                                            @Field("imei_no") String imei_no,
+                                            @Field("latitude") String latitude,
+                                            @Field("longitude") String longitude,
+                                            @Field("mac_address") String mac_address);
 
     @FormUrlEncoded
     @POST("tracking-details.php")
@@ -707,7 +657,11 @@ public interface ApiHolder {
     Call<MainResponse> updateResponse(
             @Field("message_id") String message_id);
 
-    @GET("device-type.php")
+    @GET("device-type.php")                         // response to be changed
     Call<MainResponse> getDeviceTypes();
+
+    @GET("vts-type.php")
+    Call<VTSTypeResponse> getVTSTypes();
+
 
 }

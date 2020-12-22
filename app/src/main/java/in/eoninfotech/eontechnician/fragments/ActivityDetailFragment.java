@@ -86,10 +86,11 @@ public class ActivityDetailFragment extends Fragment {
         refreshLayout = v.findViewById(R.id.refresh);
         recyclerView = v.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 //      t_install_date = (EditText) v.findViewById(R.id.installDate);
         t_install_date = v.findViewById(R.id.installDate);
         txtContentUnavailable = v.findViewById(R.id.txt_content_unavailable);
-        recyclerView.setLayoutManager(layoutManager);
+
         linearActivity = v.findViewById(R.id.llContent);
         setDateAndTime();
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE,Color.GREEN);
@@ -221,10 +222,8 @@ public class ActivityDetailFragment extends Fragment {
         try {
             if (show) {
                 progressBars.setVisibility(View.VISIBLE);
-                // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             } else {
                 progressBars.setVisibility(View.GONE);
-                // this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -53,6 +53,7 @@ import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences
  */
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
 public class LocationService extends JobService {
 
     public static final long NOTIFY_INTERVAL = 10 * 1000; // 10 seconds

@@ -176,6 +176,8 @@ public class ForegroundService extends JobService {
             if(parameter.equals("end")){
                 stopForeground(true);
                 stopSelf();
+            }else{
+
             }
         }catch(Exception ex){
         }
@@ -300,7 +302,7 @@ public class ForegroundService extends JobService {
             }
 
     private void getStatus() {
-                ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
+               ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
                 Call<TrackingResponse> locCall = loc_att.trackingResponse(username, imei);
                 locCall.enqueue(new Callback<TrackingResponse>() {
                     public void onResponse(Call<TrackingResponse> call, Response<TrackingResponse> response) {
@@ -317,6 +319,8 @@ public class ForegroundService extends JobService {
                                 if (track_status.equalsIgnoreCase("y")) {
                                     getDeviceLocation();
                                 }
+                            }else{
+                                //getDeviceLocation();
                             }
                         } catch (Exception e) {
                         }

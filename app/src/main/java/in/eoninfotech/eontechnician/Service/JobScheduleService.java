@@ -118,9 +118,6 @@ public class JobScheduleService extends JobService {
                 locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
                 locationPrefs = new LocationPrefs(this);
                 super.onCreate();
-//                HandlerThread serviceThread = new HandlerThread("service_thread",
-//                        android.os.Process.THREAD_PRIORITY_BACKGROUND);
-//                serviceThread.start();
             } else {
                 track = Integer.parseInt(track_interval);
                 if (mTimer != null) {
@@ -134,9 +131,6 @@ public class JobScheduleService extends JobService {
             locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
             locationPrefs = new LocationPrefs(this);
             super.onCreate();
-//            HandlerThread serviceThread = new HandlerThread("service_thread",
-//                    android.os.Process.THREAD_PRIORITY_BACKGROUND);
-//            serviceThread.start();
     }
     @Override
     public boolean onStartJob(JobParameters jobParameters) {

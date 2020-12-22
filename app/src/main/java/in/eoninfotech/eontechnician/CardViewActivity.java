@@ -57,13 +57,11 @@ public class CardViewActivity extends AppCompatActivity implements CompoundButto
         editor = sharedprefs.edit();
         uusername = sharedprefs.getString("s_uuser", "");
         versionname = sharedprefs.getString("version", "");
-        Log.i("******shared******", uusername + versionname);
-        progressBar = (RelativeLayout)findViewById(R.id.llayoutProgress);
+        progressBar = findViewById(R.id.llayoutProgress);
         ShowProgressBar(true);
         getDetail();
 
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
-
+        mViewPager = findViewById(R.id.viewPager);
     }
 
     private void getDetail() {
@@ -87,7 +85,6 @@ public class CardViewActivity extends AppCompatActivity implements CompoundButto
                         mViewPager.setPageTransformer(false, mCardShadowTransformer);
                         mViewPager.setOffscreenPageLimit(3);
                         ShowProgressBar(false);
-
                 }
             }
             @Override

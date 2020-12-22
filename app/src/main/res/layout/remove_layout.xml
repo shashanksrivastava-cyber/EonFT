@@ -32,7 +32,7 @@
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="3dp"
-            android:layout_weight="1.7"
+            android:layout_weight="1.6"
             android:background="@drawable/et_frame">
 
             <Spinner
@@ -115,7 +115,9 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_vts_remove"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
         <EditText android:id="@+id/remove_deviceid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,7 +162,9 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
         <EditText android:id="@+id/remove_reg_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,9 +192,10 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
             android:gravity="center"
-            android:spinnerMode="dialog" />
+            android:spinnerMode="dialog"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -198,7 +203,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginRight="6dp"
+            android:layout_marginRight="15dp"
             android:background="@color/eonWhite"
             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 

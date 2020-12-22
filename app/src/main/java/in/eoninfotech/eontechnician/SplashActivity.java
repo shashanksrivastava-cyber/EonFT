@@ -182,19 +182,6 @@ public class SplashActivity extends AppCompatActivity {
                     editor.putString("track_status", track_status);
                     editor.putString("track_interval", track_interval);
                     editor.commit();
-//                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//                        if (track_status.equalsIgnoreCase("y")) {
-//                            startService(new Intent(SplashActivity.this, JobScheduleService.class));
-//                        }else{
-//                            startService(new Intent(SplashActivity.this, JobScheduleService.class));
-//                        }
-//                    } else {
-//                        if(track_status.equalsIgnoreCase("y")){
-//                            stopService(new Intent(SplashActivity.this, LocationService.class));
-//                        }else{
-//                            stopService(new Intent(SplashActivity.this, LocationService.class));
-//                        }
-                   // }
             }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -227,7 +214,6 @@ public class SplashActivity extends AppCompatActivity {
     }
     private void startActivity() {
 
-           // if(isNetworkAvailable(this)) {
                 if (appPrefs.isLoggedIn()) {
                         Intent intee = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intee);
@@ -238,20 +224,6 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intee);
                     finish();
                 }
-//            else {
-//                Snackbar snackbar = Snackbar.make(linearLayout, getResources().getString(R.string.internetcheck), Snackbar.LENGTH_LONG)
-//                        .setAction("RETRY", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//
-//                                startActivity();
-//                            }
-//                        });
-//                snackbar.setActionTextColor(Color.RED);
-//                snackbar.setDuration(Snackbar.LENGTH_INDEFINITE);
-//                snackbar.show();
-//            }
-      //  }
     }
     private boolean isNetworkAvailable(SplashActivity splashActivity) {
 

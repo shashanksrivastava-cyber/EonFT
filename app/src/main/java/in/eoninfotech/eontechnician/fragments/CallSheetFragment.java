@@ -32,7 +32,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
@@ -303,50 +302,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
                     return mediaFile;
                 }
             });
-//           new BottomSheet.Builder(getActivity())
-//                    .title("Select Image ")
- //                   .sheet(R.menu.menu_bottom_simple_sheet).listener(new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialog, int which) {
-//                    if (which == R.id.menu_camera) {
-//                        buttonPressed = "1";
-//                        if (Build.VERSION.SDK_INT < 24) {
-//                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                            uri = Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
-//                            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//                            try {
-//                                openCameraIntent();
-//                            } catch (SecurityException e) {
-//                                e.printStackTrace();
-//                                try {
-//                                    if (hasPermissions(getActivity(), PERMISSIONS)) {
-//                                    } else {
-//                                        EasyPermissions.requestPermissions(this, "Access for storage", 101, PERMISSIONS);
-//                                    }
-//                                } catch (Exception qe) {
-//                                    qe.printStackTrace();
-//                                }
-//                                openCameraIntent();
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                        } else {
-//                            try {
-//                                if (hasPermissions(getActivity(), PERMISSIONS)) {
-//                                } else {
-//                                    EasyPermissions.requestPermissions(this, "Access for storage", 101, PERMISSIONS);
-//                                }
-//                            } catch (Exception qe) {
-//                                qe.printStackTrace();
-//                            }
-//                            openCameraIntent();
-//                        }
-//                    } else if (which == R.id.menu_gallery) {
-//                        buttonPressed = "2";
-//                        galleryIntent();
-//                    }
-//                }
-//            }).show();
         });
         return v;
     }
@@ -741,39 +696,5 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
     @Override
     public void onFinish() {
     }
-
-//    private void Progress(boolean show) {
-//        Resources res = getResources();
-//        Drawable drawable = res.getDrawable(R.drawable.circular);
-//        mProgress = v.findViewById(R.id.circularProgressbar);
-//        mProgress.setProgress(0);   // Main Progress
-//        mProgress.setSecondaryProgress(100); // Secondary Progress
-//        mProgress.setMax(100); // Maximum Progress
-//        mProgress.setProgressDrawable(drawable);
-//        tv = v.findViewById(R.id.tv);
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                // TODO Auto-generated method stub
-//                while (pStatus < 100) {
-//                    pStatus += 1;
-//                    handler.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // TODO Auto-generated method stub
-//                            mProgress.setProgress(pStatus);
-//                            tv.setText(pStatus + "%");
-//                            //  mProgress(new String[]{"" + ((this.pStatus * 100) / length)});
-//                        }
-//                    });
-//                    try {
-//                        Thread.sleep(15); //thread will take approx 1.5 seconds to finish
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }).start();
-//    }
 
 }

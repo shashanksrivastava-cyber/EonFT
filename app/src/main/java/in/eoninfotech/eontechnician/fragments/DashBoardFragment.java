@@ -74,7 +74,6 @@ public class DashBoardFragment extends Fragment {
         mChart = v.findViewById(R.id.piechart);
         t_curntday = v.findViewById(R.id.curnt_date);
         addTime = v.findViewById(R.id.addTime);
-        progressBar = v.findViewById(R.id.progressBar);
         add_value = v.findViewById(R.id.add_value);
         total_vts = v.findViewById(R.id.total_vts);
         total_drs = v.findViewById(R.id.total_drs);
@@ -95,7 +94,7 @@ public class DashBoardFragment extends Fragment {
         version = sharedprefs.getString("version", "");
         zone = sharedprefs.getString("zone","");
 
-        ShowProgressBar(true);
+        //ShowProgressBar(true);
         setDateAndTime();
         getDashBoardDetail();
 
@@ -243,15 +242,15 @@ public class DashBoardFragment extends Fragment {
         s_time = dateFormatt.format(calen.getTime());
     }
 
-     private void ShowProgressBar(boolean show) {
-         try {
-             if (show) {
-                 progressBar.setVisibility(View.VISIBLE);
-             } else {
-                 progressBar.setVisibility(View.GONE);
-             }}
-         catch (Exception e) {
-             e.printStackTrace();
-         }}
+//     private void ShowProgressBar(boolean show) {
+//         try {
+//             if (show) {
+//                 progressBar.setVisibility(View.VISIBLE);
+//             } else {
+//                 progressBar.setVisibility(View.GONE);
+//             }}
+//         catch (Exception e) {
+//             e.printStackTrace();
+//         }}
 
 }

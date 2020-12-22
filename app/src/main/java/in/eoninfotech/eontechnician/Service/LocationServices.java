@@ -38,7 +38,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
     boolean isLocationManagerUpdatingLocation;
 
     ArrayList<Location> locationList;
-
     ArrayList<Location> oldLocationList;
     ArrayList<Location> noAccuracyLocationList;
     ArrayList<Location> inaccurateLocationList;
@@ -74,7 +73,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
         batteryLevelScaledArray = new ArrayList<>();
         registerReceiver(this.batteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
-
 
 
     @Override
@@ -134,7 +132,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
             return LocationServices.this;
         }
     }
-
 
 
     /* LocationListener implemenation */
@@ -203,10 +200,7 @@ public class LocationServices extends Service implements LocationListener, GpsSt
         if(this.isLocationManagerUpdatingLocation == false){
             isLocationManagerUpdatingLocation = true;
             runStartTimeInMillis = (long)(SystemClock.elapsedRealtimeNanos() / 1000000);
-
-
             locationList.clear();
-
             oldLocationList.clear();
             noAccuracyLocationList.clear();
             inaccurateLocationList.clear();
@@ -217,7 +211,7 @@ public class LocationServices extends Service implements LocationListener, GpsSt
             //Exception thrown when GPS or Network provider were not available on the user's device.
             try {
                 Criteria criteria = new Criteria();
-                criteria.setAccuracy(Criteria.ACCURACY_FINE); //setAccuracyは内部では、https://stackoverflow.com/a/17874592/1709287の用にHorizontalAccuracyの設定に変換されている。
+                criteria.setAccuracy(Criteria.ACCURACY_FINE); //setAccuracy https://stackoverflow.com/a/17874592/1709287の用にHorizontalAccuracyの設定に変換されている。
                 criteria.setPowerRequirement(Criteria.POWER_HIGH);
                 criteria.setAltitudeRequired(false);
                 criteria.setSpeedRequired(true);
@@ -227,8 +221,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
                 //API level 9 and up
                 criteria.setHorizontalAccuracy(Criteria.ACCURACY_HIGH);
                 criteria.setVerticalAccuracy(Criteria.ACCURACY_HIGH);
-                //criteria.setBearingAccuracy(Criteria.ACCURACY_HIGH);
-                //criteria.setSpeedAccuracy(Criteria.ACCURACY_HIGH);
 
                 Integer gpsFreqInMillis = 5000;
                 Integer gpsFreqInDistance = 5;  // in meters
@@ -291,7 +283,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
         }
         return locationAge;
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private boolean filterAndAddLocation(Location location){
@@ -363,11 +354,8 @@ public class LocationServices extends Service implements LocationListener, GpsSt
         currentSpeed = location.getSpeed();
         locationList.add(location);
 
-
         return true;
     }
-
-
 
     /* Battery Consumption */
     private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver(){
@@ -377,8 +365,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
             int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
 
             float batteryLevelScaled = batteryLevel / (float)scale;
-
-
 
             batteryLevelArray.add(Integer.valueOf(batteryLevel));
             batteryLevelScaledArray.add(Float.valueOf(batteryLevelScaled));

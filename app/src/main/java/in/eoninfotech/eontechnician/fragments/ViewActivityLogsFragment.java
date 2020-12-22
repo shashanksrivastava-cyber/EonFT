@@ -217,6 +217,7 @@ public class ViewActivityLogsFragment extends Fragment{
                             intent.putExtra("AttendanceDetails", jsonCars);
                             startActivity(intent);
                         } else if(displayValue.contains("Sunday")||displayValue.contains("Holiday")){
+
                         } else {
                                 MyBottomSheetDialog myBottomSheetDialog = MyBottomSheetDialog.getInstance(getActivity());
                                 myBottomSheetDialog.setTvTitle(fullName);

@@ -99,11 +99,8 @@ import in.eoninfotech.eontechnician.activity.MessageActivity;
 import in.eoninfotech.eontechnician.activity.MessageAdapter;
 import in.eoninfotech.eontechnician.activity.SimpleServiceExample;
 import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
-import in.eoninfotech.eontechnician.fragments.ActivityFragment;
 import in.eoninfotech.eontechnician.fragments.CallSheetFragment;
-import in.eoninfotech.eontechnician.fragments.CallSheetViewUploadFragment;
 import in.eoninfotech.eontechnician.fragments.DashBoardFragment;
-import in.eoninfotech.eontechnician.fragments.DashBoardMainFragment;
 import in.eoninfotech.eontechnician.fragments.FragmentCurrentMonth;
 import in.eoninfotech.eontechnician.fragments.LiveStatusFragment;
 import in.eoninfotech.eontechnician.fragments.NewInstallmentFragment;
@@ -115,7 +112,6 @@ import in.eoninfotech.eontechnician.fragments.StockFragment;
 import in.eoninfotech.eontechnician.fragments.StockViewUploadFragment;
 import in.eoninfotech.eontechnician.fragments.ViewActivityLogsFragment;
 import in.eoninfotech.eontechnician.fragments.ViewCallSheetFragment;
-import in.eoninfotech.eontechnician.fragments.ViewMarkAttandenceFragment;
 import in.eoninfotech.eontechnician.fragments.ViewStockFragment;
 import in.eoninfotech.eontechnician.helper.ClientList;
 import in.eoninfotech.eontechnician.helper.EONUtil;
@@ -145,7 +141,6 @@ import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Animation animation;
     FragmentManager fm;
     FragmentTransaction ft;
     String username, dist_id, version,dis_username;
@@ -164,20 +159,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActivityDetailFragment activityDetailFragment;
     ActivityLogFragment activityLogFragment;
     NewInstallmentFragment installmentFragment;
-    ActivityFragment activityFragment;
-    //  NewInstallmentFragmentBackup installmentFragment;
     LiveStatusFragment liveStatusFragment;
     StockFragment stockFragment;
     TextView textCartItemCount;
-    ViewMarkAttandenceFragment viewMarkAttandenceFragment;
-    StockViewUploadFragment stockViewUploadFragment;
-    CallSheetViewUploadFragment callSheetViewUploadFragment;
     PaymentCollectionReportFragment paymentCollectionReportFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
-    DashBoardMainFragment dashBoardMainFragment;
     ViewCallSheetFragment viewCallSheetFragment;
-    ViewCallSheetFragment viewcallSheetFragment;
     ViewActivityLogsFragment viewActivityLogsFragment;
     DashBoardFragment dashBoardFragment;
     OtherDashBoardFragment otherDashBoardFragment;
@@ -187,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapterCallSheet viewPagerAdapterCallSheet;
     ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     ViewPagerAdapterActivity viewPagerAdapterActivity;
-    RetroOldInstallmentFragment rFragment;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
     int track;
@@ -534,17 +521,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             activityLogFragment = new ActivityLogFragment();
             activityLogFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, activityLogFragment);
-//            setTitle("Attendance Activity");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-
-//            viewMarkAttandenceFragment = new ViewMarkAttandenceFragment();
-//            viewMarkAttandenceFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, viewMarkAttandenceFragment);
             setTitle("Attendance Activity");
             tabLayout.setVisibility(View.VISIBLE);
             tabLayout.removeAllTabs();
@@ -568,15 +544,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
             setTitle("Dashboard");
             tabLayout.setVisibility(View.VISIBLE);
-            viewPager.setVisibility(View.VISIBLE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-////
-//            dashBoardMainFragment = new DashBoardMainFragment();
-//            dashBoardMainFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, dashBoardMainFragment);
-//            setTitle("Dashboard");
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
             viewpagerattendance.setVisibility(View.GONE);
@@ -611,17 +578,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             stockFragment = new StockFragment();
             stockFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, stockFragment);
-//            setTitle("Stock Activity");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-
-//            stockViewUploadFragment = new StockViewUploadFragment();
-//            stockViewUploadFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, stockFragment);
             setTitle("Stock Activity");
             tabLayout.setVisibility(View.VISIBLE);
@@ -632,7 +588,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewPagerAdapterStock = new ViewPagerAdapterStock(getSupportFragmentManager());
-
             viewpagerstock.setAdapter(viewPagerAdapterStock);
             tabLayout.setupWithViewPager(viewpagerstock);
             ft.commit();
@@ -660,17 +615,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             installmentFragment = new NewInstallmentFragment();
             installmentFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, installmentFragment);
-//            setTitle("Activities");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-
-//            activityFragment = new ActivityFragment();
-//            activityFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, installmentFragment);
             setTitle("Activities");
             tabLayout.setVisibility(View.VISIBLE);
@@ -687,41 +631,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-//            installmentFragment = new NewInstallmentFragmentBackup();
-//            installmentFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, installmentFragment);
-//            setTitle("Activities");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
         }
-//        else if (id == R.id.nav_view_stock) {
-//            viewStockFragment = new ViewStockFragment();
-//            viewStockFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, viewStockFragment);
-//            setTitle("Stock Details");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-//        }
         else if (id == R.id.nav_call_sheet) {
             callSheetFragment = new CallSheetFragment();
             callSheetFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, callSheetFragment);
-//            setTitle("Call Sheet");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-//            callSheetViewUploadFragment = new CallSheetViewUploadFragment();
-//            callSheetViewUploadFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, callSheetFragment);
             setTitle("Call Sheet");
             tabLayout.setVisibility(View.VISIBLE);
@@ -759,27 +672,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-
-//            Intent intee = new Intent(MainActivity.this, PaymentCollectionReportActivity.class);
-//            intee.putExtra("user", usrname);
-//            startActivity(intee);
-//            finish();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
         }
-//        else if (id == R.id.nav_view_call_sheet) {
-//            viewcallSheetFragment = new ViewCallSheetFragment();
-//            viewcallSheetFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, viewcallSheetFragment);
-//            setTitle("View Call Sheet");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-//        }
         else if (id == R.id.nav_next_plan) {
             Intent intee = new Intent(MainActivity.this, CallSheetActivity.class);
             intee.putExtra("user", usrname);
@@ -832,33 +725,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setNegativeButton("No", null)
                     .show();
         }
-//        else if (id == R.id.activitiesList) {
-//            Intent intent = new Intent(this, CustomCalender.class);
-//            startActivity(intent);
-//            activityDetailFragment = new ActivityDetailFragment();
-//            activityDetailFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, activityDetailFragment);
-//            setTitle("Activity Detail");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//          //  ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-
-//            Intent intent = new Intent(this, CalendarNew.class);
-//            startActivity(intent);
-//            activityDetailFragment = new ActivityDetailFragment();
-//            activityDetailFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, activityDetailFragment);
-//            setTitle("Activity Detail");
-//            tabLayout.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            //  ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-     //   }
         else if (id == R.id.nav_technician_of_the_month) {
             myDialog.setContentView(R.layout.technician_monthpopup);
             txtclose = myDialog.findViewById(R.id.txtclose);
@@ -1129,9 +995,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 switch (position) {
                     case 0:
-                        return "My DashBoard";
+                        return "My Dashboard";
                     case 1:
-                        return "Other's DashBoard";
+                        return "Other's Dashboard";
             }
             return null;
         }
@@ -1176,7 +1042,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 0:
                     return "Mark";
                 case 1:
-                    return "View Records";
+                    return "View Attendance";
             }
             return null;
         }
@@ -1287,15 +1153,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     installmentFragment.setArguments(bundle);
                     return installmentFragment;
 
-//                installmentFragment = new NewInstallmentFragmentBackup();
-//                installmentFragment.setArguments(bundle);
-//                return installmentFragment;
                 case 1:
                     activityDetailFragment = new ActivityDetailFragment();
                     activityDetailFragment.setArguments(bundle);
                     return activityDetailFragment;
             }
-
             return null;
         }
 
@@ -1335,7 +1197,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     dashBoardFragment = new DashBoardFragment();
                     dashBoardFragment.setArguments(bundle);
                     return dashBoardFragment;
-
                 case 1:
                     otherDashBoardFragment = new OtherDashBoardFragment();
                     otherDashBoardFragment.setArguments(bundle);
@@ -1355,9 +1216,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (position) {
                 case 0:
-                    return "My DashBoard";
+                    return "My Dashboard";
                 case 1:
-                    return "Other's DashBoard";
+                    return "Other's Dashboard";
             }
             return null;
         }
@@ -1425,6 +1286,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
 }

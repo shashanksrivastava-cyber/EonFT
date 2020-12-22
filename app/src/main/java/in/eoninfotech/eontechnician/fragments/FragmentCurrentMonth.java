@@ -77,7 +77,7 @@ public class FragmentCurrentMonth extends Fragment {
     Dialog myDialog;
     TextView datee,tech_name,dates,textView;
     TextView txt_add,txt_attendance,txt_activity,txt_stock,txt_callSheet,txt_paymentCollection,txt_incentive;
-    String current_date, selected_todate, s_date = "0",s_time,months,date;
+    String current_date, selected_todate, s_date = "0",s_time,months,date,user_id;
     Calendar calen = Calendar.getInstance();
     private AlertDialog progressDialog;
     public RecyclerView recyclerView;
@@ -115,6 +115,7 @@ public class FragmentCurrentMonth extends Fragment {
         username = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
         zone = sharedprefs.getString("zone","");
+        user_id = sharedprefs.getString("s_user_id","");
         displayName = sharedprefs.getString("dis_user","");
         myDialog = new Dialog(getActivity());
        // arc_add = v.findViewById(R.id.arc_add);
@@ -192,42 +193,6 @@ public class FragmentCurrentMonth extends Fragment {
             }
         };
         newtimer.start();
-//        scratch_view.setRevealListener(new ScratchTextView.IRevealListener() {
-//            @Override
-//            public void onRevealed(ScratchTextView tv) {
-//
-//               // scratch_view.setText("Hello");
-//            }
-//
-//            @Override
-//            public void onRevealPercentChangedListener(ScratchTextView stv, float percent) {
-//                // on percent reveal.
-//            }
-//        });
-
-    //        timer = new Timer();
-//        timer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        boolean a = false;
-//                        if (a) {
-//                            ObjectAnimator anim = ObjectAnimator.ofInt(arcProgress, "progress", 0, 10);
-//                            anim.setInterpolator(new DecelerateInterpolator());
-//                            anim.setDuration(500);
-//                            anim.start();
-//                        } else {
-//                            AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(getActivity(), R.animator.progress_anim);
-//                            set.setInterpolator(new DecelerateInterpolator());
-//                            set.setTarget(arcProgress);
-//                            set.start();
-//                        }
-//                    }
-//                });
-//            }
-//        }, 0, 2000);
         getMonth();
         getYear();
         setDateAndTime();
@@ -396,7 +361,7 @@ public class FragmentCurrentMonth extends Fragment {
     private void loadContent() {
         progressDialog.show();
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<IncentiveResponse> call = log_att.incentiveResponse(username,zone,monthtobeSend,yeartobeSend);
+        Call<IncentiveResponse> call = log_att.incentiveResponse(user_id,username,zone,monthtobeSend,yeartobeSend);
         call.enqueue(new Callback<IncentiveResponse>() {
             @Override
             public void onResponse(Call<IncentiveResponse> call, Response<IncentiveResponse> response) {
@@ -406,7 +371,6 @@ public class FragmentCurrentMonth extends Fragment {
                     filter.setImageResource(R.drawable.ic_filter);
                     lay_filter.setVisibility(View.GONE);
                     txt_add.setText(incentiveDetails.get(0).getAdd_cnt());
-                    //arc_add.setProgress(Integer.parseInt(incentiveDetails.get(0).getAdd_cnt()));
                     String color1  = incentiveDetails.get(0).getAdd_color();
                     String[] separated = color1.split(";");
                     String color = separated[0];
@@ -430,12 +394,11 @@ public class FragmentCurrentMonth extends Fragment {
                         }else if(monthtobeSend.equals(mm)){
                            incentiveDate.setVisibility(View.GONE);
                            incentive.setVisibility(View.VISIBLE);
-                          incentive.setText("** Intentive not yet Calculated!!");
+                          incentive.setText("** Incentive not yet Calculated!!");
                        }else{
                            incentiveDate.setVisibility(View.GONE);
                            incentive.setVisibility(View.GONE);
                        }
-
                     }else {
                         incentiveDate.setVisibility(View.GONE);
                         incentive.setVisibility(View.GONE);
@@ -452,6 +415,7 @@ public class FragmentCurrentMonth extends Fragment {
             @Override
             public void onFailure(Call<IncentiveResponse> call, Throwable t) {
                // refreshLayout.setRefreshing(false);
+                progressDialog.hide();
             }
         });
     }
@@ -526,6 +490,4 @@ public class FragmentCurrentMonth extends Fragment {
             }
         });
     }
-
-
 }

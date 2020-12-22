@@ -126,6 +126,7 @@ import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.view.MyTextView;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnection;
+import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -159,10 +160,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     Bitmap bmp;
     String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     NewInstallmentController newInstallmentController;
-    TextInputLayout retilVoltage,tilVoltage,til_no_avail_vts,tilsrNo_notAvail,til_new_replace,til_old_replace,til_vts_remove,til_remove_sr,tilDeviceMiss,told_drsid, tnew_drsid, t_drs_veh_no, t_drs_vts_id, tilvtsno, tilsrNo, tilFaultVts, tilFaultSr, tilphnVts, tilphnSr, til_old_vltd_sr_no, til_new_vltd_sr_no, til_id_reinst, til_id_sr, til_sr_reinst,til_new_sr_replace,til_old_sr_replace;
-    String fuel_voltage="0",path,drs_type, clientId, personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "V", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person="", contact_no="0", payment_type = "C",
+    TextInputLayout tilVoltage,til_no_avail_vts,tilsrNo_notAvail,til_new_replace,til_old_replace,til_vts_remove,til_remove_sr,tilDeviceMiss,told_drsid, tnew_drsid, t_drs_veh_no, t_drs_vts_id, tilvtsno, tilsrNo, tilFaultVts, tilFaultSr, tilphnVts, tilphnSr, til_old_vltd_sr_no, til_new_vltd_sr_no, til_id_reinst, til_id_sr, til_sr_reinst,til_new_sr_replace,til_old_sr_replace;
+    String fuel_voltage="0",path,drs_type, clientId, personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person="", contact_no="0", payment_type = "C",
             buttonPressed = "0", buttonPressedActivity = "0", s_reg_no, s_rep_srNo, s_reinst_conf_reg_no, s_device_id, s_drs_id, s_new_drs_id, s_clientname = "SELECT CLIENT", s_remarks, status, s_work_type, s_Time, s_vehicletype, s_VehicleTypeInst, s_reason_repla = "0", removalReason = "0", itemsCollected = "0", others = "", s_work_id, s_new_device_id, s_e_device_id = "0", is_drs = "N", drs_dirction = "N", disconnection_reason = "0", ignition_sensor = "N", sim_reason = "0", missing_reason = "0", cut_off="N", serial_no, confirmVehNo, panic="N",
-            s_old_serial_no, s_vts_type = "Select Device";
+            s_old_serial_no, s_vts_type = "SELECT VTS TYPE";
     CheckConnection chk;
     CheckBox check_tel_supprt, magnet_set, magnetset_install;
     EditText reinstallVoltage,installVoltage,vltd_sr_no_notAvail,e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, t_install_date, t_install_Time, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
@@ -209,7 +210,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     ArrayList<String> arr_device_types = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ProgressDialog pDialog;
-    Spinner vltddeviceNotAvail,vltddevice, vltddeviceReinst, vltddeviceReplace, vltddeviceFault, vltddeviceMiss, vltddevicephn, vltddsimReplace,vltddeviceRemove;
+    Spinner device_reinstall,device,vltddeviceNotAvail,vltddevice, vltddeviceReinst, vltddeviceReplace, vltddeviceFault, vltddeviceMiss, vltddevicephn, vltddsimReplace,vltddeviceRemove;
     ProgressBar progressBar, circularProgressbar, mProgress;
     LinearLayout refuelVoltage,fuelVoltage,drsReInstall, payCollection, followUp, faultDetail, relaydrsType, drsReplacemsg, relaydrsTypeReplace, linearDoor, linearIgnition, drsInstall, linearPayment, linearvts, linearVehicleNotAvail, vehDetail, linearReplacement, linearInstall, linearReInstall, linearRemoval, linearDrs, linearFault, linearPhoneSupport, linearSimRepalace, linearDeviceMissing, linearOthers, oldDeviceType, options, vltdOptions, oldDevicesr_no, reinstText,deviceTypeReplace,replaceSrNo;
     RelativeLayout relativeCableConnected, relayLocation, relMissing, circularRelative;
@@ -256,6 +257,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         vltddeviceMiss = v.findViewById(R.id.vltddeviceMiss);
         refuelVoltage=  v.findViewById(R.id.refuelVoltage);
         replaceSrNo = v.findViewById(R.id.replaceSrNo);
+        device = v.findViewById(R.id.device);
+        device_reinstall = v.findViewById(R.id.device_reinstall);
         //vltddsimReplace = v.findViewById(R.id.vltdsimReplace);
         vltddevicephn = v.findViewById(R.id.vltddevicephn);
         til_vts_remove = v.findViewById(R.id.til_vts_remove);
@@ -444,18 +447,20 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         Base.initialize(getActivity());
         ShowProgressBar(false);
         Progress(false);
-        addclients();
-        addLocation();
-        addVehType();
-        addWorkType();
+
         setDateAndTime();
         location.setEnabled(false);
         workType.setEnabled(false);
         if (chk.isConnected()) {
+            addclients();
+            addLocation();
+            addVehType();
+            addWorkType();
+            getDeviceTypes();
         } else {
             chk.showConnectionErrorDialog();
         }
-        getDeviceTypes();
+
         timer();
 
         e_remarks.setOnTouchListener((v, event) -> {
@@ -476,8 +481,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                clientId = String.valueOf(clientList.get(i).getClient_Id());
+                }clientId = String.valueOf(clientList.get(i).getClient_Id());
                 s_clientname = clientList.get(i).getClient_Name();
                 location.setEnabled(true);
                 addLocation();
@@ -487,6 +491,35 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        device.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                if (i == 0) {
+                    return;
+                } else {
+                    i = i - 1;
+                }device_type = deviceTypeOtherAis_arr.get(i).getId();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        device_reinstall.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                if (i == 0) {
+                    return;
+                } else {
+                    i = i - 1;
+                }device_type = deviceTypeOtherAis_arr.get(i).getId();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         removalType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -500,7 +533,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 e_remarks.setText("");
                 if (removal_type.equals("1")) {
                     itemCollected.setText("Items Handed Over");
-                } else {
+                }else {
                     itemCollected.setText("Items Collected");
                 }
             }
@@ -515,8 +548,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                collection_type = String.valueOf(paymentmethod.get(i).getId());
+                }collection_type = String.valueOf(paymentmethod.get(i).getId());
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -529,8 +561,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                disconnection_reason = String.valueOf((supportList.get(i).getId()));
+                }disconnection_reason = String.valueOf((supportList.get(i).getId()));
                 if (discReason.getSelectedItem().toString().equalsIgnoreCase("Power Cable Disconnection")) {
                     relativeCableConnected.setVisibility(View.GONE);
                 } else {
@@ -548,8 +579,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                clientLocId = String.valueOf((locationList.get(i).getLoc_Id()));
+                }clientLocId = String.valueOf((locationList.get(i).getLoc_Id()));
                 workType.setEnabled(true);
             }
             @Override
@@ -576,8 +606,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                missing_reason = String.valueOf((damageList.get(i).getRemoval_Id()));
+                }missing_reason = String.valueOf((damageList.get(i).getRemoval_Id()));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -603,8 +632,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                sim_provider = simOperatorDetails.get(i).getSp_id();
+                }sim_provider = simOperatorDetails.get(i).getSp_id();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -617,8 +645,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     return;
                 } else {
                     i = i - 1;
-                }
-                s_vehicletype = String.valueOf(vehicleList.get(i).getVehicle_Id());
+                }s_vehicletype = String.valueOf(vehicleList.get(i).getVehicle_Id());
                 s_Vehicle_Name = vehicleList.get(i).getVehicle_Name();
                 drs_type = vehicleList.get(i).getDrs_type();
                 if (drs_type.equalsIgnoreCase("Y")) {
@@ -692,7 +719,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 if (not_available_activity.equals("1") || (not_available_activity.equals("2"))) {
                     vehDetail.setVisibility(View.GONE);
                     s_vehicletype = "0";
-                    device_type = "V";
+                    device_type = "0";
                 } else {
                     vehDetail.setVisibility(View.VISIBLE);
                 }
@@ -967,6 +994,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         imageNameMissing.setText("");
                         imageNameFault.setText("");
                         addVehType();
+                        getDevice();
                         ShowProgressBar(false);
                     }, DELAY);
                     radiodrsInstall.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -1816,16 +1844,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     is_drs = "P";
                 }else{
                     is_drs="N";
-                }int deviceType = radiodeviceType.getCheckedRadioButtonId();
-                radiotype = v.findViewById(deviceType);
-                String type = radiotype.getText().toString();
-                if (type.equalsIgnoreCase("Voice")) {
-                    nonVoice.setChecked(false);
-                    device_type = "V";
-                } else {
-                    voice.setChecked(false);
-                    device_type = "N";
-                }int isDemo = is_Demo.getCheckedRadioButtonId();
+                }
+                int isDemo = is_Demo.getCheckedRadioButtonId();
                 is_demo_no = v.findViewById(isDemo);
                 String demo = is_demo_no.getText().toString();
                 if (demo.equalsIgnoreCase("No")) {
@@ -1898,7 +1918,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 }else {
                     fuel_voltage="0";
                     fuelVoltInt=0;
-                }if(s_vts_type.equalsIgnoreCase("SELECT DEVICE")){
+                }if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                 }else if (s_new_device_id.equals("") && (e_device_id.getVisibility() == View.VISIBLE)) {
                     e_device_id.setError("Vts Id can't be null");
@@ -1962,14 +1982,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 }else{
                     is_drs = "N";
                 }
-                int reinstallDeviceType = reinstDeviceType.getCheckedRadioButtonId();
-                reinst_voice = v.findViewById(reinstallDeviceType);
-                String reinstDeviceType = reinst_voice.getText().toString();
-                if (reinstDeviceType.equalsIgnoreCase("Voice")) {
-                    device_type = "V";
-                } else {
-                    device_type = "N";
-                }int selectedId = radioGroup.getCheckedRadioButtonId();
+                int selectedId = radioGroup.getCheckedRadioButtonId();
                 radionormal = v.findViewById(selectedId);
                 String drs = radionormal.getText().toString();
                 if (drs.equalsIgnoreCase("Normal") && (linearDrs.getVisibility() == View.VISIBLE)) {
@@ -2042,7 +2055,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     s_old_serial_no = old_vltd_sr_no.getText().toString();
                 } else{
                     s_old_serial_no = "";
-                }if(s_vts_type.equalsIgnoreCase("SELECT DEVICE")){
+                }if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                 }else if(s_old_serial_no.equals("")&&(til_old_vltd_sr_no.getVisibility() == View.VISIBLE)) {
                     old_vltd_sr_no.setError("Sr No. can't be null");
@@ -2162,7 +2175,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 }else{
                     serial_no="";
                 }if ((linearvts.getVisibility() == View.VISIBLE) && (new_drsid.getVisibility() == View.GONE)) {
-                    if(s_vts_type.equalsIgnoreCase("SELECT DEVICE")){
+                    if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                         Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                     }else if (s_e_device_id.equals("")&&(old_deviceidreplace.getVisibility()==View.VISIBLE)) {
                         old_deviceidreplace.setError("Vts id can't be null");
@@ -2201,7 +2214,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         regNo.setError("Registration no. can't be null or zero");
                     } else {
                         s_new_drs_id = new_drsid.getText().toString();s_vts_type="2";
-                        s_drs_id = old_drsid.getText().toString();;is_drs = "Y";itemsCollected = "0";removalReason = "0";others = "";veh_condition = "W";is_demo = "N";missing_type = "M";collection_amount = "0";collection_date = "0";collection_type = "0";image = "0";disconnection_reason = "0";not_available_activity = "0";not_available_reason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";s_remarks = e_remarks.getText().toString();missing_reason = "0";removal_type = "0";cut_off = "N";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";payment_type="C";
+                        s_drs_id = old_drsid.getText().toString();
+                        is_drs = "Y";itemsCollected = "0";removalReason = "0";others = "";veh_condition = "W";is_demo = "N";missing_type = "M";collection_amount = "0";collection_date = "0";collection_type = "0";image = "0";disconnection_reason = "0";not_available_activity = "0";not_available_reason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";s_remarks = e_remarks.getText().toString();missing_reason = "0";removal_type = "0";cut_off = "N";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";payment_type="C";
                         updateInstallationData();
                     }
                 } else if ((drs_veh_no.getVisibility() == View.VISIBLE) && (drs_vts_id.getVisibility() == View.VISIBLE)) {
@@ -2214,7 +2228,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     } else if (old_drsid.getText().toString().equals(new_drsid.getText().toString())) {
                         new_drsid.setError("Id could not be same");
                     } else {
-                        s_vts_type="2";s_new_drs_id = new_drsid.getText().toString();s_drs_id = old_drsid.getText().toString();;is_drs = "Y";s_reg_no = drs_veh_no.getText().toString();missing_type = "M";cut_off = "N";serial_no = "";s_e_device_id = drs_vts_id.getText().toString();s_new_device_id = "0";s_reason_repla = "0";itemsCollected = "0";removalReason = "0";others = "";veh_condition = "W";collection_amount = "0";collection_date = "0";collection_type = "0";image = "0";disconnection_reason = "0";not_available_activity = "0";not_available_reason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";is_demo = "N";s_remarks = e_remarks.getText().toString();missing_reason = "0";removal_type = "0";s_rep_srNo = "";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";payment_type="C";
+                        s_vts_type="2";s_new_drs_id = new_drsid.getText().toString();s_drs_id = old_drsid.getText().toString();
+                        is_drs = "Y";s_reg_no = drs_veh_no.getText().toString();missing_type = "M";cut_off = "N";serial_no = "";s_e_device_id = drs_vts_id.getText().toString();s_new_device_id = "0";s_reason_repla = "0";itemsCollected = "0";removalReason = "0";others = "";veh_condition = "W";collection_amount = "0";collection_date = "0";collection_type = "0";image = "0";disconnection_reason = "0";not_available_activity = "0";not_available_reason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";is_demo = "N";s_remarks = e_remarks.getText().toString();missing_reason = "0";removal_type = "0";s_rep_srNo = "";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";payment_type="C";
                         updateInstallationData();
                     }
                 } else {
@@ -2222,7 +2237,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     updateInstallationData();
                 }
             } else if (s_work_id.equalsIgnoreCase("5")) {
-                if(s_vts_type.equalsIgnoreCase("Select Device")){
+                if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                 }else if (removal_type.equalsIgnoreCase("0")) {
                     Toast.makeText(getContext(), "Select Action Type", Toast.LENGTH_SHORT).show();
@@ -2302,7 +2317,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 } else {
                     veh_condition = "W";
                 }s_remarks = e_remarks.getText().toString();
-                if(s_vts_type.equalsIgnoreCase("SELECT DEVICE")){
+                if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                 }else if (s_e_device_id.equals("") && (fault_vts_id.getVisibility() == View.VISIBLE)) {
                     fault_vts_id.setError("Vts Id can't be null");
@@ -2349,7 +2364,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 }s_date = t_install_date.getText().toString();
                 s_Time = t_install_Time.getText().toString();
                 s_remarks = e_remarks.getText().toString();
-                if(s_vts_type.equalsIgnoreCase("SELECT DEVICE")){
+                if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                 }else if (s_e_device_id.equals("") && (phsupport_vts_id.getVisibility() == View.VISIBLE)) {
                     phsupport_vts_id.setError("Vts Id can't be null");
@@ -2415,13 +2430,13 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     s_old_serial_no="";
                 }s_reg_no = mDevice_reg_no.getText().toString();serial_no="";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";s_VehicleTypeInst = "0";s_reason_repla = "0";removalReason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";mgt_set = "N";door_sensor = "N";ignition_sensor = "N";removal_type = "0";cut_off = "N";cut_off = "N";itemsCollected = "0";s_new_device_id = "0";is_drs = "N";drs_dirction = "N";disconnection_reason = "0";veh_condition = "W";mgt_set = "N";not_available_activity = "0";not_available_reason = "0";is_demo = "N";collection_amount = "0";collection_date = "0";collection_type = "0";image = "0";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";payment_type="C";s_date = t_install_date.getText().toString();s_Time = t_install_Time.getText().toString();s_remarks = e_remarks.getText().toString();
                 String image = imageNameMissing.getText().toString();
-                if(s_vts_type.equalsIgnoreCase("SELECT DEVICE")){
+                if(s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")){
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
                 }else if (s_e_device_id.equals("") && (mDevice_vts_id.getVisibility() == View.VISIBLE)) {
                     mDevice_vts_id.setError("Vts Id can't be null");
-                }else if(s_old_serial_no.equals("")&&(tilDeviceMiss.getVisibility()==view.VISIBLE)){
+                }else if(s_old_serial_no.equals("")&&(tilDeviceMiss.getVisibility()== View.VISIBLE)){
                     vltd_sr_no_miss.setError("Sr No can't be null");
-                } else if((s_old_serial_no.length()<8)&&(tilDeviceMiss.getVisibility()==view.VISIBLE)){
+                } else if((s_old_serial_no.length()<8)&&(tilDeviceMiss.getVisibility()== View.VISIBLE)){
                     vltd_sr_no_miss.setError("Sr No must be eight character long");
                 } else if (s_reg_no.equals("") || s_reg_no.equals("0") || s_reg_no.equals("null")) {
                     mDevice_reg_no.setError("Registration no.can't be null or zero");
@@ -2477,7 +2492,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     s_Time = t_install_Time.getText().toString();
                     s_remarks = e_remarks.getText().toString();
                     String images  = imageName.getText().toString();
-                    s_vts_type="2";s_vehicletype = "0";s_old_serial_no="";s_reg_no = "0";device_type = "V";removal_type = "0";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";s_VehicleTypeInst = "0";s_reason_repla = "0";removalReason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";mgt_set = "N";door_sensor = "N";ignition_sensor = "N";itemsCollected = "0";s_new_device_id = "0";is_drs = "N";drs_dirction = "N";disconnection_reason = "0";veh_condition = "W";mgt_set = "N";not_available_activity = "0";not_available_reason = "0";is_demo = "N";missing_type = "M";missing_reason = "0";cut_off = "N";serial_no = "0";s_rep_srNo = "";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";
+                    s_vts_type="2";s_vehicletype = "0";s_old_serial_no="";s_reg_no = "0";device_type = "0";removal_type = "0";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";s_VehicleTypeInst = "0";s_reason_repla = "0";removalReason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";mgt_set = "N";door_sensor = "N";ignition_sensor = "N";itemsCollected = "0";s_new_device_id = "0";is_drs = "N";drs_dirction = "N";disconnection_reason = "0";veh_condition = "W";mgt_set = "N";not_available_activity = "0";not_available_reason = "0";is_demo = "N";missing_type = "M";missing_reason = "0";cut_off = "N";serial_no = "0";s_rep_srNo = "";confirmVehNo = "";s_reinst_conf_reg_no = "";contact_person = "";contact_no = "0";
                     if (payment_method.getSelectedItem().toString().equalsIgnoreCase("Select Payment Method")) {
                         Toast.makeText(getActivity(), "Please Select Payment Method", Toast.LENGTH_SHORT).show();
                     } else if (x < 200) {
@@ -2507,7 +2522,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         personPhone = followUpPersonPhone.getText().toString();
                         contact_person = personName;
                         contact_no = personPhone;
-                        s_vts_type="2";s_remarks = e_remarks.getText().toString();image = "";collection_date = "0";s_vehicletype = "0";s_reg_no = "0";collection_amount = "0";device_type = "V";removal_type = "0";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";s_VehicleTypeInst = "0";s_reason_repla = "0";removalReason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";mgt_set = "N";door_sensor = "N";ignition_sensor = "N";itemsCollected = "0";s_new_device_id = "0";is_drs = "N";drs_dirction = "N";disconnection_reason = "0";veh_condition = "W";mgt_set = "N";not_available_activity = "0";not_available_reason = "0";is_demo = "N";missing_type = "M";missing_reason = "0";collection_type = "0";image = "0";cut_off = "N";serial_no = "";s_rep_srNo = "";confirmVehNo = "";s_reinst_conf_reg_no = "";
+                        s_vts_type="2";s_remarks = e_remarks.getText().toString();image = "";collection_date = "0";s_vehicletype = "0";s_reg_no = "0";collection_amount = "0";device_type = "0";removal_type = "0";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";s_VehicleTypeInst = "0";s_reason_repla = "0";removalReason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";mgt_set = "N";door_sensor = "N";ignition_sensor = "N";itemsCollected = "0";s_new_device_id = "0";is_drs = "N";drs_dirction = "N";disconnection_reason = "0";veh_condition = "W";mgt_set = "N";not_available_activity = "0";not_available_reason = "0";is_demo = "N";missing_type="M";missing_reason = "0";collection_type = "0";image = "0";cut_off = "N";serial_no = "";s_rep_srNo = "";confirmVehNo = "";s_reinst_conf_reg_no = "";
                         updateInstallationData();
                     }
                 }
@@ -2519,7 +2534,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     e_remarks.setError("Please Fill Details");
                 } else {
                     s_remarks = e_remarks.getText().toString();s_vts_type="2";s_old_serial_no="";
-                    image = "";collection_date = "0";s_vehicletype = "0";s_reg_no = "0";collection_amount = "0";device_type = "V";removal_type = "0";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";
+                    image = "";collection_date = "0";s_vehicletype = "0";s_reg_no = "0";collection_amount = "0";device_type = "0";removal_type = "0";s_device_id = "0";s_drs_id = "0";s_new_drs_id = "0";status = "0";
                     s_VehicleTypeInst = "0";s_reason_repla = "0";removalReason = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";sim_provider = "0";mgt_set = "N";door_sensor = "N";ignition_sensor = "N";itemsCollected = "0";s_new_device_id = "0";is_drs = "N";drs_dirction = "N";disconnection_reason = "0";veh_condition = "W";mgt_set = "N";not_available_activity = "0";not_available_reason = "0";is_demo = "N";missing_type = "M";missing_reason = "0";collection_type = "0";image = "0";cut_off = "N";serial_no = "";s_rep_srNo = "";contact_person = "";contact_no = "0";payment_type="C";confirmVehNo = "";s_reinst_conf_reg_no = "";
                     updateInstallationData();
                 }
@@ -3125,7 +3140,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                                 Calendar c = Calendar.getInstance();
                                 int min = c.get(Calendar.MINUTE);
                                 int hour = c.get(Calendar.HOUR_OF_DAY);
-                                s_time = String.valueOf(hour)+":"+String.valueOf(min);
+                                s_time = hour +":"+ min;
                                 t_install_Time.setText(s_time);
                             }
                         });
@@ -3151,11 +3166,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         } else {
             current_date = day + "-" + month + "-" + year;
         }
-//        if ((hour < 10) && (minutes < 10)) {
-//            s_time = "0" + hour + ":" + "0" + minutes;
-//        } else {
-//            s_time = hour + ":" + minutes;
-//        }
         t_install_date.setText(current_date);
         paymentDate.setText(current_date);
         t_install_Time.setText(s_time);
@@ -3171,7 +3181,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 getDateforPayment();
             }
         });
-       // t_install_Time.setText(s_time);
         t_install_Time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -3240,8 +3249,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
     public void clearData() {
 
-        getDeviceTypes();
-        s_vts_type="SELECT DEVICE";old_deviceid.setText("");old_deviceidreplace.setText("");regNo.setText("");new_deviceid.setText("");plantName.setText("");e_drs_id.setText("");e_reg_no.setText("");e_remarks.setText("");e_device_id.setText("");old_drsid.setText("");new_drsid.setText("");drs_veh_no.setText("");drs_vts_id.setText("");fuel_voltage="0";reinstallVoltage.setText("");installVoltage.setText("");new_vehicleRegNo.setText("");new_deviceidReinstall.setText("");vltd_sr_no_notAvail.setText("");vltd_sr_no_miss.setText("");fault_reg_no.setText("");
+        getDeviceTypes();getFaultList();getSimOperator();getSimReasonList();getPhoneSupportList();addVehType();addReasonRemove();addVehNotAvailReason();getDevice();
+        s_vts_type="SELECT VTS TYPE";old_deviceid.setText("");old_deviceidreplace.setText("");regNo.setText("");new_deviceid.setText("");plantName.setText("");e_drs_id.setText("");e_reg_no.setText("");e_remarks.setText("");e_device_id.setText("");old_drsid.setText("");new_drsid.setText("");drs_veh_no.setText("");drs_vts_id.setText("");fuel_voltage="0";reinstallVoltage.setText("");installVoltage.setText("");new_vehicleRegNo.setText("");new_deviceidReinstall.setText("");vltd_sr_no_notAvail.setText("");vltd_sr_no_miss.setText("");fault_reg_no.setText("");
         fault_vts_id.setText("");vltd_sr_no_fault.setText("");new_vltd_sr_no.setText("");old_vltd_sr_no.setText("");old_replace_sr_no.setText("");new_replace_sr_no.setText("");vltd_sr_no_fault.setText("");vltd_sr_no_phn.setText("");vltd_sr_no.setText("");remove_deviceid.setText("");phsupport_vts_id.setText("");sim_vts_id.setText("");remove_sr_no.setText("");followUpPersonName.setText("");followUpPersonPhone.setText("");buttonPressed = "0";others = "";e_old_sim_no.setText("");e_new_sim_no.setText("");mDevice_reg_no.setText("");mDevice_vts_id.setText("");
         vehNotAvailRegNo.setText("");vehNotAvailVtsID.setText("");amount.setText("");imageName.setText("");imageNameFault.setText("");imageNameMissing.setText("");s_e_device_id = "0";s_new_device_id = "0";s_vehicletype = "0";s_device_id = "0";s_reg_no = "0";is_drs = "N";s_drs_id = "0";s_new_drs_id = "0";drs_dirction = "N";s_reason_repla = "0";removalReason = "0";rep_srNo.setText("");con_in_reg_no.setText("");faultPersonNumber.setText("");faultPersonName.setText("");itemsCollected = "0";others = "";s_remarks = "0";disconnection_reason = "0";ignition_sensor = "N";
         fuel_sensor = "N";door_sensor = "N";veh_condition = "W";mgt_set = "N";sim_provider = "0";old_sim_no = "0";new_sim_no = "0";sim_reason = "0";not_available_reason = "0";not_available_activity = "0";is_demo = "N";collection_amount = "0";collection_date = "0";collection_type = "0";missing_reason = "0";removal_type = "0";vts_sr_no.setText("");vts_sr_no_reinst.setText("");reinst_conf_reg_no.setText("");phSupportPersonName.setText("");phSupportPersonPhone.setText("");image = "";
@@ -3839,7 +3848,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 }
             } else {
                 progressDialog.hide();
-                // pDialog.hide();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -3859,19 +3867,19 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     void getDeviceTypes() {
         ApiHolder get_list = ServiceConnection.getClient(version).create(ApiHolder.class);
-        Call<MainResponse> call = get_list.getDeviceTypes();
-        call.enqueue(new Callback<MainResponse>() {
+        Call<VTSTypeResponse> call = get_list.getVTSTypes();
+        call.enqueue(new Callback<VTSTypeResponse>() {
             @Override
-            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+            public void onResponse(Call<VTSTypeResponse> call, Response<VTSTypeResponse> response) {
                 try {
-                    if (response.code() == 200) {
+                    if (response.body().getType().equalsIgnoreCase("1")) {
                         deviceTypeOtherAis_arr = response.body().getDeviceTypesArr();
                         try {
                             try {
                                 arr_device_types.clear();
                             } catch (Exception e) {
                                 e.printStackTrace();
-                            }arr_device_types.add(" SELECT DEVICE");
+                            }arr_device_types.add(" SELECT VTS TYPE");
                             for (int i = 0; i < deviceTypeOtherAis_arr.size(); i++) {
                                 arr_device_types.add(deviceTypeOtherAis_arr.get(i).getName());
                             }
@@ -3898,7 +3906,63 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         e1.printStackTrace();
                     }
                 }
-                //pDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<VTSTypeResponse> call, Throwable t) {
+                t.printStackTrace();
+                try {
+                    TSnackbar snackbar = TSnackbar.make(v, K.TRY_AGAIN, TSnackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.RED);
+                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                } catch (Exception e) {
+                    try {
+                        Toast.makeText(getActivity(), K.TRY_AGAIN, Toast.LENGTH_LONG).show();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    private void getDevice() {
+        ApiHolder get_list = ServiceConnection.getClient(version).create(ApiHolder.class);
+        Call<MainResponse> call = get_list.getDeviceTypes();
+        call.enqueue(new Callback<MainResponse>() {
+            @Override
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                try {
+                    if (response.body().getType()==1) {
+                        deviceTypeOtherAis_arr = response.body().getDeviceTypesArr();
+                        try {
+                            try {
+                                arr_device_types.clear();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }arr_device_types.add("SELECT DEVICE TYPE");
+                            for (int i = 0; i < deviceTypeOtherAis_arr.size(); i++) {
+                                arr_device_types.add(deviceTypeOtherAis_arr.get(i).getName());
+                            }
+                            adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, arr_device_types);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            device.setAdapter(adapter);
+                            device_reinstall.setAdapter(adapter);
+                        } catch (NullPointerException npe) {
+                            npe.printStackTrace();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    try {
+                        Toast.makeText(getActivity(), "No data", Toast.LENGTH_LONG).show();
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
+                    }
+                }
             }
 
             @Override
@@ -3908,7 +3972,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     TSnackbar snackbar = TSnackbar.make(v, K.TRY_AGAIN, TSnackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = (TextView) snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -3917,7 +3981,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-
                 }
             }
         });
@@ -3944,7 +4007,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             // TODO Auto-generated method stub
                             mProgress.setProgress(pStatus);
                             tv.setText(pStatus + "%");
-                            //  mProgress(new String[]{"" + ((this.pStatus * 100) / length)});
                         }
                     });
                     try {
