@@ -35,8 +35,6 @@ import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
 import in.eoninfotech.eontechnician.webservice.MessageDetail;
 import retrofit2.Callback;
 
-import static com.thefinestartist.utils.content.ContextUtil.getApplicationContext;
-import static com.thefinestartist.utils.content.ContextUtil.getResources;
 
 /**
  * Created by root on 7/5/19.
@@ -56,7 +54,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Activity
         this.activityDetails  =activityDetail;
         this.context = context;
         this.listener = listener;
-        appPreferences = new AppPreferences(getApplicationContext());
+        appPreferences = new AppPreferences(context);
     }
 
     @Override
@@ -67,7 +65,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Activity
 
     @Override
     public void onBindViewHolder(ActivityHolder holder, int position) {
-        appPreferences = new AppPreferences(getApplicationContext());
+        appPreferences = new AppPreferences(context);
         final MessageDetail activityDetailResponse = activityDetail.get(position);
         holder.title.setText(activityDetailResponse.getTitle());
         holder.message.setText(activityDetailResponse.getMessage());

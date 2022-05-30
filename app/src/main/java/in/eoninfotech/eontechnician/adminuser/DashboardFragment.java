@@ -35,18 +35,20 @@ public class DashboardFragment extends Fragment {
     View v;
     ProgressDialog pDialog;
     String version;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       v= inflater.inflate(R.layout.fragment_admin_main, container, false);
-        t_quantity_entered = (TextView) v.findViewById(R.id.quantity_entered);
-        t_devices_install = (TextView) v.findViewById(R.id.devices_install);
-        t_pending_previous = (TextView) v.findViewById(R.id.pending_previous_mon);
-        t_total_pending = (TextView) v.findViewById(R.id.total_pending);
+        v = inflater.inflate(R.layout.fragment_admin_main, container, false);
+        t_quantity_entered = v.findViewById(R.id.quantity_entered);
+        t_devices_install = v.findViewById(R.id.devices_install);
+        t_pending_previous = v.findViewById(R.id.pending_previous_mon);
+        t_total_pending = v.findViewById(R.id.total_pending);
         version = getArguments().getString("version");
         return v;
     }
+
     private void ChangePasswdApi(String username, String oldpwd, String cnfrmpwd) {
 
         pDialog = new ProgressDialog(getContext());
@@ -82,24 +84,26 @@ public class DashboardFragment extends Fragment {
                     assert updateDataResponse != null;
                     Log.v("Response", updateDataResponse.toString());
                     TSnackbar snackbar = TSnackbar.make(v, updateDataResponse.getMessage(), TSnackbar.LENGTH_LONG);
-                /*    snackbar.setActionTextColor(Color.RED);*/
+                    /*    snackbar.setActionTextColor(Color.RED);*/
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.GRAY);
-                    TextView textView = (TextView) snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                     textView.setTextColor(Color.RED);
                     snackbar.show();
+
                 }
-                if(pDialog!=null)
-                pDialog.dismiss();
+                if (pDialog != null)
+                    pDialog.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<UpdateDataResponse> call, Throwable t) {
                 t.printStackTrace();
-                if(pDialog!=null)
-                pDialog.dismiss();
+                if (pDialog != null)
+                    pDialog.dismiss();
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+
             }
         });
 

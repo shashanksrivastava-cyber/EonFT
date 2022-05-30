@@ -41,7 +41,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.thefinestartist.Base;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,13 +70,12 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     View v;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String username,version;
     public RecyclerView recyclerView;
     public SwipeRefreshLayout refreshLayout;
     public LinearLayoutManager layoutManager;
     public LinearLayout linearActivity;
     private TextView txtContentUnavailable;
-    String current_date, selected_todate, s_date;
+    String current_date, selected_todate, s_date,username,version;
     ArrayList<MessageDetail> activityDetail = new ArrayList<>();
     MessageAdapter messageAdapter;
     private SearchView searchView;
@@ -102,7 +100,6 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Messages");
-        Base.initialize(this);
         appPrefs = new AppPreferences(getApplicationContext());
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();

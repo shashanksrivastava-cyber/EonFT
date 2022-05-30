@@ -16,9 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -26,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.thefinestartist.Base;
 
 
 import java.text.SimpleDateFormat;
@@ -45,7 +42,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
 
 /**
  * Created by root on 16/10/18.
@@ -77,8 +73,7 @@ public class ActivityDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_detail, container, false);
-        Base.initialize(getActivity());
-        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         username = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");

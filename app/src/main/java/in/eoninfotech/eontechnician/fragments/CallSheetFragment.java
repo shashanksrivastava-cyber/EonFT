@@ -61,18 +61,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-import com.github.chrisbanes.photoview.PhotoView;
-import com.thefinestartist.Base;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,19 +79,8 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
-import in.eoninfotech.eontechnician.ActivityDetailAdapter;
-import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
-import in.eoninfotech.eontechnician.Responses.ActivityResponse;
-import in.eoninfotech.eontechnician.Responses.CallSheetResponse;
 import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
-import in.eoninfotech.eontechnician.activity.CallSheetActivity;
-import in.eoninfotech.eontechnician.activity.CallSheetAdapter;
-import in.eoninfotech.eontechnician.activity.ImageDetailCallSheet;
-import in.eoninfotech.eontechnician.activity.LoginActivity;
-import in.eoninfotech.eontechnician.activity.PhotoFullPopup;
-import in.eoninfotech.eontechnician.helper.CallSheetDetail;
 import in.eoninfotech.eontechnician.helper.FileUtils;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
@@ -118,13 +95,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.utils.content.ContextUtil.getContentResolver;
-import static com.thefinestartist.utils.content.ContextUtil.getExternalFilesDir;
-import static com.thefinestartist.utils.content.ContextUtil.getPackageManager;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
-import static com.thefinestartist.utils.service.ServiceUtil.getSystemService;
-import static pub.devrel.easypermissions.EasyPermissions.hasPermissions;
-
 /**
  * Created by root on 25/2/19.
  */
@@ -174,8 +144,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_call_sheet, container, false);
-        Base.initialize(getActivity());
-        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         username = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
@@ -225,7 +194,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             final Dialog alertDialogBuilder = new Dialog(getActivity());
             alertDialogBuilder.requestWindowFeature(Window.FEATURE_NO_TITLE);
             alertDialogBuilder.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            LayoutInflater mInflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) getActivity().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             alet_view = mInflater.inflate(R.layout.bottom_sheet_dialog_callsheet, null);
             final TextView galary = alet_view.findViewById(R.id.menu_gallery);
             final TextView cammera = alet_view.findViewById(R.id.menu_camera);
@@ -525,7 +494,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
 
     private void openCameraIntent() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (pictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (pictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             File photoFile = null;
             photoFile = createImageFile();
             if (photoFile != null) {
@@ -631,7 +600,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
 
     private String getRealPathFromURI(String contentURI) {
         Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, null, null, null, null);
         if (cursor == null) {
             return contentUri.getPath();
         } else {
@@ -661,7 +630,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
     private File createImageFile() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = null;
         try {
             image = File.createTempFile(imageFileName,/* prefix */".jpg",/* suffix */storageDir/* directory */);

@@ -61,7 +61,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
-import com.thefinestartist.Base;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
@@ -131,19 +130,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
-import static android.location.GpsStatus.GPS_EVENT_STARTED;
-import static android.location.GpsStatus.GPS_EVENT_STOPPED;
-import static android.provider.ContactsContract.Intents.Insert.ACTION;
-import static com.thefinestartist.utils.content.ContextUtil.getApplicationContext;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager fm;
     FragmentTransaction ft;
-    String username, dist_id, version,dis_username;
+    String username, dist_id, version, dis_username;
     String pageid = "", image;
     Toolbar toolbar;
     ArrayList<ClientList> ClientLists = new ArrayList<ClientList>();
@@ -155,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String usrname, alertt, uusername, versionname, disgnid = "0", activityName = "Activities";
     NavigationView navigationView;
     Bundle bundle;
+    FaqsFragment faqsfragment;
     CriticalSitesFragment criticalSitesFragment;
     ActivityDetailFragment activityDetailFragment;
     ActivityLogFragment activityLogFragment;
@@ -177,14 +170,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapterActivity viewPagerAdapterActivity;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
-    int track;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     int REQUEST_CODE_PERMISSION = 1001;
     DownloadManager manager;
     public static final String downloadMp3Url = "http://mail.cybernetra.net:8080/android/eonApp/2.7.1/song.mp3";
     MediaPlayer mp = new MediaPlayer();
     private Menu menu;
-    String faulty_num, imei,track_interval,track_status;
+    String faulty_num, imei;
     Dialog myDialog;
     RelativeLayout progressBar;
     TextView txtclose, month, name, loc, viewMore;
@@ -211,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setTitle("Dashboard");
-        Base.initialize(this);
         linearLayout = findViewById(R.id.framelay);
         appPrefs = new AppPreferences(getApplicationContext());
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
@@ -223,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         usrname = sharedprefs.getString("s_uuser", "");
         disgnid = sharedprefs.getString("s_distt", "");
         username = sharedprefs.getString("s_uuser", "");
-        dis_username = sharedprefs.getString("dis_user","");
+        dis_username = sharedprefs.getString("dis_user", "");
         imei = sharedprefs.getString("imei1", "");
         fm = getSupportFragmentManager();
         bundle = new Bundle();
@@ -235,11 +226,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(MainActivity.this);
             imei = telephonyInfo.getImsiSIM1();
-            // textViewCounter = findViewById(R.id.textViewCounter);
         } catch (Exception e) {
             e.printStackTrace();
         }
-       // displayAlert();
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean gps_enabled = false;
         boolean network_enabled = false;
@@ -261,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent dialogIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(dialogIntent);
-                           // getBaseContext().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                            // getBaseContext().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                         }
                     })
                     .setCancelable(false)
@@ -297,17 +286,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
             }
+
             @Override
             public void onDrawerOpened(View drawerView) {
             }
+
             @Override
             public void onDrawerClosed(View drawerView) {
             }
+
             @Override
             public void onDrawerStateChanged(int newState) {
-//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.
-//                        INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });
         serviceStop();
@@ -328,9 +317,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         File applictionFile = new File(Environment.
                 getExternalStoragePublicDirectory(Environment
                         .DIRECTORY_DOWNLOADS).getAbsolutePath() + "/eontech/alert.mp3");
-        Log.i("*** file exists", "- ??" + applictionFile.isFile());
         if (!applictionFile.isFile()) {
-            // DownloadData();
         }
         Intent intent = getIntent();
         tab = intent.getStringExtra("tab");
@@ -344,6 +331,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
+
     private void displayAlert() {
 
         LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -371,49 +359,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .show();
         }
     }
+
     private void serviceStop() {
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 19);
-            calendar.set(Calendar.MINUTE, 59);
-            calendar.set(Calendar.SECOND, 59);
-            Intent intent1 = new Intent(MainActivity.this, StopService.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-            am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        Intent intent1 = new Intent(MainActivity.this, StopService.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+
     private void serviceStart() {
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
-            calendar.set(Calendar.MINUTE, 00);
-            calendar.set(Calendar.SECOND, 00);
-            Intent intent1 = new Intent(MainActivity.this, AlarmService.class);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-            AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-            am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 00);
+        calendar.set(Calendar.SECOND, 00);
+        Intent intent1 = new Intent(MainActivity.this, AlarmService.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+
     private void loadContent() {
 
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<MessageResponse> call = log_att.messageResponse(uusername,s_date,status,msg_type);
+        Call<MessageResponse> call = log_att.messageResponse(uusername, s_date, status, msg_type);
         call.enqueue(new Callback<MessageResponse>() {
             @SuppressLint("RestrictedApi")
             @Override
             public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                if(response.body().getType()==1) {
+                if (response.body().getType() == 1) {
                     MessageResponse activityResponse = response.body();
-                    if(activityResponse.getMsg_count().equals("0")){
+                    if (activityResponse.getMsg_count().equals("0")) {
                         panic_fab.setVisibility(View.GONE);
                         frame.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         panic_fab.setVisibility(View.VISIBLE);
                         frame.setVisibility(View.VISIBLE);
                         textCartItemCount.setText((CharSequence) activityResponse.getMsg_count());
                     }
-                }else{
+                } else {
                 }
             }
+
             @Override
             public void onFailure(Call<MessageResponse> call, Throwable t) {
             }
@@ -437,12 +429,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     Handler handler = new Handler();
-    Runnable timedTask = new Runnable(){
+    Runnable timedTask = new Runnable() {
         @Override
         public void run() {
             loadContent();
-            handler.postDelayed(timedTask, 1000*60*1);
-        }};
+            handler.postDelayed(timedTask, 1000 * 60 * 1);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -462,10 +455,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         return true;
     }
+
     private void setupBadge() {
 
-      loadContent();
+        loadContent();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -474,8 +469,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.msg_alert) {
-           // getFaultyVts(1);
-            Intent intent = new Intent(MainActivity.this,MessageActivity.class);
+            // getFaultyVts(1);
+            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -516,8 +511,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else if (id == R.id.nav_mark_site) {
+        } else if (id == R.id.nav_mark_site) {
             activityLogFragment = new ActivityLogFragment();
             activityLogFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, activityLogFragment);
@@ -556,8 +550,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_incentive) {
+        } else if (id == R.id.nav_incentive) {
             fragmentCurrentMonth = new FragmentCurrentMonth();
             fragmentCurrentMonth.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, fragmentCurrentMonth);
@@ -573,8 +566,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_stock) {
+        } else if (id == R.id.nav_stock) {
 
             stockFragment = new StockFragment();
             stockFragment.setArguments(bundle);
@@ -582,7 +574,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setTitle("Stock Activity");
             tabLayout.setVisibility(View.VISIBLE);
             tabLayout.removeAllTabs();
-            viewpagerstock.setVisibility(View.VISIBLE );
+            viewpagerstock.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.GONE);
             viewpagerattendance.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -594,8 +586,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_live_status) {
+        } else if (id == R.id.nav_live_status) {
             liveStatusFragment = new LiveStatusFragment();
             liveStatusFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, liveStatusFragment);
@@ -612,7 +603,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hideKeyboard();
 
         } else if (id == R.id.nav_new_repair) {
-
             installmentFragment = new NewInstallmentFragment();
             installmentFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, installmentFragment);
@@ -631,8 +621,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_call_sheet) {
+        } else if (id == R.id.nav_call_sheet) {
             callSheetFragment = new CallSheetFragment();
             callSheetFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, callSheetFragment);
@@ -651,9 +640,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_pay_col_report) {
-
+        } else if (id == R.id.nav_pay_col_report) {
             paymentCollectionReportFragment = new PaymentCollectionReportFragment();
             paymentCollectionReportFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, paymentCollectionReportFragment);
@@ -672,8 +659,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_next_plan) {
+        } else if (id == R.id.faqs) {
+            faqsfragment = new FaqsFragment();
+            faqsfragment.setArguments(bundle);
+            ft = fm.beginTransaction().replace(R.id.framelay, faqsfragment);
+            setTitle("FAQs");
+            tabLayout.setVisibility(View.GONE);
+            tabLayout.removeAllTabs();
+            viewpagerattendance.setVisibility(View.GONE);
+            viewPager.setVisibility(View.GONE);
+            viewpageractivity.setVisibility(View.GONE);
+            viewpagercallsheet.setVisibility(View.GONE);
+            viewpagerstock.setVisibility(View.GONE);
+            viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
+            viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
+            tabLayout.setupWithViewPager(viewpagercallsheet);
+            ft.commit();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            hideKeyboard();
+        } else if (id == R.id.nav_next_plan) {
             Intent intee = new Intent(MainActivity.this, CallSheetActivity.class);
             intee.putExtra("user", usrname);
             startActivity(intee);
@@ -683,7 +688,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hideKeyboard();
         } else if (id == R.id.menu_logout) {
             final boolean isRunning = EONUtil.isServiceRunning(this.getBaseContext(), ForegroundService.class);
-            String running  = String.valueOf(isRunning);
+            String running = String.valueOf(isRunning);
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Confirm Logout")
@@ -697,7 +702,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 editor.putString("s_uuser", "");
                                 editor.putString("pass", "");
                                 editor.putString("logout", "logout");
-                                editor.putString("isRunning",running);
+                                editor.putString("isRunning", running);
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
@@ -705,13 +710,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 stopIntent.putExtra("param_name", "end");
                                 getBaseContext().stopService(stopIntent);
                                 finish();
-                            }else{
+                            } else {
                                 Intent inteer = new Intent(MainActivity.this, LoginActivityNew.class);
                                 inteer.putExtra("username", "us");
                                 editor.putString("s_uuser", "");
                                 editor.putString("pass", "");
                                 editor.putString("logout", "logout");
-                                editor.putString("isRunning","");
+                                editor.putString("isRunning", "");
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
@@ -724,8 +729,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     })
                     .setNegativeButton("No", null)
                     .show();
-        }
-        else if (id == R.id.nav_technician_of_the_month) {
+        } else if (id == R.id.nav_technician_of_the_month) {
             myDialog.setContentView(R.layout.technician_monthpopup);
             txtclose = myDialog.findViewById(R.id.txtclose);
             month = myDialog.findViewById(R.id.technician_month);
@@ -751,6 +755,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Override this method in the activity that hosts the Fragment and call super
@@ -760,12 +765,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment.onActivityResult(requestCode, resultCode, data);
         }
     }
+
     private void hideKeyboard() {
         LinearLayout mainLayout;
         mainLayout = findViewById(R.id.framelay);
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mainLayout.getWindowToken(), 0);
     }
+
     private void getDetail() {
 
         ShowProgressBar(true);
@@ -796,6 +803,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 ShowProgressBar(false);
             }
+
             @Override
             public void onFailure(Call<TechnicianMonthResponse> call, Throwable t) {
                 try {
@@ -842,6 +850,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
     public void getFaultyVts(final int click) {
 
         ApiHolder log_att = ServiceConnectionNewURL.getClient(versionname).create(ApiHolder.class);
@@ -873,7 +882,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             try {
                                 faulty_num = updateDataResponse.getFaulty_vts();
                                 try {
-                                    // mp =MediaPlayer.create(MainActivity.this,R.raw.bellring);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -897,16 +905,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         Log.v("Response", updateDataResponse.toString());
                     }
                 } catch (Exception e) {
-                    // menu.getItem(0).setIcon(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_warning_grey_24dp));
                     e.printStackTrace();
                 }
-                // pDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<UpdateDataResponse> call, Throwable t) {
                 t.printStackTrace();
-                //  pDialog.dismiss();
                 Toast.makeText(MainActivity.this, "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
         });
@@ -947,10 +952,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             if (show) {
                 progressBars.setVisibility(View.VISIBLE);
-               // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             } else {
                 progressBars.setVisibility(View.GONE);
-               // this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                // this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -993,11 +998,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public CharSequence getPageTitle(int position) {
 
-                switch (position) {
-                    case 0:
-                        return "My Dashboard";
-                    case 1:
-                        return "Other's Dashboard";
+            switch (position) {
+                case 0:
+                    return "My Dashboard";
+                case 1:
+                    return "Other's Dashboard";
             }
             return null;
         }
@@ -1017,14 +1022,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("version", versionname);
 
             switch (position) {
-                    case 0:
-                        activityLogFragment = new ActivityLogFragment();
-                        activityLogFragment.setArguments(bundle);
-                        return activityLogFragment;
-                    case 1:
-                        viewActivityLogsFragment = new ViewActivityLogsFragment();
-                        viewActivityLogsFragment.setArguments(bundle);
-                        return viewActivityLogsFragment;
+                case 0:
+                    activityLogFragment = new ActivityLogFragment();
+                    activityLogFragment.setArguments(bundle);
+                    return activityLogFragment;
+                case 1:
+                    viewActivityLogsFragment = new ViewActivityLogsFragment();
+                    viewActivityLogsFragment.setArguments(bundle);
+                    return viewActivityLogsFragment;
             }
 
             return null;
@@ -1117,6 +1122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             return null;
         }
+
         @Override
         public int getCount() {
             return int_items;
@@ -1140,6 +1146,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public ViewPagerAdapterActivity(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public Fragment getItem(int position) {
 
@@ -1223,6 +1230,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return null;
         }
     }
+
     class GetVersionCode extends AsyncTask<Void, String, String> {
 
         Dialog dialog;
@@ -1277,6 +1285,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
+
     @Override
     public void onRestart() {
         super.onRestart();

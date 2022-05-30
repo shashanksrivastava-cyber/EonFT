@@ -60,7 +60,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.thefinestartist.Base;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -128,11 +127,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.utils.content.ContextUtil.getApplicationContext;
-import static com.thefinestartist.utils.content.ContextUtil.getContentResolver;
-import static com.thefinestartist.utils.content.ContextUtil.getExternalFilesDir;
-import static com.thefinestartist.utils.content.ContextUtil.getPackageManager;
-import static com.thefinestartist.utils.ui.KeyboardUtil.height;
 import static pub.devrel.easypermissions.EasyPermissions.hasPermissions;
 
 public class NewInstallmentFragmentBackup extends Fragment implements ClientListener,ProgressRequestBody.UploadCallbacks {
@@ -345,7 +339,6 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
         paymentDate.setInputType(InputType.TYPE_NULL);
 
         newInstallmentController = new NewInstallmentController();
-        Base.initialize(getActivity());
 
         ShowProgressBar(false);
         Progress(false);
@@ -1933,7 +1926,7 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
     }
     private void openCameraIntent() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (pictureIntent.resolveActivity(getPackageManager()) != null) {
+        if (pictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             File photoFile = null;
             photoFile = createImageFile();
             if (photoFile != null) {
@@ -2034,7 +2027,7 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
         return uriSting;
     }private String getRealPathFromURI(String contentURI) {
         Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, null, null, null, null);
         if (cursor == null) {
             return contentUri.getPath();
         } else {
@@ -2061,7 +2054,7 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
     private File createImageFile() {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = null;
         try {
             image = File.createTempFile(imageFileName,/* prefix */".jpg",/* suffix */storageDir/* directory */);
@@ -2072,7 +2065,7 @@ public class NewInstallmentFragmentBackup extends Fragment implements ClientList
         return image;
     }
     private File bitmapToFile(Bitmap bitmap,String fileName){
-        File filesDir = getApplicationContext().getFilesDir();
+        File filesDir = getActivity().getApplicationContext().getFilesDir();
         File imageFile = new File(filesDir, fileName + ".jpg");
         OutputStream os;
         try {

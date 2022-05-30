@@ -75,6 +75,7 @@ public class AdminMainActivity extends AppCompatActivity
     PendencyFragment pendencyFragment;
     RequirementFragment requirementFragment;
     ViewActivityLogsFragment viewActivityLogsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,7 +152,6 @@ public class AdminMainActivity extends AppCompatActivity
             startActivity(inteer);
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -187,49 +187,33 @@ public class AdminMainActivity extends AppCompatActivity
             ft.commit();
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        }
-//        else if (id == R.id.nav_view_activity) {
-//            viewActivityLogsFragment = new ViewActivityLogsFragment();
-//            viewActivityLogsFragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, viewActivityLogsFragment);
-//            setTitle("Select Date");
-//            ft.commit();
-//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-      //  }
-        else if (id == R.id.nav_call_sheet) {
+        } else if (id == R.id.nav_call_sheet) {
             adminCallSheetListFragment = new AdminCallSheetListFragment();
             adminCallSheetListFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, adminCallSheetListFragment);
             setTitle("Call Sheet");
-        }
-        else if (id == R.id.nav_update_client_list) {
+        } else if (id == R.id.nav_update_client_list) {
             new UpdateClientList().execute("abc");
-        }
-        else if (id == R.id.nav_next_plan) {
+        } else if (id == R.id.nav_next_plan) {
             adminShowNextDayPlan = new AdminShowNextDayPlan();
             adminShowNextDayPlan.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, adminShowNextDayPlan);
             setTitle("Next Day Plan");
-        }
-        else if (id == R.id.nav_dashboard) {
+        } else if (id == R.id.nav_dashboard) {
             dashboardFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
             setTitle("Dashboard");
-        }
-        else if (id == R.id.nav_pendency) {
+        } else if (id == R.id.nav_pendency) {
             pendencyFragment = new PendencyFragment();
             pendencyFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
             setTitle("Pendency Detail");
-        }
-        else if (id == R.id.nav_requirement) {
-             requirementFragment = new RequirementFragment();
+        } else if (id == R.id.nav_requirement) {
+            requirementFragment = new RequirementFragment();
             requirementFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, requirementFragment);
             setTitle("Requirement Detail");
-        }
-        else if (id == R.id.nav_passwrd) {
+        } else if (id == R.id.nav_passwrd) {
             changePasswordFragment = new ChangePasswordFragment();
             changePasswordFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, changePasswordFragment);
@@ -328,6 +312,7 @@ public class AdminMainActivity extends AppCompatActivity
     public void deleteRecord() {
         EONUtil.deleteStationData(this);
         appPrefs.saveProviderInfo("false");
+
     }
 
 }

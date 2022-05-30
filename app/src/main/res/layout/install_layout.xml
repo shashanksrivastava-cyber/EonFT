@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearInstall"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:orientation="vertical"
-    android:visibility="visible"
     android:background="@color/eonWhite"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android:visibility="visible">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -21,21 +20,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
+                android:orientation="horizontal"
                 android:weightSum="4">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Device Type"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimary"
-                    android:padding="5dp"
-                    android:layout_weight="2.5"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Device Type"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -75,38 +74,44 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilvtsno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText android:id="@+id/new_in_deviceid"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tilvtsno"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="VTS ID"
-                    android:singleLine="true"
-                    android:inputType="number"
-                    android:layout_weight="1"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:maxLength="20" />
-            </android.support.design.widget.TextInputLayout>
+                    android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <EditText android:id="@+id/vts_sr_no"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="VTS Full Sr. No.(e.g. E124-36-EAN-R02-7974)"
-                android:singleLine="true"
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:maxLength="50"
-                android:inputType="textCapCharacters"/>
-            </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/new_in_deviceid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:hint="VTS ID"
+                        android:inputType="number"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/vts_sr_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:hint="VTS Full Sr. No.(e.g. E124-36-EAN-R02-7974)"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="50"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
 
@@ -114,142 +119,148 @@
                 android:id="@+id/tilsrNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <EditText android:id="@+id/vltd_sr_no"
+
+                <EditText
+                    android:id="@+id/vltd_sr_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Device Sr. No."
-                    android:singleLine="true"
-                    android:layout_weight="1"
-                    android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:hint="Device Sr. No."
+                    android:inputType="number"
                     android:maxLength="15"
-                    android:visibility="gone"
-                    android:inputType="number"/>
+                    android:singleLine="true"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
             </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText android:id="@+id/new_in_reg_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Vehicle Reg No.(In capital Letters Only)"
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:maxLength="20"
-            android:textAllCaps="true"
-            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-            android:inputType="textPassword"/>
-    </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText android:id="@+id/con_in_reg_no"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirm Vehicle Reg No.(In capital Letters Only)"
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:maxLength="20"
-            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-            android:inputType="textCapCharacters"/>
-    </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/new_in_reg_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:hint="Vehicle Reg No.(In capital Letters Only)"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textSize="12sp" />
+            </android.support.design.widget.TextInputLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/et_frame">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <in.eoninfotech.eontechnician.view.MySearchableSpinner
-            android:id="@+id/new_in_vehicleType"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:spinnerMode="dialog" />
+                <EditText
+                    android:id="@+id/con_in_reg_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:hint="Confirm Vehicle Reg No.(In capital Letters Only)"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+            </android.support.design.widget.TextInputLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginRight="6dp"
-            android:background="@color/eonWhite"
-            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/et_frame">
 
-    </RelativeLayout>
+                <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                    android:id="@+id/new_in_vehicleType"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
 
-    <LinearLayout
-        android:id="@+id/drsInstall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:weightSum="4"
-        android:visibility="gone">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="6dp"
+                    android:background="@color/eonWhite"
+                    android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Is DRS Install  "
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"
-            android:padding="5dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
+            </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <RadioGroup
-                android:id="@+id/radiodrsInstall"
+            <LinearLayout
+                android:id="@+id/drsInstall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
                 android:orientation="horizontal"
-                android:layout_weight="1.5"
-                android:weightSum="3">
+                android:visibility="gone"
+                android:weightSum="4">
 
-                <RadioButton
-                    android:id="@+id/radionodrs"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Is DRS Install  "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="No"
-                    android:checked="true"
-                    android:textSize="14sp"/>
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radioyesdrsInstall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Yes"
-                    android:textSize="14sp" />
+                    <RadioGroup
+                        android:id="@+id/radiodrsInstall"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
 
-            </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/radionodrs"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
 
-        </LinearLayout>
+                        <RadioButton
+                            android:id="@+id/radioyesdrsInstall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Yes"
+                            android:textSize="14sp" />
 
-    </LinearLayout>
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/options"
@@ -263,20 +274,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
                     android:weightSum="4">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Device"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPrimary"
-                        android:padding="5dp"
-                        android:layout_weight="2.5"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Device"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -284,8 +293,8 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="1.55"
-                        android:visibility="gone"
-                        android:background="@drawable/et_frame">
+                        android:background="@drawable/et_frame"
+                        android:visibility="gone">
 
                         <Spinner
                             android:id="@+id/device"
@@ -312,16 +321,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical"
-                        android:visibility="visible"
-                        android:layout_weight="1">
+                        android:visibility="visible">
 
                         <RadioGroup
                             android:id="@+id/radiodeviceType"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_weight="1"
+                            android:orientation="horizontal"
                             android:weightSum="4">
 
                             <RadioButton
@@ -329,9 +338,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.1"
-                                android:text="Voice"
                                 android:checked="true"
-                                android:textSize="14sp"/>
+                                android:text="Voice"
+                                android:textSize="14sp" />
 
                             <RadioButton
                                 android:id="@+id/nonVoice"
@@ -344,368 +353,710 @@
                     </LinearLayout>
                 </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Is Demo ?"
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"
-            android:padding="5dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <RadioGroup
-                android:id="@+id/is_demo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1.5"
-                android:weightSum="3">
-
-                <RadioButton
-                    android:id="@+id/is_demo_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="No"
-                    android:checked="true"
-                    android:textSize="14sp"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Yes"
-                    android:textSize="14sp" />
-            </RadioGroup>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearIgnition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ign Connect "
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"
-            android:padding="5dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <RadioGroup
-                android:id="@+id/radiogroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1.5"
-                android:weightSum="3">
-
-                <RadioButton
-                    android:id="@+id/l_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="No"
-                    android:checked="true"
-                    android:textSize="14sp"/>
-
-                <RadioButton
-                    android:id="@+id/l_out"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Yes"
-                    android:textSize="14sp" />
-            </RadioGroup>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearDoor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Door Sensor "
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"
-            android:padding="5dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <RadioGroup
-                android:id="@+id/radiogroupDoor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1.5"
-                android:weightSum="3">
-
-                <RadioButton
-                    android:id="@+id/doorNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="No"
-                    android:checked="true"
-                    android:textSize="14sp"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Yes"
-                    android:textSize="14sp" />
-            </RadioGroup>
-        </LinearLayout>
-    </LinearLayout>
-
-       <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cut Off "
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"
-            android:padding="5dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="2">
-
-            <RadioGroup
-                android:id="@+id/radioGroupCutoff"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1.5"
-                android:weightSum="3">
-
-                <RadioButton
-                    android:id="@+id/cutoffNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="No"
-                    android:checked="true"
-                    android:textSize="14sp"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="Yes"
-                    android:textSize="14sp" />
-
-            </RadioGroup>
-
-        </LinearLayout>
-        </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/vltdOptions"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:weightSum="4">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Panic Button"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimary"
-                    android:padding="5dp"
-                    android:layout_weight="2.5"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"/>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="2">
-
-                    <RadioGroup
-                        android:id="@+id/radioGroupPanic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1.5"
-                        android:weightSum="3">
-
-                        <RadioButton
-                            android:id="@+id/panicNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="No"
-                            android:checked="true"
-                            android:textSize="14sp"/>
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Yes"
-                            android:textSize="14sp" />
-                    </RadioGroup>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:weightSum="4">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fuel Guage"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimary"
-                    android:padding="5dp"
-                    android:layout_weight="2.5"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="2">
-
-                    <RadioGroup
-                        android:id="@+id/radioGroupFuel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1.5"
-                        android:weightSum="3">
-
-                        <RadioButton
-                            android:id="@+id/fuelNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="No"
-                            android:checked="true"
-                            android:textSize="14sp"/>
-
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Yes"
-                            android:textSize="14sp" />
-                    </RadioGroup>
-                </LinearLayout>
-            </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/fuelVoltage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
                     android:weightSum="4">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fuel Guage Voltage"
-                        android:textSize="15sp"
-                        android:textColor="@color/colorPrimary"
-                        android:padding="5dp"
-                        android:layout_weight="2"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Is Demo ?"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilVoltage"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <EditText android:id="@+id/installVoltage"
-                        android:layout_width="130dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Fuel Gauge Voltage"
-                        android:singleLine="true"
-                        android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:maxLength="20" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/is_demo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/is_demo_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearIgnition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Ign Connect "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radiogroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/l_in"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:id="@+id/l_out"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearDoor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Door Sensor "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radiogroupDoor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/doorNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+                        </RadioGroup>
+                    </LinearLayout>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Cut Off "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupCutoff"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/cutoffNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/vltdOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="2.5"
+                            android:padding="5dp"
+                            android:text="Panic Button"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
+
+                            <RadioGroup
+                                android:id="@+id/radioGroupPanic"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <RadioButton
+                                    android:id="@+id/panicNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:checked="true"
+                                    android:text="No"
+                                    android:textSize="14sp" />
+
+                                <RadioButton
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Yes"
+                                    android:textSize="14sp" />
+                            </RadioGroup>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:padding="5dp"
+                            android:layout_weight="2.5"
+                            android:text="Fuel Guage"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="vertical">
+
+                            <RadioGroup
+                                android:id="@+id/radioGroupFuel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <RadioButton
+                                    android:id="@+id/fuelNo"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:checked="true"
+                                    android:text="No"
+                                    android:textSize="14sp" />
+
+                                <RadioButton
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.5"
+                                    android:text="Yes"
+                                    android:textSize="14sp" />
+                            </RadioGroup>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fuelVoltage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="2"
+                            android:padding="5dp"
+                            android:text="Fuel Guage Voltage"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/tilVoltage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/installVoltage"
+                                android:layout_width="130dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:hint="Fuel Gauge Voltage"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:textSize="12sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Fuel Sensor"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupfuel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/fuelSensorNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Tilt Sensor"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGrouptilt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/tiltNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Fuel Sensor"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupfuelSensor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/fuelSensorNewNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Temp Sensor"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGrouptemp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/tempNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.5"
+                        android:padding="5dp"
+                        android:text="Trans Receiver"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGrouptrans"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <RadioButton
+                                android:id="@+id/transNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:checked="true"
+                                android:text="No"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:text="Yes"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2.7"
+                        android:padding="5dp"
+                        android:text="LID Sensor"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.35"
+                        android:orientation="vertical">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupLid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <RadioButton
+                                android:id="@+id/lidNone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="None"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:id="@+id/lidTop"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Top"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:id="@+id/lidRear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Rear"
+                                android:textSize="14sp" />
+
+                            <RadioButton
+                                android:id="@+id/lidBoth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Both"
+                                android:textSize="14sp" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
+
 </LinearLayout>

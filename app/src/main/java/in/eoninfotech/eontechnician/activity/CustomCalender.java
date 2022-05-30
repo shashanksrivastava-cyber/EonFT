@@ -1,6 +1,7 @@
 package in.eoninfotech.eontechnician.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,7 +22,6 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
-import com.thefinestartist.Base;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,10 +39,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.thefinestartist.Base.getContext;
 
 public class CustomCalender extends AppCompatActivity implements OnDateSelectedListener, OnMonthChangedListener {
 
+    Context context;
     MaterialCalendarView mcv;
     static int count = 0;
     Calendar calen = Calendar.getInstance();
@@ -64,8 +64,6 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_calender);
-        Base.initialize(this);
-
         sharedprefs = this.getSharedPreferences("login_user_pass", MODE_PRIVATE);
         uusername = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
@@ -99,16 +97,7 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
                 getAttendanceData();
             }
         });
-//         mcv.setOnDateChangedListener(new OnDateSelectedListener() {
-//             @Override
-//             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-//                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                 selected_date=dateFormat.format(date);
-//                 Intent intent_view_entries = new Intent(CustomCalender.this, LogViewActivity.class);
-//                 intent_view_entries.putExtra("date",selected_date);
-//                 startActivity(intent_view_entries);
-//             }
-//         });
+
     }
     private void getAttendanceData() {
 
@@ -188,12 +177,11 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
         @Override
         public boolean shouldDecorate(CalendarDay day) {
             return leave.contains(day);
-           // return day.getDay() <= (calen.get(Calendar.DATE)-1);
         }
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.WHITE));
-            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.brown_circle));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.brown_circle));
         }
     }
     public class HolidayDecorator implements DayViewDecorator {
@@ -211,7 +199,7 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.WHITE));
-            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.grey_circle));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.grey_circle));
         }
     }
     private class LeaveDecorator implements DayViewDecorator {
@@ -226,7 +214,7 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.WHITE));
-            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.maroon_circle));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.maroon_circle));
         }
     }
     private class BookingDecorator implements DayViewDecorator {
@@ -242,7 +230,7 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.WHITE));
-            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.green_circle));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.green_circle));
         }
     }
 
@@ -259,7 +247,7 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
         @Override
         public void decorate(DayViewFacade view) {
             view.addSpan(new ForegroundColorSpan(Color.WHITE));
-            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.blue_circle));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.blue_circle));
         }
     }
 

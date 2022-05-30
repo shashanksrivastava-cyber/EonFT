@@ -46,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
+
 
 /**
  * Created by Android on 02-01-2018.
@@ -291,76 +291,7 @@ public class LocationService extends JobService {
 
     private void refreshLocation() {
 
-//        ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
-//        Call<TrackingResponse> locCall = loc_att.trackingResponse(username,imei);
-//        locCall.enqueue(new Callback<TrackingResponse>() {
-//            public void onResponse(Call<TrackingResponse> call, Response<TrackingResponse> response) {
-//                try {
-//                    TrackingResponse trackingResponse = response.body();
-//                    trackingDetails = response.body().getTrackingDetails();
+    }
 
-//                    if (response.body().getType() == 1) {
-//                        track_status = trackingDetails.get(0).getTrack_status();
-//                        track_interval = trackingDetails.get(0).getTrack_interval();
-//                        editor.putString("track_status",track_status);
-//                        editor.putString("track_interval",track_interval);
-//                        editor.commit();
-//                        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
-//                        editor = sharedprefs.edit();
-//                        track_status = sharedprefs.getString("track_status", "");
-//                        track_interval = sharedprefs.getString("track_interval", "");
-//                        LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-//                        boolean gps_enabled = false;
-//                        boolean network_enabled = false;
-//                        try {
-//                            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-//                        } catch (Exception ex) {
-//                        }try {
-//                            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-//                        } catch (Exception ex) {
-//                        }
-//                        if (!gps_enabled && !network_enabled) {
-//                        } else {
-//                            if (track_status.equalsIgnoreCase("false") || track_status.equalsIgnoreCase("n")) {
-//                            }else{
-//                                getDeviceLocation();
-//                                // loadContent();
-//                            }
-//                        }
-//                    }
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<TrackingResponse> call, Throwable t) {
-//                // Toast.makeText(JobScheduleService.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
-//                try {
-//                } catch (Exception e) {
-//                }
-//            }
-//        });
-                      }
-
-//    private void loadContent() {
-//
-//        String curAdd = locationPrefs.getlastLoc().toString();
-//        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-//        Call<LocationsResponse> call = log_att.locationResponse(username,curAdd,imei,lati,lngi,mac_address);
-//        call.enqueue(new Callback<LocationsResponse>() {
-//            @Override
-//            public void onResponse(Call<LocationsResponse> call, Response<LocationsResponse> response) {
-//                if (response.body().getType() == 1) {
-//                   // Toast.makeText(getApplicationContext(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                } else {
-//                  //  Toast.makeText(getApplicationContext(), ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<LocationsResponse> call, Throwable t) {
-//            }
-//        });
-//    }
-
-            }
+}
 

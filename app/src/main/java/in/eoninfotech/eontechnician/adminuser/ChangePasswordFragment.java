@@ -41,13 +41,14 @@ import retrofit2.Response;
 public class ChangePasswordFragment extends Fragment {
     EditText old_pass, new_pass, confrm_pass;
     Button btn_change_pass;
-    String oldpwd, newpwd, cnfrmpwd, username,version, status, error;
+    String oldpwd, newpwd, cnfrmpwd, username, version, status, error;
     TextView txuser;
     View v;
     CoordinatorLayout coordinatorLayout;
     Thread thread;
     ProgressDialog pDialog;
     CheckConnection chk;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,12 +64,12 @@ public class ChangePasswordFragment extends Fragment {
         version = getArguments().getString("version");
         txuser.setText(username.toUpperCase());
 
-        chk= new CheckConnection(getActivity());
+        chk = new CheckConnection(getActivity());
 
         btn_change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(chk.isConnected()) {
+                if (chk.isConnected()) {
                     btn_change_pass.setClickable(false);
                     oldpwd = old_pass.getText().toString();
                     newpwd = new_pass.getText().toString();
@@ -81,7 +82,7 @@ public class ChangePasswordFragment extends Fragment {
                         confrm_pass.setError("Enter field");
                     } else if (!cnfrmpwd.equals(newpwd)) {
                         btn_change_pass.setClickable(true);
-                        Toast.makeText(getContext(), "passwords do not match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                         new_pass.setText("");
                         confrm_pass.setText("");
                         new_pass.setFocusable(true);
@@ -93,8 +94,7 @@ public class ChangePasswordFragment extends Fragment {
                         }
                         ChangePasswdApi(username, oldpwd, cnfrmpwd);
                     }
-                }
-                else {
+                } else {
                     Toast.makeText(getActivity(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
             }
@@ -140,7 +140,7 @@ public class ChangePasswordFragment extends Fragment {
 
                     Log.v("Response", updateDataResponse.toString());
                     TSnackbar snackbar = TSnackbar.make(v, updateDataResponse.getMessage(), TSnackbar.LENGTH_LONG);
-                /*    snackbar.setActionTextColor(Color.RED);*/
+                    /*    snackbar.setActionTextColor(Color.RED);*/
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.GRAY);
                     TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
@@ -161,6 +161,7 @@ public class ChangePasswordFragment extends Fragment {
                 new_pass.setText("");
                 confrm_pass.setText("");
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+
             }
         });
 

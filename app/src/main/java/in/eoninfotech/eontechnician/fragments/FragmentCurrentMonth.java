@@ -131,9 +131,6 @@ public class FragmentCurrentMonth extends Fragment {
         mLayout = v.findViewById(R.id.mLayout);
         datee = v.findViewById(R.id.date);
         txtContentUnavailable = v.findViewById(R.id.txt_content_unavailable);
-//        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE,Color.GREEN);
-//        refreshLayout.setOnRefreshListener(this::refresh);
-//        refreshLayout.setRefreshing(true);
         go = v.findViewById(R.id.go);
         incentiveDate = v.findViewById(R.id.incentiveDate);
         txt_add = v.findViewById(R.id.txt_add);

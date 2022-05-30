@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.thefinestartist.Base;
 
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.R;
@@ -42,7 +41,6 @@ public class MessageDetails extends AppCompatActivity {
         String locName = intent.getStringExtra("locName");
         String senders = intent.getStringExtra("sender");
         actionBar.setTitle(title);
-        Base.initialize(this);
 
         tv = findViewById(R.id.message);
         msgdate = findViewById(R.id.date);

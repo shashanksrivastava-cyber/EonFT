@@ -104,13 +104,6 @@ public class LocationServices extends Service implements LocationListener, GpsSt
         Log.d(LOG_TAG, "onDestroy ");
     }
 
-//    @Nullable
-//    @Override
-//    public IBinder onBind(Intent intent) {
-//        return null;
-//    }
-
-
     //This is where we detect the app is being killed, thus stop service.
     @Override
     public void onTaskRemoved(Intent rootIntent) {

@@ -165,7 +165,7 @@
                                 android:layout_height="45dp"
                                 android:background="@drawable/cerclebackgroundblue"
                                 android:padding="10dp"
-                                android:src="@drawable/ic_calendar_21" />
+                                android:src="@drawable/ic_calendar" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -204,75 +204,211 @@
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/cardTotal"
-                        android:layout_width="300dp"
-                        android:layout_height="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="200dp"
-                        app:cardCornerRadius="10dp">
+                        app:cardCornerRadius="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:background="@drawable/stop_background"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <LinearLayout
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@drawable/stop_background"
+                                android:weightSum="3"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:layout_marginTop="5dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Total VTS"
-                                    android:textSize="16sp"
-                                    android:layout_marginTop="5dp"
-                                    android:textColor="@color/eonWhite" />
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/total_vts"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text=""
-                                    android:textColor="@color/eonWhite"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Total VTS"
+                                        android:textSize="16sp"
+                                        android:layout_marginTop="5dp"
+                                        android:textColor="@color/eonWhite"/>
+
+                                    <TextView
+                                        android:id="@+id/total_vts"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text=""
+                                        android:textColor="@color/eonWhite"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Total DRS "
+                                        android:layout_marginTop="5dp"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/eonWhite"
+                                        android:gravity="center"/>
+
+                                    <TextView
+                                        android:id="@+id/total_drs"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text=""
+                                        android:textColor="@color/eonWhite"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="SOS Temp"
+                                        android:layout_marginTop="5dp"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/eonWhite"
+                                        android:gravity="center"/>
+
+                                    <TextView
+                                        android:id="@+id/sos_temper"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text="110"
+                                        android:textColor="@color/eonWhite"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
 
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:background="@drawable/stop_background"
+                                android:weightSum="3"
                                 android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                android:layout_marginTop="5dp">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Total DRS"
-                                    android:layout_marginTop="5dp"
-                                    android:textSize="16sp"
-                                    android:textColor="@color/eonWhite"/>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/total_drs"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:fontFamily="sans-serif-light"
-                                    android:text=""
-                                    android:textColor="@color/eonWhite"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Lid Sensor"
+                                        android:textSize="16sp"
+                                        android:layout_marginTop="5dp"
+                                        android:textColor="@color/eonWhite"/>
+
+                                    <TextView
+                                        android:id="@+id/total_lid"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text="110"
+                                        android:textColor="@color/eonWhite"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Fuel Sensor"
+                                        android:layout_marginTop="5dp"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/eonWhite"
+                                        android:gravity="center"/>
+
+                                    <TextView
+                                        android:id="@+id/total_fuel"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text="110"
+                                        android:textColor="@color/eonWhite"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Temp Sensor"
+                                        android:layout_marginTop="5dp"
+                                        android:textSize="16sp"
+                                        android:textColor="@color/eonWhite"
+                                        android:gravity="center"/>
+
+                                    <TextView
+                                        android:id="@+id/sos_temp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text="110"
+                                        android:textColor="@color/eonWhite"
+                                        android:textSize="18sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
 
                             </LinearLayout>
+
                         </LinearLayout>
+
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
@@ -345,7 +481,7 @@
                         android:layout_below="@+id/cv_one_login"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:background="@color/eonWhite"
                         android:elevation="10dp"
                         android:visibility="visible"
@@ -407,10 +543,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/cv_two_login"
-                        android:layout_marginBottom="5dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:background="@color/eonWhite"
                         android:elevation="10dp"
                         android:visibility="visible"
@@ -456,6 +591,311 @@
                             android:layout_gravity="right|center_vertical"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="5dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="147"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_four_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_three_login"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_maintenance"
+                                android:drawablePadding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:text="Under Maint but working"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite"/>
+
+                            <TextView
+                                android:id="@+id/um_working"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="100"
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/um_workigSpv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="147"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_five_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_four_login"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_sos"
+                                android:drawablePadding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:text="Faulty SOS Temper"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite"/>
+
+                            <TextView
+                                android:id="@+id/sos_faulty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="100"
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/sos_Spv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="147"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_six_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_five_login"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_close"
+                                android:drawablePadding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:text="Faulty LID Sensor"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite"/>
+
+                            <TextView
+                                android:id="@+id/lid_faulty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="100"
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/lid_Spv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="147"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_seven_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_six_login"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_gas"
+                                android:drawablePadding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:text="Faulty Fuel Sensor"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite"/>
+
+                            <TextView
+                                android:id="@+id/fuel_faulty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="100"
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/fuel_Spv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
+                            app:bgColor="#e1e1e1"
+                            app:fgColorEnd="#ff4800"
+                            app:fgColorStart="#ffe400"
+                            app:percent="147"
+                            app:startAngle="0"
+                            app:strokeWidth="5dp" />
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cv_eight_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cv_seven_login"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/eonWhite"
+                        android:elevation="10dp"
+                        android:visibility="visible"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:orientation="horizontal"
+                            android:background="@drawable/stop_background">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:drawableLeft="@drawable/ic_temperature"
+                                android:drawablePadding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:text="Faulty Temp Sensor"
+                                android:textSize="16sp"
+                                android:textColor="@color/eonWhite"/>
+
+                            <TextView
+                                android:id="@+id/temp_faulty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:layout_gravity="center_vertical"
+                                android:text="100"
+                                android:textColor="@color/eonWhite"
+                                android:textSize="25sp"
+                                android:textStyle="bold"/>
+
+                        </LinearLayout>
+
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/temp_Spv"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="10dp"
                             app:bgColor="#e1e1e1"
                             app:fgColorEnd="#ff4800"
                             app:fgColorStart="#ffe400"

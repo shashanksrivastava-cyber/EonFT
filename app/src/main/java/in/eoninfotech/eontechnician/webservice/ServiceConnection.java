@@ -48,4 +48,29 @@ public class ServiceConnection {
         }
         return retrofit;
     }
+
+
+    public static Retrofit getClients(String version){
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(20,TimeUnit.MINUTES)
+                .readTimeout(10,TimeUnit.MINUTES)
+                .addInterceptor(interceptor)
+                .build();
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        if(retrofit == null){
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .client(okHttpClient)
+                    .build();
+        }
+
+        return  retrofit;
+
+    }
 }

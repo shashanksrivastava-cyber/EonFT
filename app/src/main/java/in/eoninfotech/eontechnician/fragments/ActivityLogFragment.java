@@ -67,7 +67,6 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.Task;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.thefinestartist.Base;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,10 +128,6 @@ import retrofit2.Response;
 
 import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.utils.content.ContextUtil.getApplicationContext;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
-import static com.thefinestartist.utils.content.ContextUtil.sendBroadcast;
-import static com.thefinestartist.utils.content.ContextUtil.startService;
 
 
 public class ActivityLogFragment extends Fragment implements ClientListener,GoogleApiClient.ConnectionCallbacks,
@@ -191,8 +186,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_attendence, container, false);
-        Base.initialize(getActivity());
-        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
+
+        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         username = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
@@ -481,7 +476,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                     googleApiAvailability.getErrorDialog(getActivity(),resultCode,
                             PLAY_SERVICES_REQUEST).show();
                 } else {
-                    Toast.makeText(getApplicationContext(),
+                    Toast.makeText(getActivity(),
                             "This device is not supported.", Toast.LENGTH_LONG)
                             .show();
                 }

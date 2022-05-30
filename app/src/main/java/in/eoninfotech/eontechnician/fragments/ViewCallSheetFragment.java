@@ -34,7 +34,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.thefinestartist.Base;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -61,7 +60,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
+
 
 /**
  * Created by root on 1/3/19.
@@ -105,8 +104,8 @@ public class ViewCallSheetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_call_sheet_list, container, false);
-        Base.initialize(getActivity());
-        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
+
+        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         username = sharedprefs.getString("usname", "");
         dist_id = sharedprefs.getString("s_distt", "");

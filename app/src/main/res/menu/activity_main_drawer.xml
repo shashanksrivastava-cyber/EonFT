@@ -71,6 +71,11 @@
         android:title="Technician of the Month" />
 
     <item
+        android:id="@+id/faqs"
+        android:icon="@drawable/ic_incentive"
+        android:title="FAQs" />
+
+    <item
         android:id="@+id/menu_logout"
         android:icon="@drawable/ic_power_settings_new_black_24dp"
         android:orderInCategory="100"

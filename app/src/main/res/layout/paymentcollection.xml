@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/linearPayment"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearPayment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:orientation="vertical"
-    android:visibility="gone"
     android:background="@color/eonWhite"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
+        android:layout_marginRight="5dp"
         android:weightSum="5">
 
         <RadioGroup
@@ -28,16 +28,16 @@
                 android:id="@+id/collection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:checked="true"
-                android:text="Payment Collection"
-                android:layout_weight="2"/>
+                android:text="Payment Collection" />
 
             <RadioButton
                 android:id="@+id/followup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Payment Follow-Up"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="Payment Follow-Up" />
         </RadioGroup>
 
     </LinearLayout>
@@ -46,169 +46,174 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/payCollection"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout
+            android:id="@+id/payCollection"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText android:id="@+id/amount"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Amount"
-                android:singleLine="true"
-                android:layout_weight="1"
-                android:textSize="12sp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/amount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:hint="Amount"
+                            android:inputType="number"
+                            android:maxLength="8"
+                            android:singleLine="true"
+                            android:textSize="12sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/paymentDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/et_frame"
+                    android:drawableRight="@drawable/baseline_event_black_18"
+                    android:hint="Select Date"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="10dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/payValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:maxLength="8"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:text="*Amount should be 200 or greater"
+                android:textColor="@color/dash_red"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        <EditText
-            android:id="@+id/paymentDate"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/et_frame"
-            android:hint="Select Date"
-            android:textSize="14sp"
-            android:drawableRight="@drawable/baseline_event_black_18"
-            android:paddingLeft="5dp"
-            android:paddingRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/et_frame">
 
-    </LinearLayout>
+                    <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                        android:id="@+id/payment_method"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:spinnerMode="dialog" />
 
-    <TextView
-        android:id="@+id/payValue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="*Amount should be 200 or greater"
-        android:singleLine="true"
-        android:textSize="12sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_weight="1"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="2dp"
-        android:textColor="@color/dash_red"
-        android:visibility="gone"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:background="@color/eonWhite"
+                        android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2">
+                </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/et_frame"
-        android:layout_weight="1">
+            </LinearLayout>
 
-        <in.eoninfotech.eontechnician.view.MySearchableSpinner
-            android:id="@+id/payment_method"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:spinnerMode="dialog" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginRight="6dp"
-            android:background="@color/eonWhite"
-            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+                <Button
+                    android:id="@+id/imageUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Choose File" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/imageName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="-7dp" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-
-    <Button
-        android:id="@+id/imageUpload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Choose File" />
-
-        <TextView
-            android:id="@+id/imageName"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-7dp" />
-
-    </LinearLayout>
-
-    </LinearLayout>
+        </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardCornerRadius="10dp"
-        android:background="@color/eonWhite">
+        android:background="@color/eonWhite"
+        app:cardCornerRadius="10dp">
+
         <LinearLayout
             android:id="@+id/followUp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/eonWhite"
             android:orientation="vertical"
-            android:visibility="gone"
-            android:background="@color/eonWhite">
+            android:visibility="gone">
 
             <in.eoninfotech.eontechnician.CustomTextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp">
-                <EditText android:id="@+id/followUpPersonName"
+
+                <EditText
+                    android:id="@+id/followUpPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Contact Person Name"
-                    android:singleLine="true"
-                    android:inputType="text"
                     android:layout_weight="1"
-                    android:textSize="14sp"
                     android:drawableLeft="@drawable/ic_user"
                     android:drawablePadding="10dp"
-                    android:maxLength="20" />
+                    android:hint="Contact Person Name"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
             </in.eoninfotech.eontechnician.CustomTextInputLayout>
 
             <in.eoninfotech.eontechnician.CustomTextInputLayout
@@ -216,18 +221,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp">
-                <EditText android:id="@+id/followUpPersonPhone"
+
+                <EditText
+                    android:id="@+id/followUpPersonPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Contact Person Phone No"
-                    android:singleLine="true"
                     android:layout_weight="1"
-                    android:inputType="number"
-                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_phone_call"
                     android:drawableLeft="@drawable/ic_phone_call"
                     android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_phone_call"
-                    android:maxLength="10" />
+                    android:hint="Contact Person Phone No"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:textSize="14sp" />
             </in.eoninfotech.eontechnician.CustomTextInputLayout>
 
         </LinearLayout>

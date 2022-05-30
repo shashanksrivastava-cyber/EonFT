@@ -32,7 +32,6 @@ import in.eoninfotech.eontechnician.helper.DashboardDetail;
 public class ScheduleActivity extends AppCompatActivity {
     ListView lv;
     ArrayList<ClientList> list_vehidetai = new ArrayList<ClientList>();
-    String v_time, v_task;
     private PieChart mChart;
     // we're going to display pie chart for smartphones martket shares
     private float[] yData = {33, 33, 34};
@@ -66,15 +65,14 @@ public class ScheduleActivity extends AppCompatActivity {
         mChart.setRotationEnabled(true);
         mChart.setHighlightPerTapEnabled(true);
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+
         // set a chart value selected listener
         mChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-
 
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 if (e == null)
                     return;
-                /*Toast.makeText(getActivity(), xData + "Value: " + e.getY() + ", index: " + h.getX() + ", DataSet index: " + h.getDataSetIndex() + "%", Toast.LENGTH_SHORT).show();   */
             }
 
             @Override
@@ -95,6 +93,7 @@ public class ScheduleActivity extends AppCompatActivity {
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
         //l.setExtra(BRIGHT_COLORS,xData);
+
     }
     private void addData() {
         float mult = 100;

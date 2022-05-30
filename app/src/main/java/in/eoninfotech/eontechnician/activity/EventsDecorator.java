@@ -1,6 +1,7 @@
 package in.eoninfotech.eontechnician.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.text.style.ForegroundColorSpan;
@@ -16,7 +17,8 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
 import retrofit2.Callback;
 
-import static com.thefinestartist.Base.getContext;
+import static java.security.AccessController.getContext;
+
 
 /**
  * Created by root on 10/4/19.
@@ -24,11 +26,15 @@ import static com.thefinestartist.Base.getContext;
 
 public class EventsDecorator implements DayViewDecorator {
 
+    Activity context;
     public EventsDecorator(Activity context) {
+        this.context = context;
     }
+
     public EventsDecorator(Callback<AttendanceResponse> callback) {
     }
     public EventsDecorator(OnMonthChangedListener onMonthChangedListener) {
+
     }
     @Override
     public boolean shouldDecorate(CalendarDay day) {
@@ -38,6 +44,6 @@ public class EventsDecorator implements DayViewDecorator {
     @Override
     public void decorate(DayViewFacade view) {
         view.addSpan(new ForegroundColorSpan(Color.WHITE));
-        view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.drawable.grey_circle));
+        view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.grey_circle));
     }
 }

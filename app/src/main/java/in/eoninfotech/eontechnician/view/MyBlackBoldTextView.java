@@ -33,4 +33,5 @@ public class MyBlackBoldTextView extends TextView {
         this.setPadding(5,3,3,3);
         this.setTypeface(Typeface.DEFAULT_BOLD);
     }
+
 }

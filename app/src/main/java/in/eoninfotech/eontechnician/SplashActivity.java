@@ -150,24 +150,6 @@ public class SplashActivity extends AppCompatActivity {
             }
             return "";
 
-//        WifiManager manager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-//        WifiInfo info = manager.getConnectionInfo();
-//        String address = info.getMacAddress();
-//        Toast.makeText(this, ""+address, Toast.LENGTH_SHORT).show();
-
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-//            if (track_status.equalsIgnoreCase("y")) {
-//                startService(new Intent(SplashActivity.this, JobScheduleService.class));
-//            }else{
-//                stopService(new Intent(SplashActivity.this, JobScheduleService.class));
-//            }
-//        } else {
-//            if(track_status.equalsIgnoreCase("y")){
-//                startService(new Intent(SplashActivity.this, LocationService.class));
-//            }else{
-//                stopService(new Intent(SplashActivity.this, LocationService.class));
-//            }
-//        }
     }
     private void refreshLocation() {
         ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);

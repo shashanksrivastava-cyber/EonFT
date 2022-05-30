@@ -21,6 +21,7 @@ public class Invoices {
             row.customerName = "Thomas John Beckett";
             row.customerAddress = "1112, Hash Avenue, NYC";
            data[i]=row;
+
         }
         return data;
 

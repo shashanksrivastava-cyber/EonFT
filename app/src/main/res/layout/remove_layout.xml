@@ -1,31 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/linearRemoval"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearRemoval"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
+    android:background="@color/eonWhite"
     android:orientation="vertical"
     android:paddingBottom="15dp"
-    android:visibility="gone"
-    android:background="@color/eonWhite"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="What is Removed? "
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupTypeRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/replace_deviceType"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioDeviceRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="true"
+                android:text="Device"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radioSensorRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Sensor"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radioBothRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Both"
+                android:textSize="14sp" />
+
+        </RadioGroup>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginRight="5dp"
+        android:orientation="horizontal"
         android:weightSum="4">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Device Type"
-            android:textSize="15sp"
-            android:textColor="@color/colorPrimary"
-            android:padding="5dp"
-            android:layout_weight="2.5"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Device Type"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -63,8 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/et_frame"
         android:visibility="visible">
 
@@ -94,17 +150,19 @@
         android:id="@+id/til_remove_sr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText android:id="@+id/remove_sr_no"
+
+        <EditText
+            android:id="@+id/remove_sr_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Sr No."
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:visibility="gone"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:hint="Sr No."
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:visibility="gone" />
     </android.support.design.widget.TextInputLayout>
 
 
@@ -112,51 +170,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_vts_remove"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp">
-        <EditText android:id="@+id/remove_deviceid"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_vts_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="VTS ID"
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
-    </android.support.design.widget.TextInputLayout>
+            android:layout_marginRight="5dp">
+
+            <EditText
+                android:id="@+id/remove_deviceid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:hint="VTS ID"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </android.support.design.widget.TextInputLayout>
 
         <ProgressBar
             android:id="@+id/progressremove"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
-            android:visibility="gone"/>
+            android:layout_marginRight="10dp"
+            android:visibility="gone" />
+
         <ImageView
             android:id="@+id/ivExistRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_circle_black_24dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:visibility="gone"/>
+            android:src="@drawable/ic_circle_black_24dp"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/ivnotExistRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cancel_black_24dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:visibility="gone"/>
+            android:src="@drawable/ic_cancel_black_24dp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -165,25 +226,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp">
-        <EditText android:id="@+id/remove_reg_no"
+
+        <EditText
+            android:id="@+id/remove_reg_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Vehicle Reg No."
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-            android:inputType="textCapCharacters"/>
+            android:hint="Vehicle Reg No."
+            android:inputType="textCapCharacters"
+            android:singleLine="true"
+            android:textSize="12sp" />
     </android.support.design.widget.TextInputLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/et_frame">
 
         <in.eoninfotech.eontechnician.view.MySearchableSpinner
@@ -192,10 +255,10 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:spinnerMode="dialog"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -213,28 +276,403 @@
         android:id="@+id/itemCollected"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="Items Collected"
-        android:layout_marginTop="5dp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="visible"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-    <in.eoninfotech.eontechnician.NonScrollListView
-        android:id="@+id/item_list"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/header_button">
-    </in.eoninfotech.eontechnician.NonScrollListView>
+        <in.eoninfotech.eontechnician.NonScrollListView
+            android:id="@+id/item_list"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_button"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"></in.eoninfotech.eontechnician.NonScrollListView>
 
     </LinearLayout>
+
+    <in.eoninfotech.eontechnician.view.MyTextView
+        android:id="@+id/device_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Removed Sensor Details"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Tilt Sensor"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGrouptiltRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/tiltRemoveNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="No"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Temp Sensor"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGrouptempRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/tempNoRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="No"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Panic Button"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroupPanicRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/panicNoRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="No"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Fuel Sensor"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroupfuelRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/fuelSensorNoRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="No"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Trans Receiver"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGrouptransRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/transNoRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="No"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Yes"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="2.7"
+            android:padding="5dp"
+            android:text="LID Sensor"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.35"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroupLidRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <RadioButton
+                    android:id="@+id/lidNoneRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="None"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/lidTopRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Top"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/lidRearRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rear"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/lidBothRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Both"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/sensor_veh_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/sensor_veh_no_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:hint="Vehicle Reg No"
+            android:inputType="number"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:textSize="12sp" />
+    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

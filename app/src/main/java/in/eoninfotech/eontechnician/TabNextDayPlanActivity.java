@@ -23,8 +23,7 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 2;
-    String disttid;
-    String uusername, version;
+    String uusername, version,disttid;
     Bundle bundle;
     FragmentAddNextDayPlan fragmentAddNextDayPlan;
     ShowNextDayPlanFragment showNextDayPlanFragment;
@@ -38,16 +37,14 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.viewpager);
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         uusername = sharedprefs.getString("dis_user", "");
         disttid = sharedprefs.getString("s_distt", "");
         version = sharedprefs.getString("version", "");
         actionBar.setTitle("Tomorrow Plan");
-        Log.i("****tab dis n usr***", disttid + " " + uusername);
         viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         tabLayout.post(new Runnable() {
             @Override
@@ -71,6 +68,7 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
             Intent inteer = new Intent(TabNextDayPlanActivity.this, MainActivity.class);
             startActivity(inteer);
             finish();
+
         } else if (id == R.id.menu_logout) {
             Intent inteer = new Intent(TabNextDayPlanActivity.this, LoginActivity.class);
             inteer.putExtra("username", uusername);
@@ -78,6 +76,7 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
             editor.commit();
             startActivity(inteer);
             finish();
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -99,6 +98,7 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
                     fragmentAddNextDayPlan = new FragmentAddNextDayPlan();
                     fragmentAddNextDayPlan.setArguments(bundle);
                     return fragmentAddNextDayPlan;
+
                 case 1:
                     showNextDayPlanFragment = new ShowNextDayPlanFragment();
                     showNextDayPlanFragment.setArguments(bundle);

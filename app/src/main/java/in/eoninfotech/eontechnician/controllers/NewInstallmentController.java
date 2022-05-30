@@ -60,7 +60,6 @@ public class NewInstallmentController extends Controller {
     Call<VTSResponse>vtsResponseCall;
     Call<PaymentMethodResponse>pMethodCall;
     Call<MainResponse>updateDataCall;
-    Call<MainResponse>device;
 
     public void reqeuestClientList(ClientListener listener) {
 
@@ -516,10 +515,18 @@ public class NewInstallmentController extends Controller {
                                       RequestBody collected_items,
                                       RequestBody faults_checked,
                                       RequestBody fuel_reading,
+                                      RequestBody lid_status,
+                                      RequestBody trans_receiver,
+                                      RequestBody temp_sensor,
+                                      RequestBody tilt_sensor,
+                                      RequestBody fuel_status,
+                                      RequestBody panic_status,
+                                      RequestBody sensor_veh_no,
+                                      RequestBody sensor_old_veh_no,
                                       MultipartBody.Part image,
                                       ClientListener listener) {
         updateDataCall = client_att.postInstallationsData(technician_id,activity_date,activity_time,customer,customer_location,is_demo,activity_type,vts_type,device_type,old_device_id,new_device_id,old_serial_no,new_serial_no,reg_no,veh_type,is_drs,old_drs,new_drs,drs_direction,mgt_set,ignition_sensor,fuel_sensor,door_sensor,panic_button,cut_off,replacement_reason,removal_type,removal_reason,disconnection_reason,missing_type,missing_reason,not_available_activity,not_available_reason,collection_date,payment_method,amount,
-                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,image);
+                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,lid_status,trans_receiver,temp_sensor,tilt_sensor,fuel_status,panic_status,sensor_veh_no,sensor_old_veh_no,image);
         updateDataCall.enqueue(new Callback<MainResponse>() {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
@@ -539,5 +546,29 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
+
+    public void getVehforUM(String client_id,String loc_id,ClientListener listener) {
+        updateDataCall = client_att.get_veh_for_um(client_id,loc_id);
+        updateDataCall.enqueue(new Callback<MainResponse>() {
+            @Override
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                listener.updateDataResponse(response.body());
+            }
+            @Override
+            public void onFailure(Call<MainResponse> call, Throwable t) {
+
+                try {
+                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.RED);
+                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+
 }
 

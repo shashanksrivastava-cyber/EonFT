@@ -1,400 +1,416 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <ScrollView
+
+        <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="9.5">
-        <LinearLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="7dp"
-                    android:paddingRight="7dp"
-                    android:paddingTop="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:elevation="5dp"
+                    android:paddingLeft="7dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="7dp"
+                    android:paddingBottom="5dp"
                     app:cardElevation="5dp">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingLeft="7dp"
-                android:paddingRight="7dp"
-                android:paddingTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
 
-        <RelativeLayout
-                android:id="@+id/relay"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/et_frame">
-
-            <in.eoninfotech.eontechnician.view.MySearchableSpinner
-                android:id="@+id/new_in_clients"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:spinnerMode="dialog"
-                android:visibility="visible"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginRight="6dp"
-                android:background="@color/eonWhite"
-                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-                android:id="@+id/relayLocation"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/et_frame">
-
-            <in.eoninfotech.eontechnician.view.MySearchableSpinner
-                android:id="@+id/new_in_locations"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:spinnerMode="dialog"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginRight="6dp"
-                android:background="@color/eonWhite"
-                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/et_frame">
-
-            <in.eoninfotech.eontechnician.view.MySearchableSpinner
-                android:id="@+id/new_in_workType"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:gravity="center"
-                android:spinnerMode="dialog" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginRight="6dp"
-                android:background="@color/eonWhite"
-                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="10dp"
-            android:weightSum="4">
-
-            <EditText
-                android:id="@+id/installDate"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/et_frame"
-                android:hint="Select Date"
-                android:textSize="14sp"
-                android:drawableRight="@drawable/baseline_event_black_18"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
-
-            <EditText
-                android:id="@+id/installTime"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/et_frame"
-                android:hint="Select Time"
-                android:textSize="14sp"
-                android:drawableRight="@drawable/baseline_query_builder_black_18"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:background="@drawable/et_frame"
-            android:orientation="vertical"
-            android:paddingBottom="15dp"
-            android:paddingLeft="7dp"
-            android:paddingRight="7dp"
-            android:paddingTop="5dp">
-
-            <in.eoninfotech.eontechnician.view.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Installation Details"
-                android:textStyle="bold"
-                android:id="@+id/device_info"/>
-
-            <include layout="@layout/install_layout" />
-
-            <include layout="@layout/reinstall_layout" />
-
-            <include layout="@layout/replace_layout" />
-
-            <LinearLayout
-                android:id="@+id/linearDrs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <EditText android:id="@+id/new_in_drs_id"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="7dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="7dp"
+                        android:paddingBottom="5dp">
+
+                        <RelativeLayout
+                            android:id="@+id/relay"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/et_frame">
+
+                            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                android:id="@+id/new_in_clients"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:spinnerMode="dialog"
+                                android:visibility="visible" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="6dp"
+                                android:background="@color/eonWhite"
+                                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/relayLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/et_frame">
+
+                            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                android:id="@+id/new_in_locations"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:spinnerMode="dialog" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="6dp"
+                                android:background="@color/eonWhite"
+                                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/et_frame">
+
+                            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                android:id="@+id/new_in_workType"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:spinnerMode="dialog" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="6dp"
+                                android:background="@color/eonWhite"
+                                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:hint="DRS ID"
-                            android:singleLine="true"
-                            android:textSize="12sp"
-                            android:maxLength="20"
-                            android:layout_marginLeft="5dp"
-                            android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"/>
-                    </android.support.design.widget.TextInputLayout>
-                    <ProgressBar
-                        android:id="@+id/progressdrs"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="15dp"
-                        android:visibility="gone"/>
-                    <ImageView
-                        android:id="@+id/ivnotExistDRS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="10dp"
-                        android:visibility="gone"/>
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
 
-                    <ImageView
-                        android:id="@+id/ivExistDRS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="10dp"
-                        android:visibility="gone"/>
-                </RelativeLayout>
+                            <EditText
+                                android:id="@+id/installDate"
+                                android:layout_width="140dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/et_frame"
+                                android:drawableRight="@drawable/baseline_event_black_18"
+                                android:hint="Select Date"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:textSize="14sp" />
+
+                            <EditText
+                                android:id="@+id/installTime"
+                                android:layout_width="140dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="20dp"
+                                android:background="@drawable/et_frame"
+                                android:drawableRight="@drawable/baseline_query_builder_black_18"
+                                android:hint="Select Time"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
 
                 <LinearLayout
-                    android:id="@+id/relaydrsType"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:weightSum="5">
-
-                    <TextView
-                        android:id="@+id/new_drs_dirc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="DRS Direction :"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/eonBlue"
-                        android:layout_weight="3"/>
-
-                    <RadioGroup
-                        android:id="@+id/radiodirec"
-                        android:layout_width="wrap_content"
-                        android:layout_height="25dp"
-                        android:orientation="horizontal"
-                        android:layout_toRightOf="@+id/new_drs_dirc"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1">
-
-                        <RadioButton
-                            android:id="@+id/normal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:text="Normal"
-                            android:textSize="14sp"
-                            android:layout_weight="1"/>
-
-                        <RadioButton
-                            android:id="@+id/reverse"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Reverse"
-                            android:textSize="14sp"
-                            android:layout_weight="1"/>
-
-                    </RadioGroup>
-                </LinearLayout>
-
-                <CheckBox
-                    android:id="@+id/magnetset_install"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Magnet Set Installed"
-                    android:layout_marginLeft="10dp"
-                    android:visibility="visible"/>
+                    android:background="@drawable/et_frame"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="15dp">
+
+                    <in.eoninfotech.eontechnician.view.MyTextView
+                        android:id="@+id/device_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Installation Details"
+                        android:textStyle="bold" />
+
+                    <include layout="@layout/install_layout" />
+
+                    <include layout="@layout/reinstall_layout" />
+
+                    <include layout="@layout/replace_layout" />
+
+                    <LinearLayout
+                        android:id="@+id/linearDrs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/new_in_drs_id"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"
+                                    android:hint="DRS ID"
+                                    android:inputType="number"
+                                    android:maxLength="20"
+                                    android:singleLine="true"
+                                    android:textSize="12sp" />
+                            </android.support.design.widget.TextInputLayout>
+
+                            <ProgressBar
+                                android:id="@+id/progressdrs"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="10dp"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/ivnotExistDRS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="10dp"
+                                android:visibility="gone" />
+
+                            <ImageView
+                                android:id="@+id/ivExistDRS"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="10dp"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/relaydrsType"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:weightSum="5">
+
+                            <TextView
+                                android:id="@+id/new_drs_dirc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="3"
+                                android:text="DRS Direction :"
+                                android:textColor="@color/eonBlue" />
+
+                            <RadioGroup
+                                android:id="@+id/radiodirec"
+                                android:layout_width="wrap_content"
+                                android:layout_height="25dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_toRightOf="@+id/new_drs_dirc"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/normal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:checked="true"
+                                    android:text="Normal"
+                                    android:textSize="14sp" />
+
+                                <RadioButton
+                                    android:id="@+id/reverse"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Reverse"
+                                    android:textSize="14sp" />
+
+                            </RadioGroup>
+
+                        </LinearLayout>
+
+                        <CheckBox
+                            android:id="@+id/magnetset_install"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="Magnet Set Installed"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+                    <include layout="@layout/remove_layout" />
+
+                    <include layout="@layout/fault_layout" />
+
+                    <include layout="@layout/phone_support_layout" />
+
+                    <include layout="@layout/simreplacement" />
+
+                    <include layout="@layout/devicemissing" />
+
+                    <include layout="@layout/vehiclenotavailable" />
+
+                    <include layout="@layout/paymentcollection" />
+
+                    <include layout="@layout/other_activity" />
+
+                    <include layout="@layout/removal_from_um" />
+
+                    <include layout="@layout/preventive_maintenance" />
+
+                    <CheckBox
+                        android:id="@+id/check_tel_supprt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Telephonic Support"
+                        android:textColor="@color/eonBlue"
+                        android:textSize="18dp"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/new_in_remarks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/et_frame"
+                        android:gravity="top|left"
+                        android:hint="Remarks"
+                        android:inputType="text|textMultiLine"
+                        android:lines="4"
+                        android:overScrollMode="always"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        android:scrollbarStyle="insideInset"
+                        android:scrollbars="vertical"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/new_in_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/attend_buttn_drwable"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
 
             </LinearLayout>
 
-            <include layout="@layout/remove_layout" />
-
-            <include layout="@layout/fault_layout" />
-
-            <include layout="@layout/phone_support_layout" />
-
-            <include layout="@layout/simreplacement" />
-
-            <include layout="@layout/devicemissing" />
-
-            <include layout="@layout/vehiclenotavailable" />
-
-            <include layout="@layout/paymentcollection" />
-
-            <include layout="@layout/other_activity" />
-
-            <CheckBox
-                android:id="@+id/check_tel_supprt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Telephonic Support"
-                android:textSize="18dp"
-                android:textColor="@color/eonBlue"
-                android:layout_marginLeft="10dp"
-                android:visibility="gone"/>
-
-            <EditText
-                android:id="@+id/new_in_remarks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/et_frame"
-                android:hint="Remarks"
-                android:inputType="text|textMultiLine"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:textSize="14sp"
-                android:gravity="top|left"
-                android:lines="4"
-                android:overScrollMode="always"
-                android:scrollbarStyle="insideInset"
-                android:scrollbars="vertical"/>
-        </LinearLayout>
-            <Button
-                android:id="@+id/new_in_update"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/attend_buttn_drwable"
-                android:gravity="center"
-                android:text="Submit"
-                android:textColor="#ffffff"
-                android:textSize="20dp" />
-        </LinearLayout>
-
         </ScrollView>
+
     </LinearLayout>
 
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:indeterminate="false"
-            android:max="100"
-            android:clickable="true"
-            android:progress="20"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:clickable="true"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="20" />
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/circularRelative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:id="@+id/circularRelative"
         tools:context="com.example.parsaniahardik.progressanimation.MainActivity">
 
         <ProgressBar
@@ -402,20 +418,20 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_centerInParent="true"
             android:indeterminate="false"
             android:max="100"
             android:progress="0"
-            android:layout_centerInParent="true"
             android:progressDrawable="@drawable/circular"
-            android:secondaryProgress="100"/>
+            android:secondaryProgress="100" />
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:text=""
-            android:layout_centerInParent="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 
@@ -426,7 +442,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerInParent="true"
-        android:visibility="gone"
-        android:src="@drawable/checked"/>
+        android:src="@drawable/checked"
+        android:visibility="gone" />
 
 </RelativeLayout>

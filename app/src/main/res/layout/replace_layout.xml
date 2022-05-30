@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/linearReplacement"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearReplacement"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:orientation="vertical"
-    android:visibility="gone"
     android:background="@color/eonWhite"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android:visibility="visible">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -17,84 +17,91 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:weightSum="4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:weightSum="2">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What is Replaced? "
-            android:layout_marginTop="2dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
-            android:padding="5dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="What is Replaced? "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:orientation="horizontal"
-            android:layout_toRightOf="@+id/replace_deviceType"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="3"
-            android:layout_marginTop="2dp">
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/replace_deviceType"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioVTS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:checked="true"
-                android:text="VTS"
-                android:textSize="14sp" />
+                    <RadioButton
+                        android:id="@+id/radioVTS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:checked="true"
+                        android:text="VTS"
+                        android:textSize="14sp" />
 
-            <RadioButton
-                android:id="@+id/radioDRS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="DRS"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
+                    <RadioButton
+                        android:id="@+id/radioDRS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="DRS"
+                        android:textSize="14sp" />
 
-            <RadioButton
-                android:id="@+id/radioBoth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Both"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
+                    <RadioButton
+                        android:id="@+id/radioBoth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="Both"
+                        android:textSize="14sp" />
 
-        </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radioNone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:text="None"
+                        android:textSize="14sp" />
 
-    </LinearLayout>
+                </RadioGroup>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/deviceTypeReplace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="2dp"
                 android:weightSum="4">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Device Type"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimary"
-                    android:padding="5dp"
-                    android:layout_weight="2.5"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Device Type"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -111,8 +118,8 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
-                        android:gravity="center"
                         android:entries="@array/spinnerItems"
+                        android:gravity="center"
                         android:spinnerMode="dropdown" />
 
                     <ImageView
@@ -128,417 +135,826 @@
 
             </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearvts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4">
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_old_replace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <EditText android:id="@+id/old_deviceidreplace"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Old Device ID"
-                android:singleLine="true"
-                android:layout_weight="2"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"
-                android:maxLength="20"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_new_replace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <EditText android:id="@+id/new_deviceid"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="New Device ID"
-                android:singleLine="true"
-                android:layout_weight="2"
-                android:textSize="12sp"
-                android:text=""
-                android:layout_marginLeft="10dp"
-                android:maxLength="20"/>
-        </android.support.design.widget.TextInputLayout>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/replaceSrNo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            android:weightSum="4">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_old_sr_replace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <EditText android:id="@+id/old_replace_sr_no"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:hint="Old Sr No"
-                    android:singleLine="true"
-                    android:layout_weight="2"
-                    android:textSize="12sp"
-                    android:layout_marginLeft="10dp"
-                    android:maxLength="15"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/linearvts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/til_new_sr_replace"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <EditText android:id="@+id/new_replace_sr_no"
-                        android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/til_old_replace"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="New Sr No"
-                        android:singleLine="true"
-                        android:layout_weight="2"
-                        android:textSize="12sp"
-                        android:text=""
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/old_deviceidreplace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:hint="Old Device ID"
+                            android:inputType="number"
+                            android:maxLength="20"
+                            android:singleLine="true"
+                            android:textSize="12sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/til_new_replace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/new_deviceid"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2"
+                                android:hint="New Device ID"
+                                android:inputType="number"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textSize="12sp" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/replaceSrNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/til_old_sr_replace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/old_replace_sr_no"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="2"
+                            android:hint="Old Sr No"
+                            android:inputType="number"
+                            android:maxLength="15"
+                            android:singleLine="true"
+                            android:textSize="12sp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/til_new_sr_replace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/new_replace_sr_no"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2"
+                                android:hint="New Sr No"
+                                android:inputType="number"
+                                android:maxLength="15"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textSize="12sp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/regNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="2"
+                            android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+                            android:hint="Reg No."
+                            android:inputType="textCapCharacters"
+                            android:maxLength="20"
+                            android:singleLine="true"
+                            android:textSize="12sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/rep_srNo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="2"
+                            android:hint="VTS Full Sr. No.(e.g. E124-36-EAN-R02-7974)"
+                            android:maxLength="50"
+                            android:singleLine="true"
+                            android:textSize="12sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/plantName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:layout_marginLeft="10dp"
-                        android:maxLength="15"/>
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"
+                    android:weightSum="5">
+
+                    <in.eoninfotech.eontechnician.view.MyTextView
+                        android:id="@+id/replace_deviceType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="3.5"
+                        android:padding="5dp"
+                        android:text="Device Type: "
+                        android:textSize="12sp" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/replace_deviceType"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:checked="true"
+                            android:text="Voice"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:text="Non-Voice"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/et_frame">
+
+                    <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                        android:id="@+id/replace_reason"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:spinnerMode="dialog" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="6dp"
+                        android:background="@color/eonWhite"
+                        android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/drsReplace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"
+                    android:weightSum="5">
+
+                    <in.eoninfotech.eontechnician.view.MyTextView
+                        android:id="@+id/replace_drs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="0.7"
+                        android:text="Is DRS Replace? " />
+
+                    <RadioGroup
+                        android:id="@+id/radiodrsReplace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/replace_drs"
+                        android:layout_weight="2"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/nodrsReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="3.5"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/radioyesdrsReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Yes"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/t_drs_vts_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/drs_vts_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:hint="VTS ID"
+                        android:inputType="number"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
                 </android.support.design.widget.TextInputLayout>
 
-            </RelativeLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/t_drs_veh_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
+                    <EditText
+                        android:id="@+id/drs_veh_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+                        android:hint="Vehicle Reg No."
+                        android:inputType="textCapCharacters"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+                </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/t_old_drsid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <EditText android:id="@+id/regNo"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:hint="Reg No."
-                android:singleLine="true"
-                android:layout_weight="2"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"
-                android:maxLength="20"
-                android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-                android:inputType="textCapCharacters"/>
-        </android.support.design.widget.TextInputLayout>
+                    <EditText
+                        android:id="@+id/old_drsid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"
+                        android:hint="Old DRS ID"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+                </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <EditText android:id="@+id/rep_srNo"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:hint="VTS Full Sr. No.(e.g. E124-36-EAN-R02-7974)"
-                android:singleLine="true"
-                android:layout_weight="2"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"
-                android:maxLength="50"/>
-        </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/tnew_drsid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
 
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/plantName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:singleLine="true"
-            android:textSize="12sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="5dp"/>
+                    <EditText
+                        android:id="@+id/new_drsid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"
+                        android:hint="New DRS ID"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+                </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/relaydrsTypeReplace"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"
+                    android:weightSum="5">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:weightSum="5"
-        android:visibility="gone">
+                    <TextView
+                        android:id="@+id/new_drs_dircrep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="3.2"
+                        android:text="DRS Direction :"
+                        android:textColor="@color/eonBlue" />
 
-        <in.eoninfotech.eontechnician.view.MyTextView
-            android:id="@+id/replace_deviceType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Device Type: "
-            android:layout_marginTop="2dp"
-            android:textSize="12sp"
-            android:padding="5dp"
-            android:layout_weight="3.5"/>
+                    <RadioGroup
+                        android:id="@+id/radiodireplace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/new_drs_dircrep"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:orientation="horizontal"
-            android:layout_toRightOf="@+id/replace_deviceType"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="2">
+                        <RadioButton
+                            android:id="@+id/replacenormal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="Normal"
+                            android:textSize="14sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:checked="true"
-                android:text="Voice"
-                android:textSize="14sp" />
+                        <RadioButton
+                            android:id="@+id/replacereverse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1"
+                            android:text="Reverse"
+                            android:textSize="14sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Non-Voice"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
 
-        </RadioGroup>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/et_frame"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <in.eoninfotech.eontechnician.view.MySearchableSpinner
-            android:id="@+id/replace_reason"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:spinnerMode="dialog" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginRight="6dp"
-            android:background="@color/eonWhite"
-            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
-    </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/drsReplace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="2dp"
-        android:visibility="gone">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:visibility="gone"
-        android:layout_marginTop="2dp"
-        android:weightSum="5">
-
-        <in.eoninfotech.eontechnician.view.MyTextView
-            android:id="@+id/replace_drs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Is DRS Replace? "
-            android:layout_marginTop="2dp"
-            android:layout_weight="0.7"
-            android:layout_gravity="center"/>
-
-        <RadioGroup
-            android:id="@+id/radiodrsReplace"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:orientation="horizontal"
-            android:layout_toRightOf="@+id/replace_drs"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="center"
-            android:layout_weight="2">
-
-            <RadioButton
-                android:id="@+id/nodrsReplace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3.5"
-                android:text="No"
-                android:checked="true"
-                android:textSize="14sp"
-                android:layout_marginLeft="5dp"/>
-
-            <RadioButton
-                android:id="@+id/radioyesdrsReplace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Yes"
-                android:textSize="14sp" />
-
-        </RadioGroup>
-
-    </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/t_drs_vts_id">
-            <EditText android:id="@+id/drs_vts_id"
+            <in.eoninfotech.eontechnician.view.MyTextView
+                android:id="@+id/device_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="VTS ID"
-                android:singleLine="true"
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:maxLength="20"
-                android:visibility="gone"/>
-        </android.support.design.widget.TextInputLayout>
+                android:gravity="center"
+                android:text="Sensor Replacement"
+                android:textStyle="bold" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/t_drs_veh_no">
-            <EditText android:id="@+id/drs_veh_no"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Vehicle Reg No."
-                android:singleLine="true"
-                android:layout_weight="1"
-                android:textSize="12sp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:maxLength="20"
-                android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-                android:inputType="textCapCharacters"
-                android:visibility="gone"/>
-        </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/t_old_drsid"
-        android:visibility="visible">
-        <EditText android:id="@+id/old_drsid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Old DRS ID"
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:visibility="visible"
-            android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tnew_drsid"
-        android:visibility="visible">
-        <EditText android:id="@+id/new_drsid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="New DRS ID"
-            android:singleLine="true"
-            android:layout_weight="1"
-            android:textSize="12sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:visibility="visible"
-            android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/relaydrsTypeReplace"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:visibility="gone"
-        android:weightSum="5">
-
-        <TextView
-            android:id="@+id/new_drs_dircrep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DRS Direction :"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/eonBlue"
-            android:layout_weight="3.2"/>
-
-        <RadioGroup
-            android:id="@+id/radiodireplace"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:orientation="horizontal"
-            android:layout_toRightOf="@+id/new_drs_dircrep"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1">
-
-            <RadioButton
-                android:id="@+id/replacenormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Normal"
-                android:textSize="14sp"
-                android:layout_weight="1"/>
-
-            <RadioButton
-                android:id="@+id/replacereverse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reverse"
-                android:textSize="14sp"
                 android:layout_marginLeft="5dp"
-                android:layout_weight="1"/>
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="4">
 
-        </RadioGroup>
-    </LinearLayout>
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Tilt Sensor"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/radioGrouptiltReplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <RadioButton
+                            android:id="@+id/tiltNoReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Yes"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Temp Sensor"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/radioGrouptempReplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <RadioButton
+                            android:id="@+id/tempNoReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Yes"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Panic Button"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupPanicReplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <RadioButton
+                            android:id="@+id/panicNoReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Yes"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Fuel Sensor"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupfuelReplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <RadioButton
+                            android:id="@+id/fuelSensorNoReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Yes"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="Trans Receiver"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/radioGrouptransReplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <RadioButton
+                            android:id="@+id/transNoReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:checked="true"
+                            android:text="No"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Yes"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="2.7"
+                    android:padding="5dp"
+                    android:text="LID Sensor"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.35"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupLidReplace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <RadioButton
+                            android:id="@+id/lidNoneReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="None"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/lidTopReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Top"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/lidRearReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Rear"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/lidBothReplace"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Both"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/sensor_veh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/sensor_veh_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:hint="Vehicle Reg No"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textSize="12sp" />
+
+            </android.support.design.widget.TextInputLayout>
+
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
     <CheckBox
@@ -546,6 +962,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Magnet Set Changed"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

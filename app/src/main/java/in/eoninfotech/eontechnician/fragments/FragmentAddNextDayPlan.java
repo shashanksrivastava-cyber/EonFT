@@ -27,6 +27,7 @@ import java.util.GregorianCalendar;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.K;
+import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
 import in.eoninfotech.eontechnician.view.MyEditText;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.view.MyTextView;
@@ -243,6 +244,9 @@ public class FragmentAddNextDayPlan extends Fragment {
                 adapterplant = new ArrayAdapter(getActivity(), android.R.layout.simple_dropdown_item_1line, plant_name);
                 plants.setAdapter(adapterplant);
                 pDialog.dismiss();
+
+
+
             }
             @Override
             public void onFailure(Call<UpdateDataResponse> call, Throwable t) {
@@ -254,6 +258,7 @@ public class FragmentAddNextDayPlan extends Fragment {
                 TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
                 textView.setTextColor(Color.WHITE);
                 snackbar.show();
+
             }
         });
     }

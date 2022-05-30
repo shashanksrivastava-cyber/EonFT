@@ -21,7 +21,6 @@ import android.widget.AbsListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.webianks.library.PopupBubble;
 
 import java.util.ArrayList;
 
@@ -43,9 +42,9 @@ import retrofit2.Response;
  * Created by root on 2/11/18.
  */
 
-public class FaultyDevicesActivity extends AppCompatActivity{
+public class FaultyDevicesActivity extends AppCompatActivity {
 
-    String usrname,zone,version;
+    String usrname, zone, version;
     public RecyclerView recyclerView;
     private FaultyDevicesAdapter faultyDevicesAdapter;
     private FaultyDrsAdapter faultyDrsAdapter;
@@ -54,13 +53,13 @@ public class FaultyDevicesActivity extends AppCompatActivity{
     private TextView txtContentUnavailable;
     public SwipeRefreshLayout refreshLayout;
     String sendData;
-    private PopupBubble popupBubble;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     ArrayList<FaultyDevicesDetails> faultyDevices = new ArrayList<>();
-    ArrayList<UnderMaintenanceDetail>uMainDetail = new ArrayList<>();
+    ArrayList<UnderMaintenanceDetail> uMainDetail = new ArrayList<>();
     String tab;
     private static int firstVisibleInListview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,11 +74,11 @@ public class FaultyDevicesActivity extends AppCompatActivity{
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Under Maintenance");
-        } else if(device_value.equals("1")) {
+        } else if (device_value.equals("1")) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Faulty DRS");
-        }else{
+        } else {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Faulty Devices");
@@ -129,7 +128,7 @@ public class FaultyDevicesActivity extends AppCompatActivity{
                     UnderMaintenanceResponse activityResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     uMainDetail = activityResponse.getuMainDetail();
-                    umainAdapter = new UmainAdapter(uMainDetail,FaultyDevicesActivity.this,sendData);
+                    umainAdapter = new UmainAdapter(uMainDetail, FaultyDevicesActivity.this, sendData);
                     recyclerView.setAdapter(umainAdapter);
                     runLayoutAnimation(recyclerView);
                     refreshLayout.setRefreshing(false);
@@ -140,6 +139,7 @@ public class FaultyDevicesActivity extends AppCompatActivity{
                     refreshLayout.setRefreshing(false);
                 }
             }
+
             @Override
             public void onFailure(Call<UnderMaintenanceResponse> call, Throwable t) {
                 refreshLayout.setRefreshing(false);
@@ -158,7 +158,7 @@ public class FaultyDevicesActivity extends AppCompatActivity{
                     FaultyDevices activityResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     faultyDevices = activityResponse.getFaultyDevices();
-                    faultyDevicesAdapter = new FaultyDevicesAdapter(faultyDevices,FaultyDevicesActivity.this,sendData);
+                    faultyDevicesAdapter = new FaultyDevicesAdapter(faultyDevices, FaultyDevicesActivity.this, sendData);
                     recyclerView.setAdapter(faultyDevicesAdapter);
                     runLayoutAnimation(recyclerView);
                     refreshLayout.setRefreshing(false);
@@ -188,7 +188,7 @@ public class FaultyDevicesActivity extends AppCompatActivity{
                     FaultyDevices activityResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     faultyDevices = activityResponse.getFaultyDevices();
-                    faultyDrsAdapter = new FaultyDrsAdapter(faultyDevices,FaultyDevicesActivity.this,sendData);
+                    faultyDrsAdapter = new FaultyDrsAdapter(faultyDevices, FaultyDevicesActivity.this, sendData);
                     recyclerView.setAdapter(faultyDrsAdapter);
                     runLayoutAnimation(recyclerView);
                     refreshLayout.setRefreshing(false);
@@ -217,10 +217,12 @@ public class FaultyDevicesActivity extends AppCompatActivity{
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();
     }
+
     private void refresh() {
         clear();
         getFaultyDeviceData();
     }
+
     private void clear() {
         faultyDevices.clear();
     }
@@ -228,23 +230,23 @@ public class FaultyDevicesActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
 
-        if(tab.equals("1")) {
+        if (tab.equals("1")) {
             finish();
-        }else if(tab.equals("2")) {
+        } else if (tab.equals("2")) {
             finish();
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             if (tab.equals("1")) {
                 finish();
-            }else if(tab.equals("2")) {
+            } else if (tab.equals("2")) {
                 finish();
             }
-        }
-        else {
+        } else {
         }
         return super.onOptionsItemSelected(item);
     }

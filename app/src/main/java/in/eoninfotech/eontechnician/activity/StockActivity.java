@@ -137,24 +137,6 @@ public class StockActivity extends AppCompatActivity {
             selected_todate = day + "/" + month + "/" + year;
         }
         datee.setText(selected_todate);
-      /*  datee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog dpdd = new DatePickerDialog(StockActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    // TODO Auto-generated method stub
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        if (monthOfYear + 1 < 10) {
-                            selected_todate = dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year;
-                        } else {
-                            selected_todate = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                        }
-                        datee.setText(selected_todate);
-                    }
-                }, year, month, day);
-                dpdd.show();
-            }
-        });*/
         client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

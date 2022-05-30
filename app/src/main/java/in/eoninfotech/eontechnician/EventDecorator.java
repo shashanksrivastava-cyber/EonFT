@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 
-import static com.thefinestartist.Base.getContext;
+
 
 /**
  * Created by root on 8/4/19.

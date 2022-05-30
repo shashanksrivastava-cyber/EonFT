@@ -75,7 +75,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.thefinestartist.utils.content.ContextUtil.startService;
 
 /**
  * Created by root on 2/11/18.

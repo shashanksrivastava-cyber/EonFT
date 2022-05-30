@@ -76,10 +76,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.thefinestartist.utils.content.ContextUtil.getApplicationContext;
-import static com.thefinestartist.utils.content.ContextUtil.getContentResolver;
-import static com.thefinestartist.utils.content.ContextUtil.getExternalFilesDir;
-import static com.thefinestartist.utils.content.ContextUtil.getPackageManager;
 import static pub.devrel.easypermissions.EasyPermissions.hasPermissions;
 
 public class CallSheetActivity extends AppCompatActivity implements ProgressRequestBody.UploadCallbacks {

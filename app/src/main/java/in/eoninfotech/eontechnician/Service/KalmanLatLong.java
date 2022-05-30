@@ -69,6 +69,8 @@ public class KalmanLatLong {
             lat = lat_measurement;
             lng = lng_measurement;
             variance = accuracy * accuracy;
+
+
         } else {
             // else apply Kalman filter methodology
 
@@ -94,6 +96,7 @@ public class KalmanLatLong {
             lng += K * (lng_measurement - lng);
             // new Covarariance matrix is (IdentityMatrix - K) * Covarariance
             variance = (1 - K) * variance;
+
         }
     }
 
@@ -103,5 +106,6 @@ public class KalmanLatLong {
 
     public void setConsecutiveRejectCount(int consecutiveRejectCount) {
         this.consecutiveRejectCount = consecutiveRejectCount;
+
     }
 }

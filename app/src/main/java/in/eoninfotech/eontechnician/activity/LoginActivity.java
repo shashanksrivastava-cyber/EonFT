@@ -136,7 +136,6 @@ public class LoginActivity extends Activity {
             }
         } catch (Exception npe) {
             npe.printStackTrace();
-
         }
         appPrefs = new AppPreferences(getApplicationContext());
 
@@ -222,9 +221,6 @@ public class LoginActivity extends Activity {
                 Intent intent=new Intent(Intent.ACTION_SEND);
                 String[] recipients={"support@eoninfotech.com"};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-        /*      intent.putExtra(Intent.EXTRA_SUBJECT,"Subject text here...");
-                intent.putExtra(Intent.EXTRA_TEXT,"Body of the content here...");
-                intent.putExtra(Intent.EXTRA_CC,"mailcc@gmail.com");*/
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");
                 startActivity(Intent.createChooser(intent, "Send mail"));
@@ -239,7 +235,7 @@ public class LoginActivity extends Activity {
     public void onBackPressed() {
         this.count++;
         if (this.count <= 1) {
-            Toast.makeText(getApplicationContext(), "press back to exit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Press back to exit", Toast.LENGTH_SHORT).show();
         } else {
             super.onBackPressed();
         }
@@ -448,11 +444,7 @@ public class LoginActivity extends Activity {
                 editor.putString("pass", "");
                 editor.commit();
 
-               /* if (!asyn_versn.equals("") || !asyn_versn.equals(null)) {
-                    Toast.makeText(getApplicationContext(), "check internet connection", Toast.LENGTH_LONG).show();
-                } else {*/
-                    Toast.makeText(getApplicationContext(), "username/password incorrect", Toast.LENGTH_LONG).show();
-             //   }
+                Toast.makeText(getApplicationContext(), "username/password incorrect", Toast.LENGTH_LONG).show();
             }
         }
     }

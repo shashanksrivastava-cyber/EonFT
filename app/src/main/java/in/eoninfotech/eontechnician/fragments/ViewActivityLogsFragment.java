@@ -32,7 +32,7 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
-import com.thefinestartist.Base;
+
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -59,8 +59,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.Base.getContext;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -102,8 +100,7 @@ public class ViewActivityLogsFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_view_entries_calender, container, false);
-        Base.initialize(getActivity());
-        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         uusername = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
@@ -137,12 +134,12 @@ public class ViewActivityLogsFragment extends Fragment{
         getAttendanceData();
 
         mcv.setSelectionMode(MaterialCalendarView.SELECTION_MODE_SINGLE);
-        mcv.addDecorator(new EventsDecorator(getActivity()));
+        mcv.addDecorator(new EventsDecorator());
 
         mcv.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-                mcv.addDecorator(new EventsDecorator(this));
+                mcv.addDecorator(new EventsDecorator());
                 monthtobeSend = String.valueOf(date.getMonth()+1);
                 yeartobeSend = String.valueOf(date.getYear());
                 getAttendanceData();
@@ -287,7 +284,7 @@ public class ViewActivityLogsFragment extends Fragment{
                     ShowProgressBar(false);
                 }else {
                     try {
-                        mcv.addDecorator(new EventsDecorator(this));
+                        mcv.addDecorator(new EventsDecorator());
                         AttendanceResponse attendanceResponse = response.body();
                         attendanceDetails = attendanceResponse.getAttendanceDetails();
                         present.setText(response.body().getPresent());
@@ -381,7 +378,7 @@ public class ViewActivityLogsFragment extends Fragment{
                                 mcv.addDecorator(new DayEnableDecorator(enabledDates));
                             }
                         }
-                       // ShowProgressBar(false);
+
                     } catch (Exception e) {
                         ShowProgressBar(false);
                         e.printStackTrace();
@@ -488,6 +485,24 @@ public class ViewActivityLogsFragment extends Fragment{
             view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.orange_circle));
         }
     }
+
+    public class EventsDecorator implements DayViewDecorator {
+
+        public EventsDecorator() {
+        }
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+
+            return day.getCalendar().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+        }
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.addSpan(new ForegroundColorSpan(Color.WHITE));
+            view.setBackgroundDrawable(ContextCompat.getDrawable(getContext(),R.drawable.grey_circle));
+        }
+    }
+
+
     private void ShowProgressBar(boolean show) {
         try {
             if (show) {

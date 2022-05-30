@@ -25,7 +25,7 @@ public class TabInstallmentActivity extends AppCompatActivity {
     public static ViewPager viewPager;
     public static int int_items = 1;
     String disttid;
-    String uusername, version,activityName;
+    String uusername, version;
     Bundle bundle;
     NewInstallmentFragment newInstallFragment;
     RetroOldInstallmentFragment oldInstallmentFragment;
@@ -33,16 +33,16 @@ public class TabInstallmentActivity extends AppCompatActivity {
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_install_tab_layout);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        tabLayout = findViewById(R.id.tabs);
+        viewPager = findViewById(R.id.viewpager);
         String data = getIntent().getExtras().getString("new","defaultKey");
-        Log.e("data",""+data);
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         uusername = sharedprefs.getString("s_uuser", "");
@@ -63,6 +63,7 @@ public class TabInstallmentActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_menu, menu);
+
         return true;
     }
     @Override
@@ -79,6 +80,7 @@ public class TabInstallmentActivity extends AppCompatActivity {
             Intent inteer = new Intent(TabInstallmentActivity.this, MainActivity.class);
             startActivity(inteer);
             finish();
+
         } else if (id == R.id.menu_logout) {
             Intent inteer = new Intent(TabInstallmentActivity.this, LoginActivity.class);
             inteer.putExtra("username", uusername);
@@ -107,6 +109,7 @@ public class TabInstallmentActivity extends AppCompatActivity {
                     newInstallFragment = new NewInstallmentFragment();
                     newInstallFragment.setArguments(bundle);
                     return newInstallFragment;
+
                 case 1:
                     oldInstallmentFragment = new RetroOldInstallmentFragment();
                     oldInstallmentFragment.setArguments(bundle);
@@ -115,6 +118,7 @@ public class TabInstallmentActivity extends AppCompatActivity {
                     secondOtherFragment = new OtherFragment();
                     secondOtherFragment.setArguments(bundle);
                     return secondOtherFragment;
+
             }
             return null;
         }

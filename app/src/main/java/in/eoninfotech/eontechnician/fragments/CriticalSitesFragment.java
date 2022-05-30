@@ -30,14 +30,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.thefinestartist.utils.content.ContextUtil.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CriticalSitesFragment extends Fragment {
     ListView lv;
-   // TextView text;
+    // TextView text;
     View v;
     String disttid;
     String username, version;
@@ -56,8 +55,8 @@ public class CriticalSitesFragment extends Fragment {
         disttid = getArguments().getString("disttid");
         username = getArguments().getString("usernme");
         version = getArguments().getString("version");
-            relay.setVisibility(View.GONE);
-            getCriticaldata(username);
+        relay.setVisibility(View.GONE);
+        getCriticaldata(username);
         return v;
     }
 
@@ -69,20 +68,19 @@ public class CriticalSitesFragment extends Fragment {
             @Override
             public void onResponse(Call<UpdateDataResponse> call, Response<UpdateDataResponse> response) {
                 site_data = response.body().getSite_data();
-                if(response.body().getType()==1) {
+                if (response.body().getType() == 1) {
                     for (int i = 0; i < site_data.size(); i++) {
                         Log.i("****", site_data.get(i).getCust_name());
                     }
-                }
-                else{
+                } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
                 }
                 try {
                     lv.setAdapter(new DetailAdapter(getContext(), site_data));
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-                    //  pDialog.dismiss();
+                //  pDialog.dismiss();
             }
 
             @Override
@@ -104,6 +102,7 @@ public class CriticalSitesFragment extends Fragment {
         LayoutInflater layinfa;
         int j;
         ArrayList<CriticalSitesData> planDetails = new ArrayList<>();
+
         DetailAdapter(Context c, ArrayList<CriticalSitesData> planDetails) {
             ctx = c;
             this.planDetails = planDetails;
@@ -143,6 +142,8 @@ public class CriticalSitesFragment extends Fragment {
             cust_name.setText(site_data.get(i).getCust_name());
             faulty_devices.setText("Number of Faulty VTS - " + site_data.get(i).getFaulty_dev());
             faulty_drs.setText("Number of Faulty DRS - " + site_data.get(i).getFaulty_drs());
+
+
 
             return vv;
         }

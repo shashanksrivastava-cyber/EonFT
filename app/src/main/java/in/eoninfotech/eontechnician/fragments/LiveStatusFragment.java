@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.thefinestartist.Base;
 
 import java.util.ArrayList;
 
@@ -35,7 +34,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
 
 /**
  * Created by root on 22/11/18.
@@ -60,11 +58,10 @@ public class LiveStatusFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_live_status, container, false);
 
-        Base.initialize(getActivity());
-        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         username = sharedprefs.getString("s_uuser", "");
-        version = sharedprefs.getString("version", "");
+        version = sharedprefs.getString("version","");
 
         recyclerView = v.findViewById(R.id.recyclerView);
         txtContentUnavailable = v.findViewById(R.id.txt_content_unavailable);

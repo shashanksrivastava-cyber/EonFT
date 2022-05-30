@@ -11,18 +11,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.Locale;
 
-import in.eoninfotech.eontechnician.ActivityDetailAdapter;
-import in.eoninfotech.eontechnician.Responses.ActivityResponse;
-import in.eoninfotech.eontechnician.SplashActivity;
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;
-import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.LocationsResponse;
-import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
 
 public class SendDatatoServer extends AppCompatActivity {
 

@@ -3,6 +3,7 @@ package in.eoninfotech.eontechnician.webservice;
 
 import com.google.android.gms.location.LocationSettingsResponse;
 
+import in.eoninfotech.eontechnician.ItemModel;
 import in.eoninfotech.eontechnician.Responses.ActivityResponse;
 import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
 import in.eoninfotech.eontechnician.Responses.CallSheetListResponse;
@@ -62,9 +63,6 @@ import retrofit2.http.Part;
 /**************************************************************************/
 public interface ApiHolder {
 
-//http://10.10.10.4/android/eonApp/2.7/client-locations.php?customer=4
-
-//http://10.10.10.4/android/eonApp/2.7/pcb-problems.php
 
     /*@Multipart
     @POST("device_old_tst.php")
@@ -404,53 +402,53 @@ public interface ApiHolder {
     @Multipart
     @POST("technicians-work.php")
     Call<MainResponse> postInstallationsData(@Part("work_type") RequestBody worktype,
-                                                @Part("tech_name") RequestBody techName,
-                                                @Part("client_id") RequestBody clientId,
-                                                @Part("client_loc_id") RequestBody c_loc_id,
-                                                @Part("reg_no") RequestBody regNo,
-                                                @Part("veh_type") RequestBody vehType,
-                                                @Part("device_type") RequestBody devType,
-                                                @Part("old_vts_id") RequestBody oldVtsId,
-                                                @Part("new_vts_id") RequestBody newVtsId,
-                                                @Part("is_drs") RequestBody isDrs,
-                                                @Part("new_drs_id") RequestBody newDrsId,
-                                                @Part("old_drs_id") RequestBody oldDrsId,
-                                                @Part("drs_direction") RequestBody drsDirection,
-                                                @Part("reason_replacement") RequestBody replaceReason,
-                                                @Part("removal_reason") RequestBody removalReason,
-                                                @Part("items_collected") RequestBody itemsCollected,
-                                                @Part("others") RequestBody others,
-                                                @Part("tel_support") RequestBody telSupport,
-                                                @Part("activity_date") RequestBody date,
-                                                @Part("activity_time") RequestBody time,
-                                                @Part("remarks") RequestBody remarks,
-                                                @Part("disconnection_reason") RequestBody dis_reason,
-                                                @Part("ignition_sensor") RequestBody ignition_sensor,
-                                                @Part("fuel_sensor") RequestBody fuel_sensor,
-                                                @Part("door_sensor") RequestBody door_sensor,
-                                                @Part("veh_condition") RequestBody veh_condition,
-                                                @Part("mgt_set") RequestBody mgt_set,
-                                                @Part("sim_provider") RequestBody sim_provider,
-                                                @Part("old_sim_no") RequestBody old_sim_no,
-                                                @Part("new_sim_no") RequestBody new_sim_no,
-                                                @Part("sim_reason") RequestBody sim_reason,
-                                                @Part("not_available_reason") RequestBody not_available_reason,
-                                                @Part("not_available_activity") RequestBody not_available_activity,
-                                                @Part("is_demo") RequestBody is_demo,
-                                                @Part("missing_type") RequestBody missing_type,
-                                                @Part("collection_amount") RequestBody collection_amount,
-                                                @Part("collection_date") RequestBody collection_date,
-                                                @Part("collection_type") RequestBody collection_type,
-                                                @Part MultipartBody.Part collection_image,
-                                                @Part("missing_reason") RequestBody missing_reason,
-                                                @Part("removal_type") RequestBody removal_type,
-                                                @Part("cut_off") RequestBody cut_off,
-                                                @Part("serial_no") RequestBody serial_no,
-                                                @Part("contact_person") RequestBody contact_person,
-                                                @Part("contact_no") RequestBody contact_no,
-                                                @Part("payment_type") RequestBody payment_type,
-                                                @Part("old_serial_no") RequestBody old_serial_no,
-                                                @Part("vts_type") RequestBody vts_type);
+                                             @Part("tech_name") RequestBody techName,
+                                             @Part("client_id") RequestBody clientId,
+                                             @Part("client_loc_id") RequestBody c_loc_id,
+                                             @Part("reg_no") RequestBody regNo,
+                                             @Part("veh_type") RequestBody vehType,
+                                             @Part("device_type") RequestBody devType,
+                                             @Part("old_vts_id") RequestBody oldVtsId,
+                                             @Part("new_vts_id") RequestBody newVtsId,
+                                             @Part("is_drs") RequestBody isDrs,
+                                             @Part("new_drs_id") RequestBody newDrsId,
+                                             @Part("old_drs_id") RequestBody oldDrsId,
+                                             @Part("drs_direction") RequestBody drsDirection,
+                                             @Part("reason_replacement") RequestBody replaceReason,
+                                             @Part("removal_reason") RequestBody removalReason,
+                                             @Part("items_collected") RequestBody itemsCollected,
+                                             @Part("others") RequestBody others,
+                                             @Part("tel_support") RequestBody telSupport,
+                                             @Part("activity_date") RequestBody date,
+                                             @Part("activity_time") RequestBody time,
+                                             @Part("remarks") RequestBody remarks,
+                                             @Part("disconnection_reason") RequestBody dis_reason,
+                                             @Part("ignition_sensor") RequestBody ignition_sensor,
+                                             @Part("fuel_sensor") RequestBody fuel_sensor,
+                                             @Part("door_sensor") RequestBody door_sensor,
+                                             @Part("veh_condition") RequestBody veh_condition,
+                                             @Part("mgt_set") RequestBody mgt_set,
+                                             @Part("sim_provider") RequestBody sim_provider,
+                                             @Part("old_sim_no") RequestBody old_sim_no,
+                                             @Part("new_sim_no") RequestBody new_sim_no,
+                                             @Part("sim_reason") RequestBody sim_reason,
+                                             @Part("not_available_reason") RequestBody not_available_reason,
+                                             @Part("not_available_activity") RequestBody not_available_activity,
+                                             @Part("is_demo") RequestBody is_demo,
+                                             @Part("missing_type") RequestBody missing_type,
+                                             @Part("collection_amount") RequestBody collection_amount,
+                                             @Part("collection_date") RequestBody collection_date,
+                                             @Part("collection_type") RequestBody collection_type,
+                                             @Part MultipartBody.Part collection_image,
+                                             @Part("missing_reason") RequestBody missing_reason,
+                                             @Part("removal_type") RequestBody removal_type,
+                                             @Part("cut_off") RequestBody cut_off,
+                                             @Part("serial_no") RequestBody serial_no,
+                                             @Part("contact_person") RequestBody contact_person,
+                                             @Part("contact_no") RequestBody contact_no,
+                                             @Part("payment_type") RequestBody payment_type,
+                                             @Part("old_serial_no") RequestBody old_serial_no,
+                                             @Part("vts_type") RequestBody vts_type);
 
 
     @Multipart
@@ -503,6 +501,15 @@ public interface ApiHolder {
                                              @Part("collected_items") RequestBody collected_items,
                                              @Part("faults_checked") RequestBody faults_checked,
                                              @Part("fuel_reading") RequestBody fuelreading,
+                                             @Part("lid_status") RequestBody lid_status,
+                                             @Part("trans_receiver") RequestBody trans_receiver,
+                                             @Part("temp_sensor") RequestBody temp_sensor,
+                                             @Part("tilt_sensor") RequestBody tilt_sensor,
+                                             @Part("fuel_status") RequestBody fuel_status,
+                                             @Part("panic_status") RequestBody panic_status,
+                                             @Part("sensor_veh_no") RequestBody sensor_veh_no,
+                                             @Part("sensor_veh_no") RequestBody sensor_old_veh_no,
+
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
@@ -616,7 +623,7 @@ public interface ApiHolder {
     @FormUrlEncoded
     @POST("incentives.php")
     Call<IncentiveResponse> incentiveResponse(
-            @Field("tech_id")String tech_id,
+            @Field("tech_id") String tech_id,
             @Field("tech_name") String tech_name,
             @Field("zone") String zone,
             @Field("month") String month,
@@ -632,11 +639,11 @@ public interface ApiHolder {
     @FormUrlEncoded
     @POST("locations.php")
     Call<LocationsResponse> locationResponse(@Field("tech_name") String tech_name,
-                                            @Field("location") String location,
-                                            @Field("imei_no") String imei_no,
-                                            @Field("latitude") String latitude,
-                                            @Field("longitude") String longitude,
-                                            @Field("mac_address") String mac_address);
+                                             @Field("location") String location,
+                                             @Field("imei_no") String imei_no,
+                                             @Field("latitude") String latitude,
+                                             @Field("longitude") String longitude,
+                                             @Field("mac_address") String mac_address);
 
     @FormUrlEncoded
     @POST("tracking-details.php")
@@ -657,11 +664,25 @@ public interface ApiHolder {
     Call<MainResponse> updateResponse(
             @Field("message_id") String message_id);
 
-    @GET("device-type.php")                         // response to be changed
+    @GET("device-type.php")
+        // response to be changed
     Call<MainResponse> getDeviceTypes();
 
     @GET("vts-type.php")
     Call<VTSTypeResponse> getVTSTypes();
+
+    @GET("getFaq.php")
+    Call<FaqResponse> getFaqData();
+
+    @GET("get_vehicle_for_um.php")
+    Call<MainResponse> get_veh_for_um(@Field("client_id") String client_id,
+                                      @Field("loc_id") String loc_id);
+
+    @GET("get_veh_foe_pm")
+    Call<MainResponse> get_veh_for_pm(@Field("client_id") String client_id,
+                                      @Field("loc_id") String loc_id);
+
+
 
 
 }

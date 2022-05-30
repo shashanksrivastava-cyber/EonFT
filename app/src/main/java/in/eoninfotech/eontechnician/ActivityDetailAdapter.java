@@ -1,34 +1,30 @@
 package in.eoninfotech.eontechnician;
 
-import android.app.Fragment;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
+
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.security.cert.CertPathValidatorException;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
-import in.eoninfotech.eontechnician.Responses.ActivityResponse;
+
 import in.eoninfotech.eontechnician.activity.ImageDetailActivity;
 import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
-import in.eoninfotech.eontechnician.helper.IncentiveDetail;
-import in.eoninfotech.eontechnician.helper.K;
+
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import retrofit2.Callback;
+
 
 /**
  * Created by root on 16/10/18.
