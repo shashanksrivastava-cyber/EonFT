@@ -74,7 +74,7 @@ public class LoginActivity extends Activity {
     // CheckBox rembrme;
     String imsiSIM1 = "0";
     int count = 0;
-    String versname, acti_vate, dis_username,user_id;
+    String versname, acti_vate, dis_username, user_id;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     String uusername, alert, asyn_versn;
@@ -101,13 +101,14 @@ public class LoginActivity extends Activity {
         pp_passwrd = sharedprefs.getString("pass", "");
         e_usrnme.setText(pp_usrnmae);
         e_paswrd.setText(pp_passwrd);
-        try{
-           String int_val = getIntent().getStringExtra("username");
+        try {
+            String int_val = getIntent().getStringExtra("username");
             editor.putString("pass", "");
             editor.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
 
-        }try {
+        }
+        try {
             if (!hasPermissions(this, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
             }
@@ -116,19 +117,19 @@ public class LoginActivity extends Activity {
         }
         try {
             if (sharedprefs.getString("pass", "").equals("") || sharedprefs.getString("pass", "").equals(null)) {
-                Log.i("***staylogin", "stay="+pp_passwrd);
+                Log.i("***staylogin", "stay=" + pp_passwrd);
             } else {
-                Log.i("***directlogin", "direct="+pp_passwrd);
-                if(sharedprefs.getString("s_distt","").equals("0")) {
-                    Intent intee = new Intent(LoginActivity.this, in.eoninfotech.eontechnician.AdminMainActivity.class);
+                Log.i("***directlogin", "direct=" + pp_passwrd);
+                if (sharedprefs.getString("s_distt", "").equals("0")) {
+                    Intent intee = new Intent(LoginActivity.this,  AdminMainActivity.class);
                     startActivity(intee);
                     finish();
-                }else if(sharedprefs.getString("s_distt","").equals("2")){
+                } else if (sharedprefs.getString("s_distt", "").equals("2")) {
                     Intent intee = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intee);
                     finish();
                     appPrefs.setLoggedIn(true);
-                } else if(sharedprefs.getString("s_distt","").equals("3")) {
+                } else if (sharedprefs.getString("s_distt", "").equals("3")) {
                     Intent intent = new Intent(LoginActivity.this, SalesMainActivity.class);
                     startActivity(intent);
                     finish();
@@ -146,7 +147,7 @@ public class LoginActivity extends Activity {
         }
         versname = getVersion();
         Log.i("***v***", versname);
-        t_version.setText("Version "+ versname);
+        t_version.setText("Version " + versname);
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -170,14 +171,14 @@ public class LoginActivity extends Activity {
                     e.printStackTrace();
                 }
                 try {
-                      TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(LoginActivity.this);
-                      imsiSIM1 = telephonyInfo.getImsiSIM1();
+                    TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(LoginActivity.this);
+                    imsiSIM1 = telephonyInfo.getImsiSIM1();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 p_usr = e_usrnme.getText().toString().trim();
                 p_pass = e_paswrd.getText().toString().trim();
-                Log.i("****clicklistnr****", p_usr + p_pass+" imei ="+ imsiSIM1);
+                Log.i("****clicklistnr****", p_usr + p_pass + " imei =" + imsiSIM1);
                 if (p_usr.equals("")) {
                     e_usrnme.setError("fill field");
                 } else if (p_pass.equals("")) {
@@ -191,7 +192,7 @@ public class LoginActivity extends Activity {
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(vie.getWindowToken(), 0);
                     }
-                    if (chk.isConnected() && imsiSIM1!=null) {
+                    if (chk.isConnected() && imsiSIM1 != null) {
                         chckusr = new CheckUser();
                         chckusr.execute(p_usr, p_pass, key);
                         checkAyscTask chke = new checkAyscTask(chckusr);
@@ -218,12 +219,13 @@ public class LoginActivity extends Activity {
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                String[] recipients={"support@eoninfotech.com"};
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                String[] recipients = {"support@eoninfotech.com"};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
                 intent.setType("text/html");
                 intent.setPackage("com.google.android.gm");
                 startActivity(Intent.createChooser(intent, "Send mail"));
+
             }
         });
     }
@@ -231,6 +233,7 @@ public class LoginActivity extends Activity {
     public void addRecord() {
         appPrefs.saveProviderInfo("true");
     }
+
     @Override
     public void onBackPressed() {
         this.count++;
@@ -240,6 +243,7 @@ public class LoginActivity extends Activity {
             super.onBackPressed();
         }
     }
+
     void showDialogg(String msg, int labl, int style) {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(LoginActivity.this, style);
         builder.setMessage(msg)
@@ -274,16 +278,16 @@ public class LoginActivity extends Activity {
         try {
             if (uusername.equals(p_usr)) {
                 Log.i("***user vs user***", uusername + " " + p_usr);
-                if(sharedprefs.getString("s_distt","").equals("0")) {
+                if (sharedprefs.getString("s_distt", "").equals("0")) {
                     Intent intee = new Intent(LoginActivity.this, AdminMainActivity.class);
                     startActivity(intee);
                     finish();
-                }else if(sharedprefs.getString("s_distt","").equals("2")){
+                } else if (sharedprefs.getString("s_distt", "").equals("2")) {
                     Intent intee = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intee);
                     finish();
                     appPrefs.setLoggedIn(true);
-                } else if(sharedprefs.getString("s_distt","").equals("3")) {
+                } else if (sharedprefs.getString("s_distt", "").equals("3")) {
                     Intent intent = new Intent(LoginActivity.this, SalesMainActivity.class);
                     startActivity(intent);
                     finish();
@@ -292,7 +296,7 @@ public class LoginActivity extends Activity {
         } catch (NullPointerException ne) {
             editor.putString("pass", "");
             editor.commit();
-                Toast.makeText(getApplicationContext(), "Username/Password Incorrect", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Username/Password Incorrect", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -309,6 +313,7 @@ public class LoginActivity extends Activity {
         }
         return v;
     }
+
     public static boolean hasPermissions(Context context, String... permissions) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {
@@ -365,7 +370,7 @@ public class LoginActivity extends Activity {
         protected Void doInBackground(String... strings) {
             try {
                 Log.i("****user & pass****", strings[0] + strings[1]);
-                String data = strings[0] + "&" + strings[1] + "&" + K.Url.urlkey+ "&"+ imsiSIM1;
+                String data = strings[0] + "&" + strings[1] + "&" + K.Url.urlkey + "&" + imsiSIM1;
                 byte[] encodedd = Base64.encode(data.getBytes("UTF-8"), Base64.DEFAULT);
                 String str1 = new String(encodedd, "UTF-8");
                 Log.i("***urlen****", K.Url.login_user + str1);
@@ -429,11 +434,11 @@ public class LoginActivity extends Activity {
             pDialog.cancel();
             try {
                 if (acti_vate.equals("1")) {
-                    showDialogg("Your account is deactivated", 0,R.style.MyAlertDialogStyleDisConnected);
+                    showDialogg("Your account is deactivated", 0, R.style.MyAlertDialogStyleDisConnected);
                 } else {
                     if (!versname.equals(asyn_versn)) {
                         Log.i("***version***", versname + "  " + asyn_versn);
-                        showDialogg("New Release.Please Update.", 1,R.style.MyAlertDialogStyleConnected);
+                        showDialogg("New Release.Please Update.", 1, R.style.MyAlertDialogStyleConnected);
                     } else {
                         editor.putString("pass", e_paswrd.getText().toString());
                         logMeIn();
@@ -547,7 +552,7 @@ public class LoginActivity extends Activity {
                     mAT.cancel(true); //Cancel Async task or do the operation you want after 30 sec
                     editor.putString("pass", "");
                     editor.commit();
-                        Toast.makeText(getApplicationContext(), "Connection timeout", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Connection timeout", Toast.LENGTH_SHORT).show();
                     pDialog.cancel();
                 }
             }

@@ -34,20 +34,14 @@ public class InstInstructionAdapter extends RecyclerView.Adapter<InstInstruction
     InstInstructionAdapterListener listener;
     String custName,location;
 
-//    public InstInstructionAdapter(Context context,ArrayList<InstructionDetail> instructionDetails,InstInstructionAdapterListener listener ) {
-//        this.instDetails = instructionDetails;
-//        this.context = context;
-//        this.listener = listener;
-//        this.instDetail = instructionDetails;
-//    }
-
-    public InstInstructionAdapter(Context applicationContext, ArrayList<InstructionDetail> instructionDetails, InstInstructionAdapterListener listener, String custName, String location) {
+    public InstInstructionAdapter(Context context, ArrayList<InstructionDetail> instructionDetails, InstInstructionAdapterListener listener, String custName, String location) {
         this.instDetails = instructionDetails;
         this.context = context;
         this.listener = listener;
         this.instDetail = instructionDetails;
         this.custName = custName;
         this.location = location;
+
     }
 
     @Override
@@ -60,7 +54,7 @@ public class InstInstructionAdapter extends RecyclerView.Adapter<InstInstruction
     public void onBindViewHolder(ActivityHolder holder, int position) {
 
         InstructionDetail instructionDetail = instDetails.get(position);
-        String date  = instructionDetail.getDate();
+        String date = instructionDetail.getDate();
         String[] splited = date.split("\\s+");
         String datee = splited[0];
         String time = splited[1];
@@ -69,35 +63,35 @@ public class InstInstructionAdapter extends RecyclerView.Adapter<InstInstruction
         String month = newDate[1];
         String year = newDate[2];
 
-        if(month.equals("01")){
+        if (month.equals("01")) {
             months = "Jan";
-        }else if(month.equals("02")){
+        } else if (month.equals("02")) {
             months = "Feb";
-        }else if(month.equals("03")){
+        } else if (month.equals("03")) {
             months = "Mar";
-        }else if(month.equals("04")){
+        } else if (month.equals("04")) {
             months = "Apr";
-        }else if(month.equals("05")){
+        } else if (month.equals("05")) {
             months = "May";
-        }else if(month.equals("06")){
+        } else if (month.equals("06")) {
             months = "Jun";
-        }else if(month.equals("07")){
+        } else if (month.equals("07")) {
             months = "Jul";
-        }else if(month.equals("08")){
+        } else if (month.equals("08")) {
             months = "Aug";
-        }else if(month.equals("09")){
+        } else if (month.equals("09")) {
             months = "Sep";
-        }else if(month.equals("10")){
+        } else if (month.equals("10")) {
             months = "Oct";
-        }else if(month.equals("11")){
+        } else if (month.equals("11")) {
             months = "Nov";
-        }else if(month.equals("12")){
+        } else if (month.equals("12")) {
             months = "Dec";
         }
-        String dateTobeShown = dates+"-"+months+"-"+year+" " + time;
+        String dateTobeShown = dates + "-" + months + "-" + year + " " + time;
         holder.date.setText(dateTobeShown);
 
-       // holder.date.setText(instructionDetail.getDate());
+        // holder.date.setText(instructionDetail.getDate());
         holder.from.setText(instructionDetail.getSender());
         //holder.message.setText(instructionDetail.getMessage());
         holder.clientName.setText(instructionDetail.getCust_name());
@@ -116,16 +110,13 @@ public class InstInstructionAdapter extends RecyclerView.Adapter<InstInstruction
 
     private void applyReadStatus(InstInstructionAdapter.ActivityHolder holder, InstructionDetail
             instructionDetail) {
-        if(instructionDetail.getStatus().equals("1")) {
-//            holder.title.setTypeface(null, Typeface.NORMAL);
-//            holder.message.setTypeface(null, Typeface.NORMAL);
-//            holder.title.setTextColor(ContextCompat.getColor(context, R.color.dark_greys));
-//            holder.message.setTextColor(ContextCompat.getColor(context, R.color.dark_greys));
-        }else{
+        if (instructionDetail.getStatus().equals("1")) {
+        } else {
             holder.title.setTypeface(null, Typeface.BOLD);
             holder.message.setTypeface(null, Typeface.BOLD);
             holder.title.setTextColor(ContextCompat.getColor(context, R.color.black));
             holder.message.setTextColor(ContextCompat.getColor(context, R.color.black));
+
         }
     }
 
@@ -141,9 +132,10 @@ public class InstInstructionAdapter extends RecyclerView.Adapter<InstInstruction
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView date,from,clientName,cLocation,title;
+        TextView date, from, clientName, cLocation, title;
         ExpandableTextView message;
         LinearLayout messageContainer;
+
         public ActivityHolder(View inflate) {
             super(inflate);
             date = inflate.findViewById(R.id.date);
@@ -152,7 +144,8 @@ public class InstInstructionAdapter extends RecyclerView.Adapter<InstInstruction
             clientName = inflate.findViewById(R.id.clientName);
             cLocation = inflate.findViewById(R.id.cLocation);
             messageContainer = inflate.findViewById(R.id.messageContainer);
-            title  = inflate.findViewById(R.id.title);
+            title = inflate.findViewById(R.id.title);
+
         }
     }
 }

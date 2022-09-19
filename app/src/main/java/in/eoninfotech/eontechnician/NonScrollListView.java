@@ -29,6 +29,7 @@ public class NonScrollListView extends ListView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec_custom);
         ViewGroup.LayoutParams params = getLayoutParams();
         params.height = getMeasuredHeight();
+
     }
 
     public void getOnItemClickListener(OnClickListener onClickListener) {

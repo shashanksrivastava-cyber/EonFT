@@ -104,14 +104,6 @@ public class ImageDetailCallSheet extends AppCompatActivity {
             }
         });
 
-//        linear.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(ImageDetailCallSheet.this, "hello", Toast.LENGTH_SHORT).show();
-//                image.setRotation((float) 45.0);
-//            }
-//        });
-//
         ImageUtils.glideImageWithLoader(image, images);
 
         Glide.with(this)

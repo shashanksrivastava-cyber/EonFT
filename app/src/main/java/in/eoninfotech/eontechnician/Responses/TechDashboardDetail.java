@@ -18,8 +18,10 @@ public class TechDashboardDetail {
     private int faulty_drs;
     @SerializedName("umain")
     private String umain;
-    @SerializedName("umain")
+    @SerializedName("umain_work")
     private String umain_work;
+    @SerializedName("opr_per")
+    private String opr_per;
     @SerializedName("cur_add")
     private int cur_add;
     @SerializedName("color")
@@ -188,5 +190,13 @@ public class TechDashboardDetail {
 
     public void setFaulty_temp(String faulty_temp) {
         this.faulty_temp = faulty_temp;
+    }
+
+    public String getOpr_per() {
+        return opr_per;
+    }
+
+    public void setOpr_per(String opr_per) {
+        this.opr_per = opr_per;
     }
 }

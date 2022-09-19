@@ -53,7 +53,7 @@ import retrofit2.Response;
 public class SimpleServiceExample extends JobService {
 
     public static final long NOTIFY_INTERVAL = 10 * 1000;
-    private final static long INTERVAL = 1000 * 60*3 ;
+    private final static long INTERVAL = 1000 * 60 * 3;
     private Handler mHandler = new Handler();
     private FusedLocationProviderClient locationProviderClient;
     private Timer mTimer = null;
@@ -66,18 +66,20 @@ public class SimpleServiceExample extends JobService {
     private Location_prop loc;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String username, version, imei, track_interval, track_status,mac_address;
+    String username, version, imei, track_interval, track_status, mac_address;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        try{
+        try {
             String parameter = intent.getStringExtra("param_name");
-            if(parameter.equals("end")){
+            if (parameter.equals("end")) {
                 stopSelf();
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
         }
         return START_STICKY;
     }
+
     @Override
     public void onCreate() {
 
@@ -87,31 +89,35 @@ public class SimpleServiceExample extends JobService {
         imei = sharedprefs.getString("imei1", "");
         track_status = sharedprefs.getString("track_status", "");
         track_interval = sharedprefs.getString("track_interval", "");
-        mac_address = sharedprefs.getString("MacAddress","");
+        mac_address = sharedprefs.getString("MacAddress", "");
         track = Integer.parseInt(track_interval);
         if (mTimer != null) {
             mTimer.cancel();
         } else {
             mTimer = new Timer();
         }
-        mTimer.scheduleAtFixedRate(new SimpleServiceExample.TimeDisplayTimerTask(), 0,(INTERVAL));
+        mTimer.scheduleAtFixedRate(new SimpleServiceExample.TimeDisplayTimerTask(), 0, (INTERVAL));
         startService(new Intent(getBaseContext(), SimpleServiceExample.class));
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationPrefs = new LocationPrefs(this);
         super.onCreate();
     }
+
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
         return false;
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
         return false;
     }
+
     @Override
     public void onTaskRemoved(Intent rootIntent) {
 
@@ -126,6 +132,7 @@ public class SimpleServiceExample extends JobService {
                 + 100, restartServicePendingIntent);
         super.onTaskRemoved(rootIntent);
     }
+
     public class TimeDisplayTimerTask extends TimerTask {
         @Override
         public void run() {
@@ -136,24 +143,18 @@ public class SimpleServiceExample extends JobService {
                 public void run() {
                     getDeviceLocation();
                     getStatus();
-//                    sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
-//                    editor = sharedprefs.edit();
-//                    username = sharedprefs.getString("s_uuser", "");
-//                    imei = sharedprefs.getString("imei1", "");
-//                    editor.putString("track_status", track_status);
-//                    editor.putString("track_interval", track_interval);
-//                    editor.commit();
                 }
             });
         }
     }
+
     private void getStatus() {
         ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
-        Call<TrackingResponse> locCall = loc_att.trackingResponse(username,imei);
+        Call<TrackingResponse> locCall = loc_att.trackingResponse(username, imei);
         locCall.enqueue(new Callback<TrackingResponse>() {
             public void onResponse(Call<TrackingResponse> call, Response<TrackingResponse> response) {
                 try {
-                    if (response.body().getType()==1) {
+                    if (response.body().getType() == 1) {
                         TrackingResponse trackingResponse = response.body();
                         trackingDetails = response.body().getTrackingDetails();
                         track_status = trackingDetails.get(0).getTrack_status();
@@ -162,13 +163,14 @@ public class SimpleServiceExample extends JobService {
                         editor.putString("track_interval", track_interval);
                         editor.commit();
                         track = Integer.parseInt(track_interval);
-                        if (track_status.equalsIgnoreCase("y")){
+                        if (track_status.equalsIgnoreCase("y")) {
                             getDeviceLocation();
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                 }
             }
+
             @Override
             public void onFailure(Call<TrackingResponse> call, Throwable t) {
                 try {
@@ -215,10 +217,12 @@ public class SimpleServiceExample extends JobService {
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch (Exception ex) {
-        }try {
+        }
+        try {
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch (Exception ex) {
-        }if (!gps_enabled && !network_enabled) {
+        }
+        if (!gps_enabled && !network_enabled) {
         } else {
             latitude = loc.latitude;
             longitude = loc.longitude;
@@ -248,21 +252,23 @@ public class SimpleServiceExample extends JobService {
             }
         }
     }
+
     private void loadContent() {
         String curAdd = locationPrefs.getlastLoc().toString();
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<LocationsResponse> call = log_att.locationResponse(username,curAdd,imei,lati,lngi,mac_address);
+        Call<LocationsResponse> call = log_att.locationResponse(username, curAdd, imei, lati, lngi, mac_address);
         call.enqueue(new Callback<LocationsResponse>() {
             @Override
             public void onResponse(Call<LocationsResponse> call, Response<LocationsResponse> response) {
-                try{
+                try {
                     if (response.body().getType() == 1) {
                     } else {
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<LocationsResponse> call, Throwable t) {
             }

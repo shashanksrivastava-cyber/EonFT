@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class FaultyDevicesDetailActivity extends AppCompatActivity {
 
-    String usrname,zone,version;
+    String usrname, zone, version;
     RecyclerView recyclerView;
     SwipeRefreshLayout refreshLayout;
     private FaultyDeviceDetailAdapter faultyDeviceDetailAdapter;
@@ -50,8 +50,8 @@ public class FaultyDevicesDetailActivity extends AppCompatActivity {
         actionBar.setTitle("Faulty Devices Details");
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
         usrname = sharedprefs.getString("dis_user", "");
-        version = sharedprefs.getString("version","");
-        zone = sharedprefs.getString("zone","");
+        version = sharedprefs.getString("version", "");
+        zone = sharedprefs.getString("zone", "");
         txtContentUnavailable = findViewById(R.id.txt_content_unavailable);
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(FaultyDevicesDetailActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -99,6 +99,7 @@ public class FaultyDevicesDetailActivity extends AppCompatActivity {
         clear();
         getFaultyDeviceData();
     }
+
     private void clear() {
         faultyDevicesDetails.clear();
     }
@@ -107,7 +108,7 @@ public class FaultyDevicesDetailActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         Intent inteer = new Intent(FaultyDevicesDetailActivity.this, FaultyDevicesActivity.class);
-        inteer.putExtra("device_value",device_value);
+        inteer.putExtra("device_value", device_value);
         startActivity(inteer);
         finish();
     }
@@ -117,11 +118,11 @@ public class FaultyDevicesDetailActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Intent inteer = new Intent(FaultyDevicesDetailActivity.this, FaultyDevicesActivity.class);
-            inteer.putExtra("device_value",device_value);
+            inteer.putExtra("device_value", device_value);
             startActivity(inteer);
             finish();
         } else {
         }
         return super.onOptionsItemSelected(item);
     }
-    }
+}

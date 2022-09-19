@@ -202,6 +202,8 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             alertDialogBuilder.getWindow().setLayout(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
             alertDialogBuilder.setCanceledOnTouchOutside(true);
             alertDialogBuilder.show();
+
+
             galary.setOnClickListener((View view) -> {
                 alertDialogBuilder.dismiss();
                 buttonPressed = "2";
@@ -377,6 +379,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
         RequestBody date = RequestBody.create(MediaType.parse("text/plain"), s_date);
         RequestBody remark = RequestBody.create(MediaType.parse("text/plain"),callSheetRemark);
         Call<UpdateDataResponse> call = uploadImage.call_sheet(image, tech_name, date,remark);
+
         call.enqueue(new Callback<UpdateDataResponse>() {
             @Override
             public void onResponse(Call<UpdateDataResponse> call, Response<UpdateDataResponse> response) {

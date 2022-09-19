@@ -82,7 +82,6 @@ public class ActivityDetailFragment extends Fragment {
         recyclerView = v.findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-//      t_install_date = (EditText) v.findViewById(R.id.installDate);
         t_install_date = v.findViewById(R.id.installDate);
         txtContentUnavailable = v.findViewById(R.id.txt_content_unavailable);
 

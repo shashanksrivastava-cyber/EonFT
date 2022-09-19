@@ -22,18 +22,10 @@
         android:icon="@drawable/install"
         android:title="Activities" />
 
-    <!--<item-->
-    <!--android:id="@+id/activitiesList"-->
-    <!--android:icon="@drawable/ic_view_list_black_24dp"-->
-    <!--android:title="Activities List" />-->
     <item
         android:id="@+id/nav_stock"
         android:icon="@drawable/stock"
         android:title="Stock" />
-    <!--<item-->
-    <!--android:id="@+id/nav_view_stock"-->
-    <!--android:icon="@drawable/stock"-->
-    <!--android:title="View Stock" />-->
 
     <item
         android:id="@+id/nav_call_sheet"
@@ -45,25 +37,15 @@
         android:icon="@drawable/ic_incentive"
         android:title="Payment Collection Report" />
 
-    <!--<item-->
-    <!--android:id="@+id/nav_view_call_sheet"-->
-    <!--android:icon="@drawable/ic_next_day_plan"-->
-    <!--android:title="View Call Sheet" />-->
-
     <item
         android:id="@+id/nav_incentive"
         android:icon="@drawable/ic_receipt_black_24dp"
         android:title="Incentive" />
 
-    <!--<item-->
-    <!--android:id="@+id/nav_update_client_list"-->
-    <!--android:icon="@drawable/upd_list"-->
-    <!--android:title="Update Client List" />-->
-
-    <!--<item-->
-    <!--android:id="@+id/nav_view_activity"-->
-    <!--android:icon="@drawable/ic_next_day_plan"-->
-    <!--android:title="Attendence Record" />-->
+    <item
+        android:id="@+id/nav_bill"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Bill Intimation" />
 
     <item
         android:id="@+id/nav_technician_of_the_month"

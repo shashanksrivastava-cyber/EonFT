@@ -199,7 +199,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
         ivProfile = v.findViewById(R.id.ivProfile);
         t_techname = v.findViewById(R.id.attd_username);
-       // t_time = (TextView) v.findViewById(R.id.att_time);
         t_address = v.findViewById(R.id.att_address);
         t_techname.setText(fullUserName.toUpperCase());
         btn = v.findViewById(R.id.update_data);
@@ -223,10 +222,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         location.setEnabled(false);
         String imageUri = K.Url.IMAGE_URL +"uploads/"+image;
         ImageUtils.glideImage(ivProfile, imageUri, R.drawable.user);
-       // sendData();
-       // buildGoogleApiClient();
-       // getLocation();
-
         btn.setEnabled(false);
         btn.setBackgroundColor(getResources().getColor(R.color.grey500));
 

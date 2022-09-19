@@ -52,10 +52,10 @@ import retrofit2.Response;
 
 public class FaultyDeviceDetails extends AppCompatActivity implements InstInstructionAdapter.InstInstructionAdapterListener {
 
-    TextView site_veh_num,site_drs_num,vts_Id;
+    TextView site_veh_num, site_drs_num, vts_Id;
     SharedPreferences sharedprefs;
-    String usrname,zone,version;
-    String locId,server,database,cust_id,custName,location;
+    String usrname, zone, version;
+    String locId, server, database, cust_id, custName, location;
     public RecyclerView recyclerView;
     public LinearLayoutManager layoutManager;
     ArrayList<InstructionDetail> instructionDetails = new ArrayList<>();
@@ -73,8 +73,8 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
         actionBar.setTitle("Faulty Devices Details");
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
         usrname = sharedprefs.getString("dis_user", "");
-        version = sharedprefs.getString("version","");
-        zone = sharedprefs.getString("zone","");
+        version = sharedprefs.getString("version", "");
+        zone = sharedprefs.getString("zone", "");
 
         site_veh_num = findViewById(R.id.site_veh_num);
         site_drs_num = findViewById(R.id.site_drs_num);
@@ -93,28 +93,28 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
         cust_id = intent.getStringExtra("Cust_id");
         custName = intent.getStringExtra("CustomerName");
         location = intent.getStringExtra("Location");
-        if(!faultyVTS.equals("")) {
+        if (!faultyVTS.equals("")) {
 
             String abc = String.valueOf(faultyVTS);
             String veh = removeSlash(abc);
             String def = removeBr(veh);
             site_veh_num.setText(def);
-
-        }else {
+        } else {
             site_veh_num.setText("No Faulty VTS");
-        }if(!faultyDRS.equals("")) {
+        }
+        if (!faultyDRS.equals("")) {
             String DrsVehicleNumber = removeColon(faultyDRS);
             String veh = removeSlashDRS(DrsVehicleNumber);
             String def = removeBr(veh);
             site_drs_num.setText(def);
-        }else {
+        } else {
             site_drs_num.setText("No Faulty DRS");
         }
-        listener  = new InstInstructionAdapter.InstInstructionAdapterListener() {
+        listener = new InstInstructionAdapter.InstInstructionAdapterListener() {
             @Override
             public void onMessageRowClicked(int position) {
                 InstructionDetail message = instructionDetails.get(position);
-                message_id  = instructionDetails.get(position).getMsg_id();
+                message_id = instructionDetails.get(position).getMsg_id();
                 updateData();
             }
         };
@@ -127,11 +127,12 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
         call.enqueue(new Callback<MainResponse>() {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-                if(response.body().getType()==1) {
+                if (response.body().getType() == 1) {
                     getContent();
-                }else{
+                } else {
                 }
             }
+
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
             }
@@ -141,7 +142,7 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
     private void getContent() {
 
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<InstInstructionResponse> call = log_att.instructionResponse(server,database,cust_id,locId);
+        Call<InstInstructionResponse> call = log_att.instructionResponse(server, database, cust_id, locId);
         call.enqueue(new Callback<InstInstructionResponse>() {
             @Override
             public void onResponse(Call<InstInstructionResponse> call, Response<InstInstructionResponse> response) {
@@ -149,32 +150,34 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
                     InstInstructionResponse instInstructionResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     instructionDetails = instInstructionResponse.getInstDetail();
-                    instAdapter = new InstInstructionAdapter(getApplicationContext(),instructionDetails,listener,custName,location);
+                    instAdapter = new InstInstructionAdapter(getApplicationContext(), instructionDetails, listener, custName, location);
                     recyclerView.setAdapter(instAdapter);
                 } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
-                    //Toast.makeText(FaultyDeviceDetails.this, "No Data Found", Toast.LENGTH_SHORT).show();
+
                 }
             }
+
             @Override
             public void onFailure(Call<InstInstructionResponse> call, Throwable t) {
             }
         });
     }
-    private String removeBr(String str1){
+
+    private String removeBr(String str1) {
         return str1.replaceAll("\\|", "\n");
     }
 
-    private String removeColon(String str1){
+    private String removeColon(String str1) {
         return str1.replaceAll(":", "\n");
     }
 
-    private String removeSlash(String str1){
+    private String removeSlash(String str1) {
         return str1.replaceAll("\\/", "      ");
     }
 
-    private String removeSlashDRS(String str1){
+    private String removeSlashDRS(String str1) {
         return str1.replaceAll("\\/", "        ");
     }
 
@@ -189,9 +192,9 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
         if (id == android.R.id.home) {
             finish();
         } else {
-            }
-            return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onMessageRowClicked(int position) {

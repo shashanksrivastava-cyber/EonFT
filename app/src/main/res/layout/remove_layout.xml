@@ -669,8 +669,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:hint="Vehicle Reg No"
-            android:inputType="number"
-            android:maxLength="20"
+            android:inputType="text"
             android:singleLine="true"
             android:textSize="12sp" />
     </android.support.design.widget.TextInputLayout>

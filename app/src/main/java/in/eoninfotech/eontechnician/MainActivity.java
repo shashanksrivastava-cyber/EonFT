@@ -98,6 +98,8 @@ import in.eoninfotech.eontechnician.activity.MessageActivity;
 import in.eoninfotech.eontechnician.activity.MessageAdapter;
 import in.eoninfotech.eontechnician.activity.SimpleServiceExample;
 import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
+import in.eoninfotech.eontechnician.fragments.BillIntimationFragment;
+import in.eoninfotech.eontechnician.fragments.BillViewFragment;
 import in.eoninfotech.eontechnician.fragments.CallSheetFragment;
 import in.eoninfotech.eontechnician.fragments.DashBoardFragment;
 import in.eoninfotech.eontechnician.fragments.FragmentCurrentMonth;
@@ -156,18 +158,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     StockFragment stockFragment;
     TextView textCartItemCount;
     PaymentCollectionReportFragment paymentCollectionReportFragment;
+    BillIntimationFragment billIntimationFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
     ViewCallSheetFragment viewCallSheetFragment;
     ViewActivityLogsFragment viewActivityLogsFragment;
     DashBoardFragment dashBoardFragment;
     OtherDashBoardFragment otherDashBoardFragment;
+    BillViewFragment billViewFragment;
     ViewPagerAdapter viewPagerAdapter;
     ViewPagerAdapterAtd viewPagerAdapterAtd;
     ViewPagerAdapterStock viewPagerAdapterStock;
     ViewPagerAdapterCallSheet viewPagerAdapterCallSheet;
     ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     ViewPagerAdapterActivity viewPagerAdapterActivity;
+    ViewPagerAdapterBills viewPagerAdapterBills;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -185,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<TechnicianMonthDetail> techList = new ArrayList<>();
     public static TabLayout tabLayout;
     public static int int_items = 2;
-    private ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet;
+    private ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill;
     String tab = "1";
     private String currentVersion;
     LinearLayout linearLayout;
@@ -326,6 +331,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewpageractivity = findViewById(R.id.viewpageractivity);
         viewpagerstock = findViewById(R.id.viewpagerstock);
         viewpagercallsheet = findViewById(R.id.viewpagercallsheet);
+        viewPagerBill = findViewById(R.id.viewPagerBill);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
@@ -532,7 +538,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hideKeyboard();
 
         } else if (id == R.id.nav_tech_dashboard) {
-
             dashBoardFragment = new DashBoardFragment();
             dashBoardFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
@@ -562,12 +567,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
         } else if (id == R.id.nav_stock) {
-
             stockFragment = new StockFragment();
             stockFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, stockFragment);
@@ -652,6 +657,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
             viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
             tabLayout.setupWithViewPager(viewpagercallsheet);
@@ -659,7 +665,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        } else if (id == R.id.faqs) {
+        } else if (id == R.id.nav_bill) {
+            billIntimationFragment = new BillIntimationFragment();
+            billIntimationFragment.setArguments(bundle);
+            ft = fm.beginTransaction().replace(R.id.framelay, billIntimationFragment);
+            setTitle("Bill Intimation");
+            tabLayout.setVisibility(View.VISIBLE);
+            tabLayout.removeAllTabs();
+            viewpagerattendance.setVisibility(View.GONE);
+            viewPager.setVisibility(View.GONE);
+            viewpageractivity.setVisibility(View.GONE);
+            viewpagercallsheet.setVisibility(View.GONE);
+            viewpagerstock.setVisibility(View.GONE);
+            viewPagerAdapterBills = new ViewPagerAdapterBills(getSupportFragmentManager());
+            viewPagerBill.setAdapter(viewPagerAdapterBills);
+            tabLayout.setupWithViewPager(viewPagerBill);
+            ft.commit();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            hideKeyboard();
+        }
+        else if (id == R.id.faqs) {
             faqsfragment = new FaqsFragment();
             faqsfragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, faqsfragment);
@@ -1226,6 +1252,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return "My Dashboard";
                 case 1:
                     return "Other's Dashboard";
+            }
+            return null;
+        }
+    }
+
+    class ViewPagerAdapterBills extends FragmentPagerAdapter {
+
+        public ViewPagerAdapterBills(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            bundle.putString("disttid", disgnid);
+            bundle.putString("usernme", usrname);
+            bundle.putString("version", versionname);
+
+            switch (position) {
+                case 0:
+                    billIntimationFragment = new BillIntimationFragment();
+                    billIntimationFragment.setArguments(bundle);
+                    return billIntimationFragment;
+                case 1:
+                    billViewFragment = new BillViewFragment();
+                    billViewFragment.setArguments(bundle);
+                    return billViewFragment;
+            }
+
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return int_items;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            switch (position) {
+                case 0:
+                    return "Upload";
+                case 1:
+                    return "View";
             }
             return null;
         }

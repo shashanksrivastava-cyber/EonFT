@@ -86,9 +86,6 @@ public class LogViewActivity extends AppCompatActivity{
         date = getIntent().getStringExtra("date");
         leaves = getIntent().getStringExtra("leave");
         lv = findViewById(R.id.list_logs);
-       // tvInfo = findViewById(R.id.tvInfo);
-       // tvInfoo = findViewById(R.id.tvInfoo);
-       // infoRelative = findViewById(R.id.infoRelative);
         txt_content_unavailable = findViewById(R.id.txt_content_unavailable);
         avg = findViewById(R.id.avg);
         totalWork = findViewById(R.id.totalWork);
@@ -167,74 +164,6 @@ public class LogViewActivity extends AppCompatActivity{
                     totalWork.setVisibility(View.GONE);
                     lv.setVisibility(View.GONE);
                     txt_content_unavailable.setVisibility(View.VISIBLE);
-                   // infoRelative.setVisibility(View.VISIBLE);
-//                    String def = date;
-//                    String[] separated1 = def.split("/");
-//                    String monnth = separated1[0];
-//                    String datess1 = separated1[1];
-//                    String yeears = separated1[2];
-//                    int datte = Integer.parseInt(datess1);
-//                    if(datte<10){
-//                        datesss = ""+"0"+datte;
-//                    }else{
-//                        datesss = datess1;
-//                    }
-//                    int montth = Integer.parseInt(monnth);
-//                    if(montth<10){
-//                        monntth = ""+"0"+montth;
-//                    }else{
-//                        monntth = monnth;
-//                    }
-//                    String newDate = datesss+"/"+monntth+"/"+yeears;
-//
-//                    if(monnth.equals("1")){
-//                        mnth = "Jan";
-//                    }else if(monnth.equals("2")){
-//                        mnth = "Feb";
-//                    }else if(monnth.equals("3")){
-//                        mnth = "Mar";
-//                    }else if(monnth.equals("4")){
-//                        mnth = "Apr";
-//                    }else if(monnth.equals("5")){
-//                        mnth = "May";
-//                    }else if(monnth.equals("6")){
-//                        mnth = "Jun";
-//                    }else if(monnth.equals("7")){
-//                        mnth = "Jul";
-//                    }else if(monnth.equals("8")){
-//                        mnth = "Aug";
-//                    }else if(monnth.equals("9")){
-//                        mnth = "Sep";
-//                    }else if(monnth.equals("10")){
-//                        mnth = "Oct";
-//                    }else if(monnth.equals("11")){
-//                        mnth = "Nov";
-//                    }else if(monnth.equals("12")){
-//                        mnth = "Dec";
-//                    }
-//                    String neewDate = datesss+"/"+mnth+"/"+yeears;
-//                   // tvInfoo.setText("On "+" "+neewDate);
-//                    String carListAsString = getIntent().getStringExtra("AttendanceDetails");
-//                    Gson gson = new Gson();
-//                    Type type = new TypeToken<List<AttendanceDetail>>(){}.getType();
-//                    List<AttendanceDetail> carsList = gson.fromJson(carListAsString, type);
-//                    for (AttendanceDetail cars : carsList){
-//                        if(newDate.equals(cars.getDate())){
-//                            String abc  = cars.getDisplay().toString();
-//                            if(abc.equalsIgnoreCase("Travel")){
-//                                tvInfo.setText("You were Travelling ");
-//                            }else if(abc.equalsIgnoreCase("Absent")){
-//                                tvInfo.setText("You were "+abc);
-//                            }else if(abc.equalsIgnoreCase("Leave")){
-//                                tvInfo.setText("You were on "+cars.getDisplay().toString());
-//                            }else if(abc.equalsIgnoreCase("Sunday")){
-//                                tvInfo.setText(""+cars.getDisplay().toString());
-//                            }else if(abc.equalsIgnoreCase("Holiday")){
-//                                tvInfo.setText(""+cars.getDisplay().toString());
-//                            }
-//                            //tvInfo.setText("You were "+cars.getDisplay().toString());
-//                        }
-//                    }
                 }else {
                     txt_content_unavailable.setVisibility(View.GONE);
                     log_status_time = response.body().getLogDetails();

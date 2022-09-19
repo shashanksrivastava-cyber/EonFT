@@ -82,16 +82,14 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
 
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String username, dist_id, version, buttonPressed="0";
-    String selected_todate, s_update_date;
+    String username, dist_id, version, buttonPressed = "0";
+    String selected_todate, s_update_date, filenames, path;
     int year, month, day;
     Calendar calen;
-    String filenames;
     EditText remarks;
     TextView datee;
     CircleImageView ivProfile;
     File file;
-    String path;
     Uri uri;
     Button update_dataa;
     private final int SELECT_PHOTO = 1;
@@ -112,6 +110,7 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
     String img;
     RequestBody requestBody;
     Bitmap bmp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,100 +130,6 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         ivProfile = findViewById(R.id.ivProfile);
         remarks = findViewById(R.id.remarks);
 
-//        SpaceNavigationView spaceNavigationView = findViewById(R.id.space);
-//        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
-//        spaceNavigationView.addSpaceItem(new SpaceItem("",R.drawable.ic_home));
-//        spaceNavigationView.addSpaceItem(new SpaceItem("",R.drawable.ic_incentive ));
-//
-//        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
-//            @Override
-//            public void onCentreButtonClick() {
-//                View alet_view = null;
-//                final Dialog alertDialogBuilder = new Dialog(CallSheetActivity.this,R.style.DialogSlideAnim);
-//                getWindow().setGravity(Gravity.BOTTOM);
-//                alertDialogBuilder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//                alertDialogBuilder.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//                LayoutInflater mInflater = (LayoutInflater) CallSheetActivity.this.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-//                alet_view = mInflater.inflate(R.layout.custom_popup_image, null);
-//                final ImageView cross = (ImageView) alet_view.findViewById(R.id.cross);
-//                final TextView galary = (TextView) alet_view.findViewById(R.id.gallery);
-//                final TextView cammera = (TextView) alet_view.findViewById(R.id.cammera);
-//                alertDialogBuilder.setContentView(alet_view);
-//                alertDialogBuilder.getWindow().setLayout(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
-//                alertDialogBuilder.setCanceledOnTouchOutside(true);
-//                alertDialogBuilder.show();
-
-//                BottomSheetMenuDialog dialog = new BottomSheetBuilder(CallSheetActivity.this, R.style.AppTheme_BottomSheetDialog)
-//                        .addTitleItem("Select")
-//                        .setTitleTextColor(getResources().getColor(R.color.black))
-//                        .setMode(BottomSheetBuilder.MODE_LIST)
-//                        .setMenu(R.menu.menu_bottom_simple_sheet)
-//                        .setItemClickListener(new BottomSheetItemClickListener() {
-//                            @Override
-//                            public void onBottomSheetItemClick(MenuItem item) {
-//
-//                            }
-//                        })
-//                        .createDialog();
-//
-//                dialog.show();
-
-//                new BottomSheet.Builder(CallSheetActivity.this)
-//                        .title("Select Image ")
-//                        .sheet(R.menu.menu_bottom_simple_sheet).listener(new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        if (which == R.id.menu_camera) {
-//                            buttonPressed = "1";
-//                            if (Build.VERSION.SDK_INT < 24) {
-//                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                                uri = Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
-//                                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//                                try {
-//                                    openCameraIntent();
-//                                } catch (SecurityException e) {
-//                                    e.printStackTrace();
-//                                    try {
-//                                        if (hasPermissions(CallSheetActivity.this, PERMISSIONS)) {
-//                                        } else {
-//                                            EasyPermissions.requestPermissions(this, "Access for storage",101, PERMISSIONS);
-//                                        }
-//                                    } catch (Exception qe) {
-//                                        qe.printStackTrace();
-//                                    }
-//                                    openCameraIntent();
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            } else {
-//                                try {
-//                                    if (hasPermissions(CallSheetActivity.this, PERMISSIONS)) {
-//                                    } else {
-//                                        EasyPermissions.requestPermissions(this, "Access for storage",101, PERMISSIONS);
-//                                    }
-//                                } catch (Exception qe) {
-//                                    qe.printStackTrace();
-//                                }
-//                                openCameraIntent();
-//                            }
-//                        }
-//                    else if(which == R.id.menu_gallery){
-//                            buttonPressed="2";
-//                            galleryIntent();
-//                        }
-//                    }
-//                }).show();
-//            }
-//
-//            @Override
-//            public void onItemClick(int itemIndex, String itemName) {
-//            }
-//            @Override
-//            public void onItemReselected(int itemIndex, String itemName) {
-//            }
-//        });
-
         calen = Calendar.getInstance();
         year = calen.get(Calendar.YEAR);
         month = calen.get(Calendar.MONTH);
@@ -234,7 +139,8 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
             selected_todate = day + "-0" + +month + "-" + year;
         } else {
             selected_todate = day + "-" + month + "-" + year;
-        }try {
+        }
+        try {
             //checkWritingPermission();
             if (!hasPermissions(CallSheetActivity.this, PERMISSIONS)) {
                 ActivityCompat.requestPermissions(CallSheetActivity.this, PERMISSIONS, PERMISSION_ALL);
@@ -250,13 +156,14 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
                     selected_todate = dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year;
                 } else {
                     selected_todate = dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year;
-                }datee.setText(selected_todate);
+                }
+                datee.setText(selected_todate);
             }, year, month - 1, day);
             dpdd.show();
         });
         upload_img_view.setOnClickListener(v -> {
-            Intent intent = new Intent(CallSheetActivity.this,ImageDetailCallSheet.class);
-            intent.putExtra("Image",path);
+            Intent intent = new Intent(CallSheetActivity.this, ImageDetailCallSheet.class);
+            intent.putExtra("Image", path);
             startActivity(intent);
         });
 
@@ -270,10 +177,6 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
                 s_update_date = datee.getText().toString();
                 String callSheetRemark = remarks.getText().toString();
                 try {
-//                    if (mediaPath.equals("") || mediaPath.equals(null)) {
-//                        Toast.makeText(CallSheetActivity.this, "Please Click image", Toast.LENGTH_LONG).show();
-//                        pDialog.dismiss();
-//                    } else {
                     if (buttonPressed.equals("1")) {
                         try {
                             final_file = bitmapToFile(bmp, "image_call");
@@ -283,43 +186,44 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    } else if(buttonPressed.equals("2")){
+                    } else if (buttonPressed.equals("2")) {
                         try {
                             final_file = new File(path);
                             long length = final_file.length();
-                           // ProgressRequestBody fileBody = new ProgressRequestBody(final_file, this);
                             fileToUpload = MultipartBody.Part.createFormData("image", path);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
-                        ApiHolder uploadImage = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-                        RequestBody tech_name = RequestBody.create(MediaType.parse("text/plain"), username);
-                        RequestBody date = RequestBody.create(MediaType.parse("text/plain"), s_update_date);
-                        RequestBody remark = RequestBody.create(MediaType.parse("text/plain"),callSheetRemark);
-                        Call<UpdateDataResponse> call = uploadImage.call_sheet(fileToUpload, tech_name, date,remark);
-                        call.enqueue(new Callback<UpdateDataResponse>() {
-                            @Override
-                            public void onResponse(Call<UpdateDataResponse> call, Response<UpdateDataResponse> response) {
-                                UpdateDataResponse updateDataResponse = response.body();
-                                Log.i("**respnse", " " + response.body());
-                                if (updateDataResponse != null) {
-                                    Toast.makeText(CallSheetActivity.this, updateDataResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                                    if (updateDataResponse.getType() == 1) {
-                                    }
-                                } else {
-                                    assert updateDataResponse != null;
+                    ApiHolder uploadImage = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+                    RequestBody tech_name = RequestBody.create(MediaType.parse("text/plain"), username);
+                    RequestBody date = RequestBody.create(MediaType.parse("text/plain"), s_update_date);
+                    RequestBody remark = RequestBody.create(MediaType.parse("text/plain"), callSheetRemark);
+
+                    Call<UpdateDataResponse> call = uploadImage.call_sheet(fileToUpload, tech_name, date, remark);
+                    call.enqueue(new Callback<UpdateDataResponse>() {
+                        @Override
+                        public void onResponse(Call<UpdateDataResponse> call, Response<UpdateDataResponse> response) {
+                            UpdateDataResponse updateDataResponse = response.body();
+                            Log.i("**respnse", " " + response.body());
+                            if (updateDataResponse != null) {
+                                Toast.makeText(CallSheetActivity.this, updateDataResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                if (updateDataResponse.getType() == 1) {
                                 }
-                                pDialog.dismiss();
+                            } else {
+                                assert updateDataResponse != null;
                             }
-                            @Override
-                            public void onFailure(Call<UpdateDataResponse> call, Throwable t) {
-                                t.printStackTrace();
-                                pDialog.dismiss();
-                                Toast.makeText(CallSheetActivity.this, "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                  //  }
+                            pDialog.dismiss();
+                        }
+
+                        @Override
+                        public void onFailure(Call<UpdateDataResponse> call, Throwable t) {
+                            t.printStackTrace();
+                            pDialog.dismiss();
+                            Toast.makeText(CallSheetActivity.this, "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    //  }
                 } catch (NullPointerException npe) {
                     npe.printStackTrace();
                     Toast.makeText(CallSheetActivity.this, "Please click image", Toast.LENGTH_LONG).show();
@@ -327,12 +231,14 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
             }
         });
     }
+
     private void galleryIntent() {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_PHOTO);
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_PHOTO);
     }
+
     File getOutputMediaFile(int type) {
         // External sdcard location
         File mediaStorageDir = new File(
@@ -360,16 +266,17 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         }
         return mediaFile;
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CAMERA) {
             if (Build.VERSION.SDK_INT < 24) {
                 try {
                     path = uri.getPath();
                     file = new File(path);
                     String abc = path;
-                    filenames=abc.substring(abc.lastIndexOf("/")+1);
+                    filenames = abc.substring(abc.lastIndexOf("/") + 1);
                     //imageName.setText(filename);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -381,10 +288,10 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
                 bmp = BitmapFactory.decodeFile(path);
                 ivProfile.setImageBitmap(bmp);
                 String abc = path;
-                filenames=abc.substring(abc.lastIndexOf("/")+1);
-               // imageName.setText(filename);
+                filenames = abc.substring(abc.lastIndexOf("/") + 1);
+                // imageName.setText(filename);
             }
-        }else if (requestCode == SELECT_PHOTO)
+        } else if (requestCode == SELECT_PHOTO)
             onSelectFromGalleryResult(data);
     }
 
@@ -405,6 +312,7 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         }
         return true;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == REQUEST_CODE_PERMISSION) {
@@ -415,18 +323,20 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
             }
         }
     }
+
     private void onSelectFromGalleryResult(Intent data) {
         if (data != null) {
             uri = data.getData();
-            file = FileUtils.getFile(CallSheetActivity.this,uri);
+            file = FileUtils.getFile(CallSheetActivity.this, uri);
             path = file.getPath();
             compressImage(path);
             File file = new File(path);
-           // imageName.setText(file.getName());
+            // imageName.setText(file.getName());
             bmp = BitmapFactory.decodeFile(path);
             ivProfile.setImageBitmap(bmp);
         }
     }
+
     private void openCameraIntent() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -439,6 +349,7 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
             }
         }
     }
+
     public String compressImage(String imageUri) {
         String filePath = getRealPathFromURI(imageUri);
         Bitmap scaledBitmap = null;
@@ -500,10 +411,12 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
                 matrix.postRotate(180);
             } else if (orientation == 8) {
                 matrix.postRotate(270);
-            }scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+            }
+            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
         } catch (IOException e) {
             e.printStackTrace();
-        }FileOutputStream out = null;
+        }
+        FileOutputStream out = null;
         path = getFilename();
         try {
             out = new FileOutputStream(path);
@@ -517,6 +430,7 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         }
         return path;
     }
+
     public String getFilename() {
         File file = new File(Environment.getExternalStorageDirectory().getPath(), "DCIM/Camera");
         if (!file.exists()) {
@@ -525,6 +439,7 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
         return uriSting;
     }
+
     private String getRealPathFromURI(String contentURI) {
         Uri contentUri = Uri.parse(contentURI);
         Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
@@ -536,6 +451,7 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
             return cursor.getString(index);
         }
     }
+
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -552,8 +468,9 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         }
         return inSampleSize;
     }
+
     private File createImageFile() {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.getDefault()).format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "IMG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = null;
@@ -565,7 +482,8 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
         path = image.getAbsolutePath();
         return image;
     }
-    private File bitmapToFile(Bitmap bitmap,String fileName){
+
+    private File bitmapToFile(Bitmap bitmap, String fileName) {
         File filesDir = getApplicationContext().getFilesDir();
         File imageFile = new File(filesDir, fileName + ".jpg");
         OutputStream os;
@@ -600,36 +518,6 @@ public class CallSheetActivity extends AppCompatActivity implements ProgressRequ
     public Dialog onCreateDialog(int id) {
         return null;
     }
-
-//    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-//        int width = image.getWidth();
-//        int height = image.getHeight();
-//        float bitmapRatio = (float) width / (float) height;
-//        if (bitmapRatio > 0) {
-//            width = maxSize;
-//            height = (int) (width / bitmapRatio);
-//        } else {
-//            height = maxSize;
-//            width = (int) (height * bitmapRatio);
-//        }
-//        return Bitmap.createScaledBitmap(image, width, height, true);
-//    }
-//
-//    private File bitmapToFile(Bitmap bitmap,String fileName){
-//        File filesDir = getApplicationContext().getFilesDir();
-//        File imageFile = new File(filesDir, fileName + ".jpg");
-//        OutputStream os;
-//        try {
-//            os = new FileOutputStream(imageFile);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, os);
-//            os.flush();
-//            os.close();
-//            return imageFile;
-//        } catch (Exception e) {
-//            Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
-//        }
-//        return null;
-//    }
 
 
 }

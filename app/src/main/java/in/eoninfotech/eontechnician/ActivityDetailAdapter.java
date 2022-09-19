@@ -73,13 +73,16 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             holder.textViewAttached.setVisibility(View.GONE);
             if (activityDetailResponse.getNew_drs().equals("0")&&(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getOld_vts().equals("0")))) {
                 holder.data.setText("VTS with Sr.no. " + "" + activityDetailResponse.getNew_serial_no() + " " + "is installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if((activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getNew_vts() + " " + "is installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             }else{
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getNew_vts() + " " + "is installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             }holder.image.setImageResource(R.drawable.settings);
         }
         if (activity_id.equals("6")) {
@@ -91,48 +94,58 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
         if (activity_id.equals("5")) {
             holder.textViewAttached.setVisibility(View.GONE);
             holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is removed from" + " " + activityDetailResponse.getReg_no()
-                    + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                    + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                    "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             holder.image.setImageResource(R.drawable.remove);
         }
         if (activity_id.equals("1")) {
             if (!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))) {
                 holder.textViewAttached.setVisibility(View.GONE);
                 holder.data.setText("Fault Repair is done for VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
             }else if(!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))){
                 holder.textViewAttached.setVisibility(View.GONE);
                 holder.data.setText("Fault Repair is done for VTS Sr No. " + "" + activityDetailResponse.getOld_serial_no() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
             }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))){
                 holder.textViewAttached.setVisibility(View.VISIBLE);
                 holder.data.setText("Fault Repair is done for VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
             }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))){
                 holder.textViewAttached.setVisibility(View.VISIBLE);
                 holder.data.setText("Fault Repair is done for VTS Sr No. " + "" + activityDetailResponse.getOld_serial_no() + " " + "installed on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_disc_full_black_24dp);
             }
         }if (activity_id.equals("3")) {
             holder.textViewAttached.setVisibility(View.GONE);
              if(activityDetailResponse.getNew_drs().equals("0")&&(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getOld_vts().equals("0")))){
                  holder.data.setText("VTS with Sr.no. " + "" + activityDetailResponse.getOld_serial_no() + " " + "is replaced with" + " " + activityDetailResponse.getNew_serial_no() + " " + "on" + " " + activityDetailResponse.getReg_no()
-                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                         + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                         "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if (activityDetailResponse.getOld_drs().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is replaced with" + " " + activityDetailResponse.getNew_vts() + " " + "on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if ((activityDetailResponse.getNew_vts().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "Vehicle No. " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "& Old DRS ID " + activityDetailResponse.getOld_drs() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "& Old DRS ID " + activityDetailResponse.getOld_drs() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             }else if(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getOld_vts().equals("0"))){
                 holder.data.setText("VTS with Serial No. " + "" + activityDetailResponse.getOld_serial_no() + " " + "is replaced with" + " " + activityDetailResponse.getNew_serial_no() + " " + "on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason);
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is replaced with" + " " + activityDetailResponse.getNew_vts() + " " + "on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason + "  " + "& Old DRS ID " + activityDetailResponse.getOld_drs() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " " + "due to" + " " + reason + "  " + "& Old DRS ID " + activityDetailResponse.getOld_drs() + "," + "New DRS ID" + "  " + activityDetailResponse.getNew_drs()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             }
             holder.image.setImageResource(R.drawable.responsive);
         }
@@ -140,22 +153,28 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             holder.textViewAttached.setVisibility(View.GONE);
             if(activityDetailResponse.getNew_drs().equals("0")&&(activityDetailResponse.getNew_vts().equals("0")&&(activityDetailResponse.getNew_serial_no().equals("0")))){
                 holder.data.setText("VTS with Sr.no.  " + "" + activityDetailResponse.getOld_serial_no() + " " + "is reinstall on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if (activityDetailResponse.getNew_vts().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is reinstall on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if (!activityDetailResponse.getNew_drs().equals("0") && (activityDetailResponse.getNew_vts().equals("0"))) {
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is reinstall on" + " " + activityDetailResponse.getReg_no()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " , " + "DRS ID" + " " + activityDetailResponse.getNew_drs());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " , " + "DRS ID" + " " + activityDetailResponse.getNew_drs()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if (activityDetailResponse.getNew_vts().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("New VTS ID " + "" + activityDetailResponse.getNew_vts() + " " + "Vehicle No." + " " + activityDetailResponse.getReg_no() + " " + "Old VTS ID" + " " + activityDetailResponse.getOld_vts()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else if (!activityDetailResponse.getNew_vts().equals("0") && (activityDetailResponse.getNew_drs().equals("0"))) {
                 holder.data.setText("New VTS ID " + " " + activityDetailResponse.getNew_vts() + " " + "is reinstall on" + " " + activityDetailResponse.getReg_no() + " " + "Old VTS" + " " + activityDetailResponse.getOld_vts()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             } else {
                 holder.data.setText("New VTS ID " + "" + activityDetailResponse.getNew_vts() + " " + "Vehicle No." + " " + activityDetailResponse.getReg_no() + " " + "Old VTS ID" + " " + activityDetailResponse.getOld_vts()
-                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " , " + "DRS ID" + " " + activityDetailResponse.getNew_drs());
+                        + " " + "at" + " " + activityDetailResponse.getClient_Name() + " " + "at" + " " + activityDetailResponse.getClient_loc() + " , " + "DRS ID" + " " + activityDetailResponse.getNew_drs()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
             }
             holder.image.setImageResource(R.drawable.ic_crop_rotate_black_24dp);
         }
@@ -174,28 +193,33 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             if (!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))) {
                 holder.textViewAttached.setVisibility(View.GONE);
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
-                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
             }else if(!imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))){
                 holder.textViewAttached.setVisibility(View.GONE);
                 holder.data.setText("VTS ID with Sr no " + "" + activityDetailResponse.getOld_serial_no() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
-                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
             }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_vts().equals("0"))){
                 holder.textViewAttached.setVisibility(View.VISIBLE);
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
-                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
             }else if(imageUri.contains("jpg")&&(!activityDetailResponse.getOld_serial_no().equals(""))) {
                 holder.textViewAttached.setVisibility(View.VISIBLE);
                 holder.data.setText("VTS ID with Sr no " + "" + activityDetailResponse.getOld_serial_no() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
-                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
             }
             else{
                 holder.textViewAttached.setVisibility(View.VISIBLE);
                 holder.data.setText("VTS ID " + "" + activityDetailResponse.getOld_vts() + " " + "is missing from " + " " + activityDetailResponse.getReg_no() + " " + "at" +
-                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc());
+                        " " + activityDetailResponse.getClient_Name() + " " + "at " + activityDetailResponse.getClient_loc()+"LID Sensor : "+activityDetailResponse.getLid_status()+","+"Trans Receiver : "+activityDetailResponse.getTrans_receiver()+","+
+                        "Temp Sensor : "+activityDetailResponse.getTemp_sensor()+","+"Tilt Sensor : "+activityDetailResponse.getTilt_sensor()+","+"Fuel Status : "+activityDetailResponse.getFuel_status()+","+"Panic Status : "+activityDetailResponse.getPanic_status());
                 holder.image.setImageResource(R.drawable.ic_phonelink_erase_black_24dp);
             }
         }
@@ -250,8 +274,6 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             image = inflate.findViewById(R.id.image);
             workType = inflate.findViewById(R.id.workType);
             clientName = inflate.findViewById(R.id.clientName);
-           // image1  = (CircleImageView) inflate.findViewById(R.id.image1);
-           // relImage = (RelativeLayout)inflate.findViewById(R.id.relImage);
             textViewAttached = inflate.findViewById(R.id.textViewAttached);
         }
     }

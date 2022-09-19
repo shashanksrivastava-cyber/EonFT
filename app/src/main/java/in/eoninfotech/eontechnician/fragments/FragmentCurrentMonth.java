@@ -118,7 +118,6 @@ public class FragmentCurrentMonth extends Fragment {
         user_id = sharedprefs.getString("s_user_id","");
         displayName = sharedprefs.getString("dis_user","");
         myDialog = new Dialog(getActivity());
-       // arc_add = v.findViewById(R.id.arc_add);
         monthSpinner = v.findViewById(R.id.monthSpinner);
         yearSpinner = v.findViewById(R.id.yearSpinner);
         tech_name = v.findViewById(R.id.tech_name);
@@ -127,7 +126,6 @@ public class FragmentCurrentMonth extends Fragment {
         lay_filter = v.findViewById(R.id.linearView);
         lay_filter.setVisibility(View.GONE);
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
-       // refreshLayout = v.findViewById(R.id.refresh);
         mLayout = v.findViewById(R.id.mLayout);
         datee = v.findViewById(R.id.date);
         txtContentUnavailable = v.findViewById(R.id.txt_content_unavailable);
@@ -400,7 +398,6 @@ public class FragmentCurrentMonth extends Fragment {
                         incentiveDate.setVisibility(View.GONE);
                         incentive.setVisibility(View.GONE);
                         txt_incentive.setText(incentiveDetails.get(0).getIncentive_amt());
-                        txt_incentive.setTextSize(25);
                     }
                     progressDialog.hide();
                 } else {

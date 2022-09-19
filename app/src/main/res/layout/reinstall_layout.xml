@@ -6,7 +6,64 @@
     android:layout_margin="4dp"
     android:background="@color/eonWhite"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="What is Reinstall ? "
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupReinstallType"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/replace_deviceType"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioDevice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:checked="true"
+                android:text="Device"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radioSensor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Sensor"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radioBoth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:text="Both"
+                android:textSize="14sp" />
+
+
+        </RadioGroup>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -1047,9 +1104,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:hint="Vehicle Reg No"
-                android:inputType="number"
-                android:maxLength="20"
+                android:hint="Old Vehicle Reg No"
+                android:inputType="text"
                 android:singleLine="true"
                 android:textSize="12sp" />
 
@@ -1068,9 +1124,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:hint="Vehicle Reg No"
-                android:inputType="number"
-                android:maxLength="20"
+                android:hint="New Vehicle Reg No"
+                android:inputType="text"
                 android:singleLine="true"
                 android:textSize="12sp" />
 

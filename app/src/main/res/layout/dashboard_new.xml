@@ -254,7 +254,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="110"
+                                    android:text=""
                                     android:textColor="@color/eonWhite"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -292,7 +292,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="110"
+                                    android:text=""
                                     android:textColor="@color/eonWhite"
                                     android:textSize="18sp"
                                     android:textStyle="bold"/>
@@ -320,7 +320,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="110"
+                                    android:text=""
                                     android:textColor="@color/eonWhite"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -348,7 +348,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="110"
+                                    android:text=""
                                     android:textColor="@color/eonWhite"
                                     android:textSize="18sp"
                                     android:textStyle="bold" />
@@ -584,7 +584,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text="100"
+                            android:text=""
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -645,7 +645,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text="100"
+                            android:text=""
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -706,7 +706,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text="100"
+                            android:text=""
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -767,7 +767,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text="100"
+                            android:text=""
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -828,7 +828,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text="100"
+                            android:text=""
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>

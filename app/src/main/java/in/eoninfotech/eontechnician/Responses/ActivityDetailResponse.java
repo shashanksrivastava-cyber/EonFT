@@ -40,6 +40,23 @@ public class ActivityDetailResponse {
     private String old_sim;
     @SerializedName("new_sim")
     private String new_sim;
+    @SerializedName("lid_status")
+    private String lid_status;
+    @SerializedName("trans_receiver")
+    private String trans_receiver;
+    @SerializedName("temp_sensor")
+    private String temp_sensor;
+    @SerializedName("tilt_sensor")
+    private String tilt_sensor;
+    @SerializedName("fuel_status")
+    private String fuel_status;
+    @SerializedName("panic_status")
+    private String panic_status;
+    @SerializedName("sensor_veh_no")
+    private String sensor_veh_no;
+    @SerializedName("sensor_old_veh_no")
+    private String sensor_old_veh_no;
+
     @SerializedName("reasons")
     private String reasons;
     @SerializedName("remarks")
@@ -215,5 +232,77 @@ public class ActivityDetailResponse {
 
     public void setVts_type(String vts_type) {
         this.vts_type = vts_type;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getLid_status() {
+        return lid_status;
+    }
+
+    public void setLid_status(String lid_status) {
+        this.lid_status = lid_status;
+    }
+
+    public String getTrans_receiver() {
+        return trans_receiver;
+    }
+
+    public void setTrans_receiver(String trans_receiver) {
+        this.trans_receiver = trans_receiver;
+    }
+
+    public String getTemp_sensor() {
+        return temp_sensor;
+    }
+
+    public void setTemp_sensor(String temp_sensor) {
+        this.temp_sensor = temp_sensor;
+    }
+
+    public String getTilt_sensor() {
+        return tilt_sensor;
+    }
+
+    public void setTilt_sensor(String tilt_sensor) {
+        this.tilt_sensor = tilt_sensor;
+    }
+
+    public String getFuel_status() {
+        return fuel_status;
+    }
+
+    public void setFuel_status(String fuel_status) {
+        this.fuel_status = fuel_status;
+    }
+
+    public String getPanic_status() {
+        return panic_status;
+    }
+
+    public void setPanic_status(String panic_status) {
+        this.panic_status = panic_status;
+    }
+
+    public String getSensor_veh_no() {
+        return sensor_veh_no;
+    }
+
+    public void setSensor_veh_no(String sensor_veh_no) {
+        this.sensor_veh_no = sensor_veh_no;
+    }
+
+    public String getSensor_old_veh_no() {
+        return sensor_old_veh_no;
+    }
+
+    public void setSensor_old_veh_no(String sensor_old_veh_no) {
+        this.sensor_old_veh_no = sensor_old_veh_no;
     }
 }

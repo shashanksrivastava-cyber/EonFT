@@ -6,7 +6,7 @@
     android:layout_margin="4dp"
     android:background="@color/eonWhite"
     android:orientation="vertical"
-    android:visibility="visible">
+    android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Damaged Device" />
+
         </RadioGroup>
 
     </LinearLayout>
@@ -637,7 +638,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:hint="Vehicle Reg No"
-            android:inputType="number"
+            android:inputType="text"
             android:maxLength="20"
             android:singleLine="true"
             android:textSize="12sp" />

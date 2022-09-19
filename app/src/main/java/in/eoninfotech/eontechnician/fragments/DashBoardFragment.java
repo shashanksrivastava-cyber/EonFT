@@ -237,10 +237,10 @@ public class DashBoardFragment extends Fragment {
 
                                 total_vts.setText("" + dashboardList.get(0).getTot_dev());
                                 total_drs.setText("" + dashboardList.get(0).getTot_drs());
-                                tot_sos.setText(""+dashboardList.get(0).getTot_sos());
-                                tot_lid.setText(""+dashboardList.get(0).getTot_lid());
-                                tot_fuel.setText(""+dashboardList.get(0).getTot_fuel());
-                                tot_temp.setText(""+dashboardList.get(0).getTot_temp());
+//                                tot_sos.setText(""+dashboardList.get(0).getTot_sos());
+//                                tot_lid.setText(""+dashboardList.get(0).getTot_lid());
+//                                tot_fuel.setText(""+dashboardList.get(0).getTot_fuel());
+//                                tot_temp.setText(""+dashboardList.get(0).getTot_temp());
 
                                 faulty_vts.setText("" + dashboardList.get(0).getFaulty_dev());
                                 vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
@@ -254,17 +254,17 @@ public class DashBoardFragment extends Fragment {
                                 um_working.setText(""+dashboardList.get(0).getUmain_work());
                                 um_workigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
 
-                                sos_faulty.setText(""+dashboardList.get(0).getFaulty_sos());
-                                sos_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
-
-                                lid_faulty.setText(""+dashboardList.get(0).getFaulty_lid());
-                                lid_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
-
-                                fuel_faulty.setText(""+dashboardList.get(0).getFaulty_fuel());
-                                fuel_Spv.setPercent(Float.parseFloat(""+dashboardList.get(0).getFaulty_fuel()));
-                                
-                                temp_faulty.setText(""+dashboardList.get(0).getFaulty_temp());
-                                temp_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+//                                sos_faulty.setText(""+dashboardList.get(0).getFaulty_sos());
+//                                sos_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
+//
+//                                lid_faulty.setText(""+dashboardList.get(0).getFaulty_lid());
+//                                lid_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
+//
+//                                fuel_faulty.setText(""+dashboardList.get(0).getFaulty_fuel());
+//                                fuel_Spv.setPercent(Float.parseFloat(""+dashboardList.get(0).getFaulty_fuel()));
+//
+//                                temp_faulty.setText(""+dashboardList.get(0).getFaulty_temp());
+//                                temp_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
 
                             }
                         }

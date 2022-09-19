@@ -509,7 +509,6 @@ public interface ApiHolder {
                                              @Part("panic_status") RequestBody panic_status,
                                              @Part("sensor_veh_no") RequestBody sensor_veh_no,
                                              @Part("sensor_veh_no") RequestBody sensor_old_veh_no,
-
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
@@ -675,14 +674,26 @@ public interface ApiHolder {
     Call<FaqResponse> getFaqData();
 
     @GET("get_vehicle_for_um.php")
-    Call<MainResponse> get_veh_for_um(@Field("client_id") String client_id,
+    Call<UmVehicleResponse> get_veh_for_um(@Field("client_id") String client_id,
                                       @Field("loc_id") String loc_id);
 
-    @GET("get_veh_foe_pm")
+    @GET("get_veh_for_pm")
     Call<MainResponse> get_veh_for_pm(@Field("client_id") String client_id,
                                       @Field("loc_id") String loc_id);
 
+    @GET("bill_intimation")
+    Call<MainResponse> submit_bill(@Field("user_id") String user_id,
+                                      @Field("from_date") String from_date,
+                                   @Field("to_date") String to_date,
+                                   @Field("amount") String amount,
+                                   @Field("remarks") String remarks);
 
+    @GET("bill_details")
+    Call<MainResponse> get_bill_details(@Field("user_id") String user_id,
+                                   @Field("date") String from_date,
+                                   @Field("to_date") String to_date,
+                                   @Field("amount") String amount,
+                                   @Field("remarks") String remarks);
 
 
 }

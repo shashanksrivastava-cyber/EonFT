@@ -57,7 +57,7 @@ public class FaultyDevicesActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     ArrayList<FaultyDevicesDetails> faultyDevices = new ArrayList<>();
     ArrayList<UnderMaintenanceDetail> uMainDetail = new ArrayList<>();
-    String tab;
+    String tab,device_value;
     private static int firstVisibleInListview;
 
     @Override
@@ -66,7 +66,7 @@ public class FaultyDevicesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.faulty_fragment);
         Intent intent = getIntent();
-        String device_value = intent.getStringExtra("device_value");
+        device_value = intent.getStringExtra("device_value");
         tab = intent.getStringExtra("tab");
         String zonee = intent.getStringExtra("zone");
         String other = intent.getStringExtra("other");
@@ -103,7 +103,6 @@ public class FaultyDevicesActivity extends AppCompatActivity {
 
         if (device_value.equals("1")) {
             sendData = device_value;
-            //getFaultyDeviceData();
             getFaultyDrsData();
         } else if (device_value.equals("2")) {
             sendData = device_value;
@@ -220,7 +219,19 @@ public class FaultyDevicesActivity extends AppCompatActivity {
 
     private void refresh() {
         clear();
-        getFaultyDeviceData();
+        if (device_value.equals("1")) {
+            sendData = device_value;
+            getFaultyDrsData();
+        } else if (device_value.equals("2")) {
+            sendData = device_value;
+            getFaultyDeviceData();
+        } else if (device_value.equals("3")) {
+            sendData = device_value;
+            getUmainValue();
+        } else if (device_value.equals("4")) {
+            sendData = device_value;
+            getFaultyDeviceData();
+        }
     }
 
     private void clear() {
