@@ -23,6 +23,8 @@ public class ListIncentiveDetail {
     private String payment_collection;
     @SerializedName("incentive_amt")
     private String incentive_amt;
+    @SerializedName("remarks")
+    private String remarks;
 
     public String getAdd_cnt() {
         return add_cnt;
@@ -86,5 +88,13 @@ public class ListIncentiveDetail {
 
     public void setIncentive_amt(String incentive_amt) {
         this.incentive_amt = incentive_amt;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

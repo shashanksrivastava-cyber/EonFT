@@ -7,8 +7,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -50,6 +48,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.HttpRestClient;
 import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.R;
@@ -214,7 +214,7 @@ public class StockActivity extends AppCompatActivity {
                             s_remarks = e_vts_remarks.getText().toString();
                         }
                         if (s_clientid.equals("") || s_clientid.equals(null)) {
-                            Toast.makeText(getApplicationContext(), "please select client", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Please select client", Toast.LENGTH_LONG).show();
                         } else {
                             new UpdateData().execute(s_wrking_vts_qty, s_wrking_vts_srno, s_faulty_vts_qty);
                         }

@@ -39,18 +39,13 @@ public class StockDetail {
     String location;
     @SerializedName("remarks")
     String remarks;
+    @SerializedName("drs_w_id")
+    String drs_w_id;
+    @SerializedName("drs_f_id")
+    String drs_f_id;
     String technician_name;
     String technician_id;
-    /*ArrayList<Datewise> datewisearr = new ArrayList<Datewise>();
 
-    public ArrayList<Datewise> getDatewisearr() {
-        return datewisearr;
-    }
-
-    public void setDatewisearr(ArrayList<Datewise> datewisea) {
-        this.datewisearr = datewisea;
-    }
-*/
     public String getTechnician_name() {
         return technician_name;
     }
@@ -75,7 +70,6 @@ public class StockDetail {
     public void setDrum_sensor_id(String name) {
         this.drum_sensor_id = name;
     }
-
 
     public String getClientid() {
         return clientid;
@@ -159,6 +153,7 @@ public class StockDetail {
     public void setFaulty_vts_srno(String name) {
         this.faulty_vts_srno = name;
     }
+
     public String getLocation() {
         return location;
     }
@@ -175,6 +170,19 @@ public class StockDetail {
         this.remarks = name;
     }
 
+    public String getDrs_w_id() {
+        return drs_w_id;
+    }
 
+    public void setDrs_w_id(String drs_w_id) {
+        this.drs_w_id = drs_w_id;
+    }
 
+    public String getDrs_f_id() {
+        return drs_f_id;
+    }
+
+    public void setDrs_f_id(String drs_f_id) {
+        this.drs_f_id = drs_f_id;
+    }
 }

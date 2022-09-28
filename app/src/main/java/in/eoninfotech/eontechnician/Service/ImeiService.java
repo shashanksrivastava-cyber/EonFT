@@ -6,10 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.IBinder;
-import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 
 /**
  * Created by root on 17/4/19.
@@ -41,9 +42,6 @@ public class ImeiService extends Service {
             // for ActivityCompat#requestPermissions for more details.
             return TODO;
         }
-//        imsiSIM1 = c.getImsiSIM1();
-//        imsiSIM2 = c.getImsiSIM2();
-//        Toast.makeText(this, ""+device_id, Toast.LENGTH_SHORT).show();
         return super.onStartCommand(intent, flags, startId);
     }
 }

@@ -4,7 +4,6 @@ package in.eoninfotech.eontechnician.fragments;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.androidadvance.topsnackbar.TSnackbar;
 
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.helper.IncentiveDetail;
 import in.eoninfotech.eontechnician.helper.K;

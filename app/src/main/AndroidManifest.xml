@@ -126,7 +126,7 @@
             android:enabled="true"
             android:exported="false" />
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="in.eoninfotech.eontechnician.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -159,7 +159,6 @@
             android:name=".AdminMainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.CallSheetActivity" />
         <activity android:name=".LogViewActivity" />
         <activity
             android:name=".salesteam.SalesInstallationActivity"
@@ -174,10 +173,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".TabInstallmentActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".salesteam.BillingDetailActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -185,7 +180,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".salesteam.ViewBillActivity" />
-        <activity android:name=".salesteam.EditInstallationDetailActivity" />
         <activity android:name=".CardViewActivity" />
         <activity android:name=".activity.FaultyDevicesDetailActivity" />
         <activity android:name=".LiveFaultData" />
@@ -194,12 +188,8 @@
         <activity android:name=".activity.ImageDetailActivity" />
         <activity android:name=".activity.ImageDetailCallSheet" />
         <activity android:name=".activity.CallSheetList" />
-        <activity android:name=".activity.CalendarNew" />
         <activity android:name=".activity.MessageDetails" />
         <activity android:name=".FaqDetailActivity" />
-        <activity
-            android:name=".activity.PaymentCollectionReportActivity"
-            android:theme="@style/AppTheme.FullScreen" />
         <activity android:name=".activity.CustomCalender" />
         <activity android:name=".activity.SendDatatoServer" />
         <activity

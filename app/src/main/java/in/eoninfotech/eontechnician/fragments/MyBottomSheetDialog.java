@@ -3,13 +3,14 @@ package in.eoninfotech.eontechnician.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import androidx.annotation.NonNull;
 import in.eoninfotech.eontechnician.ImageUtils;
 import in.eoninfotech.eontechnician.R;
 import pl.droidsonroids.gif.GifImageView;

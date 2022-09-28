@@ -17,11 +17,6 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.IBinder;
-import android.os.SystemClock;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -35,16 +30,12 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import in.eoninfotech.eontechnician.BuildConfig;
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;
-import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.LocationsResponse;
-import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+
 import in.eoninfotech.eontechnician.webservice.TrackingDetail;
-import in.eoninfotech.eontechnician.webservice.TrackingResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 

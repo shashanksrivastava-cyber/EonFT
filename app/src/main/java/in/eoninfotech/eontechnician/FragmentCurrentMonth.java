@@ -1,30 +1,18 @@
-package in.eoninfotech.eontechnician.fragments;
+package in.eoninfotech.eontechnician;
 
-
-import android.animation.AnimatorInflater;
-import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,32 +20,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dmax.dialog.SpotsDialog;
-import in.eoninfotech.eontechnician.ActivityDetailAdapter;
-import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ActivityResponse;
 import in.eoninfotech.eontechnician.Responses.IncentiveResponse;
 import in.eoninfotech.eontechnician.Responses.MonthDetail;
 import in.eoninfotech.eontechnician.Responses.MonthListResponse;
 import in.eoninfotech.eontechnician.Responses.TechDashboardDetail;
 import in.eoninfotech.eontechnician.Responses.YearDetail;
 import in.eoninfotech.eontechnician.Responses.YearListResponse;
-import in.eoninfotech.eontechnician.activity.IncentiveAdapter;
-import in.eoninfotech.eontechnician.helper.IncentiveDetail;
-import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ListIncentiveDetail;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
-import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,11 +47,7 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class FragmentCurrentMonth extends Fragment {
-
     View v;
     String username, version,zone,displayName;
     int year, month, day,hour,minute,seconds;
@@ -92,16 +70,15 @@ public class FragmentCurrentMonth extends Fragment {
     ArrayAdapter<String> adapter;
     RelativeLayout relay;
     String monthtobeSend="0",yeartobeSend="0";
-    private IncentiveAdapter incentiveAdapter;
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
     Float achivd, total;
     ProgressBar progressBar;
     Timer timer;
     ImageView filter,go;
     LinearLayout lay_filter;
+    EditText remarks;
     SharedPreferences sharedprefs;
     TextView incentiveDate,incentive ;
-    //ScratchTextView scratch_view;
     private TextView mScratchTitleView;
     ArrayList<ListIncentiveDetail> incentiveDetails = new ArrayList<ListIncentiveDetail>();
     private Random random = new Random();
@@ -140,6 +117,7 @@ public class FragmentCurrentMonth extends Fragment {
         txt_incentive = v.findViewById(R.id.txt_incentive);
         tech_name.setText(displayName);
         incentive  = v.findViewById(R.id.incentive);
+        remarks = v.findViewById(R.id.remarks);
 
         CountDownTimer newtimer = new CountDownTimer(1000000000, 1000) {
 
@@ -177,7 +155,6 @@ public class FragmentCurrentMonth extends Fragment {
                     months = "Dec";
                 }
                 current_date = day + "-"  +months + "-" + year;
-               // date.setText(current_date);
                 hour = c.get(Calendar.HOUR_OF_DAY);
                 minute = c.get(Calendar.MINUTE);
                 seconds = c.get(Calendar.SECOND);
@@ -219,7 +196,6 @@ public class FragmentCurrentMonth extends Fragment {
         }else if(monthtobeSend.equals("12")){
             dates.setText("DEC"+" "+","+" "+yeartobeSend);
         }
-       // dates.setText(monthtobeSend+","+yeartobeSend);
         loadContent();
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -250,7 +226,6 @@ public class FragmentCurrentMonth extends Fragment {
                 }else if(monthtobeSend.equals("12")){
                     dates.setText("DEC"+" "+","+" "+yeartobeSend);
                 }
-              //  loadContent();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -268,7 +243,6 @@ public class FragmentCurrentMonth extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 yeartobeSend = String.valueOf(yearList.get(i).getYear());
-               // loadContent();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -341,7 +315,7 @@ public class FragmentCurrentMonth extends Fragment {
             String years = separated[2];
             String dates = years + "-" + month + "-" + date;
             s_date = dates;
-           // loadContent();
+            // loadContent();
         }, year, month - 1, day);
         dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
         dpdd.show();
@@ -376,24 +350,25 @@ public class FragmentCurrentMonth extends Fragment {
                     txt_stock.setText(incentiveDetails.get(0).getStock());
                     txt_callSheet.setText(incentiveDetails.get(0).getCall_sheets());
                     txt_paymentCollection.setText(incentiveDetails.get(0).getPayment_collection());
+                    remarks.setText(incentiveDetails.get(0).getRemarks());
                     if(incentiveDetails.get(0).getIncentive_amt().equalsIgnoreCase("false")){
-                       txt_incentive.setText("---");
-                       String monnth = String.valueOf(month);
-                       int montt = Integer.parseInt(monthtobeSend);
-                       int monn = month-1;
-                       String mm = String.valueOf(monn);
-                       if(monnth.equals(monthtobeSend)){
-                           incentiveDate.setVisibility(View.VISIBLE);
-                           incentive.setVisibility(View.VISIBLE);
-                           incentive.setText("** Incentive to be calculated in 1st week of Next Month ");
+                        txt_incentive.setText("---");
+                        String monnth = String.valueOf(month);
+                        int montt = Integer.parseInt(monthtobeSend);
+                        int monn = month-1;
+                        String mm = String.valueOf(monn);
+                        if(monnth.equals(monthtobeSend)){
+                            incentiveDate.setVisibility(View.VISIBLE);
+                            incentive.setVisibility(View.VISIBLE);
+                            incentive.setText("** Incentive to be calculated in 1st week of Next Month ");
                         }else if(monthtobeSend.equals(mm)){
-                           incentiveDate.setVisibility(View.GONE);
-                           incentive.setVisibility(View.VISIBLE);
-                          incentive.setText("** Incentive not yet Calculated!!");
-                       }else{
-                           incentiveDate.setVisibility(View.GONE);
-                           incentive.setVisibility(View.GONE);
-                       }
+                            incentiveDate.setVisibility(View.GONE);
+                            incentive.setVisibility(View.VISIBLE);
+                            incentive.setText("** Incentive not yet Calculated!!");
+                        }else{
+                            incentiveDate.setVisibility(View.GONE);
+                            incentive.setVisibility(View.GONE);
+                        }
                     }else {
                         incentiveDate.setVisibility(View.GONE);
                         incentive.setVisibility(View.GONE);
@@ -408,7 +383,6 @@ public class FragmentCurrentMonth extends Fragment {
             }
             @Override
             public void onFailure(Call<IncentiveResponse> call, Throwable t) {
-               // refreshLayout.setRefreshing(false);
                 progressDialog.hide();
             }
         });
@@ -433,6 +407,13 @@ public class FragmentCurrentMonth extends Fragment {
                             }adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item,yearDetail);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             yearSpinner.setAdapter(adapter);
+
+                            for(int i=0;i<=yearDetail.size();i++){
+                                if(yearDetail.get(i).equalsIgnoreCase(String.valueOf(year))){
+                                    yearSpinner.setSelection(i);
+                                }
+                            }
+
                         } catch (NullPointerException npe) {
                             npe.printStackTrace();
                         }

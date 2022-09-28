@@ -2,7 +2,6 @@ package in.eoninfotech.eontechnician.activity;
 
 import android.content.SharedPreferences;
 import android.location.Geocoder;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.Locale;
 
+import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;
 
 
@@ -68,20 +68,5 @@ public class SendDatatoServer extends AppCompatActivity {
 
     private void sendData() {
 
-//        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-//        Call<LocationsResponse> call = log_att.locationResponse(username,address,imei);
-//        call.enqueue(new Callback<LocationsResponse>() {
-//            @Override
-//            public void onResponse(Call<LocationsResponse> call, Response<LocationsResponse> response) {
-//                if (response.body().getType() == 1) {
-//                    Toast.makeText(SendDatatoServer.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(SendDatatoServer.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<LocationsResponse> call, Throwable t) {
-//            }
-//        });
     }
 }

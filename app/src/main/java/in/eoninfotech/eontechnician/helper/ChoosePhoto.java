@@ -12,8 +12,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -22,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 import in.eoninfotech.eontechnician.R;
 
 /**

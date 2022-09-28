@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -17,9 +16,8 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import in.eoninfotech.eontechnician.InvoiceData;
-import in.eoninfotech.eontechnician.Invoices;
-import in.eoninfotech.eontechnician.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 /**
  * Created by root on 13/10/18.

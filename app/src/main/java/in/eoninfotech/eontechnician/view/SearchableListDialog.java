@@ -7,7 +7,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.SearchView;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +21,7 @@ import android.widget.ListView;
 import java.io.Serializable;
 import java.util.List;
 
+import androidx.appcompat.widget.SearchView;
 import in.eoninfotech.eontechnician.R;
 
 

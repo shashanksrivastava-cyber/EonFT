@@ -5,10 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -29,6 +25,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.AttendanceDetail;
 import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
@@ -67,7 +67,6 @@ public class CustomCalender extends AppCompatActivity implements OnDateSelectedL
         sharedprefs = this.getSharedPreferences("login_user_pass", MODE_PRIVATE);
         uusername = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
-        cv = findViewById(R.id.calendar_view);
         mcv = findViewById(R.id.calendarView);
         mcv.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)

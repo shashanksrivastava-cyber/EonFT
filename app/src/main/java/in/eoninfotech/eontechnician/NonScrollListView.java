@@ -32,6 +32,4 @@ public class NonScrollListView extends ListView {
 
     }
 
-    public void getOnItemClickListener(OnClickListener onClickListener) {
-    }
 }

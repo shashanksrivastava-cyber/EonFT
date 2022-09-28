@@ -2,22 +2,21 @@ package in.eoninfotech.eontechnician;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import in.eoninfotech.eontechnician.activity.LoginActivity;
-import in.eoninfotech.eontechnician.fragments.FragmentAddNextDayPlan;
-import in.eoninfotech.eontechnician.fragments.ShowNextDayPlanFragment;
 
 public class TabNextDayPlanActivity extends AppCompatActivity {
     public static TabLayout tabLayout;
@@ -25,8 +24,6 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
     public static int int_items = 2;
     String uusername, version,disttid;
     Bundle bundle;
-    FragmentAddNextDayPlan fragmentAddNextDayPlan;
-    ShowNextDayPlanFragment showNextDayPlanFragment;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
 
@@ -95,14 +92,7 @@ public class TabNextDayPlanActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    fragmentAddNextDayPlan = new FragmentAddNextDayPlan();
-                    fragmentAddNextDayPlan.setArguments(bundle);
-                    return fragmentAddNextDayPlan;
-
                 case 1:
-                    showNextDayPlanFragment = new ShowNextDayPlanFragment();
-                    showNextDayPlanFragment.setArguments(bundle);
-                    return showNextDayPlanFragment;
             }
             return null;
         }

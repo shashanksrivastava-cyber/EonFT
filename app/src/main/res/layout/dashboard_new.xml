@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/bankcardId"
                     android:layout_width="120dp"
                     android:layout_height="130dp"
@@ -90,9 +91,9 @@
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="120dp"
                     android:layout_height="130dp"
                     android:layout_margin="10dp"
@@ -144,7 +145,7 @@
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
@@ -152,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cardTotal"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
@@ -270,7 +271,8 @@
                             android:background="@drawable/stop_background"
                             android:weightSum="3"
                             android:layout_weight="1"
-                            android:layout_marginTop="5dp">
+                            android:layout_marginTop="5dp"
+                            android:visibility="visible">
 
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -359,9 +361,9 @@
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_one_login"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -420,9 +422,9 @@
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_two_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -483,9 +485,9 @@
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_three_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -543,9 +545,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_four_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -604,9 +606,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_five_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -665,9 +667,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_six_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -726,9 +728,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_seven_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -787,9 +789,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_eight_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -848,9 +850,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

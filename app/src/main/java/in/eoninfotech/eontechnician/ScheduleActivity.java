@@ -1,7 +1,6 @@
 package in.eoninfotech.eontechnician;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -18,6 +17,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.helper.ClientList;
 import in.eoninfotech.eontechnician.helper.DashboardDetail;
 /***************************************************************************/

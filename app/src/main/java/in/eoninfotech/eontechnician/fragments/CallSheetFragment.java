@@ -31,15 +31,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
@@ -47,9 +38,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -77,6 +65,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.R;
@@ -359,7 +353,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             }
             selecteds_todate = months+ " " +dayOfMonth + " , " + year;
             datee.setText(selecteds_todate);
-           // String abc = datee.getText().toString();
             String[] separated = selected_todate.split("-");
             String date =  separated[0];
             String month = separated[1];
@@ -406,32 +399,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    File getOutputMediaFile(int type) {
-        // External sdcard location
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory
-                (Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("****", "Oops! Failed create "
-                        + IMAGE_DIRECTORY_NAME + " directory");
-                return null;
-            }
-        }
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-            Log.d("****", "");
-        } else {
-            return null;
-        }
-        return mediaFile;
     }
 
     @Override
@@ -493,6 +460,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             bmp = BitmapFactory.decodeFile(path);
             ivProfile.setImageBitmap(bmp);
         }
+
     }
 
     private void openCameraIntent() {

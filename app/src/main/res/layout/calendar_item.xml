@@ -28,7 +28,6 @@
         android:text=""
         android:textColor="@color/eonBlue"
         android:textSize="8sp" />
-    />-->
     <ImageView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/date_icon"

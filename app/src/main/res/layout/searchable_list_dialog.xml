@@ -10,7 +10,7 @@
     android:paddingRight="4dp"
     android:paddingTop="4dp">
 
-    <android.support.v7.widget.SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="35dp"

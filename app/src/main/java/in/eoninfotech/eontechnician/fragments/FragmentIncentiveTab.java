@@ -1,28 +1,20 @@
 package in.eoninfotech.eontechnician.fragments;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import in.eoninfotech.eontechnician.FragmentCurrentMonth;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.fragments.FragmentAddNextDayPlan;
-import in.eoninfotech.eontechnician.fragments.FragmentCurrentMonth;
-import in.eoninfotech.eontechnician.fragments.FragmentLastMonth;
-import in.eoninfotech.eontechnician.fragments.ShowNextDayPlanFragment;
 
 public class FragmentIncentiveTab extends Fragment {
 

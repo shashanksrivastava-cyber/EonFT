@@ -16,7 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +43,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import in.eoninfotech.eontechnician.AdminMainActivity;
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.MainActivity;
@@ -51,7 +52,6 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.TelephonyInfo;
-import in.eoninfotech.eontechnician.salesteam.SalesMainActivity;
 /***************************************************************************/
 // Copyright EON Infotech Ltd., published work, created 2018.          //
 // This computer program includes Confidential, Proprietary information  //
@@ -129,10 +129,6 @@ public class LoginActivity extends Activity {
                     startActivity(intee);
                     finish();
                     appPrefs.setLoggedIn(true);
-                } else if (sharedprefs.getString("s_distt", "").equals("3")) {
-                    Intent intent = new Intent(LoginActivity.this, SalesMainActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
             }
         } catch (Exception npe) {
@@ -245,7 +241,7 @@ public class LoginActivity extends Activity {
     }
 
     void showDialogg(String msg, int labl, int style) {
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(LoginActivity.this, style);
+       AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, style);
         builder.setMessage(msg)
                 .setCancelable(false);
         if (labl == 1) {
@@ -269,7 +265,7 @@ public class LoginActivity extends Activity {
                 }
             });
         }
-        android.support.v7.app.AlertDialog alert = builder.create();
+        AlertDialog alert = builder.create();
         alert.setTitle("Alert");
         alert.show();
     }
@@ -287,10 +283,6 @@ public class LoginActivity extends Activity {
                     startActivity(intee);
                     finish();
                     appPrefs.setLoggedIn(true);
-                } else if (sharedprefs.getString("s_distt", "").equals("3")) {
-                    Intent intent = new Intent(LoginActivity.this, SalesMainActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
             }
         } catch (NullPointerException ne) {

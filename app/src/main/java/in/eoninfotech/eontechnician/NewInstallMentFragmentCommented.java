@@ -6,7 +6,6 @@ import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -41,6 +40,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
 import in.eoninfotech.eontechnician.Responses.ClientDetails;
 import in.eoninfotech.eontechnician.Responses.ClientLocationDetail;
 import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;

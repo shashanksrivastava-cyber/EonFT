@@ -28,12 +28,6 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.FileProvider;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -64,6 +58,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.androidadvance.topsnackbar.TSnackbar;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -76,6 +71,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.Responses.DeviceTypeOtherAis;
 import in.eoninfotech.eontechnician.Responses.MainResponse;
@@ -288,7 +288,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         panicNoMissing = v.findViewById(R.id.panicNoMissing);
         fuelSensorNoMissing = v.findViewById(R.id.fuelSensorNoMissing);
         transNoMissing = v.findViewById(R.id.transNoMissing);
-        //tiltReplaceNo = v.findViewById(R.id.tiltReplaceNo);
         followUpPersonName = v.findViewById(R.id.followUpPersonName);
         followUpPersonPhone = v.findViewById(R.id.followUpPersonPhone);
         phSupportPersonName = v.findViewById(R.id.phSupportPersonName);
@@ -2869,11 +2868,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     e_remarks.setError("Please specify reason");
                 } else if (reinstDevice.equalsIgnoreCase("S") && (lay_sensor_veh.getVisibility() == View.GONE)) {
                     Toast.makeText(getContext(), "Please select Sensor", Toast.LENGTH_LONG).show();
-                } else if ((reinstDevice.equalsIgnoreCase("S")&&(lay_sensor_veh.getVisibility() == View.VISIBLE) && (old_sensor_veh_no.getText().toString().equalsIgnoreCase("")))) {
+                } else if ((reinstDevice.equalsIgnoreCase("S") && (lay_sensor_veh.getVisibility() == View.VISIBLE) && (old_sensor_veh_no.getText().toString().equalsIgnoreCase("")))) {
                     old_sensor_veh_no.setError("Enter Vehicle No");
-                } else if ((reinstDevice.equalsIgnoreCase("S")&&(lay_sensor_veh.getVisibility() == View.VISIBLE) && (new_sensor_veh_no.getText().toString().equalsIgnoreCase("")))) {
+                } else if ((reinstDevice.equalsIgnoreCase("S") && (lay_sensor_veh.getVisibility() == View.VISIBLE) && (new_sensor_veh_no.getText().toString().equalsIgnoreCase("")))) {
                     new_sensor_veh_no.setError("Enter Vehicle no");
-                } else if ((reinstDevice.equalsIgnoreCase("S")&&(old_sensor_veh_no.getText().toString().equals(new_sensor_veh_no.getText().toString())&&(lay_sensor_veh.getVisibility() == View.VISIBLE)))) {
+                } else if ((reinstDevice.equalsIgnoreCase("S") && (old_sensor_veh_no.getText().toString().equals(new_sensor_veh_no.getText().toString()) && (lay_sensor_veh.getVisibility() == View.VISIBLE)))) {
                     Toast.makeText(getContext(), "Vehicle no. not same", Toast.LENGTH_LONG).show();
                 } else if ((new_deviceidReinstall.getVisibility() == View.VISIBLE) && (!reinstDevice.equalsIgnoreCase("S"))) {
                     s_new_device_id = new_deviceidReinstall.getText().toString();
@@ -3399,9 +3398,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         Toast.makeText(getContext(), "Select Reason", Toast.LENGTH_LONG).show();
                     } else if (itemsCollected.equals("") && (!removeDeviceType.equalsIgnoreCase("S"))) {
                         Toast.makeText(getActivity(), "Select Items Collected", Toast.LENGTH_SHORT).show();
-                    } else if ((!removeDeviceType.equalsIgnoreCase("V")) &&((sensor_veh_remove.getVisibility() == View.GONE))) {
+                    } else if ((!removeDeviceType.equalsIgnoreCase("V")) && ((sensor_veh_remove.getVisibility() == View.GONE))) {
                         Toast.makeText(getContext(), "Please Select Sensor", Toast.LENGTH_SHORT).show();
-                    } else if ((sensor_veh_remove.getVisibility() == View.VISIBLE) && (sensor_veh_no_remove.getText().toString().equalsIgnoreCase("")&& (!(removeDeviceType.equalsIgnoreCase("V"))))) {
+                    } else if ((sensor_veh_remove.getVisibility() == View.VISIBLE) && (sensor_veh_no_remove.getText().toString().equalsIgnoreCase("") && (!(removeDeviceType.equalsIgnoreCase("V"))))) {
                         sensor_veh_no_remove.setError("Please provide vehicle no");
                     } else {
                         updateInstallationData();
@@ -3728,15 +3727,15 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     vltd_sr_no_miss.setError("Sr No can't be null");
                 } else if ((s_old_serial_no.length() < 8) && (tilDeviceMiss.getVisibility() == View.VISIBLE) && (!(missDeviceType.equalsIgnoreCase("S")))) {
                     vltd_sr_no_miss.setError("Sr No must be eight character long");
-                } else if((!missDeviceType.equalsIgnoreCase("S")) && ((s_reg_no.equals("") || s_reg_no.equals("0") || s_reg_no.equals("null")))) {
+                } else if ((!missDeviceType.equalsIgnoreCase("S")) && ((s_reg_no.equals("") || s_reg_no.equals("0") || s_reg_no.equals("null")))) {
                     mDevice_reg_no.setError("Registration no.can't be null or zero");
                 } else if ((relMissing.getVisibility() == View.VISIBLE) && (missingType.getSelectedItem().toString().equalsIgnoreCase("Select Reason") && (!(missDeviceType.equalsIgnoreCase("S"))))) {
                     Toast.makeText(getActivity(), "Please Select Reason", Toast.LENGTH_SHORT).show();
                 } else if (missDeviceType.equalsIgnoreCase("S") && (sensor_veh_missing.getVisibility() == View.GONE)) {
                     Toast.makeText(getActivity(), "Please Select Sensor", Toast.LENGTH_SHORT).show();
-                } else if ((sensor_veh_missing.getVisibility() == View.VISIBLE) && (sensor_veh_no_missing.getText().toString().equalsIgnoreCase("")&&(missDeviceType.equalsIgnoreCase("S")))) {
+                } else if ((sensor_veh_missing.getVisibility() == View.VISIBLE) && (sensor_veh_no_missing.getText().toString().equalsIgnoreCase("") && (missDeviceType.equalsIgnoreCase("S")))) {
                     sensor_veh_no_missing.setError("Please provide Vehicle No");
-                } else if ((sensor_veh_missing.getVisibility() == View.VISIBLE) && (sensor_veh_no_missing.getText().toString().equalsIgnoreCase("")&&(missDeviceType.equalsIgnoreCase("B")))) {
+                } else if ((sensor_veh_missing.getVisibility() == View.VISIBLE) && (sensor_veh_no_missing.getText().toString().equalsIgnoreCase("") && (missDeviceType.equalsIgnoreCase("B")))) {
                     sensor_veh_no_missing.setError("Please provide Vehicle No");
                 } else {
                     s_remarks = e_remarks.getText().toString();

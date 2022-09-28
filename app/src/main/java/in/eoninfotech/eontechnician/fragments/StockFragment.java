@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,6 +48,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import androidx.fragment.app.Fragment;
 import in.eoninfotech.eontechnician.HttpRestClient;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ClientDataResponse;
@@ -75,8 +75,10 @@ import static android.content.Context.MODE_PRIVATE;
 public class StockFragment extends Fragment {
 
     View v;
-    EditText e_wrking_vts_qty, e_wrking_vts_srno, e_faulty_vts_qty, e_faulty_vts_srno, e_cable_7_meter, e_cable_2_meter, e_drum_sensor_qty, e_drum_sensor_ids, e_magnet_set, e_y_cable, e_remarks, e_power_cable, e_vts_remarks;
-    String s_wrking_vts_qty, s_wrking_vts_srno, s_faulty_vts_qty, s_clientname, s_faulty_vts_srno, s_cable_7_meter, s_cable_2_meter, s_drum_sensor_qty, s_drum_sensor_ids, s_magnet_set, s_y_cable, s_remarks, s_clientid = "", s_datee, s_power_cable, s_vts_remarks;
+    EditText e_wrking_vts_qty, e_wrking_vts_srno, e_faulty_vts_qty, e_faulty_vts_srno, e_cable_7_meter, e_cable_2_meter, e_drum_sensor_qty,
+            e_drum_sensor_ids, e_magnet_set, e_y_cable, e_remarks, e_power_cable, e_vts_remarks,faulty_drs;
+    String s_wrking_vts_qty, s_wrking_vts_srno, s_faulty_vts_qty, s_clientname, s_faulty_vts_srno, s_cable_7_meter, s_cable_2_meter, s_drum_sensor_qty, s_drum_sensor_ids, s_magnet_set,
+            s_y_cable, s_remarks, s_clientid = "", s_datee, s_power_cable, s_vts_remarks,s_drs_w_id,s_drs_f_id;
     Button update_dataa;
     MySearchableSpinner client;
     TextView datee;
@@ -125,6 +127,7 @@ public class StockFragment extends Fragment {
         e_y_cable = v.findViewById(R.id.y_cable);
         client = v.findViewById(R.id.m_region);
         datee = v.findViewById(R.id.datee);
+        faulty_drs = v.findViewById(R.id.faulty_drs);
         update_dataa = v.findViewById(R.id.update_data);
         progressBar = v.findViewById(R.id.progressBar);
         hashMap = EONUtil.gettingData(getActivity());
@@ -301,6 +304,11 @@ public class StockFragment extends Fragment {
         } else {
             s_y_cable = e_y_cable.getText().toString();
         }
+        if (faulty_drs.getText().toString().equals("")) {
+            s_drs_f_id = "0";
+        } else {
+            s_drs_f_id = faulty_drs.getText().toString();
+        }
         if (vts_one.getVisibility() == View.GONE) {
             if (e_cable_2_meter.getText().toString().equals("")) {
                 s_cable_2_meter = "0";
@@ -330,11 +338,10 @@ public class StockFragment extends Fragment {
         pDialog.show();
         ApiHolder loc_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         locCall = loc_att.stockResponse(s_clientid, s_wrking_vts_qty, s_faulty_vts_qty, s_cable_7_meter, s_cable_2_meter, s_drum_sensor_qty,
-                s_magnet_set, username, s_y_cable, s_remarks, s_wrking_vts_srno, s_faulty_vts_srno, s_drum_sensor_ids);
+                s_magnet_set, username, s_y_cable, s_remarks, s_wrking_vts_srno, s_faulty_vts_srno, s_drum_sensor_ids,s_drs_f_id,s_drs_w_id);
         locCall.enqueue(new Callback<MainResponse>() {
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 MainResponse workTypeResponse = response.body();
-                Log.i("**work respnse", "" + response.body());
                 Toast.makeText(getContext(), "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 pDialog.hide();
                 int DELAY = 1000;
@@ -419,10 +426,8 @@ public class StockFragment extends Fragment {
         try {
             if (show) {
                 progressBar.setVisibility(View.VISIBLE);
-                // getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             } else {
                 progressBar.setVisibility(View.GONE);
-                // getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         } catch (Exception e) {
             e.printStackTrace();

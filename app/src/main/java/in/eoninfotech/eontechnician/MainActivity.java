@@ -6,19 +6,11 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -31,27 +23,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.IBinder;
 import android.provider.Settings;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -59,58 +37,51 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.Responses.TechnicianMonthDetail;
 import in.eoninfotech.eontechnician.Responses.TechnicianMonthResponse;
 import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
 import in.eoninfotech.eontechnician.Service.AlarmService;
 import in.eoninfotech.eontechnician.Service.ForegroundService;
-import in.eoninfotech.eontechnician.Service.JobScheduleService;
-import in.eoninfotech.eontechnician.Service.LocationService;
-import in.eoninfotech.eontechnician.Service.LocationServices;
-import in.eoninfotech.eontechnician.activity.CalendarNew;
-import in.eoninfotech.eontechnician.activity.CallSheetActivity;
-import in.eoninfotech.eontechnician.activity.CustomCalender;
 import in.eoninfotech.eontechnician.activity.LoginActivityNew;
 import in.eoninfotech.eontechnician.activity.MessageActivity;
-import in.eoninfotech.eontechnician.activity.MessageAdapter;
-import in.eoninfotech.eontechnician.activity.SimpleServiceExample;
 import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
 import in.eoninfotech.eontechnician.fragments.BillIntimationFragment;
 import in.eoninfotech.eontechnician.fragments.BillViewFragment;
 import in.eoninfotech.eontechnician.fragments.CallSheetFragment;
 import in.eoninfotech.eontechnician.fragments.DashBoardFragment;
-import in.eoninfotech.eontechnician.fragments.FragmentCurrentMonth;
 import in.eoninfotech.eontechnician.fragments.LiveStatusFragment;
 import in.eoninfotech.eontechnician.fragments.NewInstallmentFragment;
-import in.eoninfotech.eontechnician.fragments.NewInstallmentFragmentBackup;
 import in.eoninfotech.eontechnician.fragments.OtherDashBoardFragment;
 import in.eoninfotech.eontechnician.fragments.PaymentCollectionReportFragment;
-import in.eoninfotech.eontechnician.fragments.RetroOldInstallmentFragment;
 import in.eoninfotech.eontechnician.fragments.StockFragment;
-import in.eoninfotech.eontechnician.fragments.StockViewUploadFragment;
 import in.eoninfotech.eontechnician.fragments.ViewActivityLogsFragment;
 import in.eoninfotech.eontechnician.fragments.ViewCallSheetFragment;
 import in.eoninfotech.eontechnician.fragments.ViewStockFragment;
@@ -118,16 +89,12 @@ import in.eoninfotech.eontechnician.helper.ClientList;
 import in.eoninfotech.eontechnician.helper.EONUtil;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.fragments.ActivityLogFragment;
-import in.eoninfotech.eontechnician.fragments.CriticalSitesFragment;
-import in.eoninfotech.eontechnician.fragments.AdminIncentiveFragment;
 import in.eoninfotech.eontechnician.fragments.FragmentIncentiveTab;
 import in.eoninfotech.eontechnician.helper.TelephonyInfo;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.MessageResponse;
-import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnician.webservice.TrackingDetail;
-import in.eoninfotech.eontechnician.webservice.TrackingResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -150,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     Bundle bundle;
     FaqsFragment faqsfragment;
-    CriticalSitesFragment criticalSitesFragment;
     ActivityDetailFragment activityDetailFragment;
     ActivityLogFragment activityLogFragment;
     NewInstallmentFragment installmentFragment;
@@ -255,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent dialogIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(dialogIntent);
-                            // getBaseContext().startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
                         }
                     })
                     .setCancelable(false)
@@ -475,7 +440,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.msg_alert) {
-            // getFaultyVts(1);
             Intent intent = new Intent(MainActivity.this, MessageActivity.class);
             startActivity(intent);
         }
@@ -490,10 +454,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_dashboard) {
             if (disgnid.equals("0")) {
-                AdminIncentiveFragment adminIncentiveFragment;
-                adminIncentiveFragment = new AdminIncentiveFragment();
-                adminIncentiveFragment.setArguments(bundle);
-                ft = fm.beginTransaction().replace(R.id.framelay, adminIncentiveFragment);
             } else {
                 FragmentIncentiveTab fragmentIncentiveTab;
                 fragmentIncentiveTab = new FragmentIncentiveTab();
@@ -501,17 +461,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ft = fm.beginTransaction().replace(R.id.framelay, fragmentIncentiveTab);
             }
             setTitle("Incentive");
-            tabLayout.setVisibility(View.GONE);
-            viewPager.setVisibility(View.GONE);
-            ft.commit();
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-
-        } else if (id == R.id.nav_critical_sites) {
-            criticalSitesFragment = new CriticalSitesFragment();
-            criticalSitesFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, criticalSitesFragment);
-            setTitle("Critical Sites");
             tabLayout.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             ft.commit();
@@ -529,6 +478,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             viewPagerAdapterAtd = new ViewPagerAdapterAtd(getSupportFragmentManager());
             viewpagerattendance.setAdapter(viewPagerAdapterAtd);
             tabLayout.setupWithViewPager(viewpagerattendance);
@@ -536,7 +486,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-
         } else if (id == R.id.nav_tech_dashboard) {
             dashBoardFragment = new DashBoardFragment();
             dashBoardFragment.setArguments(bundle);
@@ -548,6 +497,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerattendance.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(getSupportFragmentManager());
             viewPager.setAdapter(viewPagerAdapterDashboard);
             tabLayout.setupWithViewPager(viewPager);
@@ -584,6 +534,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerattendance.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             viewPagerAdapterStock = new ViewPagerAdapterStock(getSupportFragmentManager());
             viewpagerstock.setAdapter(viewPagerAdapterStock);
             tabLayout.setupWithViewPager(viewpagerstock);
@@ -602,11 +553,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-
         } else if (id == R.id.nav_new_repair) {
             installmentFragment = new NewInstallmentFragment();
             installmentFragment.setArguments(bundle);
@@ -619,6 +570,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.VISIBLE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             viewPagerAdapterActivity = new ViewPagerAdapterActivity(getSupportFragmentManager());
             viewpageractivity.setAdapter(viewPagerAdapterActivity);
             tabLayout.setupWithViewPager(viewpageractivity);
@@ -638,6 +590,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.VISIBLE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
             viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
             viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
             tabLayout.setupWithViewPager(viewpagercallsheet);
@@ -677,6 +630,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpageractivity.setVisibility(View.GONE);
             viewpagercallsheet.setVisibility(View.GONE);
             viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.VISIBLE);
             viewPagerAdapterBills = new ViewPagerAdapterBills(getSupportFragmentManager());
             viewPagerBill.setAdapter(viewPagerAdapterBills);
             tabLayout.setupWithViewPager(viewPagerBill);
@@ -684,8 +638,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.faqs) {
+        } else if (id == R.id.faqs) {
             faqsfragment = new FaqsFragment();
             faqsfragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, faqsfragment);
@@ -704,15 +657,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        } else if (id == R.id.nav_next_plan) {
-            Intent intee = new Intent(MainActivity.this, CallSheetActivity.class);
-            intee.putExtra("user", usrname);
-            startActivity(intee);
-            finish();
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            hideKeyboard();
-        } else if (id == R.id.menu_logout) {
+        }
+        else if (id == R.id.menu_logout) {
             final boolean isRunning = EONUtil.isServiceRunning(this.getBaseContext(), ForegroundService.class);
             String running = String.valueOf(isRunning);
             new AlertDialog.Builder(this)
@@ -839,22 +785,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    public void addRecord() {
-        int i = 0;
-        Log.i("***stop size***", String.valueOf(ClientLists.size()));
-        for (; i < ClientLists.size(); i++) {
-            EONUtil.insertStationData(this, i + 1, ClientLists.get(i).getClientid() + ":" + ClientLists.get(i).getDrs_status(), ClientLists.get(i).getClientname());
-        }
-        if (i == ClientLists.size()) {
-            appPrefs.saveProviderInfo("true");
-        }
-    }
-
-    public void deleteRecord() {
-        EONUtil.deleteStationData(this);
-        appPrefs.saveProviderInfo("false");
-    }
-
     public static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {
@@ -868,6 +798,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_PERMISSION) {
             if (grantResults.length >= 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // permission was granted
@@ -959,29 +890,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialog.show();
     }
 
-    private long DownloadData() {
-
-        long downloadReference;
-
-        manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(downloadMp3Url));
-
-        request.setTitle("audio.mp3");
-        request.setDestinationInExternalFilesDir(MainActivity.this,
-                Environment.DIRECTORY_DOWNLOADS, "/eontech/alert.mp3");
-        downloadReference = manager.enqueue(request);
-
-        return downloadReference;
-    }
-
     private void ShowProgressBar(boolean show) {
         try {
             if (show) {
                 progressBars.setVisibility(View.VISIBLE);
-                // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             } else {
                 progressBars.setVisibility(View.GONE);
-                // this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1006,7 +920,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     dashBoardFragment = new DashBoardFragment();
                     dashBoardFragment.setArguments(bundle);
                     return dashBoardFragment;
-
                 case 1:
                     otherDashBoardFragment = new OtherDashBoardFragment();
                     otherDashBoardFragment.setArguments(bundle);

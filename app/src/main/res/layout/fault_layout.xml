@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilFaultVts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -80,9 +80,9 @@
                 android:singleLine="true"
                 android:textSize="12sp"
                 android:visibility="visible" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilFaultSr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -98,11 +98,11 @@
                 android:singleLine="true"
                 android:textSize="12sp"
                 android:visibility="gone" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </RelativeLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -116,7 +116,7 @@
             android:inputType="textCapCharacters"
             android:singleLine="true"
             android:textSize="12sp" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -187,7 +187,7 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/eonWhite"
@@ -241,6 +241,6 @@
             </in.eoninfotech.eontechnician.CustomTextInputLayout>
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

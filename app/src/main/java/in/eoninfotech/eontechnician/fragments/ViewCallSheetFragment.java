@@ -10,11 +10,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +35,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.CallSheetResponse;
 import in.eoninfotech.eontechnician.Responses.ClientDetails;
@@ -115,13 +115,8 @@ public class ViewCallSheetFragment extends Fragment {
         upload_img_view = v.findViewById(R.id.upload_img);
         update_dataa = v.findViewById(R.id.update_data);
         ivProfile = v.findViewById(R.id.ivProfile);
-        preview = v.findViewById(R.id.preview);
         update = v.findViewById(R.id.update);
         go = v.findViewById(R.id.go);
-//      clearFilter = (ImageView) v.findViewById(R.id.reset);
-//      submit  = (ImageView)v.findViewById(R.id.submit);
-//      selectedMonth = (EditText)v.findViewById(R.id.month);
-//      selectedYear = (EditText)v.findViewById(R.id.year);
         monthSpinner = v.findViewById(R.id.monthSpinner);
         yearSpinner = v.findViewById(R.id.yearSpinner);
         datee.setInputType(InputType.TYPE_NULL);
@@ -200,6 +195,11 @@ public class ViewCallSheetFragment extends Fragment {
                             }adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, yearDetail);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             yearSpinner.setAdapter(adapter);
+                            for(int i=0;i<=yearDetail.size();i++){
+                                if(yearDetail.get(i).equalsIgnoreCase(String.valueOf(year))){
+                                    yearSpinner.setSelection(i);
+                                }
+                            }
                         } catch (NullPointerException npe) {
                             npe.printStackTrace();
                         }

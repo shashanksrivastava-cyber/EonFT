@@ -10,6 +10,8 @@ public class MainResponse {
     Integer type;
     @SerializedName("status")
     String message;
+    @SerializedName("bill_no")
+    String bill_no;
     @SerializedName("work_data")
     ArrayList<DeviceTypeOtherAis> deviceTypesArr = new ArrayList<>();
 
@@ -31,4 +33,11 @@ public class MainResponse {
 
     public ArrayList<DeviceTypeOtherAis> getDeviceTypesArr() { return deviceTypesArr; }
 
+    public String getBill_no() {
+        return bill_no;
+    }
+
+    public void setBill_no(String bill_no) {
+        this.bill_no = bill_no;
+    }
 }

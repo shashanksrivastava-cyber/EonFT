@@ -16,8 +16,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,6 +29,8 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import in.eoninfotech.eontechnician.GetLocation;
 import in.eoninfotech.eontechnician.Service.JobScheduleService;
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;

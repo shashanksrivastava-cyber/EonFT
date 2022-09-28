@@ -1,16 +1,62 @@
 package in.eoninfotech.eontechnician;
 
-import android.support.v7.widget.RecyclerView;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import androidx.recyclerview.widget.RecyclerView;
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
+import in.eoninfotech.eontechnician.callbacks.CancelBill;
+import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
+import in.eoninfotech.eontechnician.helper.K;
+import in.eoninfotech.eontechnician.webservice.ApiHolder;
+import in.eoninfotech.eontechnician.webservice.BillDetails;
+import in.eoninfotech.eontechnician.webservice.BillResponse;
+import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.ActivityHolder> {
+
+    Context context;
+    private final ArrayList<BillDetails> billDetails;
+    Dialog myDialog;
+    ProgressDialog pDialog;
+    String version;
+    SharedPreferences sharedprefs;
+    SharedPreferences.Editor editor;
+    TextView dialog_bill_no,dialog_amt,dialog_remark,cancel,ok;
+    MessageAdapterListener listener;
+
+    public BillViewAdapter(Context context, ArrayList<BillDetails> billDetails,MessageAdapterListener listener) {
+
+        this.billDetails = billDetails;
+        this.context=context;
+        myDialog = new Dialog(context);
+        this.listener = listener;
+        sharedprefs = this.context.getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        editor = sharedprefs.edit();
+        version = sharedprefs.getString("version", "");
+    }
+
     @Override
     public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -20,21 +66,156 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
 
     @Override
     public void onBindViewHolder(ActivityHolder holder, int position) {
-        holder.bill_no.setText("B123456789");
-        holder.date.setText("19 Sept");
-        holder.amount.setText("5000");
-        holder.status.setText("Approved");
+
+        final BillDetails billDetailsResponse = billDetails.get(position);
+
+        holder.bill_no.setText(billDetailsResponse.getBill_no());
+        holder.date.setText(billDetailsResponse.getBill_date());
+        holder.amount.setText("₹" + billDetailsResponse.getBill_amt());
+        holder.status.setText(billDetailsResponse.getStatus());
+        if(billDetailsResponse.getStatus().equalsIgnoreCase("Approved")){
+            holder.status.setTextColor(context.getResources().getColor(R.color.green));
+        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Rejected")){
+            holder.status.setTextColor(context.getResources().getColor(R.color.red));
+        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Received")){
+            holder.status.setTextColor(context.getResources().getColor(R.color.c));
+        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Cancelled")){
+            holder.status.setTextColor(context.getResources().getColor(R.color.dash_red));
+        }else {
+        }
+
+        if(billDetailsResponse.getStatus().equalsIgnoreCase("Approved")){
+            holder.rej_date.setVisibility(View.GONE);
+            holder.title.setVisibility(View.VISIBLE);
+            holder.app_amount.setVisibility(View.VISIBLE);
+            holder.app_date.setVisibility(View.VISIBLE);
+            holder.app_amount.setText("₹" + billDetailsResponse.getApp_amt());
+            holder.app_date.setText(billDetailsResponse.getApp_date());
+            holder.ll_form.setVisibility(View.GONE);
+            holder.view1.setVisibility(View.GONE);
+        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Rejected")) {
+            holder.title.setVisibility(View.GONE);
+            holder.app_date.setVisibility(View.VISIBLE);
+            holder.app_amount.setVisibility(View.GONE);
+            holder.app_date.setText("Bill Rejected");
+            holder.rej_date.setText(billDetailsResponse.getRej_date());
+            holder.ll_form.setVisibility(View.GONE);
+            holder.view1.setVisibility(View.GONE);
+        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Cancelled")) {
+            holder.title.setVisibility(View.GONE);
+            holder.app_date.setVisibility(View.VISIBLE);
+            holder.app_amount.setVisibility(View.GONE);
+            holder.app_date.setText("Bill cancelled");
+            holder.rej_date.setText(billDetailsResponse.getCanc_date());
+            holder.ll_form.setVisibility(View.GONE);
+            holder.view1.setVisibility(View.GONE);
+        }else {
+            holder.title.setVisibility(View.GONE);
+            holder.app_date.setVisibility(View.VISIBLE);
+            holder.app_date.setText("Bill not processed yet");
+            holder.app_amount.setVisibility(View.GONE);
+            holder.rej_date.setText(billDetailsResponse.getRec_date());
+            holder.view1.setVisibility(View.VISIBLE);
+            holder.ll_form.setVisibility(View.VISIBLE);
+        }
+        if(billDetailsResponse.getRemarks().equalsIgnoreCase("-")){
+            holder.remarks.setVisibility(View.GONE);
+        }else {
+            holder.remarks.setText(billDetailsResponse.getRemarks());
+        }
+
+        holder.viewBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String s_bill_no  = billDetails.get(position).getBill_no();
+                String s_amount = billDetails.get(position).getBill_amt();
+                showDialog(s_bill_no,s_amount,position);
+            }
+        });
+
+    }
+
+    private void showDialog(String s_bill_no, String s_amount, int position) {
+        myDialog.setContentView(R.layout.bill_confirmation_dialog);
+        cancel = myDialog.findViewById(R.id.cancel);
+        ok = myDialog.findViewById(R.id.ok);
+        dialog_bill_no = myDialog.findViewById(R.id.dialog_bill_no);
+        dialog_amt = myDialog.findViewById(R.id.dialog_amt);
+        dialog_remark = myDialog.findViewById(R.id.dialog_remark);
+
+        dialog_bill_no.setText(s_bill_no);
+        dialog_amt.setText("₹" + s_amount);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.hide();
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dialog_remark.getText().toString().equalsIgnoreCase("")){
+                    dialog_remark.setError("Fill Remarks");
+                }else {
+                   String s_remarks = dialog_remark.getText().toString();
+                    //listener.onCancelButtonClick(position,s_bill_no,s_remarks);
+                    cancelBill(position,s_bill_no,s_remarks);
+
+                }
+
+            }
+        });
+
+        myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    private void cancelBill(int position,String s_bill_no,String s_remarks) {
+        try {
+            pDialog = K.createProgressDialog(context);
+            pDialog.setMessage("Loading");
+            pDialog.show();
+            pDialog.setCancelable(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+        Call<BillResponse> call = log_att.cancel_bill(s_bill_no,s_remarks);
+        Log.i("****call", String.valueOf(call));
+        call.enqueue(new Callback<BillResponse>() {
+            @Override
+            public void onResponse(Call<BillResponse> call, Response<BillResponse> response) {
+                pDialog.dismiss();
+                if(response.body().getType().equalsIgnoreCase("1")){
+                    myDialog.hide();
+                    Toast.makeText(context, "Bill Cancelled Successfully", Toast.LENGTH_SHORT).show();
+                    listener.onCancelButtonClick(position,s_bill_no,s_remarks);
+                }
+                else {
+                }
+            }
+            @Override
+            public void onFailure(Call<BillResponse> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(context, "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+
+        return billDetails.size();
     }
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView bill_no,amount,status,date;
-        TextView textViewAttached;
+        TextView bill_no,amount,status,date,app_amount,app_date,remarks,rej_date,title,viewBill;
+        LinearLayout ll_form;
+        View view1;
 
         public ActivityHolder(View itemView) {
             super(itemView);
@@ -43,6 +224,19 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
             bill_no = itemView.findViewById(R.id.bill_no);
             amount = itemView.findViewById(R.id.amount);
             status = itemView.findViewById(R.id.status);
+            app_amount = itemView.findViewById(R.id.app_amount);
+            app_date = itemView.findViewById(R.id.app_date);
+            remarks = itemView.findViewById(R.id.remarks);
+            rej_date = itemView.findViewById(R.id.rej_date);
+            title = itemView.findViewById(R.id.app_title);
+            ll_form = itemView.findViewById(R.id.ll_form);
+            view1 = itemView.findViewById(R.id.view1);
+            viewBill = itemView.findViewById(R.id.viewBill);
         }
+    }
+
+    public interface MessageAdapterListener {
+
+        void onCancelButtonClick(int position, String s_bill_no, String s_remarks);
     }
 }

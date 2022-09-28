@@ -1,7 +1,6 @@
 package in.eoninfotech.eontechnician;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
@@ -10,6 +9,7 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import java.util.Collection;
 import java.util.HashSet;
 
+import androidx.core.content.ContextCompat;
 
 
 /**

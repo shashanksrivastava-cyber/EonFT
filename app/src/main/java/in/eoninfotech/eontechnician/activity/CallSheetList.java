@@ -7,13 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.text.InputType;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -30,6 +25,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.CallSheetListDetail;
 import in.eoninfotech.eontechnician.Responses.CallSheetListResponse;
@@ -86,8 +86,6 @@ public class CallSheetList extends AppCompatActivity {
         upload_img_view = findViewById(R.id.upload_img);
         update_dataa = findViewById(R.id.update_data);
         ivProfile = findViewById(R.id.ivProfile);
-        preview = findViewById(R.id.preview);
-        //callDate = v.findViewById(R.id.callDate);
         circularRelative = findViewById(R.id.circularRelative);
         refreshLayout = findViewById(R.id.refresh);
         recyclerView = findViewById(R.id.recyclerView);
@@ -135,7 +133,6 @@ public class CallSheetList extends AppCompatActivity {
             @Override
             public void onFailure(Call<CallSheetListResponse> call, Throwable t) {
                 t.printStackTrace();
-//                pDialog.dismiss();
                 Toast.makeText(CallSheetList.this, "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
         });

@@ -6,6 +6,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/custDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginTop="5dp">
+
+        <EditText
+            android:id="@+id/fromDate"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/et_frame"
+            android:drawableStart="@drawable/baseline_event_black_18"
+            android:drawableLeft="@drawable/baseline_event_black_18"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-light"
+            android:hint="From Date"
+            android:imeOptions="actionNext"
+            android:padding="10dp"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/toDate"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/fromDate"
+            android:background="@drawable/et_frame"
+            android:drawableStart="@drawable/baseline_event_black_18"
+            android:drawableLeft="@drawable/baseline_event_black_18"
+            android:fontFamily="sans-serif-light"
+            android:hint="  To Date"
+            android:imeOptions="actionNext"
+            android:padding="10dp"
+            android:textColorHint="@color/black"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relay"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/et_frame"
+            android:layout_weight="0.5">
+
+            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:spinnerMode="dialog"
+                android:visibility="visible"
+                android:entries="@array/billStatus"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="6dp"
+                android:background="@color/eonWhite"
+                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/done"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Done"
+            android:textColor="@color/eonWhite"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:background="@color/green"
+            android:layout_marginRight="30dp"
+            android:padding="2dp"/>
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +124,7 @@
             android:textColor="@color/colorPrimary"
             android:visibility="gone" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -31,6 +132,5 @@
             tools:listitem="@layout/bill_view_adapter"/>
 
     </LinearLayout>
-
 
 </LinearLayout>

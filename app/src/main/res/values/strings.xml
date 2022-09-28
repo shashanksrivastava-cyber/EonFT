@@ -74,5 +74,13 @@
 
 6. If device is missing, damage or removed from vehicle, it will show as device disconnect.</string>
 
+    <string-array name="billStatus">
+        <item>Submitted</item>
+        <item>Received</item>
+        <item>Approved</item>
+        <item>Rejected</item>
+        <item>Cancelled</item>
+    </string-array>
+
 
 </resources>

@@ -7,10 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +32,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.Responses.AttendanceDetail;
 import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
 import in.eoninfotech.eontechnician.Responses.LogDetail;
@@ -51,7 +50,7 @@ import retrofit2.Response;
 /**
  * Created by root on 2/2/18.
  */
-public class LogViewActivity extends AppCompatActivity{
+public class LogViewActivity extends AppCompatActivity {
 
     String disttid;
     String uusername, date, version;

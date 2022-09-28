@@ -64,17 +64,6 @@ import retrofit2.http.Part;
 public interface ApiHolder {
 
 
-    /*@Multipart
-    @POST("device_old_tst.php")
-    Call<UpdateDataResponse> uploadFile(@Part MultipartBody.Part image,
-                                        @Part("tech_name") RequestBody tech_name,
-                                        @Part("vts_old") RequestBody vts_old,
-                                        @Part("vts_new") RequestBody vts_new,
-                                        @Part("drs_new") RequestBody drs_new,
-                                        @Part("drs_old") RequestBody drs_old,
-                                        @Part("client_id") RequestBody clint_id,
-                                        @Part("client_id") RequestBody reason_,
-                                        @Part("remarks") RequestBody remarks);*/
     @FormUrlEncoded
     @POST("bill-detail.php")
     Call<UpdateDataResponse> view_bill(@Field("order_no") String order_no);
@@ -156,62 +145,11 @@ public interface ApiHolder {
             @Field("client_id") String client_id,
             @Field("client_loc") String client_loc);
 
-    @FormUrlEncoded
-    @POST("pending-bill.php")
-    Call<UpdateDataResponse> pending_bill(@Field("sales_person") String tech_name);
-
-    @FormUrlEncoded
-    @POST("plan_list.php")
-    Call<UpdateDataResponse> plan_detail(@Field("name") String tech_name,
-                                         @Field("key") String key);
-
-    @FormUrlEncoded
-    @POST("replacement-reasons.php")
-    Call<UpdateDataResponse> get_replacement_reasons(@Field("sale_id") String sale_id);
-
-    @FormUrlEncoded
-    @POST("sales-report.php")
-    Call<UpdateDataResponse> view_entry(@Field("sales_person") String tech_name,
-                                        @Field("from_date") String from_date,
-                                        @Field("to_date") String to_date);
-
-    @FormUrlEncoded
-    @POST("sales-orders.php")
-    Call<UpdateDataResponse> order_list(@Field("sales_person") String tech_name);
-
-    @FormUrlEncoded
-    @POST("sales-client-data.php")
-    Call<UpdateDataResponse> sales_client_detail(@Field("sales_person") String sales_person);
-
-    @FormUrlEncoded
-    @POST("sales-target.php")
-    Call<UpdateDataResponse> sales_target(@Field("sales_person") String sales_person);
-
-    @FormUrlEncoded
-    @POST("sale-detail.php")
-    Call<UpdateDataResponse> edit_sale_detail(@Field("sale_id") String sale_id);
 
     @FormUrlEncoded
     @POST("stock-report.php")
     Call<StockResponse> stock_report(@Field("tech_name") String tech_name,
                                      @Field("date") String date);
-
-    @FormUrlEncoded
-    @POST("tech_plans.php")
-    Call<UpdateDataResponse> update_next_day_plan(@Field("tech_name") String tech_name,
-                                                  @Field("date") String date,
-                                                  @Field("cust_name") String cust_name,
-                                                  @Field("cust_id") String cust_id,
-                                                  @Field("veh_chk") String veh_chk,
-                                                  @Field("drs_chk") String drs_chk,
-                                                  @Field("spoken_to_client") String spoken_to_client,
-                                                  @Field("client_name") String client_name,
-                                                  @Field("client_number") String client_number,
-                                                  @Field("remarks") String remarks);
-
-    @FormUrlEncoded
-    @POST("technicians_plan.php")
-    Call<UpdateDataResponse> admin_show_plan(@Field("key") String key);
 
     @FormUrlEncoded
     @POST("update_installation.php")
@@ -300,51 +238,6 @@ public interface ApiHolder {
                                              @Field("high_count") String high_count,
                                              @Field("normal_count") String normal_count,
                                              @Field("low_count") String low_count);
-
-    @Multipart
-    @POST("vts_bill.php")
-    Call<UpdateDataResponse> billing_intimation(@Part MultipartBody.Part image,
-                                                @Part("sales_person_name") RequestBody username,
-                                                @Part("date") RequestBody date,
-                                                @Part("order_no") RequestBody order_no,
-                                                @Part("install_type") RequestBody install_type,
-                                                @Part("cust_type") RequestBody cust_type,
-                                                @Part("cust_name") RequestBody cust_name,
-                                                @Part("cust_street_name") RequestBody cust_street_name,
-                                                @Part("cust_city") RequestBody cust_city,
-                                                @Part("cust_office_number") RequestBody cust_office_number,
-                                                @Part("cust_district") RequestBody cust_district,
-                                                @Part("cust_state") RequestBody cust_state,
-                                                @Part("cust_pincode") RequestBody cust_pincode,
-                                                @Part("cust_p_name") RequestBody cust_p_name,
-                                                @Part("cust_p_number") RequestBody cust_p_number,
-                                                @Part("cust_p_id") RequestBody cust_p_id,
-                                                @Part("cust_s_name") RequestBody cust_s_name,
-                                                @Part("cust_s_number") RequestBody cust_s_number,
-                                                @Part("cust_s_id") RequestBody cust_s_id,
-                                                @Part("units_billed") RequestBody units_billed,
-                                                @Part("hardware_with_voice_price") RequestBody hardware_price,
-                                                @Part("monthly_recurring_price") RequestBody monthly_recurring,
-                                                @Part("setup_charges") RequestBody setup_charges,
-                                                @Part("installation_price") RequestBody installation,
-                                                @Part("accessories_price") RequestBody accessories,
-                                                @Part("other_price") RequestBody other_price,
-                                                @Part("hardware_with_voice_tax") RequestBody hardware_tax,
-                                                @Part("monthly_recurring_tax") RequestBody monthly_recurring_tax,
-                                                @Part("setup_charges_tax") RequestBody setup_charges_tax,
-                                                @Part("installation_tax") RequestBody installation_tax,
-                                                @Part("accessories_tax") RequestBody accessories_tax,
-                                                @Part("other_tax") RequestBody other_tax,
-                                                @Part("amc_charges") RequestBody amc_charges,
-                                                @Part("start_date_amc") RequestBody start_date_amc,
-                                                @Part("remarks") RequestBody remarks,
-                                                @Part("gst_no") RequestBody gst_no,
-                                                @Part("pan_number") RequestBody pan_number,
-                                                @Part("hardware_without_voice_price") RequestBody withoutvoice_price,
-                                                @Part("hardware_without_voice_tax") RequestBody withoutvoice_tax,
-                                                @Part("hardware_pump_price") RequestBody pump_price,
-                                                @Part("hardware_pump_tax") RequestBody pump_tax,
-                                                @Part("sale_id") RequestBody sale_id);
 
     @GET("activities-list.php")
     Call<WorkTypeResponse> reqeuestworkType();
@@ -604,7 +497,9 @@ public interface ApiHolder {
             @Field("remarks") String remarks,
             @Field("vts_w_id") String vts_w_id,
             @Field("vts_f_id") String vts_f_id,
-            @Field("drs_id") String drs_id);
+            @Field("drs_id") String drs_id,
+            @Field("drs_f_id") String drs_f_id,
+            @Field("drs_w_id") String drs_w_id);
 
     @FormUrlEncoded
     @POST("stock-client-data.php")
@@ -677,23 +572,29 @@ public interface ApiHolder {
     Call<UmVehicleResponse> get_veh_for_um(@Field("client_id") String client_id,
                                       @Field("loc_id") String loc_id);
 
-    @GET("get_veh_for_pm")
+    @GET("get_veh_for_pm.php")
     Call<MainResponse> get_veh_for_pm(@Field("client_id") String client_id,
                                       @Field("loc_id") String loc_id);
 
-    @GET("bill_intimation")
-    Call<MainResponse> submit_bill(@Field("user_id") String user_id,
-                                      @Field("from_date") String from_date,
-                                   @Field("to_date") String to_date,
-                                   @Field("amount") String amount,
-                                   @Field("remarks") String remarks);
+    @Multipart
+    @POST("submit_bill.php")
+    Call<MainResponse> submit_bill(@Part("user_id") RequestBody user_id,
+                                   @Part("from_date") RequestBody from_date,
+                                   @Part("to_date") RequestBody to_date,
+                                   @Part("amount") RequestBody amount,
+                                   @Part("remarks") RequestBody remarks,
+                                   @Part MultipartBody.Part image);
 
-    @GET("bill_details")
-    Call<MainResponse> get_bill_details(@Field("user_id") String user_id,
-                                   @Field("date") String from_date,
+    @FormUrlEncoded
+    @POST("bill_details.php")
+    Call<BillResponse> get_bill_details(@Field("user_id") String user_id,
+                                   @Field("from_date") String from_date,
                                    @Field("to_date") String to_date,
-                                   @Field("amount") String amount,
-                                   @Field("remarks") String remarks);
+                                   @Field("status") String status);
 
+    @FormUrlEncoded
+    @POST("cancelled_bill.php")
+    Call<BillResponse> cancel_bill(@Field("bill_no") String bill_no,
+                                   @Field("remarks") String remarks);
 
 }

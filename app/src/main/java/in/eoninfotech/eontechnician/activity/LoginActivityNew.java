@@ -17,11 +17,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -39,6 +34,7 @@ import com.github.mikephil.charting.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,6 +48,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.BuildConfig;
@@ -61,9 +61,7 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.LoginDetail;
 import in.eoninfotech.eontechnician.Responses.LoginResponse;
 import in.eoninfotech.eontechnician.Service.ForegroundService;
-import in.eoninfotech.eontechnician.Service.JobScheduleService;
-import in.eoninfotech.eontechnician.Service.LocationService;
-import in.eoninfotech.eontechnician.SplashActivity;
+
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.EONUtil;
@@ -185,15 +183,15 @@ public class LoginActivityNew extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
-                    ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (ActivityCompat.checkSelfPermission(LoginActivityNew.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                            imsiSIM1 = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-                        }
-                    } else {
-                        imsiSIM1 = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-                    }
+//                    ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
+//                    ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                        if (ActivityCompat.checkSelfPermission(LoginActivityNew.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+//                            imsiSIM1 = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+//                        }
+//                    } else {
+//                        imsiSIM1 = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+//                    }
                     getMacAddr();
                 p_usr = e_usrnme.getText().toString().trim();
                 p_pass = e_paswrd.getText().toString().trim();
@@ -407,6 +405,7 @@ public class LoginActivityNew extends AppCompatActivity {
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_PERMISSION) {
             if (grantResults.length >= 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // permission was granted

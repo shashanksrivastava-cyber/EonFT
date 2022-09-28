@@ -22,10 +22,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
-import android.provider.Settings;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Window;
@@ -41,9 +37,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import in.eoninfotech.eontechnician.Service.JobScheduleService;
-import in.eoninfotech.eontechnician.Service.LocationService;
-import in.eoninfotech.eontechnician.Service.WakeupReceiver;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import in.eoninfotech.eontechnician.Storage.LocationPrefs;
 import in.eoninfotech.eontechnician.activity.LoginActivityNew;
 import in.eoninfotech.eontechnician.helper.EONUtil;
@@ -117,7 +113,7 @@ public class SplashActivity extends AppCompatActivity {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        imsiSIM1 = telephonyManager.getDeviceId();
+//        imsiSIM1 = telephonyManager.getDeviceId();
        // Toast.makeText(this, ""+imsiSIM1, Toast.LENGTH_SHORT).show();
         // refreshLocation();
         locationPrefs = new LocationPrefs(SplashActivity.this);

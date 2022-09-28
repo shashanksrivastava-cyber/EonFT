@@ -1,6 +1,10 @@
 package in.eoninfotech.eontechnician.helper;
 
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.view.WindowManager;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -25,7 +29,8 @@ public class K {
 
     public static class Url {
         public static final String BASE_URL = "http://mail.cybernetra.net:8080/android";
-        public static final String IMAGE_URL = "http://mail.cybernetra.net:8080/operations/";
+        //public static final String IMAGE_URL = "http://mail.cybernetra.net:8080/operations/";
+        public static final String IMAGE_URL = "http://mis.eon.co.in/eonmis/operations/";
         public static String login_user = BASE_URL+"login_api.php?v=";
         public static String get_stock_detail = BASE_URL+"client_data.php?v=";
         public static String gettechnician = BASE_URL+"tech_list.php?v=";
@@ -37,5 +42,17 @@ public class K {
         public static String getapk = "http://mail.cybernetra.net:8080/android/tech/fieldstatus.apk";
         public static String urlkey = "eon@180#$@1";
         public static int chkversion = 23; }
+
+
+    public static ProgressDialog createProgressDialog(Context context) {
+        ProgressDialog dialog = new ProgressDialog(context);
+        try {
+            dialog.show();
+        } catch (WindowManager.BadTokenException e) {
+
+        }
+        dialog.setCancelable(true);
+        return dialog;
+    }
 
 }

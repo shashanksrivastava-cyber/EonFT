@@ -6,10 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +34,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
@@ -220,7 +220,6 @@ public class ViewStockFragment extends Fragment {
                     runLayoutAnimation(recyclerView);
                     refreshLayout.setRefreshing(false);
                     recyclerView.setVisibility(View.VISIBLE);
-
                 } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
@@ -247,10 +246,8 @@ public class ViewStockFragment extends Fragment {
         try {
             if (show) {
                 progressBar.setVisibility(View.VISIBLE);
-                // getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             } else {
                 progressBar.setVisibility(View.GONE);
-                // getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,7 +8,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
+
+import androidx.core.app.ActivityCompat;
 import in.eoninfotech.eontechnician.R;
 /**
  * Created by android on 24/3/18.

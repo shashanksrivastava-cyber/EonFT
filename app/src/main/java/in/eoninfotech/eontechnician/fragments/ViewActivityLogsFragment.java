@@ -7,11 +7,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -42,6 +38,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import in.eoninfotech.eontechnician.DayEnableDecorator;
 import in.eoninfotech.eontechnician.LogViewActivity;
 import in.eoninfotech.eontechnician.R;
@@ -63,7 +63,7 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ViewActivityLogsFragment extends Fragment{
+public class ViewActivityLogsFragment extends Fragment {
 
     View v;
     LinearLayout avgWrkngHrs;

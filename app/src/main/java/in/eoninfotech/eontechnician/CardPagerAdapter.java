@@ -1,23 +1,16 @@
 package in.eoninfotech.eontechnician;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.cardview.widget.CardView;
+import androidx.viewpager.widget.PagerAdapter;
 import de.hdodenhof.circleimageview.CircleImageView;
-import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
 import in.eoninfotech.eontechnician.Responses.TechnicianMonthDetail;
 import in.eoninfotech.eontechnician.Responses.TechnicianMonthResponse;
 import in.eoninfotech.eontechnician.helper.K;

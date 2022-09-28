@@ -3,15 +3,15 @@ package in.eoninfotech.eontechnician.activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.R;
 
@@ -67,14 +67,6 @@ public class MessageDetails extends AppCompatActivity {
             clientName.setText(custName);
             cLocation.setText(locName);
         }
-
-//        if(msgType.equalsIgnoreCase("G")){
-//            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.material_green_600)));
-//            textViewCounter.setText("G");
-//        }else{
-//            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorAccent)));
-//            textViewCounter.setText("F");
-//        }
 
         String[] newDate = date.split("/");
         String dates = newDate[0];

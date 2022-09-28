@@ -4,11 +4,8 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +28,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
@@ -94,7 +95,6 @@ public class ActivityDetailFragment extends Fragment {
         progressBars = v.findViewById(R.id.progressBars);
         mShimmerViewContainer = v.findViewById(R.id.shimmer_view_container);
 
-       // loadContent();
         return v;
     }
 

@@ -5,14 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,20 +29,18 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import in.eoninfotech.eontechnician.activity.LoginActivity;
-import in.eoninfotech.eontechnician.adminuser.ChangePasswordFragment;
-import in.eoninfotech.eontechnician.adminuser.DashboardFragment;
-import in.eoninfotech.eontechnician.adminuser.PendencyFragment;
-import in.eoninfotech.eontechnician.adminuser.RequirementFragment;
 import in.eoninfotech.eontechnician.fragments.ViewActivityLogsFragment;
 import in.eoninfotech.eontechnician.helper.ClientList;
 import in.eoninfotech.eontechnician.helper.EONUtil;
 import in.eoninfotech.eontechnician.helper.K;
-import in.eoninfotech.eontechnician.fragments.AdminCallSheetListFragment;
-import in.eoninfotech.eontechnician.fragments.AdminCriticalSitesFragment;
-import in.eoninfotech.eontechnician.fragments.AdminIncentiveFragment;
-import in.eoninfotech.eontechnician.fragments.AdminShowNextDayPlan;
-import in.eoninfotech.eontechnician.fragments.AdminStockFragment;
 
 /**
  * Created by root on 12/10/17.
@@ -65,15 +57,10 @@ public class AdminMainActivity extends AppCompatActivity
     String usrname, alertt, uusername, versionname, disgnid = "0";
     NavigationView navigationView;
     Bundle bundle;
-    AdminCriticalSitesFragment adminCriticalSitesFragment;
-    AdminCallSheetListFragment adminCallSheetListFragment;
-    AdminIncentiveFragment adminIncentiveFragment;
-    AdminStockFragment adminStockFragment;
-    AdminShowNextDayPlan adminShowNextDayPlan;
-    DashboardFragment dashboardFragment;
-    ChangePasswordFragment changePasswordFragment;
-    PendencyFragment pendencyFragment;
-    RequirementFragment requirementFragment;
+//    DashboardFragment dashboardFragment;
+//    ChangePasswordFragment changePasswordFragment;
+//    PendencyFragment pendencyFragment;
+//    RequirementFragment requirementFragment;
     ViewActivityLogsFragment viewActivityLogsFragment;
 
     @Override
@@ -98,9 +85,9 @@ public class AdminMainActivity extends AppCompatActivity
         bundle.putString("usernme", uusername);
         bundle.putString("version", versionname);
 
-        dashboardFragment = new DashboardFragment();
-        dashboardFragment.setArguments(bundle);
-        ft = fm.beginTransaction().add(R.id.framelay, dashboardFragment);
+//        dashboardFragment = new DashboardFragment();
+//        dashboardFragment.setArguments(bundle);
+//        ft = fm.beginTransaction().add(R.id.framelay, dashboardFragment);
         ft.commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -160,72 +147,64 @@ public class AdminMainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_incentive) {
-            adminIncentiveFragment = new AdminIncentiveFragment();
-            adminIncentiveFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, adminIncentiveFragment);
-            setTitle("Incentive");
-        } else if (id == R.id.nav_critical_sites) {
-            try {
-                adminCriticalSitesFragment = new AdminCriticalSitesFragment();
-                adminCriticalSitesFragment.setArguments(bundle);
-                ft = fm.beginTransaction().replace(R.id.framelay, adminCriticalSitesFragment);
-                setTitle("Critical Sites");
-            } catch (IllegalStateException ise) {
-                ise.printStackTrace();
-            }
-        } else if (id == R.id.nav_stock) {
-            adminStockFragment = new AdminStockFragment();
-            adminStockFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, adminStockFragment);
-            setTitle("Stock");
-        } else if (id == R.id.nav_mark_site) {
-            dashboardFragment = new DashboardFragment();
-            dashboardFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
-            setTitle("Mark Activity");
-            ft.commit();
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.nav_call_sheet) {
-            adminCallSheetListFragment = new AdminCallSheetListFragment();
-            adminCallSheetListFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, adminCallSheetListFragment);
-            setTitle("Call Sheet");
-        } else if (id == R.id.nav_update_client_list) {
-            new UpdateClientList().execute("abc");
-        } else if (id == R.id.nav_next_plan) {
-            adminShowNextDayPlan = new AdminShowNextDayPlan();
-            adminShowNextDayPlan.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, adminShowNextDayPlan);
-            setTitle("Next Day Plan");
-        } else if (id == R.id.nav_dashboard) {
-            dashboardFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
-            setTitle("Dashboard");
-        } else if (id == R.id.nav_pendency) {
-            pendencyFragment = new PendencyFragment();
-            pendencyFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
-            setTitle("Pendency Detail");
-        } else if (id == R.id.nav_requirement) {
-            requirementFragment = new RequirementFragment();
-            requirementFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, requirementFragment);
-            setTitle("Requirement Detail");
-        } else if (id == R.id.nav_passwrd) {
-            changePasswordFragment = new ChangePasswordFragment();
-            changePasswordFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, changePasswordFragment);
-            setTitle("Change Password");
-        }
-        try {
-            ft.commit();
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (id == R.id.nav_incentive) {
+//            adminIncentiveFragment = new AdminIncentiveFragment();
+//            adminIncentiveFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, adminIncentiveFragment);
+//            setTitle("Incentive");
+//        } else if (id == R.id.nav_critical_sites) {
+//        } else if (id == R.id.nav_stock) {
+//            adminStockFragment = new AdminStockFragment();
+//            adminStockFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, adminStockFragment);
+//            setTitle("Stock");
+//        } else if (id == R.id.nav_mark_site) {
+//            dashboardFragment = new DashboardFragment();
+//            dashboardFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
+//            setTitle("Mark Activity");
+//            ft.commit();
+//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else if (id == R.id.nav_call_sheet) {
+//            adminCallSheetListFragment = new AdminCallSheetListFragment();
+//            adminCallSheetListFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, adminCallSheetListFragment);
+//            setTitle("Call Sheet");
+//        } else if (id == R.id.nav_update_client_list) {
+//            new UpdateClientList().execute("abc");
+//        } else if (id == R.id.nav_next_plan) {
+//            adminShowNextDayPlan = new AdminShowNextDayPlan();
+//            adminShowNextDayPlan.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, adminShowNextDayPlan);
+//            setTitle("Next Day Plan");
+//        } else if (id == R.id.nav_dashboard) {
+//            dashboardFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
+//            setTitle("Dashboard");
+//        } else if (id == R.id.nav_pendency) {
+//            pendencyFragment = new PendencyFragment();
+//            pendencyFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, dashboardFragment);
+//            setTitle("Pendency Detail");
+//        } else if (id == R.id.nav_requirement) {
+//            requirementFragment = new RequirementFragment();
+//            requirementFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, requirementFragment);
+//            setTitle("Requirement Detail");
+//        } else if (id == R.id.nav_passwrd) {
+//            changePasswordFragment = new ChangePasswordFragment();
+//            changePasswordFragment.setArguments(bundle);
+//            ft = fm.beginTransaction().replace(R.id.framelay, changePasswordFragment);
+//            setTitle("Change Password");
+//        }
+//        try {
+//            ft.commit();
+//            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//            drawer.closeDrawer(GravityCompat.START);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return true;
     }
 

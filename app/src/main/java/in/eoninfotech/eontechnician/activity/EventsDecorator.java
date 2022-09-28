@@ -3,7 +3,6 @@ package in.eoninfotech.eontechnician.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.text.style.ForegroundColorSpan;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -13,6 +12,7 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.util.Calendar;
 
+import androidx.core.content.ContextCompat;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
 import retrofit2.Callback;
