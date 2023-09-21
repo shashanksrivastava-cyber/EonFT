@@ -128,7 +128,8 @@
                     android:background="@color/eonWhite"
                     android:fontFamily="sans-serif-light"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:inputType="textCapSentences"/>
             </LinearLayout>
 
             <View

@@ -37,8 +37,6 @@ import in.eoninfotech.eontechnician.Storage.LocationPrefs;
 
 import in.eoninfotech.eontechnician.webservice.TrackingDetail;
 
-
-
 /**
  * Created by Android on 02-01-2018.
  */
@@ -54,18 +52,18 @@ public class LocationService extends JobService {
     private Timer mTimer = null;
     private LocationPrefs locationPrefs;
     String address;
-    String username,fullUserName,version,imei,track_interval,track_status,mac_address;
+    String username,imei,track_interval,track_status,mac_address;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
     String lati,lngi;
+
     int hour, min;
     Calendar calen = Calendar.getInstance();
     int track;
     Intent intent;
     int startTime = 8 ,endTime = 20;
-    ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY;
@@ -142,9 +140,6 @@ public class LocationService extends JobService {
                 super.onDestroy();
             }else{
                 super.onDestroy();
-//            AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-//            alarmManager.set(alarmManager.RTC_WAKEUP, System.currentTimeMillis() + (1000*60*60),
-//                    PendingIntent.getService(this,0,new Intent(this,JobScheduleService.class),0));
                 startService(new Intent(getBaseContext(), LocationService.class));
             }
         }

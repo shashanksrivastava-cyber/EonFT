@@ -174,7 +174,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="3dp"
                         android:paddingBottom="4dp"
-                        android:text="Faulty DRS:"
+                        android:text="Faulty DRS/SOS:"
                         android:textAllCaps="false"
                         android:textSize="14sp"
                         android:visibility="gone"

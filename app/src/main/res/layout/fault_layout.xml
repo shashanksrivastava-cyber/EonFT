@@ -161,7 +161,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/header_button"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"></in.eoninfotech.eontechnician.NonScrollListView>
+            android:layout_alignParentLeft="true"/>
 
     </LinearLayout>
 

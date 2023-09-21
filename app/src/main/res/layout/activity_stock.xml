@@ -227,7 +227,8 @@
             <in.eoninfotech.eontechnician.view.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Serial No" />
+                android:text="Serial No"
+                android:visibility="gone"/>
 
             <in.eoninfotech.eontechnician.view.MyEditText
                 android:id="@+id/drum_sensor_id"
@@ -236,7 +237,7 @@
                 android:layout_margin="2dp"
                 android:hint="Id's should comma seperated"
                 android:textColorHint="@color/greyed_out"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <in.eoninfotech.eontechnician.view.MyTextView
                 android:layout_width="wrap_content"

@@ -76,7 +76,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
                         android:text="None"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:visibility="visible"/>
 
                 </RadioGroup>
 
@@ -583,7 +584,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Sensor Replacement"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="visible"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -703,6 +705,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:orientation="horizontal"
+                android:visibility="visible"
                 android:weightSum="4">
 
                 <TextView

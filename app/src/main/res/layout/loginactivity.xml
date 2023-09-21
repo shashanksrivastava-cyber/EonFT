@@ -192,7 +192,8 @@
                 android:gravity="center"
                 android:fontFamily="sans-serif-medium"
                 android:layout_marginBottom="5dp"
-                android:padding="7dp"/>
+                android:padding="7dp"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="match_parent"

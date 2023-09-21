@@ -29,6 +29,7 @@ import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
 import in.eoninfotech.eontechnician.Responses.TechDashboardDetail;
+import in.eoninfotech.eontechnician.databinding.DashboardNewBinding;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -40,79 +41,40 @@ import static android.content.Context.MODE_PRIVATE;
 public class DashBoardFragment extends Fragment {
 
     View v;
+    DashboardNewBinding binding;
     String usrname, current_date, s_time, zone;
     int year, day, month, hour, minutes;
     String version, months;
     Calendar calen = Calendar.getInstance();
-    TextView t_curntday, addTime, add_value, total_vts, total_drs, faulty_vts, faulty_drs, faulty_um,tot_sos,tot_lid,tot_fuel,
-            tot_temp,um_working,sos_faulty,lid_faulty,fuel_faulty,temp_faulty;
-    private PieChart mChart;
     ArrayList<Float> yData = new ArrayList<>();
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
     Float achivd, total;
     private AlertDialog progressDialog;
-    ColorfulRingProgressView vtsSpv, drsSpv, umSpv,um_workigSpv,sos_Spv,lid_Spv,fuel_Spv,temp_Spv;
-    ProgressBar progressBar;
-    CardView cv_one_login, cv_two_login, cv_three_login,cv_four_login,cv_five_login,cv_six_login,cv_seven_login,cv_eight_login;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     private String[] xData;
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.dashboard_new, container, false);
+        binding = DashboardNewBinding.inflate(getLayoutInflater(), container, false);
 
-        mChart = v.findViewById(R.id.piechart);
-        t_curntday = v.findViewById(R.id.curnt_date);
-        addTime = v.findViewById(R.id.addTime);
-        add_value = v.findViewById(R.id.add_value);
-        total_vts = v.findViewById(R.id.total_vts);
-        total_drs = v.findViewById(R.id.total_drs);
-        tot_sos = v.findViewById(R.id.tot_sos);
-        tot_lid = v.findViewById(R.id.tot_lid);
-        tot_fuel = v.findViewById(R.id.tot_fuel);
-        tot_temp = v.findViewById(R.id.tot_temp);
-        faulty_vts = v.findViewById(R.id.faulty_vts);
-        faulty_drs = v.findViewById(R.id.faulty_drs);
-        faulty_um = v.findViewById(R.id.faulty_um);
-        vtsSpv = v.findViewById(R.id.vtsSpv);
-        drsSpv = v.findViewById(R.id.drsSpv);
-        umSpv = v.findViewById(R.id.umSpv);
-        um_working = v.findViewById(R.id.um_working);
-        um_workigSpv = v.findViewById(R.id.um_workigSpv);
-        sos_Spv = v.findViewById(R.id.sos_Spv);
-        lid_Spv= v.findViewById(R.id.lid_Spv);
-        fuel_Spv = v.findViewById(R.id.fuel_Spv);
-        temp_Spv = v.findViewById(R.id.temp_Spv);
-        sos_faulty = v.findViewById(R.id.sos_faulty);
-        lid_faulty = v.findViewById(R.id.lid_faulty);
-        fuel_faulty = v.findViewById(R.id.fuel_faulty);
-        temp_faulty = v.findViewById(R.id.temp_faulty);
-        cv_one_login = v.findViewById(R.id.cv_one_login);
-        cv_two_login = v.findViewById(R.id.cv_two_login);
-        cv_three_login = v.findViewById(R.id.cv_three_login);
-        cv_four_login = v.findViewById(R.id.cv_four_login);
-        cv_five_login = v.findViewById(R.id.cv_five_login);
-        cv_six_login = v.findViewById(R.id.cv_six_login);
-        cv_seven_login = v.findViewById(R.id.cv_seven_login);
-        cv_eight_login = v.findViewById(R.id.cv_eight_login);
-        progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         usrname = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
         zone = sharedprefs.getString("zone", "");
 
-        //ShowProgressBar(true);
+        progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
+
         setDateAndTime();
         getDashBoardDetail();
 
-        cv_one_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvOneLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -120,9 +82,10 @@ public class DashBoardFragment extends Fragment {
                 intent.putExtra("tab", "1");
                 intent.putExtra("other", "2");
                 startActivity(intent);
+
             }
         });
-        cv_two_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvTwoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -130,10 +93,11 @@ public class DashBoardFragment extends Fragment {
                 intent.putExtra("tab", "1");
                 intent.putExtra("other", "2");
                 startActivity(intent);
+
             }
         });
 
-        cv_three_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvThreeLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -141,68 +105,69 @@ public class DashBoardFragment extends Fragment {
                 intent.putExtra("tab", "1");
                 intent.putExtra("other", "2");
                 startActivity(intent);
+
             }
         });
 
-        cv_four_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvFourLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
-        cv_five_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvFiveLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
-        cv_six_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvSixLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
-        cv_seven_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvSevenLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
-        cv_eight_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvEightLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
-        return v;
+        return binding.getRoot();
     }
 
     void getDashBoardDetail() {
-
+        progressDialog.show();
         try {
             ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
             Call<DashBoardResponse> call = log_att.dashBoardResponse(zone);
@@ -215,50 +180,66 @@ public class DashBoardFragment extends Fragment {
                     if (updateDataResponse != null) {
                         if (updateDataResponse.getType() == 1) {
                             for (int i = 0; i < dashboardList.size(); i++) {
-                                addTime.setText("" + dashboardList.get(i).getCur_add());
-                                add_value.setText("" + dashboardList.get(i).getAdd_21());
+                                binding.addTime.setText("" + dashboardList.get(i).getCur_add());
+                                binding.addValue.setText("" + dashboardList.get(i).getAdd_21());
                                 String color1 = dashboardList.get(i).getColor();
                                 String[] separated = color1.split(";");
                                 String color = separated[0];
                                 int myColor = Color.parseColor(color);
-                                addTime.setTextColor(myColor);
+                                binding.addTime.setTextColor(myColor);
 
                                 String color2 = dashboardList.get(i).getColor21();
                                 String[] separated1 = color2.split(";");
                                 String color3 = separated1[0];
                                 int color21 = Color.parseColor(color3);
-                                add_value.setTextColor(color21);
+                                binding.addValue.setTextColor(color21);
 
-                                total_vts.setText("" + dashboardList.get(0).getTot_dev());
-                                total_drs.setText("" + dashboardList.get(0).getTot_drs());
-//                                tot_sos.setText(""+dashboardList.get(0).getTot_sos());
-//                                tot_lid.setText(""+dashboardList.get(0).getTot_lid());
-//                                tot_fuel.setText(""+dashboardList.get(0).getTot_fuel());
-//                                tot_temp.setText(""+dashboardList.get(0).getTot_temp());
+                                binding.drsAdd.setText("" + dashboardList.get(i).getDrs_add());
+                                String drs_color = dashboardList.get(i).getDrs_color();
+                                String[] drs_separated = drs_color.split(";");
+                                String colors = drs_separated[0];
+                                int drs_colors = Color.parseColor(colors);
+                                binding.drsAdd.setTextColor(drs_colors);
 
-                                faulty_vts.setText("" + dashboardList.get(0).getFaulty_dev());
-                                vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
+                                binding.drsAdd21.setText("" + dashboardList.get(i).getDrs_add_21());
+                                String drs21_ = dashboardList.get(i).getDrs_color21();
+                                String[] separate = drs21_.split(";");
+                                String drs_21 = separate[0];
+                                int drs21_color = Color.parseColor(drs_21);
+                                binding.addTime.setTextColor(drs21_color);
 
-                                faulty_drs.setText("" + dashboardList.get(0).getFaulty_drs());
-                                drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
+                                binding.totalVts.setText("" + dashboardList.get(0).getTot_dev());
+                                binding.totalDrs.setText("" + dashboardList.get(0).getTot_drs());
+                                binding.totSos.setText("" + dashboardList.get(0).getTot_sos());
+                                binding.totLid.setText("" + dashboardList.get(0).getTot_lid());
+                                binding.totFuel.setText("" + dashboardList.get(0).getTot_fuel());
+                                binding.totTemp.setText("" + dashboardList.get(0).getTot_temp());
 
-                                faulty_um.setText("" + dashboardList.get(0).getUmain());
-                                umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
+                                binding.faultyVts.setText("" + dashboardList.get(0).getFaulty_dev());
+                                binding.vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
 
-                                um_working.setText(""+dashboardList.get(0).getUmain_work());
-                                um_workigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
+                                binding.faultyDrs.setText("" + dashboardList.get(0).getFaulty_drs());
+                                binding.drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
 
-//                                sos_faulty.setText(""+dashboardList.get(0).getFaulty_sos());
-//                                sos_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
-//
-//                                lid_faulty.setText(""+dashboardList.get(0).getFaulty_lid());
-//                                lid_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
-//
-//                                fuel_faulty.setText(""+dashboardList.get(0).getFaulty_fuel());
-//                                fuel_Spv.setPercent(Float.parseFloat(""+dashboardList.get(0).getFaulty_fuel()));
-//
-//                                temp_faulty.setText(""+dashboardList.get(0).getFaulty_temp());
-//                                temp_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+                                binding.faultyUm.setText("" + dashboardList.get(0).getUmain());
+                                binding.umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
+
+                                binding.umWorking.setText("" + dashboardList.get(0).getUmain_work());
+                                binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
+
+                                binding.sosFaulty.setText("" + dashboardList.get(0).getFaulty_sos());
+                                binding.sosSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
+
+                                binding.lidFaulty.setText("" + dashboardList.get(0).getFaulty_lid());
+                                binding.lidSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
+
+                                binding.fuelFaulty.setText("" + dashboardList.get(0).getFaulty_fuel());
+                                binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardList.get(0).getFaulty_fuel()));
+
+                                binding.tempFaulty.setText("" + dashboardList.get(0).getFaulty_temp());
+                                binding.tempSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+
+                                progressDialog.hide();
 
                             }
                         }
@@ -266,19 +247,19 @@ public class DashBoardFragment extends Fragment {
                         assert updateDataResponse != null;
                         Log.v("Response", updateDataResponse.toString());
                         achivd = 0.0f;
+                        progressDialog.hide();
                     }
                     yData.add(Float.valueOf(33));
                     yData.add(Float.valueOf(33));
                     yData.add(Float.valueOf(33));
-                    // addData(yData);
-                    //ShowProgressBar(false);
+                    progressDialog.hide();
                 }
 
                 @Override
                 public void onFailure(Call<DashBoardResponse> call, Throwable t) {
                     t.printStackTrace();
                     Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
-                    // progressDialog.hide();
+
                 }
             });
         } catch (Exception e) {
@@ -326,7 +307,7 @@ public class DashBoardFragment extends Fragment {
             months = "Dec";
         }
         current_date = months + " " + day + "," + year;
-        t_curntday.setText(current_date);
+        binding.curntDate.setText(current_date);
         SimpleDateFormat dateFormatt = new SimpleDateFormat("HH:mm dd-MM-yyyy");
         s_time = dateFormatt.format(calen.getTime());
     }

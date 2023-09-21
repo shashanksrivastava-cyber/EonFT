@@ -24,7 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServiceConnection {
     public static final String BASE_URL = "http://mis.eon.co.in/eonmis/android/techApp/";
-//    public static final String BASE_URL = "http://mail.cybernetra.net:8080/android/";
     private static Retrofit retrofit = null;
 
 

@@ -42,12 +42,12 @@ public class FaqsFragment extends Fragment {
     View v;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String username, dist_id,version;
+    String username, dist_id, version;
     public RecyclerView recyclerView;
     public SwipeRefreshLayout refreshLayout;
     public GridLayoutManager layoutManager;
     CardView cv_powerdisconnect;
-    LinearLayout ll1,ll2;
+    LinearLayout ll1, ll2;
     FAQFragmentAdapter faqFragmentAdapter;
     ArrayList<FaqResponse> faqResponses = new ArrayList<>();
 
@@ -62,71 +62,17 @@ public class FaqsFragment extends Fragment {
         version = sharedprefs.getString("version", "");
 
         final RecyclerView recyclerView = v.findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL, false);
-        //recyclerView.setLayoutManager(layoutManager);
+        layoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         cv_powerdisconnect = v.findViewById(R.id.cv_powerdisconnect);
         ll1 = v.findViewById(R.id.ll1);
         ll2 = v.findViewById(R.id.ll2);
 
         //loadContent();
 
-//        recyclerView.addItemDecoration(new DividerItemDecorator(getActivity()));
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//
-//        final List<ItemModel> data = new ArrayList<>();
-//        data.add(new ItemModel(
-//                "What are the common reasons of a Device Disconnection?",
-//                R.color.colorPrimaryDark,
-//                R.color.colorPrimaryDark,
-//                Utils.createInterpolator(Utils.ACCELERATE_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "What are the common reasons of Power Removed/No Power Supply?\n",
-//                R.color.dark_greys,
-//                R.color.dark_greys,
-//                Utils.createInterpolator(Utils.ACCELERATE_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "What are the common reasons of SOS Tamper?",
-//                R.color.dash_red,
-//                R.color.dash_red,
-//                Utils.createInterpolator(Utils.ACCELERATE_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "3 DECELERATE_INTERPOLATOR",
-//                R.color.brown,
-//                R.color.brown,
-//                Utils.createInterpolator(Utils.DECELERATE_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "4 FAST_OUT_LINEAR_IN_INTERPOLATOR",
-//                R.color.yello,
-//                R.color.yello,
-//                Utils.createInterpolator(Utils.FAST_OUT_LINEAR_IN_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "5 FAST_OUT_SLOW_IN_INTERPOLATOR",
-//                R.color.red,
-//                R.color.red,
-//                Utils.createInterpolator(Utils.FAST_OUT_SLOW_IN_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "6 LINEAR_INTERPOLATOR",
-//                R.color.c,
-//                R.color.c,
-//                Utils.createInterpolator(Utils.LINEAR_INTERPOLATOR)));
-//        data.add(new ItemModel(
-//                "7 LINEAR_OUT_SLOW_IN_INTERPOLATOR",
-//                R.color.material_green_600,
-//                R.color.material_green_600,
-//                Utils.createInterpolator(Utils.LINEAR_OUT_SLOW_IN_INTERPOLATOR)));
-//        recyclerView.setAdapter(new RecyclerViewRecyclerAdapter(data));
-//
-//        cv_powerdisconnect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(),FaqDetailActivity.class);
-//                startActivity(intent);
-//            }
-//        });
         ll1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),FaqDetailActivity.class);
+                Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
                 startActivity(intent);
             }
         });
@@ -134,9 +80,8 @@ public class FaqsFragment extends Fragment {
         ll2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),FaqDetailActivity.class);
+                Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
                 startActivity(intent);
-
             }
         });
 
@@ -151,22 +96,19 @@ public class FaqsFragment extends Fragment {
             call.enqueue(new Callback<FaqResponse>() {
                 @Override
                 public void onResponse(Call<FaqResponse> call, Response<FaqResponse> response) {
-                    if(response.body().getType().equalsIgnoreCase("1")){
+                    if (response.body().getType().equalsIgnoreCase("1")) {
 
-                        layoutManager = new GridLayoutManager(getContext(),2, GridLayoutManager.VERTICAL, false);
+                        layoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager);
-                        faqFragmentAdapter = new FAQFragmentAdapter(faqResponses,getContext());
+                        faqFragmentAdapter = new FAQFragmentAdapter(faqResponses, getContext());
                         recyclerView.setAdapter(faqFragmentAdapter);
-
                     }
-
                 }
 
                 @Override
                 public void onFailure(Call<FaqResponse> call, Throwable t) {
                     t.printStackTrace();
                     Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
-
                 }
             });
         } catch (Exception e) {

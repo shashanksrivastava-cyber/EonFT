@@ -75,6 +75,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
+import in.eoninfotech.eontechnician.databinding.FragmentCallSheetBinding;
 import in.eoninfotech.eontechnician.helper.FileUtils;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
@@ -95,26 +96,21 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CallSheetFragment extends Fragment implements ProgressRequestBody.UploadCallbacks {
 
+    FragmentCallSheetBinding binding;
     View v;
     ProgressBar mProgress;
-    int pStatus = 0;
-    int id = 1;
     private Handler handler = new Handler();
     RelativeLayout circularRelative;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String username, dist_id, version, buttonPressed = "0";
     int year, month, day;
-    String current_date, selected_todate, s_date,months,currents_date,selecteds_todate;
+    String current_date, selected_todate, s_date,months,currents_date,path,username,version, buttonPressed = "0";;
     private AlertDialog progressDialog;
     Calendar calen = Calendar.getInstance();
-    TextView preview,tv;
     ImageView ivProfile;
     File file;
-    String path;
     Uri uri;
     EditText datee,remarks;
-    Button update_dataa;
     private final int SELECT_PHOTO = 1;
     ProgressDialog pDialog;
     MultipartBody.Part image;
@@ -197,7 +193,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             alertDialogBuilder.setCanceledOnTouchOutside(true);
             alertDialogBuilder.show();
 
-
             galary.setOnClickListener((View view) -> {
                 alertDialogBuilder.dismiss();
                 buttonPressed = "2";
@@ -205,6 +200,7 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             });
             cammera.setOnClickListener(new View.OnClickListener() {
                 @Override
+
                 public void onClick(View v) {
                     buttonPressed = "1";
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -282,40 +278,10 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             current_date = day + "-0" + month + "-" + year;
         } else {
             current_date = day + "-" + month + "-" + year;
-        }if(month==1){
-            months = "Jan";
-        }else if(month==2){
-            months = "Feb";
-        }else if(month==3){
-            months = "Mar";
-        }else if(month==4){
-            months = "Apr";
-        }else if(month==5){
-            months = "May";
-        }else if(month==6){
-            months = "Jun";
-        }else if(month==7){
-            months = "Jul";
-        }else if(month==8){
-            months = "Aug";
-        }else if(month==9){
-            months = "Sep";
-        }else if(month==10){
-            months = "Oct";
-        }else if(month==11){
-            months = "Nov";
-        }else if(month==12){
-            months = "Dec";
         }
         currents_date = months+ " " +day + " , " + year;
-        datee.setText(currents_date);
-        //String abc = datee.getText().toString();
-        String[] separated = current_date.split("-");
-        String date =  separated[0];
-        String month = separated[1];
-        String years = separated[2];
-        String dates = years + "-" + month + "-" + date;
-        s_date = dates;
+        datee.setText(K.getDateFormatWithMonthNameHyphen(current_date));
+        s_date = K.getDateFormatWithMonthNameHyphenYear(current_date);
         datee.setOnClickListener(v -> getDate());
     }
     private void getDate() {
@@ -326,41 +292,16 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             } else {
                 selected_todate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
             }
-            if((monthOfYear + 1)==1){
-                months = "Jan";
-            }else if((monthOfYear + 1)==2){
-                months = "Feb";
-            }else if((monthOfYear + 1)==3){
-                months = "Mar";
-            }else if((monthOfYear + 1)==4){
-                months = "Apr";
-            }else if((monthOfYear + 1)==5){
-                months = "May";
-            }else if((monthOfYear + 1)==6){
-                months = "Jun";
-            }else if((monthOfYear + 1)==7){
-                months = "Jul";
-            }else if((monthOfYear + 1)==8){
-                months = "Aug";
-            }else if((monthOfYear + 1)==9){
-                months = "Sep";
-            }else if((monthOfYear + 1)==10){
-                months = "Oct";
-            }else if((monthOfYear + 1)==11){
-                months = "Nov";
-            }else if((monthOfYear + 1)==12){
-                months = "Dec";
-            }
-            selecteds_todate = months+ " " +dayOfMonth + " , " + year;
-            datee.setText(selecteds_todate);
-            String[] separated = selected_todate.split("-");
-            String date =  separated[0];
-            String month = separated[1];
-            String years = separated[2];
-            String dates = years + "-" + month + "-" + date;
-            s_date = dates;
+            datee.setText(K.getDateFormatWithMonthNameHyphen(selected_todate));
+            s_date = K.getDateFormatWithMonthNameHyphenYear(selected_todate);
         }, year, month - 1, day);
         dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
+        Date today = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(today);
+        c.add(Calendar.DATE, -1);
+        long minDate = c.getTime().getTime();
+        dpdd.getDatePicker().setMinDate(minDate);
         dpdd.show();
     }
 
@@ -462,7 +403,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
         }
 
     }
-
     private void openCameraIntent() {
         Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (pictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {

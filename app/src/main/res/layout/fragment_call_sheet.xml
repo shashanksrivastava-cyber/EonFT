@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearView1"
+        android:id="@+id/linear_View"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -88,7 +88,7 @@
         android:id="@+id/relImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearView1"
+        android:layout_below="@+id/linear_View"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -143,7 +143,7 @@
                         android:background="@color/eonWhite" />
                 </LinearLayout>
                 <View
-                    android:id="@+id/view1"
+                    android:id="@+id/views"
                     android:layout_width="match_parent"
                     android:layout_height="40dp" />
 
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_alignBottom="@+id/view1"
+                    android:layout_alignBottom="@+id/views"
                     android:background="@drawable/et_frame"
                     android:includeFontPadding="false"
                     android:paddingBottom="5dp"

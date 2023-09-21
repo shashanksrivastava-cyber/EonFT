@@ -9,6 +9,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /***************************************************************************/
 // Copyright EON Infotech Ltd., unpublished work, created 2016.          //
 // This computer program includes Confidential, Proprietary information  //
@@ -29,7 +33,6 @@ public class K {
 
     public static class Url {
         public static final String BASE_URL = "http://mail.cybernetra.net:8080/android";
-        //public static final String IMAGE_URL = "http://mail.cybernetra.net:8080/operations/";
         public static final String IMAGE_URL = "http://mis.eon.co.in/eonmis/operations/";
         public static String login_user = BASE_URL+"login_api.php?v=";
         public static String get_stock_detail = BASE_URL+"client_data.php?v=";
@@ -53,6 +56,34 @@ public class K {
         }
         dialog.setCancelable(true);
         return dialog;
+    }
+
+    public static String  getDateFormatWithMonthNameHyphen(String str){
+        SimpleDateFormat spf=new SimpleDateFormat("dd-MM-yyyy");
+        Date newDate= null;
+        try {
+            newDate = spf.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf= new SimpleDateFormat("dd-MMM-yyyy");
+        String date2 = spf.format(newDate);
+
+        return date2;
+    }
+
+    public static String  getDateFormatWithMonthNameHyphenYear(String str){
+        SimpleDateFormat spf=new SimpleDateFormat("dd-MM-yyyy");
+        Date newDate= null;
+        try {
+            newDate = spf.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf= new SimpleDateFormat("yyyy-MM-dd");
+        String date2 = spf.format(newDate);
+
+        return date2;
     }
 
 }

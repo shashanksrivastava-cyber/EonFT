@@ -93,7 +93,6 @@ public class LiveFaultDataAdapter extends RecyclerView.Adapter<LiveFaultDataAdap
         public ActivityHolder(View inflate) {
             super(inflate);
             site_loc = (TextView) inflate.findViewById(R.id.acc);
-
         }
     }
 }

@@ -57,7 +57,6 @@ public class FaultyDevicesActivity extends AppCompatActivity {
     ArrayList<FaultyDevicesDetails> faultyDevices = new ArrayList<>();
     ArrayList<UnderMaintenanceDetail> uMainDetail = new ArrayList<>();
     String tab,device_value;
-    private static int firstVisibleInListview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class FaultyDevicesActivity extends AppCompatActivity {
         } else if (device_value.equals("1")) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Faulty DRS");
+            actionBar.setTitle("Faulty DRS/SOS");
         } else {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -205,12 +204,10 @@ public class FaultyDevicesActivity extends AppCompatActivity {
         });
     }
 
-
     private void runLayoutAnimation(final RecyclerView recyclerView) {
         final Context context = recyclerView.getContext();
         final LayoutAnimationController controller =
                 AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_from_right);
-
         recyclerView.setLayoutAnimation(controller);
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();

@@ -187,7 +187,6 @@
 
             </LinearLayout>
 
-
         </LinearLayout>
 
         <View
@@ -198,48 +197,25 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:orientation="vertical">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/app_amount"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Approved"-->
-<!--                android:textSize="16dp"-->
-<!--                android:drawableLeft="@drawable/ic_rupee_small"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/app_date"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:gravity="right"-->
-<!--                android:text="Date"-->
-<!--                android:textSize="14dp"-->
-<!--                android:visibility="visible"-->
-<!--                android:layout_marginTop="5dp"/>-->
-
-<!--        </LinearLayout>-->
-
         <TextView
+            android:id="@+id/remarks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Remarks"
             android:textColor="#444"
             android:textStyle="bold"
             android:textSize="16dp"/>
 
         <TextView
-            android:id="@+id/remarks"
+            android:id="@+id/action_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:text="Flat No 404, Skyline Apartments, Vizag - 500576" />
+            android:text="Remarks"
+            android:textColor="#444"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:textSize="16dp"/>
 
         <View
             android:id="@+id/view1"
@@ -248,7 +224,7 @@
             android:layout_marginTop="5dp"
             android:background="@color/greyed_out"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="10dp" />
 
         <LinearLayout
             android:id="@+id/ll_form"

@@ -47,6 +47,17 @@ public class TechDashboardDetail {
     @SerializedName("faulty_temp")
     private String faulty_temp;
 
+    @SerializedName("drs_add")
+    private String drs_add;
+
+    @SerializedName("drs_add21")
+    private String drs_add_21;
+
+    @SerializedName("drs_color")
+    private String drs_color;
+
+    @SerializedName("drs_color21")
+    private String drs_color21;
 
     public int getTot_dev() {
         return tot_dev;
@@ -198,5 +209,37 @@ public class TechDashboardDetail {
 
     public void setOpr_per(String opr_per) {
         this.opr_per = opr_per;
+    }
+
+    public String getDrs_add() {
+        return drs_add;
+    }
+
+    public void setDrs_add(String drs_add) {
+        this.drs_add = drs_add;
+    }
+
+    public String getDrs_add_21() {
+        return drs_add_21;
+    }
+
+    public void setDrs_add_21(String drs_add_21) {
+        this.drs_add_21 = drs_add_21;
+    }
+
+    public String getDrs_color() {
+        return drs_color;
+    }
+
+    public void setDrs_color(String drs_color) {
+        this.drs_color = drs_color;
+    }
+
+    public String getDrs_color21() {
+        return drs_color21;
+    }
+
+    public void setDrs_color21(String drs_color21) {
+        this.drs_color21 = drs_color21;
     }
 }

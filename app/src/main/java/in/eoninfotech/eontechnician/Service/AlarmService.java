@@ -18,7 +18,6 @@ public class AlarmService extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-
         Intent startIntent = new Intent(context, ForegroundService.class);
         startIntent.setAction(Content.ACTION.STARTFOREGROUND_ACTION);
         context.startService(startIntent);

@@ -26,7 +26,6 @@ import android.util.Log;
 import com.google.android.gms.location.*;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.wallet.wobs.TimeInterval;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,6 +79,7 @@ public class ForegroundService extends JobService {
     SharedPreferences.Editor editor;
     double latitude, longitude;
     String lati, lngi;
+
     Calendar calen = Calendar.getInstance();
     int track;
     PowerManager.WakeLock wakelock;
@@ -131,7 +131,7 @@ public class ForegroundService extends JobService {
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                notificationIntent, 0);
+                notificationIntent, PendingIntent.FLAG_MUTABLE);
         Bitmap icon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.app_icon);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

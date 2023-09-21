@@ -214,6 +214,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         addclients();
         addLocation();
         location.setEnabled(false);
+
         String imageUri = K.Url.IMAGE_URL +"uploads/"+image;
         ImageUtils.glideImage(ivProfile, imageUri, R.drawable.user);
         btn.setEnabled(false);

@@ -30,6 +30,8 @@ public class StockClientDataResponse {
 
     private String vts_f_id;
 
+    private String drs_f_id;
+
     public String getVts_w_id ()
     {
         return vts_w_id;
@@ -138,6 +140,14 @@ public class StockClientDataResponse {
     public void setVts_f_id (String vts_f_id)
     {
         this.vts_f_id = vts_f_id;
+    }
+
+    public String getDrs_f_id() {
+        return drs_f_id;
+    }
+
+    public void setDrs_f_id(String drs_f_id) {
+        this.drs_f_id = drs_f_id;
     }
 
     @Override

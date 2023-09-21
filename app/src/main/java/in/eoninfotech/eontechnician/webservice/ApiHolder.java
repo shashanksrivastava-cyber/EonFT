@@ -242,8 +242,15 @@ public interface ApiHolder {
     @GET("activities-list.php")
     Call<WorkTypeResponse> reqeuestworkType();
 
+
     @GET("vehicle-type.php")
     Call<VehicleTypeResponse> reqeuestvehicleType();
+
+//    @FormUrlEncoded
+//    @POST("vehicle-type.php")
+//    Call<VehicleTypeResponse> reqeuestvehicleType(
+//            @Field("cust_id") String cust_id,
+//            @Field("cust_name") String cust_name);
 
     @GET("clients-list.php")
     Call<ClientResponse> reqeuestClientList();
@@ -342,7 +349,6 @@ public interface ApiHolder {
                                              @Part("payment_type") RequestBody payment_type,
                                              @Part("old_serial_no") RequestBody old_serial_no,
                                              @Part("vts_type") RequestBody vts_type);
-
 
     @Multipart
     @POST("technicians-work.php")
@@ -596,5 +602,8 @@ public interface ApiHolder {
     @POST("cancelled_bill.php")
     Call<BillResponse> cancel_bill(@Field("bill_no") String bill_no,
                                    @Field("remarks") String remarks);
+
+    @GET("get_dispatch_type_list.php")
+    Call<MainResponse> get_dispatch_type_list();
 
 }

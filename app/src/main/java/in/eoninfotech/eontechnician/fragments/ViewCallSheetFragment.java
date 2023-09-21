@@ -61,7 +61,6 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
-
 /**
  * Created by root on 1/3/19.
  */
@@ -70,7 +69,7 @@ public class ViewCallSheetFragment extends Fragment {
 
     View v;
     int id = 1;
-    EditText selectedMonth,selectedYear;
+    EditText selectedMonth, selectedYear;
     private Handler handler = new Handler();
     RelativeLayout circularRelative;
     SharedPreferences sharedprefs;
@@ -86,26 +85,27 @@ public class ViewCallSheetFragment extends Fragment {
     ImageView go;
     ProgressDialog pDialog;
     Button upload_img_view;
-    String monthtobeSend="0",yeartobeSend="0";
+    String monthtobeSend = "0", yeartobeSend = "0";
     public RecyclerView recyclerView;
     public SwipeRefreshLayout refreshLayout;
     public LinearLayoutManager layoutManager;
     public LinearLayout linearActivity, update;
     private TextView txtContentUnavailable;
     private CallSheetAdapter callSheetAdapter;
-    MySearchableSpinner monthSpinner,yearSpinner;
+    MySearchableSpinner monthSpinner, yearSpinner;
     ArrayList<CallSheetDetail> callSheetDetails = new ArrayList<>();
     ArrayList<MonthDetail> monthList = new ArrayList<>();
     ArrayList<YearDetail> yearList = new ArrayList<>();
     ArrayList<String> monthDetail = new ArrayList<>();
     ArrayList<String> yearDetail = new ArrayList<>();
     ArrayAdapter<String> adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_call_sheet_list, container, false);
-
-        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        //Base.initialize(getActivity());
+        sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         username = sharedprefs.getString("usname", "");
         dist_id = sharedprefs.getString("s_distt", "");
@@ -115,6 +115,7 @@ public class ViewCallSheetFragment extends Fragment {
         upload_img_view = v.findViewById(R.id.upload_img);
         update_dataa = v.findViewById(R.id.update_data);
         ivProfile = v.findViewById(R.id.ivProfile);
+        //preview = v.findViewById(R.id.preview);
         update = v.findViewById(R.id.update);
         go = v.findViewById(R.id.go);
         monthSpinner = v.findViewById(R.id.monthSpinner);
@@ -124,7 +125,7 @@ public class ViewCallSheetFragment extends Fragment {
         circularRelative = v.findViewById(R.id.circularRelative);
         refreshLayout = v.findViewById(R.id.refresh);
         recyclerView = v.findViewById(R.id.recyclerView);
-        layoutManager = new GridLayoutManager(getActivity(),2);
+        layoutManager = new GridLayoutManager(getActivity(), 2);
         txtContentUnavailable = v.findViewById(R.id.txt_content_unavailable);
         recyclerView.setLayoutManager(layoutManager);
         linearActivity = v.findViewById(R.id.llContent);
@@ -134,15 +135,16 @@ public class ViewCallSheetFragment extends Fragment {
 
         getMonth();
         getYear();
-        getCallSheetData();
+        //getCallSheetData();
         setDateAndTime();
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-              monthtobeSend = String.valueOf(monthList.get(i).getId());
-               getCallSheetData();
+                monthtobeSend = String.valueOf(monthList.get(i).getId());
+                getCallSheetData();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -154,6 +156,7 @@ public class ViewCallSheetFragment extends Fragment {
                 yeartobeSend = String.valueOf(yearList.get(i).getYear());
                 getCallSheetData();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -165,7 +168,7 @@ public class ViewCallSheetFragment extends Fragment {
             }
         });
 
-         return v;
+        return v;
     }
 
     @Override
@@ -183,31 +186,35 @@ public class ViewCallSheetFragment extends Fragment {
             @Override
             public void onResponse(Call<YearListResponse> call, Response<YearListResponse> response) {
                 if (response.body().getType() == 1) {
-                    try{
+                    try {
                         yearList = response.body().getYearDetail();
                         try {
                             try {
                                 yearDetail.clear();
                             } catch (Exception e) {
                                 e.printStackTrace();
-                            }for (int i = 0; i < yearList.size(); i++) {
+                            }
+                            for (int i = 0; i < yearList.size(); i++) {
                                 yearDetail.add(yearList.get(i).getYear());
-                            }adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, yearDetail);
+                            }
+                            adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, yearDetail);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             yearSpinner.setAdapter(adapter);
-                            for(int i=0;i<=yearDetail.size();i++){
-                                if(yearDetail.get(i).equalsIgnoreCase(String.valueOf(year))){
-                                    yearSpinner.setSelection(i);
-                                }
+
+                          for(int i=0;i<=yearDetail.size();i++){
+                            if(yearDetail.get(i).equalsIgnoreCase(String.valueOf(year))){
+                              yearSpinner.setSelection(i);
                             }
+                          }
                         } catch (NullPointerException npe) {
                             npe.printStackTrace();
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<YearListResponse> call, Throwable t) {
                 t.printStackTrace();
@@ -223,27 +230,30 @@ public class ViewCallSheetFragment extends Fragment {
             @Override
             public void onResponse(Call<MonthListResponse> call, Response<MonthListResponse> response) {
                 if (response.body().getType() == 1) {
-                    try{
+                    try {
                         monthList = response.body().getMonthDetail();
                         try {
                             try {
                                 monthDetail.clear();
                             } catch (Exception e) {
                                 e.printStackTrace();
-                            }for (int i = 0; i < monthList.size(); i++) {
+                            }
+                            for (int i = 0; i < monthList.size(); i++) {
                                 monthDetail.add(monthList.get(i).getName());
-                            }adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, monthDetail);
+                            }
+                            adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, monthDetail);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             monthSpinner.setAdapter(adapter);
-                            monthSpinner.setSelection(month-1);
+                            monthSpinner.setSelection(month - 1);
                         } catch (NullPointerException npe) {
                             npe.printStackTrace();
                         }
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-                }
+            }
+
             @Override
             public void onFailure(Call<MonthListResponse> call, Throwable t) {
                 t.printStackTrace();
@@ -258,7 +268,7 @@ public class ViewCallSheetFragment extends Fragment {
         RequestBody tech_name = RequestBody.create(MediaType.parse("text/plain"), username);
         RequestBody month = RequestBody.create(MediaType.parse("text/plain"), monthtobeSend);
         RequestBody year = RequestBody.create(MediaType.parse("text/plain"), yeartobeSend);
-        Call<CallSheetResponse> call = uploadImage.callsheet_list(tech_name, month,year);
+        Call<CallSheetResponse> call = uploadImage.callsheet_list(tech_name, month, year);
         call.enqueue(new Callback<CallSheetResponse>() {
             @Override
             public void onResponse(Call<CallSheetResponse> call, Response<CallSheetResponse> response) {
@@ -277,10 +287,10 @@ public class ViewCallSheetFragment extends Fragment {
                     refreshLayout.setRefreshing(false);
                 }
             }
+
             @Override
             public void onFailure(Call<CallSheetResponse> call, Throwable t) {
                 t.printStackTrace();
-//                pDialog.dismiss();
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
         });
@@ -312,13 +322,14 @@ public class ViewCallSheetFragment extends Fragment {
         datee.setText(current_date);
         String abc = datee.getText().toString();
         String[] separated = abc.split("-");
-        String date =  separated[0];
+        String date = separated[0];
         String month = separated[1];
         String years = separated[2];
         String dates = years + "-" + month + "-" + date;
         s_date = dates;
         datee.setOnClickListener(v -> getDate());
     }
+
     private void getDate() {
         // TODO Auto-generated method stub
         final DatePickerDialog dpdd = new DatePickerDialog(getActivity(), (view, year, monthOfYear, dayOfMonth) -> {
@@ -330,7 +341,7 @@ public class ViewCallSheetFragment extends Fragment {
             datee.setText(selected_todate);
             String abc = datee.getText().toString();
             String[] separated = abc.split("-");
-            String date =  separated[0];
+            String date = separated[0];
             String month = separated[1];
             String years = separated[2];
             String dates = years + "-" + month + "-" + date;
@@ -340,6 +351,7 @@ public class ViewCallSheetFragment extends Fragment {
         dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
         dpdd.show();
     }
+
     private void refresh() {
         s_date = "0";
         getCallSheetData();

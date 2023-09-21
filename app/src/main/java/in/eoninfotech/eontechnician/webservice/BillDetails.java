@@ -24,6 +24,8 @@ public class BillDetails {
     String status;
     @SerializedName("remarks")
     String remarks;
+    @SerializedName("action_by")
+    String action_by;
 
     public String getBill_no() {
         return bill_no;
@@ -103,5 +105,13 @@ public class BillDetails {
 
     public void setRec_date(String rec_date) {
         this.rec_date = rec_date;
+    }
+
+    public String getAction_by() {
+        return action_by;
+    }
+
+    public void setAction_by(String action_by) {
+        this.action_by = action_by;
     }
 }

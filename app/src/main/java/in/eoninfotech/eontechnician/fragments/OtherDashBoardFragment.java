@@ -72,7 +72,7 @@ public class OtherDashBoardFragment extends Fragment {
     private PieChart mChart;
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
     TextView t_curntday, t_target, addName, addTime, add_value, total_vts, total_drs, faulty_vts, faulty_drs, faulty_um,
-            tot_sos,tot_lid,tot_fuel,tot_temp,um_working,sos_faulty,lid_faulty,fuel_faulty,temp_faulty;
+            tot_sos,tot_lid,tot_fuel,tot_temp,um_working,sos_faulty,lid_faulty,fuel_faulty,temp_faulty,drs_add,drs_add_21;
     ArrayList<Float> yData = new ArrayList<>();
     ColorfulRingProgressView vtsSpv, drsSpv, umSpv,um_workigSpv,sos_Spv,lid_Spv,fuel_Spv,temp_Spv;
     CardView cv_one_login, cv_two_login, cv_three_login,cv_four_login,cv_five_login,cv_six_login,cv_seven_login,cv_eight_login;
@@ -126,6 +126,8 @@ public class OtherDashBoardFragment extends Fragment {
         cv_six_login = v.findViewById(R.id.cv_six_login);
         cv_seven_login = v.findViewById(R.id.cv_seven_login);
         cv_eight_login = v.findViewById(R.id.cv_eight_login);
+        drs_add = v.findViewById(R.id.drs_add);
+        drs_add_21 = v.findViewById(R.id.drs_add_21);
         txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
         t_curntday = v.findViewById(R.id.curnt_date);
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
@@ -170,55 +172,55 @@ public class OtherDashBoardFragment extends Fragment {
         cv_four_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
         cv_five_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
         cv_six_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
         cv_seven_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
         cv_eight_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+//                intent.putExtra("device_value", "3");
+//                intent.putExtra("tab", "1");
+//                intent.putExtra("other", "2");
+//                startActivity(intent);
             }
         });
 
@@ -329,6 +331,20 @@ public class OtherDashBoardFragment extends Fragment {
                         add_value.setTextColor(color21);
                         // add_value.setBackgroundColor(color21);
 
+                        drs_add.setText("" + dashboardList.get(i).getDrs_add());
+                        String drs_color = dashboardList.get(i).getDrs_color();
+                        String[] drs_separated = drs_color.split(";");
+                        String colors = drs_separated[0];
+                        int drs_colors = Color.parseColor(colors);
+                        drs_add.setTextColor(drs_colors);
+
+                        drs_add_21.setText("" + dashboardList.get(i).getDrs_add_21());
+                        String drs21_ = dashboardList.get(i).getDrs_color21();
+                        String[] separate = drs21_.split(";");
+                        String drs_21 = separate[0];
+                        int drs21_color = Color.parseColor(drs_21);
+                        addTime.setTextColor(drs21_color);
+
                         total_vts.setText("" + dashboardList.get(0).getTot_dev());
                         total_drs.setText("" + dashboardList.get(0).getTot_drs());
 //                        tot_sos.setText(""+dashboardList.get(0).getTot_sos());
@@ -348,17 +364,17 @@ public class OtherDashBoardFragment extends Fragment {
                         um_working.setText(""+dashboardList.get(0).getUmain_work());
                         um_workigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
 
-//                        sos_faulty.setText(""+dashboardList.get(0).getFaulty_sos());
-//                        sos_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
-//
-//                        lid_faulty.setText(""+dashboardList.get(0).getFaulty_lid());
-//                        lid_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
-//
-//                        fuel_faulty.setText(""+dashboardList.get(0).getFaulty_fuel());
-//                        fuel_Spv.setPercent(Float.parseFloat(""+dashboardList.get(0).getFaulty_fuel()));
-//
-//                        temp_faulty.setText(""+dashboardList.get(0).getFaulty_temp());
-//                        temp_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+                        sos_faulty.setText(""+dashboardList.get(0).getFaulty_sos());
+                        sos_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
+
+                        lid_faulty.setText(""+dashboardList.get(0).getFaulty_lid());
+                        lid_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
+
+                        fuel_faulty.setText(""+dashboardList.get(0).getFaulty_fuel());
+                        fuel_Spv.setPercent(Float.parseFloat(""+dashboardList.get(0).getFaulty_fuel()));
+
+                        temp_faulty.setText(""+dashboardList.get(0).getFaulty_temp());
+                        temp_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
 
                         progressDialog.hide();
                     }

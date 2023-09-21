@@ -53,4 +53,11 @@
         android:visibility="visible">
     </androidx.viewpager.widget.ViewPager>
 
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerMaterialReturn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+    </androidx.viewpager.widget.ViewPager>
+
 </LinearLayout>

@@ -150,15 +150,6 @@ public class JobScheduleService extends JobService {
     @Override
     public void onTaskRemoved(Intent rootIntent) {
 
-//        Intent restartServiceIntent = new Intent(getApplicationContext(), this.getClass());
-//        restartServiceIntent.setPackage(getPackageName());
-//        PendingIntent restartServicePendingIntent = PendingIntent.getService(getApplicationContext(), 1, restartServiceIntent, PendingIntent.FLAG_ONE_SHOT);
-//        AlarmManager alarmService = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-//        alarmService.set(
-//                AlarmManager.ELAPSED_REALTIME,
-//                SystemClock.elapsedRealtime() + 1000,
-//                restartServicePendingIntent);
-
         super.onTaskRemoved(rootIntent);
     }
     private void getDeviceLocation() {
@@ -274,15 +265,6 @@ public class JobScheduleService extends JobService {
                 try {
                     if (response.body().getType().equals("0")) {
                         TrackingResponse trackingResponse = response.body();
-                        //trackingDetails = response.body().getTrackingDetails();
-//                        track_status = trackingDetails.get(0).getTrack_status();
-//                        track_interval = trackingDetails.get(0).getTrack_interval();
-//                        editor.putString("track_status", track_status);
-//                        editor.putString("track_interval", track_interval);
-//                        editor.commit();
-//                        sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
-//                        editor = sharedprefs.edit();
-                       // track_status="Y";
                         track_status = sharedprefs.getString("track_status", "");
                         track_interval = sharedprefs.getString("track_interval", "");
                         track_interval="20";
@@ -341,7 +323,6 @@ public class JobScheduleService extends JobService {
             }
             @Override
             public void onFailure(Call<TrackingResponse> call, Throwable t) {
-               // Toast.makeText(JobScheduleService.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
                 try {
                 } catch (Exception e) {
                 }

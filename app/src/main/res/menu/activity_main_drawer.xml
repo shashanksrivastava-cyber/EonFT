@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/nav_tech_dashboard"
@@ -48,18 +49,29 @@
         android:title="Bill Intimation" />
 
     <item
+        android:id="@+id/nav_material"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Material Received"/>
+
+    <item
+        android:id="@+id/nav_material_return"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Return Material"/>
+
+    <item
         android:id="@+id/nav_technician_of_the_month"
         android:icon="@drawable/upd_list"
         android:title="Technician of the Month" />
 
-    <item
-        android:id="@+id/faqs"
-        android:icon="@drawable/ic_incentive"
-        android:title="FAQs" />
+<!--    <item-->
+<!--        android:id="@+id/faqs"-->
+<!--        android:icon="@drawable/ic_incentive"-->
+<!--        android:title="FAQs" />-->
 
     <item
         android:id="@+id/menu_logout"
         android:icon="@drawable/ic_power_settings_new_black_24dp"
         android:orderInCategory="100"
         android:title="Logout" />
+
 </menu>

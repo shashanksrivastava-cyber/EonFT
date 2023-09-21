@@ -184,10 +184,7 @@ public class PaymentCollectionReportFragment extends Fragment {
         fromdatetoSend = dates;
         fromDateShow.setText(current_date);
         toDateShow.setText(current_date);
-
         loadContent();
-//        filter.setImageResource(R.drawable.ic_filter);
-//        lay_filter.setVisibility(View.GONE);
         fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,10 +238,6 @@ public class PaymentCollectionReportFragment extends Fragment {
             String years = separated[2];
             String dates  = years+"-"+month+"-"+date;
             fromdatetoSend = dates;
-           // loadContent();
-//            filter.setImageResource(R.drawable.ic_filter);
-//            lay_filter.setVisibility(View.GONE);
-          //  refreshLayout.setRefreshing(true);
         }, year, month - 1, day);
         dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
         dpdd.show();

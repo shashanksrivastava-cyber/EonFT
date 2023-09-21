@@ -46,7 +46,7 @@ public class FaultyDevicesAdapter extends RecyclerView.Adapter<FaultyDevicesAdap
 
         holder.site_loc.setText(faultyDevicesResponse.getLocation());
         holder.site_cust_name.setText(faultyDevicesResponse.getCustomer());
-        holder.faulty_drs.setText("Faulty DRS : "+"0");
+        holder.faulty_drs.setText("Faulty DRS/SOS : "+"0");
         holder.faulty_vts.setText("Faulty VTS : "+faultyDevicesResponse.getFaulty_dev_cnt());
         String abc = faultyDevicesResponse.getFaulty_devices();
         String def = faultyDevicesResponse.getFaulty_drs();

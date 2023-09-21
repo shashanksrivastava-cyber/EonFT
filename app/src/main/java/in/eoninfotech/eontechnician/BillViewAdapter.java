@@ -119,9 +119,15 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
             holder.ll_form.setVisibility(View.VISIBLE);
         }
         if(billDetailsResponse.getRemarks().equalsIgnoreCase("-")){
-            holder.remarks.setVisibility(View.GONE);
+            holder.remarks.setText("Remarks : ");
         }else {
-            holder.remarks.setText(billDetailsResponse.getRemarks());
+            holder.remarks.setText("Remarks : " + billDetailsResponse.getRemarks());
+        }
+
+        if(billDetailsResponse.getRemarks().equalsIgnoreCase("-")){
+            holder.action_by.setText("Action By :" );
+        }else {
+            holder.action_by.setText("Action By : " + billDetailsResponse.getAction_by());
         }
 
         holder.viewBill.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +138,6 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
                 showDialog(s_bill_no,s_amount,position);
             }
         });
-
     }
 
     private void showDialog(String s_bill_no, String s_amount, int position) {
@@ -159,11 +164,8 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
                     dialog_remark.setError("Fill Remarks");
                 }else {
                    String s_remarks = dialog_remark.getText().toString();
-                    //listener.onCancelButtonClick(position,s_bill_no,s_remarks);
                     cancelBill(position,s_bill_no,s_remarks);
-
                 }
-
             }
         });
 
@@ -213,7 +215,7 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView bill_no,amount,status,date,app_amount,app_date,remarks,rej_date,title,viewBill;
+        TextView bill_no,amount,status,date,app_amount,app_date,remarks,rej_date,title,viewBill,action_by;
         LinearLayout ll_form;
         View view1;
 
@@ -232,6 +234,7 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
             ll_form = itemView.findViewById(R.id.ll_form);
             view1 = itemView.findViewById(R.id.view1);
             viewBill = itemView.findViewById(R.id.viewBill);
+            action_by = itemView.findViewById(R.id.action_by);
         }
     }
 

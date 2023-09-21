@@ -30,6 +30,8 @@ public class LoginDetail {
     private String track_status;
     @SerializedName("track_interval")
     private String track_interval;
+    @SerializedName("bill_amt_limit")
+    private String bill_amt_limit;
 
 
     public String getVerno() {
@@ -118,5 +120,13 @@ public class LoginDetail {
 
     public void setUsr_id(String usr_id) {
         this.usr_id = usr_id;
+    }
+
+    public String getBill_amt_limit() {
+        return bill_amt_limit;
+    }
+
+    public void setBill_amt_limit(String bill_amt_limit) {
+        this.bill_amt_limit = bill_amt_limit;
     }
 }

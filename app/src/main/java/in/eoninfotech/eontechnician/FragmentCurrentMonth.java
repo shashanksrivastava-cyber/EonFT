@@ -71,15 +71,11 @@ public class FragmentCurrentMonth extends Fragment {
     RelativeLayout relay;
     String monthtobeSend="0",yeartobeSend="0";
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
-    Float achivd, total;
-    ProgressBar progressBar;
-    Timer timer;
     ImageView filter,go;
     LinearLayout lay_filter;
     EditText remarks;
     SharedPreferences sharedprefs;
     TextView incentiveDate,incentive ;
-    private TextView mScratchTitleView;
     ArrayList<ListIncentiveDetail> incentiveDetails = new ArrayList<ListIncentiveDetail>();
     private Random random = new Random();
 
@@ -274,10 +270,7 @@ public class FragmentCurrentMonth extends Fragment {
                 }
             }
         });
-
         return v;
-    }
-    private void runOnUiThread(Runnable progress) {
     }
     private void setDateAndTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");

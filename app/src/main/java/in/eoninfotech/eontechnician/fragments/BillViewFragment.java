@@ -3,6 +3,7 @@ package in.eoninfotech.eontechnician.fragments;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.util.Calendar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.BillViewAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
@@ -49,6 +51,7 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
     EditText fromDate, toDate;
     private ProgressDialog pDialog;
     View v;
+    public SwipeRefreshLayout refreshLayout;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     String version, username,current_date,selected_todate,selected_fromdate,s_from_date,s_to_date,status,s_status;
@@ -75,6 +78,11 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
         done = v.findViewById(R.id.done);
         filter_status = v.findViewById(R.id.status);
         txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
+
+        refreshLayout = v.findViewById(R.id.refresh);
+        refreshLayout.setRefreshing(true);
+        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE);
+        refreshLayout.setOnRefreshListener(this::refresh);
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -104,8 +112,6 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
 
         setDate();
 
-        //getBillDetails(s_from_date,s_to_date,"NR");
-
         filter_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -130,13 +136,17 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
                     s_from_date = fromDate.getText().toString();
                     s_to_date = toDate.getText().toString();
                     getBillDetails(s_from_date,s_to_date,s_status);
-                }else {
+                }else if(s_status.equalsIgnoreCase("Cancelled")) {
                     s_status = "C";
                     s_from_date = fromDate.getText().toString();
                     s_to_date = toDate.getText().toString();
                     getBillDetails(s_from_date,s_to_date,s_status);
+                }else {
+                    s_status = "";
+                    s_from_date = fromDate.getText().toString();
+                    s_to_date = toDate.getText().toString();
+                    getBillDetails(s_from_date,s_to_date,s_status);
                 }
-
             }
 
             @Override
@@ -178,6 +188,8 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
                     recyclerView.setAdapter(billViewAdapter);
                     recyclerView.setVisibility(View.VISIBLE);
                     txt_content_unavailable.setVisibility(View.GONE);
+                    refreshLayout.setRefreshing(false);
+                    pDialog.dismiss();
                 }
                 else {
                     pDialog.dismiss();
@@ -249,5 +261,12 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
     @Override
     public void onCancelButtonClick(int position, String s_bill_no, String s_remarks) {
 
+    }
+
+    private void refresh() {
+        s_status = "";
+        s_from_date = fromDate.getText().toString();
+        s_to_date = toDate.getText().toString();
+        getBillDetails(s_from_date,s_to_date,s_status);
     }
 }

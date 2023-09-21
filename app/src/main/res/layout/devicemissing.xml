@@ -13,7 +13,8 @@
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -177,6 +178,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_vts_miss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -275,7 +277,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Missing Sensor Details"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="visible"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -395,7 +398,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:orientation="horizontal"
-        android:weightSum="4">
+        android:weightSum="4"
+        android:visibility="visible">
 
         <TextView
             android:layout_width="match_parent"

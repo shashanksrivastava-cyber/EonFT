@@ -102,7 +102,6 @@ public class NewInstallmentController extends Controller {
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
-                    // Toast.makeText(getActivity(), "Server Response Timeout, Try Again!", Toast.LENGTH_LONG).show();
                 }
             }
         });

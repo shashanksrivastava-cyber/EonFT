@@ -21,7 +21,6 @@ import com.bumptech.glide.request.target.Target;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import androidx.annotation.Nullable;
-import androidx.palette.graphics.Palette;
 import in.eoninfotech.eontechnician.Constants;
 import in.eoninfotech.eontechnician.R;
 

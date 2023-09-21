@@ -13,7 +13,8 @@
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:visibility="visible">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +60,6 @@
                 android:layout_weight="1"
                 android:text="Both"
                 android:textSize="14sp" />
-
 
         </RadioGroup>
 
@@ -647,6 +647,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:weightSum="4">
 
         <TextView
@@ -742,6 +743,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:orientation="horizontal"
+        android:visibility="visible"
         android:weightSum="4">
 
         <TextView

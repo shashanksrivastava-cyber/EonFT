@@ -21,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,7 +75,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
     int year, month, day;
     RelativeLayout rel_image;
     ImageView Camera,btnCancel;
-    String current_date, selected_todate, s_remarks = "", s_amount, s_from_date, s_to_date, version, username;
+    String current_date, selected_todate, s_remarks = "", s_amount, s_from_date, s_to_date, version, username,bill_amt_limit="";
     View v;
     private ProgressDialog pDialog;
     File file;
@@ -111,6 +112,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         editor = sharedprefs.edit();
         username = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
+        bill_amt_limit = sharedprefs.getString("bill_amt_limit", "");
 
         fromDate = v.findViewById(R.id.fromDate);
         toDate = v.findViewById(R.id.toDate);
@@ -130,6 +132,8 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         progressBar = v.findViewById(R.id.progressBar);
         rel_image.setVisibility(View.GONE);
         edit_image.setVisibility(View.VISIBLE);
+        int bill_amt = Integer.parseInt(bill_amt_limit);
+        amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(bill_amt) });
 
         fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -266,7 +270,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         });
 
         return v;
-
     }
 
     private void openCameraIntent() {
@@ -348,7 +351,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void setDate() {

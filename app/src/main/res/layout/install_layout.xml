@@ -95,6 +95,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_vts_sr_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -118,7 +119,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilsrNo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/vltd_sr_no"
@@ -672,8 +674,6 @@
                         android:id="@+id/fuelVoltage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="5dp"
                         android:orientation="horizontal"
                         android:weightSum="4">
 
@@ -713,8 +713,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
                     android:orientation="horizontal"
                     android:visibility="gone"
                     android:weightSum="4">

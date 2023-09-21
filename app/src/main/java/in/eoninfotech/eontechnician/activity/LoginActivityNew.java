@@ -97,7 +97,7 @@ public class LoginActivityNew extends AppCompatActivity {
     String versname, acti_vate, dis_username, location, contact, zone, image, usrtype,logout,isRunning;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String uusername, alert, asyn_versn, versionName, track_status, track_interval;
+    String uusername, alert, asyn_versn, versionName, track_status, track_interval,bill_amt_limit;
     ProgressDialog pDialog;
     CheckConnection chk = new CheckConnection(LoginActivityNew.this);
     AppPreferences appPrefs;
@@ -145,6 +145,7 @@ public class LoginActivityNew extends AppCompatActivity {
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationPrefs = new LocationPrefs(this);
         telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
+
 
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -311,6 +312,7 @@ public class LoginActivityNew extends AppCompatActivity {
                     image = loginList.get(i).getImage();
                     track_status = loginList.get(i).getTrack_status();
                     track_interval = loginList.get(i).getTrack_interval();
+                    bill_amt_limit = loginList.get(i).getBill_amt_limit();
                     editor.putString("s_user_id",user_id);
                     editor.putString("s_uuser", uusername);
                     editor.putString("location", location);
@@ -323,6 +325,7 @@ public class LoginActivityNew extends AppCompatActivity {
                     editor.putString("imei1",imsiSIM1);
                     editor.putString("track_status",track_status);
                     editor.putString("track_interval",track_interval);
+                    editor.putString("bill_amt_limit",bill_amt_limit);
                     editor.commit();
                     progressDialog.hide();
 
