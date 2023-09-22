@@ -24,10 +24,12 @@ import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
+import in.eoninfotech.eontechnician.databinding.ActivityReceiveDeviceBinding;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +37,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.progressindicator.BaseProgressIndicator;
 import com.robinhood.ticker.TickerView;
 
 import java.util.ArrayList;
@@ -68,34 +72,35 @@ public class ReceiveDeviceActivity extends AppCompatActivity implements ClientLi
     }
     private void initView() {
 
-        total_device = findViewById(R.id.total_device);
-        spn_transit = findViewById(R.id.spn_transit);
-        spn_items= findViewById(R.id.spn_items);
-        device_detail_list = findViewById(R.id.device_detail_list);
-        other_material = findViewById(R.id.other_material);
-        btn_accept = findViewById(R.id.btn_accept);
-        btn_reject = findViewById(R.id.btn_reject);
-        remarks= findViewById(R.id.remarks);
+//        total_device = findViewById(R.id.total_device);
+//        spn_transit = findViewById(R.id.spn_transit);
+//        spn_items= findViewById(R.id.spn_items);
+//        device_detail_list = findViewById(R.id.device_detail_list);
+//        other_material = findViewById(R.id.other_material);
+//        btn_accept = findViewById(R.id.btn_accept);
+//        btn_reject = findViewById(R.id.btn_reject);
+        //remarks= findViewById(R.id.remarks);
         newInstallmentController = new NewInstallmentController();
 
         addclients();
         addLocation();
         getFaultList();
-        total_device.setPreferredScrollingDirection(TickerView.ScrollingDirection.DOWN);
 
-        btn_accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        total_device.setPreferredScrollingDirection(TickerView.ScrollingDirection.DOWN);
 
-            }
-        });
-
-        btn_reject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        btn_accept.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//
+//        btn_reject.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
 
     private void getFaultList() {
