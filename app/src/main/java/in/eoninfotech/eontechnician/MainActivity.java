@@ -21,8 +21,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.provider.Settings;
 
 import android.util.Log;
@@ -46,7 +44,6 @@ import com.google.android.material.tabs.TabLayout;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,7 +70,6 @@ import in.eoninfotech.eontechnician.Service.ForegroundService;
 import in.eoninfotech.eontechnician.activity.LoginActivityNew;
 import in.eoninfotech.eontechnician.activity.MessageActivity;
 import in.eoninfotech.eontechnician.activity.ReceiveDeviceActivity;
-import in.eoninfotech.eontechnician.activity.ReturnDeviceActivity;
 import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
 import in.eoninfotech.eontechnician.fragments.BillIntimationFragment;
 import in.eoninfotech.eontechnician.fragments.BillViewFragment;
@@ -197,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle.putString("usernme", usrname);
         bundle.putString("version", versionname);
         bundle.putString("image", image);
-        handler.post(timedTask);
+        //handler.post(timedTask);
         try {
             TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(MainActivity.this);
             imei = telephonyInfo.getImsiSIM1();
@@ -239,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-        serviceStart();
+        //serviceStart();
         try {
             currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -273,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDrawerStateChanged(int newState) {
             }
         });
-        serviceStop();
+        //serviceStop();
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.inflateHeaderView(R.layout.nav_header_main);
@@ -287,11 +283,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        File applictionFile = new File(Environment.
-                getExternalStoragePublicDirectory(Environment
-                        .DIRECTORY_DOWNLOADS).getAbsolutePath() + "/eontech/alert.mp3");
-        if (!applictionFile.isFile()) {
         }
         Intent intent = getIntent();
         tab = intent.getStringExtra("tab");
@@ -406,14 +397,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .show();
     }
 
-    Handler handler = new Handler();
-    Runnable timedTask = new Runnable() {
-        @Override
-        public void run() {
-            loadContent();
-            handler.postDelayed(timedTask, 1000 * 60 * 1);
-        }
-    };
+//    Handler handler = new Handler();
+//    Runnable timedTask = new Runnable() {
+//        @Override
+//        public void run() {
+//            loadContent();
+//            handler.postDelayed(timedTask, 1000 * 60 * 1);
+//        }
+//    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -435,8 +426,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupBadge() {
-
-        loadContent();
+        Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                loadContent();
+            }
+        });
+        thread.start();
     }
 
     @Override
@@ -507,8 +503,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagercallsheet.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
-            viewPagerAdapterDashboard = new ViewPagerAdapterDashboard(getSupportFragmentManager());
-            viewPager.setAdapter(viewPagerAdapterDashboard);
+            viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+            viewPager.setAdapter(viewPagerAdapter);
             tabLayout.setupWithViewPager(viewPager);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -721,9 +717,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
-                                Intent stopIntent = new Intent(MainActivity.this, ForegroundService.class);
-                                stopIntent.putExtra("param_name", "end");
-                                getBaseContext().stopService(stopIntent);
+//                                Intent stopIntent = new Intent(MainActivity.this, ForegroundService.class);
+//                                stopIntent.putExtra("param_name", "end");
+//                                getBaseContext().stopService(stopIntent);
                                 finish();
                             } else {
                                 Intent inteer = new Intent(MainActivity.this, LoginActivityNew.class);
@@ -735,9 +731,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
-                                Intent stopIntent = new Intent(MainActivity.this, ForegroundService.class);
-                                stopIntent.putExtra("param_name", "end");
-                                getBaseContext().stopService(stopIntent);
+//                                Intent stopIntent = new Intent(MainActivity.this, ForegroundService.class);
+//                                stopIntent.putExtra("param_name", "end");
+//                                getBaseContext().stopService(stopIntent);
                                 finish();
                             }
                         }
@@ -863,21 +859,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.i("**respnse", " " + response.body());
                 try {
                     if (updateDataResponse != null) {
-                        try {
-                            mp = new MediaPlayer();
-                            String filePath = Environment.getExternalStorageDirectory() + "/eontech/alert.mp3";
-                            mp.setDataSource(filePath);
-                            mp.prepare();
-                            mp.start();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (IllegalArgumentException e) {
-                            e.printStackTrace();
-                        } catch (SecurityException e) {
-                            e.printStackTrace();
-                        } catch (IllegalStateException e) {
-                            e.printStackTrace();
-                        }
                         if (updateDataResponse.getType() == 1) {
                             try {
                                 faulty_num = updateDataResponse.getFaulty_vts();
@@ -885,7 +866,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-
                                 if (Integer.parseInt(faulty_num) >= Integer.parseInt(updateDataResponse.getRange())) {
                                     showDialog("You have " + faulty_num + " faulty devices, Please send to office immediately.", 0);
                                     menu.getItem(0).setIcon(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_warning_black_24dp));
@@ -893,9 +873,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     showDialog("You have " + faulty_num + " faulty devices.", 0);
                                     menu.getItem(0).setIcon(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_warning_grey_24dp));
                                 } else {
-                                    menu.getItem(0).setIcon(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_warning_grey_24dp));
+                                    //menu.getItem(0).setIcon(ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_warning_grey_24dp));
                                 }
-
                             } catch (NumberFormatException e) {
                                 e.printStackTrace();
                             }
@@ -948,7 +927,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -993,7 +972,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterAtd extends FragmentPagerAdapter {
 
         public ViewPagerAdapterAtd(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1038,7 +1017,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterStock extends FragmentPagerAdapter {
 
         public ViewPagerAdapterStock(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1080,11 +1059,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     class ViewPagerReturnMaterial extends FragmentPagerAdapter {
-
         public ViewPagerReturnMaterial(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
-
         @Override
         public Fragment getItem(int position) {
 
@@ -1126,7 +1103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterCallSheet extends FragmentPagerAdapter {
 
         public ViewPagerAdapterCallSheet(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1170,7 +1147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterActivity extends FragmentPagerAdapter {
 
         public ViewPagerAdapterActivity(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1215,7 +1192,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterDashboard extends FragmentPagerAdapter {
 
         public ViewPagerAdapterDashboard(FragmentManager fm) {
-            super(fm);
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1365,6 +1342,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onDestroy() {
+        System.gc();
         super.onDestroy();
     }
 }

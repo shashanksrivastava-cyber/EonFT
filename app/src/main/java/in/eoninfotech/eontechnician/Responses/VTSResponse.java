@@ -13,8 +13,11 @@ public class VTSResponse implements Serializable {
 
         @SerializedName("type")
         Integer type;
-        @SerializedName("vts-rec")
-        ArrayList<VTSDetail> vtsDetails = new ArrayList<VTSDetail>();
+//        @SerializedName("vts-rec")
+//        ArrayList<VTSDetail> vtsDetails = new ArrayList<VTSDetail>();
+
+    @SerializedName("vts-rec1")
+    ArrayList<VTSDetail> vtsDetails = new ArrayList<VTSDetail>();
 
         public Integer getType() {
             return type;
@@ -33,4 +36,11 @@ public class VTSResponse implements Serializable {
         }
 
 
+//    public ArrayList<VTSDetail1> getVtsDetails() {
+//        return vtsDetails;
+//    }
+//
+//    public void setVtsDetails(ArrayList<VTSDetail1> vtsDetails) {
+//        this.vtsDetails = vtsDetails;
+//    }
 }

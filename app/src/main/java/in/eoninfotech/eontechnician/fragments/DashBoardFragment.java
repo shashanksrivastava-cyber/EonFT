@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,9 +71,7 @@ public class DashBoardFragment extends Fragment {
         zone = sharedprefs.getString("zone", "");
 
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
-
         setDateAndTime();
-        getDashBoardDetail();
 
         binding.cvOneLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,6 +164,7 @@ public class DashBoardFragment extends Fragment {
         });
         return binding.getRoot();
     }
+
 
     void getDashBoardDetail() {
         progressDialog.show();
@@ -310,6 +310,24 @@ public class DashBoardFragment extends Fragment {
         binding.curntDate.setText(current_date);
         SimpleDateFormat dateFormatt = new SimpleDateFormat("HH:mm dd-MM-yyyy");
         s_time = dateFormatt.format(calen.getTime());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progressDialog.hide();
+        Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public void onResume() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getDashBoardDetail();
+            }
+        }, 100);
+        super.onResume();
     }
 
 }

@@ -10,16 +10,16 @@ import java.io.Serializable;
 
 public class ItemList implements Serializable {
 
-    @SerializedName("id")
-    private int Id;
+    @SerializedName("id_no")
+    private String Id;
     @SerializedName("name")
     private String name;
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 

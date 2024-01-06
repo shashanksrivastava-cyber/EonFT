@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     signingConfigs {
@@ -9,13 +12,16 @@ android {
             storePassword 'fielddata'
         }
     }
-    compileSdkVersion 32
+    compileSdkVersion 34
     defaultConfig {
+        configurations.all {
+            resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+        }
         applicationId "in.eoninfotech.eontechnician"
         minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 25 // total number of version changes on play store
-        versionName "5.4"
+        targetSdkVersion 34
+        versionCode 32 // total number of version changes on play store
+        versionName "5.6"
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -30,9 +36,15 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+//            minifyEnabled true
+//            multiDexEnabled true
+//            shrinkResources true
+//            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.config
+//            debuggable true
+
+            minifyEnabled false
             multiDexEnabled true
-            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -42,41 +54,40 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-//    dexOptions {
-//        javaMaxHeapSize "4g"
-//    }
-//    configurations.all {
-//        resolutionStrategy {
-//            force 'androidx.appcompat:appcompat:1.3.1'
-//        }
-//    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    namespace 'in.eoninfotech.eontechnician'
+    configurations.all {
+        resolutionStrategy {
+            force 'androidx.appcompat:appcompat:1.3.1'
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.12.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.androidadvance:topsnackbar:1.0.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
     implementation 'pub.devrel:easypermissions:0.2.1'
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
-    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
     implementation 'org.jsoup:jsoup:1.10.2'
     implementation 'com.github.HotBitmapGG:RingProgressBar:V1.2.3'
     implementation 'pl.bclogic:pulsator4droid:1.0.3'
-    implementation 'com.cocosw:bottomsheet:1.+@aar'
+    implementation 'com.cocosw:bottomsheet:1.5.0@aar'
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
-//    implementation 'com.google.android.gms:play-services:12.0.1'
-//    implementation 'com.google.android.gms:play-services-places:12.0.1'
-//    implementation 'com.google.android.gms:play-services-location:12.0.1'
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation 'com.github.d-max:spots-dialog:0.4@aar'
     implementation 'com.github.lzyzsd:circleprogress:1.2.1'
@@ -96,5 +107,4 @@ dependencies {
     implementation 'com.google.android.gms:play-services-base:16.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.android.support:palette-v7:27.0.1'
-
 }

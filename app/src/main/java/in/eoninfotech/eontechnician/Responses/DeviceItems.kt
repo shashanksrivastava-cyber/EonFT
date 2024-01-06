@@ -1,4 +1,7 @@
 package `in`.eoninfotech.eontechnician.Responses
 
-class DeviceItems {
+data class DeviceItems(
+    val item: String,
+    val quantity: String,
+) {
 }

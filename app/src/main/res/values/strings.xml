@@ -73,6 +73,10 @@
 5. Sometimes device is faulty, and it will not show any recent data.\n\n
 
 6. If device is missing, damage or removed from vehicle, it will show as device disconnect.</string>
+    <string name="details"><u>View Details</u></string>
+    <string name="device_sr_no"><u>Device Sr.No.</u></string>
+    <string name="other_material"><u>Other Material: </u></string>
+    <string name="dispatch"><u>Dispatch Details</u></string>
 
     <string-array name="billStatus">
         <item>All</item>
@@ -81,6 +85,13 @@
         <item>Approved</item>
         <item>Rejected</item>
         <item>Cancelled</item>
+    </string-array>
+
+    <string-array name="material_status">
+        <item>All</item>
+        <item>Received</item>
+        <item>Not Received</item>
+
     </string-array>
 
 

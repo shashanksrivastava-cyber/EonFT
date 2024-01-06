@@ -95,16 +95,11 @@ public class ActivityDetailFragment extends Fragment {
         progressBars = v.findViewById(R.id.progressBars);
         mShimmerViewContainer = v.findViewById(R.id.shimmer_view_container);
 
+        loadContent();
+
         return v;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            loadContent();
-        }
-    }
     private void setDateAndTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
         year = calen.get(Calendar.YEAR);

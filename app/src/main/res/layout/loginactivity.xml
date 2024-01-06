@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -216,8 +215,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@color/eonBlue"
-                    app:srcCompat="@drawable/ic_phone_black_24dp"/>
+                    app:srcCompat="@drawable/ic_phone_black_24dp"
+                    app:tint="@color/eonBlue" />
                 <TextView
                     android:id="@+id/phnnum"
                     android:layout_width="wrap_content"
@@ -235,8 +234,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="@color/eonBlue"
-                    app:srcCompat="@drawable/ic_mail_24dp"/>
+                    app:srcCompat="@drawable/ic_mail_24dp"
+                    app:tint="@color/eonBlue" />
                 <TextView
                     android:id="@+id/emadd"
                     android:layout_width="match_parent"

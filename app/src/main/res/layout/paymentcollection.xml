@@ -66,16 +66,16 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:hint="Amount">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_weight="1"
-                            android:hint="Amount"
                             android:inputType="number"
                             android:maxLength="8"
                             android:singleLine="true"
@@ -200,16 +200,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:hint="Contact Person Name">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/followUpPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_user"
                     android:drawablePadding="10dp"
-                    android:hint="Contact Person Name"
                     android:inputType="text"
                     android:maxLength="20"
                     android:singleLine="true"
@@ -220,9 +220,10 @@
                 android:id="@+id/pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="10dp"
+                android:hint="Contact Person Phone No">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/followUpPersonPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -230,7 +231,6 @@
                     android:drawableStart="@drawable/ic_phone_call"
                     android:drawableLeft="@drawable/ic_phone_call"
                     android:drawablePadding="10dp"
-                    android:hint="Contact Person Phone No"
                     android:inputType="number"
                     android:maxLength="10"
                     android:singleLine="true"

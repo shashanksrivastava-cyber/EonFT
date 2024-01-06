@@ -67,15 +67,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Device Id">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/sim_vts_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:hint="Device Id"
                 android:inputType="number"
                 android:maxLength="20"
                 android:singleLine="true"
@@ -114,16 +114,16 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="Vehicle No.">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/sim_vehicle_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-            android:hint="Vehicle No."
             android:inputType="textCapCharacters"
             android:maxLength="20"
             android:singleLine="true"
@@ -167,15 +167,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Old Sim No">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/old_sim_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
-                android:hint="Old Sim No"
                 android:inputType="number"
                 android:maxLength="13"
                 android:singleLine="true"
@@ -229,15 +229,15 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="New Sim No">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/new_sim_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:hint="New Sim No"
             android:inputType="number"
             android:maxLength="13"
             android:singleLine="true"

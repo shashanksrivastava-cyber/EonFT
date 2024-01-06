@@ -109,16 +109,16 @@
         android:id="@+id/tilsrNo_notAvail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:hint="Device Sr. No.">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/vltd_sr_no_notAvail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:hint="Device Sr. No."
             android:inputType="number"
             android:maxLength="15"
             android:singleLine="true"
@@ -135,16 +135,16 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_no_avail_vts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="VTS ID">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/vehNotAvailVtsID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:hint="VTS ID"
                 android:inputType="number"
                 android:maxLength="20"
                 android:singleLine="true"
@@ -153,9 +153,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Vehicle Reg No.">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/vehNotAvailRegNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -163,7 +164,6 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-                android:hint="Vehicle Reg No."
                 android:inputType="textCapCharacters"
                 android:maxLength="20"
                 android:singleLine="true"

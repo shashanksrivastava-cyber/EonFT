@@ -63,56 +63,159 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/et_frame"
+        android:visibility="visible">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/spn_fault_sr_no"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_to_show_fault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="2.5"
+        android:padding="5dp"
+        android:text="If serial no. not in list click here to add serial no. manually."
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp" />
+
+
+    <LinearLayout
+        android:id="@+id/linear_device_sr_no_fault_e_series"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilFaultVts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Sr. No."
+            android:layout_weight="5">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fault_vts_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="VTS ID"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textSize="12sp"
                 android:visibility="visible" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_gravity="top|left"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/delete_button_fault_e_series"
+            android:visibility="visible"
+            android:background="@drawable/ic_minus"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_device_sr_no_fault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilFaultSr"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Device Sr. No."
+            android:layout_weight="5">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/vltd_sr_no_fault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Device Sr. No."
                 android:inputType="number"
                 android:maxLength="50"
                 android:singleLine="true"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
         </com.google.android.material.textfield.TextInputLayout>
 
-    </RelativeLayout>
+        <Button
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_gravity="top|left"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/delete_button_fault"
+            android:visibility="visible"
+            android:background="@drawable/ic_minus"/>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/con_tilsrNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/con_fault_sr_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:hint="Confirm Device Sr. No."
+            android:inputType="numberPassword"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:visibility="visible" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:hint="Vehicle Reg No.">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fault_reg_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
-            android:hint="Vehicle Reg No."
             android:inputType="textCapCharacters"
             android:singleLine="true"
             android:textSize="12sp" />
@@ -204,16 +307,16 @@
             <in.eoninfotech.eontechnician.CustomTextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:hint="Contact Person Name">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/faultPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/ic_user"
                     android:drawablePadding="5dp"
-                    android:hint="Contact Person Name"
                     android:inputType="text"
                     android:maxLength="20"
                     android:singleLine="true"
@@ -223,9 +326,10 @@
             <in.eoninfotech.eontechnician.CustomTextInputLayout
                 android:id="@+id/pass"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="Contact Person Phone No">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/faultPersonNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -233,7 +337,6 @@
                     android:drawableStart="@drawable/ic_phone_call"
                     android:drawableLeft="@drawable/ic_phone_call"
                     android:drawablePadding="10dp"
-                    android:hint="Contact Person Phone No"
                     android:inputType="number"
                     android:maxLength="10"
                     android:singleLine="true"

@@ -12,7 +12,7 @@ import `in`.eoninfotech.eontechnician.controllers.ReceiveDeviceController
 import `in`.eoninfotech.eontechnician.databinding.ActivityReturnDeviceBinding
 import `in`.eoninfotech.eontechnician.helper.CheckConnection
 
-class MaterialReturnFragment : Fragment() {
+class MaterialReturnFragmentss : Fragment() {
 
     var binding :  ActivityReturnDeviceBinding?= null
     var sharedprefs: SharedPreferences? = null

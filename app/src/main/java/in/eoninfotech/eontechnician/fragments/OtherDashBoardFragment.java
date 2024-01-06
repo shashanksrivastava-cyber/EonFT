@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,7 +133,6 @@ public class OtherDashBoardFragment extends Fragment {
         t_curntday = v.findViewById(R.id.curnt_date);
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         setDateAndTime();
-        addTechnicians();
         //ShowProgressBar(false);
 
         cv_one_login.setOnClickListener(new View.OnClickListener() {
@@ -290,7 +290,6 @@ public class OtherDashBoardFragment extends Fragment {
                 addName.setText(techList.get(i).getName() + "'s ADD Performence");
                 addDetail.setVisibility(View.VISIBLE);
                 txt_content_unavailable.setVisibility(View.GONE);
-                getDashBoardDetail();
             }
 
             @Override
@@ -432,5 +431,19 @@ public class OtherDashBoardFragment extends Fragment {
             months = "Dec";
         }
     }
+
+    @Override
+    public void onResume() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                addTechnicians();
+                getDashBoardDetail();
+            }
+        }, 100);
+
+        super.onResume();
+    }
+
 
 }

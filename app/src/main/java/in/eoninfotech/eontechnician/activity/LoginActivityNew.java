@@ -287,8 +287,7 @@ public class LoginActivityNew extends AppCompatActivity {
     }
 
     private void getLogin() {
-        if(asyn_versn!=versname)
-            progressDialog.show();
+        progressDialog.show();
         ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
         Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1);
         locCall.enqueue(new Callback<LoginResponse>() {
@@ -329,14 +328,14 @@ public class LoginActivityNew extends AppCompatActivity {
                     editor.commit();
                     progressDialog.hide();
 
-                    if(logout.equalsIgnoreCase("logout")&&(isRunning.equalsIgnoreCase("true"))) {
-                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
-                    }else if(logout.equalsIgnoreCase("")&&(isRunning.equalsIgnoreCase(""))){
-                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
-                    }else if(logout.equalsIgnoreCase("logout")&&(isRunning.equalsIgnoreCase(""))){
-                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
-                    } else{
-                    }
+//                    if(logout.equalsIgnoreCase("logout")&&(isRunning.equalsIgnoreCase("true"))) {
+//                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
+//                    }else if(logout.equalsIgnoreCase("")&&(isRunning.equalsIgnoreCase(""))){
+//                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
+//                    }else if(logout.equalsIgnoreCase("logout")&&(isRunning.equalsIgnoreCase(""))){
+//                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
+//                    } else{
+//                    }
                         Intent intee = new Intent(LoginActivityNew.this, MainActivity.class);
                         startActivity(intee);
                         finish();
@@ -518,5 +517,11 @@ public class LoginActivityNew extends AppCompatActivity {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        progressDialog.hide();
     }
 }

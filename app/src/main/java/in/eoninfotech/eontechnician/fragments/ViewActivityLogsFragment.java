@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -131,7 +132,6 @@ public class ViewActivityLogsFragment extends Fragment {
         txtGood = v.findViewById(R.id.txtGood);
         txtVeryGood = v.findViewById(R.id.txtVeryGood);
         ShowProgressBar(false);
-        getAttendanceData();
 
         mcv.setSelectionMode(MaterialCalendarView.SELECTION_MODE_SINGLE);
         mcv.addDecorator(new EventsDecorator());
@@ -255,7 +255,6 @@ public class ViewActivityLogsFragment extends Fragment {
         return v;
     }
     private void getAttendanceData() {
-
         ShowProgressBar(true);
         ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<AttendanceResponse> call = log_att.attendanceResponse(uusername, monthtobeSend, yeartobeSend);
@@ -513,5 +512,17 @@ public class ViewActivityLogsFragment extends Fragment {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onResume() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getAttendanceData();
+            }
+        }, 50);
+
+        super.onResume();
     }
 }

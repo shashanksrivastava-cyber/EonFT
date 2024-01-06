@@ -1,6 +1,9 @@
 package `in`.eoninfotech.eontechnician.Responses
 
-data class list(
+data class DeviceList(
 
+    val id: String,
+    val pcb_id: String,
+    val pcb_sr_no: String
 ) {
 }

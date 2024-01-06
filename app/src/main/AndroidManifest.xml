@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="in.eoninfotech.eontechnician">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -47,18 +46,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ReturnDeviceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ReceiveDeviceActivity"
-            android:exported="false" />
         <activity android:name=".ChangePassword" />
         <activity
             android:name=".SplashActivity"
+            android:exported="true"
             android:launchMode="singleTask"
             android:noHistory="true"
-            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -90,13 +83,15 @@
             android:stopWithTask="false" />
 
         <receiver android:name=".Service.AlarmService" />
-        <receiver android:name=".BootCompletedIntentReceiver"
+        <receiver
+            android:name=".BootCompletedIntentReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".StopService"
+        <receiver
+            android:name=".StopService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.example.Broadcast" />
@@ -110,7 +105,8 @@
         <activity
             android:name=".NotificationActivity"
             android:label="@string/app_name" /> <!-- <action android:name="android.location.PROVIDERS_CHANGED" /> -->
-        <receiver android:name=".GpsLocationReceiver"
+        <receiver
+            android:name=".GpsLocationReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.location.PROVIDERS_CHANGED" />
@@ -175,7 +171,6 @@
             android:name=".activity.FaultyDevicesActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity android:name=".CardViewActivity" />
         <activity android:name=".activity.FaultyDevicesDetailActivity" />
         <activity android:name=".LiveFaultData" />
@@ -190,6 +185,8 @@
         <activity android:name=".activity.SendDatatoServer" />
         <activity android:name=".activity.ReceiveDeviceActivity" />
         <activity android:name=".activity.ReturnDeviceActivity" />
+        <activity android:name=".activity.ReceiveDeviceDetails" />
+        <activity android:name=".ActivityDetailActivity" />
         <activity
             android:name=".activity.MessageActivity"
             android:icon="@drawable/ic_delete_white_24dp"

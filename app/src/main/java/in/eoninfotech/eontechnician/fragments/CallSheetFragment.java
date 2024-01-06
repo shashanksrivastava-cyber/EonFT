@@ -112,7 +112,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
     Uri uri;
     EditText datee,remarks;
     private final int SELECT_PHOTO = 1;
-    ProgressDialog pDialog;
     MultipartBody.Part image;
     int REQUEST_CODE_PERMISSION = 10;
     Button upload_img_view;

@@ -83,9 +83,9 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
-    public void reqeuestClientLocation(String clientId, ClientListener listener) {
+    public void reqeuestClientLocation(String clientId,String server,String dbname, ClientListener listener) {
 
-        locCall = client_att.reqeuestClientLocation(clientId);
+        locCall = client_att.reqeuestClientLocation(clientId,server,dbname);
         locCall.enqueue(new Callback<ClientLocationResponse>() {
             @Override
             public void onResponse(Call<ClientLocationResponse> call, Response<ClientLocationResponse> response) {
@@ -400,8 +400,8 @@ public class NewInstallmentController extends Controller {
         });
     }
 
-    public void reqeuestVtsDetails(String vts_id,ClientListener listener) {
-        vtsResponseCall = client_att.reqeuestVtsDetail(vts_id);
+    public void reqeuestVtsDetails(String vts_id,String server,String dbname,ClientListener listener) {
+        vtsResponseCall = client_att.reqeuestVtsDetail(vts_id,server,dbname);
         vtsResponseCall.enqueue(new Callback<VTSResponse>() {
             @Override
             public void onResponse(Call<VTSResponse> call, Response<VTSResponse> response) {
@@ -421,8 +421,8 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
-    public void reqeuestVtsDetail(String vts_id,ClientListener listener) {
-        vtsResponseCall = client_att.reqeuestVtsDetail(vts_id);
+    public void reqeuestVtsDetail(String vts_id,String server,String dbname,ClientListener listener) {
+        vtsResponseCall = client_att.reqeuestVtsDetail(vts_id,server,dbname);
         vtsResponseCall.enqueue(new Callback<VTSResponse>() {
             @Override
             public void onResponse(Call<VTSResponse> call, Response<VTSResponse> response) {
@@ -522,10 +522,12 @@ public class NewInstallmentController extends Controller {
                                       RequestBody panic_status,
                                       RequestBody sensor_veh_no,
                                       RequestBody sensor_old_veh_no,
+                                      RequestBody remove_type,
+                                      RequestBody drs_status,
                                       MultipartBody.Part image,
                                       ClientListener listener) {
         updateDataCall = client_att.postInstallationsData(technician_id,activity_date,activity_time,customer,customer_location,is_demo,activity_type,vts_type,device_type,old_device_id,new_device_id,old_serial_no,new_serial_no,reg_no,veh_type,is_drs,old_drs,new_drs,drs_direction,mgt_set,ignition_sensor,fuel_sensor,door_sensor,panic_button,cut_off,replacement_reason,removal_type,removal_reason,disconnection_reason,missing_type,missing_reason,not_available_activity,not_available_reason,collection_date,payment_method,amount,
-                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,lid_status,trans_receiver,temp_sensor,tilt_sensor,fuel_status,panic_status,sensor_veh_no,sensor_old_veh_no,image);
+                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,lid_status,trans_receiver,temp_sensor,tilt_sensor,fuel_status,panic_status,sensor_veh_no,sensor_old_veh_no,remove_type,drs_status,image);
         updateDataCall.enqueue(new Callback<MainResponse>() {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {

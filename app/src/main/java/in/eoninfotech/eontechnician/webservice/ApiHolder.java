@@ -3,6 +3,8 @@ package in.eoninfotech.eontechnician.webservice;
 
 import com.google.android.gms.location.LocationSettingsResponse;
 
+import java.lang.reflect.Array;
+
 import in.eoninfotech.eontechnician.ItemModel;
 import in.eoninfotech.eontechnician.Responses.ActivityResponse;
 import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
@@ -16,10 +18,12 @@ import in.eoninfotech.eontechnician.Responses.CollectionReportResponse;
 import in.eoninfotech.eontechnician.Responses.DRSResponse;
 import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
 import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.Responses.DispatchDeviceDetails;
 import in.eoninfotech.eontechnician.Responses.FaultResponse;
 import in.eoninfotech.eontechnician.Responses.FaultyDevices;
 import in.eoninfotech.eontechnician.Responses.IncentiveResponse;
 import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
+import in.eoninfotech.eontechnician.Responses.ItemList;
 import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.LogResponse;
 import in.eoninfotech.eontechnician.Responses.LoginResponse;
@@ -282,15 +286,26 @@ public interface ApiHolder {
     @GET("payment-methods.php")
     Call<PaymentMethodResponse> reqeuestPMethod();
 
+//    @FormUrlEncoded
+//    @POST("client-locations.php")
+//    Call<ClientLocationResponse> reqeuestClientLocation(
+//            @Field("customer") String customer,
+//            @Field("server") String server,
+//            @Field("dbname") String dbname);
+
     @FormUrlEncoded
-    @POST("client-locations.php")
+    @POST("client-locations1.php")
     Call<ClientLocationResponse> reqeuestClientLocation(
-            @Field("customer") String customer);
+            @Field("customer") String customer,
+            @Field("server") String server,
+            @Field("dbname") String dbname);
 
     @FormUrlEncoded
     @POST("vts-detail.php")
     Call<VTSResponse> reqeuestVtsDetail(
-            @Field("vid") String id);
+            @Field("vid") String id,
+            @Field("server") String server,
+            @Field("dbname") String dbname);
 
 
     @FormUrlEncoded
@@ -407,7 +422,9 @@ public interface ApiHolder {
                                              @Part("fuel_status") RequestBody fuel_status,
                                              @Part("panic_status") RequestBody panic_status,
                                              @Part("sensor_veh_no") RequestBody sensor_veh_no,
-                                             @Part("sensor_veh_no") RequestBody sensor_old_veh_no,
+                                             @Part("sensor_old_veh_no") RequestBody sensor_old_veh_no,
+                                             @Part("remove_type") RequestBody remove_type,
+                                             @Part("drs_status") RequestBody drs_status,
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
@@ -605,5 +622,60 @@ public interface ApiHolder {
 
     @GET("get_dispatch_type_list.php")
     Call<MainResponse> get_dispatch_type_list();
+
+    @FormUrlEncoded
+    @POST("get_dispatch_material_status.php")
+    Call<MainResponse> get_dispatch_material_status(
+            @Field("from_date") String from_date,
+            @Field("to_date") String to_date,
+            @Field("status") String status,
+            @Field("tech_id") String tech_id);
+
+    @FormUrlEncoded
+    @POST("get_dispatch_detailed_list.php")
+    Call<MainResponse> get_dispatched_device(
+            @Field("dispatch_id") String dispatch_id,
+            @Field("transit_through") String transit_through,
+            @Field("tech_id") String tech_id,
+            @Field("main_id") String main_id,
+            @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST("receive_dispatch_material.php")
+    Call<MainResponse> receive_dispatched_material(
+            @Field("dispatch_id") String dispatch_id,
+            @Field("tech_id") String tech_id,
+            @Field("items_collected") String items_collected,
+            @Field("remarks") String remarks);
+
+    @GET("get_item_list.php")
+    Call<MainResponse> get_item_list();
+
+    @FormUrlEncoded
+    @POST("return_material.php")
+    Call<MainResponse> return_material(
+            @Field("tech_id") String tech_id,
+            @Field("pcb_sr_no") String pcb_sr_no,
+            @Field("item_qty") String item_qty,
+            @Field("transit_type") String transit_type,
+            @Field("transit_name") String transit_name,
+            @Field("transit_through") String transit_through,
+            @Field("remarks") String remarks,
+            @Field("other_tech_id") String other_tech_id);
+
+    @FormUrlEncoded
+    @POST("get_removed_device_list.php")
+    Call<MainResponse> removed_device_list(
+            @Field("tech_id") String tech_id);
+
+    @FormUrlEncoded
+    @POST("get_activity_serial_no.php")
+    Call<MainResponse> get_serial_no(
+            @Field("tech_id") String tech_id,
+            @Field("customer") String customer,
+            @Field("sub_cust") String sub_cust,
+            @Field("activity_type") String activity_type,
+            @Field("dbname") String dbname,
+            @Field("server") String server);
 
 }

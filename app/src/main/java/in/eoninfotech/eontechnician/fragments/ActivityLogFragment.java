@@ -153,7 +153,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     private RadioButton r_in, r_out;
     String versionName;
     CircleImageView ivProfile;
-    String customAddress;
+    String customAddress,id_dist,server_name,db_name;
     File f;
     ProgressBar progressBar;
     MaterialCalendarView mcv;
@@ -211,8 +211,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         c= Calendar.getInstance();
-        addclients();
-        addLocation();
         location.setEnabled(false);
 
         String imageUri = K.Url.IMAGE_URL +"uploads/"+image;
@@ -306,6 +304,9 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                 }
                 clientId = String.valueOf(clientList.get(i).getClient_Id());
                 s_clientname = clientList.get(i).getClient_Name();
+                id_dist = clientList.get(i).getId_dist();
+                server_name = clientList.get(i).getServer_name();
+                db_name = clientList.get(i).getDb_name();
                 if(clientId.equals("500")){
                     location.setEnabled(false);
                 }else {
@@ -488,8 +489,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
                     if (updateDataResponse.getType() == 1) {
                         Toast.makeText(getActivity(), ""+updateDataResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                        addclients();
-                        addLocation();
                         remarks.setText("");
                         t_address.setText("No address");
                         locTry=0;
@@ -509,11 +508,11 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     }
 
     private void addLocation() {
-
-        newInstallmentController.reqeuestClientLocation(clientId,this);
+        newInstallmentController.reqeuestClientLocation(id_dist,server_name,db_name,this);
     }
 
     private void addclients() {
+        ShowProgressBar(true);
         newInstallmentController.reqeuestClientList(this);
     }
 
@@ -705,6 +704,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
     @Override
     public void clientResponse(ClientResponse response) {
+        ShowProgressBar(false);
+        if(response.getType()==1){
         try{
             clientList = response.getClientList();
             try {
@@ -725,6 +726,9 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
             }
         }catch (Exception e) {
             e.printStackTrace();
+        }
+        }else {
+            Toast.makeText(getActivity(), "No Record Found", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -864,5 +868,17 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void onResume() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                addclients();
+            }
+        }, 50);
+
+        super.onResume();
     }
 }

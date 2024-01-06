@@ -428,18 +428,22 @@ public class FileUtils {
                         Log.d(TAG, "Got thumb ID: " + id);
 
                     if (mimeType.contains("video")) {
-                        bm = MediaStore.Video.Thumbnails.getThumbnail(
-                                resolver,
-                                id,
-                                MediaStore.Video.Thumbnails.MINI_KIND,
-                                null);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
+                            bm = MediaStore.Video.Thumbnails.getThumbnail(
+                                    resolver,
+                                    id,
+                                    MediaStore.Video.Thumbnails.MINI_KIND,
+                                    null);
+                        }
                     }
                     else if (mimeType.contains(FileUtils.MIME_TYPE_IMAGE)) {
-                        bm = MediaStore.Images.Thumbnails.getThumbnail(
-                                resolver,
-                                id,
-                                MediaStore.Images.Thumbnails.MINI_KIND,
-                                null);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
+                            bm = MediaStore.Images.Thumbnails.getThumbnail(
+                                    resolver,
+                                    id,
+                                    MediaStore.Images.Thumbnails.MINI_KIND,
+                                    null);
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -513,8 +517,13 @@ public class FileUtils {
 
     public static void HideKeyboard(View view) {
         try {
-            InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            InputMethodManager imm = null;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         } catch (Exception e) {
 
         }

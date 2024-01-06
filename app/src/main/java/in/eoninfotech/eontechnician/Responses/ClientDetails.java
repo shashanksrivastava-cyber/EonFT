@@ -21,6 +21,15 @@ import java.io.Serializable;
     @SerializedName("c_port")
     private int client_Port;
 
+    @SerializedName("server_name")
+    private String server_name;
+
+    @SerializedName("db_name")
+    private String db_name;
+
+    @SerializedName("id_dist")
+    private String id_dist;
+
     public int getClient_Id() {
         return client_Id;
     }
@@ -28,6 +37,7 @@ import java.io.Serializable;
     public void setClient_Id(int client_Id) {
         this.client_Id = client_Id;
     }
+
 
     public String getClient_Name() {
         return client_Name;
@@ -51,5 +61,29 @@ import java.io.Serializable;
 
     public void setClient_Port(int client_Port) {
         this.client_Port = client_Port;
+    }
+
+    public String getServer_name() {
+        return server_name;
+    }
+
+    public void setServer_name(String server_name) {
+        this.server_name = server_name;
+    }
+
+    public String getDb_name() {
+        return db_name;
+    }
+
+    public void setDb_name(String db_name) {
+        this.db_name = db_name;
+    }
+
+    public String getId_dist() {
+        return id_dist;
+    }
+
+    public void setId_dist(String id_dist) {
+        this.id_dist = id_dist;
     }
 }
