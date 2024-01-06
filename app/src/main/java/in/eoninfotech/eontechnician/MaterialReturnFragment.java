@@ -42,7 +42,7 @@ import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class MaterialReturnFragment extends Fragment implements ClientListener {
+public class MaterialReturnFragments extends Fragment implements ClientListener {
 
     View v;
     private TickerView total_device;
@@ -75,16 +75,8 @@ public class MaterialReturnFragment extends Fragment implements ClientListener {
     }
 
     private void initView() {
-//        total_device = v.findViewById(R.id.total_device);
-//        spn_transit = v.findViewById(R.id.spn_transit);
-//        spn_items= v.findViewById(R.id.spn_items);
-//        device_detail_list = v.findViewById(R.id.device_detail_list);
-//        other_material = v.findViewById(R.id.other_material);
-//        btn_accept = v.findViewById(R.id.btn_accept);
-//        btn_reject = v.findViewById(R.id.btn_reject);
-//        remarks= v.findViewById(R.id.remarks);
-        newInstallmentController = new NewInstallmentController();
-        getFaultList();
+//        newInstallmentController = new NewInstallmentController();
+//        getFaultList();
     }
 
     private void getFaultList() {
