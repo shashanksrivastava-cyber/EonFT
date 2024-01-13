@@ -27,6 +27,9 @@ public class VTSDetail implements Serializable {
     @SerializedName("device_type_id")
     private String device_type;
 
+    @SerializedName("bus_id")
+    private String bus_id;
+
 
     public String getReg_no() {
         return reg_no;
@@ -90,5 +93,13 @@ public class VTSDetail implements Serializable {
 
     public void setDevice_type(String device_type) {
         this.device_type = device_type;
+    }
+
+    public String getBus_id() {
+        return bus_id;
+    }
+
+    public void setBus_id(String bus_id) {
+        this.bus_id = bus_id;
     }
 }

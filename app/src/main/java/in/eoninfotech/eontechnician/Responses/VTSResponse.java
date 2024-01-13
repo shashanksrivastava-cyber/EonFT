@@ -11,29 +11,29 @@ import java.util.ArrayList;
 
 public class VTSResponse implements Serializable {
 
-        @SerializedName("type")
-        Integer type;
+    @SerializedName("type")
+    Integer type;
 //        @SerializedName("vts-rec")
 //        ArrayList<VTSDetail> vtsDetails = new ArrayList<VTSDetail>();
 
     @SerializedName("vts-rec1")
     ArrayList<VTSDetail> vtsDetails = new ArrayList<VTSDetail>();
 
-        public Integer getType() {
-            return type;
-        }
+    public Integer getType() {
+        return type;
+    }
 
-        public void setType(Integer type) {
-            this.type = type;
-        }
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
-        public ArrayList<VTSDetail> getVtsDetails() {
-            return vtsDetails;
-        }
+    public ArrayList<VTSDetail> getVtsDetails() {
+        return vtsDetails;
+    }
 
-        public void setVtsDetails(ArrayList<VTSDetail> vtsDetails) {
-            this.vtsDetails = vtsDetails;
-        }
+    public void setVtsDetails(ArrayList<VTSDetail> vtsDetails) {
+        this.vtsDetails = vtsDetails;
+    }
 
 
 //    public ArrayList<VTSDetail1> getVtsDetails() {

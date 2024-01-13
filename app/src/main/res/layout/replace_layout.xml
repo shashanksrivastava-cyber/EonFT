@@ -7,7 +7,7 @@
     android:layout_margin="4dp"
     android:background="@color/eonWhite"
     android:orientation="vertical"
-    android:visibility="gone">
+    android:visibility="visible">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -120,7 +120,6 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
-                        android:entries="@array/spinnerItems"
                         android:gravity="center"
                         android:spinnerMode="dropdown" />
 
@@ -133,6 +132,7 @@
                         android:layout_marginRight="6dp"
                         android:background="@color/eonWhite"
                         android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
                 </RelativeLayout>
 
             </LinearLayout>
@@ -518,6 +518,113 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linear_vts_id_replace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/til_old_vts_id_replace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Old VTS ID">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/old_vts_id_replace"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:inputType="number"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/_tilnew_vts_id_replace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="New VTS ID"
+                            android:layout_weight="1">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/new_vts_id_replace"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2"
+                                android:inputType="number"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textSize="12sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/con_til_old_vts_id_replace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="Confirm Old VTS ID"
+                            app:passwordToggleEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/con_old_vts_id_replace"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:inputType="numberPassword"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:textSize="12sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/con_til_new_vts_id_replace"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Confirm New VTS ID"
+                            android:layout_weight="1"
+                            app:passwordToggleEnabled="true">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/con_new_vts_id_replace"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2"
+                                android:inputType="numberPassword"
+                                android:maxLength="20"
+                                android:singleLine="true"
+                                android:text=""
+                                android:textSize="12sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -533,7 +640,7 @@
                             android:id="@+id/regNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
                             android:inputType="textCapCharacters"
@@ -553,7 +660,7 @@
                             android:id="@+id/rep_srNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:maxLength="50"
                             android:singleLine="true"
@@ -579,9 +686,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:visibility="gone"
                     android:weightSum="5">
 
@@ -598,7 +705,7 @@
                     <RadioGroup
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_toRightOf="@+id/replace_deviceType"
                         android:layout_weight="2"
                         android:orientation="horizontal">
@@ -614,7 +721,7 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_weight="1"
                             android:text="Non-Voice"
                             android:textSize="14sp" />
@@ -644,10 +751,10 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:background="@color/eonWhite"
                         android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -666,9 +773,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:visibility="gone"
                     android:weightSum="5">
 
@@ -686,7 +793,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_toRightOf="@+id/replace_drs"
                         android:layout_weight="2"
                         android:orientation="horizontal">
@@ -695,7 +802,7 @@
                             android:id="@+id/nodrsReplace"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginEnd="5dp"
                             android:layout_weight="3.5"
                             android:checked="true"
                             android:text="No"
@@ -747,9 +854,9 @@
                 <TextView
                     android:id="@+id/text_to_show_replace_sen"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="2.5"
                     android:padding="5dp"
                     android:text="If serial no. not in list click here to add serial no. manually."
