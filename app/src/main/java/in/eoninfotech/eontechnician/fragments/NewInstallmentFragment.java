@@ -5182,7 +5182,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         RequestBody tilt_senso = RequestBody.create(MediaType.parse("text/plain"), tilt_sensor);
         RequestBody fuel_statu = RequestBody.create(MediaType.parse("text/plain"), fuel_status);
         RequestBody panic_statu = RequestBody.create(MediaType.parse("text/plain"), panic_status);
-        RequestBody sensor_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_veh_no));
+        RequestBody sensor_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sen_vehicle_no));
         RequestBody sensor_old_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_old_veh_no));
         RequestBody remove_type = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(missDeviceType));
         RequestBody drs_status = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(drsStatus));
