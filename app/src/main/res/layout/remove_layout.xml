@@ -15,8 +15,8 @@
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:weightSum="2"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -202,8 +202,8 @@
             android:id="@+id/til_remove_sr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sr No."
-            android:layout_weight="5">
+            android:layout_weight="5"
+            android:hint="Sr No.">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/remove_sr_no"
@@ -214,20 +214,20 @@
                 android:layout_weight="1"
                 android:inputType="number"
                 android:singleLine="true"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginEnd="10dp"
             android:id="@+id/delete_button_remove"
-            android:visibility="visible"
-            android:background="@drawable/ic_minus"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_minus"
+            android:visibility="visible" />
 
     </LinearLayout>
 
@@ -243,8 +243,8 @@
             android:id="@+id/til_vts_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sr.No."
-            android:layout_weight="5">
+            android:layout_weight="5"
+            android:hint="Sr.No.">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/remove_deviceid"
@@ -259,15 +259,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:layout_height="20dp"
-            android:layout_width="20dp"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginEnd="10dp"
             android:id="@+id/delete_button_remove_e_series"
-            android:visibility="visible"
-            android:background="@drawable/ic_minus"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_minus"
+            android:visibility="visible" />
 
     </LinearLayout>
 
@@ -294,60 +294,87 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
+    <LinearLayout
+        android:id="@+id/lin_vts_id_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/til_vts_remove"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:layout_marginRight="5dp"-->
-<!--            android:hint="Sr.No.">-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_vts_id_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:hint="VTS Id">
 
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/remove_deviceid"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="5dp"-->
-<!--                android:layout_marginRight="5dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:inputType="number"-->
-<!--                android:singleLine="true"-->
-<!--                android:textSize="12sp" />-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/remove_vts_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-<!--        <ProgressBar-->
-<!--            android:id="@+id/progressremove"-->
-<!--            android:layout_width="20dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:visibility="gone" />-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_con_vts_id_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:hint="Confirm VTS Id"
+            app:passwordToggleEnabled="true">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ivExistRemove"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:src="@drawable/ic_circle_black_24dp"-->
-<!--            android:visibility="gone" />-->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/con_remove_vts_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ivnotExistRemove"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentRight="true"-->
-<!--            android:layout_marginTop="15dp"-->
-<!--            android:layout_marginRight="10dp"-->
-<!--            android:src="@drawable/ic_cancel_black_24dp"-->
-<!--            android:visibility="gone" />-->
+    </LinearLayout>
 
-<!--    </RelativeLayout>-->
+
+    <!--        <ProgressBar-->
+    <!--            android:id="@+id/progressremove"-->
+    <!--            android:layout_width="20dp"-->
+    <!--            android:layout_height="20dp"-->
+    <!--            android:layout_alignParentRight="true"-->
+    <!--            android:layout_marginTop="15dp"-->
+    <!--            android:layout_marginRight="10dp"-->
+    <!--            android:visibility="gone" />-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/ivExistRemove"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentRight="true"-->
+    <!--            android:layout_marginTop="15dp"-->
+    <!--            android:layout_marginRight="10dp"-->
+    <!--            android:src="@drawable/ic_circle_black_24dp"-->
+    <!--            android:visibility="gone" />-->
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/ivnotExistRemove"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_alignParentRight="true"-->
+    <!--            android:layout_marginTop="15dp"-->
+    <!--            android:layout_marginRight="10dp"-->
+    <!--            android:src="@drawable/ic_cancel_black_24dp"-->
+    <!--            android:visibility="gone" />-->
+
+    <!--    </RelativeLayout>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -423,7 +450,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/header_button"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true" />
 
     </LinearLayout>
 
@@ -435,7 +462,7 @@
         android:gravity="center"
         android:text="Removed Sensor Details"
         android:textStyle="bold"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
