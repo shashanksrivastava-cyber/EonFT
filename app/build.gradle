@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.firebase.crashlytics'
 
 android {
@@ -21,8 +21,8 @@ android {
         applicationId "in.eoninfotech.eontechnician"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 34 // total number of version changes on play store
-        versionName "5.8"
+        versionCode 38 // total number of version changes on play store
+        versionName "5.10"
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

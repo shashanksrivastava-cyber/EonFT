@@ -662,6 +662,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 id_dist = clientList.get(i).getId_dist();
                 server_name = clientList.get(i).getServer_name();
                 db_name = clientList.get(i).getDb_name();
+                clearData();
                 addLocation();
                 location.setEnabled(true);
                 drsStatus = String.valueOf(clientList.get(i).getDrs_status());
@@ -1180,7 +1181,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             if(vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                                 linear_device_sr_no_replace_old.setVisibility(View.VISIBLE);
                                 linear_device_id_replace_old.setVisibility(View.GONE);
-                            }else {
+                            }else if(s_vts_type.equalsIgnoreCase("2")){
+                                linear_device_sr_no_replace_old.setVisibility(View.VISIBLE);
+                                linear_device_id_replace_old.setVisibility(View.GONE);
+                            } else {
                                 linear_device_id_replace_old.setVisibility(View.VISIBLE);
                                 linear_device_sr_no_replace_old.setVisibility(View.GONE);
                             }
@@ -1193,10 +1197,15 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             if(vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                                 linear_device_sr_no_replace_new.setVisibility(View.VISIBLE);
                                 linear_device_id_replace_new.setVisibility(View.GONE);
-                            }else {
+                            } else if(s_vts_type.equalsIgnoreCase("2")){
+                                linear_device_sr_no_replace_new.setVisibility(View.VISIBLE);
+                                til_new_sr_replace.setVisibility(View.VISIBLE);
+                                linear_device_id_replace_new.setVisibility(View.GONE);
+                            } else {
                                 linear_device_sr_no_replace_new.setVisibility(View.GONE);
                                 linear_device_id_replace_new.setVisibility(View.VISIBLE);
                             }
+
                         }
                     });
 
@@ -1281,7 +1290,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             imageName.setText("");
                             imageNameMissing.setText("");
                             imageNameFault.setText("");
-                            deviceTypeReplace.setVisibility(View.GONE);
                         } else if (i12 == R.id.radioBoth) {
                             clearData();
                             radioButtonChecked = "B";
@@ -1313,12 +1321,12 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             imageName.setText("");
                             imageNameMissing.setText("");
                             imageNameFault.setText("");
-                            deviceTypeReplace.setVisibility(View.GONE);
                             til_new_sr_replace.setVisibility(View.GONE);
                             til_old_sr_replace.setVisibility(View.GONE);
                             old_deviceidreplace.setVisibility(View.VISIBLE);
                             new_deviceid.setVisibility(View.VISIBLE);
                             replaceSrNo.setVisibility(View.GONE);
+                            deviceTypeReplace.setVisibility(View.GONE);
                         } else {
                             radioButtonChecked = "N";
                         }
@@ -1401,7 +1409,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-
                             serial_no = srnoList.get(i).getPcb_sr_no();
                         }
 
@@ -3178,9 +3185,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 } else {
                     s_new_device_id = "0";
                 }
-                if (vts_sr_no.getVisibility() == View.VISIBLE) {
+                if (linear_device_sr_no_e_series.getVisibility() == View.VISIBLE) {
                     serial_no = vts_sr_no.getText().toString();
-                } else if(vltd_sr_no.getVisibility()==View.VISIBLE) {
+                }
+                if(linear_device_sr_no.getVisibility()==View.VISIBLE) {
                     serial_no = vltd_sr_no.getText().toString();
                 }
                 if ((fuelVoltage.getVisibility() == View.VISIBLE) && (!installVoltage.getText().toString().equals(""))) {
@@ -3765,6 +3773,12 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         s_vts_type = "2";
                         s_drs_id = old_drsid.getText().toString();
                         is_drs = "Y";
+                        if ((linear_device_sr_no_replace_old.getVisibility() == View.VISIBLE)) {
+                            s_old_serial_no = old_replace_sr_no.getText().toString();
+                        }
+                        if ((linear_device_sr_no_replace_new.getVisibility() == View.VISIBLE)) {
+                            serial_no = new_replace_sr_no.getText().toString();
+                        }
                         itemsCollected = "0";
                         removalReason = "0";
                         others = "";
@@ -3806,6 +3820,12 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         s_vts_type = "2";
                         s_new_drs_id = new_drsid.getText().toString();
                         s_drs_id = old_drsid.getText().toString();
+                        if ((linear_device_sr_no_replace_old.getVisibility() == View.VISIBLE)) {
+                            s_old_serial_no = old_replace_sr_no.getText().toString();
+                        }
+                        if ((linear_device_sr_no_replace_new.getVisibility() == View.VISIBLE)) {
+                            serial_no = new_replace_sr_no.getText().toString();
+                        }
                         is_drs = "Y";
                         s_reg_no = drs_veh_no.getText().toString();
                         missing_type = "M";
@@ -5393,6 +5413,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         addReasonRemove();
         removal_type();
         damageReason();
+        getSerialNo();
         s_vts_type = "SELECT VTS TYPE";
         old_deviceid.setText("");
         old_deviceidreplace.setText("");
