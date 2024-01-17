@@ -1401,7 +1401,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-
                             serial_no = srnoList.get(i).getPcb_sr_no();
                         }
 
