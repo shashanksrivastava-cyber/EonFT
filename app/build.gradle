@@ -8,21 +8,22 @@ android {
         config {
             keyAlias 'fielddata'
             keyPassword 'fielddata'
-            //storeFile file('/home/androidpc/Documents/JKsfiles/fielddata.jks')
-            storeFile file('G:\\JKsfiles/fielddata.jks')
+            storeFile file('/home/androidpc/Documents/JKsfiles/fielddata.jks')
+            //storeFile file('G:\\JKsfiles/fielddata.jks')
             storePassword 'fielddata'
         }
     }
     compileSdkVersion 33
     defaultConfig {
         configurations.all {
+
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
         applicationId "in.eoninfotech.eontechnician"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 38 // total number of version changes on play store
-        versionName "5.10"
+        versionCode 39 // total number of version changes on play store
+        versionName "5.11"
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -37,12 +38,6 @@ android {
 
     buildTypes {
         release {
-//            minifyEnabled true
-//            multiDexEnabled true
-//            shrinkResources true
-//            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.config
-//            debuggable true
 
             minifyEnabled false
             multiDexEnabled true
