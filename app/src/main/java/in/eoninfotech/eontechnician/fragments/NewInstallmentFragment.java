@@ -168,7 +168,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             til_new_sr_replace, til_old_sr_replace, sensor_veh, sensor_veh_missing, sensor_veh_remove, sensor_veh_reinstall;
     String fuel_voltage = "0", path, drs_type, clientId, personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
             buttonPressed = "0", buttonPressedActivity = "0", s_reg_no, s_rep_srNo, s_reinst_conf_reg_no, s_device_id, s_drs_id, s_new_drs_id, s_clientname = "SELECT CLIENT", s_remarks, status, s_work_type, s_Time, s_vehicletype="0", s_VehicleTypeInst, s_reason_repla = "0", removalReason = "0", itemsCollected = "0", others = "", s_work_id, s_new_device_id, s_e_device_id = "0", is_drs = "N", drs_dirction = "N", disconnection_reason = "0", ignition_sensor = "N", sim_reason = "0", missing_reason = "0", cut_off = "N", serial_no = "SELECT SR.NO.", confirmVehNo, panic = "N",
-            s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name;
+            s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name,replace_type="D";
     CheckConnection chk;
     CheckBox check_tel_supprt, magnet_set, magnetset_install;
     EditText reinstallVoltage, installVoltage, vltd_sr_no_notAvail, e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, t_install_date, t_install_Time, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
@@ -1241,6 +1241,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     radioGroups.setOnCheckedChangeListener((radioGroup, i12) -> {
                         if (i12 == R.id.radioVTS) {
                             clearData();
+                            replace_type="D";
                             radioButtonChecked = "V";
                             linearvts.setVisibility(View.VISIBLE);
                             told_drsid.setVisibility(View.GONE);
@@ -1267,7 +1268,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             deviceTypeReplace.setVisibility(View.VISIBLE);
                         } else if (i12 == R.id.radioDRS) {
                             clearData();
-                            //s_vts_type = "2";
+                            replace_type="S";
                             radioButtonChecked = "D";
                             linearvts.setVisibility(View.GONE);
                             told_drsid.setVisibility(View.VISIBLE);
@@ -1293,6 +1294,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             imageNameFault.setText("");
                         } else if (i12 == R.id.radioBoth) {
                             clearData();
+                            replace_type="B";
                             radioButtonChecked = "B";
                             til_old_replace.setVisibility(View.VISIBLE);
                             til_new_replace.setVisibility(View.VISIBLE);
@@ -3837,13 +3839,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     } else {
                         s_new_drs_id = new_drsid.getText().toString();
                         s_drs_id = old_drsid.getText().toString();
-                        if ((linear_device_sr_no_replace_old.getVisibility() == View.VISIBLE)) {
-                            s_old_serial_no = old_replace_sr_no.getText().toString();
-                        }
-                        if ((linear_device_sr_no_replace_new.getVisibility() == View.VISIBLE)) {
-                            serial_no = new_replace_sr_no.getText().toString();
-                        }
                         is_drs = "Y";
+                        s_old_serial_no = drs_vts_id.getText().toString();
                         s_reg_no = drs_veh_no.getText().toString();
                         missing_type = "M";
                         cut_off = "N";
@@ -5162,6 +5159,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         RequestBody sensor_old_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_old_veh_no));
         RequestBody remove_type = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(missDeviceType));
         RequestBody drs_status = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(drsStatus));
+        RequestBody replacetype = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(replace_type));
 
         MultipartBody.Part image = null;
         if (buttonPressed.equals("0")) {
@@ -5187,7 +5185,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         }
         newInstallmentController.postInstallationsData(technician_id, activity_date, activity_time, customer, customer_location, isDemo, activity_type, vts_type, deviceType, old_device_id, new_device_id, old_serial_no, new_serial_no, reg_no, veh_type, is_DRS, old_drs, new_drs, drs_direction, Mgt_set, ignSensor, fuelSensor, doorSensor,
                 panic_button, cutOff, replacement_reason, removalType, removeReason, disconnectReason, missingType, missingReason, notAvailActivity, notAvailReason,
-                collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected, faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status, image, this);
+                collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected, faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype, image, this);
     }
 
     private void updateInstallationDataImage() {
@@ -5251,6 +5249,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         RequestBody sensor_old_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_old_veh_no));
         RequestBody remove_type = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(missDeviceType));
         RequestBody drs_status = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(drsStatus));
+        RequestBody replacetype = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(replace_type));
 
         MultipartBody.Part image = null;
         if (buttonPressed.equals("0")) {
@@ -5276,7 +5275,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         }
         newInstallmentController.postInstallationsData(technician_id, activity_date, activity_time, customer, customer_location, isDemo, activity_type, vts_type, deviceType, old_device_id, new_device_id, old_serial_no, new_serial_no, reg_no, veh_type, is_DRS, old_drs, new_drs, drs_direction, Mgt_set, ignSensor, fuelSensor, doorSensor,
                 panic_button, cutOff, replacement_reason, removalType, removeReason, disconnectReason, missingType, missingReason, notAvailActivity, notAvailReason,
-                collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected, faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status, image, this);
+                collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected, faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype, image, this);
     }
 
     boolean run = true; //set it to false if you want to stop the timer

@@ -425,6 +425,7 @@ public interface ApiHolder {
                                              @Part("sensor_old_veh_no") RequestBody sensor_old_veh_no,
                                              @Part("remove_type") RequestBody remove_type,
                                              @Part("drs_status") RequestBody drs_status,
+                                             @Part("replace_type") RequestBody replace_type,
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
