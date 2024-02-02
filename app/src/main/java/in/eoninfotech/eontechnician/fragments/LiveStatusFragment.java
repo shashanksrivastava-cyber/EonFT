@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
+import in.eoninfotech.eontechnician.databinding.LiveStatusAdapterNewBinding;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
@@ -81,11 +83,12 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     public SwipeRefreshLayout refreshLayout;
     public LinearLayoutManager layoutManager;
     private ProgressDialog pDialog;
+    Button submit;
     ArrayList<String> vehicleDetail = new ArrayList<>();
     ArrayList<VehicleTypeDetail> vehicleList = new ArrayList<>();
     ArrayList<ClientDetails> clientList = new ArrayList<>();
     ArrayList<String> clientDetail = new ArrayList<>();
-    String username, version,id_dist,server_name,db_name,clientId,s_clientname = "SELECT CLIENT",depo_id,connection_status="",veh_type="";
+    String username, version,id_dist="",server_name="",db_name="",clientId,s_clientname = "SELECT CLIENT",depo_id="",connection_status="",veh_type="";
     //  String[][] liveFault;
     ArrayList<MyPojo> liveFault = new ArrayList<>();
     private LiveFaultDataAdapter liveFaultDataAdapter;
@@ -99,6 +102,8 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     ProgressBar progressBar;
     ArrayAdapter<String> adapter;
     ArrayList<DeviceLiveStatus> deviceLiveStatuses = new ArrayList<>();
+
+    LiveStatusAdapterNew liveStatusAdapterNew;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -119,12 +124,13 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
         recyclerView.setLayoutManager(layoutManager);
         refreshLayout = v.findViewById(R.id.refresh);
         progressBar = v.findViewById(R.id.progressBar);
+        submit = v.findViewById(R.id.submit);
         txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE,Color.GREEN);
         refreshLayout.setOnRefreshListener(this::refresh);
         refreshLayout.setRefreshing(true);
-        PulsatorLayout pulsator = v.findViewById(R.id.pulsator);
-        pulsator.start();
+//        PulsatorLayout pulsator = v.findViewById(R.id.pulsator);
+//        pulsator.start();
         //loadData();
         ShowProgressBar(false);
         newInstallmentController = new NewInstallmentController();
@@ -173,6 +179,24 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
             }
         });
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(server_name.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
+                }else if(db_name.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
+                }else if(id_dist.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
+                }else if(depo_id.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Please Select Location", Toast.LENGTH_SHORT).show();
+                }else {
+                    loadData();
+                }
+            }
+        });
+
         return v;
     }
 
@@ -208,19 +232,20 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 pDialog.dismiss();
                 if(response.body().getType().equals("1")){
-                    //DeviceLiveStatus deviceLiveStatus = response.body();
-                    //deviceLiveStatuses = deviceLiveStatus.();
-//                    billViewAdapter = new BillViewAdapter(getContext(),billDetails,listener);
-//                    recyclerView.setAdapter(billViewAdapter);
-//                    recyclerView.setVisibility(View.VISIBLE);
-//                    txt_content_unavailable.setVisibility(View.GONE);
-//                    refreshLayout.setRefreshing(false);
+                    MainResponse deviceLiveStatus = response.body();
+                    deviceLiveStatuses = deviceLiveStatus.getData();
+                    liveStatusAdapterNew = new LiveStatusAdapterNew(getContext(),deviceLiveStatuses);
+                    recyclerView.setAdapter(liveStatusAdapterNew);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    txt_content_unavailable.setVisibility(View.GONE);
+                    refreshLayout.setRefreshing(false);
                     pDialog.dismiss();
                 }
                 else {
-//                    pDialog.dismiss();
-//                    txt_content_unavailable.setVisibility(View.VISIBLE);
-//                    recyclerView.setVisibility(View.GONE);
+                    refreshLayout.setRefreshing(false);
+                    pDialog.dismiss();
+                    txt_content_unavailable.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
                 }
             }
             @Override

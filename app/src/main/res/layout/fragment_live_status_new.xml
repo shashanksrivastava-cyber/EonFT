@@ -268,33 +268,23 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/submit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/eonBlue">
-
-        <pl.bclogic.pulsator4droid.library.PulsatorLayout
-            android:id="@+id/pulsator"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
-            app:pulse_count="4"
-            app:pulse_duration="5000"
-            app:pulse_repeat="0"
-            app:pulse_color="@color/green"
-            app:pulse_startFromScratch="false"
-            app:pulse_interpolator="Linear">
-        </pl.bclogic.pulsator4droid.library.PulsatorLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Get Technician Live Vehicle Status"
-            android:layout_gravity="center"
-            android:textColor="@color/eonWhite"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@color/eonBlue"
+        android:textColor="@color/eonWhite"
+        android:padding="10dp"
+        android:text="Get Live Status"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:clickable="true"
+        android:elevation="7dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:textSize="18sp"/>
 
 
     <LinearLayout
