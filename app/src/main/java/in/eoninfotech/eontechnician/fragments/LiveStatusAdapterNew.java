@@ -40,8 +40,8 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
     @Override
     public void onBindViewHolder(@NonNull LiveStatusAdapterNew.ActivityHolder holder, int position) {
 
-        final DeviceLiveStatus deviceLiveStatus = deviceLiveStatuses.get(position);
-        //holder.reg_no.setText(deviceLiveStatus.reg_no);
+        //final DeviceLiveStatus deviceLiveStatus = deviceLiveStatuses.get(position);
+        holder.reg_no.setText(deviceLiveStatuses.get(position).reg_no);
 
     }
 
@@ -53,20 +53,22 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView reg_no,device_id,status,date,app_amount,app_date,remarks,rej_date,title,viewBill,action_by;
+        TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,speed;
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
 
             reg_no = itemView.findViewById(R.id.reg_no);
             device_id = itemView.findViewById(R.id.device_id);
-            status = itemView.findViewById(R.id.status);
-            app_amount = itemView.findViewById(R.id.app_amount);
-            app_date = itemView.findViewById(R.id.app_date);
-            remarks = itemView.findViewById(R.id.remarks);
-            rej_date = itemView.findViewById(R.id.rej_date);
-            title = itemView.findViewById(R.id.app_title);
-            viewBill = itemView.findViewById(R.id.viewBill);
-            action_by = itemView.findViewById(R.id.action_by);
+            depo = itemView.findViewById(R.id.depo);
+            serial_no = itemView.findViewById(R.id.serial_no);
+            veh_type = itemView.findViewById(R.id.veh_type);
+            gps = itemView.findViewById(R.id.gps);
+            gsm = itemView.findViewById(R.id.gsm);
+            power = itemView.findViewById(R.id.power);
+            battery = itemView.findViewById(R.id.battery);
+            drum_sensor = itemView.findViewById(R.id.drum_sensor);
+            lid_sensor = itemView.findViewById(R.id.lid_sensor);
+            speed = itemView.findViewById(R.id.speed);
         }
     }
 }

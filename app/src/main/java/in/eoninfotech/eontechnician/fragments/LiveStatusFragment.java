@@ -231,7 +231,7 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 pDialog.dismiss();
-                if(response.body().getType().equals("1")){
+                if(response.body().getType()==1){
                     MainResponse deviceLiveStatus = response.body();
                     deviceLiveStatuses = deviceLiveStatus.getData();
                     liveStatusAdapterNew = new LiveStatusAdapterNew(getContext(),deviceLiveStatuses);
