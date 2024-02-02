@@ -1,5 +1,6 @@
 package `in`.eoninfotech.eontechnician.Responses
 
+
 data class DeviceLiveStatus (
     @JvmField val vts_id: String,
     @JvmField val reg_no: String,

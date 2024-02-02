@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -55,29 +56,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:layout_margin="2dp">
 
         <TextView
             android:id="@+id/device_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text=" Device ID: "
             android:textSize="14dp"
-            android:visibility="visible"
-            android:layout_marginTop="5dp"
-            android:drawableLeft="@drawable/device"/>
+            android:visibility="visible" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
             <TextView
-                android:id="@+id/depo_id"
-                android:layout_width="wrap_content"
+                android:id="@+id/depo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Depo : "
                 android:textSize="14dp"
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/placeholder"/>
+                android:visibility="visible"/>
 
         </LinearLayout>
 
@@ -97,47 +102,30 @@
 
         <TextView
             android:id="@+id/serial_no"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" Device Serial No: "
+            android:text=" Serial No: "
             android:textSize="14dp"
-            android:visibility="visible"
-            android:drawableLeft="@drawable/device"
-            android:layout_marginTop="5dp"/>
+            android:visibility="visible" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
             <TextView
                 android:id="@+id/veh_type"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=" Vehicle Type: "
                 android:textSize="14dp"
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/lid_sensor"/>
+                android:visibility="visible"/>
 
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/greyed_out"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Bill Details"
-            android:textColor="#444"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:gravity="center"
-            android:visibility="gone"/>
 
         <View
             android:layout_width="match_parent"
@@ -155,118 +143,28 @@
 
             <TextView
                 android:id="@+id/gps"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=" GPS : "
                 android:textSize="14dp"
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/placeholder"/>
-
-            <TextView
-                android:id="@+id/gsm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="  GSM : "
-                android:textSize="14dp"
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/gprs"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Bill Amount"
-                    android:textSize="16dp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"/>
-
-
-                <TextView
-                    android:id="@+id/amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Approved"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#444"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="Date"
-                    android:textSize="14dp"
-                    android:visibility="visible"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"/>
-
-            </LinearLayout>
+                android:visibility="visible" />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/greyed_out"/>
+                android:background="@color/greyed_out"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/gsm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/app_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Approved Amount"
-                    android:textSize="16dp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/app_amount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Approved"
-                    android:textSize="18dp"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:textColor="#444"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/app_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="Date"
-                    android:textSize="14dp"
-                    android:visibility="visible"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"/>
-
-            </LinearLayout>
+                android:text="  GSM : "
+                android:textSize="14dp"
+                android:visibility="visible"/>
 
         </LinearLayout>
 
@@ -286,25 +184,28 @@
 
             <TextView
                 android:id="@+id/power"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=" POWER : "
                 android:textSize="14dp"
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/powre"/>
+                android:visibility="visible"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
             <TextView
                 android:id="@+id/battery"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="  BATTERY : "
+                android:text=" BATTERY : "
                 android:textSize="14dp"
-                android:visibility="visible"
-                android:layout_marginTop="5dp"
-                android:drawableLeft="@drawable/battery"/>
+                android:visibility="visible"/>
 
         </LinearLayout>
 
@@ -324,8 +225,7 @@
             android:text=" Drum Sensor : "
             android:textSize="14dp"
             android:visibility="visible"
-            android:layout_marginTop="5dp"
-            android:drawableLeft="@drawable/drum_sensor"/>
+            android:layout_marginTop="5dp" />
 
         <View
             android:layout_width="match_parent"
@@ -343,8 +243,7 @@
             android:text=" LID Sensor : "
             android:textSize="14dp"
             android:visibility="visible"
-            android:layout_marginTop="5dp"
-            android:drawableLeft="@drawable/lid_sensor"/>
+            android:layout_marginTop="5dp" />
 
         <View
             android:layout_width="match_parent"
@@ -391,4 +290,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

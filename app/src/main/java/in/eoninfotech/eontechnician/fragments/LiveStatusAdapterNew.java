@@ -41,7 +41,7 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
     public void onBindViewHolder(@NonNull LiveStatusAdapterNew.ActivityHolder holder, int position) {
 
         //final DeviceLiveStatus deviceLiveStatus = deviceLiveStatuses.get(position);
-        //holder.reg_no.setText(deviceLiveStatuses.get(position).reg_no);
+        holder.reg_no.setText(deviceLiveStatuses.get(position).reg_no);
 
     }
 
@@ -53,13 +53,13 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView reg_no,device_id,depo_id,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,speed;
+        TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,speed;
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
 
             reg_no = itemView.findViewById(R.id.reg_no);
             device_id = itemView.findViewById(R.id.device_id);
-            depo_id = itemView.findViewById(R.id.depo_id);
+            depo = itemView.findViewById(R.id.depo);
             serial_no = itemView.findViewById(R.id.serial_no);
             veh_type = itemView.findViewById(R.id.veh_type);
             gps = itemView.findViewById(R.id.gps);
