@@ -133,7 +133,6 @@ public class OtherDashBoardFragment extends Fragment {
         t_curntday = v.findViewById(R.id.curnt_date);
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         setDateAndTime();
-        //ShowProgressBar(false);
 
         cv_one_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -290,6 +289,7 @@ public class OtherDashBoardFragment extends Fragment {
                 addName.setText(techList.get(i).getName() + "'s ADD Performence");
                 addDetail.setVisibility(View.VISIBLE);
                 txt_content_unavailable.setVisibility(View.GONE);
+                getDashBoardDetail();
             }
 
             @Override

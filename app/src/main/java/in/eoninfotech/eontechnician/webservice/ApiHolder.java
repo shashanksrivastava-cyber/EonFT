@@ -679,4 +679,14 @@ public interface ApiHolder {
             @Field("dbname") String dbname,
             @Field("server") String server);
 
+    @FormUrlEncoded
+    @POST("get_live_status_report.php")
+    Call<MainResponse> get_live_status(
+            @Field("server") String server,
+            @Field("dbname") String dbname,
+            @Field("dist_id") String dist_id,
+            @Field("depo_id") String depo_id,
+            @Field("status") String status,
+            @Field("type") String type);
+
 }

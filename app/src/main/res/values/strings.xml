@@ -78,6 +78,13 @@
     <string name="other_material"><u>Other Material: </u></string>
     <string name="dispatch"><u>Dispatch Details</u></string>
 
+    <string-array name="connection_status">
+        <item>All</item>
+        <item>Connected</item>
+        <item>Dis Connected</item>
+
+    </string-array>
+
     <string-array name="billStatus">
         <item>All</item>
         <item>Submitted</item>
@@ -93,6 +100,7 @@
         <item>Not Received</item>
 
     </string-array>
+
 
 
 </resources>

@@ -628,15 +628,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         workType.setEnabled(false);
         if (chk.isConnected()) {
             addclients();
-            //addLocation();
-            //addVehType();
             addWorkType();
-            //getDeviceTypes();
         } else {
             chk.showConnectionErrorDialog();
         }
-
-        //timer();
 
         e_remarks.setOnTouchListener((v, event) -> {
             if (e_remarks.hasFocus()) {
