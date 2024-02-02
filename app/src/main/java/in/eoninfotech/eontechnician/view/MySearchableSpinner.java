@@ -46,7 +46,7 @@ public class MySearchableSpinner extends Spinner implements View.OnTouchListener
 
     public MySearchableSpinner(Context context, AttributeSet attrs) {
 
-            super(context, attrs);
+        super(context, attrs);
         try {
             this._context = context;
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SearchableSpinner);

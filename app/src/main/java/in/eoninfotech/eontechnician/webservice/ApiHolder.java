@@ -425,6 +425,7 @@ public interface ApiHolder {
                                              @Part("sensor_old_veh_no") RequestBody sensor_old_veh_no,
                                              @Part("remove_type") RequestBody remove_type,
                                              @Part("drs_status") RequestBody drs_status,
+                                             @Part("replace_type") RequestBody replace_type,
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
@@ -677,5 +678,15 @@ public interface ApiHolder {
             @Field("activity_type") String activity_type,
             @Field("dbname") String dbname,
             @Field("server") String server);
+
+    @FormUrlEncoded
+    @POST("get_live_status_report.php")
+    Call<MainResponse> get_live_status(
+            @Field("server") String server,
+            @Field("dbname") String dbname,
+            @Field("dist_id") String dist_id,
+            @Field("depo_id") String depo_id,
+            @Field("status") String status,
+            @Field("type") String type);
 
 }

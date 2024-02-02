@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="7dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_frame"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/reg_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PB16A1111"
+                android:textColor="@color/c"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/checked"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/checked"
+                    android:visibility="visible" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/device_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" Device ID: "
+            android:textSize="14dp"
+            android:visibility="visible"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/device"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Depo : "
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/placeholder"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" Device Serial No: "
+            android:textSize="14dp"
+            android:visibility="visible"
+            android:drawableLeft="@drawable/device"
+            android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=" Vehicle Type: "
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/lid_sensor"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Bill Details"
+            android:textColor="#444"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=" GPS : "
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/placeholder"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="  GSM : "
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/gprs"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bill Amount"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
+
+
+                <TextView
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Approved"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#444"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Date"
+                    android:textSize="14dp"
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Approved Amount"
+                    android:textSize="16dp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/app_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Approved"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#444"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/app_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Date"
+                    android:textSize="14dp"
+                    android:visibility="visible"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=" POWER : "
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/powre"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="  BATTERY : "
+                android:textSize="14dp"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/battery"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" Drum Sensor : "
+            android:textSize="14dp"
+            android:visibility="visible"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/drum_sensor"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" LID Sensor : "
+            android:textSize="14dp"
+            android:visibility="visible"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/lid_sensor"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/greyed_out"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/statuss"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Approved"
+                android:visibility="invisible"
+                android:gravity="right"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"/>
+
+            <TextView
+                android:id="@+id/viewBill"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Speed :  "
+                android:textColor="@color/eonWhite"
+                android:visibility="visible"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:background="@color/green"
+                android:layout_marginRight="30dp"
+                android:padding="2dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

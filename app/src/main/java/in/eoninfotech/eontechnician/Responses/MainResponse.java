@@ -36,6 +36,9 @@ public class MainResponse {
     @SerializedName("srno_device_list")
     ArrayList<DeviceSerialNo> srno_device_list = new ArrayList<>();
 
+    @SerializedName("data")
+    ArrayList<DeviceLiveStatus> data = new ArrayList<>();
+
 
     public Integer getType() {
         return type;
@@ -137,5 +140,13 @@ public class MainResponse {
 
     public void setSrno_device_list(ArrayList<DeviceSerialNo> srno_device_list) {
         this.srno_device_list = srno_device_list;
+    }
+
+    public ArrayList<DeviceLiveStatus> getData() {
+        return data;
+    }
+
+    public void setData(ArrayList<DeviceLiveStatus> data) {
+        this.data = data;
     }
 }
