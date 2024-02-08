@@ -2,6 +2,7 @@ package `in`.eoninfotech.eontechnician.Responses
 
 
 data class DeviceLiveStatus (
+    @JvmField val sr_no: String,
     @JvmField val vts_id: String,
     @JvmField val reg_no: String,
     @JvmField val serial_no: String,
@@ -14,6 +15,7 @@ data class DeviceLiveStatus (
     @JvmField val gsm: String,
     @JvmField val power: String,
     @JvmField val battery: String,
-    @JvmField val status: String
+    @JvmField val status: String,
+    @JvmField val status_type: String
 ) {
 }
