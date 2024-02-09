@@ -42,7 +42,7 @@
                         android:layout_gravity="center_vertical">
 
                         <com.robinhood.ticker.TickerView
-                            android:id="@+id/incentive_amt"
+                            android:id="@+id/device_left"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:shadowColor="@android:color/black"
