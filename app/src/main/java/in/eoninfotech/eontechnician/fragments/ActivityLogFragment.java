@@ -190,7 +190,6 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         imei = sharedprefs.getString("imei1","");
         imei1 = sharedprefs.getString("imei2","");
         versionName  = BuildConfig.VERSION_NAME;
-
         ivProfile = v.findViewById(R.id.ivProfile);
         t_techname = v.findViewById(R.id.attd_username);
         t_address = v.findViewById(R.id.att_address);
