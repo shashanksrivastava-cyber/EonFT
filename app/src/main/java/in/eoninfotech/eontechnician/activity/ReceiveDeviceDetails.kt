@@ -73,6 +73,11 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         initView()
     }
 
+    override fun onSupportNavigateUp(): kotlin.Boolean {
+        onBackPressed()
+        return true
+    }
+
     private fun initView() {
 
         dispatch_id = intent.getStringExtra("dispatch_id").toString()

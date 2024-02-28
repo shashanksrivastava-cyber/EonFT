@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,8 @@ import android.widget.Toast;
 import com.robinhood.ticker.TickerView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
 import in.eoninfotech.eontechnician.Responses.ClientDetails;
@@ -62,7 +66,7 @@ import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class MaterialReturnFragment extends Fragment implements ReceiveDeviceListener {
+public class MaterialReturnFragment extends Fragment implements ReceiveDeviceListener, TextWatcher {
 
     View v;
     Spinner type_spinner,transit_spinner,courier_spinner;
@@ -74,7 +78,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     LinearLayout parentLinearLayout, transit_linear;
     TextView addMaterial;
     TickerView tickerView;
-    EditText details,et_remarks;
+    EditText details,et_remarks,search;
     SharedPreferences.Editor editor;
     String version, username,transit_id="",type_id,tech_id,others="",courier_id="",transit_through="",remarks="",item_qty="",other_tech_id="";
     ReceiveDeviceController receiveDeviceController;
@@ -87,6 +91,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     ArrayList<DeviceList> list_change_values = new ArrayList<>();
     ArrayList<String> value_name = new ArrayList<>();
     ArrayList<String> vehicletype = new ArrayList<>();
+    String searchingText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -128,6 +133,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         delete_button = v.findViewById(R.id.delete_button);
         update_data = v.findViewById(R.id.update_data);
         type_spinner = v.findViewById(R.id.type_spinner);
+        search = v.findViewById(R.id.search);
         transit_spinner = v.findViewById(R.id.transit_spinner);
         transit_linear = v.findViewById(R.id.transit_linear);
         courier_spinner = v.findViewById(R.id.courier_spinner);
@@ -161,7 +167,6 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                     details.setHint("Enter Employee ID");
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -204,7 +209,6 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                 adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, itemDetails);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 type_spinner.setAdapter(adapter);
-
                 type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -259,6 +263,31 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                     submitData();
             }
         });
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        try {
+            lv.smoothScrollToPosition(0);
+            adapter.getFilter().filter(search.getText().toString());
+            if(adapter.getCount()==0){
+                String errorString = "No match found";
+                Toast.makeText(getActivity(), errorString, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 
     private void submitData() {
@@ -401,7 +430,11 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     public void dispatchFromTechResponse(MainResponse response) {
         if(response.getType()==1) {
             pDialog.dismiss();
-          tickerView.setText(response.getTotal_received_count());
+            tickerView.setText(response.getTotal_received_count());
+            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+            onResume();
+            details.setText("");
+            et_remarks.setText("");
         }else{
             pDialog.dismiss();
             Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
@@ -410,11 +443,11 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
 
     @Override
     public void onResume() {
-
         getDeviceList();
         getItemsList();
         getTransitList();
 
         super.onResume();
     }
+
 }

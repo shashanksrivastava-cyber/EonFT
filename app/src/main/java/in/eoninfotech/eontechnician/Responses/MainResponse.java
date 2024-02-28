@@ -23,10 +23,13 @@ public class MainResponse {
     ArrayList<DeviceTypeOtherAis> deviceTypesArr = new ArrayList<>();
     @SerializedName("transit_list")
     ArrayList<TransitList> transit_list = new ArrayList<>();
+
     @SerializedName("dispatched_device_list")
     ArrayList<DispatchDeviceList> dispatched_device_list = new ArrayList<>();
+
     @SerializedName("dispatched_device_details")
     ArrayList<DispatchDeviceDetails> dispatched_device_details = new ArrayList<>();
+
     @SerializedName("item_list")
     ArrayList<ItemList> items_list = new ArrayList<>();
 
@@ -39,6 +42,11 @@ public class MainResponse {
     @SerializedName("data")
     ArrayList<DeviceLiveStatus> data = new ArrayList<>();
 
+    @SerializedName("tech_return_device_list")
+    ArrayList<TechReturnDevice> tech_return_device_list = new ArrayList<>();
+
+    @SerializedName("tech_return_details")
+    ArrayList<TechReturnDetails> tech_return_details = new ArrayList<>();
 
     public Integer getType() {
         return type;
@@ -148,5 +156,21 @@ public class MainResponse {
 
     public void setData(ArrayList<DeviceLiveStatus> data) {
         this.data = data;
+    }
+
+    public ArrayList<TechReturnDevice> getTech_return_device_list() {
+        return tech_return_device_list;
+    }
+
+    public void setTech_return_device_list(ArrayList<TechReturnDevice> tech_return_device_list) {
+        this.tech_return_device_list = tech_return_device_list;
+    }
+
+    public ArrayList<TechReturnDetails> getTech_return_details() {
+        return tech_return_details;
+    }
+
+    public void setTech_return_details(ArrayList<TechReturnDetails> tech_return_details) {
+        this.tech_return_details = tech_return_details;
     }
 }

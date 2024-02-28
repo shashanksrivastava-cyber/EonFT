@@ -33,7 +33,7 @@ class ReceiveDeviceAdapter(
                 binding.type.text= this?.transit_type
                 binding.dispatchDate.text= this?.dispatched_date
                 binding.docket.text= this?.transit_through
-
+                //binding.receivedAt.text = this?.tech_received_date
                 if(this!!.transit_name.equals("")){
                     binding.name.setVisibility(View.GONE)
                 }else {
@@ -42,8 +42,10 @@ class ReceiveDeviceAdapter(
                 binding.status.text= this.status
                 if(!this.status.equals("Received")){
                    binding.status.setBackgroundResource(R.color.dash_red)
+                    //binding.received_at.setVisibility(View.GONE)
                 }else {
                     binding.status.setBackgroundResource(R.color.green)
+                    //binding.received_at.setVisibility(View.VISIBLE)
                 }
 
                 binding.details.setOnClickListener{

@@ -1,6 +1,7 @@
 package in.eoninfotech.eontechnician.Service;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -61,6 +62,7 @@ import static java.lang.Math.round;
  * Created by root on 23/5/19.
  */
 
+@SuppressLint("SpecifyJobSchedulerIdRange")
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
 public class ForegroundService extends JobService {
@@ -118,55 +120,55 @@ public class ForegroundService extends JobService {
         } else {
             mTimer = new Timer();
         }
-        mTimer.scheduleAtFixedRate(new ForegroundService.TimeDisplayTimerTask(), 0, (INTERVAL * track));
-        startService(new Intent(getBaseContext(), ForegroundService.class));
-        locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-        locationPrefs = new LocationPrefs(this);
-        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakelock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getCanonicalName());
-        wakelock.acquire();
+//        mTimer.scheduleAtFixedRate(new ForegroundService.TimeDisplayTimerTask(), 0, (INTERVAL * track));
+//        startService(new Intent(getBaseContext(), ForegroundService.class));
+//        locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//        locationPrefs = new LocationPrefs(this);
+//        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+//        wakelock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getCanonicalName());
+//        wakelock.acquire();
         super.onCreate();
-        Intent notificationIntent = new Intent(this, ForegroundService.class);
-        notificationIntent.setAction(Content.ACTION.MAIN_ACTION);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                notificationIntent, PendingIntent.FLAG_MUTABLE);
-        Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                R.drawable.app_icon);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
-            String channelName = "My Background Service";
-            NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-            chan.setLightColor(Color.BLUE);
-            chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            assert manager != null;
-            manager.createNotificationChannel(chan);
-
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-            Notification notification = notificationBuilder.setOngoing(true)
-                    .setSmallIcon(R.drawable.app_icon)
-                    .setContentTitle("Getting Location")
-                    .setPriority(NotificationManager.IMPORTANCE_MIN)
-                    .setCategory(Notification.CATEGORY_SERVICE)
-                    .build();
-            startForeground(2, notification);
-        } else {
-            Notification notification = new NotificationCompat.Builder(this)
-                    .setContentTitle("Eon FT")
-                    .setTicker("Location Service")
-                    .setContentText("Getting Location")
-                    .setSmallIcon(R.drawable.app_icon)
-                    .setLargeIcon(
-                            Bitmap.createScaledBitmap(icon, 60, 60, false))
-                    .setContentIntent(pendingIntent)
-                    .setOngoing(true)
-                    .build();
-            startForeground(Content.NOTIFICATION_ID.FOREGROUND_SERVICE,
-                    notification);
-
-        }
+//        Intent notificationIntent = new Intent(this, ForegroundService.class);
+//        notificationIntent.setAction(Content.ACTION.MAIN_ACTION);
+//        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+//                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+//                notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+//        Bitmap icon = BitmapFactory.decodeResource(getResources(),
+//                R.drawable.app_icon);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            String NOTIFICATION_CHANNEL_ID = "com.example.simpleapp";
+//            String channelName = "My Background Service";
+//            NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+//            chan.setLightColor(Color.BLUE);
+//            chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+//            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//            assert manager != null;
+//            manager.createNotificationChannel(chan);
+//
+//            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+//            Notification notification = notificationBuilder.setOngoing(true)
+//                    .setSmallIcon(R.drawable.app_icon)
+//                    .setContentTitle("Getting Location")
+//                    .setPriority(NotificationManager.IMPORTANCE_MIN)
+//                    .setCategory(Notification.CATEGORY_SERVICE)
+//                    .build();
+//            startForeground(2, notification);
+//        } else {
+//            Notification notification = new NotificationCompat.Builder(this)
+//                    .setContentTitle("Eon FT")
+//                    .setTicker("Location Service")
+//                    .setContentText("Getting Location")
+//                    .setSmallIcon(R.drawable.app_icon)
+//                    .setLargeIcon(
+//                            Bitmap.createScaledBitmap(icon, 60, 60, false))
+//                    .setContentIntent(pendingIntent)
+//                    .setOngoing(true)
+//                    .build();
+//            startForeground(Content.NOTIFICATION_ID.FOREGROUND_SERVICE,
+//                    notification);
+//
+//        }
     }
 
     @Override

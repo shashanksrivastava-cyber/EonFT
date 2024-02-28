@@ -328,7 +328,6 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
                         }
                         item_qty = sb.toString();
                     }
-
                     SparseBooleanArray checked = lv.getCheckedItemPositions();
                     others = "";
                     for (int j = 0; j < checked.size(); j++) {
@@ -474,6 +473,10 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
         if(response.getType()==1) {
             pDialog.dismiss();
             tickerView.setText(response.getTotal_received_count());
+            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+            onResume();
+            details.setText("");
+            et_remarks.setText("");
         }else{
             pDialog.dismiss();
             Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();

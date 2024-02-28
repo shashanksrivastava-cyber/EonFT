@@ -133,7 +133,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     Dialog myDialog;
     ImageView txtclose;
     EditText etMasterPass;
-    Button btCancel,btSubmit;
+    Button btCancel,btSubmit,add_manual;
     private final static int REQUEST_CHECK_SETTINGS = 2000;
     Calendar calen = Calendar.getInstance();
     int REQUEST_CODE_PERMISSION = 10;
@@ -204,6 +204,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         date  = v.findViewById(R.id.date);
         time = v.findViewById(R.id.time);
         client =  v.findViewById(R.id.new_in_clients);
+        add_manual = v.findViewById(R.id.add_manual);
         location =   v.findViewById(R.id.new_in_locations);
         myDialog = new Dialog(getActivity());
         newInstallmentController = new NewInstallmentController();
@@ -344,6 +345,48 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
             network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         } catch (Exception ex) {
         }
+
+        add_manual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.setContentView(R.layout.add_address);
+                txtclose = myDialog.findViewById(R.id.error);
+                etMasterPass = myDialog.findViewById(R.id.etMasterPass);
+                btCancel = myDialog.findViewById(R.id.btCancel);
+                btSubmit = myDialog.findViewById(R.id.btSubmit);
+                add_manual = myDialog.findViewById(R.id.add_manual);
+                txtclose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog.dismiss();
+                    }
+                });
+                btCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        etMasterPass.setText("");
+                    }
+                });
+
+                btSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        customAddress = etMasterPass.getText().toString();
+                        t_address.setText(customAddress);
+                        address = customAddress;
+                        latitude= Double.parseDouble("0");
+                        longitude= Double.parseDouble("0");
+                        btn.setEnabled(true);
+                        btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        myDialog.dismiss();
+                    }
+                });
+                myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.show();
+            }
+        });
+
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -353,6 +396,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                     etMasterPass = myDialog.findViewById(R.id.etMasterPass);
                     btCancel = myDialog.findViewById(R.id.btCancel);
                     btSubmit = myDialog.findViewById(R.id.btSubmit);
+                   add_manual = myDialog.findViewById(R.id.add_manual);
                     txtclose.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -365,6 +409,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                            etMasterPass.setText("");
                         }
                     });
+
                     btSubmit.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -381,7 +426,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                     myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
                     myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     myDialog.show();
-                    }else {
+                    }
+               else {
                         try {
                         gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
                     } catch (Exception ex) {
@@ -565,6 +611,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                         lngi = String.valueOf(longitude);
 
                         if (lati.equals("0.0") && (lngi.equals("0.0"))) {
+
                                 locTry = locTry+1;
                                 ShowProgressBar(false);
                         }

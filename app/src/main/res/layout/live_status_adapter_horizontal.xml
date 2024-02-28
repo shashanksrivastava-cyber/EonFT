@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <!-- syntax for HorizontalScrollView -->
+<!--    <HorizontalScrollView-->
+<!--        android:id="@+id/horizontalScrollView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_margin="5dp"-->
+<!--        android:foregroundGravity="center_vertical"-->
+<!--        android:scrollbars="horizontal|vertical"-->
+<!--        tools:ignore="UselessParent">-->
+
+        <!-- child view -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="#9E9E9E"
+            android:layout_margin="5dp">
+
+            <!-- LinearLayout children -->
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sr. No."
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="VTS ID"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Device Sr. No"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reg No"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/speed"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/satellite"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/signal"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/batt_conn"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/batt"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"/>
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/eonWhite"
+                android:textSize="14sp"
+                android:layout_margin="3dp"
+                android:text="Connectivity"/>
+
+
+        </LinearLayout>
+
+<!--    </HorizontalScrollView>-->
+
+</HorizontalScrollView>

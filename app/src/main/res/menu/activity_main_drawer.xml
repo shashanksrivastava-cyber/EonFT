@@ -59,6 +59,11 @@
         android:title="Return Material"/>
 
     <item
+        android:id="@+id/nav_material_send_to_tech"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Send to Technician"/>
+
+    <item
         android:id="@+id/nav_technician_of_the_month"
         android:icon="@drawable/upd_list"
         android:title="Technician of the Month" />

@@ -79,6 +79,12 @@ class ReceiveDeviceActivity : AppCompatActivity(), ReceiveDeviceListener {
         initView()
     }
 
+    override fun onSupportNavigateUp(): kotlin.Boolean {
+        onBackPressed()
+        return true
+    }
+
+
     private fun setDate() {
         val dateFormat = SimpleDateFormat("HH:mm")
         var year = calen.get(Calendar.YEAR)

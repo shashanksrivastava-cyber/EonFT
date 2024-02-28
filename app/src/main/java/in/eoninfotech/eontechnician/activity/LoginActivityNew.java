@@ -35,6 +35,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -97,7 +98,7 @@ public class LoginActivityNew extends AppCompatActivity {
     String versname, acti_vate, dis_username, location, contact, zone, image, usrtype,logout,isRunning;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String uusername, alert, asyn_versn, versionName, track_status, track_interval,bill_amt_limit;
+    String uusername, alert, asyn_versn, versionName, track_status, track_interval,bill_amt_limit,token;
     ProgressDialog pDialog;
     CheckConnection chk = new CheckConnection(LoginActivityNew.this);
     AppPreferences appPrefs;
@@ -146,6 +147,7 @@ public class LoginActivityNew extends AppCompatActivity {
         locationPrefs = new LocationPrefs(this);
         telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
 
+        getFCMTocken();
 
         Window window = this.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -184,15 +186,6 @@ public class LoginActivityNew extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-//                    ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE);
-//                    ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                        if (ActivityCompat.checkSelfPermission(LoginActivityNew.this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-//                            imsiSIM1 = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-//                        }
-//                    } else {
-//                        imsiSIM1 = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-//                    }
                     getMacAddr();
                 p_usr = e_usrnme.getText().toString().trim();
                 p_pass = e_paswrd.getText().toString().trim();
@@ -258,6 +251,17 @@ public class LoginActivityNew extends AppCompatActivity {
         });
     }
 
+    private void getFCMTocken() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                token = task.getException().getMessage();
+                Log.w("FCM TOKEN Failed", task.getException());
+            } else {
+                token = task.getResult().getToken();
+                Log.i("FCM TOKEN", token);
+            }
+        });
+    }
     public String getMacAddr() {
         try {
             List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -289,7 +293,7 @@ public class LoginActivityNew extends AppCompatActivity {
     private void getLogin() {
         progressDialog.show();
         ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
-        Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1);
+        Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1,token);
         locCall.enqueue(new Callback<LoginResponse>() {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 try{
@@ -328,14 +332,6 @@ public class LoginActivityNew extends AppCompatActivity {
                     editor.commit();
                     progressDialog.hide();
 
-//                    if(logout.equalsIgnoreCase("logout")&&(isRunning.equalsIgnoreCase("true"))) {
-//                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
-//                    }else if(logout.equalsIgnoreCase("")&&(isRunning.equalsIgnoreCase(""))){
-//                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
-//                    }else if(logout.equalsIgnoreCase("logout")&&(isRunning.equalsIgnoreCase(""))){
-//                        startService(new Intent(LoginActivityNew.this, ForegroundService.class));
-//                    } else{
-//                    }
                         Intent intee = new Intent(LoginActivityNew.this, MainActivity.class);
                         startActivity(intee);
                         finish();
@@ -417,6 +413,7 @@ public class LoginActivityNew extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,16 +34,43 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
     @NonNull
     @Override
     public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.live_status_adapter_new, parent, false));
+
+//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.live_status_adapter_horizontal, parent, false));
+
         return new ActivityHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.live_status_adapter_new, parent, false));
+                .inflate(R.layout.live_status_adapter_duplicate, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull LiveStatusAdapterNew.ActivityHolder holder, int position) {
 
-        //final DeviceLiveStatus deviceLiveStatus = deviceLiveStatuses.get(position);
+        final DeviceLiveStatus deviceLiveStatus = deviceLiveStatuses.get(position);
+        holder.sr_no.setText(deviceLiveStatuses.get(position).sr_no);
         holder.reg_no.setText(deviceLiveStatuses.get(position).reg_no);
-
+//        holder.connection_status.setText(deviceLiveStatuses.get(position).status);
+        holder.device_id.setText(deviceLiveStatuses.get(position).vts_id);
+//        holder.depo.setText("Depot : "+ deviceLiveStatuses.get(position).depot);
+        holder.serial_no.setText(deviceLiveStatuses.get(position).serial_no);
+//        holder.veh_type.setText("Veh Type : "+ deviceLiveStatuses.get(position).veh_type_name);
+        holder.gps.setText(deviceLiveStatuses.get(position).gps);
+        holder.gsm.setText(deviceLiveStatuses.get(position).gsm);
+        if(deviceLiveStatuses.get(position).power.equalsIgnoreCase("Dis Connected")){
+            holder.power.setBackgroundResource(R.drawable.power_dis);
+        }
+        holder.battery.setText(deviceLiveStatuses.get(position).battery);
+//        holder.drum_sensor.setText("Drum Sensor : "+ deviceLiveStatuses.get(position).drum_sensor);
+//        holder.lid_sensor.setText("LID Sensor : "+ deviceLiveStatuses.get(position).lid_sensor);
+        holder.speed.setText(deviceLiveStatuses.get(position).speed);
+//        if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("C")){
+//            holder.connected.setVisibility(View.VISIBLE);
+//        }else if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("D")){
+//            holder.disconnected.setVisibility(View.VISIBLE);
+//        }else {
+//            holder.under_main.setVisibility(View.VISIBLE);
+//        }
     }
 
 
@@ -53,7 +81,9 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,speed;
+        ImageView connected,disconnected,under_main;
+        TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,
+                speed,connection_status,sr_no;
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -69,6 +99,11 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
             drum_sensor = itemView.findViewById(R.id.drum_sensor);
             lid_sensor = itemView.findViewById(R.id.lid_sensor);
             speed = itemView.findViewById(R.id.speed);
+            connection_status = itemView.findViewById(R.id.connection_status);
+            connected = itemView.findViewById(R.id.connected);
+            disconnected = itemView.findViewById(R.id.disconnected);
+            sr_no = itemView.findViewById(R.id.sr_no);
+            under_main = itemView.findViewById(R.id.under_main);
         }
     }
 }

@@ -461,7 +461,8 @@ public interface ApiHolder {
     Call<LoginResponse> loginResponse(
             @Field("username") String username,
             @Field("password") String password,
-            @Field("imei_no") String imei_no);
+            @Field("imei_no") String imei_no,
+            @Field("fcm_token") String fcm_token);
 
     @FormUrlEncoded
     @POST("log-status.php")
@@ -688,5 +689,18 @@ public interface ApiHolder {
             @Field("depo_id") String depo_id,
             @Field("status") String status,
             @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST("get_return_material_status.php")
+    Call<MainResponse> get_return_material_status(
+            @Field("from_date") String from_date,
+            @Field("to_date") String to_date,
+            @Field("status") String status,
+            @Field("tech_id") String tech_id);
+
+    @FormUrlEncoded
+    @POST("get_tech_returned_device_details.php")
+    Call<MainResponse> get_tech_returned_device_details(
+            @Field("id_no") String id_no);
 
 }

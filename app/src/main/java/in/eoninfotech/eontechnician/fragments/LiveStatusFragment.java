@@ -88,8 +88,7 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     ArrayList<VehicleTypeDetail> vehicleList = new ArrayList<>();
     ArrayList<ClientDetails> clientList = new ArrayList<>();
     ArrayList<String> clientDetail = new ArrayList<>();
-    String username, version,id_dist="",server_name="",db_name="",clientId,s_clientname = "SELECT CLIENT",depo_id="",connection_status="",veh_type="";
-    //  String[][] liveFault;
+    String username, version,id_dist="",server_name="",db_name="",clientId,s_clientname = "SELECT CLIENT",depo_id="",connection_status="D",veh_type="";
     ArrayList<MyPojo> liveFault = new ArrayList<>();
     private LiveFaultDataAdapter liveFaultDataAdapter;
     NewInstallmentController newInstallmentController;
@@ -97,7 +96,7 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     ArrayList<ClientLocationDetail> locationList = new ArrayList<>();
     ArrayList<String> locationDetail = new ArrayList<>();
     SharedPreferences.Editor editor;
-    MySearchableSpinner client, location,vehicleType;
+    MySearchableSpinner client, location,vehicleType,device_status;
     CheckConnection chk;
     ProgressBar progressBar;
     ArrayAdapter<String> adapter;
@@ -107,8 +106,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //v = inflater.inflate(R.layout.fragment_live_status_new, container, false);
         v = inflater.inflate(R.layout.fragment_live_status_new, container, false);
 
         sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
@@ -125,13 +122,12 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
         refreshLayout = v.findViewById(R.id.refresh);
         progressBar = v.findViewById(R.id.progressBar);
         submit = v.findViewById(R.id.submit);
+        device_status = v.findViewById(R.id.device_status);
+        vehicleType = v.findViewById(R.id.vehicleType);
         txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE,Color.GREEN);
         refreshLayout.setOnRefreshListener(this::refresh);
-        refreshLayout.setRefreshing(true);
-//        PulsatorLayout pulsator = v.findViewById(R.id.pulsator);
-//        pulsator.start();
-        //loadData();
+        refreshLayout.setRefreshing(false);
         ShowProgressBar(false);
         newInstallmentController = new NewInstallmentController();
         if (chk.isConnected()) {
@@ -140,6 +136,42 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
         } else {
             chk.showConnectionErrorDialog();
         }
+        device_status.setSelection(2);
+
+        device_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(device_status.getSelectedItemPosition()==0){
+                    connection_status = "A";
+                }else if(device_status.getSelectedItemPosition()==1){
+                    connection_status = "C";
+                }else {
+                    connection_status="D";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        vehicleType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    return;
+                } else {
+                    i = i - 1;
+                }
+                veh_type = String.valueOf(vehicleList.get(i).getVehicle_Id());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -189,8 +221,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
                     Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
                 }else if(id_dist.equalsIgnoreCase("")){
                     Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
-                }else if(depo_id.equalsIgnoreCase("")){
-                    Toast.makeText(getActivity(), "Please Select Location", Toast.LENGTH_SHORT).show();
                 }else {
                     loadData();
                 }
@@ -230,7 +260,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
         call.enqueue(new Callback<MainResponse>() {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-                pDialog.dismiss();
                 if(response.body().getType()==1){
                     MainResponse deviceLiveStatus = response.body();
                     deviceLiveStatuses = deviceLiveStatus.getData();

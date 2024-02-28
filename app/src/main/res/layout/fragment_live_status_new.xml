@@ -240,7 +240,7 @@
                             android:layout_height="40dp">
 
                             <in.eoninfotech.eontechnician.view.MySearchableSpinner
-                                android:id="@+id/new_in_vehicleType"
+                                android:id="@+id/vehicleType"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
@@ -266,6 +266,7 @@
 
         </LinearLayout>
 
+
     </RelativeLayout>
 
     <Button
@@ -285,7 +286,6 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:textSize="18sp"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -329,6 +329,7 @@
                         android:visibility="visible"
                         android:background="@color/eonWhite"/>
                 </LinearLayout>
+
             </androidx.core.widget.NestedScrollView>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -345,6 +346,5 @@
         android:indeterminate="false"
         android:max="100"
         android:progress="20" />
-
 
 </LinearLayout>

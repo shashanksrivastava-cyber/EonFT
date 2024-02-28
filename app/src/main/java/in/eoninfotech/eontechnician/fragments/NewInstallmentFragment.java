@@ -168,7 +168,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             til_new_sr_replace, til_old_sr_replace, sensor_veh, sensor_veh_missing, sensor_veh_remove, sensor_veh_reinstall;
     String fuel_voltage = "0", path, drs_type, clientId, personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
             buttonPressed = "0", buttonPressedActivity = "0", s_reg_no, s_rep_srNo, s_reinst_conf_reg_no, s_device_id, s_drs_id, s_new_drs_id, s_clientname = "SELECT CLIENT", s_remarks, status, s_work_type, s_Time, s_vehicletype="0", s_VehicleTypeInst, s_reason_repla = "0", removalReason = "0", itemsCollected = "0", others = "", s_work_id, s_new_device_id, s_e_device_id = "0", is_drs = "N", drs_dirction = "N", disconnection_reason = "0", ignition_sensor = "N", sim_reason = "0", missing_reason = "0", cut_off = "N", serial_no = "SELECT SR.NO.", confirmVehNo, panic = "N",
-            s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name,replace_type="D";
+            s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name,replace_type="D",silo_sensor="N";
     CheckConnection chk;
     CheckBox check_tel_supprt, magnet_set, magnetset_install;
     EditText reinstallVoltage, installVoltage, vltd_sr_no_notAvail, e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, t_install_date, t_install_Time, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
@@ -234,7 +234,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             spn_fault_sr_no,spn_phone_sr_no,spn_missing_sr_no,spn_reinstall_sr_no,spn_replace_sensor;
     RadioGroup radioGroup, radiogroupPay, radioGroupReinstall, drsReplace, radiodeviceType, radiodireplace, radiogroup, radioGrouptiltReinst,radiogroupdrsReinst, radioGroupfuelSensorReinst, radioGrouptempReinst, radioGrouptransReinst, radioGroupLidReinst, radioGrouptiltRemove, radioGrouptempRemove, radioGroupPanicRemove, radioGroupfuelRemove,
             radiogroupDoor, radioGroupCutoff, radiogroupCutOffReinst, is_Demo, radiodrsReInstall, radiodrsInstall, radioGroups, radioGrouptransRemove, radioGroupLidRemove, radioGrouptiltMissing, radioGrouptempMissing, radioGroupPanicMissing, radioGroupfuelMissing, radioGrouptransMissing, radioGroupLidMissing,
-            radioGroupMissing, reinstDeviceType, radioGroupPanic, radioGroupFuel, radioGroupPanicReinst, radioGroupFuelReinst, radioGroupTypeRemove, radioGroupMiss, radioGroupReinstallType,radioGroupdrsMissing,radioGroupdrsRemove,
+            radioGroupMissing, reinstDeviceType, radioGroupPanic, radioGroupFuel, radioGroupPanicReinst, radioGroupFuelReinst, radioGroupTypeRemove, radioGroupMiss, radioGroupReinstallType,radioGroupdrsMissing,radioGroupdrsRemove,radioGroupSilo,
             radiovltdDevicetype, radioGrouptilt, radioGrouptrans, radioGrouptemp, radioGrouptiltReplace, radioGroupLid, radioGroupfuelSensor, radioGrouptempReplace, radioGroupPanicReplace, radioGrouptransReplace, radioGroupLidReplace;
     RadioButton radionormal, radiotype, old_Device, new_Device, radionormalrep, l_in, doorNo, cutoffNo, cut_off_no_reinst, radioNone, radioDevice, drs_no_reinst, panicNoReinst, tiltNoReinst, fuelSensorNewNoReinst, tempNoReinst, transNoReinst, lidNoneReinst,
             drsType, drsReeInstall, is_demo_no, damageDevice, voice, nonVoice, radionodrs, radioyesdrs, normal, reverse, tiltNoReplace, tempNoReplace, panicNoReplace, fuelSensorNoReplace, transNoReplace, lidNoneReplace, radioVTS, radioDeviceMiss, tiltMissingNo, tempNoMissing, lidNoneMissing,
@@ -468,6 +468,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         radioGroupMiss = v.findViewById(R.id.radioGroupMiss);
         radioGrouptemp = v.findViewById(R.id.radioGrouptemp);
         radioGrouptemp = v.findViewById(R.id.radioGrouptemp);
+        radioGroupSilo = v.findViewById(R.id.radioGroupSilo);
         radioGroupdrsMissing = v.findViewById(R.id.radioGroupdrsMissing);
         radioGroupdrsRemove = v.findViewById(R.id.radioGroupdrsRemove);
         linearIgnition = v.findViewById(R.id.linearIgnition);
@@ -1072,6 +1073,13 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                                 panic_status = "Y";
                                 sensor_veh.setVisibility(View.VISIBLE);
                             }
+                        }
+                    });
+
+                    radioGroupSilo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                            if(id==R.id.siloNo);
                         }
                     });
 
@@ -1735,7 +1743,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                                 til_id_sr.setVisibility(View.GONE);
                                 til_sr_reinst.setVisibility(View.GONE);
                                 til_old_vltd_sr_no.setVisibility(View.VISIBLE);
-                                //til_new_vltd_sr_no.setVisibility(View.VISIBLE);
                                 new_deviceidReinstall.setVisibility(View.GONE);
                                 til_id_sr.setVisibility(View.GONE);
                             } else {
@@ -1764,14 +1771,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-                            //if(vltddeviceReinst.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                             s_old_serial_no = removesrnoList.get(i).getPcb_sr_no();
                             serial_no="0";
                             s_new_device_id="0";
-//                            }else {
-//                                serial_no = removesrnoList.get(i).getPcb_sr_no();
-//                                s_old_serial_no="0";
-//                            }
                         }
 
                         @Override
@@ -3089,7 +3091,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         update_dataa.setOnClickListener(view -> {
             if (s_clientname.equalsIgnoreCase("SELECT Client") || (s_clientname.equals(null))) {
                 Toast.makeText(getContext(), "Please Select Client", Toast.LENGTH_LONG).show();
-            } else if (location.getSelectedItem().toString().equalsIgnoreCase("Select Location")) {
+            }else if (location.getSelectedItem().toString().equalsIgnoreCase("Select Location")) {
                 Toast.makeText(getContext(), "Please Select Location", Toast.LENGTH_LONG).show();
             } else if (workType.getSelectedItem().toString().equalsIgnoreCase("Select Work Type")) {
                 Toast.makeText(getContext(), "Please Select Work Type", Toast.LENGTH_LONG).show();

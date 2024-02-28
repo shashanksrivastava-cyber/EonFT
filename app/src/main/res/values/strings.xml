@@ -77,6 +77,7 @@
     <string name="device_sr_no"><u>Device Sr.No.</u></string>
     <string name="other_material"><u>Other Material: </u></string>
     <string name="dispatch"><u>Dispatch Details</u></string>
+    <string name="dispatched_date">Dispatched Date</string>
 
     <string-array name="connection_status">
         <item>All</item>
@@ -98,9 +99,14 @@
         <item>All</item>
         <item>Received</item>
         <item>Not Received</item>
-
     </string-array>
 
+    <string-array name="return_status">
+        <item>All</item>
+        <item>Pending</item>
+        <item>Received</item>
+    </string-array>
 
+    <string name="notification_channel_id">default</string>
 
 </resources>

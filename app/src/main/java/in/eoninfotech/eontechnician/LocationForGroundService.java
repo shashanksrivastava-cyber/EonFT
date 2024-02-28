@@ -1,5 +1,6 @@
 package in.eoninfotech.eontechnician;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -66,6 +67,7 @@ public class LocationForGroundService extends Service implements
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
     }
 
+    @SuppressLint("ForegroundServiceType")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
@@ -73,8 +75,8 @@ public class LocationForGroundService extends Service implements
 
             Log.v(TAG, "Starting the " + this.getClass().getSimpleName());
 
-            startForeground(LocationForGroundService.GPS_NOTIFICATION,
-                    notifyUserThatLocationServiceStarted());
+//            startForeground(LocationForGroundService.GPS_NOTIFICATION,
+//                    notifyUserThatLocationServiceStarted());
             isForeground = true;
 
             // connect to google api client
@@ -130,29 +132,29 @@ public class LocationForGroundService extends Service implements
         return locationRequest;
     }
 
-    private Notification notifyUserThatLocationServiceStarted() {
-
-        // pop up a notification that the location service is running
-        Intent notificationIntent = new Intent(this, NotificationActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-                notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-        final Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.app_icon)
-                .setContentTitle(("Service"))
-                .setContentText(("ForGroundService"))
-                .setContentIntent(pendingIntent)
-                .setWhen(System.currentTimeMillis());
-
-        final Notification notification;
-        if (Build.VERSION.SDK_INT < 16) {
-            notification = builder.getNotification();
-        } else {
-            notification = builder.build();
-        }
-
-        return notification;
-    }
+//    private Notification notifyUserThatLocationServiceStarted() {
+//
+//        // pop up a notification that the location service is running
+//        Intent notificationIntent = new Intent(this, NotificationActivity.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+//                notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+//
+//        final Notification.Builder builder = new Notification.Builder(this)
+//                .setSmallIcon(R.drawable.app_icon)
+//                .setContentTitle(("Service"))
+//                .setContentText(("ForGroundService"))
+//                .setContentIntent(pendingIntent)
+//                .setWhen(System.currentTimeMillis());
+//
+//        final Notification notification;
+//        if (Build.VERSION.SDK_INT < 16) {
+//            notification = builder.getNotification();
+//        } else {
+//            notification = builder.build();
+//        }
+//
+//        return notification;
+//    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {

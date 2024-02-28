@@ -53,6 +53,37 @@ class ReceiveDeviceController : Controller() {
         })
     }
 
+    fun requestDispatchDevice(
+            from_date: String?,
+            to_date: String?,
+            status: String?,
+            tech_id: String?,
+            listener: ReceiveDeviceListener
+    ) {
+        clientCall = client_att.get_return_material_status(from_date, to_date, status, tech_id)
+        clientCall!!.enqueue(object : Callback<MainResponse?> {
+            override fun onResponse(call: Call<MainResponse?>, response: Response<MainResponse?>) {
+                listener.receiveDeviceResponse(response.body())
+            }
+
+            override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
+                try {
+                    val snackbar = TSnackbar.make(
+                            v!!,
+                            "Server Response Timeout, Try Again!",
+                            TSnackbar.LENGTH_LONG
+                    )
+                    val snackbarView = snackbar.view
+                    snackbarView.setBackgroundColor(Color.RED)
+                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+                    textView.setTextColor(Color.WHITE)
+                    snackbar.show()
+                } catch (e: Exception) {
+                }
+            }
+        })
+    }
+
     fun requestDispatchedDevice(dispatch_id: String?,transit_through: String?,techid: String?,mainid: String?,type: String?, listener: ReceiveDeviceListener) {
         clientCall = client_att.get_dispatched_device(dispatch_id,transit_through,techid,mainid,type)
         clientCall!!.enqueue(object : Callback<MainResponse?> {

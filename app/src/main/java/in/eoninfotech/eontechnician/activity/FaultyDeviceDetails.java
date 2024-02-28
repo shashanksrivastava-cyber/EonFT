@@ -82,7 +82,6 @@ public class FaultyDeviceDetails extends AppCompatActivity implements InstInstru
         custName = intent.getStringExtra("CustomerName");
         location = intent.getStringExtra("Location");
         if (!faultyVTS.equals("")) {
-
             String abc = String.valueOf(faultyVTS);
             String veh = removeSlash(abc);
             String def = removeBr(veh);

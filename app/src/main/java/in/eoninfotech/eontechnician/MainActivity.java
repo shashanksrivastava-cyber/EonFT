@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     PaymentCollectionReportFragment paymentCollectionReportFragment;
     MaterialReturnFragment materialReturnFragment;
     MaterialtoTechFragment materialtoTechFragment;
+    MaterialReturnViews materialReturnView;
     BillIntimationFragment billIntimationFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
@@ -139,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapterActivity viewPagerAdapterActivity;
     ViewPagerAdapterBills viewPagerAdapterBills;
     ViewPagerReturnMaterial viewPagerReturnMaterial;
+    ViewPagerSendToTechnician viewPagerSendtoTechnician;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<TechnicianMonthDetail> techList = new ArrayList<>();
     public static TabLayout tabLayout;
     public static int int_items = 2;
-    private ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill,viewPagerMaterialReturn;
+    private ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill,viewPagerMaterialReturn,viewPagertechnician;
     String tab = "1";
     private String currentVersion;
     LinearLayout linearLayout;
@@ -293,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewpagercallsheet = findViewById(R.id.viewpagercallsheet);
         viewPagerBill = findViewById(R.id.viewPagerBill);
         viewPagerMaterialReturn = findViewById(R.id.viewPagerMaterialReturn);
+        viewPagertechnician = findViewById(R.id.viewPagerSendtoTechnician);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
@@ -327,29 +330,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void serviceStop() {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        Intent intent1 = new Intent(MainActivity.this, StopService.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_MUTABLE);
-        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-    }
-
-    private void serviceStart() {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 00);
-        calendar.set(Calendar.SECOND, 00);
-        Intent intent1 = new Intent(MainActivity.this, AlarmService.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_MUTABLE);
-        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-    }
+//    private void serviceStop() {
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 19);
+//        calendar.set(Calendar.MINUTE, 59);
+//        calendar.set(Calendar.SECOND, 59);
+//        Intent intent1 = new Intent(MainActivity.this, StopService.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_MUTABLE);
+//        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
+//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+//    }
+//
+//    private void serviceStart() {
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 8);
+//        calendar.set(Calendar.MINUTE, 00);
+//        calendar.set(Calendar.SECOND, 00);
+//        Intent intent1 = new Intent(MainActivity.this, AlarmService.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_MUTABLE);
+//        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
+//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+//    }
 
     private void loadContent() {
 
@@ -396,15 +399,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setNegativeButton("No", null)
                 .show();
     }
-
-//    Handler handler = new Handler();
-//    Runnable timedTask = new Runnable() {
-//        @Override
-//        public void run() {
-//            loadContent();
-//            handler.postDelayed(timedTask, 1000 * 60 * 1);
-//        }
-//    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -524,6 +518,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagertechnician.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -562,6 +557,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagertechnician.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -643,6 +639,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.VISIBLE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagertechnician.setVisibility(View.GONE);
             viewPagerAdapterBills = new ViewPagerAdapterBills(getSupportFragmentManager());
             viewPagerBill.setAdapter(viewPagerAdapterBills);
             tabLayout.setupWithViewPager(viewPagerBill);
@@ -672,7 +669,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
+        } else if (id == R.id.nav_material_send_to_tech) {
+            materialReturnFragment = new MaterialReturnFragment();
+            materialReturnFragment.setArguments(bundle);
+            ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
+            setTitle("Send to Technician");
+            tabLayout.setVisibility(View.VISIBLE);
+            tabLayout.removeAllTabs();
+            viewpagerattendance.setVisibility(View.GONE);
+            viewPager.setVisibility(View.GONE);
+            viewpageractivity.setVisibility(View.GONE);
+            viewpagercallsheet.setVisibility(View.GONE);
+            viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
+            viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagertechnician.setVisibility(View.VISIBLE);
+            viewPagerSendtoTechnician = new ViewPagerSendToTechnician(getSupportFragmentManager());
+            viewPagertechnician.setAdapter(viewPagerSendtoTechnician);
+            tabLayout.setupWithViewPager(viewPagertechnician);
+            ft.commit();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            hideKeyboard();
         }
+        
         else if (id == R.id.nav_material) {
            Intent intent = new Intent(MainActivity.this, ReceiveDeviceActivity.class);
            startActivity(intent);
@@ -1074,10 +1094,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     materialReturnFragment = new MaterialReturnFragment();
                     materialReturnFragment.setArguments(bundle);
                     return materialReturnFragment;
+
                 case 1:
-                    materialtoTechFragment = new MaterialtoTechFragment();
-                    materialtoTechFragment.setArguments(bundle);
-                    return materialtoTechFragment;
+                    materialReturnView = new MaterialReturnViews();
+                    materialReturnView.setArguments(bundle);
+                    return materialReturnView;
             }
             return null;
         }
@@ -1094,7 +1115,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 0:
                     return "Return To Eon";
                 case 1:
-                    return "Send to Technician";
+                    return "View";
+            }
+            return null;
+        }
+    }
+
+    class ViewPagerSendToTechnician extends FragmentPagerAdapter {
+        public ViewPagerSendToTechnician(FragmentManager fm) {
+            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        }
+        @Override
+        public Fragment getItem(int position) {
+
+            bundle.putString("disttid", disgnid);
+            bundle.putString("usernme", usrname);
+            bundle.putString("version", versionname);
+
+            switch (position) {
+                case 0:
+                    materialtoTechFragment = new MaterialtoTechFragment();
+                    materialtoTechFragment.setArguments(bundle);
+                    return materialtoTechFragment;
+
+                case 1:
+                    materialReturnView = new MaterialReturnViews();
+                    materialReturnView.setArguments(bundle);
+                    return materialReturnView;
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return int_items;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            switch (position) {
+                case 0:
+                    return "Send To Technician";
+                case 1:
+                    return "View";
             }
             return null;
         }
@@ -1156,7 +1220,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("disttid", disgnid);
             bundle.putString("usernme", usrname);
             bundle.putString("version", versionname);
-
             switch (position) {
                 case 0:
                     installmentFragment = new NewInstallmentFragment();
@@ -1257,7 +1320,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     billViewFragment.setArguments(bundle);
                     return billViewFragment;
             }
-
             return null;
         }
 
