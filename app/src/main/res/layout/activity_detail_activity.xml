@@ -305,7 +305,6 @@
                 android:layout_height="1dp"
                 android:background="@color/grey500"/>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -520,6 +519,312 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Collected Amount"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/collected_amt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Collected Date"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/collected_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LID Status"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/lid_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="N"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trans Receiver"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/trans_receiver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="N"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Temp Sensor"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/temp_sensor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="N"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fuel Status"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/fuel_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="N"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Panic Status"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/panic_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="N"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:layout_marginRight="5dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey500"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Missing Type"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_weight="2"
+                    android:padding="3dp"
+                    android:layout_marginLeft="5dp"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey500"/>
+
+                <TextView
+                    android:id="@+id/missing_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
                     android:textSize="14sp"
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"

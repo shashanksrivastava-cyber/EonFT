@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidadvance.topsnackbar.TSnackbar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -178,10 +178,10 @@ public class LogViewActivity extends AppCompatActivity {
                 t.printStackTrace();
                 //pDialog.dismiss();
                 try {
-                    TSnackbar snackbar = TSnackbar.make(LogViewActivity.this.getCurrentFocus(), "Try Again Connection Timeout", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(LogViewActivity.this.getCurrentFocus(), "Try Again Connection Timeout", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 }catch (Exception e) {

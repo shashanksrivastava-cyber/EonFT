@@ -187,7 +187,7 @@
                 android:textColor="@color/greyed_out"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
         </LinearLayout>
 

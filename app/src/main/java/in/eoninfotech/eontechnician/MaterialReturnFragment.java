@@ -162,9 +162,17 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                 }else if(transit_id.equalsIgnoreCase("2")) {
                     transit_linear.setVisibility(View.GONE);
                     details.setHint("Enter Bus No.");
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courier_spinner.setAdapter(adapter);
+                    courier_id="";
                 }else {
                     transit_linear.setVisibility(View.GONE);
                     details.setHint("Enter Employee ID");
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courier_spinner.setAdapter(adapter);
+                    courier_id="";
                 }
             }
             @Override
@@ -240,19 +248,28 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                 transit_through = details.getText().toString();
                 remarks = et_remarks.getText().toString();
 
-                for (int i = 0; i < parentLinearLayout.getChildCount() - 1; i++) {
-                    View view1 = parentLinearLayout.getChildAt(i);
+                if(transit_id.equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Select Transit Type", Toast.LENGTH_SHORT).show();
+                }else if(transit_id.equalsIgnoreCase("1")&&(courier_id.equalsIgnoreCase(""))){
+                        Toast.makeText(getActivity(), "Select Courier Name ", Toast.LENGTH_SHORT).show();
+                }else if(transit_id.equalsIgnoreCase("1")&&(details.getText().toString().equalsIgnoreCase(""))){
+                        Toast.makeText(getActivity(), "Enter Docket Number", Toast.LENGTH_SHORT).show();
+                }else if(details.getText().toString().equalsIgnoreCase("")){
+                    Toast.makeText(getActivity(), "Enter bus no/Employee id/Consignment No", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 0; i < parentLinearLayout.getChildCount() - 1; i++) {
+                        View view1 = parentLinearLayout.getChildAt(i);
 
-                    Spinner spinner = view1.findViewById(R.id.type_spinner);
-                    EditText ed_value = view1.findViewById(R.id.etQuantity);
+                        Spinner spinner = view1.findViewById(R.id.type_spinner);
+                        EditText ed_value = view1.findViewById(R.id.etQuantity);
 
-                    vehicletype.add(spinner.getSelectedItemId() + ":" + ed_value.getText().toString());
-                    StringBuffer sb = new StringBuffer();
-                    for (int k = 0; k < vehicletype.size(); k++) {
-                        sb.append(vehicletype.get(i));
+                        vehicletype.add(spinner.getSelectedItemId() + ":" + ed_value.getText().toString());
+                        StringBuffer sb = new StringBuffer();
+                        for (int k = 0; k < vehicletype.size(); k++) {
+                            sb.append(vehicletype.get(i));
+                        }
+                        item_qty = sb.toString();
                     }
-                    item_qty = sb.toString();
-                }
 
                     SparseBooleanArray checked = lv.getCheckedItemPositions();
                     others = "";
@@ -261,6 +278,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                         others = others + (list_change_values.get(key).getId()) + ":";
                     }
                     submitData();
+                }
             }
         });
     }
@@ -348,6 +366,9 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                     for (int i = 0; i < detailList.size(); i++) {
                         courierDetails.add(detailList.get(i).getName());
                     }
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courier_spinner.setAdapter(adapter);
                 } catch (NullPointerException npe) {
                     npe.printStackTrace();
                 }

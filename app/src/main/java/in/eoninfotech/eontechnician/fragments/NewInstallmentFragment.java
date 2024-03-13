@@ -22,6 +22,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -59,7 +60,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.androidadvance.topsnackbar.TSnackbar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
@@ -79,6 +80,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import dmax.dialog.SpotsDialog;
+import in.eoninfotech.eontechnician.ImageUtil;
 import in.eoninfotech.eontechnician.Responses.DeviceTypeOtherAis;
 import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.PMethodDetail;
@@ -141,7 +143,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
-import static pub.devrel.easypermissions.EasyPermissions.hasPermissions;
+import static in.eoninfotech.eontechnician.fragments.CallSheetFragment.hasPermissions;
 
 public class NewInstallmentFragment extends Fragment implements ClientListener, ReceiveDeviceListener,ProgressRequestBody.UploadCallbacks {
 
@@ -4136,12 +4138,13 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     faultPersonNumber.setError("Please Enter valid Mobile No.");
                 } else {
                     s_remarks = e_remarks.getText().toString();
-                    if (!image.equals("")) {
-                        mProgress.setProgress(0);
-                        updateInstallationDataImage();
-                    } else {
+//                    if (!image.equals("")) {
+//                        mProgress.setProgress(0);
+//                        updateInstallationDataImage();
+//                    } else {
                         updateInstallationData();
-                    }
+
+                        //                 }
                 }
             } else if (s_work_id.equalsIgnoreCase("6")) {
                 String MobilePattern = "[0-9]{10}";
@@ -4364,12 +4367,12 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     sensor_veh_no_missing.setError("Please provide Vehicle No");
                 } else {
                     s_remarks = e_remarks.getText().toString();
-                    if (!image.equals("")) {
-                        mProgress.setProgress(0);
-                        updateInstallationDataImage();
-                    } else {
+//                    if (!image.equals("")) {
+//                        mProgress.setProgress(0);
+//                        updateInstallationDataImage();
+//                    } else {
                         updateInstallationData();
-                    }
+  //                  }
                 }
             } else if (s_work_id.equalsIgnoreCase("9")) {
                 s_e_device_id = vehNotAvailVtsID.getText().toString();
@@ -4491,12 +4494,12 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     } else {
                         payValue.setVisibility(View.GONE);
                         s_remarks = e_remarks.getText().toString();
-                        if (!images.equals("")) {
-                            mProgress.setProgress(0);
-                            updateInstallationDataImage();
-                        } else {
+//                        if (!images.equals("")) {
+//                            mProgress.setProgress(0);
+//                            updateInstallationDataImage();
+//                        } else {
                             updateInstallationData();
-                        }
+ //                       }
                     }
                 } else {
                     String MobilePattern = "[0-9]{10}";
@@ -4793,7 +4796,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             uri = data.getData();
             file = FileUtils.getFile(getActivity(), uri);
             path = file.getPath();
-            compressImage(path);
+            ImageUtil.compressImage(path);
             File file = new File(path);
             // imageName.setText(file.getName());
             if (buttonPressedActivity.equals("1")) {
@@ -4817,126 +4820,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
             }
         }
-    }
-
-    public String compressImage(String imageUri) {
-        String filePath = getRealPathFromURI(imageUri);
-        Bitmap scaledBitmap = null;
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        Bitmap bmp = BitmapFactory.decodeFile(path, options);
-        int actualHeight = options.outHeight;
-        int actualWidth = options.outWidth;
-        float maxHeight = 816.0f;
-        float maxWidth = 612.0f;
-        float imgRatio = actualWidth / actualHeight;
-        float maxRatio = maxWidth / maxHeight;
-        if (actualHeight > maxHeight || actualWidth > maxWidth) {
-            if (imgRatio < maxRatio) {
-                imgRatio = maxHeight / actualHeight;
-                actualWidth = (int) (imgRatio * actualWidth);
-                actualHeight = (int) maxHeight;
-            } else if (imgRatio > maxRatio) {
-                imgRatio = maxWidth / actualWidth;
-                actualHeight = (int) (imgRatio * actualHeight);
-                actualWidth = (int) maxWidth;
-            } else {
-                actualHeight = (int) maxHeight;
-                actualWidth = (int) maxWidth;
-            }
-        }
-        options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
-        options.inJustDecodeBounds = false;
-        options.inPurgeable = true;
-        options.inInputShareable = true;
-        options.inTempStorage = new byte[16 * 1024];
-        try {
-            bmp = BitmapFactory.decodeFile(path, options);
-
-        } catch (OutOfMemoryError exception) {
-            exception.printStackTrace();
-        }
-        try {
-            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
-        } catch (OutOfMemoryError exception) {
-            exception.printStackTrace();
-        }
-        float ratioX = actualWidth / (float) options.outWidth;
-        float ratioY = actualHeight / (float) options.outHeight;
-        float middleX = actualWidth / 2.0f;
-        float middleY = actualHeight / 2.0f;
-        Matrix scaleMatrix = new Matrix();
-        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
-        Canvas canvas = new Canvas(scaledBitmap);
-        canvas.setMatrix(scaleMatrix);
-        canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
-        ExifInterface exif;
-        try {
-            exif = new ExifInterface(path);
-            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
-            Matrix matrix = new Matrix();
-            if (orientation == 6) {
-                matrix.postRotate(90);
-            } else if (orientation == 3) {
-                matrix.postRotate(180);
-            } else if (orientation == 8) {
-                matrix.postRotate(270);
-            }
-            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FileOutputStream out = null;
-        path = getFilename();
-        try {
-            out = new FileOutputStream(path);
-            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 60, out);
-            out.flush();
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return path;
-    }
-
-    public String getFilename() {
-        File file = new File(Environment.getExternalStorageDirectory().getPath(), "DCIM/Camera");
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        String uriSting = (file.getAbsolutePath() + "/" + System.currentTimeMillis() + ".jpg");
-        return uriSting;
-    }
-
-    private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getActivity().getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
-        }
-    }
-
-    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-        }
-        final float totalPixels = width * height;
-        final float totalReqPixelsCap = reqWidth * reqHeight * 2;
-        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
-            inSampleSize++;
-        }
-        return inSampleSize;
     }
 
     private File createImageFile() {
@@ -5183,124 +5066,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         newInstallmentController.postInstallationsData(technician_id, activity_date, activity_time, customer, customer_location, isDemo, activity_type, vts_type, deviceType, old_device_id, new_device_id, old_serial_no, new_serial_no, reg_no, veh_type, is_DRS, old_drs, new_drs, drs_direction, Mgt_set, ignSensor, fuelSensor, doorSensor,
                 panic_button, cutOff, replacement_reason, removalType, removeReason, disconnectReason, missingType, missingReason, notAvailActivity, notAvailReason,
                 collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected, faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype, image, this);
-    }
-
-    private void updateInstallationDataImage() {
-        progressDialog.show();
-        Progress(true);
-        RequestBody technician_id = RequestBody.create(MediaType.parse("text/plain"), user_id);
-        RequestBody activity_date = RequestBody.create(MediaType.parse("text/plain"), s_date);
-        RequestBody activity_time = RequestBody.create(MediaType.parse("text/plain"), s_Time);
-        RequestBody customer = RequestBody.create(MediaType.parse("text/plain"), clientId);
-        RequestBody customer_location = RequestBody.create(MediaType.parse("text/plain"), clientLocId);
-        RequestBody isDemo = RequestBody.create(MediaType.parse("text/plain"), is_demo);
-        RequestBody activity_type = RequestBody.create(MediaType.parse("text/plain"), s_work_id);
-        RequestBody vts_type = RequestBody.create(MediaType.parse("text/plain"), s_vts_type);
-        RequestBody is_DRS = RequestBody.create(MediaType.parse("text/plain"), is_drs);
-        RequestBody deviceType = RequestBody.create(MediaType.parse("text/plain"), device_type);
-        RequestBody old_device_id = RequestBody.create(MediaType.parse("text/plain"), s_e_device_id);
-        RequestBody new_device_id = RequestBody.create(MediaType.parse("text/plain"), s_new_device_id);
-        RequestBody old_serial_no = RequestBody.create(MediaType.parse("text/plain"), s_old_serial_no);
-        RequestBody new_serial_no = RequestBody.create(MediaType.parse("text/plain"), serial_no);
-        RequestBody reg_no = RequestBody.create(MediaType.parse("text/plain"), s_reg_no);
-        RequestBody veh_type = RequestBody.create(MediaType.parse("text/plain"), s_vehicletype);
-        RequestBody old_drs = RequestBody.create(MediaType.parse("text/plain"), s_drs_id);
-        RequestBody new_drs = RequestBody.create(MediaType.parse("text/plain"), s_new_drs_id);
-        RequestBody drs_direction = RequestBody.create(MediaType.parse("text/plain"), drs_dirction);
-        RequestBody Mgt_set = RequestBody.create(MediaType.parse("text/plain"), mgt_set);
-        RequestBody ignSensor = RequestBody.create(MediaType.parse("text/plain"), ignition_sensor);
-        RequestBody fuelSensor = RequestBody.create(MediaType.parse("text/plain"), fuel_sensor);
-        RequestBody doorSensor = RequestBody.create(MediaType.parse("text/plain"), door_sensor);
-        RequestBody panic_button = RequestBody.create(MediaType.parse("text/plain"), panic);
-        RequestBody cutOff = RequestBody.create(MediaType.parse("text/plain"), cut_off);
-        RequestBody replacement_reason = RequestBody.create(MediaType.parse("text/plain"), s_reason_repla);
-        RequestBody removalType = RequestBody.create(MediaType.parse("text/plain"), removal_type);
-        RequestBody removeReason = RequestBody.create(MediaType.parse("text/plain"), removalReason);
-        RequestBody disconnectReason = RequestBody.create(MediaType.parse("text/plain"), disconnection_reason);
-        RequestBody missingType = RequestBody.create(MediaType.parse("text/plain"), missing_type);
-        RequestBody missingReason = RequestBody.create(MediaType.parse("text/plain"), missing_reason);
-        RequestBody notAvailActivity = RequestBody.create(MediaType.parse("text/plain"), not_available_activity);
-        RequestBody notAvailReason = RequestBody.create(MediaType.parse("text/plain"), not_available_reason);
-        RequestBody collectionDate = RequestBody.create(MediaType.parse("text/plain"), collection_date);
-        RequestBody collectionType = RequestBody.create(MediaType.parse("text/plain"), collection_type);
-        RequestBody collectionAmount = RequestBody.create(MediaType.parse("text/plain"), collection_amount);
-        RequestBody paymentType = RequestBody.create(MediaType.parse("text/plain"), payment_type);
-        RequestBody contactPerson = RequestBody.create(MediaType.parse("text/plain"), contact_person);
-        RequestBody contactNo = RequestBody.create(MediaType.parse("text/plain"), contact_no);
-        RequestBody simProvider = RequestBody.create(MediaType.parse("text/plain"), sim_provider);
-        RequestBody oldSimNo = RequestBody.create(MediaType.parse("text/plain"), old_sim_no);
-        RequestBody newSimNo = RequestBody.create(MediaType.parse("text/plain"), new_sim_no);
-        RequestBody simReason = RequestBody.create(MediaType.parse("text/plain"), sim_reason);
-        RequestBody veh_Condition = RequestBody.create(MediaType.parse("text/plain"), veh_condition);
-        RequestBody remarks = RequestBody.create(MediaType.parse("text/plain"), s_remarks);
-        RequestBody itemCollected = RequestBody.create(MediaType.parse("text/plain"), itemsCollected);
-        RequestBody faults_checked = RequestBody.create(MediaType.parse("text/plain"), others);
-        RequestBody fuel_reading = RequestBody.create(MediaType.parse("text/plain"), fuel_voltage);
-        RequestBody lid_statu = RequestBody.create(MediaType.parse("text/plain"), lid_status);
-        RequestBody tran = RequestBody.create(MediaType.parse("text/plain"), trans);
-        RequestBody temp_senso = RequestBody.create(MediaType.parse("text/plain"), temp_sensor);
-        RequestBody tilt_senso = RequestBody.create(MediaType.parse("text/plain"), tilt_sensor);
-        RequestBody fuel_statu = RequestBody.create(MediaType.parse("text/plain"), fuel_status);
-        RequestBody panic_statu = RequestBody.create(MediaType.parse("text/plain"), panic_status);
-        RequestBody sensor_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sen_vehicle_no));
-        RequestBody sensor_old_veh_n = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_old_veh_no));
-        RequestBody remove_type = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(missDeviceType));
-        RequestBody drs_status = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(drsStatus));
-        RequestBody replacetype = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(replace_type));
-
-        MultipartBody.Part image = null;
-        if (buttonPressed.equals("0")) {
-            image = null;
-        } else if (buttonPressed.equals("1")) {
-            try {
-                File file = bitmapToFile(bmp, "image_call");
-                long length = file.length();
-                ProgressRequestBody fileBody = new ProgressRequestBody(file, this);
-                image = MultipartBody.Part.createFormData("image", file.getName(), fileBody);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (buttonPressed.equals("2")) {
-            try {
-                file = new File(path);
-                long length = file.length();
-                ProgressRequestBody fileBody = new ProgressRequestBody(file, this);
-                image = MultipartBody.Part.createFormData("image", path, fileBody);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        newInstallmentController.postInstallationsData(technician_id, activity_date, activity_time, customer, customer_location, isDemo, activity_type, vts_type, deviceType, old_device_id, new_device_id, old_serial_no, new_serial_no, reg_no, veh_type, is_DRS, old_drs, new_drs, drs_direction, Mgt_set, ignSensor, fuelSensor, doorSensor,
-                panic_button, cutOff, replacement_reason, removalType, removeReason, disconnectReason, missingType, missingReason, notAvailActivity, notAvailReason,
-                collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected, faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype, image, this);
-    }
-
-    boolean run = true; //set it to false if you want to stop the timer
-    Handler mHandler = new Handler();
-
-    public void timer() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (run) {
-                    try {
-                        Thread.sleep(60000);
-                        mHandler.post(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                Calendar c = Calendar.getInstance();
-                                int min = c.get(Calendar.MINUTE);
-                                int hour = c.get(Calendar.HOUR_OF_DAY);
-                                s_time = hour + ":" + min;
-                                t_install_Time.setText(s_time);
-                            }
-                        });
-                    } catch (Exception e) {
-                    }
-                }
-            }
-        }).start();
     }
 
     private void setDateAndTime() {
@@ -6489,10 +6254,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     private void failureData() {
         try {
-            TSnackbar snackbar = TSnackbar.make(v, K.TRY_AGAIN, TSnackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(v, K.TRY_AGAIN, Snackbar.LENGTH_LONG);
             View snackbarView = snackbar.getView();
             snackbarView.setBackgroundColor(Color.RED);
-            TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             snackbar.show();
         } catch (Exception e) {

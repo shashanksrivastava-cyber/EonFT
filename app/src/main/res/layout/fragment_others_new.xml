@@ -582,7 +582,8 @@
 
                         </LinearLayout>
 
-                        <com.timqi.sectorprogressview.ColorfulRingProgressView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        <com.timqi.sectorprogressview.ColorfulRingProgressView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
                             android:id="@+id/vtsSpv"
                             android:layout_width="40dp"
                             android:layout_height="40dp"

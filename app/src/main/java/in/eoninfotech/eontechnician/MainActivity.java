@@ -1,22 +1,30 @@
 package in.eoninfotech.eontechnician;
 
+import static android.content.ContentValues.TAG;
+import static com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -40,6 +48,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
@@ -146,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
     int REQUEST_CODE_PERMISSION = 1001;
     DownloadManager manager;
-    public static final String downloadMp3Url = "http://mail.cybernetra.net:8080/android/eonApp/2.7.1/song.mp3";
     MediaPlayer mp = new MediaPlayer();
     private Menu menu;
     String faulty_num, imei;
@@ -160,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static int int_items = 2;
     private ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill,viewPagerMaterialReturn,viewPagertechnician;
     String tab = "1";
+    int count=0;
     private String currentVersion;
     LinearLayout linearLayout;
     int id = 0;
@@ -167,6 +185,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String msg_type = "";
     ArrayList<MessageResponse> messageResponses = new ArrayList<>();
     FrameLayout frame;
+    private AppUpdateManager appUpdateManager;
+    private final int UPDATE_REQUEST_CODE = 99;
+    private static final int MY_REQUEST_CODE = 17326;
+    private AppUpdateManager mAppUpdateManager;
+    private static final int RC_APP_UPDATE = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,7 +218,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle.putString("usernme", usrname);
         bundle.putString("version", versionname);
         bundle.putString("image", image);
-        //handler.post(timedTask);
+
+        ConnectivityManager m = (ConnectivityManager) getSystemService(Service.CONNECTIVITY_SERVICE);
+        m.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                Log.e(TAG, "onAvailable: ");
+                if(count==0){
+                }else {
+                    Snackbar.make(findViewById(android.R.id.content),"Internet connection restored",Snackbar.LENGTH_LONG).show();
+                    count=0;
+                }
+            }
+            @Override
+            public void onLost(Network network) {
+                Log.e(TAG, "onLost: ");
+                count=1;
+                Snackbar.make(findViewById(android.R.id.content),"It seems internet connection not available",Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+
         try {
             TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(MainActivity.this);
             imei = telephonyInfo.getImsiSIM1();
@@ -271,7 +314,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDrawerStateChanged(int newState) {
             }
         });
-        //serviceStop();
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.inflateHeaderView(R.layout.nav_header_main);
@@ -329,30 +371,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .show();
         }
     }
-
-//    private void serviceStop() {
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 19);
-//        calendar.set(Calendar.MINUTE, 59);
-//        calendar.set(Calendar.SECOND, 59);
-//        Intent intent1 = new Intent(MainActivity.this, StopService.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_MUTABLE);
-//        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-//    }
-//
-//    private void serviceStart() {
-//
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, 8);
-//        calendar.set(Calendar.MINUTE, 00);
-//        calendar.set(Calendar.SECOND, 00);
-//        Intent intent1 = new Intent(MainActivity.this, AlarmService.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent1, PendingIntent.FLAG_MUTABLE);
-//        AlarmManager am = (AlarmManager) MainActivity.this.getSystemService(MainActivity.this.ALARM_SERVICE);
-//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-//    }
 
     private void loadContent() {
 
@@ -737,9 +755,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
-//                                Intent stopIntent = new Intent(MainActivity.this, ForegroundService.class);
-//                                stopIntent.putExtra("param_name", "end");
-//                                getBaseContext().stopService(stopIntent);
                                 finish();
                             } else {
                                 Intent inteer = new Intent(MainActivity.this, LoginActivityNew.class);
@@ -751,9 +766,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
-//                                Intent stopIntent = new Intent(MainActivity.this, ForegroundService.class);
-//                                stopIntent.putExtra("param_name", "end");
-//                                getBaseContext().stopService(stopIntent);
                                 finish();
                             }
                         }
@@ -794,6 +806,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         for (Fragment fragment : getSupportFragmentManager().getFragments()) {
             fragment.onActivityResult(requestCode, resultCode, data);
+        }
+
+        if (requestCode == MY_REQUEST_CODE) {
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    if (resultCode != RESULT_OK) {
+                        Toast.makeText(this, "RESULT_OK" + resultCode, Toast.LENGTH_LONG).show();
+                        Log.d("RESULT_OK  :", "" + resultCode);
+                    }
+                    break;
+                case Activity.RESULT_CANCELED:
+
+                    if (resultCode != RESULT_CANCELED) {
+                        Toast.makeText(this, "RESULT_CANCELED" + resultCode, Toast.LENGTH_LONG).show();
+                        Log.d("RESULT_CANCELED  :", "" + resultCode);
+                    }
+                    break;
+                case RESULT_IN_APP_UPDATE_FAILED:
+
+                    if (resultCode != RESULT_IN_APP_UPDATE_FAILED) {
+
+                        Toast.makeText(this, "RESULT_IN_APP_UPDATE_FAILED" + resultCode, Toast.LENGTH_LONG).show();
+                        Log.d("RESULT_IN_APP_FAILED:", "" + resultCode);
+                    }
+            }
         }
     }
 

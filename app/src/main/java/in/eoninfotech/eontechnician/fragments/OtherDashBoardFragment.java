@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidadvance.topsnackbar.TSnackbar;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -27,7 +26,9 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
+import com.timqi.sectorprogressview.SectorProgressView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -266,10 +267,10 @@ public class OtherDashBoardFragment extends Fragment {
             @Override
             public void onFailure(Call<TechResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -346,10 +347,6 @@ public class OtherDashBoardFragment extends Fragment {
 
                         total_vts.setText("" + dashboardList.get(0).getTot_dev());
                         total_drs.setText("" + dashboardList.get(0).getTot_drs());
-//                        tot_sos.setText(""+dashboardList.get(0).getTot_sos());
-//                        tot_lid.setText(""+dashboardList.get(0).getTot_lid());
-//                        tot_fuel.setText(""+dashboardList.get(0).getTot_fuel());
-//                        tot_temp.setText(""+dashboardList.get(0).getTot_temp());
 
                         faulty_vts.setText("" + dashboardList.get(0).getFaulty_dev());
                         vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));

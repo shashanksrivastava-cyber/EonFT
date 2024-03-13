@@ -30,6 +30,9 @@ class OtherMaterialAdapter(
                 //binding!!.refNo.text= this?.ref_no
                 binding!!.materialName.text= this?.item
                 binding!!.quantity.text= this?.quantity + " "+"No."
+
+                binding!!.deleteButton
+
             }
         }
     }

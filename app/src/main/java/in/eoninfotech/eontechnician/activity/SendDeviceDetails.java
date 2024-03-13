@@ -120,6 +120,7 @@ public class SendDeviceDetails extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else {
+                    pDialog.hide();
                     Toast.makeText(SendDeviceDetails.this, ""+response.body().getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }

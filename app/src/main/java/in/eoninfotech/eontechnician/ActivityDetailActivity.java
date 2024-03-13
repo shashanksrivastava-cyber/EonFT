@@ -36,7 +36,7 @@ public class ActivityDetailActivity extends AppCompatActivity {
     int i;
     private AlertDialog progressDialog;
     TextView cust_name,loc_name,vts_type,new_device_id,old_device_id,new_sr_no,old_serial_no,old_drs,new_drs,old_sim,new_sim,reason
-            ,remarks,workType;
+            ,remarks,workType,collected_amt,collected_date,lid_status,trans_receiver,temp_sensor,fuel_status,panic_status,missing_type;
 
 
     @Override
@@ -71,6 +71,14 @@ public class ActivityDetailActivity extends AppCompatActivity {
         reason =findViewById(R.id.reason);
         remarks =findViewById(R.id.remarks);
         workType =findViewById(R.id.workType);
+        collected_amt =findViewById(R.id.collected_amt);
+        collected_date =findViewById(R.id.collected_date);
+        lid_status =findViewById(R.id.lid_status);
+        trans_receiver =findViewById(R.id.trans_receiver);
+        temp_sensor =findViewById(R.id.temp_sensor);
+        fuel_status =findViewById(R.id.fuel_status);
+        panic_status =findViewById(R.id.panic_status);
+        missing_type =findViewById(R.id.missing_type);
         progressDialog = new SpotsDialog(this, R.style.CustomIncentive);
         loadContent();
     }
@@ -98,6 +106,14 @@ public class ActivityDetailActivity extends AppCompatActivity {
                     new_sim.setText(activityResponse.getActivityList().get(i).getNew_sim());
                     reason.setText(activityResponse.getActivityList().get(i).getReasons());
                     remarks.setText(activityResponse.getActivityList().get(i).getRemarks());
+                    collected_amt.setText(activityResponse.getActivityList().get(i).getCollected_amt());
+                    collected_date.setText(activityResponse.getActivityList().get(i).getCollected_date());
+                    lid_status.setText(activityResponse.getActivityList().get(i).getLid_status());
+                    trans_receiver.setText(activityResponse.getActivityList().get(i).getTrans_receiver());
+                    temp_sensor.setText(activityResponse.getActivityList().get(i).getTemp_sensor());
+                    fuel_status.setText(activityResponse.getActivityList().get(i).getFuel_status());
+                    panic_status.setText(activityResponse.getActivityList().get(i).getPanic_status());
+                    missing_type.setText(activityResponse.getActivityList().get(i).getMissing_type());
                     progressDialog.hide();
                 } else {
                     progressDialog.hide();

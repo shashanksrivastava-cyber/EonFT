@@ -206,7 +206,8 @@
         <activity android:name=".activity.SendDatatoServer" />
         <activity android:name=".activity.ReceiveDeviceActivity" />
         <activity android:name=".activity.ReturnDeviceActivity" />
-        <activity android:name=".activity.ReceiveDeviceDetails" />
+        <activity android:name=".activity.ReceiveDeviceDetails"
+            android:windowSoftInputMode="adjustResize|adjustPan"/>
         <activity android:name=".activity.SendDeviceDetails" />
         <activity android:name=".ActivityDetailActivity" />
         <activity

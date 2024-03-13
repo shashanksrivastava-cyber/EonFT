@@ -16,6 +16,12 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
 import com.timqi.sectorprogressview.SectorProgressView;
 
@@ -26,6 +32,7 @@ import java.util.Calendar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import dmax.dialog.SpotsDialog;
+import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
@@ -162,9 +169,9 @@ public class DashBoardFragment extends Fragment {
 //                startActivity(intent);
             }
         });
+
         return binding.getRoot();
     }
-
 
     void getDashBoardDetail() {
         progressDialog.show();

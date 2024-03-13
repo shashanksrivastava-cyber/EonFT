@@ -1,19 +1,26 @@
 package in.eoninfotech.eontechnician.fragments;
 
+import static in.eoninfotech.eontechnician.R.drawable.connected;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import in.eoninfotech.eontechnician.BillViewAdapter;
 import in.eoninfotech.eontechnician.R;
@@ -34,43 +41,68 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
     @NonNull
     @Override
     public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
 //        return new ActivityHolder(LayoutInflater.from(parent.getContext())
 //                .inflate(R.layout.live_status_adapter_new, parent, false));
 
 //        return new ActivityHolder(LayoutInflater.from(parent.getContext())
 //                .inflate(R.layout.live_status_adapter_horizontal, parent, false));
 
+//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.live_status_adapter_duplicate, parent, false));
+
         return new ActivityHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.live_status_adapter_duplicate, parent, false));
+                .inflate(R.layout.report_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull LiveStatusAdapterNew.ActivityHolder holder, int position) {
 
-        final DeviceLiveStatus deviceLiveStatus = deviceLiveStatuses.get(position);
         holder.sr_no.setText(deviceLiveStatuses.get(position).sr_no);
         holder.reg_no.setText(deviceLiveStatuses.get(position).reg_no);
-//        holder.connection_status.setText(deviceLiveStatuses.get(position).status);
         holder.device_id.setText(deviceLiveStatuses.get(position).vts_id);
-//        holder.depo.setText("Depot : "+ deviceLiveStatuses.get(position).depot);
         holder.serial_no.setText(deviceLiveStatuses.get(position).serial_no);
-//        holder.veh_type.setText("Veh Type : "+ deviceLiveStatuses.get(position).veh_type_name);
         holder.gps.setText(deviceLiveStatuses.get(position).gps);
         holder.gsm.setText(deviceLiveStatuses.get(position).gsm);
         if(deviceLiveStatuses.get(position).power.equalsIgnoreCase("Dis Connected")){
             holder.power.setBackgroundResource(R.drawable.power_dis);
         }
         holder.battery.setText(deviceLiveStatuses.get(position).battery);
-//        holder.drum_sensor.setText("Drum Sensor : "+ deviceLiveStatuses.get(position).drum_sensor);
-//        holder.lid_sensor.setText("LID Sensor : "+ deviceLiveStatuses.get(position).lid_sensor);
+        holder.drum_sensor.setText(deviceLiveStatuses.get(position).drum_sensor);
+        holder.lid_sensor.setText(deviceLiveStatuses.get(position).lid_sensor);
         holder.speed.setText(deviceLiveStatuses.get(position).speed);
-//        if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("C")){
-//            holder.connected.setVisibility(View.VISIBLE);
-//        }else if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("D")){
-//            holder.disconnected.setVisibility(View.VISIBLE);
-//        }else {
-//            holder.under_main.setVisibility(View.VISIBLE);
-//        }
+        holder.fuel.setText(deviceLiveStatuses.get(position).fuel);
+        holder.silo.setText(deviceLiveStatuses.get(position).silo);
+
+        if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("C")){
+            holder.connection_status.setText("Connected");
+            holder.connected.setBackgroundResource(connected);
+        }else if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("D")){
+            holder.connection_status.setText(deviceLiveStatuses.get(position).status);
+            holder.connected.setBackgroundResource(R.drawable.disconnected);
+        }else {
+            holder.connection_status.setText(deviceLiveStatuses.get(position).status);
+            holder.connected.setBackgroundResource(R.drawable.notrack);
+        }
+
+        if (position % 2 == 0) {
+            holder.linear_layout.setBackgroundColor(ContextCompat.getColor(context, R.color.back_color));
+        } else {
+            holder.linear_layout.setBackgroundColor(ContextCompat.getColor(context, R.color.eonWhite));
+        }
+
+        holder.location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String strUri = "http://maps.google.com/maps?q=loc:" + deviceLiveStatuses.get(position).lat + "," + deviceLiveStatuses.get(position).lng +deviceLiveStatuses.get(position).reg_no;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                context.startActivity(intent);
+            }
+        });
     }
 
 
@@ -83,7 +115,8 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
 
         ImageView connected,disconnected,under_main;
         TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,
-                speed,connection_status,sr_no;
+                speed,connection_status,sr_no,fuel,silo,location;
+        LinearLayout linear_layout;
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -104,6 +137,10 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
             disconnected = itemView.findViewById(R.id.disconnected);
             sr_no = itemView.findViewById(R.id.sr_no);
             under_main = itemView.findViewById(R.id.under_main);
+            linear_layout = itemView.findViewById(R.id.linear_layout);
+            fuel = itemView.findViewById(R.id.fuel);
+            silo = itemView.findViewById(R.id.silo);
+            location = itemView.findViewById(R.id.location);
         }
     }
 }

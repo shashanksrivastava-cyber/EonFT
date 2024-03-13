@@ -197,14 +197,14 @@
                         android:layout_below="@+id/txtDetails"
                         android:visibility="visible"
                         android:maxLength="3"
-                        android:layout_toRightOf="@id/etVehicleType"/>
+                        android:layout_toEndOf="@id/etVehicleType"/>
 
                     <Button
                         android:layout_height="20dp"
                         android:layout_width="20dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:id="@+id/delete_button"
                         android:visibility="visible"
                         android:background="@drawable/ic_minus"/>
@@ -215,12 +215,12 @@
                     android:id="@+id/addMaterial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:textColor="@color/eonBlue"
                     android:text="Add More Accessories"
                     android:visibility="visible"
                     android:layout_marginTop="5dp"
-                    android:drawableLeft="@drawable/ic_add_black_24dp"/>
+                    app:drawableLeftCompat="@drawable/ic_add_black_24dp" />
 
             </LinearLayout>
 
@@ -381,8 +381,6 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/dashed_green"
-                android:clickable="false"
-                android:editable="false"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:hint=""
@@ -423,8 +421,6 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/dashed_green"
-                android:clickable="false"
-                android:editable="false"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:hint="Remarks"

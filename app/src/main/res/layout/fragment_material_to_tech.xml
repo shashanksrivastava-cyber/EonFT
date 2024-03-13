@@ -481,7 +481,8 @@
                 android:padding="15dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:inputType="textCapSentences"/>
 
         </LinearLayout>
 

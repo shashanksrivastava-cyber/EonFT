@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
-import com.androidadvance.topsnackbar.TSnackbar;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
 import in.eoninfotech.eontechnician.Responses.ClientResponse;
 import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
@@ -71,10 +73,10 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<ClientResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -95,10 +97,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<ClientLocationResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -118,10 +120,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<WorkTypeResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -141,10 +143,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<VehicleTypeResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -164,10 +166,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<FaultResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -187,10 +189,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<ReplaceReason> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -210,10 +212,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<DisconnectionResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -232,10 +234,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<RemovalActivityResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -255,10 +257,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<RemovalResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -276,10 +278,10 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<RemovalResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -297,10 +299,10 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<CollectedItemsResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -319,10 +321,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<SimOperatorResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -342,10 +344,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<SimReplaceResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -365,10 +367,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<NotAvailActivityResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -388,10 +390,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<VehNotAvailReasonResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -410,10 +412,10 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<VTSResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -432,10 +434,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<VTSResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -454,10 +456,10 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<PaymentMethodResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -537,10 +539,10 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -583,10 +585,10 @@ public class NewInstallmentController extends Controller {
             public void onFailure(Call<MainResponse> call, Throwable t) {
 
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {

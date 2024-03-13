@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:padding="5dp"
             android:text=""
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="@color/black" />
 
         <TextView
@@ -34,17 +34,63 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="7dp"
             android:layout_marginStart="7dp"
             android:layout_weight="2"
             android:padding="5dp"
             android:background="@drawable/grey_background"
             android:gravity="center"
-            android:text="Not Marked"
+            android:text=""
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_weight="2">
+
+            <Button
+                android:layout_height="20dp"
+                android:layout_width="20dp"
+                android:layout_gravity="top|left"
+                android:layout_marginStart="3dp"
+                android:id="@+id/delete_button"
+                android:visibility="visible"
+                android:background="@drawable/ic_minus"/>
+
+            <TextView
+                android:id="@+id/addText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/eonBlue"
+                android:text="0"
+                android:visibility="visible"
+                android:textSize="18dp"
+                android:padding="5dp"/>
+
+            <Button
+                android:layout_height="20dp"
+                android:layout_width="20dp"
+                android:layout_gravity="top|left"
+                android:layout_marginStart="3dp"
+                android:id="@+id/add_button"
+                android:visibility="visible"
+                android:background="@drawable/circle_plus"/>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/check_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2.2"
+            android:gravity="center"
             android:textColor="@color/black" />
+
 
     </LinearLayout>
 

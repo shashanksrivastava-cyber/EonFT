@@ -70,6 +70,15 @@ public class ActivityDetailResponse {
     @SerializedName("collected_mtd")
     private String collected_mtd;
 
+    @SerializedName("verified_date")
+    private String verified_date;
+
+    @SerializedName("verify_by")
+    private String verify_by;
+
+    @SerializedName("missing_type")
+    private String missing_type;
+
     public String getActivity_id() {
         return activity_id;
     }
@@ -304,5 +313,29 @@ public class ActivityDetailResponse {
 
     public void setSensor_old_veh_no(String sensor_old_veh_no) {
         this.sensor_old_veh_no = sensor_old_veh_no;
+    }
+
+    public String getVerified_date() {
+        return verified_date;
+    }
+
+    public void setVerified_date(String verified_date) {
+        this.verified_date = verified_date;
+    }
+
+    public String getVerify_by() {
+        return verify_by;
+    }
+
+    public void setVerify_by(String verify_by) {
+        this.verify_by = verify_by;
+    }
+
+    public String getMissing_type() {
+        return missing_type;
+    }
+
+    public void setMissing_type(String missing_type) {
+        this.missing_type = missing_type;
     }
 }

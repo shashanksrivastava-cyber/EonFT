@@ -101,7 +101,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     ProgressBar progressBar;
     ArrayAdapter<String> adapter;
     ArrayList<DeviceLiveStatus> deviceLiveStatuses = new ArrayList<>();
-
     LiveStatusAdapterNew liveStatusAdapterNew;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

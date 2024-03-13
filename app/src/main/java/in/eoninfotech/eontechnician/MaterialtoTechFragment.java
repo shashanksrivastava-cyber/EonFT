@@ -23,7 +23,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidadvance.topsnackbar.TSnackbar;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.robinhood.ticker.TickerView;
 
 import java.util.ArrayList;
@@ -167,10 +168,10 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
             @Override
             public void onFailure(Call<TechResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();
                     snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
                 } catch (Exception e) {
@@ -232,9 +233,17 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
                 }else if(transit_id.equalsIgnoreCase("2")) {
                     transit_linear.setVisibility(View.GONE);
                     details.setHint("Enter Bus No.");
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courier_spinner.setAdapter(adapter);
+                    courier_id="";
                 }else {
                     transit_linear.setVisibility(View.GONE);
                     details.setHint("Enter Employee ID");
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courier_spinner.setAdapter(adapter);
+                    courier_id="";
                 }
             }
 
@@ -309,9 +318,17 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
         update_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(other_tech_id.equalsIgnoreCase("")){
+                if (other_tech_id.equalsIgnoreCase("")) {
                     Toast.makeText(getActivity(), "Select Technician Id", Toast.LENGTH_SHORT).show();
-                }else {
+                } else if (transit_id.equalsIgnoreCase("")) {
+                    Toast.makeText(getActivity(), "Select Transit Type", Toast.LENGTH_SHORT).show();
+                } else if (transit_id.equalsIgnoreCase("1") && (courier_id.equalsIgnoreCase(""))) {
+                    Toast.makeText(getActivity(), "Select Courier Name ", Toast.LENGTH_SHORT).show();
+                } else if (transit_id.equalsIgnoreCase("1") && (details.getText().toString().equalsIgnoreCase(""))) {
+                    Toast.makeText(getActivity(), "Enter Docket Number", Toast.LENGTH_SHORT).show();
+                } else if (details.getText().toString().equalsIgnoreCase("")) {
+                    Toast.makeText(getActivity(), "Enter bus no/Employee id/Consignment No", Toast.LENGTH_SHORT).show();
+                } else {
                     transit_through = details.getText().toString();
                     remarks = et_remarks.getText().toString();
 
@@ -392,6 +409,9 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
                     for (int i = 0; i < detailList.size(); i++) {
                         courierDetails.add(detailList.get(i).getName());
                     }
+                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    courier_spinner.setAdapter(adapter);
                 } catch (NullPointerException npe) {
                     npe.printStackTrace();
                 }

@@ -6,17 +6,6 @@
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
-    <!-- syntax for HorizontalScrollView -->
-<!--    <HorizontalScrollView-->
-<!--        android:id="@+id/horizontalScrollView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_margin="5dp"-->
-<!--        android:foregroundGravity="center_vertical"-->
-<!--        android:scrollbars="horizontal|vertical"-->
-<!--        tools:ignore="UselessParent">-->
-
-        <!-- child view -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
