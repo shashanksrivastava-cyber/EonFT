@@ -4,6 +4,7 @@ package in.eoninfotech.eontechnician.webservice;
 import com.google.android.gms.location.LocationSettingsResponse;
 
 import java.lang.reflect.Array;
+import java.util.Map;
 
 import in.eoninfotech.eontechnician.ItemModel;
 import in.eoninfotech.eontechnician.Responses.ActivityResponse;
@@ -51,6 +52,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -648,6 +650,7 @@ public interface ApiHolder {
             @Field("dispatch_id") String dispatch_id,
             @Field("tech_id") String tech_id,
             @Field("items_collected") String items_collected,
+            @FieldMap Map<String, String> accessories_collected,
             @Field("remarks") String remarks);
 
     @GET("get_item_list.php")

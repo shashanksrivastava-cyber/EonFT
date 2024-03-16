@@ -42,10 +42,8 @@ class ReceiveDeviceAdapter(
                 binding.status.text= this.status
                 if(!this.status.equals("Received")){
                    binding.status.setBackgroundResource(R.color.dash_red)
-                    //binding.received_at.setVisibility(View.GONE)
                 }else {
                     binding.status.setBackgroundResource(R.color.green)
-                    //binding.received_at.setVisibility(View.VISIBLE)
                 }
 
                 binding.details.setOnClickListener{

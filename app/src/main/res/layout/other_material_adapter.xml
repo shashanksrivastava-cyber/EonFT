@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/eonWhite"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/tex_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="5dp"
         android:orientation="horizontal">
 
@@ -20,13 +19,13 @@
             android:id="@+id/material_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:background="@drawable/grey_background"
             android:gravity="center_vertical"
             android:layout_gravity="center"
             android:padding="5dp"
             android:text=""
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/black" />
 
         <TextView
@@ -35,21 +34,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="7dp"
-            android:layout_weight="2"
+            android:layout_weight="2.2"
             android:padding="5dp"
             android:background="@drawable/grey_background"
             android:gravity="center"
             android:text=""
             android:layout_marginEnd="5dp"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="@color/black"/>
 
         <LinearLayout
+            android:id="@+id/addCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="visible"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:background="@drawable/grey_background">
 
             <Button
                 android:layout_height="20dp"
@@ -68,8 +69,9 @@
                 android:textColor="@color/eonBlue"
                 android:text="0"
                 android:visibility="visible"
-                android:textSize="18dp"
-                android:padding="5dp"/>
+                android:textSize="16dp"
+                android:padding="5dp"
+                android:maxLength="4"/>
 
             <Button
                 android:layout_height="20dp"
@@ -81,16 +83,6 @@
                 android:background="@drawable/circle_plus"/>
 
         </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/check_box"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2.2"
-            android:gravity="center"
-            android:textColor="@color/black" />
-
 
     </LinearLayout>
 

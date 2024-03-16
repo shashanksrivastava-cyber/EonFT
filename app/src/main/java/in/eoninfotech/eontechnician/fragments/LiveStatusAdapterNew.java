@@ -42,15 +42,6 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
     @Override
     public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.live_status_adapter_new, parent, false));
-
-//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.live_status_adapter_horizontal, parent, false));
-
-//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.live_status_adapter_duplicate, parent, false));
-
         return new ActivityHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.report_item, parent, false));
     }

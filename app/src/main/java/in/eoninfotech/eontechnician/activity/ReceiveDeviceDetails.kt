@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,8 +36,11 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
     var transit_through: String? = null
     var status: String? = null
     var itemsCollected: String? = ""
+    var accessoriesCollected: String? = ""
     var techid: String? = null
     var main_id: String? = null
+    var key: String = ""
+    var value: String = ""
     var type: String? = null
     var chk = CheckConnection(this)
     var receiveDeviceController: ReceiveDeviceController? = null
@@ -46,6 +50,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
     var adapter: ArrayAdapter<String>? = null
     var recyclerView: RecyclerView? = null
     private var progressDialog: AlertDialog? = null
+    var items = emptyMap<String,String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +90,6 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         status = intent.getStringExtra("status").toString()
         main_id = intent.getStringExtra("id").toString()
         type = intent.getStringExtra("type").toString()
-        //binding!!.transitNo.setText(transit_through)
         receiveDeviceController = ReceiveDeviceController()
         val layoutManager = LinearLayoutManager(applicationContext)
         binding!!.recyclerView.layoutManager = layoutManager
@@ -95,6 +99,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         if(status.equals("Received")){
             binding!!.remarksReceive.setVisibility(View.GONE)
             binding!!.btnAcceptReceive.setVisibility(View.GONE)
+
         }else {
             binding!!.btnAcceptReceive.setVisibility(View.VISIBLE)
         }
@@ -106,9 +111,28 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                 val key: Int = checked.keyAt(i)
                 itemsCollected = itemsCollected+list_change_values.get(key).pcb_id + ":"
             }
-            if(itemsCollected.equals("")){
-                val toast = Toast.makeText(applicationContext, "Please select at least one device!!", Toast.LENGTH_LONG)
+
+            for (i in 0..lr.size-1){
+                key = binding!!.recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(R.id.material_name)?.text.toString()
+                value = binding!!.recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(R.id.addText)?.text.toString()
+                items += key to value
+            }
+
+            for (item in items) {
+                val toast = android.widget.Toast.makeText(applicationContext, "".plus("${item.key} : ${item.value}"), android.widget.Toast.LENGTH_LONG)
                 toast.show()
+            }
+            if(list_change_values.size>0){
+                if(itemsCollected.equals("")){
+                    val toast = Toast.makeText(applicationContext, "Please select at least one device!!", Toast.LENGTH_LONG)
+                    toast.show()
+                }else {
+                    if (chk.isConnected) {
+                        submitData()
+                    } else {
+                        chk.showConnectionErrorDialog()
+                    }
+                }
             }else {
                 if (chk.isConnected) {
                     submitData()
@@ -116,6 +140,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                     chk.showConnectionErrorDialog()
                 }
             }
+
         }
     }
 
@@ -130,7 +155,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             .setMessage("Are you sure you want to receive device ?")
             .setPositiveButton("Yes") { dialog, which ->
                 progressDialog!!.show()
-                receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,techid,itemsCollected,binding!!.remarksReceive.text.toString(),this)
+                //receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,techid,itemsCollected,items,binding!!.remarksReceive.text.toString(),this)
             }
             .setNegativeButton("No", null)
             .show()
@@ -165,7 +190,9 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                     }
                     if (list_change_values.size > 0) {
                         for (i in list_change_values.indices) {
-                            value_name.add(list_change_values.get(i).pcb_sr_no)
+                            val val1 = 1
+                            var k = i.plus(val1)!!.toString()
+                            value_name.add(k.plus(". ").plus((list_change_values.get(i).pcb_sr_no)))
                         }
                         if (list_change_values.size > 5) {
                             binding!!.deviceDetailListReceive.setLayoutParams(
@@ -244,4 +271,5 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
     override fun dispatchFromTechResponse(response: MainResponse?) {
 
     }
+
 }

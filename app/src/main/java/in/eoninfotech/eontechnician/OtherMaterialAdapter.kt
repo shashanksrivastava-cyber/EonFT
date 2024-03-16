@@ -1,21 +1,18 @@
 package `in`.eoninfotech.eontechnician
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import `in`.eoninfotech.eontechnician.Responses.DeviceItems
-import `in`.eoninfotech.eontechnician.Responses.DispatchDeviceList
-import `in`.eoninfotech.eontechnician.activity.ReceiveDeviceDetails
-import `in`.eoninfotech.eontechnician.databinding.DispatchedMaterialListBinding
 import `in`.eoninfotech.eontechnician.databinding.OtherMaterialAdapterBinding
+import android.widget.Toast
 
 class OtherMaterialAdapter(
     private val context: Context,
-    var lr: ArrayList<DeviceItems>
+    var lr: ArrayList<DeviceItems>,
 ): RecyclerView.Adapter<OtherMaterialAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OtherMaterialAdapter.ViewHolder {
         val binding = OtherMaterialAdapterBinding
@@ -27,12 +24,36 @@ class OtherMaterialAdapter(
 
         with(holder){
             with(lr?.get(position)) {
-                //binding!!.refNo.text= this?.ref_no
-                binding!!.materialName.text= this?.item
-                binding!!.quantity.text= this?.quantity + " "+"No."
+                val val1 = 1
+                var k = position.plus(val1)!!.toString()
+                binding!!.materialName.text= k.plus(". ").plus(this?.item)
+                binding!!.quantity.text= this?.quantity
+                binding!!.addText.text= this?.quantity
 
-                binding!!.deleteButton
+                binding!!.deleteButton.setOnClickListener {
 
+                    var value = binding!!.addText.text.toString()!!.toInt()
+
+                    if (value > 0) {
+                        value--
+                        binding!!.addText.text = value.toString()
+
+                        //callback.onItemClicked(item)
+                    }
+                }
+
+                binding!!.addButton.setOnClickListener {
+
+                    var value = binding!!.addText.text.toString()!!.toInt()
+                    value++
+                    binding!!.addText.text = value.toString()
+                }
+
+//                if(status.equals("Received")){
+//                    binding!!.addCount.setEnabled(false)
+//                }else {
+//                    binding!!.addCount.setEnabled(true)
+//                }
             }
         }
     }
@@ -43,4 +64,10 @@ class OtherMaterialAdapter(
 
     inner class ViewHolder(val binding: OtherMaterialAdapterBinding)
         :RecyclerView.ViewHolder(binding.root)
+
+
+//    interface AdapterCallback {
+//        fun onItemClicked(data: HashMap<String, Any>)
+//    }
+
 }
