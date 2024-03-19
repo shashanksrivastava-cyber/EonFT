@@ -650,7 +650,7 @@ public interface ApiHolder {
             @Field("dispatch_id") String dispatch_id,
             @Field("tech_id") String tech_id,
             @Field("items_collected") String items_collected,
-            @FieldMap Map<String, String> accessories_collected,
+            @Field("accessories_collected") String accessories_collected,
             @Field("remarks") String remarks);
 
     @GET("get_item_list.php")

@@ -660,10 +660,19 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 id_dist = clientList.get(i).getId_dist();
                 server_name = clientList.get(i).getServer_name();
                 db_name = clientList.get(i).getDb_name();
-                clearData();
-                addLocation();
-                location.setEnabled(true);
-                drsStatus = String.valueOf(clientList.get(i).getDrs_status());
+
+                if(s_clientname.equalsIgnoreCase("OTHERS")){
+                    clearData();
+                    clientLocId ="0";
+                    location.setEnabled(false);
+                    workType.setEnabled(true);
+                    drsStatus = String.valueOf(clientList.get(i).getDrs_status());
+                }else {
+                    clearData();
+                    addLocation();
+                    location.setEnabled(true);
+                    drsStatus = String.valueOf(clientList.get(i).getDrs_status());
+                }
             }
 
             @Override
@@ -2105,16 +2114,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-//                            if(vltddeviceRemove.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                                 s_old_serial_no = removesrnoList.get(i).getPcb_sr_no();
                                 vts_id = s_old_serial_no;
                                 getVTSDetail();
-                           // }
-//                            else {
-//                                s_e_device_id = removesrnoList.get(i).getPcb_sr_no();
-//                                vts_id = s_e_device_id;
-//                                getVTSDetail();
-//                            }
                         }
 
                         @Override
@@ -2279,15 +2281,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-//                            if(vltddeviceFault.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                                 s_old_serial_no = removesrnoList.get(i).getPcb_sr_no();
                                 vts_id = s_old_serial_no;
                                 getVTSDetail();
-//                            }else {
-//                                s_e_device_id = removesrnoList.get(i).getPcb_sr_no();
-//                                vts_id = s_e_device_id;
-//                                getVTSDetail();
-//                            }
+
                         }
 
                         @Override
@@ -2494,17 +2491,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-                            //if(vltddevicephn.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                                 s_old_serial_no = removesrnoList.get(i).getPcb_sr_no();
                                 s_e_device_id="0";
                                 vts_id = s_old_serial_no;
                                 getVTSDetail();
-//                            }else {
-//                                s_e_device_id = removesrnoList.get(i).getPcb_sr_no();
-//                                s_old_serial_no="";
-//                                vts_id = s_e_device_id;
-//                                getVTSDetail();
-//                            }
                         }
 
                         @Override
@@ -2674,15 +2664,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-                            //if(vltddeviceMiss.getSelectedItem().toString().equalsIgnoreCase("AIS 140")){
                                 s_old_serial_no = removesrnoList.get(i).getPcb_sr_no();
                                 vts_id = s_old_serial_no;
                                 getVTSDetail();
-//                            }else {
-//                                s_e_device_id = removesrnoList.get(i).getPcb_sr_no();
-//                                vts_id = s_e_device_id;
-//                                getVTSDetail();
-//                            }
                         }
 
                         @Override
@@ -4138,13 +4122,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     faultPersonNumber.setError("Please Enter valid Mobile No.");
                 } else {
                     s_remarks = e_remarks.getText().toString();
-//                    if (!image.equals("")) {
-//                        mProgress.setProgress(0);
-//                        updateInstallationDataImage();
-//                    } else {
+
                         updateInstallationData();
 
-                        //                 }
                 }
             } else if (s_work_id.equalsIgnoreCase("6")) {
                 String MobilePattern = "[0-9]{10}";
@@ -4367,12 +4347,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     sensor_veh_no_missing.setError("Please provide Vehicle No");
                 } else {
                     s_remarks = e_remarks.getText().toString();
-//                    if (!image.equals("")) {
-//                        mProgress.setProgress(0);
-//                        updateInstallationDataImage();
-//                    } else {
                         updateInstallationData();
-  //                  }
                 }
             } else if (s_work_id.equalsIgnoreCase("9")) {
                 s_e_device_id = vehNotAvailVtsID.getText().toString();
@@ -4494,12 +4469,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     } else {
                         payValue.setVisibility(View.GONE);
                         s_remarks = e_remarks.getText().toString();
-//                        if (!images.equals("")) {
-//                            mProgress.setProgress(0);
-//                            updateInstallationDataImage();
-//                        } else {
+
                             updateInstallationData();
- //                       }
                     }
                 } else {
                     String MobilePattern = "[0-9]{10}";

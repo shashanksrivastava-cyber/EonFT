@@ -33,7 +33,6 @@ class ReceiveDeviceAdapter(
                 binding.type.text= this?.transit_type
                 binding.dispatchDate.text= this?.dispatched_date
                 binding.docket.text= this?.transit_through
-                //binding.receivedAt.text = this?.tech_received_date
                 if(this!!.transit_name.equals("")){
                     binding.name.setVisibility(View.GONE)
                 }else {

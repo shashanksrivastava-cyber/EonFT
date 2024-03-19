@@ -98,7 +98,7 @@ public class LoginActivityNew extends AppCompatActivity {
     String versname, acti_vate, dis_username, location, contact, zone, image, usrtype,logout,isRunning;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String uusername, alert, asyn_versn, versionName, track_status, track_interval,bill_amt_limit,token;
+    String uusername, alert, asyn_versn, versionName, track_status, track_interval,bill_amt_limit,token="";
     ProgressDialog pDialog;
     CheckConnection chk = new CheckConnection(LoginActivityNew.this);
     AppPreferences appPrefs;
@@ -274,7 +274,6 @@ public class LoginActivityNew extends AppCompatActivity {
                 }
                 StringBuilder res1 = new StringBuilder();
                 for (byte b : macBytes) {
-                    //res1.append(Integer.toHexString(b & 0xFF) + ":");
                     res1.append(String.format("%02X:", b));
                     macAddress = String.valueOf(res1);
                     editor.putString("MacAddress", macAddress);

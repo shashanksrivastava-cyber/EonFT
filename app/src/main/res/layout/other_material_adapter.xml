@@ -69,7 +69,7 @@
                 android:textColor="@color/eonBlue"
                 android:text="0"
                 android:visibility="visible"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:padding="5dp"
                 android:maxLength="4"/>
 

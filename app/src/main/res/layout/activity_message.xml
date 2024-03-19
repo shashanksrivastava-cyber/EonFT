@@ -19,7 +19,7 @@
             android:background="@color/greyed_out"
             android:orientation="vertical"
             android:gravity="center|right"
-            android:layout_marginRight="20dp">
+            android:layout_marginEnd="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:background="@drawable/edittext_back"
                     android:ems="10"
                     android:hint="  Search"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:drawableStart="@drawable/ic_search_black_24dp"
                     android:focusableInTouchMode="true">
                 </EditText>
             </LinearLayout>

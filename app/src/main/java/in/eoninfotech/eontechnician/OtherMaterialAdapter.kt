@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import `in`.eoninfotech.eontechnician.Responses.DeviceItems
 import `in`.eoninfotech.eontechnician.databinding.OtherMaterialAdapterBinding
 import android.widget.Toast
+import android.view.View
 
 class OtherMaterialAdapter(
     private val context: Context,
     var lr: ArrayList<DeviceItems>,
+    var status: String?,
 ): RecyclerView.Adapter<OtherMaterialAdapter.ViewHolder>() {
 
 
@@ -38,7 +40,6 @@ class OtherMaterialAdapter(
                         value--
                         binding!!.addText.text = value.toString()
 
-                        //callback.onItemClicked(item)
                     }
                 }
 
@@ -49,11 +50,11 @@ class OtherMaterialAdapter(
                     binding!!.addText.text = value.toString()
                 }
 
-//                if(status.equals("Received")){
-//                    binding!!.addCount.setEnabled(false)
-//                }else {
-//                    binding!!.addCount.setEnabled(true)
-//                }
+                if(status.equals("Received")){
+                    binding!!.addCount.setVisibility(View.GONE)
+                }else {
+                    binding!!.addCount.setVisibility(View.VISIBLE)
+                }
             }
         }
     }
@@ -65,9 +66,5 @@ class OtherMaterialAdapter(
     inner class ViewHolder(val binding: OtherMaterialAdapterBinding)
         :RecyclerView.ViewHolder(binding.root)
 
-
-//    interface AdapterCallback {
-//        fun onItemClicked(data: HashMap<String, Any>)
-//    }
 
 }

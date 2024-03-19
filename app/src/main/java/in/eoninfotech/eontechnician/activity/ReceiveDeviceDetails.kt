@@ -36,7 +36,6 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
     var transit_through: String? = null
     var status: String? = null
     var itemsCollected: String? = ""
-    var accessoriesCollected: String? = ""
     var techid: String? = null
     var main_id: String? = null
     var key: String = ""
@@ -46,6 +45,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
     var receiveDeviceController: ReceiveDeviceController? = null
     var list_change_values = ArrayList<DeviceList>()
     var lr = ArrayList<DeviceItems>()
+    var accessories = ArrayList<String>()
     var value_name = java.util.ArrayList<String>()
     var adapter: ArrayAdapter<String>? = null
     var recyclerView: RecyclerView? = null
@@ -99,9 +99,10 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         if(status.equals("Received")){
             binding!!.remarksReceive.setVisibility(View.GONE)
             binding!!.btnAcceptReceive.setVisibility(View.GONE)
-
+            binding!!.actualQty.setVisibility(View.GONE)
         }else {
             binding!!.btnAcceptReceive.setVisibility(View.VISIBLE)
+            binding!!.actualQty.setVisibility(View.VISIBLE)
         }
         getData()
 
@@ -113,15 +114,10 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             }
 
             for (i in 0..lr.size-1){
-                key = binding!!.recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(R.id.material_name)?.text.toString()
-                value = binding!!.recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(R.id.addText)?.text.toString()
-                items += key to value
+
+                accessories.add((lr.get(i).id).toString() + ":" + binding!!.recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(R.id.addText)?.text.toString())
             }
 
-            for (item in items) {
-                val toast = android.widget.Toast.makeText(applicationContext, "".plus("${item.key} : ${item.value}"), android.widget.Toast.LENGTH_LONG)
-                toast.show()
-            }
             if(list_change_values.size>0){
                 if(itemsCollected.equals("")){
                     val toast = Toast.makeText(applicationContext, "Please select at least one device!!", Toast.LENGTH_LONG)
@@ -140,7 +136,6 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                     chk.showConnectionErrorDialog()
                 }
             }
-
         }
     }
 
@@ -155,7 +150,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             .setMessage("Are you sure you want to receive device ?")
             .setPositiveButton("Yes") { dialog, which ->
                 progressDialog!!.show()
-                //receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,techid,itemsCollected,items,binding!!.remarksReceive.text.toString(),this)
+                receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,techid,itemsCollected,accessories.toString(),binding!!.remarksReceive.text.toString(),this)
             }
             .setNegativeButton("No", null)
             .show()
@@ -227,7 +222,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
 
                         if (lr.size>0) {
                             otherMaterialAdapter =
-                                OtherMaterialAdapter(this@ReceiveDeviceDetails, lr)
+                                OtherMaterialAdapter(this@ReceiveDeviceDetails, lr,status)
                             binding!!.recyclerView.setAdapter(otherMaterialAdapter)
                             otherMaterialAdapter!!.notifyDataSetChanged()
                             binding!!.recyclerView.setVisibility(View.VISIBLE)

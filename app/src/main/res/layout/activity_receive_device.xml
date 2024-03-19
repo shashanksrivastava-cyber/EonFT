@@ -19,7 +19,7 @@
             android:background="@color/greyed_out"
             android:orientation="vertical"
             android:gravity="center|right"
-            android:layout_marginRight="20dp">
+            android:layout_marginEnd="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:background="@drawable/edittext_back"
                     android:ems="10"
                     android:hint="  Search"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
+                    android:drawableStart="@drawable/ic_search_black_24dp"
                     android:focusableInTouchMode="true">
                 </EditText>
             </LinearLayout>
@@ -83,11 +83,10 @@
                 android:id="@+id/fromDate"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:background="@drawable/et_frame"
                 android:drawableStart="@drawable/baseline_event_black_18"
-                android:drawableLeft="@drawable/baseline_event_black_18"
                 android:fontFamily="sans-serif-light"
                 android:hint="From Date"
                 android:drawablePadding="5dp"
@@ -102,13 +101,12 @@
                 android:id="@+id/toDate"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toRightOf="@+id/fromDate"
                 android:background="@drawable/et_frame"
                 android:drawableStart="@drawable/baseline_event_black_18"
-                android:drawableLeft="@drawable/baseline_event_black_18"
                 android:fontFamily="sans-serif-light"
                 android:hint="To Date"
                 android:drawablePadding="5dp"
@@ -122,7 +120,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/et_frame"
                 android:layout_weight="1">
 
@@ -132,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:spinnerMode="dialog"
                     android:visibility="visible"
@@ -141,10 +139,10 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginEnd="6dp"
                     android:background="@color/eonWhite"
                     android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -155,7 +153,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/go"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
@@ -169,7 +167,7 @@
         android:id="@+id/addVehicle_receive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="3dp"
         android:text="@string/dispatch"
         android:textColor="@color/eonBlue"

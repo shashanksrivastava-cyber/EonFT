@@ -13,8 +13,8 @@
         <TextView
             android:id="@+id/workType"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
             android:background="@color/eonBlue"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -52,7 +52,7 @@
                     android:padding="3dp"
                     android:layout_weight="2"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -90,7 +90,7 @@
                     android:padding="3dp"
                     android:layout_weight="2"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -106,7 +106,7 @@
                     <TextView
                         android:id="@+id/loc_name"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:text="0"
                         android:textSize="14sp"
                         android:textColor="@color/colorPrimary"
@@ -135,7 +135,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -171,7 +171,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -206,7 +206,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -243,7 +243,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -281,7 +281,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -318,7 +318,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -355,7 +355,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -371,7 +371,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -393,7 +393,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -409,7 +409,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -431,7 +431,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -447,7 +447,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -469,7 +469,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -485,7 +485,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -507,7 +507,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -523,7 +523,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -545,7 +545,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -561,7 +561,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -583,7 +583,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -599,7 +599,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -621,7 +621,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -637,7 +637,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -659,7 +659,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -675,7 +675,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -697,7 +697,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -713,7 +713,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -735,7 +735,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -751,7 +751,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -774,7 +774,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -790,7 +790,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 
@@ -813,7 +813,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="2"
                     android:padding="3dp"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginStart="5dp"/>
 
                 <View
                     android:layout_width="1dp"
@@ -829,7 +829,7 @@
                     android:textColor="@color/colorPrimary"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginEnd="5dp"/>
 
             </LinearLayout>
 

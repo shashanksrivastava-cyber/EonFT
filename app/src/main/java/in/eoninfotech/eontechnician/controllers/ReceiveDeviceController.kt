@@ -109,7 +109,7 @@ class ReceiveDeviceController : Controller() {
         })
     }
 
-    fun receiveDispatchedMaterial(dispatch_id: String?,tech_id: String?,items_collected: String?,accessories_collected: Map<String,String>,remarks: String?, listener: ReceiveDeviceListener) {
+    fun receiveDispatchedMaterial(dispatch_id: String?,tech_id: String?,items_collected: String?,accessories_collected: String?,remarks: String?, listener: ReceiveDeviceListener) {
         clientCall = client_att.receive_dispatched_material(dispatch_id,tech_id,items_collected,accessories_collected,remarks)
         clientCall!!.enqueue(object : Callback<MainResponse?> {
             override fun onResponse(call: Call<MainResponse?>, response: Response<MainResponse?>) {

@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="Present"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textSize="18sp" />
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/black"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textSize="18sp"/>
 
             </LinearLayout>
@@ -108,7 +108,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:text="Absent"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -116,7 +116,7 @@
                     android:id="@+id/absent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Leave"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
@@ -149,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
@@ -178,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Comp Off"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
@@ -209,7 +209,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Avg Hrs"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
@@ -217,7 +217,7 @@
                     android:id="@+id/avg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
@@ -238,7 +238,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Avg Hrs"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textColor="@color/eonWhite"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
@@ -246,7 +246,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:text="7"
                     android:textColor="@color/eonWhite"
                     android:textSize="18sp"
@@ -273,7 +273,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="1">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -294,8 +294,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Present"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="@color/black" />
 
         </LinearLayout>
@@ -323,8 +323,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Absent"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="@color/black" />
 
         </LinearLayout>
@@ -352,8 +352,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Leave"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="@color/black"/>
 
         </LinearLayout>
@@ -380,8 +380,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Holidays"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="@color/black"/>
 
         </LinearLayout>
@@ -408,8 +408,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Travel"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="5dp"
                 android:textColor="@color/black"/>
         </LinearLayout>
 
