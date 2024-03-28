@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf'
 //apply plugin: 'com.google.gms.google-services'
 //apply plugin: 'com.google.firebase.crashlytics'
 
@@ -20,7 +21,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 42 // total number of version changes on play store
-        versionName "5.12"
+        versionName "5.14"
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
@@ -60,6 +61,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'com.google.firebase:firebase-inappmessaging-display:20.4.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.6.2'
+    implementation 'com.google.firebase:firebase-perf:20.5.2'
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.androidadvance:topsnackbar:1.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
@@ -84,7 +86,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.robinhood.ticker:ticker:2.0.4'
     implementation 'com.airbnb.android:lottie:3.5.0'
-    implementation 'com.google.android.gms:play-services-maps:18.0.0'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
@@ -98,8 +100,10 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     implementation 'com.timqi.sectorprogressview:library:2.0.1'
     implementation 'pub.devrel:easypermissions:0.2.1'
-    implementation("com.google.android.play:app-update:2.1.0")
+    implementation 'com.google.android.play:app-update:2.1.0'
 
     // For Kotlin users also import the Kotlin extensions library for Play In-App Update:
     implementation("com.google.android.play:app-update-ktx:2.1.0")
+    implementation 'com.google.firebase:firebase-inappmessaging-display:20.4.0'
+    //implementation 'com.google.android.play:core:1.10.3'
 }

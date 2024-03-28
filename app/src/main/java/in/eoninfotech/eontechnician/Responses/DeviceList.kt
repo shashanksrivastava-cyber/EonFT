@@ -4,6 +4,7 @@ data class DeviceList(
 
     val id: String,
     val pcb_id: String,
-    val pcb_sr_no: String
+    val pcb_sr_no: String,
+    val sr_no: String
 ) {
 }

@@ -179,7 +179,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             new_replace_sr_no, sensor_veh_no, sensor_veh_no_missing, sensor_veh_no_remove;
     MyTextView device_info, itemCollected;
     TextView plantName, imageName, imageNameFault, imageNameMissing, tv, payValue,text_to_show,text_to_show_remove,text_to_show_missing,
-            text_to_show_fault,text_to_show_phone,text_to_show_replace_old,text_to_show_replace_new,text_to_show_reinstall;
+            text_to_show_fault,text_to_show_phone,text_to_show_replace_old,text_to_show_replace_new,text_to_show_reinstall,text_to_show_replace_sen;
     Button update_dataa, imageUpload, imageUploadfault, imageUploadMissing,delete_button,delete_button_e_series,delete_button_remove,delete_button_remove_e_series,delete_button_missing,delete_button_missing_e_series,delete_button_reinstall,
             delete_button_fault_e_series,delete_button_fault,delete_button_phone_e_series,delete_button_phone,delete_button_replace_old_serial,delete_button_replace_new_serial,delete_button_replace_old_id,delete_button_replace_new_id,delete_button_reinstall_ais;
     Calendar calen = Calendar.getInstance();
@@ -552,6 +552,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         text_to_show_replace_old = v.findViewById(R.id.text_to_show_replace_old);
         text_to_show_replace_new = v.findViewById(R.id.text_to_show_replace_new);
         text_to_show_reinstall = v.findViewById(R.id.text_to_show_reinstall);
+        text_to_show_replace_sen = v.findViewById(R.id.text_to_show_replace_sen);
         linear_device_sr_no = v.findViewById(R.id.linear_device_sr_no);
         linear_device_sr_no_e_series = v.findViewById(R.id.linear_device_sr_no_e_series);
         linear_device_sr_no_remove = v.findViewById(R.id.linear_device_sr_no_remove);
@@ -1208,6 +1209,13 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                                 linear_device_id_replace_old.setVisibility(View.VISIBLE);
                                 linear_device_sr_no_replace_old.setVisibility(View.GONE);
                             }
+                        }
+                    });
+
+                    text_to_show_replace_sen.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
                         }
                     });
 
@@ -3097,11 +3105,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 drsType = v.findViewById(radioDrs);
                 String drsTypes = drsType.getText().toString();
                 if (drsTypes.equalsIgnoreCase("Yes") && (drsInstall.getVisibility() == View.VISIBLE)) {
-                    is_drs = "Y";
+                    is_drs = "Y";         // drs installed
                 } else if (drsTypes.equalsIgnoreCase("No") && (drsInstall.getVisibility() == View.VISIBLE)) {
-                    is_drs = "P";
+                    is_drs = "P";        // drs required in vehicle but not installed
                 } else {
-                    is_drs = "N";
+                    is_drs = "N";       // drs not required in vehicle
                 }
                 int isDemo = is_Demo.getCheckedRadioButtonId();
                 is_demo_no = v.findViewById(isDemo);
@@ -6309,6 +6317,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 spn_phone_sr_no.setAdapter(adapter);
                 spn_missing_sr_no.setAdapter(adapter);
                 spn_reinstall_sr_no.setAdapter(adapter);
+                spn_replace_sensor.setAdapter(adapter);
             } catch (NullPointerException npe) {
                 npe.printStackTrace();
             }

@@ -108,5 +108,6 @@
     </string-array>
 
     <string name="notification_channel_id">default</string>
+    <string name="restart">Restart</string>
 
 </resources>

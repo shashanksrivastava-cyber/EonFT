@@ -135,7 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Message"
+                            android:text="Faulty Fuel"
                             android:textSize="14dp"
                             android:layout_toRightOf="@+id/quantity"
                             android:padding="2dp"

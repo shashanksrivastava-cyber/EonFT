@@ -451,6 +451,10 @@ public interface ApiHolder {
     Call<UnderMaintenanceResponse> underMainResponse(@Field("zone") String zone);
 
     @FormUrlEncoded
+    @POST("faulty_fuel.php")
+    Call<FaultyDevices> faulty_fuel_response(@Field("zone") String zone);
+
+    @FormUrlEncoded
     @POST("devices-detail.php")
     Call<FaultyDevices> faultyDevicesResponse(@Field("zone") String zone);
 
@@ -648,6 +652,7 @@ public interface ApiHolder {
     @POST("receive_dispatch_material.php")
     Call<MainResponse> receive_dispatched_material(
             @Field("dispatch_id") String dispatch_id,
+            @Field("challan_id") String challan_id,
             @Field("tech_id") String tech_id,
             @Field("items_collected") String items_collected,
             @Field("accessories_collected") String accessories_collected,

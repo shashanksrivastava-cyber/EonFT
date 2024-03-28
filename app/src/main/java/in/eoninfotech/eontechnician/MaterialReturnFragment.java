@@ -2,11 +2,14 @@ package in.eoninfotech.eontechnician;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -19,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -76,6 +80,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     Button delete_button,update_data;
     SharedPreferences sharedprefs;
     LinearLayout parentLinearLayout, transit_linear;
+    Button btCancel,btSubmit,add_manual;
     TextView addMaterial;
     TickerView tickerView;
     EditText details,et_remarks,search;
@@ -92,6 +97,9 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     ArrayList<String> value_name = new ArrayList<>();
     ArrayList<String> vehicletype = new ArrayList<>();
     String searchingText;
+    Dialog myDialog;
+    EditText etMasterPass;
+    ImageView txtclose;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -141,6 +149,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         et_remarks = v.findViewById(R.id.et_remarks);
         lv = v.findViewById(R.id.return_device_list);
         tickerView = v.findViewById(R.id.device_left);
+        myDialog = new Dialog(getActivity());
         receiveDeviceController = new ReceiveDeviceController();
 
         transit_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -238,6 +247,41 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                         parentLinearLayout.removeView((View) view.getParent());
                     }
                 });
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SparseBooleanArray checked = lv.getCheckedItemPositions();
+                others = list_change_values.get(position).getSr_no();
+                myDialog.setContentView(R.layout.add_serial_no);
+                txtclose = myDialog.findViewById(R.id.error);
+                btCancel = myDialog.findViewById(R.id.btCancel);
+                btSubmit = myDialog.findViewById(R.id.btSubmit);
+                etMasterPass = myDialog.findViewById(R.id.etMasterPass);
+                txtclose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog.dismiss();
+                    }
+                });
+                btCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog.dismiss();
+                    }
+                });
+
+                btSubmit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        myDialog.dismiss();
+                    }
+                });
+                myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                myDialog.show();
             }
         });
 

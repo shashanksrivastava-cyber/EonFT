@@ -150,7 +150,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             .setMessage("Are you sure you want to receive device ?")
             .setPositiveButton("Yes") { dialog, which ->
                 progressDialog!!.show()
-                receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,techid,itemsCollected,accessories.toString(),binding!!.remarksReceive.text.toString(),this)
+                receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,main_id,techid,itemsCollected,accessories.toString(),binding!!.remarksReceive.text.toString(),this)
             }
             .setNegativeButton("No", null)
             .show()

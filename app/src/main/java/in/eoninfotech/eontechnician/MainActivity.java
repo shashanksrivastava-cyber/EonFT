@@ -58,6 +58,7 @@ import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
@@ -219,6 +220,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle.putString("version", versionname);
         bundle.putString("image", image);
 
+        FirebaseApp.initializeApp(this);
+
         ConnectivityManager m = (ConnectivityManager) getSystemService(Service.CONNECTIVITY_SERVICE);
         m.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback() {
             @Override
@@ -280,7 +283,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-        //serviceStart();
         try {
             currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -342,6 +344,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        //inAppUpdate();
+    }
+
+    private void inAppUpdate() {
+        // Creates instance of the manager.
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+
+        // Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+
+                Log.e("AVAILABLE_VERSION_CODE", appUpdateInfo.availableVersionCode()+"");
+                Toast.makeText(MainActivity.this, ""+appUpdateInfo.availableVersionCode(), Toast.LENGTH_SHORT).show();
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                        // For a flexible update, use AppUpdateType.FLEXIBLE
+                        && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                    // Request the update.
+
+                    try {
+                        appUpdateManager.startUpdateFlowForResult(
+                                // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                                appUpdateInfo,
+                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+                                AppUpdateType.IMMEDIATE,
+                                // The current activity making the update request.
+                                MainActivity.this,
+                                // Include a request code to later monitor this update request.
+                                UPDATE_REQUEST_CODE);
+                    } catch (IntentSender.SendIntentException ignored) {
+
+                    }
+                }else {
+                    Toast.makeText(MainActivity.this, "No Update Available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        appUpdateManager.registerListener(installStateUpdatedListener);
+
+    }
+    //lambda operation used for below listener
+    InstallStateUpdatedListener installStateUpdatedListener = installState -> {
+        if (installState.installStatus() == InstallStatus.DOWNLOADED) {
+            popupSnackbarForCompleteUpdate();
+        } else
+            Log.e("UPDATE", "Not downloaded yet");
+    };
+
+    private void popupSnackbarForCompleteUpdate() {
+
+        Snackbar snackbar =
+                Snackbar.make(
+                        findViewById(android.R.id.content),
+                        "Update almost finished!",
+                        Snackbar.LENGTH_INDEFINITE);
+        //lambda operation used for below action
+        snackbar.setAction(this.getString(R.string.restart), view ->
+                appUpdateManager.completeUpdate());
+        snackbar.setActionTextColor(getResources().getColor(R.color.red));
+        snackbar.show();
     }
 
     private void displayAlert() {

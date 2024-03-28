@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:weightSum="2">
 
                 <TextView
@@ -37,7 +37,7 @@
                     android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_marginTop="2dp"
                     android:layout_toRightOf="@+id/replace_deviceType"
                     android:layout_weight="1"
@@ -56,7 +56,7 @@
                         android:id="@+id/radioDRS"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:text="DRS"
                         android:textSize="14sp" />
@@ -65,7 +65,7 @@
                         android:id="@+id/radioBoth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:text="Both"
                         android:textSize="14sp" />
@@ -74,7 +74,7 @@
                         android:id="@+id/radioNone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:text="None"
                         android:textSize="14sp"
@@ -88,8 +88,8 @@
                 android:id="@+id/deviceTypeReplace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="2dp"
                 android:weightSum="4">
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="2.5"
                     android:padding="5dp"
                     android:text="Device Type"
@@ -108,7 +108,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1.7"
                     android:background="@drawable/et_frame">
@@ -119,17 +119,17 @@
                         android:layout_height="35dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="center"
                         android:spinnerMode="dropdown" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:background="@color/eonWhite"
                         android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -170,10 +170,10 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginRight="6dp"
+                            android:layout_marginEnd="6dp"
                             android:background="@color/eonWhite"
                             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -200,10 +200,10 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginRight="6dp"
+                            android:layout_marginEnd="6dp"
                             android:background="@color/eonWhite"
                             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -223,7 +223,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:padding="5dp"
                         android:text="If serial no. not in list click here to add serial no. manually."
@@ -235,7 +235,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:padding="5dp"
                         android:text="If serial no. not in list click here to add serial no. manually."
@@ -244,58 +244,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:visibility="gone">
-
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        android:id="@+id/til_old_replace"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:hint="Old Device ID">-->
-
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:id="@+id/old_deviceidreplace"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginLeft="10dp"-->
-<!--                            android:inputType="number"-->
-<!--                            android:maxLength="20"-->
-<!--                            android:singleLine="true"-->
-<!--                            android:textSize="12sp" />-->
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--                    <RelativeLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-<!--                        <com.google.android.material.textfield.TextInputLayout-->
-<!--                            android:id="@+id/til_new_replace"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:hint="New Device ID">-->
-
-<!--                            <com.google.android.material.textfield.TextInputEditText-->
-<!--                                android:id="@+id/new_deviceid"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginLeft="10dp"-->
-<!--                                android:layout_weight="2"-->
-<!--                                android:inputType="number"-->
-<!--                                android:maxLength="20"-->
-<!--                                android:singleLine="true"-->
-<!--                                android:text=""-->
-<!--                                android:textSize="12sp" />-->
-
-<!--                        </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--                    </RelativeLayout>-->
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linear_device_id_replace_old"
@@ -307,7 +255,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_old_replace"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:hint="Old Device Sr No.">
@@ -316,7 +264,7 @@
                             android:id="@+id/old_deviceidreplace"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:inputType="number"
                             android:maxLength="20"
                             android:singleLine="true"
@@ -327,7 +275,7 @@
                         android:layout_width="20dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_marginEnd="10dp"
                         android:id="@+id/delete_button_replace_old_id"
                         android:visibility="visible"
@@ -354,7 +302,7 @@
                             android:id="@+id/new_deviceid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:inputType="number"
                             android:maxLength="20"
@@ -368,7 +316,7 @@
                         android:layout_width="20dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_marginEnd="10dp"
                         android:id="@+id/delete_button_replace_new_id"
                         android:visibility="visible"
@@ -405,7 +353,7 @@
                             android:id="@+id/old_replace_sr_no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:inputType="number"
                             android:maxLength="15"
@@ -418,7 +366,7 @@
                         android:layout_width="20dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_marginEnd="10dp"
                         android:id="@+id/delete_button_replace_old_serial"
                         android:visibility="visible"
@@ -445,7 +393,7 @@
                             android:id="@+id/new_replace_sr_no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:inputType="number"
                             android:maxLength="15"
@@ -458,7 +406,7 @@
                         android:layout_width="20dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_marginEnd="10dp"
                         android:id="@+id/delete_button_replace_new_serial"
                         android:visibility="visible"
@@ -484,7 +432,7 @@
                             android:id="@+id/con_old_deviceidreplace"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:inputType="numberPassword"
                             android:maxLength="20"
                             android:singleLine="true"
@@ -504,7 +452,7 @@
                             android:id="@+id/con_new_deviceid"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="2"
                             android:inputType="numberPassword"
                             android:maxLength="20"
@@ -541,7 +489,7 @@
                                 android:id="@+id/old_vts_id_replace"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
                                 android:inputType="number"
                                 android:maxLength="20"
                                 android:singleLine="true"
@@ -560,7 +508,7 @@
                                 android:id="@+id/new_vts_id_replace"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_weight="2"
                                 android:inputType="number"
                                 android:maxLength="20"
@@ -590,7 +538,7 @@
                                 android:id="@+id/con_old_vts_id_replace"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
                                 android:inputType="numberPassword"
                                 android:maxLength="20"
                                 android:singleLine="true"
@@ -610,7 +558,7 @@
                                 android:id="@+id/con_new_vts_id_replace"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
                                 android:layout_weight="2"
                                 android:inputType="numberPassword"
                                 android:maxLength="20"
@@ -835,17 +783,17 @@
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="center"
                         android:spinnerMode="dialog" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:background="@color/eonWhite"
                         android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -960,7 +908,7 @@
                         android:id="@+id/new_drs_dircrep"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_weight="3.2"
                         android:text="DRS Direction :"
@@ -970,7 +918,7 @@
                         android:id="@+id/radiodireplace"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_toRightOf="@+id/new_drs_dircrep"
                         android:layout_weight="1"
                         android:orientation="horizontal">
@@ -988,7 +936,7 @@
                             android:id="@+id/replacereverse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_weight="1"
                             android:text="Reverse"
                             android:textSize="14sp" />
@@ -1019,7 +967,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="2.5"
                     android:padding="5dp"
                     android:text="Tilt Sensor"
@@ -1035,7 +983,7 @@
                     <RadioGroup
                         android:id="@+id/radioGrouptiltReplace"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_weight="1.5"
                         android:orientation="horizontal"
                         android:weightSum="3">
@@ -1075,7 +1023,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="2.5"
                     android:padding="5dp"
                     android:text="Temp Sensor"
@@ -1091,7 +1039,7 @@
                     <RadioGroup
                         android:id="@+id/radioGrouptempReplace"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_weight="1.5"
                         android:orientation="horizontal"
                         android:weightSum="3">
