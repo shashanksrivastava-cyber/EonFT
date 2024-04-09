@@ -451,6 +451,10 @@ public interface ApiHolder {
     Call<UnderMaintenanceResponse> underMainResponse(@Field("zone") String zone);
 
     @FormUrlEncoded
+    @POST("under_maintenance_working.php")
+    Call<UnderMaintenanceResponse> underMainWorkingResponse(@Field("zone") String zone);
+
+    @FormUrlEncoded
     @POST("faulty_fuel.php")
     Call<FaultyDevices> faulty_fuel_response(@Field("zone") String zone);
 

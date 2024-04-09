@@ -20,8 +20,8 @@ android {
         applicationId "in.eoninfotech.eontechnician"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 42 // total number of version changes on play store
-        versionName "5.14"
+        versionCode 43 // total number of version changes on play store
+        versionName "5.15"
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

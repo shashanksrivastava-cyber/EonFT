@@ -109,5 +109,26 @@
 
     <string name="notification_channel_id">default</string>
     <string name="restart">Restart</string>
+    <string name="cust_name">Cust_Name</string>
+    <string name="location">Location :</string>
+    <string name="faulty_vts">Faulty VTS :</string>
+    <string name="faulty_fuel">"Faulty Fuel : "</string>
+    <string name="faulty_drs_sos">Faulty DRS/SOS:</string>
+    <string name="vts_add">VTS ADD</string>
+    <string name="vts_add_30">VTS ADD 30</string>
+    <string name="drs_add">DRS ADD</string>
+    <string name="drs_add_30">DRS ADD 30</string>
+    <string name="total_vts">Total VTS</string>
+    <string name="total_drs">Total DRS</string>
+    <string name="sos_temp">SOS Temp</string>
+    <string name="lid_sensor">Lid Sensor</string>
+    <string name="fuel_sensor">Fuel Sensor</string>
+    <string name="temp_sensor">Temp Sensor</string>
+    <string name="under_maintenance">Under Maintenance : </string>
+    <string name="under_maint_but_working">Under Maint but working : </string>
+    <string name="faulty_sos_temper">"Faulty SOS Temper : "</string>
+    <string name="faulty_lid_sensor">"Faulty LID Sensor : "</string>
+    <string name="faulty_fuel_sensor">"Faulty Fuel Sensor : "</string>
+    <string name="faulty_temp_sensor">"Faulty Temp Sensor : "</string>
 
 </resources>

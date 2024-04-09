@@ -6,18 +6,17 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,7 +24,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,59 +31,37 @@ import android.widget.Toast;
 import com.robinhood.ticker.TickerView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Locale;
+import java.util.ListIterator;
 
 import androidx.fragment.app.Fragment;
-import in.eoninfotech.eontechnician.Responses.ClientDetails;
-import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
+import androidx.fragment.app.FragmentTransaction;
+
 import in.eoninfotech.eontechnician.Responses.DeviceList;
-import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
-import in.eoninfotech.eontechnician.Responses.FaultList;
-import in.eoninfotech.eontechnician.Responses.FaultResponse;
 import in.eoninfotech.eontechnician.Responses.ItemList;
 import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
-import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalResponse;
-import in.eoninfotech.eontechnician.Responses.ReplaceReason;
-import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
-import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
 import in.eoninfotech.eontechnician.Responses.TransitList;
-import in.eoninfotech.eontechnician.Responses.VTSResponse;
-import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
-import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
-import in.eoninfotech.eontechnician.Service.ForegroundService;
-import in.eoninfotech.eontechnician.activity.LoginActivityNew;
-import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.callbacks.ReceiveDeviceListener;
-import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
 import in.eoninfotech.eontechnician.controllers.ReceiveDeviceController;
 import in.eoninfotech.eontechnician.helper.K;
-import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class MaterialReturnFragment extends Fragment implements ReceiveDeviceListener, TextWatcher {
 
-    View v;
+    View v,rowView;
     Spinner type_spinner,transit_spinner,courier_spinner;
     ArrayAdapter<String> adapter;
     private ProgressDialog pDialog;
     NonScrollListView lv;
-    Button delete_button,update_data;
+    Button delete_button,update_data,final_submit, final_cancel;
     SharedPreferences sharedprefs;
-    LinearLayout parentLinearLayout, transit_linear;
+    LinearLayout parentLinearLayout, transit_linear, materialLL;
     Button btCancel,btSubmit,add_manual;
-    TextView addMaterial;
+    TextView addMaterial,response_comment,items_values,preview_tags,items_tags;
     TickerView tickerView;
-    EditText details,et_remarks,search;
+    EditText details,et_remarks,search,etQuantity;
     SharedPreferences.Editor editor;
-    String version, username,transit_id="",type_id,tech_id,others="",courier_id="",transit_through="",remarks="",item_qty="",other_tech_id="";
+    String version, username,transit_id="",type_id,type_name="",tech_id,others="",items_value="",other_key="",courier_id="",transit_through="",remarks="",item_qty="",other_tech_id="";
     ReceiveDeviceController receiveDeviceController;
     ArrayList<ItemList> itemList = new ArrayList<>();
     ArrayList<TransitList> transitList = new ArrayList<>();
@@ -96,10 +72,14 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     ArrayList<DeviceList> list_change_values = new ArrayList<>();
     ArrayList<String> value_name = new ArrayList<>();
     ArrayList<String> vehicletype = new ArrayList<>();
+    ArrayList<String> items_list = new ArrayList<>();
     String searchingText;
     Dialog myDialog;
     EditText etMasterPass;
     ImageView txtclose;
+    StringBuilder sb,sbFieldIds;
+    private Dialog confirmDialog;
+    int count=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,6 +92,11 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         version = sharedprefs.getString("version", "");
         tech_id = sharedprefs.getString("s_user_id", "");
         initView();
+
+        getDeviceList();
+        getItemsList();
+        getTransitList();
+
         return v;
     }
 
@@ -137,6 +122,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
 
     private void initView() {
         parentLinearLayout = v.findViewById(R.id.parent_linear_layout);
+        materialLL = v.findViewById(R.id.materialLL);
         addMaterial = v.findViewById(R.id.addMaterial);
         delete_button = v.findViewById(R.id.delete_button);
         update_data = v.findViewById(R.id.update_data);
@@ -147,10 +133,12 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         courier_spinner = v.findViewById(R.id.courier_spinner);
         details = v.findViewById(R.id.details);
         et_remarks = v.findViewById(R.id.et_remarks);
+        etQuantity = v.findViewById(R.id.etQuantity);
         lv = v.findViewById(R.id.return_device_list);
         tickerView = v.findViewById(R.id.device_left);
         myDialog = new Dialog(getActivity());
         receiveDeviceController = new ReceiveDeviceController();
+        confirmDialog = new Dialog(getActivity());
 
         transit_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -214,11 +202,29 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             }
         });
 
+        type_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if (i == 0) {
+                    return;
+                } else {
+                    i = i - 1;
+                }
+                type_id = itemList.get(i).getId();
+                type_name  = itemList.get(i).getName();
+                //add_accessory_dialog(type_name);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
         addMaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View rowView = inflater.inflate(R.layout.field, null);
+                rowView = inflater.inflate(R.layout.field, null);
                 parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
                 delete_button = rowView.findViewById(R.id.delete_button);
                 type_spinner = rowView.findViewById(R.id.type_spinner);
@@ -236,6 +242,8 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                             i = i - 1;
                         }
                         type_id = itemList.get(i).getId();
+                        type_name  = itemList.get(i).getName();
+                        //add_accessory_dialog(type_name);
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
@@ -250,40 +258,40 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             }
         });
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SparseBooleanArray checked = lv.getCheckedItemPositions();
-                others = list_change_values.get(position).getSr_no();
-                myDialog.setContentView(R.layout.add_serial_no);
-                txtclose = myDialog.findViewById(R.id.error);
-                btCancel = myDialog.findViewById(R.id.btCancel);
-                btSubmit = myDialog.findViewById(R.id.btSubmit);
-                etMasterPass = myDialog.findViewById(R.id.etMasterPass);
-                txtclose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        myDialog.dismiss();
-                    }
-                });
-                btCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        myDialog.dismiss();
-                    }
-                });
-
-                btSubmit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        myDialog.dismiss();
-                    }
-                });
-                myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                myDialog.show();
-            }
-        });
+//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                SparseBooleanArray checked = lv.getCheckedItemPositions();
+//                others = list_change_values.get(position).getSr_no();
+//                myDialog.setContentView(R.layout.add_serial_no);
+//                txtclose = myDialog.findViewById(R.id.error);
+//                btCancel = myDialog.findViewById(R.id.btCancel);
+//                btSubmit = myDialog.findViewById(R.id.btSubmit);
+//                etMasterPass = myDialog.findViewById(R.id.etMasterPass);
+//                txtclose.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        myDialog.dismiss();
+//                    }
+//                });
+//                btCancel.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        myDialog.dismiss();
+//                    }
+//                });
+//
+//                btSubmit.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        myDialog.dismiss();
+//                    }
+//                });
+//                myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+//                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                myDialog.show();
+//            }
+//        });
 
         update_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,21 +315,31 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                         Spinner spinner = view1.findViewById(R.id.type_spinner);
                         EditText ed_value = view1.findViewById(R.id.etQuantity);
 
-                        vehicletype.add(spinner.getSelectedItemId() + ":" + ed_value.getText().toString());
-                        StringBuffer sb = new StringBuffer();
-                        for (int k = 0; k < vehicletype.size(); k++) {
-                            sb.append(vehicletype.get(i));
-                        }
-                        item_qty = sb.toString();
-                    }
+                            for (ItemList entry : itemList) {
+                                if(entry.getName().equalsIgnoreCase(spinner.getSelectedItem().toString()))
+                                {
+                                    vehicletype.add(entry.getId()+ ":" + ed_value.getText().toString());
+                                    items_list.add(entry.getName()+ ":" + ed_value.getText().toString());
+                                }
+                            }
+                            SparseBooleanArray checked = lv.getCheckedItemPositions();
+                            int abc = lv.getCheckedItemCount();
+                            count=0;
+                            others = "";
+                            other_key="";
+                            boolean containsBoolean = false;
+                            for (int j = 0; j < checked.size(); j++) {
+                                int key = checked.keyAt(j);
+                                if(checked.valueAt(j)==true){
+                                    count++;
+                                    others = others + (list_change_values.get(key).getId()) + ":";
+                                    other_key = other_key + (list_change_values.get(key).getPcb_sr_no()) + "\n";
+                                }else {
 
-                    SparseBooleanArray checked = lv.getCheckedItemPositions();
-                    others = "";
-                    for (int j = 0; j < checked.size(); j++) {
-                        int key = checked.keyAt(j);
-                        others = others + (list_change_values.get(key).getId()) + ":";
+                                }
+                            }
+                            submitData();
                     }
-                    submitData();
                 }
             }
         });
@@ -358,18 +376,44 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     }
 
     private void confirmationDialog() {
-        new AlertDialog.Builder(getActivity())
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Confirm Submission")
-                .setMessage("Are you sure you want to submit ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finalSubmitData();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+
+        confirmDialog.setContentView(R.layout.confirmation_dialog);
+        final_submit = confirmDialog.findViewById(R.id.final_submit);
+        final_cancel = confirmDialog.findViewById(R.id.final_cancel);
+        response_comment = confirmDialog.findViewById(R.id.comment);
+        items_values = confirmDialog.findViewById(R.id.items_values);
+        preview_tags = confirmDialog.findViewById(R.id.preview_tags);
+        items_tags = confirmDialog.findViewById(R.id.items_tags);
+        TextView preview_values = confirmDialog.findViewById(R.id.preview_values);
+
+        String errorList=other_key.toString();
+        errorList=errorList.replaceAll(",", "\n");
+        preview_values.setText((errorList));
+
+        preview_tags.setText("Total Device Count : " + count);
+
+        items_tags.setText("Total Items Count : "+ items_list.size());
+        items_values.setText(items_list.toString());
+        response_comment.setText(remarks);
+        final_submit.setOnClickListener(view -> finalSubmitData());
+
+        final_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               items_list.clear();
+               vehicletype.clear();
+                count=0;
+                confirmDialog.hide();
+            }
+        });
+
+        confirmDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        confirmDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        confirmDialog.setCanceledOnTouchOutside(false);
+        confirmDialog.setCancelable(false);
+        Window window = confirmDialog.getWindow();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        confirmDialog.show();
     }
 
     private void finalSubmitData() {
@@ -498,21 +542,47 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             tickerView.setText(response.getTotal_received_count());
             Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
             onResume();
+            materialLL.removeAllViews();
             details.setText("");
             et_remarks.setText("");
+            confirmDialog.hide();
         }else{
+            confirmDialog.hide();
             pDialog.dismiss();
             Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onResume() {
-        getDeviceList();
-        getItemsList();
-        getTransitList();
+    public void add_accessory_dialog(String type_name){
 
-        super.onResume();
+        myDialog.setContentView(R.layout.add_accessory_dialog);
+        txtclose = myDialog.findViewById(R.id.error);
+        btCancel = myDialog.findViewById(R.id.btCancel);
+        btSubmit = myDialog.findViewById(R.id.btSubmit);
+        etMasterPass = myDialog.findViewById(R.id.etMasterPass);
+
+        etMasterPass.setText(type_name);
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+
+        btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
-
 }

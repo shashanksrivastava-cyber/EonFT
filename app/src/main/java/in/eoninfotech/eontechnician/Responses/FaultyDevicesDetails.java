@@ -32,6 +32,12 @@ public class FaultyDevicesDetails implements Serializable {
     private String faulty_drs_cnt;
     @SerializedName("faulty_drs")
     private String faulty_drs;
+
+    @SerializedName("faulty_fuel_count")
+    private String faulty_fuel_count;
+
+    @SerializedName("faulty_fuel")
+    private String faulty_fuel;
     public String getCustomer() {
         return customer;
     }
@@ -118,5 +124,21 @@ public class FaultyDevicesDetails implements Serializable {
 
     public void setDatabase(String database) {
         this.database = database;
+    }
+
+    public String getFaulty_fuel_count() {
+        return faulty_fuel_count;
+    }
+
+    public void setFaulty_fuel_count(String faulty_fuel_count) {
+        this.faulty_fuel_count = faulty_fuel_count;
+    }
+
+    public String getFaulty_fuel() {
+        return faulty_fuel;
+    }
+
+    public void setFaulty_fuel(String faulty_fuel) {
+        this.faulty_fuel = faulty_fuel;
     }
 }

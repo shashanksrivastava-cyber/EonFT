@@ -49,6 +49,7 @@ public class UmainAdapter extends RecyclerView.Adapter<UmainAdapter.ActivityHold
         holder.site_cust_name.setText(underMaintenanceDetail.getCustomer());
         holder.faulty_vts.setText("Total Devices : "+underMaintenanceDetail.getTotal_device());
         holder.faulty_drs.setVisibility(View.GONE);
+        holder.faulty_fuel.setVisibility(View.GONE);
         holder.slide_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +83,7 @@ public class UmainAdapter extends RecyclerView.Adapter<UmainAdapter.ActivityHold
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
         CardView slide_card;
-        TextView site_loc, site_cust_name,faulty_vts,faulty_drs,quantity,tvBought;
+        TextView site_loc, site_cust_name,faulty_vts,faulty_drs,quantity,tvBought,faulty_fuel;
         public ActivityHolder(View inflate) {
             super(inflate);
 
@@ -93,6 +94,7 @@ public class UmainAdapter extends RecyclerView.Adapter<UmainAdapter.ActivityHold
             slide_card = inflate.findViewById(R.id.slide_card);
             quantity = inflate.findViewById(R.id.quantity);
             tvBought = inflate.findViewById(R.id.tvBought);
+            faulty_fuel = inflate.findViewById(R.id.faulty_fuel);
         }
     }
 }

@@ -508,10 +508,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Thread thread = new Thread(new Runnable(){
             @Override
             public void run(){
-                loadContent();
+                //loadContent();
             }
         });
-        thread.start();
+        //thread.start();
     }
 
     @Override
@@ -1503,7 +1503,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRestart() {
         super.onRestart();
-        loadContent();
+        //loadContent();
     }
 
     @Override

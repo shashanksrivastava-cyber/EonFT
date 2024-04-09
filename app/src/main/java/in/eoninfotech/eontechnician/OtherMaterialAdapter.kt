@@ -39,7 +39,6 @@ class OtherMaterialAdapter(
                     if (value > 0) {
                         value--
                         binding!!.addText.text = value.toString()
-
                     }
                 }
 
@@ -53,7 +52,11 @@ class OtherMaterialAdapter(
                 if(status.equals("Received")){
                     binding!!.addCount.setVisibility(View.GONE)
                 }else {
+                    if(status.equals("Send")){
+                        binding!!.addCount.setVisibility(View.GONE)
+                    }else{
                     binding!!.addCount.setVisibility(View.VISIBLE)
+                    }
                 }
             }
         }

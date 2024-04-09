@@ -1,11 +1,13 @@
 package in.eoninfotech.eontechnician;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,10 +15,12 @@ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -77,20 +81,20 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     View v;
     NonScrollListView lv;
     private ProgressDialog pDialog;
-    Button delete_button,update_data;
-    EditText details,et_remarks;
+    Button delete_button,update_data,final_submit, final_cancel;
+    EditText details,et_remarks,etQuantity;
     TickerView tickerView;
     Spinner type_spinner,transit_spinner,courier_spinner;
     ArrayList<TechDetails> techList = new ArrayList<>();
     ArrayList<String> techDetail = new ArrayList<>();
     ArrayList<TransitList> transitList = new ArrayList<>();
     MySearchableSpinner spn_technicians;
-    LinearLayout parentLinearLayout, transit_linear;
+    LinearLayout parentLinearLayout, transit_linear,materialLL;
     ArrayList<ItemList> itemList = new ArrayList<>();
-    TextView addMaterial;
+    TextView addMaterial,response_comment,items_values,preview_tags,items_tags;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String version, username,transit_id="",type_id,tech_id,others="",courier_id="",transit_through="",remarks="",item_qty="",other_tech_id="";
+    String version, username,transit_id="",type_id,tech_id,others="",courier_id="",transit_through="",remarks="",other_key="",item_qty="",other_tech_id="";
     ReceiveDeviceController receiveDeviceController;
     ArrayAdapter<String> adapter;
     ArrayList<ItemList> detailList = new ArrayList<>();
@@ -100,6 +104,13 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     ArrayList<DeviceList> list_change_values = new ArrayList<>();
     ArrayList<String> value_name = new ArrayList<>();
     ArrayList<String> vehicletype = new ArrayList<>();
+    int count=0;
+    Dialog myDialog;
+    EditText etMasterPass;
+    ImageView txtclose;
+    StringBuilder sb,sbFieldIds;
+    private Dialog confirmDialog;
+    ArrayList<String> items_list = new ArrayList<>();
 
 
     @Override
@@ -113,6 +124,12 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
         version = sharedprefs.getString("version", "");
         tech_id = sharedprefs.getString("s_user_id", "");
         initView();
+
+        addTechnicians();
+        getDeviceList();
+        getItemsList();
+        getTransitList();
+
         return v;
     }
 
@@ -183,6 +200,7 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     private void initView() {
 
         parentLinearLayout = v.findViewById(R.id.parent_linear_layout);
+        materialLL = v.findViewById(R.id.materialLL);
         addMaterial = v.findViewById(R.id.addMaterial);
         delete_button = v.findViewById(R.id.delete_button);
         update_data = v.findViewById(R.id.update_data);
@@ -190,12 +208,14 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
         transit_spinner = v.findViewById(R.id.transit_spinner);
         transit_linear = v.findViewById(R.id.transit_linear);
         courier_spinner = v.findViewById(R.id.courier_spinner);
+        etQuantity = v.findViewById(R.id.etQuantity);
         details = v.findViewById(R.id.details);
         et_remarks = v.findViewById(R.id.et_remarks);
         lv = v.findViewById(R.id.return_device_list);
         tickerView = v.findViewById(R.id.device_left);
         spn_technicians = v.findViewById(R.id.spn_technicians);
         receiveDeviceController = new ReceiveDeviceController();
+        confirmDialog = new Dialog(getActivity());
 
         spn_technicians.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -338,18 +358,28 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
                         Spinner spinner = view1.findViewById(R.id.type_spinner);
                         EditText ed_value = view1.findViewById(R.id.etQuantity);
 
-                        vehicletype.add(spinner.getSelectedItemId() + ":" + ed_value.getText().toString());
-                        StringBuffer sb = new StringBuffer();
-                        for (int k = 0; k < vehicletype.size(); k++) {
-                            sb.append(vehicletype.get(i));
+                        for (ItemList entry : itemList) {
+                            if(entry.getName().equalsIgnoreCase(spinner.getSelectedItem().toString()))
+                            {
+                                vehicletype.add(entry.getId()+ ":" + ed_value.getText().toString());
+                            }
                         }
-                        item_qty = sb.toString();
                     }
                     SparseBooleanArray checked = lv.getCheckedItemPositions();
+                    int abc = lv.getCheckedItemCount();
+                    count=0;
                     others = "";
+                    other_key="";
+                    boolean containsBoolean = false;
                     for (int j = 0; j < checked.size(); j++) {
                         int key = checked.keyAt(j);
-                        others = others + (list_change_values.get(key).getId()) + ":";
+                        if(checked.valueAt(j)==true){
+                            count++;
+                            others = others + (list_change_values.get(key).getId()) + ":";
+                            other_key = other_key + (list_change_values.get(key).getPcb_sr_no()) + "\n";
+                        }else {
+
+                        }
                     }
                     submitData();
                 }
@@ -358,18 +388,49 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     }
 
     private void submitData() {
-        new AlertDialog.Builder(getActivity())
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Confirm Submission")
-                .setMessage("Are you sure you want to Submit ?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finalSubmitData();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+
+        confirmationDialog();
+    }
+
+    private void confirmationDialog() {
+
+        confirmDialog.setContentView(R.layout.confirmation_dialog);
+        final_submit = confirmDialog.findViewById(R.id.final_submit);
+        final_cancel = confirmDialog.findViewById(R.id.final_cancel);
+        response_comment = confirmDialog.findViewById(R.id.comment);
+        items_values = confirmDialog.findViewById(R.id.items_values);
+        preview_tags = confirmDialog.findViewById(R.id.preview_tags);
+        items_tags = confirmDialog.findViewById(R.id.items_tags);
+        TextView preview_values = confirmDialog.findViewById(R.id.preview_values);
+
+        String errorList=other_key.toString();
+        errorList=errorList.replaceAll(",", "\n");
+        preview_values.setText((errorList));
+
+        preview_tags.setText("Total Device Count : " + count);
+
+        items_tags.setText("Total Items Count : "+ items_list.size());
+        items_values.setText(items_list.toString());
+        response_comment.setText(remarks);
+        final_submit.setOnClickListener(view -> finalSubmitData());
+
+        final_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                items_list.clear();
+                vehicletype.clear();
+                count=0;
+                confirmDialog.hide();
+            }
+        });
+
+        confirmDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        confirmDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        confirmDialog.setCanceledOnTouchOutside(false);
+        Window window = confirmDialog.getWindow();
+        confirmDialog.setCancelable(false);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        confirmDialog.show();
     }
 
     private void finalSubmitData() {
@@ -495,21 +556,15 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
             tickerView.setText(response.getTotal_received_count());
             Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
             onResume();
+            materialLL.removeAllViews();
             details.setText("");
             et_remarks.setText("");
+            etQuantity.setText("");
+            getActivity().getSupportFragmentManager().beginTransaction().detach(this).attach(this).commit();
         }else{
             pDialog.dismiss();
             Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onResume() {
-        addTechnicians();
-        getDeviceList();
-        getItemsList();
-        getTransitList();
-
-        super.onResume();
-    }
 }

@@ -119,7 +119,7 @@ public class DashBoardFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "3");
+//                intent.putExtra("device_value", "4");
 //                intent.putExtra("tab", "1");
 //                intent.putExtra("other", "2");
 //                startActivity(intent);
@@ -152,7 +152,7 @@ public class DashBoardFragment extends Fragment {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "3");
+//                intent.putExtra("device_value", "7");
 //                intent.putExtra("tab", "1");
 //                intent.putExtra("other", "2");
 //                startActivity(intent);

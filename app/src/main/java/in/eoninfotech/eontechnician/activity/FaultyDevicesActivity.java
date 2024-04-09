@@ -72,10 +72,18 @@ public class FaultyDevicesActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Under Maintenance");
+        } else if (device_value.equals("4")) {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Under Maintenance but working");
         } else if (device_value.equals("1")) {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("Faulty DRS/SOS");
+        } else if (device_value.equals("7")) {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Faulty Fuel Sensor");
         } else {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -110,8 +118,70 @@ public class FaultyDevicesActivity extends AppCompatActivity {
             getUmainValue();
         } else if (device_value.equals("4")) {
             sendData = device_value;
-            getFaultyDeviceData();
+            getUmainWorkingValue();
+        }else if (device_value.equals("7")) {
+            sendData = device_value;
+            getFaultyFuelData();
         }
+    }
+
+    private void getUmainWorkingValue() {
+
+        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+        Call<UnderMaintenanceResponse> call = log_att.underMainWorkingResponse(zone);
+        call.enqueue(new Callback<UnderMaintenanceResponse>() {
+            @Override
+            public void onResponse(Call<UnderMaintenanceResponse> call, Response<UnderMaintenanceResponse> response) {
+                if (response.body().getType() == 1) {
+                    UnderMaintenanceResponse activityResponse = response.body();
+                    txtContentUnavailable.setVisibility(View.GONE);
+                    uMainDetail = activityResponse.getuMainDetail();
+                    umainAdapter = new UmainAdapter(uMainDetail, FaultyDevicesActivity.this, sendData);
+                    recyclerView.setAdapter(umainAdapter);
+                    runLayoutAnimation(recyclerView);
+                    refreshLayout.setRefreshing(false);
+                    recyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    txtContentUnavailable.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                    refreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UnderMaintenanceResponse> call, Throwable t) {
+                refreshLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void getFaultyFuelData() {
+        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+        Call<FaultyDevices> call = log_att.faulty_fuel_response(zone);
+        call.enqueue(new Callback<FaultyDevices>() {
+            @Override
+            public void onResponse(Call<FaultyDevices> call, Response<FaultyDevices> response) {
+                if (response.body().getType() == 1) {
+                    FaultyDevices activityResponse = response.body();
+                    txtContentUnavailable.setVisibility(View.GONE);
+                    faultyDevices = activityResponse.getFaultyDevices();
+                    faultyDevicesAdapter = new FaultyDevicesAdapter(faultyDevices, FaultyDevicesActivity.this, sendData);
+                    recyclerView.setAdapter(faultyDevicesAdapter);
+                    runLayoutAnimation(recyclerView);
+                    refreshLayout.setRefreshing(false);
+                    recyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    txtContentUnavailable.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
+                    refreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FaultyDevices> call, Throwable t) {
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void getUmainValue() {
@@ -226,7 +296,10 @@ public class FaultyDevicesActivity extends AppCompatActivity {
             getUmainValue();
         } else if (device_value.equals("4")) {
             sendData = device_value;
-            getFaultyDeviceData();
+            getUmainWorkingValue();
+        }else if (device_value.equals("7")) {
+            sendData = device_value;
+            getFaultyFuelData();
         }
     }
 

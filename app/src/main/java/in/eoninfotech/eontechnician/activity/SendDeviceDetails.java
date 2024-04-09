@@ -13,11 +13,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
+import in.eoninfotech.eontechnician.BillViewAdapter;
 import in.eoninfotech.eontechnician.NonScrollListView;
+import in.eoninfotech.eontechnician.OtherMaterialAdapter;
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.Responses.DeviceItems;
+import in.eoninfotech.eontechnician.Responses.DeviceList;
+import in.eoninfotech.eontechnician.Responses.DispatchDeviceDetails;
 import in.eoninfotech.eontechnician.Responses.FaultList;
 import in.eoninfotech.eontechnician.Responses.MainResponse;
 import in.eoninfotech.eontechnician.Responses.TechReturnDetails;
@@ -37,9 +43,14 @@ public class SendDeviceDetails extends AppCompatActivity {
     String usrname, version, id_no;
     NonScrollListView device_detail_list_receive;
     ProgressDialog pDialog;
-    ArrayList<TechReturnDetails> list_change_values = new ArrayList<>();
+    //ArrayList<DispatchDeviceDetails> list_change_values = new ArrayList<>();
+    ArrayList<DeviceList> list_change_values = new ArrayList<>();
+    //ArrayList<DeviceList> list_values = new ArrayList<>();
+    ArrayList<DeviceItems> lr = new ArrayList<>();
     ArrayList<String> value_name = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    OtherMaterialAdapter othermaterialAdapter;
+    public LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +83,8 @@ public class SendDeviceDetails extends AppCompatActivity {
 
     private void initView(){
 
+        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(layoutManager);
     }
 
     private void getContent() {
@@ -80,6 +93,7 @@ public class SendDeviceDetails extends AppCompatActivity {
             pDialog.setMessage("Loading");
             pDialog.show();
             pDialog.setCancelable(false);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,7 +106,8 @@ public class SendDeviceDetails extends AppCompatActivity {
                 if (response.body().getType() == 1) {
                     pDialog.hide();
                     try {
-                        list_change_values = response.body().getTech_return_details();
+                        lr = response.body().getTech_return_details().get(0).getDevice_items();
+                        list_change_values = response.body().getTech_return_details().get(0).getDevice_list();
                         try {
                             try {
                                 value_name.clear();
@@ -101,7 +116,8 @@ public class SendDeviceDetails extends AppCompatActivity {
                             }
                             if (list_change_values.size() > 0) {
                                 for (int i = 0; i < list_change_values.size(); i++) {
-                                    value_name.add(list_change_values.get(i).cust_name+" "+list_change_values.get(i).pcb_sr_no);
+                                    Log.e("List Change Value",""+list_change_values.get(i));
+                                   value_name.add(list_change_values.get(i).getCust_name()+" "+list_change_values.get(i).getPcb_sr_no());
                                 }
                                 if (list_change_values.size() > 5) {
                                     binding.deviceDetailListReceive.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));
@@ -111,6 +127,11 @@ public class SendDeviceDetails extends AppCompatActivity {
                                 adapter = new ArrayAdapter<String>(SendDeviceDetails.this, R.layout.custom_list_item_disable, value_name);
                                 binding.deviceDetailListReceive.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                                 binding.deviceDetailListReceive.setAdapter(adapter);
+
+                                othermaterialAdapter = new OtherMaterialAdapter(SendDeviceDetails.this,lr,"Send");
+                                binding.recyclerView.setAdapter(othermaterialAdapter);
+                                binding.recyclerView.setVisibility(View.VISIBLE);
+
                             } else {
                             }
                         } catch (NullPointerException npe) {

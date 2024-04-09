@@ -48,28 +48,22 @@ public class FaultyDevicesAdapter extends RecyclerView.Adapter<FaultyDevicesAdap
         holder.site_cust_name.setText(faultyDevicesResponse.getCustomer());
         holder.faulty_drs.setText("Faulty DRS/SOS : "+"0");
         holder.faulty_vts.setText("Faulty VTS : "+faultyDevicesResponse.getFaulty_dev_cnt());
-        String abc = faultyDevicesResponse.getFaulty_devices();
-        String def = faultyDevicesResponse.getFaulty_drs();
-        String server = faultyDevicesResponse.getServer();
-        String loc_id = faultyDevicesResponse.getLoc_id();
-        String cust_id = faultyDevicesResponse.getCust_id();
-        String database = faultyDevicesResponse.getDatabase();
-        String customerName = faultyDevicesResponse.getCustomer();
-        String location  = faultyDevicesResponse.getLocation();
+        holder.faulty_fuel.setText("Faulty Fuel : "+faultyDevicesResponse.getFaulty_fuel_count());
 
         holder.slide_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(context,FaultyDeviceDetails.class);
-                intent.putExtra("Faulty VTS",abc);
-                intent.putExtra("Faulty DRS",def);
-                intent.putExtra("Server",server);
-                intent.putExtra("LocId",loc_id);
-                intent.putExtra("Cust_id",cust_id);
-                intent.putExtra("Database",database);
-                intent.putExtra("CustomerName",customerName);
-                intent.putExtra("Location",location);
+                intent.putExtra("Faulty VTS",faultyDevicesResponse.getFaulty_devices());
+                intent.putExtra("Faulty DRS",faultyDevicesResponse.getFaulty_drs());
+                intent.putExtra("Faulty fuel",faultyDevicesResponse.getFaulty_fuel());
+                intent.putExtra("Server",faultyDevicesResponse.getServer());
+                intent.putExtra("LocId",faultyDevicesResponse.getLoc_id());
+                intent.putExtra("Cust_id",faultyDevicesResponse.getCust_id());
+                intent.putExtra("Database",faultyDevicesResponse.getDatabase());
+                intent.putExtra("CustomerName",faultyDevicesResponse.getCustomer());
+                intent.putExtra("Location",faultyDevicesResponse.getLocation());
                 context.startActivity(intent);
             }
         });
@@ -86,7 +80,7 @@ public class FaultyDevicesAdapter extends RecyclerView.Adapter<FaultyDevicesAdap
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
         CardView slide_card;
-        TextView site_loc, site_cust_name, faulty_vts, faulty_drs, quantity, tvBought;
+        TextView site_loc, site_cust_name, faulty_vts, faulty_drs, quantity, tvBought,faulty_fuel;
 
         public ActivityHolder(View inflate) {
             super(inflate);
@@ -97,6 +91,7 @@ public class FaultyDevicesAdapter extends RecyclerView.Adapter<FaultyDevicesAdap
             slide_card = inflate.findViewById(R.id.slide_card);
             quantity = inflate.findViewById(R.id.quantity);
             tvBought = inflate.findViewById(R.id.tvBought);
+            faulty_fuel = inflate.findViewById(R.id.faulty_fuel);
         }
     }
 }

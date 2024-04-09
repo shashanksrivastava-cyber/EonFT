@@ -7,5 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
-    android:textSize="12sp"
+    android:textSize="18sp"
     android:textAlignment="inherit"/>

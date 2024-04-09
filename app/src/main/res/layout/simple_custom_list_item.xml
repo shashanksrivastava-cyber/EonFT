@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:textSize="16sp"
+    android:textSize="18sp"
     android:textColor="@color/eonBlue"
+    android:padding="7dp"
     android:checkMark="?android:attr/listChoiceIndicatorMultiple"/>

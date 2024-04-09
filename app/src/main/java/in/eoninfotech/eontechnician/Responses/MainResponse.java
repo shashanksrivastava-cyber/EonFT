@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public class MainResponse {
 
     @SerializedName("type")
@@ -46,7 +47,7 @@ public class MainResponse {
     ArrayList<TechReturnDevice> tech_return_device_list = new ArrayList<>();
 
     @SerializedName("tech_return_details")
-    ArrayList<TechReturnDetails> tech_return_details = new ArrayList<>();
+    ArrayList<TechReturn> tech_return_details = new ArrayList<>();
 
     public Integer getType() {
         return type;
@@ -166,11 +167,11 @@ public class MainResponse {
         this.tech_return_device_list = tech_return_device_list;
     }
 
-    public ArrayList<TechReturnDetails> getTech_return_details() {
+    public ArrayList<TechReturn> getTech_return_details() {
         return tech_return_details;
     }
 
-    public void setTech_return_details(ArrayList<TechReturnDetails> tech_return_details) {
+    public void setTech_return_details(ArrayList<TechReturn> tech_return_details) {
         this.tech_return_details = tech_return_details;
     }
 }

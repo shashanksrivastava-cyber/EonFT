@@ -339,9 +339,11 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
                     linearBill.setVisibility(View.VISIBLE);
                     billNo.setText(updateDataResponse.getBill_no());
                     pDialog.dismiss();
+                    pDialog.hide();
                 }else {
                     Toast.makeText(getActivity(), ""+updateDataResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
+                pDialog.hide();
                 pDialog.dismiss();
             }
             @Override
@@ -383,7 +385,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         }
         return null;
     }
-
 
     private void ShowProgressBar(boolean show) {
         try {

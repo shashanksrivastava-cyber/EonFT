@@ -22,8 +22,8 @@
                 android:id="@+id/curnt_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingRight="16dp"
+                android:gravity="end"
+                android:paddingEnd="16dp"
                 android:paddingTop="5dp"
                 android:text="20th,February"
                 android:textColor="@color/eonBlue"
@@ -46,7 +46,8 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    app:cardElevation="5dp"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -67,7 +68,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="VTS ADD"
+                            android:text="@string/vts_add"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -100,7 +101,8 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    app:cardElevation="5dp"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -121,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="VTS ADD 30"
+                            android:text="@string/vts_add_30"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -166,7 +168,8 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    app:cardElevation="5dp"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -187,7 +190,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="DRS ADD"
+                            android:text="@string/drs_add"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -220,7 +223,8 @@
                     android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="5dp">
+                    app:cardElevation="5dp"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -241,7 +245,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="DRS ADD 30"
+                            android:text="@string/drs_add_30"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -309,7 +313,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Total VTS"
+                                    android:text="@string/total_vts"
                                     android:textSize="16sp"
                                     android:layout_marginTop="5dp"
                                     android:textColor="@color/eonWhite"/>
@@ -336,7 +340,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Total DRS "
+                                    android:text="@string/total_drs"
                                     android:layout_marginTop="5dp"
                                     android:textSize="16sp"
                                     android:textColor="@color/eonWhite"
@@ -365,7 +369,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="SOS Temp"
+                                    android:text="@string/sos_temp"
                                     android:layout_marginTop="5dp"
                                     android:textSize="16sp"
                                     android:textColor="@color/eonWhite"
@@ -405,7 +409,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Lid Sensor"
+                                    android:text="@string/lid_sensor"
                                     android:textSize="16sp"
                                     android:layout_marginTop="5dp"
                                     android:textColor="@color/eonWhite"/>
@@ -432,7 +436,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Fuel Sensor"
+                                    android:text="@string/fuel_sensor"
                                     android:layout_marginTop="5dp"
                                     android:textSize="16sp"
                                     android:textColor="@color/eonWhite"
@@ -460,7 +464,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Temp Sensor"
+                                    android:text="@string/temp_sensor"
                                     android:layout_marginTop="5dp"
                                     android:textSize="16sp"
                                     android:textColor="@color/eonWhite"
@@ -508,7 +512,7 @@
                             android:layout_margin="10dp"
                             android:drawableLeft="@drawable/disable_gps"
                             android:drawablePadding="10dp"
-                            android:text="Faulty VTS"
+                            android:text="@string/faulty_vts"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
                             android:textSize="16sp"
@@ -530,12 +534,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/vtsSpv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -569,13 +572,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_drs_na"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Faulty DRS/SOS"
+                            android:text="@string/faulty_drs_sos"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_drs_na" />
 
                         <TextView
                             android:id="@+id/faulty_drs"
@@ -593,12 +596,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/drsSpv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_gravity="end|center_vertical"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -632,13 +634,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_maintenance"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Under Maintenance"
+                            android:text="@string/under_maintenance"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_maintenance" />
 
                         <TextView
                             android:id="@+id/faulty_um"
@@ -654,12 +656,11 @@
                             android:textStyle="bold"/>
                     </LinearLayout>
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/umSpv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -692,13 +693,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_maintenance"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Under Maint but working"
+                            android:text="@string/under_maint_but_working"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_maintenance" />
 
                         <TextView
                             android:id="@+id/um_working"
@@ -715,12 +716,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/um_workigSpv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -753,13 +753,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_sos"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Faulty SOS Temper"
+                            android:text="@string/faulty_sos_temper"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_sos" />
 
                         <TextView
                             android:id="@+id/sos_faulty"
@@ -776,12 +776,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/sos_Spv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -814,13 +813,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_close"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Faulty LID Sensor"
+                            android:text="@string/faulty_lid_sensor"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_close" />
 
                         <TextView
                             android:id="@+id/lid_faulty"
@@ -837,12 +836,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/lid_Spv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -875,13 +873,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_gas"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Faulty Fuel Sensor"
+                            android:text="@string/faulty_fuel_sensor"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_gas" />
 
                         <TextView
                             android:id="@+id/fuel_faulty"
@@ -898,12 +896,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/fuel_Spv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -936,13 +933,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/ic_temperature"
                             android:drawablePadding="10dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text="Faulty Temp Sensor"
+                            android:text="@string/faulty_temp_sensor"
                             android:textSize="16sp"
-                            android:textColor="@color/eonWhite"/>
+                            android:textColor="@color/eonWhite"
+                            app:drawableLeftCompat="@drawable/ic_temperature" />
 
                         <TextView
                             android:id="@+id/temp_faulty"
@@ -959,12 +956,11 @@
                     </LinearLayout>
 
                     <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/temp_Spv"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="right|center_vertical"
-                        android:layout_marginRight="10dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="10dp"
                         app:bgColor="#e1e1e1"
                         app:fgColorEnd="#ff4800"
                         app:fgColorStart="#ffe400"
@@ -987,6 +983,7 @@
         android:indeterminate="false"
         android:max="100"
         android:progress="20"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:focusable="true" />
 
 </androidx.cardview.widget.CardView>

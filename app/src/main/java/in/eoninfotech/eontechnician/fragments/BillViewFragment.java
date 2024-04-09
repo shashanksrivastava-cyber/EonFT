@@ -192,6 +192,7 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
                     pDialog.dismiss();
                 }
                 else {
+                    refreshLayout.setRefreshing(false);
                     pDialog.dismiss();
                     txt_content_unavailable.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);

@@ -36,7 +36,7 @@
                         android:id="@+id/linear_layo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical">
@@ -73,14 +73,14 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="VTS Device"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:visibility="gone" />
 
             <TextView
                 android:id="@+id/addVehicle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="3dp"
                 android:text="Select Technician"
                 android:textColor="@color/eonBlue"
@@ -138,10 +138,10 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="20dp"
-                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentEnd="true"
                                     android:layout_centerVertical="true"
                                     android:layout_gravity="center"
-                                    android:layout_marginRight="6dp"
+                                    android:layout_marginEnd="6dp"
                                     android:background="@color/eonWhite"
                                     android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -162,7 +162,7 @@
                 android:textColor="@color/eonBlue"
                 android:visibility="visible"
                 android:textStyle="bold"
-                android:textSize="18dp"/>
+                android:textSize="18sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -206,11 +206,11 @@
                 android:id="@+id/addVehicl"
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/other_material"
                 android:textColor="@color/eonBlue"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="visible" />
 
@@ -223,6 +223,7 @@
                 android:layout_below="@+id/txtDetails">
 
                 <LinearLayout
+                    android:id="@+id/materialLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -235,7 +236,7 @@
                         android:background="@drawable/et_frame"
                         android:layout_weight="1"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp">
+                        android:layout_marginStart="5dp">
 
                         <in.eoninfotech.eontechnician.view.MySearchableSpinner
                             android:id="@+id/type_spinner"
@@ -243,14 +244,14 @@
                             android:layout_height="40dp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:gravity="center"
                             android:spinnerMode="dialog" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_marginRight="6dp"
@@ -371,10 +372,10 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="20dp"
-                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentEnd="true"
                                     android:layout_centerVertical="true"
                                     android:layout_gravity="center"
-                                    android:layout_marginRight="6dp"
+                                    android:layout_marginEnd="6dp"
                                     android:background="@color/eonWhite"
                                     android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -421,17 +422,17 @@
                                     android:layout_height="40dp"
                                     android:layout_centerVertical="true"
                                     android:layout_gravity="center"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginStart="5dp"
                                     android:gravity="center"
                                     android:spinnerMode="dialog" />
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="20dp"
-                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentEnd="true"
                                     android:layout_centerVertical="true"
                                     android:layout_gravity="center"
-                                    android:layout_marginRight="6dp"
+                                    android:layout_marginEnd="6dp"
                                     android:background="@color/eonWhite"
                                     android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 

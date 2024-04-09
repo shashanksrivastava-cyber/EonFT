@@ -4,13 +4,13 @@
     android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/slide_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_margin="10dp"
             android:background="@drawable/et_frame">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -25,9 +25,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
+                        android:layout_marginStart="7dp"
                         android:textSize="14sp"
-                        android:text="Client Name : "
+                        android:text="@string/client_name"
                         android:layout_marginTop="5dp"
                         android:textStyle="bold"/>
 
@@ -35,9 +35,9 @@
                     android:id="@+id/site_cust_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textSize="14sp"
-                    android:text="Cust_Name"
+                    android:text="@string/cust_name"
                     android:layout_weight="1.5"
                     android:textColor="@color/c"
                     android:padding="2dp"
@@ -54,9 +54,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textSize="14sp"
-                    android:text="Location : "
+                    android:text="@string/location"
                     android:layout_weight="0.25"
                     android:textStyle="bold"/>
 
@@ -64,9 +64,9 @@
                     android:id="@+id/site_loc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
+                    android:layout_marginStart="7dp"
                     android:textSize="14sp"
-                    android:text="Location"
+                    android:text="@string/location"
                     android:layout_weight="1.5"
                     android:textColor="@color/c"/>
 
@@ -87,25 +87,26 @@
                     android:paddingLeft="2dp"
                     android:paddingRight="2dp"
                     android:weightSum="3">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_weight="1"
-                        android:layout_marginLeft="5dp">
+                        android:layout_marginStart="5dp">
 
                     <TextView
                         android:id="@+id/tvBought"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:paddingRight="2dp"
+                        android:layout_marginStart="10dp"
+                        android:paddingEnd="2dp"
                         android:layout_marginTop="2dp"
-                        android:text="Faulty VTS :"
+                        android:text="@string/faulty_vts"
                         android:textSize="14sp"
                         android:layout_alignParentLeft="true"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginEnd="3dp"
                         android:visibility="gone"
                         android:textStyle="bold" />
 
@@ -113,7 +114,7 @@
                         android:id="@+id/faulty_vts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="45"
+                        android:text="@string/faulty_vts"
                         android:textSize="14sp"
                         android:layout_marginTop="2dp"
                         android:padding="3dp"
@@ -129,14 +130,15 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:layout_weight="1"
-                        android:layout_marginRight="15dp">
+                        android:layout_marginEnd="15dp">
 
                         <TextView
+                            android:id="@+id/faulty_fuel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Faulty Fuel"
-                            android:textSize="14dp"
+                            android:text="@string/faulty_fuel"
+                            android:textSize="14sp"
                             android:layout_toRightOf="@+id/quantity"
                             android:padding="2dp"
                             android:textStyle="bold"/>
@@ -146,13 +148,12 @@
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_marginEnd="-5dp"
-                            android:layout_marginRight="-5dp"
                             android:background="@drawable/ic_dot_5dp"
                             android:gravity="center"
                             android:padding="3dp"
                             android:textColor="@android:color/white"
                             android:text=""
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:visibility="gone"/>
 
                     </LinearLayout>
@@ -160,35 +161,35 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:gravity="right"
+                        android:layout_gravity="end"
+                        android:gravity="end"
                         android:orientation="horizontal"
                         android:layout_weight="1"
-                        android:layout_marginRight="15dp">
+                        android:layout_marginEnd="15dp">
 
                     <TextView
                         android:id="@+id/quantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="3dp"
                         android:paddingBottom="4dp"
-                        android:text="Faulty DRS/SOS:"
+                        android:text="@string/faulty_drs_sos"
                         android:textAllCaps="false"
                         android:textSize="14sp"
                         android:visibility="gone"
                         android:layout_toRightOf="@+id/faulty_vts"
                         android:textStyle="bold"
-                        android:gravity="right"/>
+                        android:gravity="end"/>
 
                     <TextView
                         android:id="@+id/faulty_drs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="end"
                         android:text=""
-                        android:textSize="14dp"
+                        android:textSize="14sp"
                         android:layout_toRightOf="@+id/quantity"
                         android:layout_marginTop="2dp"
                         android:padding="3dp"
