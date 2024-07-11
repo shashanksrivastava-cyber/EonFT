@@ -1,9 +1,6 @@
 package in.eoninfotech.eontechnician.callbacks;
 
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.DispatchDeviceDetails;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.ReceiveDeviceResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
 
 public interface ReceiveDeviceListener extends ErrorCallBacks {
 

@@ -1,6 +1,5 @@
 package in.eoninfotech.eontechnician.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,11 +13,8 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 import in.eoninfotech.eontechnician.ImageUtils;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
-import in.eoninfotech.eontechnician.fragments.CallSheetFragment;
 import in.eoninfotech.eontechnician.fragments.ViewCallSheetFragment;
 import in.eoninfotech.eontechnician.helper.CallSheetDetail;
-import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 
 /**

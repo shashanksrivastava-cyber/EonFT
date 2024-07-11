@@ -1,6 +1,5 @@
 package in.eoninfotech.eontechnician.activity;
 
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
 
-import android.text.InputType;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -31,10 +28,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.CallSheetListDetail;
-import in.eoninfotech.eontechnician.Responses.CallSheetListResponse;
-import in.eoninfotech.eontechnician.Responses.CallSheetResponse;
-import in.eoninfotech.eontechnician.helper.CallSheetDetail;
+import in.eoninfotech.eontechnician.responses.CallSheetListDetail;
+import in.eoninfotech.eontechnician.responses.CallSheetListResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import okhttp3.MediaType;

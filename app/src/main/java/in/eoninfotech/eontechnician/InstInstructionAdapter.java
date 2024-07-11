@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,13 +13,8 @@ import java.util.ArrayList;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
-import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
-import in.eoninfotech.eontechnician.Responses.InstructionDetail;
-import in.eoninfotech.eontechnician.activity.MessageAdapter;
-import in.eoninfotech.eontechnician.fragments.ActivityDetailFragment;
-import in.eoninfotech.eontechnician.webservice.MessageDetail;
-import retrofit2.Callback;
+
+import in.eoninfotech.eontechnician.responses.InstructionDetail;
 
 /**
  * Created by root on 3/12/18.

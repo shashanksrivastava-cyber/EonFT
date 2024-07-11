@@ -2,11 +2,8 @@ package in.eoninfotech.eontechnician.fragments;
 
 import static in.eoninfotech.eontechnician.R.drawable.connected;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +17,9 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-import in.eoninfotech.eontechnician.BillViewAdapter;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.DeviceLiveStatus;
-import in.eoninfotech.eontechnician.webservice.BillDetails;
+import in.eoninfotech.eontechnician.responses.DeviceLiveStatus;
 
 public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapterNew.ActivityHolder> {
 

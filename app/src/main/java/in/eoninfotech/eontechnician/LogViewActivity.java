@@ -1,8 +1,6 @@
 package in.eoninfotech.eontechnician;
 
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,28 +18,24 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import in.eoninfotech.eontechnician.Responses.AttendanceDetail;
-import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
-import in.eoninfotech.eontechnician.Responses.LogDetail;
-import in.eoninfotech.eontechnician.Responses.LogResponse;
+import in.eoninfotech.eontechnician.responses.AttendanceDetail;
+import in.eoninfotech.eontechnician.responses.AttendanceResponse;
+import in.eoninfotech.eontechnician.responses.LogDetail;
+import in.eoninfotech.eontechnician.responses.LogResponse;
 import in.eoninfotech.eontechnician.helper.Location_prop;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -172,8 +166,7 @@ public class LogViewActivity extends AppCompatActivity {
                     lv.setAdapter(new DetailAdapter(LogViewActivity.this, log_status_time));
                 }
                 }
-
-            @Override
+                @Override
             public void onFailure(Call<LogResponse> call, Throwable t) {
                 t.printStackTrace();
                 //pDialog.dismiss();

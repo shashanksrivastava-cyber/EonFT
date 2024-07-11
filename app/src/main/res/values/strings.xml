@@ -113,7 +113,7 @@
     <string name="location">Location :</string>
     <string name="faulty_vts">Faulty VTS :</string>
     <string name="faulty_fuel">"Faulty Fuel : "</string>
-    <string name="faulty_drs_sos">Faulty DRS/SOS:</string>
+    <string name="faulty_drs_sos">Faulty DRS/SOS :</string>
     <string name="vts_add">VTS ADD</string>
     <string name="vts_add_30">VTS ADD 30</string>
     <string name="drs_add">DRS ADD</string>
@@ -130,5 +130,8 @@
     <string name="faulty_lid_sensor">"Faulty LID Sensor : "</string>
     <string name="faulty_fuel_sensor">"Faulty Fuel Sensor : "</string>
     <string name="faulty_temp_sensor">"Faulty Temp Sensor : "</string>
+    <string name="working_device">Working Devices</string>
+    <string name="faulty_device">Faulty Devices</string>
+    <string name="total_devices">Total Devices -</string>
 
 </resources>

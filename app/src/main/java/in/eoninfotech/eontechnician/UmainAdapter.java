@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import in.eoninfotech.eontechnician.Responses.UnderMaintenanceDetail;
+import in.eoninfotech.eontechnician.responses.UnderMaintenanceDetail;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 
 /**

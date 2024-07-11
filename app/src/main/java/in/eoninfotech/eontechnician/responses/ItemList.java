@@ -1,0 +1,33 @@
+package in.eoninfotech.eontechnician.responses;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+/**
+ * Created by root on 25/9/18.
+ */
+
+public class ItemList implements Serializable {
+
+    @SerializedName("id_no")
+    private String Id;
+    @SerializedName("name")
+    private String name;
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}

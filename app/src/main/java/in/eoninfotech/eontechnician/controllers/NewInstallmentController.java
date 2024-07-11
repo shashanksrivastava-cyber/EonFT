@@ -8,23 +8,23 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
-import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
-import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
-import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalResponse;
-import in.eoninfotech.eontechnician.Responses.ReplaceReason;
-import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
-import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
-import in.eoninfotech.eontechnician.Responses.VTSResponse;
-import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
-import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
+import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.responses.CollectedItemsResponse;
+import in.eoninfotech.eontechnician.responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.responses.FaultResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.NotAvailActivityResponse;
+import in.eoninfotech.eontechnician.responses.PaymentMethodResponse;
+import in.eoninfotech.eontechnician.responses.RemovalActivityResponse;
+import in.eoninfotech.eontechnician.responses.RemovalResponse;
+import in.eoninfotech.eontechnician.responses.ReplaceReason;
+import in.eoninfotech.eontechnician.responses.SimOperatorResponse;
+import in.eoninfotech.eontechnician.responses.SimReplaceResponse;
+import in.eoninfotech.eontechnician.responses.VTSResponse;
+import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
+import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
+import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -33,7 +33,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Part;
 
 /**
  * Created by root on 11/1/19.
@@ -62,10 +61,12 @@ public class NewInstallmentController extends Controller {
     Call<VTSResponse>vtsResponseCall;
     Call<PaymentMethodResponse>pMethodCall;
     Call<MainResponse>updateDataCall;
+    Call<MainResponse>mainCustCall;
+    Call<MainResponse>liveDeviceCountCall;
 
-    public void reqeuestClientList(ClientListener listener) {
+    public void reqeuestClientList(String c_id,ClientListener listener) {
 
-        clientCall = client_att.reqeuestClientList();
+        clientCall = client_att.reqeuestClientList(c_id);
         clientCall.enqueue(new Callback<ClientResponse>() {
             public void onResponse(Call<ClientResponse> call, Response<ClientResponse> response) {
                 listener.clientResponse(response.body());
@@ -85,6 +86,30 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
+
+    public void reqeuestMainClientList(ClientListener listener) {
+
+        mainCustCall = client_att.reqeuestMainClientList();
+        mainCustCall.enqueue(new Callback<MainResponse>() {
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                listener.mainClientResponse(response.body());
+            }
+            @Override
+            public void onFailure(Call<MainResponse> call, Throwable t) {
+                try {
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.RED);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                } catch (Exception e) {
+                    // Toast.makeText(getActivity(), "Server Response Timeout, Try Again!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
     public void reqeuestClientLocation(String clientId,String server,String dbname, ClientListener listener) {
 
         locCall = client_att.reqeuestClientLocation(clientId,server,dbname);
@@ -103,6 +128,7 @@ public class NewInstallmentController extends Controller {
                     TextView textView = snackbarView.findViewById(R.id.snackbar_text);
                     textView.setTextColor(Color.WHITE);
                     snackbar.show();
+
                 } catch (Exception e) {
                 }
             }
@@ -527,10 +553,13 @@ public class NewInstallmentController extends Controller {
                                       RequestBody remove_type,
                                       RequestBody drs_status,
                                       RequestBody replacetype,
+                                      RequestBody device_working_status,
+                                      RequestBody sensor_working_status,
+                                      RequestBody main_client_id,
                                       MultipartBody.Part image,
                                       ClientListener listener) {
         updateDataCall = client_att.postInstallationsData(technician_id,activity_date,activity_time,customer,customer_location,is_demo,activity_type,vts_type,device_type,old_device_id,new_device_id,old_serial_no,new_serial_no,reg_no,veh_type,is_drs,old_drs,new_drs,drs_direction,mgt_set,ignition_sensor,fuel_sensor,door_sensor,panic_button,cut_off,replacement_reason,removal_type,removal_reason,disconnection_reason,missing_type,missing_reason,not_available_activity,not_available_reason,collection_date,payment_method,amount,
-                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,lid_status,trans_receiver,temp_sensor,tilt_sensor,fuel_status,panic_status,sensor_veh_no,sensor_old_veh_no,remove_type,drs_status,replacetype,image);
+                payment_type,contact_person,contact_no,sim_provider,old_sim_no,new_sim_no,sim_reason,veh_condition,tech_remarks,collected_items,faults_checked,fuel_reading,lid_status,trans_receiver,temp_sensor,tilt_sensor,fuel_status,panic_status,sensor_veh_no,sensor_old_veh_no,remove_type,drs_status,replacetype,device_working_status,sensor_working_status,main_client_id,image);
         updateDataCall.enqueue(new Callback<MainResponse>() {
             @Override
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
@@ -584,6 +613,50 @@ public class NewInstallmentController extends Controller {
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
 
+                try {
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.RED);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+
+    public void reqeuestAccVtsDetails(String dbname,String server,String reg_no,ClientListener listener) {
+        updateDataCall = client_att.get_serial_no(dbname,server,reg_no);
+        updateDataCall.enqueue(new Callback<MainResponse>() {
+            @Override
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                listener.vtsAccResponses(response.body());
+            }
+            @Override
+            public void onFailure(Call<MainResponse> call, Throwable t) {
+                try {
+                    Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
+                    View snackbarView = snackbar.getView();
+                    snackbarView.setBackgroundColor(Color.RED);
+                    TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+                    textView.setTextColor(Color.WHITE);
+                    snackbar.show();
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+
+    public void requestLiveDeviceCount(String user_name,String status, String customer, ClientListener listener) {
+        liveDeviceCountCall = client_att.get_live_device_count_details(user_name,status,customer);
+        liveDeviceCountCall.enqueue(new Callback<MainResponse>() {
+            @Override
+            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
+                listener.updateDataResponse(response.body());
+            }
+            @Override
+            public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
                     Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();

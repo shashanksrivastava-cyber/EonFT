@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,8 +14,7 @@
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9.5">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,6 +47,39 @@
                         android:paddingBottom="5dp">
 
                         <RelativeLayout
+                            android:id="@+id/relayss"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/et_frame">
+
+                            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                android:id="@+id/new_main_clients"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:gravity="center"
+                                android:spinnerMode="dialog"
+                                android:visibility="visible" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="6dp"
+                                android:background="@color/eonWhite"
+                                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
                             android:id="@+id/relay"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
@@ -61,7 +95,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:gravity="center"
                                 android:spinnerMode="dialog"
                                 android:visibility="visible" />
@@ -69,10 +103,10 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_marginRight="6dp"
+                                android:layout_marginEnd="6dp"
                                 android:background="@color/eonWhite"
                                 android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -94,17 +128,17 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:gravity="center"
                                 android:spinnerMode="dialog" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_marginRight="6dp"
+                                android:layout_marginEnd="6dp"
                                 android:background="@color/eonWhite"
                                 android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -125,17 +159,17 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:gravity="center"
                                 android:spinnerMode="dialog" />
 
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_marginRight="6dp"
+                                android:layout_marginEnd="6dp"
                                 android:background="@color/eonWhite"
                                 android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -144,7 +178,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginEnd="10dp"
                             android:orientation="horizontal"
                             android:weightSum="4">
 
@@ -152,11 +186,11 @@
                                 android:id="@+id/installDate"
                                 android:layout_width="140dp"
                                 android:layout_height="40dp"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:background="@drawable/et_frame"
-                                android:drawableRight="@drawable/baseline_event_black_18"
+                                android:drawableEnd="@drawable/baseline_event_black_18"
                                 android:hint="Select Date"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
@@ -166,11 +200,11 @@
                                 android:id="@+id/installTime"
                                 android:layout_width="140dp"
                                 android:layout_height="40dp"
-                                android:layout_marginLeft="1dp"
+                                android:layout_marginStart="1dp"
                                 android:layout_marginTop="5dp"
-                                android:layout_marginRight="20dp"
+                                android:layout_marginEnd="20dp"
                                 android:background="@drawable/et_frame"
-                                android:drawableRight="@drawable/baseline_query_builder_black_18"
+                                android:drawableEnd="@drawable/baseline_query_builder_black_18"
                                 android:hint="Select Time"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
@@ -227,41 +261,43 @@
                                     android:id="@+id/new_in_drs_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginStart="5dp"
                                     android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm"
                                     android:hint="DRS ID"
                                     android:inputType="number"
                                     android:maxLength="20"
                                     android:singleLine="true"
                                     android:textSize="12sp" />
+
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <ProgressBar
                                 android:id="@+id/progressdrs"
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginTop="15dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:visibility="gone" />
 
                             <ImageView
                                 android:id="@+id/ivnotExistDRS"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginTop="15dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:visibility="gone" />
 
                             <ImageView
                                 android:id="@+id/ivExistDRS"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
+                                android:layout_alignParentEnd="true"
                                 android:layout_marginTop="15dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginEnd="10dp"
                                 android:visibility="gone" />
+
                         </RelativeLayout>
 
                         <LinearLayout
@@ -276,7 +312,7 @@
                                 android:id="@+id/new_drs_dirc"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
+                                android:layout_marginStart="5dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_weight="3"
                                 android:text="DRS Direction :"
@@ -286,8 +322,8 @@
                                 android:id="@+id/radiodirec"
                                 android:layout_width="wrap_content"
                                 android:layout_height="25dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_toRightOf="@+id/new_drs_dirc"
+                                android:layout_marginStart="5dp"
+                                android:layout_toEndOf="@+id/new_drs_dirc"
                                 android:layout_weight="1"
                                 android:orientation="horizontal">
 
@@ -316,7 +352,7 @@
                             android:id="@+id/magnetset_install"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:text="Magnet Set Installed"
                             android:visibility="visible" />
 
@@ -346,10 +382,10 @@
                         android:id="@+id/check_tel_supprt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:text="Telephonic Support"
                         android:textColor="@color/eonBlue"
-                        android:textSize="18dp"
+                        android:textSize="18sp"
                         android:visibility="gone" />
 
                     <EditText
@@ -362,7 +398,7 @@
                         android:background="@drawable/et_frame"
                         android:gravity="top|start"
                         android:hint="Remarks"
-                        android:inputType="text|textMultiLine"
+                        android:inputType="textCapWords|textMultiLine"
                         android:lines="4"
                         android:overScrollMode="always"
                         android:paddingLeft="12dp"
@@ -385,7 +421,7 @@
                     android:gravity="center"
                     android:text="Submit"
                     android:textColor="#ffffff"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -405,8 +441,6 @@
         android:progress="20" />
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/circularRelative"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

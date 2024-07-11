@@ -2,7 +2,6 @@ package in.eoninfotech.eontechnician.fragments;
 
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.helper.IncentiveDetail;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
-import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
+import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import retrofit2.Call;

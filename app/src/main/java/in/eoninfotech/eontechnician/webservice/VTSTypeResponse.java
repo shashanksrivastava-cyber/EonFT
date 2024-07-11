@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import in.eoninfotech.eontechnician.Responses.DeviceTypeOtherAis;
+import in.eoninfotech.eontechnician.responses.DeviceTypeOtherAis;
 
 public class VTSTypeResponse {
 

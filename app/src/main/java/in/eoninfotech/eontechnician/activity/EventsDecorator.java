@@ -1,7 +1,6 @@
 package in.eoninfotech.eontechnician.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 
@@ -14,10 +13,8 @@ import java.util.Calendar;
 
 import androidx.core.content.ContextCompat;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
+import in.eoninfotech.eontechnician.responses.AttendanceResponse;
 import retrofit2.Callback;
-
-import static java.security.AccessController.getContext;
 
 
 /**

@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.AbsListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -26,10 +22,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import in.eoninfotech.eontechnician.FaultyDevicesAdapter;
 import in.eoninfotech.eontechnician.FaultyDrsAdapter;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.FaultyDevices;
-import in.eoninfotech.eontechnician.Responses.FaultyDevicesDetails;
-import in.eoninfotech.eontechnician.Responses.UnderMaintenanceDetail;
-import in.eoninfotech.eontechnician.Responses.UnderMaintenanceResponse;
+import in.eoninfotech.eontechnician.responses.FaultyDevices;
+import in.eoninfotech.eontechnician.responses.FaultyDevicesDetails;
+import in.eoninfotech.eontechnician.responses.UnderMaintenanceDetail;
+import in.eoninfotech.eontechnician.responses.UnderMaintenanceResponse;
 import in.eoninfotech.eontechnician.UmainAdapter;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -176,7 +172,6 @@ public class FaultyDevicesActivity extends AppCompatActivity {
                     refreshLayout.setRefreshing(false);
                 }
             }
-
             @Override
             public void onFailure(Call<FaultyDevices> call, Throwable t) {
                 refreshLayout.setRefreshing(false);

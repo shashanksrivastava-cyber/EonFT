@@ -1,58 +1,48 @@
 package in.eoninfotech.eontechnician.webservice;
 
 
-import com.google.android.gms.location.LocationSettingsResponse;
-
-import java.lang.reflect.Array;
-import java.util.Map;
-
-import in.eoninfotech.eontechnician.ItemModel;
-import in.eoninfotech.eontechnician.Responses.ActivityResponse;
-import in.eoninfotech.eontechnician.Responses.AttendanceResponse;
-import in.eoninfotech.eontechnician.Responses.CallSheetListResponse;
-import in.eoninfotech.eontechnician.Responses.CallSheetResponse;
-import in.eoninfotech.eontechnician.Responses.ClientDataResponse;
-import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
-import in.eoninfotech.eontechnician.Responses.CollectionReportResponse;
-import in.eoninfotech.eontechnician.Responses.DRSResponse;
-import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
-import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
-import in.eoninfotech.eontechnician.Responses.DispatchDeviceDetails;
-import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.FaultyDevices;
-import in.eoninfotech.eontechnician.Responses.IncentiveResponse;
-import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
-import in.eoninfotech.eontechnician.Responses.ItemList;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.LogResponse;
-import in.eoninfotech.eontechnician.Responses.LoginResponse;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.MonthListResponse;
-import in.eoninfotech.eontechnician.Responses.MyPojo;
-import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
-import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalResponse;
-import in.eoninfotech.eontechnician.Responses.ReplaceReason;
-import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
-import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
-import in.eoninfotech.eontechnician.Responses.StockResponse;
-import in.eoninfotech.eontechnician.Responses.TechResponse;
-import in.eoninfotech.eontechnician.Responses.TechnicianMonthResponse;
-import in.eoninfotech.eontechnician.Responses.UnderMaintenanceResponse;
-import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
-import in.eoninfotech.eontechnician.Responses.VTSResponse;
-import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
-import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
-import in.eoninfotech.eontechnician.Responses.YearListResponse;
+import in.eoninfotech.eontechnician.responses.ActivityResponse;
+import in.eoninfotech.eontechnician.responses.AttendanceResponse;
+import in.eoninfotech.eontechnician.responses.CallSheetListResponse;
+import in.eoninfotech.eontechnician.responses.CallSheetResponse;
+import in.eoninfotech.eontechnician.responses.ClientDataResponse;
+import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
+import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.responses.CollectedItemsResponse;
+import in.eoninfotech.eontechnician.responses.CollectionReportResponse;
+import in.eoninfotech.eontechnician.responses.DRSResponse;
+import in.eoninfotech.eontechnician.responses.DashBoardResponse;
+import in.eoninfotech.eontechnician.responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.responses.FaultResponse;
+import in.eoninfotech.eontechnician.responses.FaultyDevices;
+import in.eoninfotech.eontechnician.responses.IncentiveResponse;
+import in.eoninfotech.eontechnician.responses.InstInstructionResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.LogResponse;
+import in.eoninfotech.eontechnician.responses.LoginResponse;
+import in.eoninfotech.eontechnician.responses.MonthListResponse;
+import in.eoninfotech.eontechnician.responses.MyPojo;
+import in.eoninfotech.eontechnician.responses.NotAvailActivityResponse;
+import in.eoninfotech.eontechnician.responses.PaymentMethodResponse;
+import in.eoninfotech.eontechnician.responses.RemovalActivityResponse;
+import in.eoninfotech.eontechnician.responses.RemovalResponse;
+import in.eoninfotech.eontechnician.responses.ReplaceReason;
+import in.eoninfotech.eontechnician.responses.SimOperatorResponse;
+import in.eoninfotech.eontechnician.responses.SimReplaceResponse;
+import in.eoninfotech.eontechnician.responses.StockResponse;
+import in.eoninfotech.eontechnician.responses.TechResponse;
+import in.eoninfotech.eontechnician.responses.TechnicianMonthResponse;
+import in.eoninfotech.eontechnician.responses.UnderMaintenanceResponse;
+import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
+import in.eoninfotech.eontechnician.responses.VTSResponse;
+import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
+import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
+import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.responses.YearListResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -151,7 +141,6 @@ public interface ApiHolder {
             @Field("client_id") String client_id,
             @Field("client_loc") String client_loc);
 
-
     @FormUrlEncoded
     @POST("stock-report.php")
     Call<StockResponse> stock_report(@Field("tech_name") String tech_name,
@@ -248,7 +237,6 @@ public interface ApiHolder {
     @GET("activities-list.php")
     Call<WorkTypeResponse> reqeuestworkType();
 
-
     @GET("vehicle-type.php")
     Call<VehicleTypeResponse> reqeuestvehicleType();
 
@@ -258,8 +246,14 @@ public interface ApiHolder {
 //            @Field("cust_id") String cust_id,
 //            @Field("cust_name") String cust_name);
 
-    @GET("clients-list.php")
-    Call<ClientResponse> reqeuestClientList();
+
+    @GET("main_client_list.php")
+    Call<MainResponse> reqeuestMainClientList();
+    @FormUrlEncoded
+    @POST("clients-list.php")
+    Call<ClientResponse> reqeuestClientList(
+            @Field("c_id") String c_id
+    );
 
     @GET("stock-clients.php")
     Call<ClientResponse> reqeuestStockClientList();
@@ -309,12 +303,10 @@ public interface ApiHolder {
             @Field("server") String server,
             @Field("dbname") String dbname);
 
-
     @FormUrlEncoded
     @POST("check-drs.php")
     Call<DRSResponse> reqeuestDrsDetail(
             @Field("id") String id);
-
 
     @Multipart
     @POST("technicians-work.php")
@@ -428,6 +420,9 @@ public interface ApiHolder {
                                              @Part("remove_type") RequestBody remove_type,
                                              @Part("drs_status") RequestBody drs_status,
                                              @Part("replace_type") RequestBody replace_type,
+                                             @Part("device_working_status") RequestBody device_working_status,
+                                             @Part("sensor_working_status") RequestBody sensor_working_status,
+                                             @Part("main_client_id") RequestBody main_client_id,
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
@@ -472,6 +467,7 @@ public interface ApiHolder {
             @Field("username") String username,
             @Field("password") String password,
             @Field("imei_no") String imei_no,
+            @Field("version_name") String version_name,
             @Field("fcm_token") String fcm_token);
 
     @FormUrlEncoded
@@ -714,5 +710,29 @@ public interface ApiHolder {
     @POST("get_tech_returned_device_details.php")
     Call<MainResponse> get_tech_returned_device_details(
             @Field("id_no") String id_no);
+
+    @FormUrlEncoded
+    @POST("get_device_count_details.php")
+    Call<MainResponse> get_device_count_details(
+            @Field("user_name") String user_name);
+
+    @FormUrlEncoded
+    @POST("get_serial_no.php")
+    Call<MainResponse> get_serial_no(
+            @Field("dbname") String dbname,
+            @Field("server") String server,
+            @Field("regno") String regno);
+
+    @FormUrlEncoded
+    @POST("get_live_device_count.php")
+    Call<MainResponse> get_live_device_count(
+            @Field("user_name") String user_name);
+
+    @FormUrlEncoded
+    @POST("get_live_device_count_details.php")
+    Call<MainResponse> get_live_device_count_details(
+            @Field("user_name") String user_name,
+            @Field("status") String status,
+            @Field("customer") String customer);
 
 }

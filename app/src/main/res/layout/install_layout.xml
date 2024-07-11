@@ -19,10 +19,9 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/oldDeviceType1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginRight="5dp"
                 android:orientation="horizontal"
                 android:weightSum="4">
 
@@ -30,7 +29,92 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="2.5"
+                    android:padding="5dp"
+                    android:text="What is Installed?"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="1.55"
+                    android:background="@drawable/et_frame"
+                    android:visibility="gone">
+
+                    <Spinner
+                        android:id="@+id/device1"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="6dp"
+                        android:background="@color/eonWhite"
+                        android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <RadioGroup
+                        android:id="@+id/radiodeviceType1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="4">
+
+                        <RadioButton
+                            android:id="@+id/device11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.1"
+                            android:checked="true"
+                            android:text="Device"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/acessories"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Accessories"
+                            android:textSize="14sp" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="2.5"
                     android:padding="5dp"
                     android:text="Device Type"
@@ -40,7 +124,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1.7"
                     android:background="@drawable/et_frame">
@@ -51,17 +135,17 @@
                         android:layout_height="35dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:gravity="center"
                         android:spinnerMode="dropdown" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:background="@color/eonWhite"
                         android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -70,6 +154,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/rel_sr_no"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
@@ -83,17 +168,17 @@
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:spinnerMode="dialog" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginEnd="6dp"
                     android:background="@color/eonWhite"
                     android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -102,14 +187,15 @@
             <TextView
                 android:id="@+id/text_to_show"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="2.5"
                 android:padding="5dp"
                 android:text="If serial no. not in list click here to add serial no. manually."
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/oldDevicesr_no"
@@ -147,7 +233,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_vts_sr_no"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="Sr. No."
                         android:visibility="gone"
@@ -172,7 +258,7 @@
                         android:layout_width="20dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:layout_marginEnd="10dp"
                         android:id="@+id/delete_button_e_series"
                         android:visibility="visible"
@@ -191,7 +277,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilsrNo"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:layout_weight="5">
@@ -216,7 +302,7 @@
                     android:layout_width="20dp"
                     android:layout_gravity="top|left"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
                     android:layout_marginEnd="10dp"
                     android:id="@+id/delete_button"
                     android:visibility="visible"
@@ -285,6 +371,57 @@
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <LinearLayout
+                android:id="@+id/linear_accessory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Vehicle Reg No.(In capital Letters Only)">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/accessory_reg_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textAllCaps="true"
+                        android:textSize="12sp"
+                        android:inputType="textCapCharacters"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/acc_sr_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/accessory_sr_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:hint="Sr. No."
+                        android:inputType="text"
+                        android:maxLength="15"
+                        android:singleLine="true"
+                        android:textSize="12sp"
+                        android:visibility="visible"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -299,17 +436,17 @@
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:gravity="center"
                     android:spinnerMode="dialog" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginRight="6dp"
+                    android:layout_marginEnd="6dp"
                     android:background="@color/eonWhite"
                     android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -319,8 +456,8 @@
                 android:id="@+id/drsInstall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:orientation="horizontal"
                 android:visibility="gone"
                 android:weightSum="4">
@@ -329,7 +466,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_weight="2.5"
                     android:padding="5dp"
                     android:text="Is DRS Install  "
@@ -345,7 +482,7 @@
                     <RadioGroup
                         android:id="@+id/radiodrsInstall"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_weight="1.5"
                         android:orientation="horizontal"
                         android:weightSum="3">
@@ -391,7 +528,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Device"
@@ -401,7 +538,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="1.55"
                         android:background="@drawable/et_frame"
@@ -413,17 +550,17 @@
                             android:layout_height="35dp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:gravity="center"
                             android:spinnerMode="dropdown" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginRight="6dp"
+                            android:layout_marginEnd="6dp"
                             android:background="@color/eonWhite"
                             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -439,7 +576,7 @@
                         <RadioGroup
                             android:id="@+id/radiodeviceType"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
                             android:orientation="horizontal"
                             android:weightSum="4">
@@ -467,7 +604,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
@@ -475,7 +612,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Is Demo ?"
@@ -491,7 +628,7 @@
                         <RadioGroup
                             android:id="@+id/is_demo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -526,7 +663,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Ign Connect "
@@ -542,7 +679,7 @@
                         <RadioGroup
                             android:id="@+id/radiogroup"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -578,7 +715,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Door Sensor "
@@ -594,7 +731,7 @@
                         <RadioGroup
                             android:id="@+id/radiogroupDoor"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -629,7 +766,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Cut Off "
@@ -645,7 +782,7 @@
                         <RadioGroup
                             android:id="@+id/radioGroupCutoff"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -689,7 +826,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_weight="2.5"
                             android:padding="5dp"
                             android:text="Panic Button"
@@ -705,7 +842,7 @@
                             <RadioGroup
                                 android:id="@+id/radioGroupPanic"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="0dp"
                                 android:layout_weight="1.5"
                                 android:orientation="horizontal"
                                 android:weightSum="3">
@@ -739,7 +876,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:padding="5dp"
                             android:layout_weight="2.5"
                             android:text="Fuel Guage"
@@ -755,7 +892,7 @@
                             <RadioGroup
                                 android:id="@+id/radioGroupFuel"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="0dp"
                                 android:layout_weight="1.5"
                                 android:orientation="horizontal"
                                 android:weightSum="3">
@@ -787,10 +924,10 @@
                         android:weightSum="4">
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:layout_weight="2"
                             android:padding="5dp"
                             android:text="Fuel Guage Voltage"
@@ -830,7 +967,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Fuel Sensor"
@@ -846,7 +983,7 @@
                         <RadioGroup
                             android:id="@+id/radioGroupfuel"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -884,7 +1021,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Tilt Sensor"
@@ -900,7 +1037,7 @@
                         <RadioGroup
                             android:id="@+id/radioGrouptilt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -938,7 +1075,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Fuel Sensor"
@@ -954,7 +1091,7 @@
                         <RadioGroup
                             android:id="@+id/radioGroupfuelSensor"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -992,7 +1129,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Temp Sensor"
@@ -1008,7 +1145,7 @@
                         <RadioGroup
                             android:id="@+id/radioGrouptemp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -1046,7 +1183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Trans Receiver"
@@ -1062,7 +1199,7 @@
                         <RadioGroup
                             android:id="@+id/radioGrouptrans"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -1100,7 +1237,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.5"
                         android:padding="5dp"
                         android:text="Silo Sensor"
@@ -1116,7 +1253,7 @@
                         <RadioGroup
                             android:id="@+id/radioGroupSilo"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1.5"
                             android:orientation="horizontal"
                             android:weightSum="3">
@@ -1155,7 +1292,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="2.7"
                         android:padding="5dp"
                         android:text="LID Sensor"
@@ -1171,7 +1308,7 @@
                         <RadioGroup
                             android:id="@+id/radioGroupLid"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
                             android:orientation="horizontal"
                             android:weightSum="4">
@@ -1220,5 +1357,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 </LinearLayout>

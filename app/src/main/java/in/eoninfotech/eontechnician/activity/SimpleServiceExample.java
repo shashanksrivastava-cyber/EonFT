@@ -1,48 +1,8 @@
 package in.eoninfotech.eontechnician.activity;
 
-import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.job.JobParameters;
-import android.app.job.JobService;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.SystemClock;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.Task;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import in.eoninfotech.eontechnician.GetLocation;
-import in.eoninfotech.eontechnician.Service.JobScheduleService;
-import in.eoninfotech.eontechnician.Storage.LocationPrefs;
-import in.eoninfotech.eontechnician.helper.Location_prop;
-import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.LocationsResponse;
-import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import in.eoninfotech.eontechnician.webservice.TrackingDetail;
-import in.eoninfotech.eontechnician.webservice.TrackingResponse;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by androidpc on 31/5/19.

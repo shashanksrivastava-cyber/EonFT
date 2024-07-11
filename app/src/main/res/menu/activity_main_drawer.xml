@@ -68,7 +68,13 @@
         android:icon="@drawable/upd_list"
         android:title="Technician of the Month" />
 
-<!--    <item-->
+    <item
+        android:id="@+id/material_dashboard"
+        android:icon="@drawable/upd_list"
+        android:title="Material Dashbaoard" />
+
+
+    <!--    <item-->
 <!--        android:id="@+id/faqs"-->
 <!--        android:icon="@drawable/ic_incentive"-->
 <!--        android:title="FAQs" />-->

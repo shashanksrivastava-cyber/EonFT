@@ -1,22 +1,22 @@
 package in.eoninfotech.eontechnician.callbacks;
 
-import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
-import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
-import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
-import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalResponse;
-import in.eoninfotech.eontechnician.Responses.ReplaceReason;
-import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
-import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
-import in.eoninfotech.eontechnician.Responses.VTSResponse;
-import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
-import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
+import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.responses.CollectedItemsResponse;
+import in.eoninfotech.eontechnician.responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.responses.FaultResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.NotAvailActivityResponse;
+import in.eoninfotech.eontechnician.responses.PaymentMethodResponse;
+import in.eoninfotech.eontechnician.responses.RemovalActivityResponse;
+import in.eoninfotech.eontechnician.responses.RemovalResponse;
+import in.eoninfotech.eontechnician.responses.ReplaceReason;
+import in.eoninfotech.eontechnician.responses.SimOperatorResponse;
+import in.eoninfotech.eontechnician.responses.SimReplaceResponse;
+import in.eoninfotech.eontechnician.responses.VTSResponse;
+import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
+import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
+import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 
 /**
  * Created by root on 11/1/19.
@@ -61,6 +61,8 @@ public interface ClientListener extends ErrorCallBacks {
     void pMethod(PaymentMethodResponse response);
 
     void updateDataResponse(MainResponse response);
+    void mainClientResponse(MainResponse response);
+    void vtsAccResponses(MainResponse response);
 
 
 }

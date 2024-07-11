@@ -116,8 +116,12 @@
 //import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
 //import in.eoninfotech.eontechnician.callbacks.ClientListener;
 //import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
+//import in.eoninfotech.eontechnician.databinding.FaultLayoutBinding;
 //import in.eoninfotech.eontechnician.databinding.FragmentNewInstallBinding;
 //import in.eoninfotech.eontechnician.databinding.InstallLayoutBinding;
+//import in.eoninfotech.eontechnician.databinding.PaymentcollectionBinding;
+//import in.eoninfotech.eontechnician.databinding.ReinstallLayoutBinding;
+//import in.eoninfotech.eontechnician.databinding.ReplaceLayoutBinding;
 //import in.eoninfotech.eontechnician.helper.CheckConnection;
 //import in.eoninfotech.eontechnician.helper.FileUtils;
 //import in.eoninfotech.eontechnician.helper.K;
@@ -145,7 +149,11 @@
 //
 //    View v;
 //    FragmentNewInstallBinding binding;
+//    ReplaceLayoutBinding replaceLayoutBinding;
 //    InstallLayoutBinding installLayoutBinding;
+//   PaymentcollectionBinding paymentcollectionBinding;
+//   FaultLayoutBinding faultLayoutBinding;
+//   ReinstallLayoutBinding reinstallLayoutBinding;
 //    private final int SELECT_PHOTO = 1;
 //    public static final String IMAGE_DIRECTORY_NAME = "android_file";
 //    public static final int MEDIA_TYPE_IMAGE = 1;
@@ -165,7 +173,7 @@
 //            til_remove_sr, tilDeviceMiss, told_drsid, tnew_drsid, t_drs_veh_no, t_drs_vts_id, tilvtsno, tilsrNo, tilFaultVts,
 //            tilFaultSr, tilphnVts, tilphnSr, til_old_vltd_sr_no, til_new_vltd_sr_no, til_id_reinst, til_id_sr, til_sr_reinst,
 //            til_new_sr_replace, til_old_sr_replace, sensor_veh, sensor_veh_missing, sensor_veh_remove, sensor_veh_reinstall;
-//    String fuel_voltage = "0", path, drs_type, clientId, personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
+//    String fuel_voltage = "0", path, mainClientId, drs_type, clientId, personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
 //            buttonPressed = "0", buttonPressedActivity = "0", s_reg_no, s_rep_srNo, s_reinst_conf_reg_no, s_device_id, s_drs_id, s_new_drs_id, s_clientname = "SELECT CLIENT", s_remarks, status, s_work_type, s_Time, s_vehicletype, s_VehicleTypeInst, s_reason_repla = "0", removalReason = "0", itemsCollected = "0", others = "", s_work_id, s_new_device_id, s_e_device_id = "0", is_drs = "N", drs_dirction = "N", disconnection_reason = "0", ignition_sensor = "N", sim_reason = "0", missing_reason = "0", cut_off = "N", serial_no, confirmVehNo, panic = "N",
 //            s_old_serial_no, s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "V", missDeviceType = "V", reinstDevice = "V";
 //    CheckConnection chk;
@@ -239,19 +247,17 @@
 //                             final Bundle savedInstanceState) {
 //        binding = FragmentNewInstallBinding.inflate(inflater, container, false);
 //        installLayoutBinding = InstallLayoutBinding.inflate(inflater, container, false);
+//        replaceLayoutBinding = ReplaceLayoutBinding.inflate(inflater, container, false);
+//        paymentcollectionBinding = PaymentcollectionBinding.inflate(inflater, container, false);
+//        faultLayoutBinding = FaultLayoutBinding.inflate(inflater, container, false);
+//        reinstallLayoutBinding = ReinstallLayoutBinding.inflate(inflater, container, false);
+//
 //        chk = new CheckConnection(v.getContext());
 //        sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
 //        uusername = sharedprefs.getString("s_uuser", "");
 //        user_id = sharedprefs.getString("s_user_id", "");
 //        version = sharedprefs.getString("version", "");
-//        regNo = v.findViewById(R.id.regNo);
-//        nodrsReplace = v.findViewById(R.id.nodrsReplace);
-//        radioyesdrsReplace = v.findViewById(R.id.radioyesdrsReplace);
-//        amount = v.findViewById(R.id.amount);
 //        lv = v.findViewById(R.id.other_list);
-//        doorNo = v.findViewById(R.id.doorNo);
-//        cutoffNo = v.findViewById(R.id.cutoffNo);
-//        cut_off_no_reinst = v.findViewById(R.id.cut_off_no_reinst);
 //        radioDevice = v.findViewById(R.id.radioDevice);
 //        drs_no_reinst = v.findViewById(R.id.drs_no_reinst);
 //        fuelNoReinst = v.findViewById(R.id.fuelNoReinst);
@@ -927,13 +933,13 @@
 //                                vts_id = old_deviceidreplace.getText().toString();
 //                                getVTSDetail();
 //                            } else {
-//                                regNo.setText("");
+//                                replaceLayoutBinding.regNo.setText("");
 //                                plantName.setText("");
 //                                // drsReplacemsg.setVisibility(View.GONE);
 //                            }
-//                            regNo.setOnTouchListener((v1, event) -> {
-//                                regNo.setText("");
-//                                regNo.setTextColor(getResources().getColor(R.color.black));
+//                            replaceLayoutBinding.regNo.setOnTouchListener((v1, event) -> {
+//                                replaceLayoutBinding.regNo.setText("");
+//                                replaceLayoutBinding.regNo.setTextColor(getResources().getColor(R.color.black));
 //                                return false;
 //                            });
 //                        }
@@ -945,12 +951,12 @@
 //                                vts_id = old_replace_sr_no.getText().toString();
 //                                getVTSDetail();
 //                            } else {
-//                                regNo.setText("");
+//                                replaceLayoutBinding.regNo.setText("");
 //                                plantName.setText("");
 //                            }
-//                            regNo.setOnTouchListener((v1, event) -> {
-//                                regNo.setText("");
-//                                regNo.setTextColor(getResources().getColor(R.color.black));
+//                            replaceLayoutBinding.regNo.setOnTouchListener((v1, event) -> {
+//                                replaceLayoutBinding.regNo.setText("");
+//                                replaceLayoutBinding.regNo.setTextColor(getResources().getColor(R.color.black));
 //                                return false;
 //                            });
 //                        }
@@ -2581,8 +2587,8 @@
 //                    ignition_sensor = "Y";
 //                }
 //                int selectedTypes = radiogroupDoor.getCheckedRadioButtonId();
-//                doorNo = v.findViewById(selectedTypes);
-//                String typesensor = doorNo.getText().toString();
+//                //installLayoutBinding.doorNo = v.findViewById(selectedTypes);
+//                String typesensor = installLayoutBinding.doorNo.getText().toString();
 //                if (typesensor.equalsIgnoreCase("No")) {
 //                    door_sensor = "N";
 //                } else {
@@ -2599,8 +2605,8 @@
 //                    drs_dirction = "R";
 //                }
 //                int cutoffType = radioGroupCutoff.getCheckedRadioButtonId();
-//                cutoffNo = v.findViewById(cutoffType);
-//                String cutoff = cutoffNo.getText().toString();
+//                //cutoffNo = v.findViewById(cutoffType);
+//                String cutoff = installLayoutBinding.cutoffNo.getText().toString();
 //                if (cutoff.equalsIgnoreCase("No")) {
 //                    cut_off = "N";
 //                } else {
@@ -2781,16 +2787,16 @@
 //                    ignition_sensor = "N";
 //                }
 //                int selectedTypes = radiogroupDoor.getCheckedRadioButtonId();
-//                doorNo = v.findViewById(selectedTypes);
-//                String typesensor = doorNo.getText().toString();
+//                //doorNo = v.findViewById(selectedTypes);
+//                String typesensor = installLayoutBinding.doorNo.getText().toString();
 //                if (typesensor.equalsIgnoreCase("No")) {
 //                    door_sensor = "N";
 //                } else {
 //                    door_sensor = "Y";
 //                }
 //                int cutoffTypeReinst = radiogroupCutOffReinst.getCheckedRadioButtonId();
-//                cut_off_no_reinst = v.findViewById(cutoffTypeReinst);
-//                String cutoffReinst = cut_off_no_reinst.getText().toString();
+//                //cut_off_no_reinst = v.findViewById(cutoffTypeReinst);
+//                String cutoffReinst = reinstallLayoutBinding.cutOffNoReinst.getText().toString();
 //                if (cutoffReinst.equalsIgnoreCase("No")) {
 //                    cut_off = "N";
 //                } else {
@@ -3061,7 +3067,7 @@
 //                } else {
 //                    s_new_device_id = "0";
 //                }
-//                s_reg_no = regNo.getText().toString();
+//                s_reg_no = replaceLayoutBinding.regNo.getText().toString();
 //                int selectedId = radiodireplace.getCheckedRadioButtonId();
 //                radionormalrep = v.findViewById(selectedId);
 //                linearDrs.setVisibility(View.GONE);
@@ -3081,8 +3087,8 @@
 //                    ignition_sensor = "Y";
 //                }
 //                int selectedTypes = radiogroupDoor.getCheckedRadioButtonId();
-//                doorNo = v.findViewById(selectedTypes);
-//                String typesensor = doorNo.getText().toString();
+//                //doorNo = v.findViewById(selectedTypes);
+//                String typesensor = installLayoutBinding.doorNo.getText().toString();
 //                if (typesensor.equalsIgnoreCase("No")) {
 //                    door_sensor = "N";
 //                } else {
@@ -3094,10 +3100,10 @@
 //                radiotype = v.findViewById(selectedType);
 //                String type = radiotype.getText().toString();
 //                if (type.equalsIgnoreCase("YES")) {
-//                    nodrsReplace.setChecked(false);
+//                    replaceLayoutBinding.nodrsReplace.setChecked(false);
 //                    is_drs = "Y";
 //                } else {
-//                    radioyesdrsReplace.setChecked(false);
+//                    replaceLayoutBinding.radioyesdrsReplace.setChecked(false);
 //                    is_drs = "N";
 //                }
 //                if (magnet_set.isChecked()) {
@@ -3139,7 +3145,7 @@
 //                    } else if (serial_no.equals("") && (til_new_sr_replace.getVisibility() == View.VISIBLE) && (!(radioButtonChecked.equalsIgnoreCase("N")))) {
 //                        new_replace_sr_no.setError("Sr. no. can't be empty");
 //                    } else if ((!(radioButtonChecked.equalsIgnoreCase("N")) && (s_reg_no.equals("") || s_reg_no.equals("0") || s_reg_no.equals("null")))) {
-//                        regNo.setError("Registration no. can't be null or zero");
+//                        replaceLayoutBinding.regNo.setError("Registration no. can't be null or zero");
 //                    } else if (s_old_serial_no.equals("") && (rep_srNo.getVisibility() == View.VISIBLE) && (!(radioButtonChecked.equalsIgnoreCase("N")))) {
 //                        rep_srNo.setError("Sr. no. can't be null");
 //                    } else if ((s_old_serial_no.length() < 10) && (rep_srNo.getVisibility() == View.VISIBLE) && (!(radioButtonChecked.equalsIgnoreCase("N")))) {
@@ -3186,7 +3192,7 @@
 //                    } else if ((reason_replace.getSelectedItem().toString().equalsIgnoreCase("Select Reason"))) {
 //                        Toast.makeText(getContext(), "Please Select Reason", Toast.LENGTH_LONG).show();
 //                    } else if (s_reg_no.equals("") || s_reg_no.equals("0") || s_reg_no.equals("null")) {
-//                        regNo.setError("Registration no. can't be null or zero");
+//                        replaceLayoutBinding.regNo.setError("Registration no. can't be null or zero");
 //                    } else {
 //                        s_new_drs_id = new_drsid.getText().toString();
 //                        s_vts_type = "2";
@@ -3269,15 +3275,14 @@
 //                        updateInstallationData();
 //                    }
 //                } else if ((radioButtonChecked.equalsIgnoreCase("N"))) {
-//                    sensor_old_veh_no = sensor_veh_no.getText().toString();
+//                    sensor_old_veh_no = replaceLayoutBinding.sensorVehNo.getText().toString();
 //                    if (s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")) {
 //                        Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
 //                    } else if ((radioButtonChecked.equalsIgnoreCase("N") && (sensor_veh.getVisibility() == View.GONE))) {
 //                        Toast.makeText(getContext(), "Please Select Sensor", Toast.LENGTH_LONG).show();
-//                    } else if ((sensor_veh_no.getVisibility() == View.VISIBLE) && (sensor_old_veh_no.equalsIgnoreCase(""))) {
-//                        sensor_veh_no.setError("Enter Vehicle No");
+//                    } else if ((replaceLayoutBinding.sensorVehNo.getVisibility() == View.VISIBLE) && (sensor_old_veh_no.equalsIgnoreCase(""))) {
+//                        replaceLayoutBinding.sensorVehNo.setError("Enter Vehicle No");
 //                    } else {
-//
 //                        sen_vehicle_no = "";
 //                        s_drs_id = "0";
 //                        s_new_drs_id = "0";
@@ -3825,10 +3830,10 @@
 //                    updateInstallationData();
 //                }
 //            } else if (s_work_id.equalsIgnoreCase("10")) {
-//                String abc = amount.getText().toString();
+//                String abc = paymentcollectionBinding.amount.getText().toString();
 //                if (followUp.getVisibility() == View.GONE) {
 //                    if (abc.equalsIgnoreCase("")) {
-//                        amount.setError("Fill Field");
+//                        paymentcollectionBinding.amount.setError("Fill Field");
 //                    } else {
 //                        x = Integer.parseInt(abc);
 //                        collection_amount = abc + ".00";
@@ -4369,7 +4374,7 @@
 //    }
 //
 //    private void addclients() {
-//        newInstallmentController.reqeuestClientList(this);
+//        newInstallmentController.reqeuestClientList(mainClientId,this);
 //    }
 //
 //    private void removal_type() {
@@ -4465,6 +4470,7 @@
 //                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //                            vehicle_list_um.setAdapter(adapter);
 //                            vehicle_list_pm.setAdapter(adapter);
+//
 //                        } catch (NullPointerException npe) {
 //                            npe.printStackTrace();
 //                        }
@@ -4809,7 +4815,7 @@
 //        s_vts_type = "SELECT VTS TYPE";
 //        old_deviceid.setText("");
 //        old_deviceidreplace.setText("");
-//        regNo.setText("");
+//        replaceLayoutBinding.regNo.setText("");
 //        new_deviceid.setText("");
 //        plantName.setText("");
 //        e_drs_id.setText("");
@@ -4908,10 +4914,10 @@
 //        tiltNo.setChecked(true);
 //        is_demo_no.setChecked(true);
 //        installLayoutBinding.lIn.setChecked(true);
-//        doorNo.setChecked(true);
-//        cutoffNo.setChecked(true);
+//        installLayoutBinding.doorNo.setChecked(true);
+//        installLayoutBinding.cutoffNo.setChecked(true);
 //        fuelSensorNewNo.setChecked(true);
-//        cut_off_no_reinst.setChecked(true);
+//        reinstallLayoutBinding.cutOffNoReinst.setChecked(true);
 //        drs_no_reinst.setChecked(true);
 //        fuelNoReinst.setChecked(true);
 //        panicNoReinst.setChecked(true);
@@ -5406,12 +5412,12 @@
 //                        String location_Name = vtsList.get(i).getLocation_name();
 //                        if (s_work_id.equalsIgnoreCase("3")) {
 //                            if (s_reg_no.equalsIgnoreCase("null") || (s_reg_no.equalsIgnoreCase("") || (s_reg_no.equals("0")))) {
-//                                regNo.setText("Please Enter Registration no.");
-//                                regNo.setTextColor(getResources().getColor(R.color.greyed_out));
-//                                regNo.setEnabled(true);
+//                                replaceLayoutBinding.regNo.setText("Please Enter Registration no.");
+//                                replaceLayoutBinding.regNo.setTextColor(getResources().getColor(R.color.greyed_out));
+//                                replaceLayoutBinding.regNo.setEnabled(true);
 //                            } else {
-//                                regNo.setText(s_reg_no);
-//                                regNo.setTextColor(getResources().getColor(R.color.black));
+//                                replaceLayoutBinding.regNo.setText(s_reg_no);
+//                                replaceLayoutBinding.regNo.setTextColor(getResources().getColor(R.color.black));
 //                                plantName.setText(location_Name);
 //                            }
 //                        } else if (s_work_id.equalsIgnoreCase("1")) {
@@ -5543,8 +5549,8 @@
 //                is_Demo.check(is_demo_no.getId());
 //                is_demo_no.setChecked(true);
 //                installLayoutBinding.lIn.setChecked(true);
-//                doorNo.setChecked(true);
-//                cutoffNo.setChecked(true);
+//                installLayoutBinding.doorNo.setChecked(true);
+//                installLayoutBinding.cutoffNo.setChecked(true);
 //                panicNo.setChecked(true);
 //                fuelNo.setChecked(true);
 //                if (s_work_id.equalsIgnoreCase("2")) {
@@ -5578,6 +5584,11 @@
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+//    }
+//
+//    @Override
+//    public void mainClientResponse(MainResponse response) {
+//
 //    }
 //
 //    @Override

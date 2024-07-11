@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
-import in.eoninfotech.eontechnician.Responses.MyPojo;
+import in.eoninfotech.eontechnician.responses.MyPojo;
 import in.eoninfotech.eontechnician.activity.LiveDataWebView;
 
 /**

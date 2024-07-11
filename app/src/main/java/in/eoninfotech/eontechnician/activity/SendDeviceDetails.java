@@ -17,18 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
-import in.eoninfotech.eontechnician.BillViewAdapter;
 import in.eoninfotech.eontechnician.NonScrollListView;
 import in.eoninfotech.eontechnician.OtherMaterialAdapter;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.DeviceItems;
-import in.eoninfotech.eontechnician.Responses.DeviceList;
-import in.eoninfotech.eontechnician.Responses.DispatchDeviceDetails;
-import in.eoninfotech.eontechnician.Responses.FaultList;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.TechReturnDetails;
+import in.eoninfotech.eontechnician.responses.DeviceItems;
+import in.eoninfotech.eontechnician.responses.DeviceList;
+import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.databinding.ActivitySendDeviceDetailsBinding;
-import in.eoninfotech.eontechnician.fragments.LiveStatusAdapterNew;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;

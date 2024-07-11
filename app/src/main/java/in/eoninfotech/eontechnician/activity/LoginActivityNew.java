@@ -2,11 +2,9 @@ package in.eoninfotech.eontechnician.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -25,17 +23,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.utils.Utils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -56,18 +50,14 @@ import androidx.core.content.ContextCompat;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.BuildConfig;
-import in.eoninfotech.eontechnician.GetLocation;
 import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.LoginDetail;
-import in.eoninfotech.eontechnician.Responses.LoginResponse;
-import in.eoninfotech.eontechnician.Service.ForegroundService;
+import in.eoninfotech.eontechnician.responses.LoginDetail;
+import in.eoninfotech.eontechnician.responses.LoginResponse;
 
-import in.eoninfotech.eontechnician.Storage.LocationPrefs;
+import in.eoninfotech.eontechnician.storage.LocationPrefs;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
-import in.eoninfotech.eontechnician.helper.EONUtil;
 import in.eoninfotech.eontechnician.helper.K;
-import in.eoninfotech.eontechnician.helper.TelephonyInfo;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -252,15 +242,15 @@ public class LoginActivityNew extends AppCompatActivity {
     }
 
     private void getFCMTocken() {
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                token = task.getException().getMessage();
-                Log.w("FCM TOKEN Failed", task.getException());
-            } else {
-                token = task.getResult().getToken();
-                Log.i("FCM TOKEN", token);
-            }
-        });
+//        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+//            if (!task.isSuccessful()) {
+//                token = task.getException().getMessage();
+//                Log.w("FCM TOKEN Failed", task.getException());
+//            } else {
+//                token = task.getResult().getToken();
+//                Log.i("FCM TOKEN", token);
+//            }
+//        });
     }
     public String getMacAddr() {
         try {
@@ -292,7 +282,7 @@ public class LoginActivityNew extends AppCompatActivity {
     private void getLogin() {
         progressDialog.show();
         ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
-        Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1,token);
+        Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1,versionName,token);
         locCall.enqueue(new Callback<LoginResponse>() {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 try{

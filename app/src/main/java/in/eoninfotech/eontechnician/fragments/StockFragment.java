@@ -1,14 +1,10 @@
 package in.eoninfotech.eontechnician.fragments;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,38 +20,21 @@ import android.widget.Toast;
 
 import com.androidadvance.topsnackbar.TSnackbar;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import androidx.fragment.app.Fragment;
-import in.eoninfotech.eontechnician.HttpRestClient;
+
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ClientDataResponse;
-import in.eoninfotech.eontechnician.Responses.ClientDetails;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.StockClientDataResponse;
+import in.eoninfotech.eontechnician.responses.ClientDataResponse;
+import in.eoninfotech.eontechnician.responses.ClientDetails;
+import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.helper.EONUtil;
-import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.StockDetail;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;

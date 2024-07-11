@@ -4,9 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import in.eoninfotech.eontechnician.Service.ForegroundService;
-import in.eoninfotech.eontechnician.activity.SimpleServiceExample;
-
 /**
  * Created by androidpc on 6/6/19.
  */

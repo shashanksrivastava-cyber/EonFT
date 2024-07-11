@@ -10,25 +10,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.timqi.sectorprogressview.ColorfulRingProgressView;
-import com.timqi.sectorprogressview.SectorProgressView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,10 +32,10 @@ import androidx.fragment.app.Fragment;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
-import in.eoninfotech.eontechnician.Responses.TechDashboardDetail;
-import in.eoninfotech.eontechnician.Responses.TechDetails;
-import in.eoninfotech.eontechnician.Responses.TechResponse;
+import in.eoninfotech.eontechnician.responses.DashBoardResponse;
+import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
+import in.eoninfotech.eontechnician.responses.TechDetails;
+import in.eoninfotech.eontechnician.responses.TechResponse;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -135,6 +125,7 @@ public class OtherDashBoardFragment extends Fragment {
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         setDateAndTime();
 
+
         cv_one_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,11 +163,11 @@ public class OtherDashBoardFragment extends Fragment {
         cv_four_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "3");
-//                intent.putExtra("tab", "1");
-//                intent.putExtra("other", "2");
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+                intent.putExtra("device_value", "4");
+                intent.putExtra("tab", "1");
+                intent.putExtra("other", "2");
+                startActivity(intent);
             }
         });
 

@@ -1,42 +1,36 @@
 package in.eoninfotech.eontechnician.fragments;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.PieChart;
-
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
-import com.timqi.sectorprogressview.ColorfulRingProgressView;
-import com.timqi.sectorprogressview.SectorProgressView;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import dmax.dialog.SpotsDialog;
-import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.DashBoardResponse;
-import in.eoninfotech.eontechnician.Responses.TechDashboardDetail;
+import in.eoninfotech.eontechnician.responses.DashBoardResponse;
+import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
 import in.eoninfotech.eontechnician.databinding.DashboardNewBinding;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -50,17 +44,19 @@ public class DashBoardFragment extends Fragment {
 
     View v;
     DashboardNewBinding binding;
-    String usrname, current_date, s_time, zone;
+    String usrname, current_date, s_time, zone,version, months;
     int year, day, month, hour, minutes;
-    String version, months;
     Calendar calen = Calendar.getInstance();
     ArrayList<Float> yData = new ArrayList<>();
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
-    Float achivd, total;
+    Float achivd;
     private AlertDialog progressDialog;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     private String[] xData;
+
+    ReviewManager reviewManager;
+    ReviewInfo reviewInfo = null;
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
 
@@ -80,6 +76,10 @@ public class DashBoardFragment extends Fragment {
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         setDateAndTime();
 
+        getReviewInfo();
+
+        //AskForRating(0);
+
         binding.cvOneLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +88,6 @@ public class DashBoardFragment extends Fragment {
                 intent.putExtra("tab", "1");
                 intent.putExtra("other", "2");
                 startActivity(intent);
-
             }
         });
         binding.cvTwoLogin.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +98,6 @@ public class DashBoardFragment extends Fragment {
                 intent.putExtra("tab", "1");
                 intent.putExtra("other", "2");
                 startActivity(intent);
-
             }
         });
 
@@ -111,18 +109,17 @@ public class DashBoardFragment extends Fragment {
                 intent.putExtra("tab", "1");
                 intent.putExtra("other", "2");
                 startActivity(intent);
-
             }
         });
 
         binding.cvFourLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "4");
-//                intent.putExtra("tab", "1");
-//                intent.putExtra("other", "2");
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+                intent.putExtra("device_value", "4");
+                intent.putExtra("tab", "1");
+                intent.putExtra("other", "2");
+                startActivity(intent);
             }
         });
 
@@ -171,6 +168,59 @@ public class DashBoardFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    private void AskForRating(int _appUsedCount){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setTitle("Please Rate Us");
+        alert.setIcon(R.drawable.app_icon);
+        alert.setMessage("Thanks for using the application. If you like YOUR APP NAME please rate us! Your feedback is important for us!");
+        alert.setPositiveButton("Rate it",new Dialog.OnClickListener(){
+            public void onClick(DialogInterface dialog, int whichButton){
+                String url = "https://play.google.com/store/apps/details?id=YOUR PACKAGE NAME";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+        alert.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alert.show();
+    }
+
+    private void getReviewInfo() {
+        reviewManager = ReviewManagerFactory.create(getActivity());
+        //reviewManager = new FakeReviewManager(getActivity());
+        Task<ReviewInfo> manager = reviewManager.requestReviewFlow();
+        manager.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                reviewInfo = task.getResult();
+                startReviewFlow();
+            } else {
+                //Toast.makeText(getActivity(), "In App ReviewFlow failed to start", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void startReviewFlow() {
+
+        if (reviewInfo != null) {
+            Task<Void> flow = reviewManager.launchReviewFlow(getActivity(), reviewInfo);
+            flow.addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(Task<Void> task) {
+                   // Toast.makeText(getActivity(), "In App Rating complete", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+        else {
+           // Toast.makeText(getActivity(), "In App Rating failed", Toast.LENGTH_LONG).show();
+        }
     }
 
     void getDashBoardDetail() {
@@ -266,7 +316,6 @@ public class DashBoardFragment extends Fragment {
                 public void onFailure(Call<DashBoardResponse> call, Throwable t) {
                     t.printStackTrace();
                     Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
-
                 }
             });
         } catch (Exception e) {

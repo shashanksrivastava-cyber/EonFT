@@ -217,7 +217,8 @@
         android:padding="5dp"
         android:text="If serial no. not in list click here to add serial no. manually."
         android:textColor="@color/colorPrimary"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/linear_device_sr_no_reinstall_ais"

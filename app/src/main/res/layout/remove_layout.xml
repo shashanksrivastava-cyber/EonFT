@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:visibility="visible"
         android:weightSum="2">
 
@@ -30,7 +30,7 @@
             android:id="@+id/radioGroupTypeRemove"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@+id/replace_deviceType"
             android:layout_weight="1"
@@ -49,7 +49,7 @@
                 android:id="@+id/radioSensorRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:text="Sensor"
                 android:textSize="14sp" />
@@ -58,7 +58,7 @@
                 android:id="@+id/radioBothRemove"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:text="Both"
                 android:textSize="14sp" />
@@ -70,7 +70,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:orientation="horizontal"
         android:weightSum="4">
 
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.5"
             android:padding="5dp"
             android:text="Device Type"
@@ -88,7 +88,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="3dp"
             android:layout_weight="1.6"
             android:background="@drawable/et_frame">
@@ -99,17 +99,17 @@
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_marginRight="6dp"
+                android:layout_marginEnd="6dp"
                 android:background="@color/eonWhite"
                 android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -132,17 +132,17 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:gravity="center"
             android:spinnerMode="dialog" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginRight="6dp"
+            android:layout_marginEnd="6dp"
             android:background="@color/eonWhite"
             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -163,17 +163,17 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:gravity="center"
             android:spinnerMode="dialog" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginRight="6dp"
+            android:layout_marginEnd="6dp"
             android:background="@color/eonWhite"
             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -184,12 +184,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_weight="2.5"
         android:padding="5dp"
         android:text="If serial no. not in list click here to add serial no. manually."
         android:textColor="@color/colorPrimary"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:id="@+id/linear_device_sr_no_remove"
@@ -223,7 +224,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="top|left"
-            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_minus"
@@ -263,7 +264,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="top|left"
-            android:layout_marginLeft="3dp"
+            android:layout_marginStart="3dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/ic_minus"
@@ -319,6 +320,7 @@
                 android:inputType="number"
                 android:singleLine="true"
                 android:textSize="12sp" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -343,38 +345,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
-
-    <!--        <ProgressBar-->
-    <!--            android:id="@+id/progressremove"-->
-    <!--            android:layout_width="20dp"-->
-    <!--            android:layout_height="20dp"-->
-    <!--            android:layout_alignParentRight="true"-->
-    <!--            android:layout_marginTop="15dp"-->
-    <!--            android:layout_marginRight="10dp"-->
-    <!--            android:visibility="gone" />-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/ivExistRemove"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentRight="true"-->
-    <!--            android:layout_marginTop="15dp"-->
-    <!--            android:layout_marginRight="10dp"-->
-    <!--            android:src="@drawable/ic_circle_black_24dp"-->
-    <!--            android:visibility="gone" />-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/ivnotExistRemove"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentRight="true"-->
-    <!--            android:layout_marginTop="15dp"-->
-    <!--            android:layout_marginRight="10dp"-->
-    <!--            android:src="@drawable/ic_cancel_black_24dp"-->
-    <!--            android:visibility="gone" />-->
-
-    <!--    </RelativeLayout>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -418,10 +388,10 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:background="@color/eonWhite"
             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
 
@@ -449,20 +419,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_below="@+id/header_button"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentStart="true"/>
 
     </LinearLayout>
-
-
-    <in.eoninfotech.eontechnician.view.MyTextView
-        android:id="@+id/device_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Removed Sensor Details"
-        android:textStyle="bold"
-        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -477,7 +436,129 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Device status"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroupdeviceworking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/deviceWorking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="Working"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Faulty"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_weight="2.5"
+            android:padding="5dp"
+            android:text="Sensor status"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radioGroupsensorworking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioButton
+                    android:id="@+id/sensorWorking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:checked="true"
+                    android:text="Working"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Faulty"
+                    android:textSize="14sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <in.eoninfotech.eontechnician.view.MyTextView
+        android:id="@+id/device_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Removed Sensor Details"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.5"
             android:padding="5dp"
             android:text="DRS Sensor"
@@ -533,7 +614,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.5"
             android:padding="5dp"
             android:text="Tilt Sensor"
@@ -589,7 +670,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.5"
             android:padding="5dp"
             android:text="Temp Sensor"
@@ -645,7 +726,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.5"
             android:padding="5dp"
             android:text="Panic Button"
@@ -698,7 +779,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.5"
             android:padding="5dp"
             android:text="Fuel Sensor"
@@ -808,7 +889,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="2.7"
             android:padding="5dp"
             android:text="LID Sensor"

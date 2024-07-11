@@ -4,14 +4,12 @@ import android.content.SharedPreferences;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
-import in.eoninfotech.eontechnician.Storage.LocationPrefs;
+import in.eoninfotech.eontechnician.storage.LocationPrefs;
 
 
 public class SendDatatoServer extends AppCompatActivity {

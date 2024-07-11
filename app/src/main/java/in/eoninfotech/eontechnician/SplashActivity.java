@@ -1,49 +1,32 @@
 package in.eoninfotech.eontechnician;
 
 import android.app.AlarmManager;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.app.admin.DeviceAdminReceiver;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Geocoder;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.net.NetworkInterface;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import in.eoninfotech.eontechnician.Storage.LocationPrefs;
+import in.eoninfotech.eontechnician.storage.LocationPrefs;
 import in.eoninfotech.eontechnician.activity.LoginActivityNew;
-import in.eoninfotech.eontechnician.helper.EONUtil;
-import in.eoninfotech.eontechnician.helper.TelephonyInfo;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnician.webservice.TrackingDetail;
@@ -51,8 +34,6 @@ import in.eoninfotech.eontechnician.webservice.TrackingResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by root on 17/10/18.

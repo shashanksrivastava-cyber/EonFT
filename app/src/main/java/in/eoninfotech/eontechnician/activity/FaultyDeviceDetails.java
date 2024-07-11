@@ -2,17 +2,12 @@ package in.eoninfotech.eontechnician.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 
@@ -22,13 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.eoninfotech.eontechnician.InstInstructionAdapter;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ActivityDetailResponse;
-import in.eoninfotech.eontechnician.Responses.InstInstructionResponse;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.InstructionDetail;
-import in.eoninfotech.eontechnician.Responses.UnderMaintenanceResponse;
+import in.eoninfotech.eontechnician.responses.InstInstructionResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.InstructionDetail;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.MessageDetail;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
 import retrofit2.Callback;

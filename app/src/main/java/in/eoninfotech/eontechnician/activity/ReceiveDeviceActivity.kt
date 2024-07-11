@@ -17,9 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import dmax.dialog.SpotsDialog
 import `in`.eoninfotech.eontechnician.R
 import `in`.eoninfotech.eontechnician.ReceiveDeviceAdapter
-import `in`.eoninfotech.eontechnician.Responses.DispatchDeviceDetails
-import `in`.eoninfotech.eontechnician.Responses.DispatchDeviceList
-import `in`.eoninfotech.eontechnician.Responses.MainResponse
+import `in`.eoninfotech.eontechnician.responses.DispatchDeviceDetails
+import `in`.eoninfotech.eontechnician.responses.DispatchDeviceList
+import `in`.eoninfotech.eontechnician.responses.MainResponse
 import `in`.eoninfotech.eontechnician.callbacks.ReceiveDeviceListener
 import `in`.eoninfotech.eontechnician.controllers.ReceiveDeviceController
 import `in`.eoninfotech.eontechnician.databinding.ActivityReceiveDeviceBinding

@@ -172,7 +172,7 @@
                             android:layout_height="40dp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
                             android:gravity="center"
                             android:spinnerMode="dialog" />
 
@@ -369,6 +369,7 @@
                         </FrameLayout>
 
                     </androidx.cardview.widget.CardView>
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -8,14 +8,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,16 +24,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -50,8 +41,11 @@ import java.util.Locale;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+
+import in.eoninfotech.eontechnician.ImageUtil;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.databinding.FragmentBillIntimationBinding;
 import in.eoninfotech.eontechnician.helper.FileUtils;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
@@ -70,18 +64,15 @@ import static in.eoninfotech.eontechnician.fragments.CallSheetFragment.IMAGE_DIR
 
 public class BillIntimationFragment extends Fragment implements ProgressRequestBody.UploadCallbacks {
 
-    EditText fromDate, toDate, amount, remarks, billNo,edit_image;
+    FragmentBillIntimationBinding binding;
     Calendar calen = Calendar.getInstance();
     int year, month, day;
-    RelativeLayout rel_image;
-    ImageView Camera,btnCancel;
     String current_date, selected_todate, s_remarks = "", s_amount, s_from_date, s_to_date, version, username,bill_amt_limit="";
     View v;
     private ProgressDialog pDialog;
     File file;
     public static final int MEDIA_TYPE_IMAGE = 1;
     private int REQUEST_CAMERA = 0;
-    LinearLayout submit, linearBill;
     ProgressBar progressBar;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
@@ -107,6 +98,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_bill_intimation, container, false);
+        binding = FragmentBillIntimationBinding.inflate(getLayoutInflater(), container, false);
 
         sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
@@ -114,35 +106,24 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         version = sharedprefs.getString("version", "");
         bill_amt_limit = sharedprefs.getString("bill_amt_limit", "");
 
-        fromDate = v.findViewById(R.id.fromDate);
-        toDate = v.findViewById(R.id.toDate);
-        amount = v.findViewById(R.id.amount);
-        remarks = v.findViewById(R.id.remarks);
-        billNo = v.findViewById(R.id.billNo);
-        submit = v.findViewById(R.id.submit);
-        edit_image = v.findViewById(R.id.image);
-        linearBill = v.findViewById(R.id.linearBill);
-        rel_image = v.findViewById(R.id.rel_image);
-        Camera = v.findViewById(R.id.Camera);
-        btnCancel = v.findViewById(R.id.btnCancel);
-        linearBill.setVisibility(View.GONE);
-        fromDate.setInputType(InputType.TYPE_NULL);
-        toDate.setInputType(InputType.TYPE_NULL);
-        billNo.setInputType(InputType.TYPE_NULL);
+        binding.linearBill.setVisibility(View.GONE);
+        binding.fromDate.setInputType(InputType.TYPE_NULL);
+        binding.toDate.setInputType(InputType.TYPE_NULL);
+        binding.billNo.setInputType(InputType.TYPE_NULL);
         progressBar = v.findViewById(R.id.progressBar);
-        rel_image.setVisibility(View.GONE);
-        edit_image.setVisibility(View.VISIBLE);
+        binding.relImage.setVisibility(View.GONE);
+        binding.image.setVisibility(View.VISIBLE);
         int bill_amt = Integer.parseInt(bill_amt_limit);
-        amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(bill_amt) });
+        binding.amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(bill_amt) });
 
-        fromDate.setOnClickListener(new View.OnClickListener() {
+        binding.fromDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFromDate();
             }
         });
 
-        toDate.setOnClickListener(new View.OnClickListener() {
+        binding.toDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getToDate();
@@ -151,27 +132,27 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
 
         setDate();
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rel_image.setVisibility(View.GONE);
-                edit_image.setVisibility(View.VISIBLE);
+                binding.relImage.setVisibility(View.GONE);
+                binding.image.setVisibility(View.VISIBLE);
             }
         });
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        binding.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                s_from_date = fromDate.getText().toString();
-                s_to_date = toDate.getText().toString();
-                s_amount = amount.getText().toString();
-                s_remarks = remarks.getText().toString();
+                s_from_date = binding.fromDate.getText().toString();
+                s_to_date = binding.toDate.getText().toString();
+                s_amount = binding.amount.getText().toString();
+                s_remarks = binding.remarks.getText().toString();
 
                 if (s_amount.equalsIgnoreCase("")) {
-                    amount.setError("Enter Amount");
-                } else if(rel_image.getVisibility()!=View.VISIBLE){
+                    binding.amount.setError("Enter Amount");
+                } else if(binding.relImage.getVisibility()!=View.VISIBLE){
                     submitData();
-                    edit_image.setVisibility(View.GONE);
+                    binding.image.setVisibility(View.GONE);
                 }
                 else {
                     final_file = bitmapToFile(bmp, "image_call");
@@ -183,7 +164,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
             }
         });
 
-        edit_image.setOnClickListener(new View.OnClickListener() {
+        binding.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View alet_view = null;
@@ -269,7 +250,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
             }
         });
 
-        return v;
+        return binding.getRoot();
     }
 
     private void openCameraIntent() {
@@ -336,10 +317,14 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
                 Log.i("**respnse", " " + response.body().getType());
 
                 if (updateDataResponse.getType() == 1) {
-                    linearBill.setVisibility(View.VISIBLE);
-                    billNo.setText(updateDataResponse.getBill_no());
+                    binding.linearBill.setVisibility(View.VISIBLE);
+                    binding.billNo.setText(updateDataResponse.getBill_no());
                     pDialog.dismiss();
                     pDialog.hide();
+                    binding.relImage.setVisibility(View.GONE);
+                    binding.image.setVisibility(View.VISIBLE);
+                    binding.remarks.setText("");
+                    binding.amount.setText("");
                 }else {
                     Toast.makeText(getActivity(), ""+updateDataResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -366,8 +351,8 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         } else {
             current_date = day + "-" + month + "-" + year;
         }
-        fromDate.setText(current_date);
-        toDate.setText(current_date);
+        binding.fromDate.setText(current_date);
+        binding.toDate.setText(current_date);
     }
 
     private File bitmapToFile(Bitmap bitmap, String fileName) {
@@ -408,7 +393,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
                 } else {
                     selected_todate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                 }
-                toDate.setText(selected_todate);
+                binding.toDate.setText(selected_todate);
             }
         }, year, month - 1, day);
         dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
@@ -425,7 +410,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
                 } else {
                     selected_todate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                 }
-                fromDate.setText(selected_todate);
+                binding.fromDate.setText(selected_todate);
             }
         }, year, month - 1, day);
         dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
@@ -448,9 +433,9 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         } else if (requestCode == REQUEST_CAPTURE_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
                 bmp = BitmapFactory.decodeFile(path);
-                rel_image.setVisibility(View.VISIBLE);
-                edit_image.setVisibility(View.GONE);
-                Camera.setImageBitmap(bmp);
+                binding.relImage.setVisibility(View.VISIBLE);
+                binding.image.setVisibility(View.GONE);
+                binding.Camera.setImageBitmap(bmp);
             }
         } else if (requestCode == SELECT_PHOTO)
             onSelectFromGalleryResult(data);
@@ -461,104 +446,11 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
             uri = data.getData();
             file = FileUtils.getFile(getActivity(), uri);
             path = file.getPath();
-            compressImage(path);
+            ImageUtil.compressImage(path);
             bmp = BitmapFactory.decodeFile(path);
-            rel_image.setVisibility(View.VISIBLE);
-            edit_image.setVisibility(View.GONE);
-            Camera.setImageBitmap(bmp);
-        }
-    }
-
-    private String compressImage(String imageUri) {
-        String filePath = getRealPathFromURI(imageUri);
-        Bitmap scaledBitmap = null;
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        Bitmap bmp = BitmapFactory.decodeFile(path, options);
-        int actualHeight = options.outHeight;
-        int actualWidth = options.outWidth;
-        float maxHeight = 816.0f;
-        float maxWidth = 612.0f;
-        float imgRatio = actualWidth / actualHeight;
-        float maxRatio = maxWidth / maxHeight;
-        if (actualHeight > maxHeight || actualWidth > maxWidth) {
-            if (imgRatio < maxRatio) {
-                imgRatio = maxHeight / actualHeight;
-                actualWidth = (int) (imgRatio * actualWidth);
-                actualHeight = (int) maxHeight;
-            } else if (imgRatio > maxRatio) {
-                imgRatio = maxWidth / actualWidth;
-                actualHeight = (int) (imgRatio * actualHeight);
-                actualWidth = (int) maxWidth;
-            } else {
-                actualHeight = (int) maxHeight;
-                actualWidth = (int) maxWidth;
-            }
-        }
-        options.inSampleSize = calculateInSampleSize(options, actualWidth, actualHeight);
-        options.inJustDecodeBounds = false;
-        options.inPurgeable = true;
-        options.inInputShareable = true;
-        options.inTempStorage = new byte[16 * 1024];
-        try {
-            bmp = BitmapFactory.decodeFile(path, options);
-        } catch (OutOfMemoryError exception) {
-            exception.printStackTrace();
-        }
-        try {
-            scaledBitmap = Bitmap.createBitmap(actualWidth, actualHeight, Bitmap.Config.ARGB_8888);
-        } catch (OutOfMemoryError exception) {
-            exception.printStackTrace();
-        }
-        float ratioX = actualWidth / (float) options.outWidth;
-        float ratioY = actualHeight / (float) options.outHeight;
-        float middleX = actualWidth / 2.0f;
-        float middleY = actualHeight / 2.0f;
-        Matrix scaleMatrix = new Matrix();
-        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
-        Canvas canvas = new Canvas(scaledBitmap);
-        canvas.setMatrix(scaleMatrix);
-        canvas.drawBitmap(bmp, middleX - bmp.getWidth() / 2, middleY - bmp.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
-        ExifInterface exif;
-        try {
-            exif = new ExifInterface(path);
-            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
-            Matrix matrix = new Matrix();
-            if (orientation == 6) {
-                matrix.postRotate(90);
-            } else if (orientation == 3) {
-                matrix.postRotate(180);
-            } else if (orientation == 8) {
-                matrix.postRotate(270);
-            }
-            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FileOutputStream out = null;
-        path = getFilename();
-        try {
-            out = new FileOutputStream(path);
-            scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 60, out);
-            out.flush();
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return path;
-    }
-
-    private String getRealPathFromURI(String contentURI) {
-        Uri contentUri = Uri.parse(contentURI);
-        Cursor cursor = getActivity().getContentResolver().query(contentUri, null, null, null, null);
-        if (cursor == null) {
-            return contentUri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(index);
+            binding.relImage.setVisibility(View.VISIBLE);
+            binding.image.setVisibility(View.GONE);
+            binding.Camera.setImageBitmap(bmp);
         }
     }
 
@@ -570,22 +462,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         return uriSting;
     }
 
-    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-        }
-        final float totalPixels = width * height;
-        final float totalReqPixelsCap = reqWidth * reqHeight * 2;
-        while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
-            inSampleSize++;
-        }
-        return inSampleSize;
-    }
     @Override
     public void onProgressUpdate(int percentage) {
         

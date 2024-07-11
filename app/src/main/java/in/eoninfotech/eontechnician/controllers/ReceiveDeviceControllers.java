@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.androidadvance.topsnackbar.TSnackbar;
 
-import in.eoninfotech.eontechnician.Responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.callbacks.ReceiveDeviceListener;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;

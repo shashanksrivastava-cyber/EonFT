@@ -1,7 +1,6 @@
 package in.eoninfotech.eontechnician.fragments;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,7 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -19,15 +17,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,13 +32,11 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,8 +45,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -63,11 +54,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,52 +63,41 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.BuildConfig;
-import in.eoninfotech.eontechnician.CardViewActivity;
 import in.eoninfotech.eontechnician.ImageUtils;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ClientDetails;
-import in.eoninfotech.eontechnician.Responses.ClientLocationDetail;
-import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
-import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
-import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.LoginDetail;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
-import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalResponse;
-import in.eoninfotech.eontechnician.Responses.ReplaceReason;
-import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
-import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
-import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
-import in.eoninfotech.eontechnician.Responses.VTSResponse;
-import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
-import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
-import in.eoninfotech.eontechnician.Service.JobScheduleService;
-import in.eoninfotech.eontechnician.Service.LocationService;
-import in.eoninfotech.eontechnician.SplashActivity;
-import in.eoninfotech.eontechnician.Storage.LocationPrefs;
-import in.eoninfotech.eontechnician.activity.SendDatatoServer;
+import in.eoninfotech.eontechnician.responses.ClientDetails;
+import in.eoninfotech.eontechnician.responses.ClientLocationDetail;
+import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
+import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.responses.CollectedItemsResponse;
+import in.eoninfotech.eontechnician.responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.responses.FaultResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.NotAvailActivityResponse;
+import in.eoninfotech.eontechnician.responses.PaymentMethodResponse;
+import in.eoninfotech.eontechnician.responses.RemovalActivityResponse;
+import in.eoninfotech.eontechnician.responses.RemovalResponse;
+import in.eoninfotech.eontechnician.responses.ReplaceReason;
+import in.eoninfotech.eontechnician.responses.SimOperatorResponse;
+import in.eoninfotech.eontechnician.responses.SimReplaceResponse;
+import in.eoninfotech.eontechnician.responses.VTSResponse;
+import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
+import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
+import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.storage.LocationPrefs;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
-import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.GetLocations;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.Location_prop;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.AttResponse;
-import in.eoninfotech.eontechnician.webservice.LocationsResponse;
-import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.ContentValues.TAG;
 import static android.content.Context.MODE_PRIVATE;
 
 
@@ -558,7 +535,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
     private void addclients() {
         ShowProgressBar(true);
-        newInstallmentController.reqeuestClientList(this);
+        newInstallmentController.reqeuestClientList("",this);
     }
 
     public Address getAddress(double latitude, double longitude) {
@@ -884,6 +861,16 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
     @Override
     public void updateDataResponse(MainResponse response) {
+
+    }
+
+    @Override
+    public void mainClientResponse(MainResponse response) {
+
+    }
+
+    @Override
+    public void vtsAccResponses(MainResponse response) {
 
     }
 

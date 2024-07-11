@@ -1,16 +1,10 @@
 package in.eoninfotech.eontechnician;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
-import java.util.Calendar;
-
-import in.eoninfotech.eontechnician.Service.ForegroundService;
+import in.eoninfotech.eontechnician.service.ForegroundService;
 
 
 /**

@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import in.eoninfotech.eontechnician.Responses.DeviceTypeOtherAis;
-
 public class FaqResponse {
 
     @SerializedName("type")

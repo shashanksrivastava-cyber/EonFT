@@ -5,17 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
-import in.eoninfotech.eontechnician.ImageUtils;
+
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.CallSheetListDetail;
+import in.eoninfotech.eontechnician.responses.CallSheetListDetail;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import retrofit2.Callback;
 
 /**
  * Created by root on 7/3/19.

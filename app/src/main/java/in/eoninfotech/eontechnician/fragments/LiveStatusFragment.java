@@ -1,14 +1,11 @@
 package in.eoninfotech.eontechnician.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,45 +23,37 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import in.eoninfotech.eontechnician.BillViewAdapter;
-import in.eoninfotech.eontechnician.LiveFaultData;
 import in.eoninfotech.eontechnician.LiveFaultDataAdapter;
-import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.R;
-import in.eoninfotech.eontechnician.Responses.ClientDetails;
-import in.eoninfotech.eontechnician.Responses.ClientLocationDetail;
-import in.eoninfotech.eontechnician.Responses.ClientLocationResponse;
-import in.eoninfotech.eontechnician.Responses.ClientResponse;
-import in.eoninfotech.eontechnician.Responses.CollectedItemsResponse;
-import in.eoninfotech.eontechnician.Responses.DeviceLiveStatus;
-import in.eoninfotech.eontechnician.Responses.DisconnectionResponse;
-import in.eoninfotech.eontechnician.Responses.FaultResponse;
-import in.eoninfotech.eontechnician.Responses.LoginResponse;
-import in.eoninfotech.eontechnician.Responses.MainResponse;
-import in.eoninfotech.eontechnician.Responses.MyPojo;
-import in.eoninfotech.eontechnician.Responses.NotAvailActivityResponse;
-import in.eoninfotech.eontechnician.Responses.PaymentMethodResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalActivityResponse;
-import in.eoninfotech.eontechnician.Responses.RemovalResponse;
-import in.eoninfotech.eontechnician.Responses.ReplaceReason;
-import in.eoninfotech.eontechnician.Responses.SimOperatorResponse;
-import in.eoninfotech.eontechnician.Responses.SimReplaceResponse;
-import in.eoninfotech.eontechnician.Responses.VTSResponse;
-import in.eoninfotech.eontechnician.Responses.VehNotAvailReasonResponse;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeDetail;
-import in.eoninfotech.eontechnician.Responses.VehicleTypeResponse;
-import in.eoninfotech.eontechnician.Responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.responses.ClientDetails;
+import in.eoninfotech.eontechnician.responses.ClientLocationDetail;
+import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
+import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.responses.CollectedItemsResponse;
+import in.eoninfotech.eontechnician.responses.DeviceLiveStatus;
+import in.eoninfotech.eontechnician.responses.DisconnectionResponse;
+import in.eoninfotech.eontechnician.responses.FaultResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.MyPojo;
+import in.eoninfotech.eontechnician.responses.NotAvailActivityResponse;
+import in.eoninfotech.eontechnician.responses.PaymentMethodResponse;
+import in.eoninfotech.eontechnician.responses.RemovalActivityResponse;
+import in.eoninfotech.eontechnician.responses.RemovalResponse;
+import in.eoninfotech.eontechnician.responses.ReplaceReason;
+import in.eoninfotech.eontechnician.responses.SimOperatorResponse;
+import in.eoninfotech.eontechnician.responses.SimReplaceResponse;
+import in.eoninfotech.eontechnician.responses.VTSResponse;
+import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
+import in.eoninfotech.eontechnician.responses.VehicleTypeDetail;
+import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
+import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
-import in.eoninfotech.eontechnician.databinding.LiveStatusAdapterNewBinding;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.BillDetails;
-import in.eoninfotech.eontechnician.webservice.BillResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -221,6 +210,7 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
                 }else if(id_dist.equalsIgnoreCase("")){
                     Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
                 }else {
+
                     loadData();
                 }
             }
@@ -235,7 +225,7 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
 
     private void addclients() {
         ShowProgressBar(true);
-        newInstallmentController.reqeuestClientList(this);
+        newInstallmentController.reqeuestClientList("",this);
     }
 
     private void addVehType() {
@@ -445,6 +435,16 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
 
     @Override
     public void updateDataResponse(MainResponse response) {
+
+    }
+
+    @Override
+    public void mainClientResponse(MainResponse response) {
+
+    }
+
+    @Override
+    public void vtsAccResponses(MainResponse response) {
 
     }
 

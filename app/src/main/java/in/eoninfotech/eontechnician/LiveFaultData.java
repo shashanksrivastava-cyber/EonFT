@@ -1,13 +1,10 @@
 package in.eoninfotech.eontechnician;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -20,14 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import in.eoninfotech.eontechnician.Responses.FaultyDevices;
-import in.eoninfotech.eontechnician.Responses.FaultyDevicesDetails;
-import in.eoninfotech.eontechnician.Responses.MyPojo;
-import in.eoninfotech.eontechnician.myprovider.StringUtils;
+
+import in.eoninfotech.eontechnician.responses.MyPojo;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import okhttp3.ResponseBody;
-import pl.bclogic.pulsator4droid.library.PulsatorLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

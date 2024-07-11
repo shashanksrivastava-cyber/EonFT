@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import in.eoninfotech.eontechnician.Responses.AttendanceDetail;
-
 /**
  * Created by root on 27/4/19.
  */

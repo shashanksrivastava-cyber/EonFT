@@ -1,37 +1,30 @@
 package in.eoninfotech.eontechnician.activity;
 
 import android.app.DatePickerDialog;
-import android.app.Notification;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,12 +36,11 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import in.eoninfotech.eontechnician.ActivityDetailAdapter;
+
 import in.eoninfotech.eontechnician.AppPreferences;
-import in.eoninfotech.eontechnician.InstInstructionAdapter;
 import in.eoninfotech.eontechnician.R;
 
-import in.eoninfotech.eontechnician.Responses.MainResponse;
+import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.MessageDetail;
 import in.eoninfotech.eontechnician.webservice.MessageResponse;
@@ -56,8 +48,6 @@ import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static in.eoninfotech.eontechnician.activity.CustomCalender.count;
 
 public class MessageActivity extends AppCompatActivity implements MessageAdapter.MessageAdapterListener, View.OnClickListener, TextWatcher {
 

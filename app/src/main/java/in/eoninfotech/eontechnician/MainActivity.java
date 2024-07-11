@@ -6,12 +6,10 @@ import static com.google.android.play.core.install.model.ActivityResult.RESULT_I
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
 
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,12 +49,10 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.InstallState;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 
@@ -65,7 +61,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,11 +76,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
-import in.eoninfotech.eontechnician.Responses.TechnicianMonthDetail;
-import in.eoninfotech.eontechnician.Responses.TechnicianMonthResponse;
-import in.eoninfotech.eontechnician.Responses.UpdateDataResponse;
-import in.eoninfotech.eontechnician.Service.AlarmService;
-import in.eoninfotech.eontechnician.Service.ForegroundService;
+import in.eoninfotech.eontechnician.responses.TechnicianMonthDetail;
+import in.eoninfotech.eontechnician.responses.TechnicianMonthResponse;
+import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
+import in.eoninfotech.eontechnician.service.ForegroundService;
+import in.eoninfotech.eontechnician.activity.Devicedashboards;
 import in.eoninfotech.eontechnician.activity.LoginActivityNew;
 import in.eoninfotech.eontechnician.activity.MessageActivity;
 import in.eoninfotech.eontechnician.activity.ReceiveDeviceActivity;
@@ -241,7 +236,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
         try {
             TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(MainActivity.this);
             imei = telephonyInfo.getImsiSIM1();
@@ -345,23 +339,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        //inAppUpdate();
-    }
-
-    private void inAppUpdate() {
-        // Creates instance of the manager.
         appUpdateManager = AppUpdateManagerFactory.create(this);
+        appUpdateManager.registerListener(installStateUpdatedListener);
+
+        inAppUpdate();
+    }
+    private void inAppUpdate() {
 
         // Returns an intent object that you use to check for an update.
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
         // Checks that the platform will allow the specified type of update.
-        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
-            @Override
-            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo ->  {
+//            @Override
+//            public void onSuccess(AppUpdateInfo appUpdateInfo) {
 
-                Log.e("AVAILABLE_VERSION_CODE", appUpdateInfo.availableVersionCode()+"");
-                Toast.makeText(MainActivity.this, ""+appUpdateInfo.availableVersionCode(), Toast.LENGTH_SHORT).show();
                 if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
                         // For a flexible update, use AppUpdateType.FLEXIBLE
                         && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
@@ -371,7 +363,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         appUpdateManager.startUpdateFlowForResult(
                                 // Pass the intent that is returned by 'getAppUpdateInfo()'.
                                 appUpdateInfo,
-                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+//                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
+//                                activityResultLauncher,
+//                                // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
+//                                // flexible updates.
+//                                AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE)
+//                                        .setAllowAssetPackDeletion(true)
+//                                        .build()
                                 AppUpdateType.IMMEDIATE,
                                 // The current activity making the update request.
                                 MainActivity.this,
@@ -381,13 +379,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     }
                 }else {
-                    Toast.makeText(MainActivity.this, "No Update Available", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MainActivity.this, "No Update Available", Toast.LENGTH_SHORT).show();
                 }
-            }
+//            }
         });
-
-        appUpdateManager.registerListener(installStateUpdatedListener);
-
     }
     //lambda operation used for below listener
     InstallStateUpdatedListener installStateUpdatedListener = installState -> {
@@ -732,8 +727,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }
-        else if (id == R.id.nav_material_return) {
+        } else if (id == R.id.nav_material_return) {
             materialReturnFragment = new MaterialReturnFragment();
             materialReturnFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
@@ -782,6 +776,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
            Intent intent = new Intent(MainActivity.this, ReceiveDeviceActivity.class);
            startActivity(intent);
         }
+        else if (id == R.id.material_dashboard) {
+           Intent intent = new Intent(MainActivity.this, Devicedashboards.class);
+           startActivity(intent);
+
+//            Intent intent = new Intent(MainActivity.this, Devicedashboard.class);
+//            startActivity(intent);
+
+        }
+
 //        else if (id == R.id.faqs) {
 //            faqsfragment = new FaqsFragment();
 //            faqsfragment.setArguments(bundle);
@@ -947,7 +950,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
     public static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {
@@ -1510,5 +1512,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onDestroy() {
         System.gc();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        appUpdateManager
+                .getAppUpdateInfo()
+                .addOnSuccessListener(
+                        appUpdateInfo -> {
+                            if (appUpdateInfo.updateAvailability()
+                                    == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                                // If an in-app update is already running, resume the update.
+                                try {
+                                    appUpdateManager.startUpdateFlowForResult(
+                                            appUpdateInfo,
+                                            AppUpdateType.IMMEDIATE,
+                                            // The current activity making the update request.
+                                            MainActivity.this,
+                                            // Include a request code to later monitor this update request.
+                                            UPDATE_REQUEST_CODE);
+                                } catch (IntentSender.SendIntentException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        });
     }
 }
