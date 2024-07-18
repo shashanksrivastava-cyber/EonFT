@@ -123,11 +123,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FloatingActionButton fab, panic_fab;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    FragmentCurrentMonth fragmentCurrentMonth;
+    in.eoninfotech.eontechnician.FragmentCurrentMonth fragmentCurrentMonth;
     String usrname, alertt, uusername, versionname, disgnid = "0", activityName = "Activities";
     NavigationView navigationView;
     Bundle bundle;
-    FaqsFragment faqsfragment;
+    in.eoninfotech.eontechnician.FaqsFragment faqsfragment;
     ActivityDetailFragment activityDetailFragment;
     ActivityLogFragment activityLogFragment;
     NewInstallmentFragment installmentFragment;
@@ -135,9 +135,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     StockFragment stockFragment;
     TextView textCartItemCount;
     PaymentCollectionReportFragment paymentCollectionReportFragment;
-    MaterialReturnFragment materialReturnFragment;
-    MaterialtoTechFragment materialtoTechFragment;
-    MaterialReturnViews materialReturnView;
+    in.eoninfotech.eontechnician.MaterialReturnFragment materialReturnFragment;
+    in.eoninfotech.eontechnician.MaterialtoTechFragment materialtoTechFragment;
+    in.eoninfotech.eontechnician.MaterialReturnViews materialReturnView;
     BillIntimationFragment billIntimationFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
@@ -466,6 +466,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Confirm Exit")
@@ -568,7 +569,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             dashBoardFragment = new DashBoardFragment();
             dashBoardFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
-            setTitle("Dashboard");
+            setTitle("Add Dashboard");
             tabLayout.setVisibility(View.VISIBLE);
             tabLayout.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.VISIBLE);
@@ -585,7 +586,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
         } else if (id == R.id.nav_incentive) {
-            fragmentCurrentMonth = new FragmentCurrentMonth();
+            fragmentCurrentMonth = new in.eoninfotech.eontechnician.FragmentCurrentMonth();
             fragmentCurrentMonth.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, fragmentCurrentMonth);
             setTitle("Incentive Activity");
@@ -728,7 +729,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
         } else if (id == R.id.nav_material_return) {
-            materialReturnFragment = new MaterialReturnFragment();
+            materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
             materialReturnFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
             setTitle("Return Material");
@@ -749,7 +750,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
         } else if (id == R.id.nav_material_send_to_tech) {
-            materialReturnFragment = new MaterialReturnFragment();
+            materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
             materialReturnFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
             setTitle("Send to Technician");

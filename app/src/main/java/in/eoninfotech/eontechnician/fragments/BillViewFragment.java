@@ -45,7 +45,6 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
     FragmentBillViewBinding binding;
     RecyclerView recyclerView;
     BillViewAdapter billViewAdapter;
-
     public LinearLayoutManager layoutManager;
     EditText fromDate, toDate;
     private ProgressDialog pDialog;

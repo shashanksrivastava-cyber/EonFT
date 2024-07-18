@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 
@@ -56,7 +58,7 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
 
     SharedPreferences.Editor editor;
 
-    String mainClientId="",status="T";
+    String mainClientId="",status="";
 
     NewInstallmentController newInstallmentController;
 
@@ -69,6 +71,7 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
     ArrayList<DeviceCountDetail> deviceCountDetails = new ArrayList<>();
 
     DeviceCountDetailAdapter deviceCountDetailAdapter;
+    public LinearLayoutManager layoutManager;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -89,28 +92,61 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
         editor = sharedprefs.edit();
         usrname = sharedprefs.getString("s_uuser", "");
 
-        addclients();
+        layoutManager = new LinearLayoutManager(DevicedashboardDetail.this, LinearLayoutManager.VERTICAL, false);
+        binding.recyclerView.setLayoutManager(layoutManager);
 
-        getData();
+        progressDialog = new SpotsDialog(DevicedashboardDetail.this, R.style.CustomIncentive);
 
         Intent intent = getIntent();
-
         status = intent.getStringExtra("Status");
 
         if(status.equalsIgnoreCase("T")){
             binding.total.setChecked(true);
+            status="T";
             getData();
-        }else if(status.equalsIgnoreCase("W")){
+        } else if(status.equalsIgnoreCase("W")){
             binding.working.setChecked(true);
+            status="W";
             getData();
-        }else {
+        }else if(status.equalsIgnoreCase("F")) {
             binding.faulty.setChecked(true);
+            status = "F";
+            getData();
+        } else if (status.equalsIgnoreCase("ITT")){
+            binding.inTransitTech.setChecked(true);
+            status="ITT";
+            getData();
+        }else{
+            binding.inTransitStore.setChecked(true);
+            status="ITS";
             getData();
         }
 
         binding.swipeRefresh.setColorSchemeColors(Color.RED, Color.BLUE,Color.GREEN);
         binding.swipeRefresh.setOnRefreshListener(this::refresh);
         binding.swipeRefresh.setRefreshing(true);
+
+        binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+               if(checkedId == R.id.total){
+                   status="T";
+                   getData();
+               }else if(checkedId == R.id.working){
+                   status="W";
+                   getData();
+               }else if(checkedId == R.id.faulty) {
+                   status="F";
+                   getData();
+               }else if(checkedId == R.id.in_transit_tech) {
+                   status="ITT";
+                   getData();
+               }else {
+                   status="ITS";
+                   getData();
+               }
+            }
+        });
 
         binding.newMainClients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -121,6 +157,7 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
                     i = i - 1;
                 }
                 mainClientId = String.valueOf(mainclientList.get(i).getClient_Id());
+                getData();
             }
 
             @Override
@@ -139,6 +176,7 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
     }
 
     private void getData() {
+        progressDialog.show();
         newInstallmentController.requestLiveDeviceCount(usrname,status,mainClientId,this);
     }
 
@@ -235,16 +273,20 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
     public void updateDataResponse(MainResponse response) {
 
         if (response.getType() == 1) {
-           binding.txtContentUnavailable.setText(View.GONE);
+            binding.txtContentUnavailable.setVisibility(View.GONE);
             binding.swipeRefresh.setRefreshing(false);
             deviceCountDetails = response.getDevice_count_detail();
             deviceCountDetailAdapter = new DeviceCountDetailAdapter(DevicedashboardDetail.this, deviceCountDetails);
             binding.recyclerView.setAdapter(deviceCountDetailAdapter);
+            deviceCountDetailAdapter.notifyDataSetChanged();
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            progressDialog.hide();
 
         } else {
           binding.txtContentUnavailable.setVisibility(View.VISIBLE);
           binding.swipeRefresh.setRefreshing(false);
           binding.recyclerView.setVisibility(View.GONE);
+          progressDialog.hide();
         }
 
     }
@@ -280,5 +322,15 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
+    @Override
+    protected void onResume() {
+        addclients();
+        super.onResume();
+    }
 }

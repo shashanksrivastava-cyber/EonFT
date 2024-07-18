@@ -377,12 +377,8 @@ public class DashBoardFragment extends Fragment {
 
     @Override
     public void onResume() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getDashBoardDetail();
-            }
-        }, 100);
+
+        getDashBoardDetail();
         super.onResume();
     }
 

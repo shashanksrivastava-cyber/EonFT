@@ -6,6 +6,7 @@ data class DeviceCountDetail(
     @JvmField val vts_id: String,
     @JvmField val customer: String,
     @JvmField val status: String,
+    @JvmField val date_time: String,
 
 ){
 

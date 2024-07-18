@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Devicedashboard">
+    tools:context=".activity.DevicedashboardDetail">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -261,7 +261,7 @@
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="2"
-                    android:text="In Transit (To Store)"
+                    android:text="Outgoing Material"
                     android:textColor="#1c6e37"
                     android:textSize="22sp"
                     android:visibility="visible"
@@ -320,7 +320,7 @@
                     android:shadowDx="1"
                     android:shadowDy="1"
                     android:shadowRadius="2"
-                    android:text="In Transit (To Technician)"
+                    android:text="Incoming Material"
                     android:textColor="#1c6e37"
                     android:textSize="22sp"
                     android:visibility="visible"

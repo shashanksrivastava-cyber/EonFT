@@ -5,7 +5,12 @@
     <item
         android:id="@+id/nav_tech_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Dashboard" />
+        android:title="Add Dashboard" />
+
+    <item
+        android:id="@+id/material_dashboard"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Live Inventory Dashbaoard" />
 
     <item
         android:id="@+id/nav_mark_site"
@@ -51,7 +56,7 @@
     <item
         android:id="@+id/nav_material"
         android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Material Received"/>
+        android:title="Receive Material"/>
 
     <item
         android:id="@+id/nav_material_return"
@@ -67,11 +72,6 @@
         android:id="@+id/nav_technician_of_the_month"
         android:icon="@drawable/upd_list"
         android:title="Technician of the Month" />
-
-    <item
-        android:id="@+id/material_dashboard"
-        android:icon="@drawable/upd_list"
-        android:title="Material Dashbaoard" />
 
 
     <!--    <item-->

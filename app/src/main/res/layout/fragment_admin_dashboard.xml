@@ -277,6 +277,7 @@
                                 app:lottie_loop="true" />
 
                         </LinearLayout>
+
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout

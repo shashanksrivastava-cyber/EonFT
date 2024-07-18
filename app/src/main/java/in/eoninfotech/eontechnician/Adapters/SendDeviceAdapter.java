@@ -17,7 +17,7 @@ import in.eoninfotech.eontechnician.activity.SendDeviceDetails;
 
 public class SendDeviceAdapter extends RecyclerView.Adapter<SendDeviceAdapter.ActivityHolder>{
 
-    MaterialReturnViews fragment;
+    in.eoninfotech.eontechnician.MaterialReturnViews fragment;
     Context context;
     String date;
     private final ArrayList<TechReturnDevice> dispatchDeviceListArrayList;

@@ -204,7 +204,7 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             @Override
             public void onClick(View v) {
                 String  pos = String.valueOf(holder.getAdapterPosition());
-                Intent intent = new Intent(context, ActivityDetailActivity.class);
+                Intent intent = new Intent(context, in.eoninfotech.eontechnician.ActivityDetailActivity.class);
                 intent.putExtra("Dates",date);
                 intent.putExtra("Item Position",pos);
                 context.startActivity(intent);

@@ -57,7 +57,7 @@ public class Devicedashboards extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Live Device Count");
+        actionBar.setTitle("Live Inventory Dashboard");
 
         // getting our root layout in our view.
         View view = binding.getRoot();
@@ -101,6 +101,25 @@ public class Devicedashboards extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.inTransitTech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
+                intent.putExtra("Status","ITT");
+                startActivity(intent);
+            }
+        });
+
+        binding.inTransitStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
+                intent.putExtra("Status","ITS");
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void setPieChart(String f_faulty,String f_working) {
@@ -112,8 +131,8 @@ public class Devicedashboards extends AppCompatActivity {
         binding.piechart.setTransparentCircleRadius(61f);
         binding.piechart.setHoleColor(Color.WHITE);
 
-        yValues.add(new PieEntry(Float.parseFloat(f_faulty), "Faulty"));
-        yValues.add(new PieEntry(Float.parseFloat(f_working), "Working"));
+        yValues.add(new PieEntry(Float.parseFloat(f_faulty), ""));
+        yValues.add(new PieEntry(Float.parseFloat(f_working), ""));
 
         binding.piechart.setCenterText("Total Device - "+f_total);
 
@@ -156,8 +175,8 @@ public class Devicedashboards extends AppCompatActivity {
                         binding.totalDevice.setText("Total Devices - "+countDetails.get(0).total);
                         binding.workingDevices.setText(countDetails.get(0).working);
                         binding.faultyDevices.setText(countDetails.get(0).faulty);
-                        binding.inTransitStore.setText("In Transit (To Store) - "+countDetails.get(0).in_transit_store);
-                        binding.inTransitTech.setText("In Transit (To Tech) - "+countDetails.get(0).in_transit_tech);
+                        binding.inTransitStore.setText("Outgoing Material - "+countDetails.get(0).in_transit_store);
+                        binding.inTransitTech.setText("Incoming Material - "+countDetails.get(0).in_transit_tech);
                         progressDialog.hide();
                         }
                     } else {
@@ -176,5 +195,11 @@ public class Devicedashboards extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(Devicedashboards.this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
