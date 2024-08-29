@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_marginBottom="10dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/workType"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -43,7 +43,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Customer Name"
@@ -59,7 +59,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/customer_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Loc Name"
@@ -103,7 +103,7 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/loc_name"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="VTS Type"
@@ -141,7 +141,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/vts_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="New Device ID"
@@ -177,7 +177,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/new_device_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Old Device ID"
@@ -213,7 +213,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/old_device_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -235,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="New Serial No."
@@ -250,7 +250,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/new_sr_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,7 +273,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Old Serial No."
@@ -288,7 +288,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/old_serial_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Old DRS"
@@ -325,7 +325,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/old_drs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -347,7 +347,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="New DRS"
@@ -362,7 +362,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/new_drs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -385,7 +385,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Old SIM"
@@ -400,7 +400,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/old_sim"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -423,7 +423,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="New SIM"
@@ -438,7 +438,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/new_sim"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -461,7 +461,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Reason"
@@ -476,7 +476,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/reason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -499,7 +499,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Remarks"
@@ -514,7 +514,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/remarks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -537,7 +537,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Collected Amount"
@@ -552,7 +552,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/collected_amt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -575,7 +575,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Collected Date"
@@ -590,7 +590,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/collected_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -613,7 +613,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="LID Status"
@@ -628,7 +628,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/lid_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -651,7 +651,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Trans Receiver"
@@ -666,7 +666,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/trans_receiver"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -689,7 +689,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Temp Sensor"
@@ -704,7 +704,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/temp_sensor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -727,7 +727,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Fuel Status"
@@ -742,7 +742,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/fuel_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -766,7 +766,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Panic Status"
@@ -781,7 +781,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/panic_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -805,7 +805,7 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Missing Type"
@@ -820,7 +820,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/grey500"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/missing_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

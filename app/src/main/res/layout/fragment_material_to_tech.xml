@@ -272,9 +272,9 @@
                         android:maxLength="3"
                         android:layout_toRightOf="@id/etVehicleType"/>
 
-                    <Button
-                        android:layout_height="20dp"
-                        android:layout_width="20dp"
+                    <ImageButton
+                        android:layout_height="30dp"
+                        android:layout_width="30dp"
                         android:layout_gravity="top|left"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="3dp"
@@ -284,16 +284,16 @@
 
                 </LinearLayout>
 
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.Icon"
                     android:id="@+id/addMaterial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textColor="@color/eonBlue"
                     android:text="Add More Accessories"
                     android:visibility="visible"
                     android:layout_marginTop="5dp"
-                    android:drawableLeft="@drawable/ic_add_black_24dp"/>
+                    app:icon="@drawable/circle_plus"/>
 
             </LinearLayout>
 

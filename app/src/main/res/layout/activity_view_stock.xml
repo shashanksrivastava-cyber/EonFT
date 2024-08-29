@@ -10,7 +10,7 @@
         android:layout_gravity="end"
         android:gravity="end">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:textColor="@color/colorAccent"
             android:layout_marginRight="10dp"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/installDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:descendantFocusability="blocksDescendants"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_content_unavailable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

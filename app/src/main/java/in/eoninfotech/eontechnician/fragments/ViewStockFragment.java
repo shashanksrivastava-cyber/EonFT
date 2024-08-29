@@ -35,7 +35,7 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.ClientDetails;
 import in.eoninfotech.eontechnician.responses.StockClientDataResponse;
 import in.eoninfotech.eontechnician.responses.StockResponse;
-import in.eoninfotech.eontechnician.ViewStockAdapter;
+import in.eoninfotech.eontechnician.adapters.ViewStockAdapter;
 import in.eoninfotech.eontechnician.helper.StockDetail;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;

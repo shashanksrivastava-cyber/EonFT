@@ -322,6 +322,7 @@ public class LoginActivityNew extends AppCompatActivity {
                     progressDialog.hide();
 
                         Intent intee = new Intent(LoginActivityNew.this, MainActivity.class);
+                        intee.putExtra("intent","");
                         startActivity(intee);
                         finish();
                         appPrefs.setLoggedIn(true);
@@ -357,6 +358,7 @@ public class LoginActivityNew extends AppCompatActivity {
             if (uusername.equals(p_usr)) {
                 Log.i("***user vs user***", uusername + " " + p_usr);
                     Intent intee = new Intent(LoginActivityNew.this, MainActivity.class);
+                    intee.putExtra("intent","");
                     startActivity(intee);
                     finish();
                     appPrefs.setLoggedIn(true);

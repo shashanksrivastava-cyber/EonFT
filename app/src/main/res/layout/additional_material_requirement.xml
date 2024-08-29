@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/addVehicl"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/vts_details"
+        android:textColor="@color/eonBlue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/parent_linear_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/parent_linear_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addVehicl">
+
+        <LinearLayout
+            android:id="@+id/materialLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/relays"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_frame"
+                android:visibility="visible">
+
+                <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                    android:id="@+id/new_main_clients"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="6dp"
+                    android:background="@color/eonWhite"
+                    android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/device_relay"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/et_frame"
+                android:visibility="visible">
+
+                <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                    android:id="@+id/device_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="6dp"
+                    android:background="@color/eonWhite"
+                    android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etQuantity"
+                style="@style/et_profile"
+                android:layout_width="40dp"
+                android:layout_marginTop="3dp"
+                android:autofillHints="Qty"
+                android:hint="Qty"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColorHint="@color/grey500"
+                android:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|center_vertical"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_minus"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/addMaterials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/add_more_devices"
+            android:textColor="@color/eonBlue"
+            android:visibility="gone"
+            app:drawableLeftCompat="@drawable/ic_add_black_24dp" />
+
+        <Button
+            android:id="@+id/addMaterial"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/add_more_devices"
+            android:visibility="visible"
+            app:icon="@drawable/circle_plus" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/addAccesory"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/acc_details"
+        android:textColor="@color/eonBlue"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parent_linear_layout" />
+
+    <LinearLayout
+        android:id="@+id/accessory_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="637dp"
+        android:layout_marginEnd="4dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addAccesory">
+
+        <LinearLayout
+            android:id="@+id/accessoryLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="3dp"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_frame"
+                android:visibility="visible">
+
+                <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                    android:id="@+id/accessory_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="6dp"
+                    android:background="@color/eonWhite"
+                    android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/acc_etQuantity"
+                style="@style/et_profile"
+                android:layout_width="80dp"
+                android:hint="Qty"
+                android:textColorHint="@color/grey500"
+                android:inputType="number"
+                android:layout_below="@+id/txtDetails"
+                android:visibility="visible"
+                android:maxLength="3"
+                android:layout_toRightOf="@id/etVehicleType"/>
+
+            <ImageButton
+                android:id="@+id/acc_delete_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|center_vertical"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_minus"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/addAccs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/add_more_accessories"
+            android:textColor="@color/eonBlue"
+            android:visibility="gone"
+            app:drawableLeftCompat="@drawable/ic_add_black_24dp" />
+
+        <Button
+            android:id="@+id/addAccessory"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/add_more_accessories"
+            android:visibility="visible"
+            app:icon="@drawable/circle_plus" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:text="@string/submit"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:textSize="20sp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     <item
         android:id="@+id/nav_tech_dashboard"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Add Dashboard" />
+        android:title="ADD Dashboard" />
 
     <item
         android:id="@+id/material_dashboard"
@@ -54,19 +54,27 @@
         android:title="Bill Intimation" />
 
     <item
+        android:id="@+id/nav_additional_material"
+        android:icon="@drawable/ic_receipt_black_24dp"
+        android:title="Additional Material Requirement" />
+
+    <item
         android:id="@+id/nav_material"
         android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Receive Material"/>
+        android:title="Receive Material"
+        android:visible="false"/>
 
     <item
         android:id="@+id/nav_material_return"
         android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Return Material"/>
+        android:title="Send to Eon"
+        android:visible="false"/>
 
     <item
         android:id="@+id/nav_material_send_to_tech"
         android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Send to Technician"/>
+        android:title="Send to Technician"
+        android:visible="false"/>
 
     <item
         android:id="@+id/nav_technician_of_the_month"

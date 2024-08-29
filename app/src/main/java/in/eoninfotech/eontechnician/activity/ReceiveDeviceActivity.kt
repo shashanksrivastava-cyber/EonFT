@@ -41,8 +41,8 @@ class ReceiveDeviceActivity : AppCompatActivity(), ReceiveDeviceListener {
     var techid: String? = null
     var status: String? = "A"
     var current_date: String? = null
-    var s_from_date : String ? =null
-    var s_to_date : String ? =null
+    var s_from_date : String? =null
+    var s_to_date : String? =null
     lateinit var fromdate : EditText
     lateinit var todate: EditText
     lateinit var spinner : MySearchableSpinner

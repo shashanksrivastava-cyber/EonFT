@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import in.eoninfotech.eontechnician.BillViewAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.databinding.FragmentBillViewBinding;
@@ -35,6 +36,7 @@ import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -150,7 +152,6 @@ public class BillViewFragment extends Fragment implements BillViewAdapter.Messag
         binding.done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
 

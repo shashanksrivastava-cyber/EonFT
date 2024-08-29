@@ -16,10 +16,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView_receive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,12 +36,12 @@
                         android:id="@+id/linear_layo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Received Device"
@@ -72,13 +72,13 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/addVehicle_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="3dp"
                 android:text="@string/device_sr_no"
                 android:textColor="@color/eonBlue"
@@ -94,7 +94,7 @@
                 android:layout_margin="7dp"
                 android:visibility="visible">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_content_unavailable_sr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,11 +124,11 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/addVehicle_receives"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/other_material"
                 android:textColor="@color/eonBlue"
@@ -144,7 +144,7 @@
                 android:layout_marginStart="3dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.2"
@@ -155,7 +155,7 @@
                     android:textColor="@color/black"
                     android:layout_marginStart="10dp"/>
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -174,7 +174,7 @@
                     android:visibility="visible"
                     android:layout_weight="2">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/actual_qty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                     android:descendantFocusability="blocksDescendants"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txt_content_unavailable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -245,7 +245,7 @@
 
     </ScrollView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_accept_receive"
         android:layout_width="match_parent"
         android:layout_height="45dp"

@@ -1,4 +1,4 @@
-package in.eoninfotech.eontechnician;
+package in.eoninfotech.eontechnician.adapters;
 
 
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.StockResponse;
 import in.eoninfotech.eontechnician.helper.StockDetail;
 import retrofit2.Callback;

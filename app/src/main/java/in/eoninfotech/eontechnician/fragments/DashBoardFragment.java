@@ -26,14 +26,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import dmax.dialog.SpotsDialog;
+import in.eoninfotech.eontechnician.activity.DevicedashboardDetail;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.DashBoardResponse;
 import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
 import in.eoninfotech.eontechnician.databinding.DashboardNewBinding;
+import in.eoninfotech.eontechnician.viewModel.ViewModelAddDashboard;
+import in.eoninfotech.eontechnician.viewModel.ViewModelDeviceDashboard;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +51,7 @@ public class DashBoardFragment extends Fragment {
 
     View v;
     DashboardNewBinding binding;
-    String usrname, current_date, s_time, zone,version, months;
+    String usrname, current_date, s_time, zone, version, months;
     int year, day, month, hour, minutes;
     Calendar calen = Calendar.getInstance();
     ArrayList<Float> yData = new ArrayList<>();
@@ -60,6 +67,8 @@ public class DashBoardFragment extends Fragment {
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
 
+    ViewModelAddDashboard viewModelAddDashboard;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +83,7 @@ public class DashBoardFragment extends Fragment {
         zone = sharedprefs.getString("zone", "");
 
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
+
         setDateAndTime();
 
         getReviewInfo();
@@ -167,17 +177,24 @@ public class DashBoardFragment extends Fragment {
             }
         });
 
+        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDashBoardDetail();
+            }
+        });
+
         return binding.getRoot();
     }
 
-    private void AskForRating(int _appUsedCount){
+    private void AskForRating(int _appUsedCount) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Please Rate Us");
         alert.setIcon(R.drawable.app_icon);
         alert.setMessage("Thanks for using the application. If you like YOUR APP NAME please rate us! Your feedback is important for us!");
-        alert.setPositiveButton("Rate it",new Dialog.OnClickListener(){
-            public void onClick(DialogInterface dialog, int whichButton){
+        alert.setPositiveButton("Rate it", new Dialog.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
                 String url = "https://play.google.com/store/apps/details?id=YOUR PACKAGE NAME";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
@@ -214,114 +231,90 @@ public class DashBoardFragment extends Fragment {
             flow.addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(Task<Void> task) {
-                   // Toast.makeText(getActivity(), "In App Rating complete", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(getActivity(), "In App Rating complete", Toast.LENGTH_LONG).show();
                 }
             });
-        }
-        else {
-           // Toast.makeText(getActivity(), "In App Rating failed", Toast.LENGTH_LONG).show();
+        } else {
+            // Toast.makeText(getActivity(), "In App Rating failed", Toast.LENGTH_LONG).show();
         }
     }
 
     void getDashBoardDetail() {
         progressDialog.show();
-        try {
-            ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-            Call<DashBoardResponse> call = log_att.dashBoardResponse(zone);
-            Log.i("****call", String.valueOf(call));
-            call.enqueue(new Callback<DashBoardResponse>() {
-                @Override
-                public void onResponse(Call<DashBoardResponse> call, Response<DashBoardResponse> response) {
-                    DashBoardResponse updateDataResponse = response.body();
-                    dashboardList = response.body().getTechDashboardDetails();
-                    if (updateDataResponse != null) {
-                        if (updateDataResponse.getType() == 1) {
-                            for (int i = 0; i < dashboardList.size(); i++) {
-                                binding.addTime.setText("" + dashboardList.get(i).getCur_add());
-                                binding.addValue.setText("" + dashboardList.get(i).getAdd_21());
-                                String color1 = dashboardList.get(i).getColor();
-                                String[] separated = color1.split(";");
-                                String color = separated[0];
-                                int myColor = Color.parseColor(color);
-                                binding.addTime.setTextColor(myColor);
 
-                                String color2 = dashboardList.get(i).getColor21();
-                                String[] separated1 = color2.split(";");
-                                String color3 = separated1[0];
-                                int color21 = Color.parseColor(color3);
-                                binding.addValue.setTextColor(color21);
+        viewModelAddDashboard = ViewModelProviders.of(this).get(ViewModelAddDashboard.class);
+        viewModelAddDashboard.getAddCountsRepository(zone).observe(this, movieResponse -> {
+            dashboardList = movieResponse.getTechDashboardDetails();
 
-                                binding.drsAdd.setText("" + dashboardList.get(i).getDrs_add());
-                                String drs_color = dashboardList.get(i).getDrs_color();
-                                String[] drs_separated = drs_color.split(";");
-                                String colors = drs_separated[0];
-                                int drs_colors = Color.parseColor(colors);
-                                binding.drsAdd.setTextColor(drs_colors);
+            if (movieResponse.getType() == 1) {
+                for (int i = 0; i < dashboardList.size(); i++) {
+                    binding.addTime.setText("" + dashboardList.get(i).getCur_add());
+                    binding.addValue.setText("" + dashboardList.get(i).getAdd_21());
+                    String color1 = dashboardList.get(i).getColor();
+                    String[] separated = color1.split(";");
+                    String color = separated[0];
+                    int myColor = Color.parseColor(color);
+                    binding.addTime.setTextColor(myColor);
 
-                                binding.drsAdd21.setText("" + dashboardList.get(i).getDrs_add_21());
-                                String drs21_ = dashboardList.get(i).getDrs_color21();
-                                String[] separate = drs21_.split(";");
-                                String drs_21 = separate[0];
-                                int drs21_color = Color.parseColor(drs_21);
-                                binding.addTime.setTextColor(drs21_color);
+                    String color2 = dashboardList.get(i).getColor21();
+                    String[] separated1 = color2.split(";");
+                    String color3 = separated1[0];
+                    int color21 = Color.parseColor(color3);
+                    binding.addValue.setTextColor(color21);
 
-                                binding.totalVts.setText("" + dashboardList.get(0).getTot_dev());
-                                binding.totalDrs.setText("" + dashboardList.get(0).getTot_drs());
-                                binding.totSos.setText("" + dashboardList.get(0).getTot_sos());
-                                binding.totLid.setText("" + dashboardList.get(0).getTot_lid());
-                                binding.totFuel.setText("" + dashboardList.get(0).getTot_fuel());
-                                binding.totTemp.setText("" + dashboardList.get(0).getTot_temp());
+                    binding.drsAdd.setText("" + dashboardList.get(i).getDrs_add());
+                    String drs_color = dashboardList.get(i).getDrs_color();
+                    String[] drs_separated = drs_color.split(";");
+                    String colors = drs_separated[0];
+                    int drs_colors = Color.parseColor(colors);
+                    binding.drsAdd.setTextColor(drs_colors);
 
-                                binding.faultyVts.setText("" + dashboardList.get(0).getFaulty_dev());
-                                binding.vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
+                    binding.drsAdd21.setText("" + dashboardList.get(i).getDrs_add_21());
+                    String drs21_ = dashboardList.get(i).getDrs_color21();
+                    String[] separate = drs21_.split(";");
+                    String drs_21 = separate[0];
+                    int drs21_color = Color.parseColor(drs_21);
+                    binding.addTime.setTextColor(drs21_color);
 
-                                binding.faultyDrs.setText("" + dashboardList.get(0).getFaulty_drs());
-                                binding.drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
+                    binding.totalVts.setText("" + dashboardList.get(0).getTot_dev());
+                    binding.totalDrs.setText("" + dashboardList.get(0).getTot_drs());
+                    binding.totSos.setText("" + dashboardList.get(0).getTot_sos());
+                    binding.totLid.setText("" + dashboardList.get(0).getTot_lid());
+                    binding.totFuel.setText("" + dashboardList.get(0).getTot_fuel());
+                    binding.totTemp.setText("" + dashboardList.get(0).getTot_temp());
 
-                                binding.faultyUm.setText("" + dashboardList.get(0).getUmain());
-                                binding.umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
+                    binding.faultyVts.setText("" + dashboardList.get(0).getFaulty_dev());
+                    binding.vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
 
-                                binding.umWorking.setText("" + dashboardList.get(0).getUmain_work());
-                                binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
+                    binding.faultyDrs.setText("" + dashboardList.get(0).getFaulty_drs());
+                    binding.drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
 
-                                binding.sosFaulty.setText("" + dashboardList.get(0).getFaulty_sos());
-                                binding.sosSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
+                    binding.faultyUm.setText("" + dashboardList.get(0).getUmain());
+                    binding.umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
 
-                                binding.lidFaulty.setText("" + dashboardList.get(0).getFaulty_lid());
-                                binding.lidSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
+                    binding.umWorking.setText("" + dashboardList.get(0).getUmain_work());
+                    binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
 
-                                binding.fuelFaulty.setText("" + dashboardList.get(0).getFaulty_fuel());
-                                binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardList.get(0).getFaulty_fuel()));
+                    binding.sosFaulty.setText("" + dashboardList.get(0).getFaulty_sos());
+                    binding.sosSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
 
-                                binding.tempFaulty.setText("" + dashboardList.get(0).getFaulty_temp());
-                                binding.tempSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+                    binding.lidFaulty.setText("" + dashboardList.get(0).getFaulty_lid());
+                    binding.lidSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
 
-                                progressDialog.hide();
+                    binding.fuelFaulty.setText("" + dashboardList.get(0).getFaulty_fuel());
+                    binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardList.get(0).getFaulty_fuel()));
 
-                            }
-                        }
-                    } else {
-                        assert updateDataResponse != null;
-                        Log.v("Response", updateDataResponse.toString());
-                        achivd = 0.0f;
-                        progressDialog.hide();
-                    }
-                    yData.add(Float.valueOf(33));
-                    yData.add(Float.valueOf(33));
-                    yData.add(Float.valueOf(33));
+                    binding.tempFaulty.setText("" + dashboardList.get(0).getFaulty_temp());
+                    binding.tempSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+
                     progressDialog.hide();
-                }
+                    binding.swipeRefresh.setRefreshing(false);
 
-                @Override
-                public void onFailure(Call<DashBoardResponse> call, Throwable t) {
-                    t.printStackTrace();
-                    Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
                 }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_LONG).show();
-        }
+            } else {
+                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     void setDateAndTime() {
@@ -377,7 +370,6 @@ public class DashBoardFragment extends Fragment {
 
     @Override
     public void onResume() {
-
         getDashBoardDetail();
         super.onResume();
     }

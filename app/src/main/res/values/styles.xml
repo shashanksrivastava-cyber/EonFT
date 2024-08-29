@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -129,8 +129,49 @@
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_marginLeft">8dp</item>
         <item name="android:layout_marginRight">4dp</item>
-        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginTop">3dp</item>
         <item name="android:background">@drawable/et_frame</item>
+    </style>
+
+    <style name="MultiChoiceAlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/YourAlertDialog.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/YourAlertDialog.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/YourAlertDialog.Button</item>
+        <item name="android:background">#fff</item>
+        <item name="android:textColorPrimary">#000</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:colorActivatedHighlight">#0f0</item>
+        <item name="android:colorControlActivated">#00f</item>
+        <item name="colorControlNormal">@color/grey500</item>
+        <item name="colorControlActivated">@color/material_green_600</item>
+        <item name="dialogCornerRadius">8dp</item>
+    </style>
+
+    <style name="YourAlertDialog.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:gravity">left</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="MyRadioButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/grey500</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+    </style>
+
+    <style name="spinnerTheme" parent= "Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="strokeColor">@color/grey500</item>
+    </style>
+
+    <style name="RoundShapeTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="shapeAppearanceMediumComponent">@style/RoundShapeAppearance</item>
+    </style>
+
+    <style name="RoundShapeAppearance" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
 </resources>

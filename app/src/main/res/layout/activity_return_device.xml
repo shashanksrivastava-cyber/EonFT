@@ -35,7 +35,7 @@
                 android:layout_marginRight="5dp"
                 android:visibility="gone" />
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -78,9 +78,9 @@
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/addVehicle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:layout_margin="7dp"
                 android:visibility="visible">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/txt_content_unavailable_sr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/addVehicl"
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
@@ -146,8 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:orientation="vertical"
-                android:layout_below="@+id/txtDetails">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/materialLL"
@@ -158,7 +157,7 @@
 
                     <RelativeLayout
                         android:id="@+id/relays"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:background="@drawable/et_frame"
                         android:layout_weight="1"
@@ -195,15 +194,14 @@
                         android:hint="Qty"
                         android:textColorHint="@color/grey500"
                         android:inputType="number"
-                        android:layout_below="@+id/txtDetails"
                         android:visibility="visible"
                         android:maxLength="3"
-                        android:layout_toEndOf="@id/etVehicleType"/>
+                        android:autofillHints="Qty" />
 
-                    <Button
-                        android:layout_height="20dp"
-                        android:layout_width="20dp"
-                        android:layout_gravity="top|left"
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="top|start"
                         android:layout_marginTop="5dp"
                         android:layout_marginStart="3dp"
                         android:id="@+id/delete_button"
@@ -212,16 +210,27 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/addMaterial"
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:textColor="@color/eonBlue"
                     android:text="Add More Accessories"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginTop="5dp"
                     app:drawableLeftCompat="@drawable/ic_add_black_24dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="3dp"
+                    android:id="@+id/addMaterial"
+                    android:visibility="visible"
+                    app:icon="@drawable/circle_plus"
+                    android:text="Add More Accessories"/>
 
             </LinearLayout>
 
@@ -229,11 +238,10 @@
                 android:id="@+id/abcd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view1"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/preview_tags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -251,7 +259,6 @@
                 android:id="@+id/abc"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@+id/view1"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="7dp"
                 android:orientation="horizontal"
@@ -268,7 +275,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
@@ -311,7 +318,7 @@
 
                         </FrameLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -325,7 +332,7 @@
                     android:layout_marginRight="5dp"
                     android:visibility="gone">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
@@ -368,7 +375,7 @@
 
                         </FrameLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
@@ -447,23 +454,22 @@
         android:orientation="horizontal"
         android:weightSum="2">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/update_data"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_weight="1"
-            android:background="@color/eonBlue"
-            android:clickable="true"
-            android:elevation="7dp"
-            android:fontFamily="sans-serif-light"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:text="Submit"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorPrimary"
             android:textColor="@color/eonWhite"
-            android:textSize="20sp" />
+            android:textSize="16sp"
+            app:elevation="100dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/cardView_transit_tech"/>
 
     </LinearLayout>
 

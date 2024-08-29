@@ -278,14 +278,13 @@
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_margin="5dp"
                 android:background="@color/eonBlue"
                 android:textColor="@color/eonWhite"
-                android:padding="10dp"
                 android:text="Get Current Location"
                 android:drawableLeft="@drawable/google"
                 android:layout_gravity="center"
@@ -295,7 +294,7 @@
                 android:fontFamily="sans-serif-light"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="15dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_weight="1"/>
 
             <Button

@@ -133,5 +133,10 @@
     <string name="working_device">Working Devices</string>
     <string name="faulty_device">Faulty Devices</string>
     <string name="total_devices">Total Devices -</string>
+    <string name="vts_details">VTS Details</string>
+    <string name="acc_details">Accessory Details</string>
+    <string name="add_more_accessories">Add More Accessories</string>
+    <string name="add_more_devices">Add More Devices</string>
+    <string name="submit">Submit</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package in.eoninfotech.eontechnician;
 
+import static android.app.ProgressDialog.show;
 import static android.content.ContentValues.TAG;
 import static com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED;
 
@@ -42,6 +43,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -76,6 +78,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthDetail;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthResponse;
 import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
@@ -124,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     in.eoninfotech.eontechnician.FragmentCurrentMonth fragmentCurrentMonth;
-    String usrname, alertt, uusername, versionname, disgnid = "0", activityName = "Activities";
+    String usrname, alertt, uusername, versionname, disgnid = "0", activityName = "Activities",intent_req="TT";
     NavigationView navigationView;
     Bundle bundle;
     in.eoninfotech.eontechnician.FaqsFragment faqsfragment;
@@ -135,10 +138,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     StockFragment stockFragment;
     TextView textCartItemCount;
     PaymentCollectionReportFragment paymentCollectionReportFragment;
-    in.eoninfotech.eontechnician.MaterialReturnFragment materialReturnFragment;
-    in.eoninfotech.eontechnician.MaterialtoTechFragment materialtoTechFragment;
+     in.eoninfotech.eontechnician.MaterialReturnFragment materialReturnFragment;
+     in.eoninfotech.eontechnician.MaterialtoTechFragment materialtoTechFragment;
     in.eoninfotech.eontechnician.MaterialReturnViews materialReturnView;
     BillIntimationFragment billIntimationFragment;
+    AdditionalMaterialFragment additionalMaterialFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
     ViewCallSheetFragment viewCallSheetFragment;
@@ -153,8 +157,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     ViewPagerAdapterActivity viewPagerAdapterActivity;
     ViewPagerAdapterBills viewPagerAdapterBills;
+
+    ViewPagerAdapterAddMaterial viewPagerAdapterAddMaterial;
     ViewPagerReturnMaterial viewPagerReturnMaterial;
-    ViewPagerSendToTechnician viewPagerSendtoTechnician;
+     ViewPagerSendToTechnician viewPagerSendtoTechnician;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -169,9 +175,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CircleImageView tech_img;
     ProgressBar progressBars;
     ArrayList<TechnicianMonthDetail> techList = new ArrayList<>();
-    public static TabLayout tabLayout;
+     TabLayout tabLayout;
     public static int int_items = 2;
-    private ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill,viewPagerMaterialReturn,viewPagertechnician;
+    ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill,viewPagerMaterialReturn,viewPagertechnician,viewPagerAddMaterial;
     String tab = "1";
     int count=0;
     private String currentVersion;
@@ -194,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        setTitle("Dashboard");
+        setTitle("ADD Dashboard");
         linearLayout = findViewById(R.id.framelay);
         appPrefs = new AppPreferences(getApplicationContext());
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
@@ -218,23 +224,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FirebaseApp.initializeApp(this);
 
         ConnectivityManager m = (ConnectivityManager) getSystemService(Service.CONNECTIVITY_SERVICE);
-        m.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback() {
-            @Override
-            public void onAvailable(Network network) {
-                Log.e(TAG, "onAvailable: ");
-                if(count==0){
-                }else {
-                    Snackbar.make(findViewById(android.R.id.content),"Internet connection restored",Snackbar.LENGTH_LONG).show();
-                    count=0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            m.registerDefaultNetworkCallback(new ConnectivityManager.NetworkCallback() {
+                @Override
+                public void onAvailable(Network network) {
+                    Log.e(TAG, "onAvailable: ");
+                    if(count==0){
+                    }else {
+                        Snackbar.make(findViewById(android.R.id.content),"Internet connection restored",Snackbar.LENGTH_LONG).show();
+                        count=0;
+                    }
                 }
-            }
-            @Override
-            public void onLost(Network network) {
-                Log.e(TAG, "onLost: ");
-                count=1;
-                Snackbar.make(findViewById(android.R.id.content),"It seems internet connection not available",Snackbar.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onLost(Network network) {
+                    Log.e(TAG, "onLost: ");
+                    count=1;
+                    Snackbar.make(findViewById(android.R.id.content),"It seems internet connection not available",Snackbar.LENGTH_LONG).show();
+                }
+            });
+        }
 
         try {
             TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(MainActivity.this);
@@ -255,12 +263,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (!gps_enabled && !network_enabled) {
             // notify user
-            new android.app.AlertDialog.Builder(this)
+            new AlertDialog.Builder(this)
                     .setMessage("Your Location is OFF.")
                     .setPositiveButton("Enable Location", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                            Intent dialogIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            Intent dialogIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(dialogIntent);
                         }
@@ -334,16 +342,88 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPagerBill = findViewById(R.id.viewPagerBill);
         viewPagerMaterialReturn = findViewById(R.id.viewPagerMaterialReturn);
         viewPagertechnician = findViewById(R.id.viewPagerSendtoTechnician);
+        viewPagerAddMaterial = findViewById(R.id.viewPagerAddMaterial);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        Intent intent1 = getIntent();
+        try {
+            intent_req = intent1.getStringExtra("intent");
+        } catch (Exception e) {
+            intent_req="";
+            throw new RuntimeException(e);
+        }
+
+        try {
+            if(intent_req.equalsIgnoreCase("toEon")){
+                sendToEon();
+            }else if(intent_req.equalsIgnoreCase("toFT")){
+               sendToFT();
+            }else {
+              addDashboard();
+            }
+        } catch (Exception e) {
+            addDashboard();
+            throw new RuntimeException(e);
+        }
 
         appUpdateManager = AppUpdateManagerFactory.create(this);
         appUpdateManager.registerListener(installStateUpdatedListener);
 
         inAppUpdate();
     }
+
+    private void addDashboard() {
+        dashBoardFragment = new DashBoardFragment();
+        dashBoardFragment.setArguments(bundle);
+        ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
+        setTitle("ADD Dashboard");
+        tabLayout.setVisibility(View.VISIBLE);
+        tabLayout.setVisibility(View.VISIBLE);
+        viewPager.setVisibility(View.VISIBLE);
+        viewpagerattendance.setVisibility(View.GONE);
+        viewpageractivity.setVisibility(View.GONE);
+        viewpagercallsheet.setVisibility(View.GONE);
+        viewPagerBill.setVisibility(View.GONE);
+        viewPagerMaterialReturn.setVisibility(View.GONE);
+        viewPagerAddMaterial.setVisibility(View.GONE);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+        ft.commit();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        hideKeyboard();
+    }
+
+    private void sendToFT() {
+
+        materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
+        materialReturnFragment.setArguments(bundle);
+        ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
+        setTitle("Send to Technician");
+        tabLayout.setVisibility(View.VISIBLE);
+        tabLayout.removeAllTabs();
+        viewpagerattendance.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        viewpageractivity.setVisibility(View.GONE);
+        viewpagercallsheet.setVisibility(View.GONE);
+        viewpagerstock.setVisibility(View.GONE);
+        viewPagerBill.setVisibility(View.GONE);
+        viewPagerMaterialReturn.setVisibility(View.GONE);
+        viewPagerAddMaterial.setVisibility(View.GONE);
+        viewPagertechnician.setVisibility(View.VISIBLE);
+        viewPagerSendtoTechnician = new ViewPagerSendToTechnician(getSupportFragmentManager());
+        viewPagertechnician.setAdapter(viewPagerSendtoTechnician);
+        tabLayout.setupWithViewPager(viewPagertechnician);
+        ft.commit();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        hideKeyboard();
+    }
+
     private void inAppUpdate() {
 
         // Returns an intent object that you use to check for an update.
@@ -464,10 +544,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Confirm Exit")
                 .setMessage("Are you sure you want to exit?")
@@ -480,6 +561,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setNegativeButton("No", null)
                 .show();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -558,6 +640,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagerAdapterAtd = new ViewPagerAdapterAtd(getSupportFragmentManager());
             viewpagerattendance.setAdapter(viewPagerAdapterAtd);
             tabLayout.setupWithViewPager(viewpagerattendance);
@@ -566,25 +649,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
         } else if (id == R.id.nav_tech_dashboard) {
-            dashBoardFragment = new DashBoardFragment();
-            dashBoardFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
-            setTitle("Add Dashboard");
-            tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.setVisibility(View.VISIBLE);
-            viewPager.setVisibility(View.VISIBLE);
-            viewpagerattendance.setVisibility(View.GONE);
-            viewpageractivity.setVisibility(View.GONE);
-            viewpagercallsheet.setVisibility(View.GONE);
-            viewPagerBill.setVisibility(View.GONE);
-            viewPagerMaterialReturn.setVisibility(View.GONE);
-            viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-            viewPager.setAdapter(viewPagerAdapter);
-            tabLayout.setupWithViewPager(viewPager);
-            ft.commit();
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            hideKeyboard();
+           addDashboard();
         } else if (id == R.id.nav_incentive) {
             fragmentCurrentMonth = new in.eoninfotech.eontechnician.FragmentCurrentMonth();
             fragmentCurrentMonth.setArguments(bundle);
@@ -599,6 +664,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -618,6 +684,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagercallsheet.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagerAdapterStock = new ViewPagerAdapterStock(getSupportFragmentManager());
             viewpagerstock.setAdapter(viewPagerAdapterStock);
             tabLayout.setupWithViewPager(viewpagerstock);
@@ -638,6 +705,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -657,6 +725,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagerAdapterActivity = new ViewPagerAdapterActivity(getSupportFragmentManager());
             viewpageractivity.setAdapter(viewPagerAdapterActivity);
             tabLayout.setupWithViewPager(viewpageractivity);
@@ -678,6 +747,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
             viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
             tabLayout.setupWithViewPager(viewpagercallsheet);
@@ -699,6 +769,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
             viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
             tabLayout.setupWithViewPager(viewpagercallsheet);
@@ -720,6 +791,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.VISIBLE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
             viewPagerAdapterBills = new ViewPagerAdapterBills(getSupportFragmentManager());
             viewPagerBill.setAdapter(viewPagerAdapterBills);
@@ -728,32 +800,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        } else if (id == R.id.nav_material_return) {
-            materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
-            materialReturnFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
-            setTitle("Return Material");
-            tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
-            viewpagerattendance.setVisibility(View.GONE);
-            viewPager.setVisibility(View.GONE);
-            viewpageractivity.setVisibility(View.GONE);
-            viewpagercallsheet.setVisibility(View.GONE);
-            viewpagerstock.setVisibility(View.GONE);
-            viewPagerBill.setVisibility(View.GONE);
-            viewPagerMaterialReturn.setVisibility(View.VISIBLE);
-            viewPagerReturnMaterial = new ViewPagerReturnMaterial(getSupportFragmentManager());
-            viewPagerMaterialReturn.setAdapter(viewPagerReturnMaterial);
-            tabLayout.setupWithViewPager(viewPagerMaterialReturn);
-            ft.commit();
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-            hideKeyboard();
-        } else if (id == R.id.nav_material_send_to_tech) {
-            materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
-            materialReturnFragment.setArguments(bundle);
-            ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
-            setTitle("Send to Technician");
+        }  else if (id == R.id.nav_additional_material) {
+            additionalMaterialFragment  = new AdditionalMaterialFragment();
+            additionalMaterialFragment.setArguments(bundle);
+            ft = fm.beginTransaction().replace(R.id.framelay, additionalMaterialFragment);
+            setTitle("Additional Material Requirement");
             tabLayout.setVisibility(View.VISIBLE);
             tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
@@ -763,16 +814,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewpagerstock.setVisibility(View.GONE);
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
-            viewPagertechnician.setVisibility(View.VISIBLE);
-            viewPagerSendtoTechnician = new ViewPagerSendToTechnician(getSupportFragmentManager());
-            viewPagertechnician.setAdapter(viewPagerSendtoTechnician);
-            tabLayout.setupWithViewPager(viewPagertechnician);
+            viewPagerAddMaterial.setVisibility(View.VISIBLE);
+            viewPagertechnician.setVisibility(View.GONE);
+            viewPagerAdapterAddMaterial = new ViewPagerAdapterAddMaterial(getSupportFragmentManager());
+            viewPagerAddMaterial.setAdapter(viewPagerAdapterAddMaterial);
+            tabLayout.setupWithViewPager(viewPagerAddMaterial);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
+        } else if ((id == R.id.nav_material_return)) {
+            sendToEon();
+        } else if (id == R.id.nav_material_send_to_tech) {
+            sendToFT();
         }
-        
         else if (id == R.id.nav_material) {
            Intent intent = new Intent(MainActivity.this, ReceiveDeviceActivity.class);
            startActivity(intent);
@@ -780,36 +835,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         else if (id == R.id.material_dashboard) {
            Intent intent = new Intent(MainActivity.this, Devicedashboards.class);
            startActivity(intent);
-
-//            Intent intent = new Intent(MainActivity.this, Devicedashboard.class);
-//            startActivity(intent);
-
         }
-
-//        else if (id == R.id.faqs) {
-//            faqsfragment = new FaqsFragment();
-//            faqsfragment.setArguments(bundle);
-//            ft = fm.beginTransaction().replace(R.id.framelay, faqsfragment);
-//            setTitle("FAQs");
-//            tabLayout.setVisibility(View.GONE);
-//            tabLayout.removeAllTabs();
-//            viewpagerattendance.setVisibility(View.GONE);
-//            viewPager.setVisibility(View.GONE);
-//            viewpageractivity.setVisibility(View.GONE);
-//            viewpagercallsheet.setVisibility(View.GONE);
-//            viewpagerstock.setVisibility(View.GONE);
-//            viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
-//            viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
-//            tabLayout.setupWithViewPager(viewpagercallsheet);
-//            ft.commit();
-//            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//            drawer.closeDrawer(GravityCompat.START);
-//            hideKeyboard();
-//        }
         else if (id == R.id.menu_logout) {
             final boolean isRunning = EONUtil.isServiceRunning(this.getBaseContext(), ForegroundService.class);
             String running = String.valueOf(isRunning);
-            new AlertDialog.Builder(this)
+            new MaterialAlertDialogBuilder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Confirm Logout")
                     .setMessage("Are you sure you want to logout ?")
@@ -855,7 +885,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             txtclose.setOnClickListener(v -> myDialog.dismiss());
 
             viewMore.setOnClickListener(view -> {
-                Intent intent = new Intent(getApplicationContext(), CardViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), in.eoninfotech.eontechnician.CardViewActivity.class);
                 startActivity(intent);
                 myDialog.hide();
             });
@@ -868,6 +898,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             hideKeyboard();
         }
         return true;
+    }
+
+    private void sendToEon() {
+        materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
+        materialReturnFragment.setArguments(bundle);
+        ft = fm.beginTransaction().replace(R.id.framelay, materialReturnFragment);
+        setTitle("Send to Eon");
+        tabLayout.setVisibility(View.VISIBLE);
+        tabLayout.removeAllTabs();
+        viewpagerattendance.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        viewpageractivity.setVisibility(View.GONE);
+        viewpagercallsheet.setVisibility(View.GONE);
+        viewpagerstock.setVisibility(View.GONE);
+        viewPagerBill.setVisibility(View.GONE);
+        viewPagerMaterialReturn.setVisibility(View.VISIBLE);
+        viewPagerReturnMaterial = new ViewPagerReturnMaterial(getSupportFragmentManager());
+        viewPagerMaterialReturn.setAdapter(viewPagerReturnMaterial);
+        tabLayout.setupWithViewPager(viewPagerMaterialReturn);
+        ft.commit();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        hideKeyboard();
     }
 
     @Override
@@ -1198,12 +1251,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (position) {
                 case 0:
-                    materialReturnFragment = new MaterialReturnFragment();
+                    materialReturnFragment = new in.eoninfotech.eontechnician.MaterialReturnFragment();
                     materialReturnFragment.setArguments(bundle);
                     return materialReturnFragment;
 
                 case 1:
-                    materialReturnView = new MaterialReturnViews();
+                    materialReturnView = new in.eoninfotech.eontechnician.MaterialReturnViews();
                     materialReturnView.setArguments(bundle);
                     return materialReturnView;
             }
@@ -1228,7 +1281,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    class ViewPagerSendToTechnician extends FragmentPagerAdapter {
+    public class ViewPagerSendToTechnician extends FragmentPagerAdapter {
         public ViewPagerSendToTechnician(FragmentManager fm) {
             super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
@@ -1241,12 +1294,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (position) {
                 case 0:
-                    materialtoTechFragment = new MaterialtoTechFragment();
+                    materialtoTechFragment = new in.eoninfotech.eontechnician.MaterialtoTechFragment();
                     materialtoTechFragment.setArguments(bundle);
                     return materialtoTechFragment;
 
                 case 1:
-                    materialReturnView = new MaterialReturnViews();
+                    materialReturnView = new in.eoninfotech.eontechnician.MaterialReturnViews();
                     materialReturnView.setArguments(bundle);
                     return materialReturnView;
             }
@@ -1448,6 +1501,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    class ViewPagerAdapterAddMaterial extends FragmentPagerAdapter {
+
+        public ViewPagerAdapterAddMaterial(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            bundle.putString("disttid", disgnid);
+            bundle.putString("usernme", usrname);
+            bundle.putString("version", versionname);
+
+            switch (position) {
+                case 0:
+                    additionalMaterialFragment = new AdditionalMaterialFragment();
+                    additionalMaterialFragment.setArguments(bundle);
+                    return additionalMaterialFragment;
+                case 1:
+                    additionalMaterialFragment = new AdditionalMaterialFragment();
+                    additionalMaterialFragment.setArguments(bundle);
+                    return additionalMaterialFragment;
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return int_items;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            switch (position) {
+                case 0:
+                    return "Upload";
+                case 1:
+                    return "View";
+            }
+            return null;
+        }
+    }
+
     class GetVersionCode extends AsyncTask<Void, String, String> {
 
         Dialog dialog;
@@ -1507,12 +1604,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onRestart() {
         super.onRestart();
         //loadContent();
-    }
-
-    @Override
-    protected void onDestroy() {
-        System.gc();
-        super.onDestroy();
     }
 
     @Override

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/parent_linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:visibility="visible"
+    android:padding="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/relays"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_frame"
+            android:visibility="visible">
+
+            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                android:id="@+id/new_main_clients"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:spinnerMode="dialog" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="6dp"
+                android:background="@color/eonWhite"
+                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/device_relay"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/et_frame"
+            android:visibility="visible">
+
+            <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                android:id="@+id/device_type"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="2dp"
+                android:gravity="center"
+                android:spinnerMode="dialog"
+                android:contentDescription="Select VTS type"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="6dp"
+                android:background="@color/eonWhite"
+                android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/etQuantity"
+            style="@style/et_profile"
+            android:layout_width="40dp"
+            android:autofillHints="Qty"
+            android:hint="Qty"
+            android:inputType="number"
+            android:maxLength="3"
+            android:textColorHint="@color/grey500"
+            android:visibility="visible"
+            android:layout_marginTop="3dp"/>
+
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="top|center_vertical"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_minus"
+            android:visibility="visible" />
+
+    </LinearLayout>

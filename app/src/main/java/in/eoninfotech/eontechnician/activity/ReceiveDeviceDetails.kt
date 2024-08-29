@@ -23,6 +23,7 @@ import `in`.eoninfotech.eontechnician.callbacks.ReceiveDeviceListener
 import `in`.eoninfotech.eontechnician.controllers.ReceiveDeviceController
 import `in`.eoninfotech.eontechnician.databinding.ActivityReceiveDeviceDetailsBinding
 import `in`.eoninfotech.eontechnician.helper.CheckConnection
+import androidx.lifecycle.lifecycleScope
 
 class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
 
@@ -104,7 +105,19 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             binding!!.btnAcceptReceive.setVisibility(View.VISIBLE)
             binding!!.actualQty.setVisibility(View.VISIBLE)
         }
-        getData()
+
+//        lifecycleScope.launch {
+//            // do your Coroutine Stuff here, i.e. call a suspend fun:
+//            coroutineFunction()
+//        }
+//
+//        suspend fun coroutineFunction() {
+//            // Use a different CoroutineScope, etc
+//            CoroutineScope(Dispatchers.IO).launch {
+//                // do some long running operation or something
+//                getData()
+//            }
+//        }
 
         binding!!.btnAcceptReceive.setOnClickListener{
             val checked: SparseBooleanArray = binding!!.deviceDetailListReceive.getCheckedItemPositions()

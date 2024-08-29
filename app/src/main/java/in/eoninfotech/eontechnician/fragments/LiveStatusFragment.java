@@ -19,10 +19,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.LiveFaultDataAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.ClientDetails;
@@ -52,6 +54,10 @@ import in.eoninfotech.eontechnician.controllers.NewInstallmentController;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
+import in.eoninfotech.eontechnician.viewModel.ViewModelActivityDetails;
+import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
+import in.eoninfotech.eontechnician.viewModel.ViewModelLiveStatus;
+import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -91,6 +97,9 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     ArrayAdapter<String> adapter;
     ArrayList<DeviceLiveStatus> deviceLiveStatuses = new ArrayList<>();
     LiveStatusAdapterNew liveStatusAdapterNew;
+    ViewModelSubClient viewModelSubClient;
+    ViewModelClientLocation viewModelClientLocation;
+    ViewModelLiveStatus viewModelLiveStatus;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -120,7 +129,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
         newInstallmentController = new NewInstallmentController();
         if (chk.isConnected()) {
             addclients();
-            addVehType();
         } else {
             chk.showConnectionErrorDialog();
         }
@@ -137,7 +145,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
                     connection_status="D";
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -210,7 +217,6 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
                 }else if(id_dist.equalsIgnoreCase("")){
                     Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
                 }else {
-
                     loadData();
                 }
             }
@@ -220,19 +226,56 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
     }
 
     private void addLocation() {
-        newInstallmentController.reqeuestClientLocation(id_dist,server_name,db_name, this);
+
+        viewModelClientLocation= ViewModelProviders.of(this).get(ViewModelClientLocation.class);
+        viewModelClientLocation.getClientLocationRepository(id_dist,server_name,db_name).observe(this, movieResponse -> {
+            locationList = movieResponse.getClientLoc();
+            if(movieResponse.getType()==1){
+                try {
+                    locationDetail.clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                locationDetail.add("SELECT LOCATION");
+                for (int i = 0; i < locationList.size(); i++) {
+                    locationDetail.add(locationList.get(i).getLoc_Name());
+                }
+                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                location.setAdapter(adapter);
+            }else {
+                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void addclients() {
-        ShowProgressBar(true);
-        newInstallmentController.reqeuestClientList("",this);
+        viewModelSubClient= ViewModelProviders.of(this).get(ViewModelSubClient.class);
+        viewModelSubClient.getSubClientRepository("").observe(this, movieResponse -> {
+            clientList = movieResponse.getClientList();
+            if(movieResponse.getType()==1){
+                try {
+                    clientDetail.clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                clientDetail.add(" SELECT CLIENT");
+                for (int i = 0; i < clientList.size(); i++) {
+                    clientDetail.add(clientList.get(i).getClient_Name());
+                }
+                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                client.setAdapter(adapter);
+            }else {
+                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void addVehType() {
         newInstallmentController.reqeuestvehicleType(this);
     }
-
-
 
     private void loadData() {
         try {
@@ -243,33 +286,21 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<MainResponse> call = log_att.get_live_status(server_name,db_name,id_dist,depo_id,connection_status,veh_type);
-        Log.i("****call", String.valueOf(call));
-        call.enqueue(new Callback<MainResponse>() {
-            @Override
-            public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-                if(response.body().getType()==1){
-                    MainResponse deviceLiveStatus = response.body();
-                    deviceLiveStatuses = deviceLiveStatus.getData();
-                    liveStatusAdapterNew = new LiveStatusAdapterNew(getContext(),deviceLiveStatuses);
-                    recyclerView.setAdapter(liveStatusAdapterNew);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    txt_content_unavailable.setVisibility(View.GONE);
-                    refreshLayout.setRefreshing(false);
-                    pDialog.dismiss();
-                }
-                else {
-                    refreshLayout.setRefreshing(false);
-                    pDialog.dismiss();
-                    txt_content_unavailable.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onFailure(Call<MainResponse> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+        viewModelLiveStatus= ViewModelProviders.of(this).get(ViewModelLiveStatus.class);
+        viewModelLiveStatus.getLiveStatusRepository(server_name,db_name,id_dist,depo_id,connection_status,veh_type).observe(this, movieResponse -> {
+            deviceLiveStatuses = movieResponse.getData();
+            if(movieResponse.getType()==1){
+                liveStatusAdapterNew = new LiveStatusAdapterNew(getContext(),deviceLiveStatuses);
+                recyclerView.setAdapter(liveStatusAdapterNew);
+                recyclerView.setVisibility(View.VISIBLE);
+                txt_content_unavailable.setVisibility(View.GONE);
+                refreshLayout.setRefreshing(false);
+                pDialog.dismiss();
+            }else {
+                refreshLayout.setRefreshing(false);
+                pDialog.dismiss();
+                txt_content_unavailable.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
             }
         });
     }
@@ -284,53 +315,10 @@ public class LiveStatusFragment extends Fragment implements ClientListener {
 
     @Override
     public void clientResponse(ClientResponse response) {
-        try {
-            clientList = response.getClientList();
-            try {
-                try {
-                    clientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                clientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < clientList.size(); i++) {
-                    clientDetail.add(clientList.get(i).getClient_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                client.setAdapter(adapter);
-                ShowProgressBar(false);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void locationResponse(ClientLocationResponse response) {
-        try {
-            locationList = response.getClientLoc();
-            try {
-                try {
-                    locationDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                locationDetail.add("SELECT LOCATION");
-                for (int i = 0; i < locationList.size(); i++) {
-                    locationDetail.add(locationList.get(i).getLoc_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                location.setAdapter(adapter);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

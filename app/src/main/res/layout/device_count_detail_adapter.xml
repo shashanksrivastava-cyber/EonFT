@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,8 @@
     android:layout_marginTop="8dp"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    app:cardElevation="10dp">
+    app:cardElevation="15dp"
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -16,15 +17,15 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_marginBottom="5dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/sr_no"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="16dp"
             android:fontFamily="sans-serif-thin"
             android:text="Ref No."
             android:textColor="#DE000000"
@@ -33,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_vts_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -59,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/vts_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,7 +86,7 @@
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/vts_id" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/cust_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -97,15 +98,16 @@
             android:textColor="#DE000000"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:maxLength="12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_cust_name" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_cust_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:text="Customer Name"
             android:textColor="#8A000000"
@@ -113,12 +115,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:text="Status"
             android:textColor="#8A000000"
@@ -126,37 +128,51 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view1" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_height="0dp"
+            android:layout_margin="2dp"
             android:background="@color/green"
-            android:padding="5dp"
+            android:padding="3dp"
             android:text="Pending"
             android:textColor="@color/eonWhite"
             android:textSize="14sp"
             android:visibility="visible"
+            android:fontFamily="sans-serif-light"
             app:layout_constraintTop_toBottomOf="@+id/tv_status"
-            app:layout_constraintRight_toLeftOf="@+id/view_more"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/date_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginRight="10dp"
+            android:gravity="bottom"
+            android:text=""
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="1dp"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/tv_status"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/change_device_status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginRight="10dp"
             android:gravity="bottom"
-            android:text="Change Device Status"
+            android:text="Change Device\n Status"
             android:textColor="@color/colorPrimary"
-            android:layout_marginTop="10dp"
-            android:textSize="14sp"
+            android:layout_marginTop="1dp"
+            android:textSize="12sp"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/tv_status"
             app:layout_constraintLeft_toLeftOf="@+id/status"
             app:layout_constraintEnd_toStartOf="@+id/status"/>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contentConstraint"
@@ -244,7 +260,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <TextView
             android:id="@+id/received_at"
             android:layout_width="wrap_content"
@@ -261,4 +276,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

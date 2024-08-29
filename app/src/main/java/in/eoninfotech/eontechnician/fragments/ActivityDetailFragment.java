@@ -14,10 +14,12 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -34,6 +37,8 @@ import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.ActivityDetailResponse;
 import in.eoninfotech.eontechnician.responses.ActivityResponse;
+import in.eoninfotech.eontechnician.viewModel.ViewModelActivityDetails;
+import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -67,6 +72,7 @@ public class ActivityDetailFragment extends Fragment {
     ArrayList<ActivityDetailResponse> activityDetail = new ArrayList<>();
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
+    ViewModelActivityDetails viewModelActivityDetails;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -152,7 +158,6 @@ public class ActivityDetailFragment extends Fragment {
     }
 
     private void refresh() {
-        //  AppDebug.showToast(getContext(), TAG, "refresh", "");
         clear();
         loadContent();
     }
@@ -163,35 +168,24 @@ public class ActivityDetailFragment extends Fragment {
 
     private void loadContent() {
 
-       // refreshLayout.setRefreshing(true);
-        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<ActivityResponse> call = log_att.view_activities(s_date, user_id);
-        call.enqueue(new Callback<ActivityResponse>() {
-            @Override
-            public void onResponse(Call<ActivityResponse> call, Response<ActivityResponse> response) {
-                if (response.body().getType() == 1) {
-                    ActivityResponse activityResponse = response.body();
-                    txtContentUnavailable.setVisibility(View.GONE);
-                    activityDetail = activityResponse.getActivityList();
-                    activityDetailAdapter = new ActivityDetailAdapter(getContext(), activityDetail,s_date);
-                    recyclerView.setAdapter(activityDetailAdapter);
-                    runLayoutAnimation(recyclerView);
-                    refreshLayout.setRefreshing(false);
-                    recyclerView.setVisibility(View.VISIBLE);
-                    mShimmerViewContainer.stopShimmerAnimation();
-                    mShimmerViewContainer.setVisibility(View.GONE);
-                    //ShowProgressBar(false);
-                } else {
-                    txtContentUnavailable.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
-                    refreshLayout.setRefreshing(false);
-                    mShimmerViewContainer.stopShimmerAnimation();
-                    mShimmerViewContainer.setVisibility(View.GONE);
-                }
-            }
-            @Override
-            public void onFailure(Call<ActivityResponse> call, Throwable t) {
-                //refreshLayout.setRefreshing(false);
+        viewModelActivityDetails= ViewModelProviders.of(this).get(ViewModelActivityDetails.class);
+        viewModelActivityDetails.getActivityDetailRepository(s_date, user_id).observe(this, movieResponse -> {
+            activityDetail = movieResponse.getActivityList();
+            if(movieResponse.getType()==1){
+                txtContentUnavailable.setVisibility(View.GONE);
+                activityDetailAdapter = new ActivityDetailAdapter(getContext(), activityDetail,s_date);
+                recyclerView.setAdapter(activityDetailAdapter);
+                runLayoutAnimation(recyclerView);
+                refreshLayout.setRefreshing(false);
+                recyclerView.setVisibility(View.VISIBLE);
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
+            }else {
+                txtContentUnavailable.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+                refreshLayout.setRefreshing(false);
+                mShimmerViewContainer.stopShimmerAnimation();
+                mShimmerViewContainer.setVisibility(View.GONE);
             }
         });
     }

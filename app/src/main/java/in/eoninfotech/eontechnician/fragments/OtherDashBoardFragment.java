@@ -29,14 +29,19 @@ import java.util.List;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.databinding.DashboardNewBinding;
+import in.eoninfotech.eontechnician.databinding.FragmentOthersNewBinding;
 import in.eoninfotech.eontechnician.responses.DashBoardResponse;
 import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
 import in.eoninfotech.eontechnician.responses.TechDetails;
 import in.eoninfotech.eontechnician.responses.TechResponse;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
+import in.eoninfotech.eontechnician.viewModel.ViewModelAddDashboard;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -52,6 +57,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class OtherDashBoardFragment extends Fragment {
 
     View v;
+    FragmentOthersNewBinding binding;
     int year, day, month;
     Calendar calen = Calendar.getInstance();
     MySearchableSpinner client;
@@ -64,10 +70,10 @@ public class OtherDashBoardFragment extends Fragment {
     private PieChart mChart;
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
     TextView t_curntday, t_target, addName, addTime, add_value, total_vts, total_drs, faulty_vts, faulty_drs, faulty_um,
-            tot_sos,tot_lid,tot_fuel,tot_temp,um_working,sos_faulty,lid_faulty,fuel_faulty,temp_faulty,drs_add,drs_add_21;
+            tot_sos, tot_lid, tot_fuel, tot_temp, um_working, sos_faulty, lid_faulty, fuel_faulty, temp_faulty, drs_add, drs_add_21;
     ArrayList<Float> yData = new ArrayList<>();
-    ColorfulRingProgressView vtsSpv, drsSpv, umSpv,um_workigSpv,sos_Spv,lid_Spv,fuel_Spv,temp_Spv;
-    CardView cv_one_login, cv_two_login, cv_three_login,cv_four_login,cv_five_login,cv_six_login,cv_seven_login,cv_eight_login;
+    ColorfulRingProgressView vtsSpv, drsSpv, umSpv, um_workigSpv, sos_Spv, lid_Spv, fuel_Spv, temp_Spv;
+    CardView cv_one_login, cv_two_login, cv_three_login, cv_four_login, cv_five_login, cv_six_login, cv_seven_login, cv_eight_login;
     Float achivd, total;
     private String[] xData;
     TextView txt_content_unavailable;
@@ -75,58 +81,24 @@ public class OtherDashBoardFragment extends Fragment {
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
 
+    ViewModelAddDashboard viewModelAddDashboard;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_others_new, container, false);
+        binding = FragmentOthersNewBinding.inflate(getLayoutInflater(), container, false);
 
         sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         uusername = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
         Log.i("****stat dist n usr***", version + " " + uusername);
-        client = v.findViewById(R.id.new_in_clients);
-        mChart = v.findViewById(R.id.piechart);
-        addTime = v.findViewById(R.id.addTime);
-        add_value = v.findViewById(R.id.add_value);
-        addDetail = v.findViewById(R.id.addDetail);
-        addName = v.findViewById(R.id.addName);
-        add_value = v.findViewById(R.id.add_value);
-        total_vts = v.findViewById(R.id.total_vts);
-        total_drs = v.findViewById(R.id.total_drs);
-        faulty_vts = v.findViewById(R.id.faulty_vts);
-        faulty_drs = v.findViewById(R.id.faulty_drs);
-        faulty_um = v.findViewById(R.id.faulty_um);
-        vtsSpv = v.findViewById(R.id.vtsSpv);
-        drsSpv = v.findViewById(R.id.drsSpv);
-        umSpv = v.findViewById(R.id.umSpv);
-        um_working = v.findViewById(R.id.um_working);
-        um_workigSpv = v.findViewById(R.id.um_workigSpv);
-        sos_Spv = v.findViewById(R.id.sos_Spv);
-        lid_Spv= v.findViewById(R.id.lid_Spv);
-        fuel_Spv = v.findViewById(R.id.fuel_Spv);
-        temp_Spv = v.findViewById(R.id.temp_Spv);
-        sos_faulty = v.findViewById(R.id.sos_faulty);
-        lid_faulty = v.findViewById(R.id.lid_faulty);
-        fuel_faulty = v.findViewById(R.id.fuel_faulty);
-        temp_faulty = v.findViewById(R.id.temp_faulty);
-        cv_one_login = v.findViewById(R.id.cv_one_login);
-        cv_two_login = v.findViewById(R.id.cv_two_login);
-        cv_three_login = v.findViewById(R.id.cv_three_login);
-        cv_four_login = v.findViewById(R.id.cv_four_login);
-        cv_five_login = v.findViewById(R.id.cv_five_login);
-        cv_six_login = v.findViewById(R.id.cv_six_login);
-        cv_seven_login = v.findViewById(R.id.cv_seven_login);
-        cv_eight_login = v.findViewById(R.id.cv_eight_login);
-        drs_add = v.findViewById(R.id.drs_add);
-        drs_add_21 = v.findViewById(R.id.drs_add_21);
-        txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
-        t_curntday = v.findViewById(R.id.curnt_date);
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
         setDateAndTime();
 
 
-        cv_one_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvOneLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -137,7 +109,7 @@ public class OtherDashBoardFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        cv_two_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvTwoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -149,7 +121,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        cv_three_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvThreeLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -160,7 +132,7 @@ public class OtherDashBoardFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        cv_four_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvFourLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -171,7 +143,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        cv_five_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvFiveLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -182,7 +154,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        cv_six_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvSixLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -193,7 +165,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        cv_seven_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvSevenLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -204,7 +176,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        cv_eight_login.setOnClickListener(new View.OnClickListener() {
+        binding.cvEightLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
@@ -215,7 +187,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        return v;
+        return binding.getRoot();
     }
 
     private void addTechnicians() {
@@ -248,7 +220,7 @@ public class OtherDashBoardFragment extends Fragment {
                     }
                     adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, name);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    client.setAdapter(adapter);
+                    binding.newInClients.setAdapter(adapter);
 
                 } catch (NullPointerException npe) {
                     npe.printStackTrace();
@@ -269,7 +241,7 @@ public class OtherDashBoardFragment extends Fragment {
             }
         });
 
-        client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.newInClients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
@@ -278,9 +250,9 @@ public class OtherDashBoardFragment extends Fragment {
                     i = i - 1;
                 }
                 zone = (techList.get(i).getZone());
-                addName.setText(techList.get(i).getName() + "'s ADD Performence");
-                addDetail.setVisibility(View.VISIBLE);
-                txt_content_unavailable.setVisibility(View.GONE);
+                binding.addName.setText(techList.get(i).getName() + "'s ADD Performence");
+                binding.addDetail.setVisibility(View.VISIBLE);
+                binding.txtContentUnavailable.setVisibility(View.GONE);
                 getDashBoardDetail();
             }
 
@@ -294,92 +266,76 @@ public class OtherDashBoardFragment extends Fragment {
     private void getDashBoardDetail() {
 
         progressDialog.show();
-        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<DashBoardResponse> call = log_att.dashBoardResponse(zone);
-        Log.i("****call", String.valueOf(call));
-        call.enqueue(new Callback<DashBoardResponse>() {
-            @Override
-            public void onResponse(Call<DashBoardResponse> call, Response<DashBoardResponse> response) {
-                DashBoardResponse updateDataResponse = response.body();
-                dashboardList = response.body().getTechDashboardDetails();
-                Log.i("**respnse", " " + response.body());
-                // if (updateDataResponse != null) {
-                if (updateDataResponse.getType() == 1) {
-                    for (int i = 0; i < dashboardList.size(); i++) {
-                        addTime.setText("" + dashboardList.get(i).getCur_add());
-                        add_value.setText("" + dashboardList.get(i).getAdd_21());
-                        String color1 = dashboardList.get(i).getColor();
-                        String[] separated = color1.split(";");
-                        String color = separated[0];
-                        int myColor = Color.parseColor(color);
-                        addTime.setTextColor(myColor);
-                        // addTime.setBackgroundColor(myColor);
 
-                        String color2 = dashboardList.get(i).getColor21();
-                        String[] separated1 = color2.split(";");
-                        String color3 = separated1[0];
-                        int color21 = Color.parseColor(color3);
-                        add_value.setTextColor(color21);
-                        // add_value.setBackgroundColor(color21);
+        viewModelAddDashboard = ViewModelProviders.of(this).get(ViewModelAddDashboard.class);
+        viewModelAddDashboard.getAddCountsRepository(zone).observe(this, movieResponse -> {
+            dashboardList = movieResponse.getTechDashboardDetails();
 
-                        drs_add.setText("" + dashboardList.get(i).getDrs_add());
-                        String drs_color = dashboardList.get(i).getDrs_color();
-                        String[] drs_separated = drs_color.split(";");
-                        String colors = drs_separated[0];
-                        int drs_colors = Color.parseColor(colors);
-                        drs_add.setTextColor(drs_colors);
+            if (movieResponse.getType() == 1) {
+                for (int i = 0; i < dashboardList.size(); i++) {
+                    binding.addTime.setText("" + dashboardList.get(i).getCur_add());
+                    binding.addValue.setText("" + dashboardList.get(i).getAdd_21());
+                    String color1 = dashboardList.get(i).getColor();
+                    String[] separated = color1.split(";");
+                    String color = separated[0];
+                    int myColor = Color.parseColor(color);
+                    binding.addTime.setTextColor(myColor);
 
-                        drs_add_21.setText("" + dashboardList.get(i).getDrs_add_21());
-                        String drs21_ = dashboardList.get(i).getDrs_color21();
-                        String[] separate = drs21_.split(";");
-                        String drs_21 = separate[0];
-                        int drs21_color = Color.parseColor(drs_21);
-                        addTime.setTextColor(drs21_color);
+                    String color2 = dashboardList.get(i).getColor21();
+                    String[] separated1 = color2.split(";");
+                    String color3 = separated1[0];
+                    int color21 = Color.parseColor(color3);
+                    binding.addValue.setTextColor(color21);
 
-                        total_vts.setText("" + dashboardList.get(0).getTot_dev());
-                        total_drs.setText("" + dashboardList.get(0).getTot_drs());
+                    binding.drsAdd.setText("" + dashboardList.get(i).getDrs_add());
+                    String drs_color = dashboardList.get(i).getDrs_color();
+                    String[] drs_separated = drs_color.split(";");
+                    String colors = drs_separated[0];
+                    int drs_colors = Color.parseColor(colors);
+                    binding.drsAdd.setTextColor(drs_colors);
 
-                        faulty_vts.setText("" + dashboardList.get(0).getFaulty_dev());
-                        vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
+                    binding.drsAdd21.setText("" + dashboardList.get(i).getDrs_add_21());
+                    String drs21_ = dashboardList.get(i).getDrs_color21();
+                    String[] separate = drs21_.split(";");
+                    String drs_21 = separate[0];
+                    int drs21_color = Color.parseColor(drs_21);
+                    binding.addTime.setTextColor(drs21_color);
 
-                        faulty_drs.setText("" + dashboardList.get(0).getFaulty_drs());
-                        drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
+                    binding.totalVts.setText("" + dashboardList.get(0).getTot_dev());
+                    binding.totalDrs.setText("" + dashboardList.get(0).getTot_drs());
 
-                        faulty_um.setText("" + dashboardList.get(0).getUmain());
-                        umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
+                    binding.faultyVts.setText("" + dashboardList.get(0).getFaulty_dev());
+                    binding.vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
 
-                        um_working.setText(""+dashboardList.get(0).getUmain_work());
-                        um_workigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
+                    binding.faultyDrs.setText("" + dashboardList.get(0).getFaulty_drs());
+                    binding.drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
 
-                        sos_faulty.setText(""+dashboardList.get(0).getFaulty_sos());
-                        sos_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
+                    binding.faultyUm.setText("" + dashboardList.get(0).getUmain());
+                    binding.umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
 
-                        lid_faulty.setText(""+dashboardList.get(0).getFaulty_lid());
-                        lid_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
+                    binding.umWorking.setText("" + dashboardList.get(0).getUmain_work());
+                    binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
 
-                        fuel_faulty.setText(""+dashboardList.get(0).getFaulty_fuel());
-                        fuel_Spv.setPercent(Float.parseFloat(""+dashboardList.get(0).getFaulty_fuel()));
+                    binding.sosFaulty.setText("" + dashboardList.get(0).getFaulty_sos());
+                    binding.sosSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
 
-                        temp_faulty.setText(""+dashboardList.get(0).getFaulty_temp());
-                        temp_Spv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+                    binding.lidFaulty.setText("" + dashboardList.get(0).getFaulty_lid());
+                    binding.lidSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
 
-                        progressDialog.hide();
-                    }
-                } else {
+                    binding.fuelFaulty.setText("" + dashboardList.get(0).getFaulty_fuel());
+                    binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardList.get(0).getFaulty_fuel()));
+
+                    binding.tempFaulty.setText("" + dashboardList.get(0).getFaulty_temp());
+                    binding.tempSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
+
                     progressDialog.hide();
-                    assert updateDataResponse != null;
-                    Log.v("Response", updateDataResponse.toString());
-                    achivd = 0.0f;
-                }
-            }
 
-            @Override
-            public void onFailure(Call<DashBoardResponse> call, Throwable t) {
-                progressDialog.hide();
-                t.printStackTrace();
+                }
+            } else {
                 Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
     void setDateAndTime() {

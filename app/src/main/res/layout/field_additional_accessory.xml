@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent_linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal"
+    android:visibility="visible">
+
+    <EditText
+        android:id="@+id/etVehicleType"
+        style="@style/et_profile"
+        android:layout_width="match_parent"
+        android:focusable="false"
+        android:visibility="gone"
+        android:focusableInTouchMode="false"
+        android:layout_weight="1"
+        android:layout_below="@+id/txtDetails"/>
+
+    <RelativeLayout
+        android:id="@+id/relays"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/et_frame"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp">
+
+        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+            android:id="@+id/accessory_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:spinnerMode="dialog" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp"
+            android:background="@color/eonWhite"
+            android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/acc_etQuantity"
+        style="@style/et_profile"
+        android:layout_width="80dp"
+        android:hint="Qty"
+        android:textColorHint="@color/grey500"
+        android:inputType="number"
+        android:layout_below="@+id/txtDetails"
+        android:visibility="visible"
+        android:maxLength="3"
+        android:layout_toRightOf="@id/etVehicleType"/>
+
+    <ImageButton
+        android:id="@+id/acc_delete_button"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="top|left"
+        android:layout_marginLeft="3dp"
+        android:visibility="visible"
+        android:onClick="onDelete"
+        android:background="@drawable/ic_minus"/>
+
+</LinearLayout>

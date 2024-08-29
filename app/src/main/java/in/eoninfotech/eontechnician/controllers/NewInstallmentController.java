@@ -28,6 +28,7 @@ import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -669,6 +670,5 @@ public class NewInstallmentController extends Controller {
             }
         });
     }
-
 }
 

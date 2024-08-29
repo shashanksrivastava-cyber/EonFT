@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -49,11 +50,12 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     ArrayAdapter<String> adapter;
     private ProgressDialog pDialog;
     NonScrollListView lv;
-    Button delete_button,update_data,final_submit, final_cancel;
+    Button update_data,final_submit, final_cancel,addMaterial;
+    ImageButton delete_button;
     SharedPreferences sharedprefs;
     LinearLayout parentLinearLayout, transit_linear, materialLL,linearField;
     Button btCancel,btSubmit,add_manual;
-    TextView addMaterial,response_comment,items_values,preview_tags,items_tags,addMaterialText;
+    TextView response_comment,items_values,preview_tags,items_tags;
     TickerView tickerView;
     EditText details,et_remarks,search,etQuantity;
     SharedPreferences.Editor editor;
@@ -212,7 +214,6 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                 }
                 type_id = itemList.get(i).getId();
                 type_name  = itemList.get(i).getName();
-                //add_accessory_dialog(type_name);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -255,41 +256,6 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                 });
             }
         });
-
-//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                SparseBooleanArray checked = lv.getCheckedItemPositions();
-//                others = list_change_values.get(position).getSr_no();
-//                myDialog.setContentView(R.layout.add_serial_no);
-//                txtclose = myDialog.findViewById(R.id.error);
-//                btCancel = myDialog.findViewById(R.id.btCancel);
-//                btSubmit = myDialog.findViewById(R.id.btSubmit);
-//                etMasterPass = myDialog.findViewById(R.id.etMasterPass);
-//                txtclose.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        myDialog.dismiss();
-//                    }
-//                });
-//                btCancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        myDialog.dismiss();
-//                    }
-//                });
-//
-//                btSubmit.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        myDialog.dismiss();
-//                    }
-//                });
-//                myDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                myDialog.show();
-//            }
-//        });
 
         update_data.setOnClickListener(new View.OnClickListener() {
             @Override

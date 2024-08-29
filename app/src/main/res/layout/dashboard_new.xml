@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/swipe_refresh">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,11 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="230dp"/>
-
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/curnt_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +35,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/bankcardId"
                     android:layout_width="120dp"
                     android:layout_height="130dp"
@@ -63,7 +60,7 @@
                             android:padding="10dp"
                             android:src="@drawable/ic_performance" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -79,7 +76,7 @@
                             android:layout_marginRight="10dp"
                             android:background="@color/grey500" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/addTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -92,9 +89,9 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="120dp"
                     android:layout_height="130dp"
                     android:layout_margin="10dp"
@@ -118,7 +115,7 @@
                             android:padding="10dp"
                             android:src="@drawable/ic_calendar" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -134,7 +131,7 @@
                             android:layout_marginRight="10dp"
                             android:background="@color/grey500" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/add_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -147,7 +144,7 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
@@ -160,7 +157,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_drs"
                     android:layout_width="120dp"
                     android:layout_height="130dp"
@@ -185,7 +182,7 @@
                             android:padding="10dp"
                             android:src="@drawable/ic_performance" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -201,7 +198,7 @@
                             android:layout_marginRight="10dp"
                             android:background="@color/grey500" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/drs_add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -214,9 +211,9 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="120dp"
                     android:layout_height="130dp"
                     android:layout_margin="10dp"
@@ -240,7 +237,7 @@
                             android:padding="10dp"
                             android:src="@drawable/ic_calendar" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -256,7 +253,7 @@
                             android:layout_marginRight="10dp"
                             android:background="@color/grey500" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/drs_add_21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -269,7 +266,7 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
@@ -278,7 +275,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/drs_linear">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardTotal"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -310,7 +307,7 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/total_vts"
@@ -318,7 +315,7 @@
                                     android:layout_marginTop="5dp"
                                     android:textColor="@color/eonWhite"/>
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/total_vts"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -337,7 +334,7 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/total_drs"
@@ -346,7 +343,7 @@
                                     android:textColor="@color/eonWhite"
                                     android:gravity="center"/>
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/total_drs"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -366,7 +363,7 @@
                                 android:orientation="vertical"
                                 android:visibility="gone">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/sos_temp"
@@ -375,7 +372,7 @@
                                     android:textColor="@color/eonWhite"
                                     android:gravity="center"/>
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/tot_sos"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -406,7 +403,7 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/lid_sensor"
@@ -414,7 +411,7 @@
                                     android:layout_marginTop="5dp"
                                     android:textColor="@color/eonWhite"/>
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/tot_lid"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -433,7 +430,7 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/fuel_sensor"
@@ -442,7 +439,7 @@
                                     android:textColor="@color/eonWhite"
                                     android:gravity="center"/>
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/tot_fuel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -461,7 +458,7 @@
                                 android:gravity="center"
                                 android:orientation="vertical">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/temp_sensor"
@@ -470,7 +467,7 @@
                                     android:textColor="@color/eonWhite"
                                     android:gravity="center"/>
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/tot_temp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -486,9 +483,9 @@
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_one_login"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -506,11 +503,11 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
-                            android:drawableLeft="@drawable/disable_gps"
+                            android:drawableStart="@drawable/disable_gps"
                             android:drawablePadding="10dp"
                             android:text="@string/faulty_vts"
                             android:gravity="center"
@@ -518,7 +515,7 @@
                             android:textSize="16sp"
                             android:textColor="@color/eonWhite"/>
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/faulty_vts"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -546,9 +543,9 @@
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_two_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -568,7 +565,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -580,7 +577,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_drs_na" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/faulty_drs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -608,9 +605,9 @@
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_three_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -630,7 +627,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -642,7 +639,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_maintenance" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/faulty_um"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -667,9 +664,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_four_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -689,7 +686,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -701,7 +698,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_maintenance" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/um_working"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -727,9 +724,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_five_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -749,7 +746,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -761,7 +758,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_sos" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/sos_faulty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -787,9 +784,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_six_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -809,7 +806,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -821,7 +818,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_close" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/lid_faulty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -847,9 +844,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_seven_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -869,7 +866,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -881,7 +878,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_gas" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/fuel_faulty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -907,9 +904,9 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_eight_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -929,7 +926,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/stop_background">
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -941,7 +938,7 @@
                             android:textColor="@color/eonWhite"
                             app:drawableLeftCompat="@drawable/ic_temperature" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/temp_faulty"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -967,7 +964,7 @@
                         app:percent="147"
                         app:startAngle="0"
                         app:strokeWidth="5dp" />
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
             </RelativeLayout>
         </RelativeLayout>
@@ -986,4 +983,4 @@
         android:visibility="gone"
         android:focusable="true" />
 
-</androidx.cardview.widget.CardView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

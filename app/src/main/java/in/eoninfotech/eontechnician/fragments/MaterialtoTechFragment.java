@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -58,9 +59,11 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     View v;
     NonScrollListView lv;
     private ProgressDialog pDialog;
-    Button delete_button,update_data,final_submit, final_cancel;
+    Button update_data,final_submit, final_cancel,addMaterial;
     EditText details,et_remarks,etQuantity;
     TickerView tickerView;
+
+    ImageButton delete_button;
     Spinner type_spinner,transit_spinner,courier_spinner;
     ArrayList<TechDetails> techList = new ArrayList<>();
     ArrayList<String> techDetail = new ArrayList<>();
@@ -68,7 +71,7 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     MySearchableSpinner spn_technicians;
     LinearLayout parentLinearLayout, transit_linear,materialLL;
     ArrayList<ItemList> itemList = new ArrayList<>();
-    TextView addMaterial,response_comment,items_values,preview_tags,items_tags;
+    TextView response_comment,items_values,preview_tags,items_tags;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     String version, username,transit_id="",type_id,tech_id,others="",courier_id="",transit_through="",remarks="",other_key="",item_qty="",other_tech_id="";

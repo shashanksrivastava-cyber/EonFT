@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:visibility="visible">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,7 +25,7 @@
                 android:orientation="horizontal"
                 android:weightSum="4">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -82,7 +82,7 @@
                         android:orientation="horizontal"
                         android:weightSum="4">
 
-                        <RadioButton
+                        <com.google.android.material.radiobutton.MaterialRadioButton
                             android:id="@+id/device11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                             android:text="Device"
                             android:textSize="14sp" />
 
-                        <RadioButton
+                        <com.google.android.material.radiobutton.MaterialRadioButton
                             android:id="@+id/acessories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -315,7 +315,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                android:layout_marginTop="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/con_vltd_sr_no"
@@ -426,7 +427,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/et_frame">
 
@@ -524,7 +525,7 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -581,7 +582,7 @@
                             android:orientation="horizontal"
                             android:weightSum="4">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/voice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -590,7 +591,7 @@
                                 android:text="Voice"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/nonVoice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -604,11 +605,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -633,7 +633,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/is_demo_no"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -642,7 +642,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
@@ -659,7 +659,7 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -684,7 +684,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/l_in"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -693,7 +693,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/l_out"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -711,7 +711,7 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -736,7 +736,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/doorNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -745,7 +745,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
@@ -762,7 +762,7 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -787,7 +787,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/cutoffNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -796,7 +796,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
@@ -1017,7 +1017,7 @@
                     android:visibility="visible"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -1042,7 +1042,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/tiltNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1051,7 +1051,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1.5"
@@ -1071,7 +1071,7 @@
                     android:visibility="visible"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -1096,7 +1096,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/fuelSensorNewNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1105,7 +1105,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
@@ -1125,7 +1125,7 @@
                     android:visibility="visible"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -1150,7 +1150,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/tempNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1159,7 +1159,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
@@ -1179,7 +1179,7 @@
                     android:visibility="visible"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -1204,7 +1204,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/transNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1213,7 +1213,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.5"
@@ -1233,7 +1233,7 @@
                     android:visibility="visible"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -1258,7 +1258,7 @@
                             android:orientation="horizontal"
                             android:weightSum="3">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/siloNo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1267,7 +1267,7 @@
                                 android:text="No"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/siloYes"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1288,7 +1288,7 @@
                     android:visibility="visible"
                     android:weightSum="4">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -1313,7 +1313,7 @@
                             android:orientation="horizontal"
                             android:weightSum="4">
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/lidNone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1322,7 +1322,7 @@
                                 android:text="None"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/lidTop"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1330,7 +1330,7 @@
                                 android:text="Top"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/lidRear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1338,7 +1338,7 @@
                                 android:text="Rear"
                                 android:textSize="14sp" />
 
-                            <RadioButton
+                            <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/lidBoth"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -1356,7 +1356,7 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </LinearLayout>

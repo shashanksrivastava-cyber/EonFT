@@ -1,6 +1,8 @@
 package in.eoninfotech.eontechnician.webservice;
 
 
+import java.util.List;
+
 import in.eoninfotech.eontechnician.responses.ActivityResponse;
 import in.eoninfotech.eontechnician.responses.AttendanceResponse;
 import in.eoninfotech.eontechnician.responses.CallSheetListResponse;
@@ -39,6 +41,7 @@ import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
 import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.responses.YearListResponse;
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -623,6 +626,13 @@ public interface ApiHolder {
                                    @Field("to_date") String to_date,
                                    @Field("status") String status);
 
+//    @FormUrlEncoded
+//    @POST("bill_details.php")
+//    Observable<List<BillResponse>> get_bill_details(@Field("user_id") String user_id,
+//                                                    @Field("from_date") String from_date,
+//                                                    @Field("to_date") String to_date,
+//                                                    @Field("status") String status);
+
     @FormUrlEncoded
     @POST("cancelled_bill.php")
     Call<BillResponse> cancel_bill(@Field("bill_no") String bill_no,
@@ -734,5 +744,12 @@ public interface ApiHolder {
             @Field("user_name") String user_name,
             @Field("status") String status,
             @Field("customer") String customer);
+
+    @FormUrlEncoded
+    @POST("change_device_status.php")
+    Call<MainResponse> get_change_device_status(
+            @Field("user_name") String user_name,
+            @Field("status") String status,
+            @Field("pcb_sr_no") String pcb_sr_no);
 
 }

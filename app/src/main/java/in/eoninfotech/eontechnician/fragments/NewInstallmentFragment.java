@@ -71,8 +71,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.ImageUtil;
+import in.eoninfotech.eontechnician.activity.DevicedashboardDetail;
 import in.eoninfotech.eontechnician.responses.DeviceTypeOtherAis;
 import in.eoninfotech.eontechnician.responses.MainClientList;
 import in.eoninfotech.eontechnician.responses.MainResponse;
@@ -121,11 +124,16 @@ import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.view.MyTextView;
+import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
+import in.eoninfotech.eontechnician.viewModel.ViewModelCountDetails;
+import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
+import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import in.eoninfotech.eontechnician.webservice.UmVehicleDetail;
 import in.eoninfotech.eontechnician.webservice.UmVehicleResponse;
 import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
+import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -235,6 +243,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             panicNo, fuelNo, fuelNoReinst, tiltNo, tempNo, tiltReplaceNo, transNo, lidNone, lidTop, lidRear, lidBoth, fuelSensorNewNo,deviceWorking,sensorWorking;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
+    ViewModelMainClient viewModelMainClient;
+    ViewModelSubClient viewModelSubClient;
+    ViewModelClientLocation viewModelClientLocation;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -4731,7 +4742,29 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     private void addMainClients() {
-        newInstallmentController.reqeuestMainClientList(this);
+
+        viewModelMainClient= ViewModelProviders.of(this).get(ViewModelMainClient.class);
+        viewModelMainClient.getMainClientRepository().observe(this, movieResponse -> {
+            mainclientList = movieResponse.getMain_client_list();
+            if(movieResponse.getType()==1){
+                try {
+                    mainClientDetail.clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mainClientDetail.add(" SELECT CLIENT");
+                for (int i = 0; i < mainclientList.size(); i++) {
+                    mainClientDetail.add(mainclientList.get(i).getClient_Name());
+                }
+                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, mainClientDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                new_main_clients.setAdapter(adapter);
+                progressDialog.hide();
+            }else {
+                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+            }
+        });
     }
 
     private void getSerialNo() {
@@ -4952,7 +4985,30 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     private void addclients() {
-        newInstallmentController.reqeuestClientList(mainClientId,this);
+
+        viewModelSubClient= ViewModelProviders.of(this).get(ViewModelSubClient.class);
+        viewModelSubClient.getSubClientRepository(mainClientId).observe(this, movieResponse -> {
+            clientList = movieResponse.getClientList();
+            if(movieResponse.getType()==1){
+                try {
+                    clientDetail.clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                clientDetail.add(" SELECT CLIENT");
+                for (int i = 0; i < clientList.size(); i++) {
+                    clientDetail.add(clientList.get(i).getClient_Name());
+                }
+                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                client.setAdapter(adapter);
+                progressDialog.hide();
+            }else {
+                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+            }
+        });
+
     }
 
     private void removal_type() {
@@ -4999,7 +5055,29 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     private void addLocation() {
         ShowProgressBar(true);
-        newInstallmentController.reqeuestClientLocation(id_dist,server_name,db_name, this);
+
+        viewModelClientLocation= ViewModelProviders.of(this).get(ViewModelClientLocation.class);
+        viewModelClientLocation.getClientLocationRepository(id_dist,server_name,db_name).observe(this, movieResponse -> {
+            locationList = movieResponse.getClientLoc();
+            if(movieResponse.getType()==1){
+                try {
+                    locationDetail.clear();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                locationDetail.add("SELECT LOCATION");
+                for (int i = 0; i < locationList.size(); i++) {
+                    locationDetail.add(locationList.get(i).getLoc_Name());
+                }
+                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                location.setAdapter(adapter);
+                progressDialog.hide();
+            }else {
+                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+            }
+        });
     }
 
     private void addActivity() {
@@ -5591,54 +5669,54 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     @Override
     public void clientResponse(ClientResponse response) {
-        try {
-            clientList = response.getClientList();
-            try {
-                try {
-                    clientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                clientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < clientList.size(); i++) {
-                    clientDetail.add(clientList.get(i).getClient_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                client.setAdapter(adapter);
-                ShowProgressBar(false);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            clientList = response.getClientList();
+//            try {
+//                try {
+//                    clientDetail.clear();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                clientDetail.add(" SELECT CLIENT");
+//                for (int i = 0; i < clientList.size(); i++) {
+//                    clientDetail.add(clientList.get(i).getClient_Name());
+//                }
+//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                client.setAdapter(adapter);
+//                ShowProgressBar(false);
+//            } catch (NullPointerException npe) {
+//                npe.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
     public void locationResponse(ClientLocationResponse response) {
-        try {
-            locationList = response.getClientLoc();
-            try {
-                try {
-                    locationDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                locationDetail.add("SELECT LOCATION");
-                for (int i = 0; i < locationList.size(); i++) {
-                    locationDetail.add(locationList.get(i).getLoc_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                location.setAdapter(adapter);
-                ShowProgressBar(false);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            locationList = response.getClientLoc();
+//            try {
+//                try {
+//                    locationDetail.clear();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                locationDetail.add("SELECT LOCATION");
+//                for (int i = 0; i < locationList.size(); i++) {
+//                    locationDetail.add(locationList.get(i).getLoc_Name());
+//                }
+//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                location.setAdapter(adapter);
+//                ShowProgressBar(false);
+//            } catch (NullPointerException npe) {
+//                npe.printStackTrace();
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -6247,35 +6325,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     @Override
     public void mainClientResponse(MainResponse response) {
-        try {
-            mainclientList = response.getMain_client_list();
-            try {
-                try {
-                    mainClientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                mainClientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < mainclientList.size(); i++) {
-                    mainClientDetail.add(mainclientList.get(i).getClient_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, mainClientDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                new_main_clients.setAdapter(adapter);
-                ShowProgressBar(false);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void vtsAccResponses(MainResponse response) {
-       // if(response.getType()==1){
             accessory_sr_no.setText(response.getSerial_no());
-       // }
     }
 
     @Override
@@ -6333,7 +6387,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<VTSTypeResponse> call, Throwable t) {
                 t.printStackTrace();

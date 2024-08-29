@@ -1,6 +1,11 @@
 package in.eoninfotech.eontechnician.activity;
 
+import static android.app.ProgressDialog.show;
+
+import static com.google.android.material.internal.ViewUtils.hideKeyboard;
+
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,11 +16,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 
@@ -25,6 +35,7 @@ import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.DeviceCount;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.databinding.DeviceDashboardActivityBinding;
+import in.eoninfotech.eontechnician.viewModel.ViewModelDeviceDashboard;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -48,6 +59,10 @@ public class Devicedashboards extends AppCompatActivity {
     ArrayList<PieEntry> yValues = new ArrayList<>();
 
     String f_faulty="0",f_working="0",f_total = "";
+
+    public static final int REQUEST_CODE = 1;
+
+    ViewModelDeviceDashboard viewModelDeviceDashboard;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -120,6 +135,36 @@ public class Devicedashboards extends AppCompatActivity {
             }
         });
 
+        binding.receiveDevice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Devicedashboards.this, ReceiveDeviceActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.sendToEon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Devicedashboards.this, MainActivity.class);
+                intent.putExtra("intent","toEon");
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+        binding.sendToFt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Devicedashboards.this, MainActivity.class);
+                intent.putExtra("intent","toFT");
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     public void setPieChart(String f_faulty,String f_working) {
@@ -153,48 +198,16 @@ public class Devicedashboards extends AppCompatActivity {
     }
 
     private void getDeviceCountDetails() {
-        progressDialog.show();
-        try {
-            ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-            Call<MainResponse> call = log_att.get_live_device_count(usrname);
-            Log.i("****call", String.valueOf(call));
-            call.enqueue(new Callback<MainResponse>() {
-                @Override
-                public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
-                    MainResponse updateDataResponse = response.body();
-                    countDetails = response.body().getDevice_count();
-                    if (updateDataResponse != null) {
-                    if (updateDataResponse.getType() == 1) {
 
-                        f_faulty = countDetails.get(0).faulty;
-                        f_working = countDetails.get(0).working;
-                        f_total = countDetails.get(0).total;
-
-                        setPieChart(f_faulty,f_working);
-
-                        binding.totalDevice.setText("Total Devices - "+countDetails.get(0).total);
-                        binding.workingDevices.setText(countDetails.get(0).working);
-                        binding.faultyDevices.setText(countDetails.get(0).faulty);
-                        binding.inTransitStore.setText("Outgoing Material - "+countDetails.get(0).in_transit_store);
-                        binding.inTransitTech.setText("Incoming Material - "+countDetails.get(0).in_transit_tech);
-                        progressDialog.hide();
-                        }
-                    } else {
-                        assert updateDataResponse != null;
-                        progressDialog.hide();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<MainResponse> call, Throwable t) {
-                    t.printStackTrace();
-                    Toast.makeText(Devicedashboards.this, "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(Devicedashboards.this, "Something went wrong", Toast.LENGTH_LONG).show();
-        }
+        viewModelDeviceDashboard= ViewModelProviders.of(this).get(ViewModelDeviceDashboard.class);
+        viewModelDeviceDashboard.getDashboardCountRepository(usrname).observe(this, movieResponse -> {
+            countDetails = movieResponse.getDevice_count();
+            binding.totalDevice.setText("Total Devices - "+countDetails.get(0).total);
+            binding.workingDevices.setText(countDetails.get(0).working);
+            binding.faultyDevices.setText(countDetails.get(0).faulty);
+            binding.inTransitStore.setText("Outgoing Material - "+countDetails.get(0).in_transit_store);
+            binding.inTransitTech.setText("Incoming Material - "+countDetails.get(0).in_transit_tech);
+        });
     }
 
     @Override
