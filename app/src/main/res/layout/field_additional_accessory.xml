@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent_linear_layout"
+    android:id="@+id/accessory_field"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
@@ -10,16 +10,6 @@
     android:layout_marginBottom="5dp"
     android:orientation="horizontal"
     android:visibility="visible">
-
-    <EditText
-        android:id="@+id/etVehicleType"
-        style="@style/et_profile"
-        android:layout_width="match_parent"
-        android:focusable="false"
-        android:visibility="gone"
-        android:focusableInTouchMode="false"
-        android:layout_weight="1"
-        android:layout_below="@+id/txtDetails"/>
 
     <RelativeLayout
         android:id="@+id/relays"

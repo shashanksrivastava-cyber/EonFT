@@ -213,6 +213,7 @@
         <activity android:name=".activity.Devicedashboard" />
         <activity android:name=".activity.Devicedashboards" />
         <activity android:name=".activity.DevicedashboardDetail" />
+        <activity android:name=".activity.AdditionalMaterialDetails" />
         <activity
             android:name=".activity.MessageActivity"
             android:icon="@drawable/ic_delete_white_24dp"

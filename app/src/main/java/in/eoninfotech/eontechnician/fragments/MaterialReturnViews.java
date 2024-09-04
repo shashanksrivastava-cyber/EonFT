@@ -42,7 +42,7 @@ public class MaterialReturnViews extends Fragment implements ReceiveDeviceListen
     ReceiveDeviceController receiveDeviceController;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    SendDeviceAdapter sendDeviceAdapter;
+    in.eoninfotech.eontechnician.SendDeviceAdapter sendDeviceAdapter;
     Spinner statusSpinner;
     SwipeRefreshLayout swipe_refresh;
 
@@ -184,7 +184,7 @@ public class MaterialReturnViews extends Fragment implements ReceiveDeviceListen
         if (response.getType() == 1) {
             dispatchDeviceListArrayList = response.getTech_return_device_list();
             txtContentUnavailable.setVisibility(View.GONE);
-            sendDeviceAdapter = new SendDeviceAdapter(getContext(), dispatchDeviceListArrayList);
+            sendDeviceAdapter = new in.eoninfotech.eontechnician.SendDeviceAdapter(getContext(), dispatchDeviceListArrayList);
             recyclerView.setAdapter(sendDeviceAdapter);
             refreshLayout.setRefreshing(false);
             recyclerView.setVisibility(View.VISIBLE);

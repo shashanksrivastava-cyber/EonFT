@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/parent_linear_layout"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vts_field"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:visibility="visible"
-    android:padding="3dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:padding="3dp">
 
         <RelativeLayout
             android:id="@+id/relays"

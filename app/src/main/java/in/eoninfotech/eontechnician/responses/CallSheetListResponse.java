@@ -15,6 +15,9 @@ public class CallSheetListResponse {
     @SerializedName("sheets")
     ArrayList<CallSheetListDetail> callsheetlist = new ArrayList<CallSheetListDetail>();
 
+    @SerializedName("list")
+    ArrayList<CallSheetListDetail> add_material_list = new ArrayList<CallSheetListDetail>();
+
     public Integer getType() {
         return type;
     }
@@ -25,5 +28,13 @@ public class CallSheetListResponse {
 
     public void setCallsheetlist(ArrayList<CallSheetListDetail> callsheetlist) {
         this.callsheetlist = callsheetlist;
+    }
+
+    public ArrayList<CallSheetListDetail> getAdd_material_list() {
+        return add_material_list;
+    }
+
+    public void setAdd_material_list(ArrayList<CallSheetListDetail> add_material_list) {
+        this.add_material_list = add_material_list;
     }
 }

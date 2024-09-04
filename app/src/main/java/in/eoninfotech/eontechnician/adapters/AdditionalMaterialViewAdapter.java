@@ -1,4 +1,4 @@
-package in.eoninfotech.eontechnician.activity;
+package in.eoninfotech.eontechnician.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,53 +7,51 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.activity.AdditionalMaterialDetails;
+import in.eoninfotech.eontechnician.activity.CallSheetListAdapter;
+import in.eoninfotech.eontechnician.activity.ImageDetailCallSheet;
+import in.eoninfotech.eontechnician.fragments.AdditionalMaterialViewFragment;
 import in.eoninfotech.eontechnician.responses.CallSheetListDetail;
-import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 
-/**
- * Created by root on 7/3/19.
- */
-
-public class CallSheetListAdapter extends RecyclerView.Adapter<CallSheetListAdapter.ActivityHolder>{
+public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<AdditionalMaterialViewAdapter.ActivityHolder>{
 
     Context context;
     private final ArrayList<CallSheetListDetail> callSheetDetails;
 
-    public CallSheetListAdapter(Context context, ArrayList<CallSheetListDetail> callSheetDetails) {
+
+    public AdditionalMaterialViewAdapter(android.content.Context context, ArrayList<CallSheetListDetail> callSheetDetails) {
 
         this.context = context;
         this.callSheetDetails = callSheetDetails;
     }
 
+    @NonNull
     @Override
-    public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CallSheetListAdapter.ActivityHolder(LayoutInflater.from(parent.getContext())
+    public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new AdditionalMaterialViewAdapter.ActivityHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.call_sheet_adapter, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(CallSheetListAdapter.ActivityHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ActivityHolder holder, int position) {
 
         final CallSheetListDetail callSheetDetail = callSheetDetails.get(position);
 
         holder.date.setText(callSheetDetail.getDate());
-        holder.image.setText("View Uploaded Image");
-
-        String ImageUri = ServiceConnectionNewURL.BASE_URL+callSheetDetail.getImage();
+        holder.image.setText("View Detail");
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, ImageDetailCallSheet.class);
+                Intent intent = new Intent(context, AdditionalMaterialDetails.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("Image",ImageUri);
-                intent.putExtra("Date",callSheetDetail.getDate());
-                intent.putExtra("Remarks",callSheetDetail.getRemarks());
+                intent.putExtra("id_no",callSheetDetail.getId());
                 context.startActivity(intent);
             }
         });

@@ -79,6 +79,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
+import in.eoninfotech.eontechnician.fragments.AdditionalMaterialViewFragment;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthDetail;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthResponse;
 import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
@@ -143,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     in.eoninfotech.eontechnician.MaterialReturnViews materialReturnView;
     BillIntimationFragment billIntimationFragment;
     AdditionalMaterialFragment additionalMaterialFragment;
+
+    AdditionalMaterialViewFragment additionalMaterialViewFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
     ViewCallSheetFragment viewCallSheetFragment;
@@ -1520,9 +1523,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     additionalMaterialFragment.setArguments(bundle);
                     return additionalMaterialFragment;
                 case 1:
-                    additionalMaterialFragment = new AdditionalMaterialFragment();
-                    additionalMaterialFragment.setArguments(bundle);
-                    return additionalMaterialFragment;
+                    additionalMaterialViewFragment = new AdditionalMaterialViewFragment();
+                    additionalMaterialViewFragment.setArguments(bundle);
+                    return additionalMaterialViewFragment;
             }
             return null;
         }

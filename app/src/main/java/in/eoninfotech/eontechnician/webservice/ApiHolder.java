@@ -752,4 +752,25 @@ public interface ApiHolder {
             @Field("status") String status,
             @Field("pcb_sr_no") String pcb_sr_no);
 
+    @FormUrlEncoded
+    @POST("submit_additional_devices.php")
+    Call<MainResponse> submit_additional_devices(
+            @Field("user_name") String user_name,
+            @Field("device_data") String device_data,
+            @Field("acc_data") String acc_data,
+            @Field("remarks") String remarks);
+
+    @FormUrlEncoded
+    @POST("get_tech_requirement_details.php")
+    Call<CallSheetListResponse> get_tech_requirement_details(
+            @Field("month") String month,
+            @Field("year") String year,
+            @Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("get_tech_requirement_detailed_data.php")
+    Call<MainResponse> get_tech_requirement_detailed_data(
+            @Field("id_no") String id_no,
+            @Field("username") String username);
+
 }

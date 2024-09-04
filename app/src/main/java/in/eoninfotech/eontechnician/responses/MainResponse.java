@@ -59,6 +59,9 @@ public class MainResponse {
     @SerializedName("device_count_detail")
     ArrayList<DeviceCountDetail> device_count_detail = new ArrayList<>();
 
+    @SerializedName("tech_req_dtls")
+    ArrayList<TechRequirementDetails> tech_req_dtls = new ArrayList<>();
+
     public Integer getType() {
         return type;
     }
@@ -215,5 +218,13 @@ public class MainResponse {
 
     public void setDevice_count_detail(ArrayList<DeviceCountDetail> device_count_detail) {
         this.device_count_detail = device_count_detail;
+    }
+
+    public ArrayList<TechRequirementDetails> getTech_req_dtls() {
+        return tech_req_dtls;
+    }
+
+    public void setTech_req_dtls(ArrayList<TechRequirementDetails> tech_req_dtls) {
+        this.tech_req_dtls = tech_req_dtls;
     }
 }
