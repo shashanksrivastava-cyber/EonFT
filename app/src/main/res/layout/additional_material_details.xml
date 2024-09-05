@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Device Details"
+                android:text="@string/device_details"
                 android:textColor="@color/eonBlue"
                 android:visibility="visible"
                 android:textStyle="bold"
@@ -42,23 +42,25 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:gravity="center_vertical"
                     android:layout_gravity="center"
                     android:text="Clinet Name"
                     android:textSize="16sp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_marginStart="10dp"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="center_vertical"
                     android:layout_gravity="center"
                     android:text="Device Type"
                     android:textSize="16sp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_marginStart="10dp"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -66,43 +68,50 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="7dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2.2"
                     android:gravity="center"
                     android:text="Quantity"
                     android:layout_marginEnd="5dp"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp"
-                android:layout_margin="7dp"
-                android:visibility="visible">
+                android:fillViewport="true">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_content_unavailable_sr"
+                <LinearLayout
+                    android:id="@+id/vtsContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="Content Unavailable!!"
-                    android:visibility="gone" />
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
 
-                <in.eoninfotech.eontechnician.NonScrollListView
-                    android:id="@+id/device_detail_list_receive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/header_button"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/content_unavailable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Content Unavailable!!"
+                        android:visibility="gone" />
 
-            </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/vts_recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="visible"
+                        android:background="@color/eonWhite"
+                        tools:listitem="@layout/additional_material_device_adapter"
+                        android:padding="10dp"/>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
 
             <View
                 android:layout_width="match_parent"
@@ -141,6 +150,7 @@
                     android:text="Material Name"
                     android:textSize="16sp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_marginStart="10dp"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -153,6 +163,7 @@
                     android:text="Quantity"
                     android:layout_marginEnd="5dp"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     android:textColor="@color/black"/>
 
             </LinearLayout>
@@ -185,8 +196,11 @@
                         android:nestedScrollingEnabled="false"
                         android:visibility="visible"
                         android:background="@color/eonWhite"
+                        tools:listitem="@layout/additional_accessory_adapter"
                         android:padding="10dp"/>
+
                 </LinearLayout>
+
             </androidx.core.widget.NestedScrollView>
 
             <EditText

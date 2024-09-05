@@ -438,7 +438,13 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
         items_values.setText(items_list.toString());
         preview_values.setText(clientDeviceDetails.toString());
         response_comment.setText(remarks);
-        final_submit.setOnClickListener(view -> finalSubmitData());
+        final_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalSubmitData();
+                confirmDialog.hide();
+            }
+        });
 
         final_cancel.setOnClickListener(new View.OnClickListener() {
             @Override

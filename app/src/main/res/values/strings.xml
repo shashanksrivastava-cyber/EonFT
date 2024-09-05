@@ -76,6 +76,7 @@
     <string name="details"><u>View Details</u></string>
     <string name="device_sr_no"><u>Device Sr.No.</u></string>
     <string name="other_material"><u>Other Material: </u></string>
+    <string name="device_details"><u>Device Details: </u></string>
     <string name="dispatch"><u>Dispatch Details</u></string>
     <string name="dispatched_date">Dispatched Date</string>
 
