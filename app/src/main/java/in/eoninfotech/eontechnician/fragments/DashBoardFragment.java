@@ -180,16 +180,16 @@ public class DashBoardFragment extends Fragment {
             }
         });
 
-        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (chk.isConnected()) {
-                    getDashBoardDetail();
-                } else {
-                    chk.showConnectionErrorDialog();
-                }
-            }
-        });
+//        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                if (chk.isConnected()) {
+//                    getDashBoardDetail();
+//                } else {
+//                    chk.showConnectionErrorDialog();
+//                }
+//            }
+//        });
 
         return binding.getRoot();
     }

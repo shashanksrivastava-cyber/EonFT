@@ -26,11 +26,12 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/vts_details"
+            android:text="@string/vts_devices"
             android:textColor="@color/eonBlue"
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="visible"
+            android:layout_gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/parent_linear_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -166,6 +167,7 @@
             android:textStyle="bold"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/parent_linear_layout" />
 
         <LinearLayout

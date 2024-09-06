@@ -442,7 +442,6 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
             @Override
             public void onClick(View v) {
                 finalSubmitData();
-                confirmDialog.hide();
             }
         });
 
@@ -488,6 +487,37 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
                 if (updateDataResponse.getType() == 1) {
                     Toast.makeText(getActivity(), ""+updateDataResponse.getMsg(), Toast.LENGTH_SHORT).show();
                     pDialog.hide();
+                    et_remarks.setText("");
+                    etQuantity.setText("");
+                    acc_etQuantity.setText("");
+                    confirmDialog.hide();
+                    parentLinearLayout.removeViews(1, parentLinearLayout.getChildCount()-1);
+                    parentLinearLayout.addView(addMaterial, parentLinearLayout.getChildCount());
+                    for (int i = 0; i < parentLinearLayout.getChildCount() - 1; i++) {
+                        View view1 = parentLinearLayout.getChildAt(i);
+
+                        Spinner clientSpinner = view1.findViewById(R.id.new_main_clients);
+                        Spinner device_spinner = view1.findViewById(R.id.device_type);
+
+                        clientSpinner.setSelection(0);
+                        device_spinner.setSelection(0);
+                    }
+
+                    accessory_linear_layout.removeViews(1, accessory_linear_layout.getChildCount()-1);
+                    accessory_linear_layout.addView(addAccessory, accessory_linear_layout.getChildCount());
+                    for (int i = 0; i < accessory_linear_layout.getChildCount() - 1; i++) {
+                        View view2 = accessory_linear_layout.getChildAt(i);
+
+                        Spinner acc_spinner = view2.findViewById(R.id.accessory_spinner);
+                        acc_spinner.setSelection(0);
+                    }
+                    vehicletype.clear();
+                    clientDeviceType.clear();
+                    clientDeviceDetails.clear();
+                    items_list.clear();
+                    addclients();
+                    addDevice();
+                    getItemList();
                 }else {
                     Toast.makeText(getActivity(), ""+updateDataResponse.getMsg(), Toast.LENGTH_SHORT).show();
                     pDialog.hide();
