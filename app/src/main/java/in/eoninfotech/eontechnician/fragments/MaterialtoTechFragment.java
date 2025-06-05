@@ -507,7 +507,10 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
                     }
                     if (list_change_values.size() > 0) {
                         for (int i = 0; i < list_change_values.size(); i++) {
-                            value_name.add(list_change_values.get(i).getPcb_sr_no());
+                            int val1 = 1;
+                            String k = Integer.toString(i + val1);
+                            value_name.add(k +". "+ list_change_values.get(i).getPcb_sr_no());
+                            //value_name.add(list_change_values.get(i).getPcb_sr_no());
                         }
                         if (list_change_values.size() > 5) {
                             lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));

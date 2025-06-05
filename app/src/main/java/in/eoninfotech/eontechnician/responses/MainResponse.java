@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import in.eoninfotech.eontechnician.LiveStatusSerialNo;
+
 
 public class MainResponse {
 
@@ -61,6 +63,9 @@ public class MainResponse {
 
     @SerializedName("tech_req_dtls")
     ArrayList<TechRequirementDetails> tech_req_dtls = new ArrayList<>();
+
+    @SerializedName("tech_devices")
+    ArrayList<LiveStatusSerialNo> live_status_serial_no = new ArrayList<>();
 
     public Integer getType() {
         return type;
@@ -226,5 +231,13 @@ public class MainResponse {
 
     public void setTech_req_dtls(ArrayList<TechRequirementDetails> tech_req_dtls) {
         this.tech_req_dtls = tech_req_dtls;
+    }
+
+    public ArrayList<LiveStatusSerialNo> getLive_status_serial_no() {
+        return live_status_serial_no;
+    }
+
+    public void setLive_status_serial_no(ArrayList<LiveStatusSerialNo> live_status_serial_no) {
+        this.live_status_serial_no = live_status_serial_no;
     }
 }

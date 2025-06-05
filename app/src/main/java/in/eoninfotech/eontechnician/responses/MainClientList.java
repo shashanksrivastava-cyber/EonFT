@@ -8,6 +8,10 @@ public class MainClientList {
     private int client_Id;
     @SerializedName("c_name")
     private String client_Name;
+    @SerializedName("db")
+    private String db;
+    @SerializedName("server")
+    private String server;
 
 
     public int getClient_Id() {
@@ -24,5 +28,21 @@ public class MainClientList {
 
     public void setClient_Name(String client_Name) {
         this.client_Name = client_Name;
+    }
+
+    public String getDb() {
+        return db;
+    }
+
+    public void setDb(String db) {
+        this.db = db;
+    }
+
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
     }
 }

@@ -77,6 +77,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialViewFragment;
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     in.eoninfotech.eontechnician.FragmentCurrentMonth fragmentCurrentMonth;
-    String usrname, alertt, uusername, versionname, disgnid = "0", activityName = "Activities",intent_req="TT";
+    String usrname, alertt, uusername, versionname, disgnid = "0", activityName = "Activities", intent_req = "TT";
     NavigationView navigationView;
     Bundle bundle;
     in.eoninfotech.eontechnician.FaqsFragment faqsfragment;
@@ -136,15 +137,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ActivityLogFragment activityLogFragment;
     NewInstallmentFragment installmentFragment;
     LiveStatusFragment liveStatusFragment;
+    LiveStatusFragmentEon liveStatusFragmentEon;
     StockFragment stockFragment;
     TextView textCartItemCount;
     PaymentCollectionReportFragment paymentCollectionReportFragment;
-     in.eoninfotech.eontechnician.MaterialReturnFragment materialReturnFragment;
-     in.eoninfotech.eontechnician.MaterialtoTechFragment materialtoTechFragment;
+    in.eoninfotech.eontechnician.MaterialReturnFragment materialReturnFragment;
+    in.eoninfotech.eontechnician.MaterialtoTechFragment materialtoTechFragment;
     in.eoninfotech.eontechnician.MaterialReturnViews materialReturnView;
     BillIntimationFragment billIntimationFragment;
     AdditionalMaterialFragment additionalMaterialFragment;
-
     AdditionalMaterialViewFragment additionalMaterialViewFragment;
     ViewStockFragment viewStockFragment;
     CallSheetFragment callSheetFragment;
@@ -157,13 +158,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapterAtd viewPagerAdapterAtd;
     ViewPagerAdapterStock viewPagerAdapterStock;
     ViewPagerAdapterCallSheet viewPagerAdapterCallSheet;
-    ViewPagerAdapterDashboard viewPagerAdapterDashboard;
+    //ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     ViewPagerAdapterActivity viewPagerAdapterActivity;
     ViewPagerAdapterBills viewPagerAdapterBills;
 
     ViewPagerAdapterAddMaterial viewPagerAdapterAddMaterial;
     ViewPagerReturnMaterial viewPagerReturnMaterial;
-     ViewPagerSendToTechnician viewPagerSendtoTechnician;
+    ViewPagerSendToTechnician viewPagerSendtoTechnician;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -178,11 +179,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     CircleImageView tech_img;
     ProgressBar progressBars;
     ArrayList<TechnicianMonthDetail> techList = new ArrayList<>();
-     TabLayout tabLayout;
+    TabLayout tabLayout;
     public static int int_items = 2;
-    ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet,viewPagerBill,viewPagerMaterialReturn,viewPagertechnician,viewPagerAddMaterial;
+    ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet, viewPagerBill, viewPagerMaterialReturn, viewPagertechnician, viewPagerAddMaterial;
     String tab = "1";
-    int count=0;
+    int count = 0;
     private String currentVersion;
     LinearLayout linearLayout;
     int id = 0;
@@ -232,17 +233,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onAvailable(Network network) {
                     Log.e(TAG, "onAvailable: ");
-                    if(count==0){
-                    }else {
-                        Snackbar.make(findViewById(android.R.id.content),"Internet connection restored",Snackbar.LENGTH_LONG).show();
-                        count=0;
+                    if (count == 0) {
+                    } else {
+                        Snackbar.make(findViewById(android.R.id.content), "Internet connection restored", Snackbar.LENGTH_LONG).show();
+                        count = 0;
                     }
                 }
+
                 @Override
                 public void onLost(Network network) {
                     Log.e(TAG, "onLost: ");
-                    count=1;
-                    Snackbar.make(findViewById(android.R.id.content),"It seems internet connection not available",Snackbar.LENGTH_LONG).show();
+                    count = 1;
+                    Snackbar.make(findViewById(android.R.id.content), "It seems internet connection not available", Snackbar.LENGTH_LONG).show();
                 }
             });
         }
@@ -281,12 +283,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         fab = findViewById(R.id.fab);
         panic_fab = findViewById(R.id.panic_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MessageActivity.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+            startActivity(intent);
         });
         try {
             currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
@@ -355,17 +354,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             intent_req = intent1.getStringExtra("intent");
         } catch (Exception e) {
-            intent_req="";
+            intent_req = "";
             throw new RuntimeException(e);
         }
 
         try {
-            if(intent_req.equalsIgnoreCase("toEon")){
+            if (intent_req.equalsIgnoreCase("toEon")) {
                 sendToEon();
-            }else if(intent_req.equalsIgnoreCase("toFT")){
-               sendToFT();
-            }else {
-              addDashboard();
+            } else if (intent_req.equalsIgnoreCase("toFT")) {
+                sendToFT();
+            } else {
+                addDashboard();
             }
         } catch (Exception e) {
             addDashboard();
@@ -433,19 +432,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
         // Checks that the platform will allow the specified type of update.
-        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo ->  {
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
 //            @Override
 //            public void onSuccess(AppUpdateInfo appUpdateInfo) {
 
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                        // For a flexible update, use AppUpdateType.FLEXIBLE
-                        && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                    // Request the update.
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    // For a flexible update, use AppUpdateType.FLEXIBLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                // Request the update.
 
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(
-                                // Pass the intent that is returned by 'getAppUpdateInfo()'.
-                                appUpdateInfo,
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                            appUpdateInfo,
 //                                // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
 //                                activityResultLauncher,
 //                                // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
@@ -453,20 +452,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                                AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE)
 //                                        .setAllowAssetPackDeletion(true)
 //                                        .build()
-                                AppUpdateType.IMMEDIATE,
-                                // The current activity making the update request.
-                                MainActivity.this,
-                                // Include a request code to later monitor this update request.
-                                UPDATE_REQUEST_CODE);
-                    } catch (IntentSender.SendIntentException ignored) {
+                            AppUpdateType.IMMEDIATE,
+                            // The current activity making the update request.
+                            MainActivity.this,
+                            // Include a request code to later monitor this update request.
+                            UPDATE_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException ignored) {
 
-                    }
-                }else {
-                   // Toast.makeText(MainActivity.this, "No Update Available", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                // Toast.makeText(MainActivity.this, "No Update Available", Toast.LENGTH_SHORT).show();
+            }
 //            }
         });
     }
+
     //lambda operation used for below listener
     InstallStateUpdatedListener installStateUpdatedListener = installState -> {
         if (installState.installStatus() == InstallStatus.DOWNLOADED) {
@@ -586,9 +586,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupBadge() {
-        Thread thread = new Thread(new Runnable(){
+        Thread thread = new Thread(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 //loadContent();
             }
         });
@@ -652,7 +652,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
         } else if (id == R.id.nav_tech_dashboard) {
-           addDashboard();
+            addDashboard();
         } else if (id == R.id.nav_incentive) {
             fragmentCurrentMonth = new in.eoninfotech.eontechnician.FragmentCurrentMonth();
             fragmentCurrentMonth.setArguments(bundle);
@@ -700,6 +700,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             liveStatusFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, liveStatusFragment);
             setTitle("Live Status");
+            tabLayout.setVisibility(View.GONE);
+            viewpagerattendance.setVisibility(View.GONE);
+            viewPager.setVisibility(View.GONE);
+            viewpageractivity.setVisibility(View.GONE);
+            viewpagercallsheet.setVisibility(View.GONE);
+            viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
+            viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagertechnician.setVisibility(View.GONE);
+            ft.commit();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            hideKeyboard();
+        } else if (id == R.id.nav_live_status_eon) {
+            liveStatusFragmentEon = new LiveStatusFragmentEon();
+            liveStatusFragmentEon.setArguments(bundle);
+            ft = fm.beginTransaction().replace(R.id.framelay, liveStatusFragmentEon);
+            setTitle("Live Status Eon");
             tabLayout.setVisibility(View.GONE);
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
@@ -803,11 +822,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        }  else if (id == R.id.nav_additional_material) {
-            additionalMaterialFragment  = new AdditionalMaterialFragment();
+        } else if (id == R.id.nav_additional_material) {
+            additionalMaterialFragment = new AdditionalMaterialFragment();
             additionalMaterialFragment.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, additionalMaterialFragment);
-            setTitle("Additional Material Requirement");
+            setTitle("Service Stock Demand");
             tabLayout.setVisibility(View.VISIBLE);
             tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
@@ -830,16 +849,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             sendToEon();
         } else if (id == R.id.nav_material_send_to_tech) {
             sendToFT();
-        }
-        else if (id == R.id.nav_material) {
-           Intent intent = new Intent(MainActivity.this, ReceiveDeviceActivity.class);
-           startActivity(intent);
-        }
-        else if (id == R.id.material_dashboard) {
-           Intent intent = new Intent(MainActivity.this, Devicedashboards.class);
-           startActivity(intent);
-        }
-        else if (id == R.id.menu_logout) {
+        } else if (id == R.id.nav_material) {
+            Intent intent = new Intent(MainActivity.this, ReceiveDeviceActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.material_dashboard) {
+            Intent intent = new Intent(MainActivity.this, Devicedashboards.class);
+            startActivity(intent);
+        } else if (id == R.id.menu_logout) {
             final boolean isRunning = EONUtil.isServiceRunning(this.getBaseContext(), ForegroundService.class);
             String running = String.valueOf(isRunning);
             new MaterialAlertDialogBuilder(this)
@@ -899,6 +915,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             getDetail();
             hideKeyboard();
+        }else if(id==R.id.tm_removal){
+            Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
+            intent.putExtra("type","tm");
+            startActivity(intent);
+        }else if(id==R.id.pump_removal){
+            Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
+            intent.putExtra("type","pump");
+            startActivity(intent);
+        }
+        else if(id==R.id.device_maint){
+            Intent intent = new Intent(MainActivity.this, DeviceMaintenance.class);
+            intent.putExtra("type","maint");
+            startActivity(intent);
+        }else if(id==R.id.knowldge_base){
+            Intent intent = new Intent(MainActivity.this, DeviceMaintenance.class);
+            intent.putExtra("type","knowldge");
+            startActivity(intent);
+        }else if(id==R.id.faqs){
+            Intent intent = new Intent(MainActivity.this, DeviceMaintenance.class);
+            intent.putExtra("type","faq");
+            startActivity(intent);
         }
         return true;
     }
@@ -1007,6 +1044,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
     public static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {
@@ -1110,7 +1148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1155,7 +1193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterAtd extends FragmentPagerAdapter {
 
         public ViewPagerAdapterAtd(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1200,7 +1238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterStock extends FragmentPagerAdapter {
 
         public ViewPagerAdapterStock(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1243,8 +1281,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     class ViewPagerReturnMaterial extends FragmentPagerAdapter {
         public ViewPagerReturnMaterial(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
+
         @Override
         public Fragment getItem(int position) {
 
@@ -1286,8 +1325,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public class ViewPagerSendToTechnician extends FragmentPagerAdapter {
         public ViewPagerSendToTechnician(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
+
         @Override
         public Fragment getItem(int position) {
 
@@ -1330,7 +1370,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterCallSheet extends FragmentPagerAdapter {
 
         public ViewPagerAdapterCallSheet(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1374,7 +1414,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     class ViewPagerAdapterActivity extends FragmentPagerAdapter {
 
         public ViewPagerAdapterActivity(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -1415,50 +1455,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    class ViewPagerAdapterDashboard extends FragmentPagerAdapter {
-
-        public ViewPagerAdapterDashboard(FragmentManager fm) {
-            super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
-
-            switch (position) {
-                case 0:
-                    dashBoardFragment = new DashBoardFragment();
-                    dashBoardFragment.setArguments(bundle);
-                    return dashBoardFragment;
-                case 1:
-                    otherDashBoardFragment = new OtherDashBoardFragment();
-                    otherDashBoardFragment.setArguments(bundle);
-                    return otherDashBoardFragment;
-            }
-
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return int_items;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            switch (position) {
-                case 0:
-                    return "My Dashboard";
-                case 1:
-                    return "Other's Dashboard";
-            }
-            return null;
-        }
-    }
+//    class ViewPagerAdapterDashboard extends FragmentPagerAdapter {
+//
+//        public ViewPagerAdapterDashboard(FragmentManager fm) {
+//            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+//        }
+//
+//        @Override
+//        public Fragment getItem(int position) {
+//
+//            bundle.putString("disttid", disgnid);
+//            bundle.putString("usernme", usrname);
+//            bundle.putString("version", versionname);
+//
+//            switch (position) {
+//                case 0 -> {
+//                    dashBoardFragment = new DashBoardFragment();
+//                    dashBoardFragment.setArguments(bundle);
+//                    return dashBoardFragment;
+//                }
+//                case 1 -> {
+//                    otherDashBoardFragment = new OtherDashBoardFragment();
+//                    otherDashBoardFragment.setArguments(bundle);
+//                    return otherDashBoardFragment;
+//                }
+//            }
+//
+//            return null;
+//        }
+//
+//        @Override
+//        public int getCount() {
+//            return int_items;
+//        }
+//
+//        @Override
+//        public CharSequence getPageTitle(int position) {
+//
+//            switch (position) {
+//                case 0:
+//                    return "My Dashboard";
+//                case 1:
+//                    return "Other's Dashboard";
+//            }
+//            return null;
+//        }
+//    }
 
     class ViewPagerAdapterBills extends FragmentPagerAdapter {
 
@@ -1474,14 +1516,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("version", versionname);
 
             switch (position) {
-                case 0:
+                case 0 -> {
                     billIntimationFragment = new BillIntimationFragment();
                     billIntimationFragment.setArguments(bundle);
                     return billIntimationFragment;
-                case 1:
+                }
+                case 1 -> {
                     billViewFragment = new BillViewFragment();
                     billViewFragment.setArguments(bundle);
                     return billViewFragment;
+                }
             }
             return null;
         }
@@ -1518,14 +1562,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bundle.putString("version", versionname);
 
             switch (position) {
-                case 0:
+                case 0 -> {
                     additionalMaterialFragment = new AdditionalMaterialFragment();
                     additionalMaterialFragment.setArguments(bundle);
                     return additionalMaterialFragment;
-                case 1:
+                }
+                case 1 -> {
                     additionalMaterialViewFragment = new AdditionalMaterialViewFragment();
                     additionalMaterialViewFragment.setArguments(bundle);
                     return additionalMaterialViewFragment;
+                }
             }
             return null;
         }

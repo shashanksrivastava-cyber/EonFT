@@ -1,9 +1,12 @@
 package in.eoninfotech.eontechnician.fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +21,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.LiveFaultDataAdapter;
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.databinding.FragmentLiveStatusNewBinding;
 import in.eoninfotech.eontechnician.responses.ClientDetails;
 import in.eoninfotech.eontechnician.responses.ClientLocationDetail;
 import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
@@ -35,6 +43,7 @@ import in.eoninfotech.eontechnician.responses.CollectedItemsResponse;
 import in.eoninfotech.eontechnician.responses.DeviceLiveStatus;
 import in.eoninfotech.eontechnician.responses.DisconnectionResponse;
 import in.eoninfotech.eontechnician.responses.FaultResponse;
+import in.eoninfotech.eontechnician.responses.MainClientList;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.responses.MyPojo;
 import in.eoninfotech.eontechnician.responses.NotAvailActivityResponse;
@@ -57,6 +66,7 @@ import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.viewModel.ViewModelActivityDetails;
 import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
 import in.eoninfotech.eontechnician.viewModel.ViewModelLiveStatus;
+import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -70,382 +80,264 @@ import static android.content.Context.MODE_PRIVATE;
  * Created by root on 22/11/18.
  */
 
-public class LiveStatusFragment extends Fragment implements ClientListener {
+public class LiveStatusFragment extends Fragment{
 
-    View v;
-    public RecyclerView recyclerView;
-    private TextView txt_content_unavailable;
-    public SwipeRefreshLayout refreshLayout;
-    public LinearLayoutManager layoutManager;
+    private FragmentLiveStatusNewBinding binding;
+    private AlertDialog progressDialog;
     private ProgressDialog pDialog;
-    Button submit;
-    ArrayList<String> vehicleDetail = new ArrayList<>();
-    ArrayList<VehicleTypeDetail> vehicleList = new ArrayList<>();
-    ArrayList<ClientDetails> clientList = new ArrayList<>();
-    ArrayList<String> clientDetail = new ArrayList<>();
-    String username, version,id_dist="",server_name="",db_name="",clientId,s_clientname = "SELECT CLIENT",depo_id="",connection_status="D",veh_type="";
-    ArrayList<MyPojo> liveFault = new ArrayList<>();
-    private LiveFaultDataAdapter liveFaultDataAdapter;
-    NewInstallmentController newInstallmentController;
-    SharedPreferences sharedprefs;
-    ArrayList<ClientLocationDetail> locationList = new ArrayList<>();
-    ArrayList<String> locationDetail = new ArrayList<>();
-    SharedPreferences.Editor editor;
-    MySearchableSpinner client, location,vehicleType,device_status;
-    CheckConnection chk;
-    ProgressBar progressBar;
-    ArrayAdapter<String> adapter;
-    ArrayList<DeviceLiveStatus> deviceLiveStatuses = new ArrayList<>();
-    LiveStatusAdapterNew liveStatusAdapterNew;
-    ViewModelSubClient viewModelSubClient;
-    ViewModelClientLocation viewModelClientLocation;
-    ViewModelLiveStatus viewModelLiveStatus;
+    private SharedPreferences sharedPrefs;
+    private SharedPreferences.Editor editor;
+    private LiveStatusAdapterNew liveStatusAdapterNew;
+    private ArrayAdapter<String> adapter;
+    private ViewModelMainClient viewModelMainClient;
+    private ViewModelSubClient viewModelSubClient;
+    private ViewModelClientLocation viewModelClientLocation;
+    private ViewModelLiveStatus viewModelLiveStatus;
+    private final ArrayList<MainClientList> mainclientList = new ArrayList<>();
+    private final ArrayList<ClientDetails> clientList = new ArrayList<>();
+    private final ArrayList<ClientLocationDetail> locationList = new ArrayList<>();
+    private final ArrayList<DeviceLiveStatus> deviceLiveStatuses = new ArrayList<>();
+    private final ArrayList<VehicleTypeDetail> vehicleList = new ArrayList<>();
+    private final ArrayList<String> mainClientDetail = new ArrayList<>();
+    private final ArrayList<String> clientDetail = new ArrayList<>();
+    private final ArrayList<String> locationDetail = new ArrayList<>();
+    private final ArrayList<String> vehicleDetail = new ArrayList<>();
+
+    private String server_name = "", db_name = "", id_dist = "", depo_id = "", clientId = "", mainClientId = "", connection_status = "D", veh_type = "";
+
+    private CheckConnection checkConnection;
+    private boolean hasLoadedClients = false;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_live_status_new, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentLiveStatusNewBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
-        editor = sharedprefs.edit();
-        username = sharedprefs.getString("s_uuser", "");
-        version = sharedprefs.getString("version","");
-        chk = new CheckConnection(v.getContext());
-        recyclerView = v.findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        client = v.findViewById(R.id.new_in_clients);
-        vehicleType = v.findViewById(R.id.new_in_vehicleType);
-        location = v.findViewById(R.id.new_in_locations);
-        recyclerView.setLayoutManager(layoutManager);
-        refreshLayout = v.findViewById(R.id.refresh);
-        progressBar = v.findViewById(R.id.progressBar);
-        submit = v.findViewById(R.id.submit);
-        device_status = v.findViewById(R.id.device_status);
-        vehicleType = v.findViewById(R.id.vehicleType);
-        txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
-        refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE,Color.GREEN);
-        refreshLayout.setOnRefreshListener(this::refresh);
-        refreshLayout.setRefreshing(false);
-        ShowProgressBar(false);
-        newInstallmentController = new NewInstallmentController();
-        if (chk.isConnected()) {
-            addclients();
+        initUI();
+        initViewModels();
+        observeViewModels();
+        observeViewModelsSubClient();
+        observeViewModelsLocation();
+        observeViewModelsLiveStatus();
+
+        if (checkConnection.isConnected()) {
+            fetchMainClients();
         } else {
-            chk.showConnectionErrorDialog();
+            checkConnection.showConnectionErrorDialog();
         }
-        device_status.setSelection(2);
 
-        device_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(device_status.getSelectedItemPosition()==0){
-                    connection_status = "A";
-                }else if(device_status.getSelectedItemPosition()==1){
-                    connection_status = "C";
-                }else {
-                    connection_status="D";
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        vehicleType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    return;
-                } else {
-                    i = i - 1;
-                }
-                veh_type = String.valueOf(vehicleList.get(i).getVehicle_Id());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    return;
-                } else {
-                    i = i - 1;
-                }
-                clientId = String.valueOf(clientList.get(i).getClient_Id());
-                s_clientname = clientList.get(i).getClient_Name();
-                id_dist = clientList.get(i).getId_dist();
-                server_name = clientList.get(i).getServer_name();
-                db_name = clientList.get(i).getDb_name();
-                addLocation();
-                location.setEnabled(true);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    return;
-                } else {
-                    i = i - 1;
-                }
-                depo_id = String.valueOf((locationList.get(i).getLoc_Id()));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(server_name.equalsIgnoreCase("")){
-                    Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
-                }else if(db_name.equalsIgnoreCase("")){
-                    Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
-                }else if(id_dist.equalsIgnoreCase("")){
-                    Toast.makeText(getActivity(), "Please Select Client", Toast.LENGTH_SHORT).show();
-                }else {
-                    loadData();
-                }
-            }
-        });
-
-        return v;
+        return view;
     }
 
-    private void addLocation() {
+    private void initUI() {
+        sharedPrefs = requireActivity().getSharedPreferences("login_user_pass", Context.MODE_PRIVATE);
+        editor = sharedPrefs.edit();
 
-        viewModelClientLocation= ViewModelProviders.of(this).get(ViewModelClientLocation.class);
-        viewModelClientLocation.getClientLocationRepository(id_dist,server_name,db_name).observe(this, movieResponse -> {
-            locationList = movieResponse.getClientLoc();
-            if(movieResponse.getType()==1){
-                try {
-                    locationDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
+        checkConnection = new CheckConnection(requireContext());
+
+        progressDialog = new SpotsDialog(requireContext(), R.style.CustomIncentive);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.refresh.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+        binding.refresh.setOnRefreshListener(this::refresh);
+        binding.refresh.setRefreshing(false);
+        binding.progressBar.setVisibility(View.GONE);
+
+        binding.deviceStatus.setSelection(2);
+        binding.deviceStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                connection_status = position == 0 ? "A" : position == 1 ? "C" : "D";
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        binding.mainClient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                if (i == 0) return;
+                String selectedId = String.valueOf(mainclientList.get(i - 1).getClient_Id());
+                if (!selectedId.equals(mainClientId)) {
+                    mainClientId = selectedId;
+                    hasLoadedClients = false;
+                    fetchSubClients();
                 }
-                locationDetail.add("SELECT LOCATION");
-                for (int i = 0; i < locationList.size(); i++) {
-                    locationDetail.add(locationList.get(i).getLoc_Name());
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        binding.newInClients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                if (i == 0) return;
+                ClientDetails client = clientList.get(i - 1);
+                clientId = String.valueOf(client.getClient_Id());
+                id_dist = client.getId_dist();
+                server_name = client.getServer_name();
+                db_name = client.getDb_name();
+                fetchLocations();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        binding.newInLocations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                if (i == 0) return;
+                depo_id = String.valueOf(locationList.get(i - 1).getLoc_Id());
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        binding.submit.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(server_name) || TextUtils.isEmpty(db_name) || TextUtils.isEmpty(id_dist)) {
+                Toast.makeText(getContext(), "Please Select Client", Toast.LENGTH_SHORT).show();
+            } else {
+                loadLiveStatusData();
+            }
+        });
+    }
+
+    private void initViewModels() {
+        viewModelMainClient = new ViewModelProvider(this).get(ViewModelMainClient.class);
+        viewModelSubClient = new ViewModelProvider(this).get(ViewModelSubClient.class);
+        viewModelLiveStatus = new ViewModelProvider(this).get(ViewModelLiveStatus.class);
+        viewModelClientLocation = new ViewModelProvider(this).get(ViewModelClientLocation.class);
+    }
+
+    private void observeViewModels() {
+        viewModelMainClient.getMainClientRepository().observe(getViewLifecycleOwner(), response -> {
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+                return;
+            }
+            if (response.getType() == 1) {
+                mainclientList.clear();
+                mainclientList.addAll(response.getMain_client_list());
+                mainClientDetail.clear();
+                mainClientDetail.add("SELECT CLIENT");
+                for (MainClientList client : mainclientList) {
+                    mainClientDetail.add(client.getClient_Name());
                 }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, mainClientDetail);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                location.setAdapter(adapter);
-            }else {
-                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                binding.mainClient.setAdapter(adapter);
+            } else {
+                mainClientDetail.clear();
+                mainClientDetail.add("NO DATA AVAILABLE");
+                //Toast.makeText(getContext(), "Failed to load main clients", Toast.LENGTH_SHORT).show();
             }
+            progressDialog.dismiss();
         });
-
     }
 
-    private void addclients() {
-        viewModelSubClient= ViewModelProviders.of(this).get(ViewModelSubClient.class);
-        viewModelSubClient.getSubClientRepository("").observe(this, movieResponse -> {
-            clientList = movieResponse.getClientList();
-            if(movieResponse.getType()==1){
-                try {
+    private void observeViewModelsSubClient() {
+        viewModelSubClient.getSubClientRepository(mainClientId).observe(getViewLifecycleOwner(), response -> {
+            if (!hasLoadedClients) {
+                hasLoadedClients = true;
+                if (response == null) {
+                    Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                    progressDialog.hide();
+                    return;
+                }
+                if (response.getType() == 1) {
+                    clientList.clear();
+                    clientList.addAll(response.getClientList());
                     clientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    clientDetail.add("SELECT CLIENT");
+                    for (ClientDetails client : clientList) {
+                        clientDetail.add(client.getClient_Name());
+                    }
+                    adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, clientDetail);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    binding.newInClients.setAdapter(adapter);
+                } else {
+                    clientDetail.clear();
+                    clientDetail.add("NO DATA AVAILABLE");
                 }
-                clientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < clientList.size(); i++) {
-                    clientDetail.add(clientList.get(i).getClient_Name());
+            }
+            progressDialog.dismiss();
+        });
+    }
+
+    private void observeViewModelsLocation() {
+        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name).observe(getViewLifecycleOwner(), response -> {
+
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+                return;
+            }
+            if (response.getType() == 1) {
+                locationList.clear();
+                locationList.addAll(response.getClientLoc());
+                locationDetail.clear();
+                locationDetail.add("SELECT LOCATION");
+                for (ClientLocationDetail loc : locationList) {
+                    locationDetail.add(loc.getLoc_Name());
                 }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, locationDetail);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                client.setAdapter(adapter);
-            }else {
-                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
+                binding.newInLocations.setAdapter(adapter);
+            } else {
+                locationDetail.clear();
+                locationDetail.add("NO DATA AVAILABLE");
             }
+            progressDialog.dismiss();
         });
     }
 
-    private void addVehType() {
-        newInstallmentController.reqeuestvehicleType(this);
+    private void observeViewModelsLiveStatus() {
+
+        viewModelLiveStatus.getLiveStatusRepository(server_name, db_name, id_dist, depo_id, connection_status, veh_type)
+                .observe(getViewLifecycleOwner(), response -> {
+                    binding.refresh.setRefreshing(false);
+                    if (pDialog != null) pDialog.dismiss();
+                    if (response == null) {
+                        Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                        progressDialog.hide();
+                        return;
+                    }
+                    if (response.getType() == 1) {
+                        deviceLiveStatuses.clear();
+                        deviceLiveStatuses.addAll(response.getData());
+                        liveStatusAdapterNew = new LiveStatusAdapterNew(getContext(), deviceLiveStatuses,server_name,db_name);
+                        binding.recyclerView.setAdapter(liveStatusAdapterNew);
+                        binding.recyclerView.setVisibility(View.VISIBLE);
+                        binding.txtContentUnavailable.setVisibility(View.GONE);
+                        progressDialog.hide();
+                    } else {
+                        binding.recyclerView.setVisibility(View.GONE);
+                        binding.txtContentUnavailable.setVisibility(View.VISIBLE);
+                        progressDialog.hide();
+                    }
+                });
     }
 
-    private void loadData() {
-        try {
-            pDialog = K.createProgressDialog(getActivity());
-            pDialog.setMessage("Loading");
-            pDialog.show();
-            pDialog.setCancelable(false);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        viewModelLiveStatus= ViewModelProviders.of(this).get(ViewModelLiveStatus.class);
-        viewModelLiveStatus.getLiveStatusRepository(server_name,db_name,id_dist,depo_id,connection_status,veh_type).observe(this, movieResponse -> {
-            deviceLiveStatuses = movieResponse.getData();
-            if(movieResponse.getType()==1){
-                liveStatusAdapterNew = new LiveStatusAdapterNew(getContext(),deviceLiveStatuses);
-                recyclerView.setAdapter(liveStatusAdapterNew);
-                recyclerView.setVisibility(View.VISIBLE);
-                txt_content_unavailable.setVisibility(View.GONE);
-                refreshLayout.setRefreshing(false);
-                pDialog.dismiss();
-            }else {
-                refreshLayout.setRefreshing(false);
-                pDialog.dismiss();
-                txt_content_unavailable.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.GONE);
-            }
-        });
+    private void fetchMainClients() {
+        progressDialog.show();
+        viewModelMainClient.getMainClientRepository(); // assumed method call
+    }
+
+    private void fetchSubClients() {
+        progressDialog.show();
+        viewModelSubClient.getSubClientRepository(mainClientId);// assumed method call
+    }
+
+    private void fetchLocations() {
+        progressDialog.show();
+        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name);// assumed method call
+    }
+
+    private void loadLiveStatusData() {
+        progressDialog.show();
+        viewModelLiveStatus.getLiveStatusRepository(server_name, db_name, id_dist, depo_id, connection_status, veh_type);
+        // assumed method call
     }
 
     private void refresh() {
-        clear();
-        loadData();
-    }
-    private void clear() {
-        liveFault.clear();
+        loadLiveStatusData();
     }
 
-    @Override
-    public void clientResponse(ClientResponse response) {
-    }
-
-    @Override
-    public void locationResponse(ClientLocationResponse response) {
-    }
-
-    @Override
-    public void workTypeResponse(WorkTypeResponse response) {
-
-    }
-
-    @Override
-    public void vehicleTypeResponse(VehicleTypeResponse response) {
-        try {
-            vehicleList = response.getVehicletypeList();
-            try {
-                try {
-                    vehicleDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                vehicleDetail.add("SELECT VEHICLE TYPE");
-                for (int i = 0; i < vehicleList.size(); i++) {
-                    vehicleDetail.add(vehicleList.get(i).getVehicle_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, vehicleDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                vehicleType.setAdapter(adapter);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void faultListResponse(FaultResponse response) {
-
-    }
-
-    @Override
-    public void replaceResponse(ReplaceReason response) {
-
-    }
-
-    @Override
-    public void disconnectionResponse(DisconnectionResponse response) {
-
-    }
-
-    @Override
-    public void removalActivityResponse(RemovalActivityResponse response) {
-
-    }
-
-    @Override
-    public void removalResponse(RemovalResponse response) {
-
-    }
-
-    @Override
-    public void damageResponse(RemovalResponse response) {
-
-    }
-
-    @Override
-    public void collectItemResponse(CollectedItemsResponse response) {
-
-    }
-
-    @Override
-    public void simOperatorResponse(SimOperatorResponse response) {
-
-    }
-
-    @Override
-    public void simReplaceReason(SimReplaceResponse response) {
-
-    }
-
-    @Override
-    public void notAvailActivity(NotAvailActivityResponse response) {
-
-    }
-
-    @Override
-    public void vehicleNotAvailReason(VehNotAvailReasonResponse response) {
-
-    }
-
-    @Override
-    public void vtsResponses(VTSResponse response) {
-
-    }
-
-    @Override
-    public void vtsResponse(VTSResponse response) {
-
-    }
-
-    @Override
-    public void pMethod(PaymentMethodResponse response) {
-
-    }
-
-    @Override
-    public void updateDataResponse(MainResponse response) {
-
-    }
-
-    @Override
-    public void mainClientResponse(MainResponse response) {
-
-    }
-
-    @Override
-    public void vtsAccResponses(MainResponse response) {
-
-    }
-
-    private void ShowProgressBar(boolean show) {
-        try {
-            if (show) {
-                progressBar.setVisibility(View.VISIBLE);
-            } else {
-                progressBar.setVisibility(View.GONE);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 

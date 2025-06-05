@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.activity.ViewDRSStatus;
 import in.eoninfotech.eontechnician.responses.DeviceLiveStatus;
 
 public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapterNew.ActivityHolder> {
@@ -26,10 +27,20 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
     Context context;
     private final ArrayList<DeviceLiveStatus> deviceLiveStatuses;
 
-    public LiveStatusAdapterNew(Context context, ArrayList<DeviceLiveStatus> deviceLiveStatuses) {
+    String server_name,db_name;
+
+    public interface OnDRSStatusClickListener {
+        void onDRSStatusClick(DeviceLiveStatus device);
+    }
+    private OnDRSStatusClickListener listener;
+
+    public LiveStatusAdapterNew(Context context, ArrayList<DeviceLiveStatus> deviceLiveStatuses, String server_name, String db_name) {
 
         this.deviceLiveStatuses = deviceLiveStatuses;
         this.context = context;
+        this.listener = listener;
+        this.server_name = server_name;
+        this.db_name = db_name;
     }
 
     @NonNull
@@ -88,8 +99,18 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
                 context.startActivity(intent);
             }
         });
-    }
 
+        holder.drs_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inteer = new Intent(context, ViewDRSStatus.class);
+                inteer.putExtra("veh_no",deviceLiveStatuses.get(position).reg_no);
+                inteer.putExtra("server",server_name);
+                inteer.putExtra("db_Name",db_name);
+                context.startActivity(inteer);
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
@@ -100,7 +121,7 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
 
         ImageView connected,disconnected,under_main;
         TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,
-                speed,connection_status,sr_no,fuel,silo,location;
+                speed,connection_status,sr_no,fuel,silo,location,drs_status;
         LinearLayout linear_layout;
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
@@ -126,6 +147,7 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
             fuel = itemView.findViewById(R.id.fuel);
             silo = itemView.findViewById(R.id.silo);
             location = itemView.findViewById(R.id.location);
+            drs_status = itemView.findViewById(R.id.drs_status);
         }
     }
 }

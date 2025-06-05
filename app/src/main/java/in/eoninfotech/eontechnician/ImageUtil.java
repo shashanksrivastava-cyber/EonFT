@@ -43,7 +43,6 @@ public class ImageUtil {
             } else {
                 actualHeight = (int) maxHeight;
                 actualWidth = (int) maxWidth;
-
             }
         }
 

@@ -177,7 +177,6 @@ public class CallSheetFragment extends Fragment implements ProgressRequestBody.U
             });
             cammera.setOnClickListener(new View.OnClickListener() {
                 @Override
-
                 public void onClick(View v) {
                     buttonPressed = "1";
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

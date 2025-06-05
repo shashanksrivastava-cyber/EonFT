@@ -1,5 +1,6 @@
 package in.eoninfotech.eontechnician.activity;
 
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -77,6 +78,7 @@ public class FaultyDevicesDetailActivity extends AppCompatActivity {
                     FaultyDevices activityResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     faultyDevicesDetails = activityResponse.getFaultyDevices();
+
                     faultyDeviceDetailAdapter = new FaultyDeviceDetailAdapter(faultyDevicesDetails, FaultyDevicesDetailActivity.this);
                     recyclerView.setAdapter(faultyDeviceDetailAdapter);
                     refreshLayout.setRefreshing(false);
@@ -87,7 +89,6 @@ public class FaultyDevicesDetailActivity extends AppCompatActivity {
                     refreshLayout.setRefreshing(false);
                 }
             }
-
             @Override
             public void onFailure(Call<FaultyDevices> call, Throwable t) {
                 refreshLayout.setRefreshing(false);

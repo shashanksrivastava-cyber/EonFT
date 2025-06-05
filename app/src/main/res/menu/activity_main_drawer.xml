@@ -3,89 +3,155 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/nav_tech_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="ADD Dashboard" />
+        android:id="@+id/dashboard"
+        android:icon="@drawable/manual_book"
+        android:title="Dashboard">
+
+        <menu>
+            <item
+                android:id="@+id/nav_tech_dashboard"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="ADD Dashboard" />
+
+            <item
+                android:id="@+id/material_dashboard"
+                android:icon="@drawable/ic_dashboard_black_24dp"
+                android:title="Live Inventory Dashbaoard" />
+
+            <item
+                android:id="@+id/nav_live_status"
+                android:icon="@drawable/ic_critical_sites_24dp"
+                android:title="Live Status (Customer)" />
+
+            <item
+                android:id="@+id/nav_live_status_eon"
+                android:icon="@drawable/ic_critical_sites_24dp"
+                android:title="Live Status (EON VTS)" />
+
+        </menu>
+    </item>
 
     <item
-        android:id="@+id/material_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Live Inventory Dashbaoard" />
+        android:id="@+id/activities"
+        android:icon="@drawable/manual_book"
+        android:title="Activities">
+
+        <menu>
+
+        <item
+            android:id="@+id/nav_mark_site"
+            android:icon="@drawable/ic_mark_site_attendence_24dp"
+            android:title="Mark Attendance" />
+
+        <item
+            android:id="@+id/nav_new_repair"
+            android:layout_width="match_parent"
+            android:icon="@drawable/install"
+            android:title="Activities" />
+
+        <item
+            android:id="@+id/nav_stock"
+            android:icon="@drawable/stock"
+            android:title="Stock" />
+
+        <item
+            android:id="@+id/nav_call_sheet"
+            android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
+            android:title="Call Sheet" />
+
+        </menu>
+
+    </item>
 
     <item
-        android:id="@+id/nav_mark_site"
-        android:icon="@drawable/ic_mark_site_attendence_24dp"
-        android:title="Mark Attendance" />
+        android:id="@+id/other"
+        android:icon="@drawable/manual_book"
+        android:title="Other">
+
+        <menu>
+            <item
+                android:id="@+id/nav_pay_col_report"
+                android:icon="@drawable/ic_incentive"
+                android:title="Payment Collection Report" />
+
+            <item
+                android:id="@+id/nav_incentive"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Incentive" />
+
+            <item
+                android:id="@+id/nav_bill"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Bill Intimation" />
+
+            <item
+                android:id="@+id/nav_additional_material"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Service Stock Demand" />
+
+            <item
+                android:id="@+id/nav_material"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Receive Material"
+                android:visible="false"/>
+
+            <item
+                android:id="@+id/nav_material_return"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Send to Eon"
+                android:visible="false"/>
+
+            <item
+                android:id="@+id/nav_material_send_to_tech"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Send to Technician"
+                android:visible="false"/>
+
+            <item
+                android:id="@+id/nav_technician_of_the_month"
+                android:icon="@drawable/upd_list"
+                android:title="Technician of the Month" />
+
+        </menu>
+
+    </item>
 
     <item
-        android:id="@+id/nav_live_status"
-        android:icon="@drawable/ic_critical_sites_24dp"
-        android:title="Live Status" />
+        android:id="@+id/manual"
+        android:title="Maintenance Manual">
+
+        <menu>
+            <item
+                android:id="@+id/device_maint"
+                android:icon="@drawable/maintenance"
+                android:title="Device Maintenance" />
+            <item
+                android:id="@+id/tm_removal"
+                android:icon="@drawable/maintenance"
+                android:title="TM Removal " />
+            <item
+                android:id="@+id/pump_removal"
+                android:icon="@drawable/maintenance"
+                android:title="Pump Removal" />
+        </menu>
+    </item>
 
     <item
-        android:id="@+id/nav_new_repair"
-        android:layout_width="match_parent"
-        android:icon="@drawable/install"
-        android:title="Activities" />
+        android:id="@+id/knowldge"
+        android:title="Knowldge Base">
 
-    <item
-        android:id="@+id/nav_stock"
-        android:icon="@drawable/stock"
-        android:title="Stock" />
+        <menu>
+            <item
+                android:id="@+id/knowldge_base"
+                android:icon="@drawable/manual_book"
+                android:title="Knowldge Base" />
+            <item
+                android:id="@+id/faqs"
+                android:icon="@drawable/maintenance"
+                android:title="FAQ's" />
+        </menu>
 
-    <item
-        android:id="@+id/nav_call_sheet"
-        android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
-        android:title="Call Sheet" />
-
-    <item
-        android:id="@+id/nav_pay_col_report"
-        android:icon="@drawable/ic_incentive"
-        android:title="Payment Collection Report" />
-
-    <item
-        android:id="@+id/nav_incentive"
-        android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Incentive" />
-
-    <item
-        android:id="@+id/nav_bill"
-        android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Bill Intimation" />
-
-    <item
-        android:id="@+id/nav_additional_material"
-        android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Additional Material Requirement" />
-
-    <item
-        android:id="@+id/nav_material"
-        android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Receive Material"
-        android:visible="false"/>
-
-    <item
-        android:id="@+id/nav_material_return"
-        android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Send to Eon"
-        android:visible="false"/>
-
-    <item
-        android:id="@+id/nav_material_send_to_tech"
-        android:icon="@drawable/ic_receipt_black_24dp"
-        android:title="Send to Technician"
-        android:visible="false"/>
-
-    <item
-        android:id="@+id/nav_technician_of_the_month"
-        android:icon="@drawable/upd_list"
-        android:title="Technician of the Month" />
-
-
-    <!--    <item-->
-<!--        android:id="@+id/faqs"-->
-<!--        android:icon="@drawable/ic_incentive"-->
-<!--        android:title="FAQs" />-->
+    </item>
 
     <item
         android:id="@+id/menu_logout"

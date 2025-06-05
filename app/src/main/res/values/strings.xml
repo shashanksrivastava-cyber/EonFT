@@ -135,10 +135,22 @@
     <string name="faulty_device">Faulty Devices</string>
     <string name="total_devices">Total Devices -</string>
     <string name="vts_details">VTS Details</string>
-    <string name="vts_devices">Device Requirement</string>
-    <string name="acc_details">Accessory Requirement</string>
+    <string name="vts_devices">Device Demand</string>
+    <string name="acc_details">Accessory Demand</string>
     <string name="add_more_accessories">Add More </string>
     <string name="add_more_devices">Add More </string>
     <string name="submit">Submit</string>
+    <string name="working_drs">Working DRS</string>
+    <string name="faulty_drs">Faulty DRS</string>
+    <string name="installation_details">Installation Details</string>
+    <string name="select_time">Select Time</string>
+    <string name="select_date">Select Date</string>
+    <string name="drs_details"><u>View DRS Status</u></string>
+    <string name="close">CLOSE</string>
 
+    <string-array name="vts_type">
+        <item>SELECT VTS TYPE</item>
+        <item>Standard VTS</item>
+        <item>TM</item>
+    </string-array>
 </resources>

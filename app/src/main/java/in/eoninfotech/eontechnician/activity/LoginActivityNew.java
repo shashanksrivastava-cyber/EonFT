@@ -47,17 +47,23 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProviders;
+
 import dmax.dialog.SpotsDialog;
+import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.BuildConfig;
 import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.databinding.LoginactivityBinding;
 import in.eoninfotech.eontechnician.responses.LoginDetail;
 import in.eoninfotech.eontechnician.responses.LoginResponse;
 
 import in.eoninfotech.eontechnician.storage.LocationPrefs;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.K;
+import in.eoninfotech.eontechnician.viewModel.ViewModelActivityDetails;
+import in.eoninfotech.eontechnician.viewModel.ViewModelLogin;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -71,11 +77,19 @@ import retrofit2.Response;
 
 public class LoginActivityNew extends AppCompatActivity {
 
-    Button loginn;
-    TextView phn, email;
-    EditText e_usrnme, e_paswrd;
-    TextInputLayout user,pass;
-    String p_usr = "", p_pass = "", pp_usrnmae = "", pp_passwrd = "",user_id;
+    LoginactivityBinding binding;
+    public Button loginn;
+    public TextView phn;
+    public TextView email;
+    public EditText e_usrnme;
+    public EditText e_paswrd;
+    TextInputLayout user;
+    public TextInputLayout pass;
+    public String p_usr = "";
+    public String p_pass = "";
+    String pp_usrnmae = "";
+    String pp_passwrd = "";
+    String user_id;
     int REQUEST_CODE_PERMISSION = 10;
     private FusedLocationProviderClient locationProviderClient;
     String key = "eon180$135rddyttd";
@@ -83,18 +97,16 @@ public class LoginActivityNew extends AppCompatActivity {
     String imsiSIM1 = "";
     private AlertDialog progressDialog;
     TelephonyManager telephonyManager;
-    int count = 0;
+    public int count = 0;
     StringBuilder res1;
     String versname, acti_vate, dis_username, location, contact, zone, image, usrtype,logout,isRunning;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     String uusername, alert, asyn_versn, versionName, track_status, track_interval,bill_amt_limit,token="";
-    ProgressDialog pDialog;
-    CheckConnection chk = new CheckConnection(LoginActivityNew.this);
-    AppPreferences appPrefs;
-    TextView t_version;
+    public CheckConnection chk = new CheckConnection(LoginActivityNew.this);
+    public AppPreferences appPrefs;
+    public TextView t_version;
     RelativeLayout progressBar;
-   // ProgressBar progressBar;
     private LocationPrefs locationPrefs;
     String macAddress;
     int PERMISSION_ALL = 1;
@@ -103,6 +115,7 @@ public class LoginActivityNew extends AppCompatActivity {
             Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA};
+    public ViewModelLogin viewModelLogin;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -131,7 +144,6 @@ public class LoginActivityNew extends AppCompatActivity {
         isRunning = sharedprefs.getString("isRunning","");
         e_usrnme.setText(pp_usrnmae);
         e_paswrd.setText(pp_passwrd);
-        //chckusr = new CheckUser();
         versionName = BuildConfig.VERSION_NAME;
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationPrefs = new LocationPrefs(this);
@@ -228,16 +240,13 @@ public class LoginActivityNew extends AppCompatActivity {
                 }
             }
         });
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(Intent.ACTION_SEND);
-                String[] recipients={"support@eoninfotech.com"};
-                intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-                intent.setType("text/html");
-                intent.setPackage("com.google.android.gm");
-                startActivity(Intent.createChooser(intent, "Send mail"));
-            }
+        email.setOnClickListener(v -> {
+            Intent intent=new Intent(Intent.ACTION_SEND);
+            String[] recipients={"support@eoninfotech.com"};
+            intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+            intent.setType("text/html");
+            intent.setPackage("com.google.android.gm");
+            startActivity(Intent.createChooser(intent, "Send mail"));
         });
     }
 
@@ -279,64 +288,50 @@ public class LoginActivityNew extends AppCompatActivity {
         return "";
     }
 
-    private void getLogin() {
-        progressDialog.show();
-        ApiHolder loc_att = ServiceConnectionNewURL.getClient().create(ApiHolder.class);
-        Call<LoginResponse> locCall = loc_att.loginResponse(p_usr,p_pass,imsiSIM1,versionName,token);
-        locCall.enqueue(new Callback<LoginResponse>() {
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                try{
-                LoginResponse workTypeResponse = response.body();
-                loginList = response.body().getLoginDetails();
-                if (loginList.size() == 0) {
-                    Toast.makeText(LoginActivityNew.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
-                    progressDialog.hide();
-                } else{
-                    int i=0;
-                    user_id = loginList.get(i).getUsr_id();
-                    versname = loginList.get(i).getVerno();
-                    usrtype = loginList.get(i).getUsrtype();
-                    uusername = loginList.get(i).getUsrname();
-                    dis_username = loginList.get(i).getDisplayname();
-                    contact = loginList.get(i).getContact();
-                    zone = loginList.get(i).getZone();
-                    location = loginList.get(i).getLocation();
-                    image = loginList.get(i).getImage();
-                    track_status = loginList.get(i).getTrack_status();
-                    track_interval = loginList.get(i).getTrack_interval();
-                    bill_amt_limit = loginList.get(i).getBill_amt_limit();
-                    editor.putString("s_user_id",user_id);
-                    editor.putString("s_uuser", uusername);
-                    editor.putString("location", location);
-                    editor.putString("usrtype",usrtype);
-                    editor.putString("zone", zone);
-                    editor.putString("version", versname);
-                    editor.putString("contact", contact);
-                    editor.putString("dis_user", dis_username);
-                    editor.putString("image", image);
-                    editor.putString("imei1",imsiSIM1);
-                    editor.putString("track_status",track_status);
-                    editor.putString("track_interval",track_interval);
-                    editor.putString("bill_amt_limit",bill_amt_limit);
-                    editor.commit();
-                    progressDialog.hide();
+    public void getLogin() {
 
-                        Intent intee = new Intent(LoginActivityNew.this, MainActivity.class);
-                        intee.putExtra("intent","");
-                        startActivity(intee);
-                        finish();
-                        appPrefs.setLoggedIn(true);
-                }
-            }catch(Exception e){
-                e.printStackTrace();}
-            }
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+        progressDialog.show();
+        viewModelLogin= ViewModelProviders.of(this).get(ViewModelLogin.class);
+        viewModelLogin.getLoginResponse(p_usr,p_pass,imsiSIM1,versionName,token).observe(this, movieResponse -> {
+            loginList = movieResponse.getLoginDetails();
+            if(movieResponse.getType()==1){
+                int i=0;
+                user_id = loginList.get(i).getUsr_id();
+                versname = loginList.get(i).getVerno();
+                usrtype = loginList.get(i).getUsrtype();
+                uusername = loginList.get(i).getUsrname();
+                dis_username = loginList.get(i).getDisplayname();
+                contact = loginList.get(i).getContact();
+                zone = loginList.get(i).getZone();
+                location = loginList.get(i).getLocation();
+                image = loginList.get(i).getImage();
+                track_status = loginList.get(i).getTrack_status();
+                track_interval = loginList.get(i).getTrack_interval();
+                bill_amt_limit = loginList.get(i).getBill_amt_limit();
+                editor.putString("s_user_id",user_id);
+                editor.putString("s_uuser", uusername);
+                editor.putString("location", location);
+                editor.putString("usrtype",usrtype);
+                editor.putString("zone", zone);
+                editor.putString("version", versname);
+                editor.putString("contact", contact);
+                editor.putString("dis_user", dis_username);
+                editor.putString("image", image);
+                editor.putString("imei1",imsiSIM1);
+                editor.putString("track_status",track_status);
+                editor.putString("track_interval",track_interval);
+                editor.putString("bill_amt_limit",bill_amt_limit);
+                editor.commit();
+                progressDialog.hide();
+
+                Intent intee = new Intent(LoginActivityNew.this, MainActivity.class);
+                intee.putExtra("intent","");
+                startActivity(intee);
+                finish();
+                appPrefs.setLoggedIn(true);
+            }else {
                 Toast.makeText(LoginActivityNew.this, "Username/Password Incorrect", Toast.LENGTH_SHORT).show();
                 progressDialog.hide();
-                try {
-                } catch (Exception e) {
-                }
             }
         });
     }
@@ -411,7 +406,7 @@ public class LoginActivityNew extends AppCompatActivity {
                 case 0:
                     break;
                 case 1:
-                    new LoginActivityNew.UpdateApp().execute("asdf");
+                    //new LoginActivityNew.UpdateApp().execute("asdf");
                     break;
                 case 5:
                     logMeIn();
@@ -421,78 +416,6 @@ public class LoginActivityNew extends AppCompatActivity {
             }
         }
     };
-
-    class UpdateApp extends AsyncTask<String, String, Void> {
-
-        int FileSize;
-        int percentage;
-        int count;
-        ProgressDialog pDialog;
-        long totalSize = 0;
-        URLConnection urlconnection;
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(LoginActivityNew.this);
-            pDialog.setTitle("Updating...");
-            pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected Void doInBackground(String... voids) {
-            Log.i("****", voids[0]);
-            try {
-                String str = K.Url.getapk;
-                HttpURLConnection c = (HttpURLConnection) new URL(str).openConnection();
-                c.setRequestMethod("GET");
-                c.setDoOutput(true);
-                c.connect();
-
-                FileOutputStream fos = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/eontech.apk"));
-                FileSize = c.getContentLength();
-                InputStream is = c.getInputStream();
-                byte[] buffer = new byte[1024];
-                while ((count = is.read(buffer)) != -1) {
-                    totalSize += count;
-                    publishProgress("" + ((this.totalSize * 100) / FileSize));
-                    fos.write(buffer, 0, count);
-                }
-                fos.flush();
-                fos.close();
-                is.close();
-            } catch (IOException ignored) {
-                ignored.printStackTrace();
-            } catch (Exception ae) {
-                ae.printStackTrace();
-            }
-            return null;
-        }
-
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-            pDialog.setProgress(Integer.parseInt(values[0]));
-            percentage = Integer.parseInt(values[0]);
-        }
-
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if (percentage == 100) {
-                try {
-                    Intent promptInstall = new Intent("android.intent.action.VIEW");
-                    promptInstall.setDataAndType(Uri.fromFile(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/eontech.apk")), "application/vnd.android.package-archive");
-                    promptInstall.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(promptInstall);
-                    //openFolder();
-                } catch (Exception ae) {
-                    ae.printStackTrace();
-                }
-            } else
-                Toast.makeText(getApplicationContext(), "Permission Required", Toast.LENGTH_LONG).show();
-            pDialog.cancel();
-        }
-    }
 
     private void ShowProgressBar(boolean show) {
         try {

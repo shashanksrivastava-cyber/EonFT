@@ -21,6 +21,14 @@ data class DeviceLiveStatus (
     @JvmField val fuel: String,
     @JvmField val silo: String,
     @JvmField val status: String,
-    @JvmField val status_type: String
+    @JvmField val status_type: String,
+    @JvmField val site_in: String,
+    @JvmField val site_out: String,
+    @JvmField val drum_hrs: String,
+    @JvmField val bus_name: String,
+    @JvmField val plant_in: String,
+    @JvmField val plant_out: String,
+    @JvmField val km_per: String,
+    @JvmField val drum_rotaion_status: String
 ) {
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearField"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
@@ -20,6 +20,14 @@
         android:focusableInTouchMode="false"
         android:layout_weight="1"
         android:layout_below="@+id/txtDetails"/>
+
+    <LinearLayout
+        android:id="@+id/materialLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:visibility="visible">
 
     <RelativeLayout
         android:id="@+id/relays"
@@ -74,5 +82,7 @@
         android:visibility="visible"
         android:onClick="onDelete"
         android:background="@drawable/ic_minus"/>
+
+    </LinearLayout>
 
 </LinearLayout>

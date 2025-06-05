@@ -71,6 +71,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import dmax.dialog.SpotsDialog;
@@ -130,6 +131,7 @@ import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnection;
+import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnician.webservice.UmVehicleDetail;
 import in.eoninfotech.eontechnician.webservice.UmVehicleResponse;
 import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
@@ -157,6 +159,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     int pStatus = 0, x, PERMISSION_ALL = 1, REQUEST_CODE_PERMISSION = 10, fuelVoltInt;
     CheckedTextView text1;
     ImageView checked;
+    private boolean hasLoadedClients = false;
     private AlertDialog progressDialog;
     File file;
     Uri uri;
@@ -639,6 +642,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         tilDeviceMiss.setVisibility(View.GONE);
         ShowProgressBar(false);
         Progress(false);
+        initViewModels();
+        observeViewModels();
 
         setDateAndTime();
         location.setEnabled(false);
@@ -4736,6 +4741,89 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         return v;
     }
 
+    private void observeViewModels() {
+        viewModelMainClient.getMainClientRepository().observe(getViewLifecycleOwner(), response -> {
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+                return;
+            }
+            if (response.getType() == 1) {
+                mainclientList.clear();
+                mainclientList.addAll(response.getMain_client_list());
+                mainClientDetail.clear();
+                mainClientDetail.add("SELECT CLIENT");
+                for (MainClientList client : mainclientList) {
+                    mainClientDetail.add(client.getClient_Name());
+                }
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, mainClientDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                new_main_clients.setAdapter(adapter);
+            } else {
+                mainClientDetail.clear();
+                mainClientDetail.add("NO DATA AVAILABLE");
+                Toast.makeText(getContext(), "Failed to load main clients", Toast.LENGTH_SHORT).show();
+            }
+            progressDialog.dismiss();
+        });
+
+        viewModelSubClient.getSubClientRepository(mainClientId).observe(getViewLifecycleOwner(), response -> {
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+                return;
+            }
+                if (response.getType() == 1) {
+                    clientList.clear();
+                    clientList.addAll(response.getClientList());
+                    clientDetail.clear();
+                    clientDetail.add("SELECT CLIENT");
+                    for (ClientDetails client : clientList) {
+                        clientDetail.add(client.getClient_Name());
+                    }
+                    adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, clientDetail);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    client.setAdapter(adapter);
+                } else {
+                    clientDetail.clear();
+                    clientDetail.add("NO DATA AVAILABLE");
+                }
+            progressDialog.dismiss();
+        });
+
+        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name).observe(getViewLifecycleOwner(), response -> {
+
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+                return;
+            }
+
+            if (response.getType() == 1) {
+                locationList.clear();
+                locationList.addAll(response.getClientLoc());
+                locationDetail.clear();
+                locationDetail.add("SELECT LOCATION");
+                for (ClientLocationDetail loc : locationList) {
+                    locationDetail.add(loc.getLoc_Name());
+                }
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, locationDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                location.setAdapter(adapter);
+            } else {
+                locationDetail.clear();
+                locationDetail.add("NO DATA AVAILABLE");
+            }
+            progressDialog.dismiss();
+        });
+    }
+
+    private void initViewModels() {
+        viewModelMainClient = new ViewModelProvider(this).get(ViewModelMainClient.class);
+        viewModelSubClient = new ViewModelProvider(this).get(ViewModelSubClient.class);
+        viewModelClientLocation = new ViewModelProvider(this).get(ViewModelClientLocation.class);
+    }
+
     private void getAccSerialNo(String s_reg_no) {
 
         newInstallmentController.reqeuestAccVtsDetails(db_name,server_name,s_reg_no, this);
@@ -4743,28 +4831,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     private void addMainClients() {
 
-        viewModelMainClient= ViewModelProviders.of(this).get(ViewModelMainClient.class);
-        viewModelMainClient.getMainClientRepository().observe(this, movieResponse -> {
-            mainclientList = movieResponse.getMain_client_list();
-            if(movieResponse.getType()==1){
-                try {
-                    mainClientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                mainClientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < mainclientList.size(); i++) {
-                    mainClientDetail.add(mainclientList.get(i).getClient_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, mainClientDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                new_main_clients.setAdapter(adapter);
-                progressDialog.hide();
-            }else {
-                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-                progressDialog.hide();
-            }
-        });
+        progressDialog.show();
+        viewModelMainClient.getMainClientRepository();
     }
 
     private void getSerialNo() {
@@ -4986,29 +5054,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     private void addclients() {
 
-        viewModelSubClient= ViewModelProviders.of(this).get(ViewModelSubClient.class);
-        viewModelSubClient.getSubClientRepository(mainClientId).observe(this, movieResponse -> {
-            clientList = movieResponse.getClientList();
-            if(movieResponse.getType()==1){
-                try {
-                    clientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                clientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < clientList.size(); i++) {
-                    clientDetail.add(clientList.get(i).getClient_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                client.setAdapter(adapter);
-                progressDialog.hide();
-            }else {
-                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-                progressDialog.hide();
-            }
-        });
-
+        progressDialog.show();
+        viewModelSubClient.getSubClientRepository(mainClientId);
     }
 
     private void removal_type() {
@@ -5054,30 +5101,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     private void addLocation() {
-        ShowProgressBar(true);
 
-        viewModelClientLocation= ViewModelProviders.of(this).get(ViewModelClientLocation.class);
-        viewModelClientLocation.getClientLocationRepository(id_dist,server_name,db_name).observe(this, movieResponse -> {
-            locationList = movieResponse.getClientLoc();
-            if(movieResponse.getType()==1){
-                try {
-                    locationDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                locationDetail.add("SELECT LOCATION");
-                for (int i = 0; i < locationList.size(); i++) {
-                    locationDetail.add(locationList.get(i).getLoc_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                location.setAdapter(adapter);
-                progressDialog.hide();
-            }else {
-                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-                progressDialog.hide();
-            }
-        });
+        progressDialog.show();
+        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name);
     }
 
     private void addActivity() {
@@ -5104,7 +5130,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     private void getUmVehicle() {
-        ApiHolder get_list = ServiceConnection.getClient(version).create(ApiHolder.class);
+        ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<UmVehicleResponse> call = get_list.get_veh_for_um(clientId, clientLocId);
         call.enqueue(new Callback<UmVehicleResponse>() {
             @Override
@@ -5669,54 +5695,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
 
     @Override
     public void clientResponse(ClientResponse response) {
-//        try {
-//            clientList = response.getClientList();
-//            try {
-//                try {
-//                    clientDetail.clear();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                clientDetail.add(" SELECT CLIENT");
-//                for (int i = 0; i < clientList.size(); i++) {
-//                    clientDetail.add(clientList.get(i).getClient_Name());
-//                }
-//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                client.setAdapter(adapter);
-//                ShowProgressBar(false);
-//            } catch (NullPointerException npe) {
-//                npe.printStackTrace();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
     public void locationResponse(ClientLocationResponse response) {
-//        try {
-//            locationList = response.getClientLoc();
-//            try {
-//                try {
-//                    locationDetail.clear();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                locationDetail.add("SELECT LOCATION");
-//                for (int i = 0; i < locationList.size(); i++) {
-//                    locationDetail.add(locationList.get(i).getLoc_Name());
-//                }
-//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                location.setAdapter(adapter);
-//                ShowProgressBar(false);
-//            } catch (NullPointerException npe) {
-//                npe.printStackTrace();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -6345,7 +6327,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     void getDeviceTypes() {
-        ApiHolder get_list = ServiceConnection.getClient(version).create(ApiHolder.class);
+        ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<VTSTypeResponse> call = get_list.getVTSTypes();
         call.enqueue(new Callback<VTSTypeResponse>() {
             @Override
@@ -6396,7 +6378,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     private void getDevice() {
-        ApiHolder get_list = ServiceConnection.getClient(version).create(ApiHolder.class);
+        ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<MainResponse> call = get_list.getDeviceTypes();
         call.enqueue(new Callback<MainResponse>() {
             @Override

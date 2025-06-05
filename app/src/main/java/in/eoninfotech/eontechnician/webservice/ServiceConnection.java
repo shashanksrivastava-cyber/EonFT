@@ -23,7 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Harman on 9/10/2017.
  */
 public class ServiceConnection {
-    public static final String BASE_URL = "http://mis.eon.co.in/eonmis/android/techApp/";
+    //public static final String BASE_URL = "http://mis.eon.co.in/eonmis/android/techApp/";
+    public static final String BASE_URL = "http://mis.eurotrack.in/eonmis/android/techApp/";
     private static Retrofit retrofit = null;
 
 
@@ -31,7 +32,7 @@ public class ServiceConnection {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okclient = new OkHttpClient.Builder()
-                .connectTimeout(20, TimeUnit.MINUTES)
+                .connectTimeout(10, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES)
                 .addInterceptor(interceptor)
                 .build();
@@ -53,7 +54,7 @@ public class ServiceConnection {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(20,TimeUnit.MINUTES)
+                .connectTimeout(10,TimeUnit.MINUTES)
                 .readTimeout(10,TimeUnit.MINUTES)
                 .addInterceptor(interceptor)
                 .build();

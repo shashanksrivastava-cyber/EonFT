@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
@@ -191,7 +186,7 @@
                                 android:layout_marginEnd="10dp"
                                 android:background="@drawable/et_frame"
                                 android:drawableEnd="@drawable/baseline_event_black_18"
-                                android:hint="Select Date"
+                                android:hint="@string/select_date"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
                                 android:textSize="14sp" />
@@ -205,7 +200,7 @@
                                 android:layout_marginEnd="20dp"
                                 android:background="@drawable/et_frame"
                                 android:drawableEnd="@drawable/baseline_query_builder_black_18"
-                                android:hint="Select Time"
+                                android:hint="@string/select_time"
                                 android:paddingLeft="5dp"
                                 android:paddingRight="5dp"
                                 android:textSize="14sp" />
@@ -231,7 +226,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Installation Details"
+                        android:text="@string/installation_details"
                         android:textStyle="bold" />
 
                     <include layout="@layout/install_layout" />
@@ -445,8 +440,6 @@
             </LinearLayout>
 
         </ScrollView>
-
-    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

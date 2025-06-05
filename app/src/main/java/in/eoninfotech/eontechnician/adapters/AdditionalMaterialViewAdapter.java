@@ -24,7 +24,6 @@ public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<Addition
     Context context;
     private final ArrayList<CallSheetListDetail> callSheetDetails;
 
-
     public AdditionalMaterialViewAdapter(android.content.Context context, ArrayList<CallSheetListDetail> callSheetDetails) {
 
         this.context = context;
@@ -35,7 +34,7 @@ public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<Addition
     @Override
     public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new AdditionalMaterialViewAdapter.ActivityHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.call_sheet_adapter, parent, false));
+                .inflate(R.layout.additional_material_view_adapter, parent, false));
     }
 
     @Override
@@ -44,6 +43,7 @@ public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<Addition
         final CallSheetListDetail callSheetDetail = callSheetDetails.get(position);
 
         holder.date.setText(callSheetDetail.getDate());
+        holder.req_no.setText(callSheetDetail.getReq_no());
         holder.image.setText("View Detail");
 
         holder.image.setOnClickListener(new View.OnClickListener() {
@@ -64,12 +64,13 @@ public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<Addition
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView date,image;
+        TextView date,image,req_no;
         public ActivityHolder(View itemView) {
             super(itemView);
 
             date = itemView.findViewById(R.id.workType);
             image = itemView.findViewById(R.id.textViewAttached);
+            req_no = itemView.findViewById(R.id.req_no);
         }
     }
 }

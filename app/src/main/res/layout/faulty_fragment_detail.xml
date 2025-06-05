@@ -1,252 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <androidx.core.widget.NestedScrollView
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:layout_height="wrap_content"
+            android:text="Faulty Devices"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="#D32F2F"
+            android:padding="10dp" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@drawable/et_frame">
+        <TableLayout
+            android:id="@+id/table_faulty_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginTop="5dp"
+            android:background="#EEEEEE" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@drawable/et_frame">
-                    <TextView
-                        android:id="@+id/titleTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Faulty Devices"
-                        android:textColor="@color/eonWhite"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="#D32F2F"
-                        android:padding="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Faulty DRS"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="#F44336"
+            android:padding="10dp"
+            android:layout_marginTop="20dp" />
 
-                    <LinearLayout
-                        android:id="@+id/linear_vts"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:weightSum="2"
-                        android:layout_below="@+id/titleTextView">
+        <TableLayout
+            android:id="@+id/table_faulty_drs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginTop="5dp"
+            android:background="#EEEEEE" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
+        <TextView
+            android:id="@+id/txt_content_unavailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Message !!"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_marginTop="20dp" />
 
-                            <TextView
-                                android:layout_width="54dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:layout_marginLeft="7dp"
-                                android:layout_weight="0.7"
-                                android:text="Vehicle No. : "
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:visibility="gone"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="7dp"
-                                android:textSize="16sp"
-                                android:text="VTS ID : "
-                                android:layout_weight="0.8"
-                                android:layout_marginTop="5dp"
-                                android:textStyle="bold"
-                                android:gravity="left"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="7dp"
-                                android:textSize="16sp"
-                                android:text="Date : "
-                                android:layout_marginTop="5dp"
-                                android:textStyle="bold"
-                                android:layout_weight="1"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                    <TextView
-                            android:id="@+id/site_veh_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
-                            android:textSize="16sp"
-                            android:text=""
-                            android:layout_weight="1"
-                            android:padding="2dp"
-                            android:lineSpacingExtra="3dp"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/black"/>
-
-                        <TextView
-                            android:id="@+id/vts_Id"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
-                            android:textSize="16sp"
-                            android:text=""
-                            android:layout_weight="1"
-                            android:padding="2dp"
-                            android:lineSpacingExtra="3dp"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/black" />
-
-                            <TextView
-                                android:id="@+id/date"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="7dp"
-                                android:textSize="16sp"
-                                android:text=""
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:lineSpacingExtra="3dp"
-                                android:layout_marginTop="5dp"
-                                android:textColor="@color/black"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/faultyDrs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Faulty DRS"
-                        android:textColor="@color/eonWhite"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="#F44336"
-                        android:padding="5dp"
-                        android:layout_below="@id/linear_vts"
-                        android:layout_marginTop="10dp"/>
-
-                    <LinearLayout
-                        android:id="@+id/linear_drs"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:weightSum="2"
-                        android:layout_below="@+id/faultyDrs"
-                        android:layout_marginBottom="10dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="7dp"
-                                android:textSize="16sp"
-                                android:text="Vehicle No. : "
-                                android:layout_marginTop="5dp"
-                                android:textStyle="bold"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="7dp"
-                                android:textSize="16sp"
-                                android:text="No of TRIP : "
-                                android:layout_weight="1"
-                                android:layout_marginTop="5dp"
-                                android:textStyle="bold"
-                                android:gravity="left"/>
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/site_drs_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
-                            android:textSize="16sp"
-                            android:text="No Data Available"
-                            android:layout_weight="1.5"
-                            android:padding="2dp"
-                            android:layout_marginTop="5dp"
-                            android:textColor="@color/black"/>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/linear_drs"/>
-
-                    <TextView
-                        android:id="@+id/standingMsg"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Standing Message"
-                        android:textColor="@color/eonWhite"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:background="#F44336"
-                        android:padding="5dp"
-                        android:layout_below="@id/linear_drs"
-                        android:layout_marginTop="10dp"
-                        android:visibility="gone"/>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/linear_drs"
-                        android:background="@drawable/et_frame"
-                        android:elevation="10dp"
-                        android:padding="5dp">
-                        <TextView
-                            android:layout_below="@+id/standingMsg"
-                            android:id="@+id/txt_content_unavailable"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:gravity="center"
-                            android:text="No Message !!"
-                            android:visibility="gone"
-                            android:layout_marginBottom="40dp"/>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:nestedScrollingEnabled="false"
-                            android:visibility="visible"
-                            android:layout_below="@+id/standingMsg"
-                            android:background="@color/eonWhite"/>
-                    </androidx.cardview.widget.CardView>
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-        </androidx.core.widget.NestedScrollView>
-
-    </FrameLayout>
+    </LinearLayout>
 </ScrollView>

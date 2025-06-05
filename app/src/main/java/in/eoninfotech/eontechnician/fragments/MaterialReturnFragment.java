@@ -41,25 +41,26 @@ import in.eoninfotech.eontechnician.callbacks.ReceiveDeviceListener;
 import in.eoninfotech.eontechnician.controllers.ReceiveDeviceController;
 import in.eoninfotech.eontechnician.helper.K;
 
+import static android.app.PendingIntent.getActivity;
 import static android.content.Context.MODE_PRIVATE;
 
 public class MaterialReturnFragment extends Fragment implements ReceiveDeviceListener, TextWatcher {
 
-    View v,rowView;
-    Spinner type_spinner,transit_spinner,courier_spinner;
+    View v, rowView;
+    Spinner type_spinner, transit_spinner, courier_spinner;
     ArrayAdapter<String> adapter;
     private ProgressDialog pDialog;
     NonScrollListView lv;
-    Button update_data,final_submit, final_cancel,addMaterial;
+    Button update_data, final_submit, final_cancel, addMaterial;
     ImageButton delete_button;
     SharedPreferences sharedprefs;
-    LinearLayout parentLinearLayout, transit_linear, materialLL,linearField;
-    Button btCancel,btSubmit,add_manual;
-    TextView response_comment,items_values,preview_tags,items_tags;
+    LinearLayout parentLinearLayout, transit_linear, materialLL, linearField;
+    Button btCancel, btSubmit, add_manual;
+    TextView response_comment, items_values, preview_tags, items_tags;
     TickerView tickerView;
-    EditText details,et_remarks,search,etQuantity;
+    EditText details, et_remarks, search, etQuantity;
     SharedPreferences.Editor editor;
-    String version, username,transit_id="",type_id,type_name="",tech_id,others="",items_value="",other_key="",courier_id="",transit_through="",remarks="",item_qty="",other_tech_id="";
+    String version, username, transit_id = "", type_id, type_name = "", tech_id, others = "", items_value = "", other_key = "", courier_id = "", transit_through = "", remarks = "", item_qty = "", other_tech_id = "";
     ReceiveDeviceController receiveDeviceController;
     ArrayList<ItemList> itemList = new ArrayList<>();
     ArrayList<TransitList> transitList = new ArrayList<>();
@@ -75,9 +76,9 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     Dialog myDialog;
     EditText etMasterPass;
     ImageView txtclose;
-    StringBuilder sb,sbFieldIds;
+    StringBuilder sb, sbFieldIds;
     private Dialog confirmDialog;
-    int count=0;
+    int count = 0;
     MaterialReturnFragment materialReturnFragment;
 
     @Override
@@ -108,7 +109,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         } catch (Exception e) {
             e.printStackTrace();
         }
-     receiveDeviceController.returnDeviceList(tech_id,this);
+        receiveDeviceController.returnDeviceList(tech_id, this);
     }
 
     private void getTransitList() {
@@ -116,13 +117,12 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     }
 
     private void getItemsList() {
-      receiveDeviceController.deviceList(this);
+        receiveDeviceController.deviceList(this);
     }
 
     private void initView() {
         materialReturnFragment = new MaterialReturnFragment();
         parentLinearLayout = v.findViewById(R.id.parent_linear_layout);
-        materialLL = v.findViewById(R.id.materialLL);
         addMaterial = v.findViewById(R.id.addMaterial);
         linearField = v.findViewById(R.id.linearField);
         delete_button = v.findViewById(R.id.delete_button);
@@ -151,28 +151,29 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                 }
                 transit_id = transitList.get(i).getTransit_id();
 
-                if(transit_id.equalsIgnoreCase("1")){
+                if (transit_id.equalsIgnoreCase("1")) {
                     transit_linear.setVisibility(View.VISIBLE);
                     adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     courier_spinner.setAdapter(adapter);
                     details.setHint("Enter Docket No.");
-                }else if(transit_id.equalsIgnoreCase("2")) {
+                } else if (transit_id.equalsIgnoreCase("2")) {
                     transit_linear.setVisibility(View.GONE);
                     details.setHint("Enter Bus No.");
                     adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     courier_spinner.setAdapter(adapter);
-                    courier_id="";
-                }else {
+                    courier_id = "";
+                } else {
                     transit_linear.setVisibility(View.GONE);
                     details.setHint("Enter Employee ID");
                     adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, courierDetails);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     courier_spinner.setAdapter(adapter);
-                    courier_id="";
+                    courier_id = "";
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -213,8 +214,9 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                     i = i - 1;
                 }
                 type_id = itemList.get(i).getId();
-                type_name  = itemList.get(i).getName();
+                type_name = itemList.get(i).getName();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -224,7 +226,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             @Override
             public void onClick(View v) {
                 LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                rowView = inflater.inflate(R.layout.field, null);
+                final View rowView = inflater.inflate(R.layout.field, null);
                 parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
                 delete_button = rowView.findViewById(R.id.delete_button);
                 type_spinner = rowView.findViewById(R.id.type_spinner);
@@ -242,8 +244,9 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                             i = i - 1;
                         }
                         type_id = itemList.get(i).getId();
-                        type_name  = itemList.get(i).getName();
+                        type_name = itemList.get(i).getName();
                     }
+
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
                     }
@@ -261,52 +264,63 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             @Override
             public void onClick(View v) {
 
-                transit_through = details.getText().toString();
-                remarks = et_remarks.getText().toString();
-
-                if(transit_id.equalsIgnoreCase("")){
+                if (transit_id.equalsIgnoreCase("")) {
                     Toast.makeText(getActivity(), "Select Transit Type", Toast.LENGTH_SHORT).show();
-                }else if(transit_id.equalsIgnoreCase("1")&&(courier_id.equalsIgnoreCase(""))){
-                        Toast.makeText(getActivity(), "Select Courier Name ", Toast.LENGTH_SHORT).show();
-                }else if(transit_id.equalsIgnoreCase("1")&&(details.getText().toString().equalsIgnoreCase(""))){
-                        Toast.makeText(getActivity(), "Enter Docket Number", Toast.LENGTH_SHORT).show();
-                }else if(details.getText().toString().equalsIgnoreCase("")){
+                } else if (transit_id.equalsIgnoreCase("1") && (courier_id.equalsIgnoreCase(""))) {
+                    Toast.makeText(getActivity(), "Select Courier Name ", Toast.LENGTH_SHORT).show();
+                } else if (transit_id.equalsIgnoreCase("1") && (details.getText().toString().equalsIgnoreCase(""))) {
+                    Toast.makeText(getActivity(), "Enter Docket Number", Toast.LENGTH_SHORT).show();
+                } else if (details.getText().toString().equalsIgnoreCase("")) {
                     Toast.makeText(getActivity(), "Enter bus no/Employee id/Consignment No", Toast.LENGTH_SHORT).show();
                 } else {
+                    transit_through = details.getText().toString();
+                    remarks = et_remarks.getText().toString();
+
+                    boolean hasAccessories = false;
+
                     for (int i = 0; i < parentLinearLayout.getChildCount() - 1; i++) {
                         View view1 = parentLinearLayout.getChildAt(i);
 
                         Spinner spinner = view1.findViewById(R.id.type_spinner);
                         EditText ed_value = view1.findViewById(R.id.etQuantity);
 
-                            for (ItemList entry : itemList) {
-                                if(entry.getName().equalsIgnoreCase(spinner.getSelectedItem().toString())) {
-//                                    if(!(entry.getName().equalsIgnoreCase("SELECT ITEMS")&&(ed_value.getText().toString().equalsIgnoreCase("")))){
-//                                        Toast.makeText(getActivity(), "Select Quantity", Toast.LENGTH_SHORT).show();
-//                                    }else {
-                                        vehicletype.add(entry.getId()+ ":" + ed_value.getText().toString());
-                                        items_list.add(entry.getName()+ ":" + ed_value.getText().toString());
-                                   // }
-                                }
+                        hasAccessories = true;
+                        for (ItemList entry : itemList) {
+                            if (entry.getName().equalsIgnoreCase(spinner.getSelectedItem().toString())) {
+                                vehicletype.add(entry.getId() + ":" + ed_value.getText().toString());
+                                items_list.add(entry.getName() + ":" + ed_value.getText().toString());
                             }
-                            SparseBooleanArray checked = lv.getCheckedItemPositions();
-                            int abc = lv.getCheckedItemCount();
-                            count=0;
-                            others = "";
-                            other_key="";
-                            boolean containsBoolean = false;
-                            for (int j = 0; j < checked.size(); j++) {
-                                int key = checked.keyAt(j);
-                                if(checked.valueAt(j)==true){
-                                    count++;
-                                    others = others + (list_change_values.get(key).getId()) + ":";
-                                    other_key = other_key + (list_change_values.get(key).getPcb_sr_no()) + "\n";
-                                }else {
-
-                                }
-                            }
-                            submitData();
+                        }
                     }
+                    SparseBooleanArray checked = lv.getCheckedItemPositions();
+                    int abc = lv.getCheckedItemCount();
+                    count = 0;
+                    others = "";
+                    other_key = "";
+                    boolean containsBoolean = false;
+                    if (checked != null) {
+                        for (int j = 0; j < checked.size(); j++) {
+                            int key = checked.keyAt(j);
+                            if (checked.valueAt(j) == true) {
+                                count++;
+                                others = others + (list_change_values.get(key).getId()) + ":";
+                                other_key = other_key + (list_change_values.get(key).getPcb_sr_no()) + "\n";
+                            } else {
+
+                            }
+                        }
+                    }
+                    if (others.endsWith(":")) {
+                        others = others.substring(0, others.length() - 1);
+                    }
+
+                    // Allow submission if either devices or accessories are selected
+                    if (count > 0 || hasAccessories) {
+                        submitData();
+                    } else {
+                        Toast.makeText(getActivity(), "Please select at least one device or accessory", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
@@ -322,7 +336,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         try {
             lv.smoothScrollToPosition(0);
             adapter.getFilter().filter(search.getText().toString());
-            if(adapter.getCount()==0){
+            if (adapter.getCount() == 0) {
                 String errorString = "No match found";
                 Toast.makeText(getActivity(), errorString, Toast.LENGTH_SHORT).show();
                 return;
@@ -336,6 +350,7 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
     public void afterTextChanged(Editable s) {
 
     }
+
     private void submitData() {
 
         confirmationDialog();
@@ -352,13 +367,13 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         items_tags = confirmDialog.findViewById(R.id.items_tags);
         TextView preview_values = confirmDialog.findViewById(R.id.preview_values);
 
-        String errorList=other_key.toString();
-        errorList=errorList.replaceAll(",", "\n");
+        String errorList = other_key.toString();
+        errorList = errorList.replaceAll(",", "\n");
         preview_values.setText((errorList));
 
         preview_tags.setText("Total Device Count : " + count);
 
-        items_tags.setText("Total Items Count : "+ items_list.size());
+        items_tags.setText("Total Items Count : " + items_list.size());
         items_values.setText(items_list.toString());
         response_comment.setText(remarks);
         final_submit.setOnClickListener(view -> finalSubmitData());
@@ -366,10 +381,10 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         final_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               items_list.clear();
-               vehicletype.clear();
-               count=0;
-               confirmDialog.hide();
+                items_list.clear();
+                vehicletype.clear();
+                count = 0;
+                confirmDialog.hide();
             }
         });
 
@@ -391,12 +406,12 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
         } catch (Exception e) {
             e.printStackTrace();
         }
-        receiveDeviceController.return_material(tech_id,others,vehicletype.toString(),transit_id,courier_id,transit_through,remarks,other_tech_id,this);
+        receiveDeviceController.return_material(tech_id, others, vehicletype.toString(), transit_id, courier_id, transit_through, remarks, other_tech_id, this);
     }
 
     @Override
     public void receiveDeviceResponse(MainResponse response) {
-        if(response.getType()==1) {
+        if (response.getType() == 1) {
             pDialog.dismiss();
             try {
                 transitList = response.getTransit_list();
@@ -429,13 +444,43 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
-            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+        } else {
+            clearAllFields();
+            Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void clearAllFields() {
+        details.setText("");
+        et_remarks.setText("");
+        etQuantity.setText("");
+
+        // Clear dynamic fields
+        parentLinearLayout.removeViews(1, parentLinearLayout.getChildCount() - 1);
+        parentLinearLayout.addView(addMaterial, parentLinearLayout.getChildCount());
+
+        // Reset spinners in remaining fields
+        for (int i = 0; i < parentLinearLayout.getChildCount() - 1; i++) {
+            View view1 = parentLinearLayout.getChildAt(i);
+            Spinner spinner = view1.findViewById(R.id.type_spinner);
+            spinner.setSelection(0);
+        }
+
+        // Clear lists
+        items_list.clear();
+        vehicletype.clear();
+        count = 0;
+
+        // Reset transit spinner
+        transit_spinner.setSelection(0);
+        courier_spinner.setSelection(0);
+        transit_id = "";
+        courier_id = "";
+    }
+
     @Override
     public void receiveDispatchMaterial(MainResponse response) {
-        if(response.getType()==1) {
+        if (response.getType() == 1) {
             pDialog.dismiss();
             try {
                 itemList = response.getItems_list();
@@ -458,61 +503,61 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
-            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void returnDeviceresponse(MainResponse response) {
-        if(response.getType()==1){
+        if (response.getType() == 1) {
             pDialog.dismiss();
-        try {
-            list_change_values = response.getDevice_list();
             try {
+                list_change_values = response.getDevice_list();
                 try {
-                    value_name.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (list_change_values.size() > 0) {
-                    for (int i = 0; i < list_change_values.size(); i++) {
-                        int val1 = 1;
-                        String k = Integer.toString(i + val1);
-                        value_name.add(k +". "+ list_change_values.get(i).getPcb_sr_no());
+                    try {
+                        value_name.clear();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    if (list_change_values.size() > 5) {
-                        lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));
+                    if (list_change_values.size() > 0) {
+                        for (int i = 0; i < list_change_values.size(); i++) {
+                            int val1 = 1;
+                            String k = Integer.toString(i + val1);
+                            value_name.add(k + ". " + list_change_values.get(i).getPcb_sr_no());
+                        }
+                        if (list_change_values.size() > 5) {
+                            lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));
+                        } else {
+                            lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size()));
+                        }
+                        adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_list_item, value_name);
+                        lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+                        lv.setAdapter(adapter);
                     } else {
-                        lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size()));
                     }
-                    adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_list_item, value_name);
-                    lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-                    lv.setAdapter(adapter);
-                } else {
+                } catch (NullPointerException npe) {
+                    npe.printStackTrace();
                 }
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }else {
-            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void dispatchFromTechResponse(MainResponse response) {
-        if(response.getType()==1) {
+        if (response.getType() == 1) {
             pDialog.dismiss();
             tickerView.setText(response.getTotal_received_count());
-            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
             details.setText("");
             et_remarks.setText("");
             confirmDialog.hide();
             etQuantity.setText("");
-            parentLinearLayout.removeViews(1, parentLinearLayout.getChildCount()-1);
+            parentLinearLayout.removeViews(1, parentLinearLayout.getChildCount() - 1);
             parentLinearLayout.addView(addMaterial, parentLinearLayout.getChildCount());
             for (int i = 0; i < parentLinearLayout.getChildCount() - 1; i++) {
                 View view1 = parentLinearLayout.getChildAt(i);
@@ -522,18 +567,18 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
             }
             items_list.clear();
             vehicletype.clear();
-            count=0;
+            count = 0;
             getDeviceList();
             getItemsList();
             getTransitList();
-        }else{
+        } else {
             confirmDialog.hide();
             pDialog.dismiss();
-            Toast.makeText(getActivity(), ""+response.getMsg(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void add_accessory_dialog(String type_name){
+    public void add_accessory_dialog(String type_name) {
 
         myDialog.setContentView(R.layout.add_accessory_dialog);
         txtclose = myDialog.findViewById(R.id.error);

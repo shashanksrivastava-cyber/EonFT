@@ -72,7 +72,7 @@ import retrofit2.Response;
 
 public class AdditionalMaterialFragment extends Fragment implements ReceiveDeviceListener, ClientListener {
     View v,rowView;
-    Spinner new_main_clients,device_type,accessory_spinner;
+    Spinner new_main_clients,device_type,accessory_spinner,vts_type;
     ArrayAdapter<String> adapter;
     private ProgressDialog pDialog;
     NonScrollListView lv;
@@ -98,7 +98,7 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
     ArrayList<String> clientDeviceType = new ArrayList<>();
     ArrayList<String> clientDeviceDetails = new ArrayList<>();
     ArrayList<String> items_list = new ArrayList<>();
-    String searchingText;
+    String searchingText,vts_other_type;
     Dialog myDialog;
     EditText etMasterPass;
     ImageView txtclose;
@@ -142,7 +142,7 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ApiHolder get_list = ServiceConnection.getClient(version).create(ApiHolder.class);
+        ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<MainResponse> call = get_list.getDeviceTypes();
         call.enqueue(new Callback<MainResponse>() {
             @Override
@@ -189,6 +189,7 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
         receiveDeviceController = new ReceiveDeviceController();
         new_main_clients= v.findViewById(R.id.new_main_clients);
         device_type= v.findViewById(R.id.device_type);
+        vts_type= v.findViewById(R.id.vts_type);
         accessory_spinner= v.findViewById(R.id.accessory_spinner);
         parentLinearLayout = v.findViewById(R.id.parent_linear_layout);
         accessory_linear_layout = v.findViewById(R.id.accessory_linear_layout);
@@ -252,6 +253,25 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
             }
         });
 
+        vts_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getActivity(), ""+position, Toast.LENGTH_SHORT).show();
+                if(position==1){
+                    vts_other_type = "SD";
+                }else if(position==2) {
+                    vts_other_type = "TM";
+                }else {
+                    vts_other_type="";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -274,6 +294,7 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
                 parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
                 new_main_clients = rowView.findViewById(R.id.new_main_clients);
                 device_type = rowView.findViewById(R.id.device_type);
+                vts_type = rowView.findViewById(R.id.vts_type);
                 delete_button = rowView.findViewById(R.id.delete_button);
                 etQuantity = rowView.findViewById(R.id.etQuantity);
 
@@ -315,6 +336,24 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+                vts_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        //Toast.makeText(getActivity(), ""+position, Toast.LENGTH_SHORT).show();
+                        if(position==1){
+                            vts_other_type = "SD";
+                        }else if(position==2) {
+                            vts_other_type = "TM";
+                        }else {
+                            vts_other_type="";
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
                     }
                 });
 
@@ -386,14 +425,22 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
 
                         Spinner clientSpinner = view2.findViewById(R.id.new_main_clients);
                         Spinner device_spinner = view2.findViewById(R.id.device_type);
+                        Spinner other_device_type = view2.findViewById(R.id.vts_type);
                         EditText etQuantity = view2.findViewById(R.id.etQuantity);
 
+                        String abc;
+
                         for (MainClientList clientEntry : mainclientList) {
+                            if(other_device_type.getSelectedItem().toString().equalsIgnoreCase("Standard VTS")){
+                                abc = "SD";
+                            }else {
+                                abc = "TM";
+                            }
                             if(clientEntry.getClient_Name().equalsIgnoreCase(clientSpinner.getSelectedItem().toString())) {
                                     for(DeviceTypeOtherAis entrys : deviceTypeOtherAis_arr){
                                         if(entrys.getName().equalsIgnoreCase(device_spinner.getSelectedItem().toString())){
-                                                clientDeviceType.add(clientEntry.getClient_Id()+ ":" +entrys.getId()+ ":" +etQuantity.getText().toString());
-                                                clientDeviceDetails.add(clientEntry.getClient_Name()+ ":" +entrys.getName()+ ":" +etQuantity.getText().toString());
+                                                clientDeviceType.add(clientEntry.getClient_Id()+ ":" +entrys.getId()+ ":" +etQuantity.getText().toString()+ ":" +abc);
+                                                clientDeviceDetails.add(clientEntry.getClient_Name()+ ":" +entrys.getName()+ ":" +etQuantity.getText().toString()+ ":"+other_device_type.getSelectedItem().toString());
                                         }
                                 }
                             }
@@ -482,8 +529,6 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
             public void onResponse(Call<MainResponse> call, Response<MainResponse> response) {
                 MainResponse updateDataResponse = response.body();
                 Log.i("**respnse", " " + response.body());
-                Log.i("**respnse", " " + response.body().getType());
-
                 if (updateDataResponse.getType() == 1) {
                     Toast.makeText(getActivity(), ""+updateDataResponse.getMsg(), Toast.LENGTH_SHORT).show();
                     pDialog.hide();
@@ -515,6 +560,8 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
                     clientDeviceType.clear();
                     clientDeviceDetails.clear();
                     items_list.clear();
+                    etQuantity.setText("");
+                    acc_etQuantity.setText("");
                     addclients();
                     addDevice();
                     getItemList();

@@ -24,8 +24,12 @@ import com.google.android.play.core.review.ReviewManagerFactory;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -49,6 +53,7 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+
 public class DashBoardFragment extends Fragment {
 
     View v;
@@ -63,331 +68,165 @@ public class DashBoardFragment extends Fragment {
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     private String[] xData;
-
     ReviewManager reviewManager;
     ReviewInfo reviewInfo = null;
+    private CheckConnection checkConnection;
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
 
     ViewModelAddDashboard viewModelAddDashboard;
-    CheckConnection chk = new CheckConnection(getActivity());
+    boolean isDashboardLoaded = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.dashboard_new, container, false);
         binding = DashboardNewBinding.inflate(getLayoutInflater(), container, false);
 
-        sharedprefs = this.getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
+        sharedprefs = requireActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
         usrname = sharedprefs.getString("s_uuser", "");
         version = sharedprefs.getString("version", "");
         zone = sharedprefs.getString("zone", "");
+        checkConnection = new CheckConnection(requireContext());
 
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
 
         setDateAndTime();
 
-        getReviewInfo();
+        viewModelAddDashboard = new ViewModelProvider(this).get(ViewModelAddDashboard.class);
+        binding.setViewModelAddDashboard(viewModelAddDashboard);
 
-        //AskForRating(0);
-
-        binding.cvOneLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "2");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
-            }
-        });
-        binding.cvTwoLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "1");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
+        binding.swipeRefresh.setOnRefreshListener(() -> {
+            isDashboardLoaded = false;
+            if (checkConnection.isConnected()) {
+                getDashBoardDetail();
+                isDashboardLoaded = true;
+            } else {
+                checkConnection.showConnectionErrorDialog();
+                binding.swipeRefresh.setRefreshing(false);
             }
         });
 
-        binding.cvThreeLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "3");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
-            }
-        });
-
-        binding.cvFourLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-                intent.putExtra("device_value", "4");
-                intent.putExtra("tab", "1");
-                intent.putExtra("other", "2");
-                startActivity(intent);
-            }
-        });
-
-        binding.cvFiveLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "3");
-//                intent.putExtra("tab", "1");
-//                intent.putExtra("other", "2");
-//                startActivity(intent);
-            }
-        });
-
-        binding.cvSixLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "3");
-//                intent.putExtra("tab", "1");
-//                intent.putExtra("other", "2");
-//                startActivity(intent);
-            }
-        });
-
-        binding.cvSevenLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "7");
-//                intent.putExtra("tab", "1");
-//                intent.putExtra("other", "2");
-//                startActivity(intent);
-            }
-        });
-
-        binding.cvEightLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
-//                intent.putExtra("device_value", "3");
-//                intent.putExtra("tab", "1");
-//                intent.putExtra("other", "2");
-//                startActivity(intent);
-            }
-        });
-
-//        binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                if (chk.isConnected()) {
-//                    getDashBoardDetail();
-//                } else {
-//                    chk.showConnectionErrorDialog();
-//                }
-//            }
-//        });
+        setupClickListeners();
 
         return binding.getRoot();
     }
 
-    private void AskForRating(int _appUsedCount) {
+    private void setupClickListeners() {
+        View.OnClickListener launchIntent = view -> {
+            Intent intent = new Intent(getActivity(), FaultyDevicesActivity.class);
+            int id = view.getId();
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setTitle("Please Rate Us");
-        alert.setIcon(R.drawable.app_icon);
-        alert.setMessage("Thanks for using the application. If you like YOUR APP NAME please rate us! Your feedback is important for us!");
-        alert.setPositiveButton("Rate it", new Dialog.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String url = "https://play.google.com/store/apps/details?id=YOUR PACKAGE NAME";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
+            if (id == binding.cvOneLogin.getId()) {
+                intent.putExtra("device_value", "2");
+            } else if (id == binding.cvTwoLogin.getId()) {
+                intent.putExtra("device_value", "1");
+            } else if (id == binding.cvThreeLogin.getId()) {
+                intent.putExtra("device_value", "3");
+            } else if (id == binding.cvFourLogin.getId()) {
+                intent.putExtra("device_value", "4");
             }
-        });
-        alert.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        alert.show();
+            intent.putExtra("tab", "1");
+            intent.putExtra("other", "2");
+            startActivity(intent);
+        };
+
+        binding.cvOneLogin.setOnClickListener(launchIntent);
+        binding.cvTwoLogin.setOnClickListener(launchIntent);
+        binding.cvThreeLogin.setOnClickListener(launchIntent);
+        binding.cvFourLogin.setOnClickListener(launchIntent);
     }
 
-    private void getReviewInfo() {
-        reviewManager = ReviewManagerFactory.create(getActivity());
-        //reviewManager = new FakeReviewManager(getActivity());
-        Task<ReviewInfo> manager = reviewManager.requestReviewFlow();
-        manager.addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                reviewInfo = task.getResult();
-                startReviewFlow();
-            } else {
-                //Toast.makeText(getActivity(), "In App ReviewFlow failed to start", Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isDashboardLoaded && checkConnection.isConnected()) {
+            getDashBoardDetail();
+            isDashboardLoaded = true;
+        }
     }
 
-    private void startReviewFlow() {
-
-        if (reviewInfo != null) {
-            Task<Void> flow = reviewManager.launchReviewFlow(getActivity(), reviewInfo);
-            flow.addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(Task<Void> task) {
-                    // Toast.makeText(getActivity(), "In App Rating complete", Toast.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            // Toast.makeText(getActivity(), "In App Rating failed", Toast.LENGTH_LONG).show();
+    private void hideProgress() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 
     void getDashBoardDetail() {
         progressDialog.show();
+        try {
+            viewModelAddDashboard.getAddCountsRepository(zone).observe(getViewLifecycleOwner(), movieResponse -> {
+                if (movieResponse == null) {
+                    Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                    hideProgress();
+                    return;
+                }
+                try {
+                    if (movieResponse.getType() == 1) {
+                        dashboardList = movieResponse.getTechDashboardDetails();
+                        if (dashboardList != null && !dashboardList.isEmpty()) {
+                            TechDashboardDetail dashboardDetail = dashboardList.get(0);
+                            binding.setDashboardDetail(dashboardDetail);
 
-        try{
-            viewModelAddDashboard = ViewModelProviders.of(this).get(ViewModelAddDashboard.class);
-            viewModelAddDashboard.getAddCountsRepository(zone).observe(this, movieResponse -> {
-                dashboardList = movieResponse.getTechDashboardDetails();
+                            String color1 = dashboardDetail.getColor().split(";")[0];
+                            binding.addTime.setTextColor(Color.parseColor(color1));
 
-                if (movieResponse.getType() == 1) {
-                    for (int i = 0; i < dashboardList.size(); i++) {
-                        binding.addTime.setText("" + dashboardList.get(i).getCur_add());
-                        binding.addValue.setText("" + dashboardList.get(i).getAdd_21());
-                        String color1 = dashboardList.get(i).getColor();
-                        String[] separated = color1.split(";");
-                        String color = separated[0];
-                        int myColor = Color.parseColor(color);
-                        binding.addTime.setTextColor(myColor);
+                            String color2 = dashboardDetail.getColor21().split(";")[0];
+                            binding.addValue.setTextColor(Color.parseColor(color2));
 
-                        String color2 = dashboardList.get(i).getColor21();
-                        String[] separated1 = color2.split(";");
-                        String color3 = separated1[0];
-                        int color21 = Color.parseColor(color3);
-                        binding.addValue.setTextColor(color21);
+                            String drsColor = dashboardDetail.getDrs_color().split(";")[0];
+                            binding.drsAdd.setTextColor(Color.parseColor(drsColor));
 
-                        binding.drsAdd.setText("" + dashboardList.get(i).getDrs_add());
-                        String drs_color = dashboardList.get(i).getDrs_color();
-                        String[] drs_separated = drs_color.split(";");
-                        String colors = drs_separated[0];
-                        int drs_colors = Color.parseColor(colors);
-                        binding.drsAdd.setTextColor(drs_colors);
+                            String drsColor21 = dashboardDetail.getDrs_color21().split(";")[0];
+                            binding.addTime.setTextColor(Color.parseColor(drsColor21));
 
-                        binding.drsAdd21.setText("" + dashboardList.get(i).getDrs_add_21());
-                        String drs21_ = dashboardList.get(i).getDrs_color21();
-                        String[] separate = drs21_.split(";");
-                        String drs_21 = separate[0];
-                        int drs21_color = Color.parseColor(drs_21);
-                        binding.addTime.setTextColor(drs21_color);
-
-                        binding.totalVts.setText("" + dashboardList.get(0).getTot_dev());
-                        binding.totalDrs.setText("" + dashboardList.get(0).getTot_drs());
-                        binding.totSos.setText("" + dashboardList.get(0).getTot_sos());
-                        binding.totLid.setText("" + dashboardList.get(0).getTot_lid());
-                        binding.totFuel.setText("" + dashboardList.get(0).getTot_fuel());
-                        binding.totTemp.setText("" + dashboardList.get(0).getTot_temp());
-
-                        binding.faultyVts.setText("" + dashboardList.get(0).getFaulty_dev());
-                        binding.vtsSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_dev()));
-
-                        binding.faultyDrs.setText("" + dashboardList.get(0).getFaulty_drs());
-                        binding.drsSpv.setPercent(dashboardList.get(0).getFaulty_drs());
-
-                        binding.faultyUm.setText("" + dashboardList.get(0).getUmain());
-                        binding.umSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain()));
-
-                        binding.umWorking.setText("" + dashboardList.get(0).getUmain_work());
-                        binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardList.get(0).getUmain_work()));
-
-                        binding.sosFaulty.setText("" + dashboardList.get(0).getFaulty_sos());
-                        binding.sosSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_sos()));
-
-                        binding.lidFaulty.setText("" + dashboardList.get(0).getFaulty_lid());
-                        binding.lidSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_lid()));
-
-                        binding.fuelFaulty.setText("" + dashboardList.get(0).getFaulty_fuel());
-                        binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardList.get(0).getFaulty_fuel()));
-
-                        binding.tempFaulty.setText("" + dashboardList.get(0).getFaulty_temp());
-                        binding.tempSpv.setPercent(Float.parseFloat(dashboardList.get(0).getFaulty_temp()));
-
-                        progressDialog.hide();
-                        binding.swipeRefresh.setRefreshing(false);
-
+                            binding.vtsSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_dev()));
+                            binding.drsSpv.setPercent(dashboardDetail.getFaulty_drs());
+                            binding.umSpv.setPercent(Float.parseFloat(dashboardDetail.getUmain()));
+                            binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardDetail.getUmain_work()));
+                            binding.sosSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_sos()));
+                            binding.lidSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_lid()));
+                            binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardDetail.getFaulty_fuel()));
+                            binding.tempSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_temp()));
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Try Again - Connection timeout", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(getActivity(), "Try Again-Connection timeout", Toast.LENGTH_LONG).show();
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                } finally {
+                    hideProgress();
+                    binding.swipeRefresh.setRefreshing(false);
                 }
             });
-        }catch(Exception e){
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            hideProgress();
+            binding.swipeRefresh.setRefreshing(false);
         }
     }
 
     void setDateAndTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM");
         year = calen.get(Calendar.YEAR);
         month = calen.get(Calendar.MONTH);
         day = calen.get(Calendar.DAY_OF_MONTH);
-        month = month + 1;
         hour = calen.get(Calendar.HOUR_OF_DAY);
         minutes = calen.get(Calendar.MINUTE);
-        if (month + 1 < 10) {
-            current_date = day + "-0" + month + "-" + year;
-        } else {
-            current_date = day + "-" + month + "-" + year;
-        }
-        if (month == 1) {
-            months = "Jan";
-        } else if (month == 2) {
-            months = "Feb";
-        } else if (month == 3) {
-            months = "Mar";
-        } else if (month == 4) {
-            months = "Apr";
-        } else if (month == 5) {
-            months = "May";
-        } else if (month == 6) {
-            months = "Jun";
-        } else if (month == 7) {
-            months = "Jul";
-        } else if (month == 8) {
-            months = "Aug";
-        } else if (month == 9) {
-            months = "Sep";
-        } else if (month == 10) {
-            months = "Oct";
-        } else if (month == 11) {
-            months = "Nov";
-        } else if (month == 12) {
-            months = "Dec";
-        }
+        month += 1;
+
+        months = new SimpleDateFormat("MMM", Locale.ENGLISH).format(calen.getTime());
         current_date = months + " " + day + "," + year;
         binding.curntDate.setText(current_date);
-        SimpleDateFormat dateFormatt = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+
+        SimpleDateFormat dateFormatt = new SimpleDateFormat("HH:mm dd-MM-yyyy", Locale.ENGLISH);
         s_time = dateFormatt.format(calen.getTime());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        progressDialog.hide();
-        Runtime.getRuntime().gc();
+        hideProgress();
     }
-
-    @Override
-    public void onResume() {
-//        if (chk.isConnected()) {
-//            getDashBoardDetail();
-//        } else {
-//            chk.showConnectionErrorDialog();
-//        }
-        getDashBoardDetail();
-        super.onResume();
-    }
-
 }
+

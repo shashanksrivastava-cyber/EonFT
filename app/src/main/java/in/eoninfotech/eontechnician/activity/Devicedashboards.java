@@ -2,6 +2,7 @@ package in.eoninfotech.eontechnician.activity;
 
 import static android.app.ProgressDialog.show;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
 import static com.google.android.material.internal.ViewUtils.hideKeyboard;
 
 import android.app.AlertDialog;
@@ -32,9 +33,12 @@ import java.util.ArrayList;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.MainActivity;
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.responses.DeviceCount;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.databinding.DeviceDashboardActivityBinding;
+import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
+import in.eoninfotech.eontechnician.viewModel.ViewModelAddDashboard;
 import in.eoninfotech.eontechnician.viewModel.ViewModelDeviceDashboard;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -46,7 +50,7 @@ public class Devicedashboards extends AppCompatActivity {
 
     DeviceDashboardActivityBinding binding;
 
-    String usrname,zone,version;
+    String usrname, zone, version;
 
     private AlertDialog progressDialog;
 
@@ -58,11 +62,12 @@ public class Devicedashboards extends AppCompatActivity {
 
     ArrayList<PieEntry> yValues = new ArrayList<>();
 
-    String f_faulty="0",f_working="0",f_total = "";
+    String f_faulty = "0", f_working = "0", f_total = "";
 
     public static final int REQUEST_CODE = 1;
 
     ViewModelDeviceDashboard viewModelDeviceDashboard;
+    private CheckConnection checkConnection;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -87,14 +92,22 @@ public class Devicedashboards extends AppCompatActivity {
         zone = sharedprefs.getString("zone", "");
 
         progressDialog = new SpotsDialog(Devicedashboards.this, R.style.CustomIncentive);
+        checkConnection = new CheckConnection(this);
 
-        getDeviceCountDetails();
+        viewModelDeviceDashboard = new ViewModelProvider(this).get(ViewModelDeviceDashboard.class);
+        binding.setViewModelDeviceDashboard(viewModelDeviceDashboard);
+
+        if (checkConnection.isConnected()) {
+            getDeviceCountDetails();
+        } else {
+            checkConnection.showConnectionErrorDialog();
+        }
 
         binding.linearTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
-                intent.putExtra("Status","T");
+                intent.putExtra("Status", "T");
                 startActivity(intent);
             }
         });
@@ -103,7 +116,7 @@ public class Devicedashboards extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
-                intent.putExtra("Status","W");
+                intent.putExtra("Status", "W");
                 startActivity(intent);
             }
         });
@@ -112,7 +125,7 @@ public class Devicedashboards extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
-                intent.putExtra("Status","F");
+                intent.putExtra("Status", "F");
                 startActivity(intent);
             }
         });
@@ -121,7 +134,7 @@ public class Devicedashboards extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
-                intent.putExtra("Status","ITT");
+                intent.putExtra("Status", "ITT");
                 startActivity(intent);
             }
         });
@@ -130,7 +143,7 @@ public class Devicedashboards extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Devicedashboards.this, DevicedashboardDetail.class);
-                intent.putExtra("Status","ITS");
+                intent.putExtra("Status", "ITS");
                 startActivity(intent);
             }
         });
@@ -148,10 +161,9 @@ public class Devicedashboards extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Devicedashboards.this, MainActivity.class);
-                intent.putExtra("intent","toEon");
+                intent.putExtra("intent", "toEon");
                 startActivity(intent);
                 finish();
-
             }
         });
 
@@ -159,7 +171,7 @@ public class Devicedashboards extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Devicedashboards.this, MainActivity.class);
-                intent.putExtra("intent","toFT");
+                intent.putExtra("intent", "toFT");
                 startActivity(intent);
                 finish();
             }
@@ -167,46 +179,32 @@ public class Devicedashboards extends AppCompatActivity {
 
     }
 
-    public void setPieChart(String f_faulty,String f_working) {
-
-        binding.piechart.setUsePercentValues(true);
-        binding.piechart.getDescription().setEnabled(true);
-        binding.piechart.setExtraOffsets(5,10,5,5);
-        binding.piechart.setDragDecelerationFrictionCoef(0.9f);
-        binding.piechart.setTransparentCircleRadius(61f);
-        binding.piechart.setHoleColor(Color.WHITE);
-
-        yValues.add(new PieEntry(Float.parseFloat(f_faulty), ""));
-        yValues.add(new PieEntry(Float.parseFloat(f_working), ""));
-
-        binding.piechart.setCenterText("Total Device - "+f_total);
-
-        PieDataSet dataSet = new PieDataSet(yValues, "");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        PieData pieData = new PieData((dataSet));
-        pieData.setValueTextSize(10f);
-        pieData.setValueTextColor(Color.YELLOW);
-        binding.piechart.getDescription().setEnabled(false);
-        binding.piechart.setData(pieData);
-
-        binding.piechart.invalidate();
-
-        //pieChart.animateY(1000, Easing.EasingFuncti);
-        //PieChart Ends Here
-    }
-
     private void getDeviceCountDetails() {
-
-        viewModelDeviceDashboard= ViewModelProviders.of(this).get(ViewModelDeviceDashboard.class);
+        progressDialog.show();
+        viewModelDeviceDashboard = ViewModelProviders.of(this).get(ViewModelDeviceDashboard.class);
         viewModelDeviceDashboard.getDashboardCountRepository(usrname).observe(this, movieResponse -> {
-            countDetails = movieResponse.getDevice_count();
-            binding.totalDevice.setText("Total Devices - "+countDetails.get(0).total);
-            binding.workingDevices.setText(countDetails.get(0).working);
-            binding.faultyDevices.setText(countDetails.get(0).faulty);
-            binding.inTransitStore.setText("Outgoing Material - "+countDetails.get(0).in_transit_store);
-            binding.inTransitTech.setText("Incoming Material - "+countDetails.get(0).in_transit_tech);
+
+            if (movieResponse == null) {
+                Toast.makeText(this, "Null response from server", Toast.LENGTH_SHORT).show();
+                progressDialog.hide();
+                return;
+            }
+            if (movieResponse.getType() == 1) {
+                countDetails = movieResponse.getDevice_count();
+                if (countDetails != null &&!countDetails.isEmpty()) {
+                    DeviceCount countList = countDetails.get(0);
+
+                    // Update UI through data binding
+                    binding.setDeviceCount(countList);
+
+                    binding.totalDevice.setText("Total Devices - " + countDetails.get(0).total);
+                    binding.totalDrs.setText("Total DRS - " + countDetails.get(0).total_drs);
+                    binding.inTransitStore.setText("Outgoing Material - " + countDetails.get(0).in_transit_store);
+                    binding.inTransitTech.setText("Incoming Material - " + countDetails.get(0).in_transit_tech);
+
+                }
+                progressDialog.hide();
+            }
         });
     }
 
@@ -214,5 +212,11 @@ public class Devicedashboards extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null; // Prevent memory leaks
     }
 }

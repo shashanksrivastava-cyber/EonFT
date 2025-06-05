@@ -106,6 +106,8 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             binding!!.actualQty.setVisibility(View.VISIBLE)
         }
 
+        getData();
+
 //        lifecycleScope.launch {
 //            // do your Coroutine Stuff here, i.e. call a suspend fun:
 //            coroutineFunction()

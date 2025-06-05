@@ -49,7 +49,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:id="@+id/linear_layo"
+                        android:id="@+id/linear_lay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -130,7 +130,7 @@
                 android:layout_marginRight="20dp"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/addVehicl"
+                android:id="@+id/addVehic"
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 android:layout_marginStart="15dp"
@@ -149,14 +149,14 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/materialLL"
+                    android:id="@+id/materialLLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:visibility="visible">
 
                     <RelativeLayout
-                        android:id="@+id/relays"
+                        android:id="@+id/ree"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:background="@drawable/et_frame"
@@ -209,16 +209,6 @@
                         android:background="@drawable/ic_minus"/>
 
                 </LinearLayout>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@color/eonBlue"
-                    android:text="Add More Accessories"
-                    android:visibility="gone"
-                    android:layout_marginTop="5dp"
-                    app:drawableLeftCompat="@drawable/ic_add_black_24dp" />
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.MaterialComponents.Button.Icon"

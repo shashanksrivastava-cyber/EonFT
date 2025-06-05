@@ -62,7 +62,6 @@ import retrofit2.http.Part;
 /**************************************************************************/
 public interface ApiHolder {
 
-
     @FormUrlEncoded
     @POST("bill-detail.php")
     Call<UpdateDataResponse> view_bill(@Field("order_no") String order_no);
@@ -255,8 +254,12 @@ public interface ApiHolder {
     @FormUrlEncoded
     @POST("clients-list.php")
     Call<ClientResponse> reqeuestClientList(
-            @Field("c_id") String c_id
-    );
+            @Field("c_id") String c_id);
+
+//    @FormUrlEncoded
+//    @POST("clients-list-test.php")
+//    Call<ClientResponse> reqeuestClientList(
+//            @Field("c_id") String c_id);
 
     @GET("stock-clients.php")
     Call<ClientResponse> reqeuestStockClientList();
@@ -708,6 +711,18 @@ public interface ApiHolder {
             @Field("status") String status,
             @Field("type") String type);
 
+
+    @FormUrlEncoded
+    @POST("get_live_status_report_eon.php")
+    Call<MainResponse> get_live_status_report(
+            @Field("server") String server,
+            @Field("dbname") String dbname,
+            @Field("dist_id") String dist_id,
+            @Field("depo_id") String depo_id,
+            @Field("status") String status,
+            @Field("type") String type,
+            @Field("veh_serial_no") String veh_serial_no);
+
     @FormUrlEncoded
     @POST("get_return_material_status.php")
     Call<MainResponse> get_return_material_status(
@@ -772,5 +787,18 @@ public interface ApiHolder {
     Call<MainResponse> get_tech_requirement_detailed_data(
             @Field("id_no") String id_no,
             @Field("username") String username);
+
+    @FormUrlEncoded
+    @POST("kd_cust_tech_device_list.php")
+    Call<MainResponse> get_cust_tech_device(
+            @Field("tech_id") String tech_id,
+            @Field("customer") String customer);
+
+    @FormUrlEncoded
+    @POST("get_live_drum_report.php")
+    Call<MainResponse> get_live_drum_report(
+            @Field("veh_no") String veh_no,
+            @Field("server") String server,
+            @Field("dbname") String dbname);
 
 }

@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModelAddDashboard"
+            type="in.eoninfotech.eontechnician.viewModel.ViewModelAddDashboard" />
+
+        <variable
+            name="dashboardDetail"
+            type="in.eoninfotech.eontechnician.responses.TechDashboardDetail" />
+
+        <import type="android.view.View" />
+    </data>
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -80,12 +95,12 @@
                             android:id="@+id/addTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text=""
+                            android:gravity="center"
+                            android:text="@{String.valueOf(dashboardDetail.cur_add)}"
                             android:textColor="@color/black"
                             android:textSize="20sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -137,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.add_21)}"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold"/>
@@ -204,7 +219,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.drs_add != null ? dashboardDetail.drs_add : 0)}"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold"/>
@@ -259,7 +274,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginTop="5dp"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.drs_add_21 != null ? dashboardDetail.drs_add_21 : 0)}"
                             android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold"/>
@@ -316,11 +331,11 @@
                                     android:textColor="@color/eonWhite"/>
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/total_vts"
+                                    android:id="@+id/totalVts"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text=""
+                                    android:text="@{String.valueOf(dashboardDetail.tot_dev)}"
                                     android:textColor="@color/eonWhite"
                                     android:textSize="20sp"
                                     android:textStyle="bold"/>
@@ -348,7 +363,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text=""
+                                    android:text="@{String.valueOf(dashboardDetail.tot_drs != null ? dashboardDetail.tot_drs : 0)}"
                                     android:textColor="@color/eonWhite"
                                     android:textSize="20sp"
                                     android:textStyle="bold" />
@@ -523,7 +538,7 @@
                             android:padding="5dp"
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.faulty_dev != null ? dashboardDetail.faulty_dev : 0)}"
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -585,7 +600,7 @@
                             android:gravity="center"
                             android:layout_gravity="center_vertical"
                             android:padding="5dp"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.faulty_drs)}"
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -647,7 +662,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.Umain != null ? dashboardDetail.Umain : 0)}"
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -705,7 +720,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.Umain_work != null ? dashboardDetail.Umain_work : 0)}"
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -885,7 +900,7 @@
                             android:gravity="center"
                             android:padding="5dp"
                             android:layout_gravity="center_vertical"
-                            android:text=""
+                            android:text="@{String.valueOf(dashboardDetail.Faulty_fuel != null ? dashboardDetail.Faulty_fuel : 0)}"
                             android:textColor="@color/eonWhite"
                             android:textSize="25sp"
                             android:textStyle="bold"/>
@@ -984,3 +999,5 @@
         android:focusable="true" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>

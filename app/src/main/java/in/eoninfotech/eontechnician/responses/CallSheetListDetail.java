@@ -18,6 +18,9 @@ public class CallSheetListDetail {
     @SerializedName("id")
     private String id;
 
+    @SerializedName("req_no")
+    private String req_no;
+
     public String getDate() {
         return date;
     }
@@ -48,5 +51,13 @@ public class CallSheetListDetail {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getReq_no() {
+        return req_no;
+    }
+
+    public void setReq_no(String req_no) {
+        this.req_no = req_no;
     }
 }

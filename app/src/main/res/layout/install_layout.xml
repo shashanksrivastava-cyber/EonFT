@@ -195,7 +195,7 @@
                 android:text="If serial no. not in list click here to add serial no. manually."
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/oldDevicesr_no"
@@ -235,9 +235,9 @@
                         android:id="@+id/til_vts_sr_no"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="5"
                         android:hint="Sr. No."
-                        android:visibility="gone"
-                        android:layout_weight="5">
+                        android:visibility="gone">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/vts_sr_no"
@@ -254,15 +254,15 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:layout_height="20dp"
-                        android:layout_width="20dp"
-                        android:layout_gravity="top|left"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginStart="3dp"
-                        android:layout_marginEnd="10dp"
                         android:id="@+id/delete_button_e_series"
-                        android:visibility="visible"
-                        android:background="@drawable/ic_minus"/>
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="top|left"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/ic_minus"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -279,8 +279,8 @@
                     android:id="@+id/tilsrNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_weight="5">
+                    android:layout_weight="5"
+                    android:visibility="gone">
 
                     <EditText
                         android:id="@+id/vltd_sr_no"
@@ -298,15 +298,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:layout_height="20dp"
-                    android:layout_width="20dp"
-                    android:layout_gravity="top|left"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginEnd="10dp"
                     android:id="@+id/delete_button"
-                    android:visibility="visible"
-                    android:background="@drawable/ic_minus"/>
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="top|left"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_minus"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -314,9 +314,9 @@
                 android:id="@+id/con_tilsrNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:visibility="visible"
-                app:passwordToggleEnabled="true"
-                android:layout_marginTop="5dp">
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/con_vltd_sr_no"
@@ -392,11 +392,11 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:digits="0123456789*,QWERTYUIOPASDFGHJKLZXCVBNM"
+                        android:inputType="textCapCharacters"
                         android:maxLength="20"
                         android:singleLine="true"
                         android:textAllCaps="true"
-                        android:textSize="12sp"
-                        android:inputType="textCapCharacters"/>
+                        android:textSize="12sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -417,7 +417,7 @@
                         android:maxLength="15"
                         android:singleLine="true"
                         android:textSize="12sp"
-                        android:visibility="visible"/>
+                        android:visibility="visible" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -523,15 +523,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="2">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
-                        android:layout_weight="2.5"
-                        android:padding="5dp"
+                        android:layout_weight="1"
                         android:text="Device"
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp" />
@@ -539,7 +538,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="3dp"
                         android:layout_weight="1.55"
                         android:background="@drawable/et_frame"
@@ -551,55 +550,46 @@
                             android:layout_height="35dp"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginStart="5dp"
+                            android:layout_marginLeft="5dp"
                             android:gravity="center"
                             android:spinnerMode="dropdown" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="25dp"
-                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
-                            android:layout_marginEnd="6dp"
+                            android:layout_marginRight="6dp"
                             android:background="@color/eonWhite"
                             android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
-
                     </RelativeLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <RadioGroup
+                        android:id="@+id/radiodeviceType"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-                        <RadioGroup
-                            android:id="@+id/radiodeviceType"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/voice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
+                            android:checked="true"
+                            android:text="Voice"
+                            android:textSize="14sp" />
 
-                            <com.google.android.material.radiobutton.MaterialRadioButton
-                                android:id="@+id/voice"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.1"
-                                android:checked="true"
-                                android:text="Voice"
-                                android:textSize="14sp" />
-
-                            <com.google.android.material.radiobutton.MaterialRadioButton
-                                android:id="@+id/nonVoice"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5"
-                                android:text="Non Voice"
-                                android:textSize="14sp" />
-                        </RadioGroup>
-                    </LinearLayout>
+                        <com.google.android.material.radiobutton.MaterialRadioButton
+                            android:id="@+id/nonVoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Non Voice"
+                            android:textSize="14sp" />
+                    </RadioGroup>
                 </LinearLayout>
 
                 <LinearLayout
@@ -877,8 +867,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="5dp"
-                            android:padding="5dp"
                             android:layout_weight="2.5"
+                            android:padding="5dp"
                             android:text="Fuel Guage"
                             android:textColor="@color/colorPrimary"
                             android:textSize="15sp" />

@@ -170,6 +170,12 @@ public class ActivityDetailFragment extends Fragment {
 
         viewModelActivityDetails= ViewModelProviders.of(this).get(ViewModelActivityDetails.class);
         viewModelActivityDetails.getActivityDetailRepository(s_date, user_id).observe(this, movieResponse -> {
+
+            if (movieResponse == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             activityDetail = movieResponse.getActivityList();
             if(movieResponse.getType()==1){
                 txtContentUnavailable.setVisibility(View.GONE);
