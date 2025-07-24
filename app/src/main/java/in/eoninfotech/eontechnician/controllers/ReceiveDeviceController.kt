@@ -3,8 +3,7 @@ package `in`.eoninfotech.eontechnician.controllers
 import android.graphics.Color
 import android.view.View
 import android.widget.TextView
-import com.androidadvance.topsnackbar.R
-import com.androidadvance.topsnackbar.TSnackbar
+import android.widget.Toast
 import `in`.eoninfotech.eontechnician.responses.MainResponse
 import `in`.eoninfotech.eontechnician.callbacks.ReceiveDeviceListener
 import `in`.eoninfotech.eontechnician.webservice.ApiHolder
@@ -37,16 +36,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -68,16 +67,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                            v!!,
-                            "Server Response Timeout, Try Again!",
-                            TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                            v!!,
+//                            "Server Response Timeout, Try Again!",
+//                            TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -93,16 +92,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -118,16 +117,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -143,16 +142,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -168,16 +167,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -200,16 +199,17 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+                    //Toast.makeText(this, "Server Response Timeout, Try Again!", Toast.LENGTH_SHORT).show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }
@@ -225,16 +225,16 @@ class ReceiveDeviceController : Controller() {
 
             override fun onFailure(call: Call<MainResponse?>, t: Throwable) {
                 try {
-                    val snackbar = TSnackbar.make(
-                        v!!,
-                        "Server Response Timeout, Try Again!",
-                        TSnackbar.LENGTH_LONG
-                    )
-                    val snackbarView = snackbar.view
-                    snackbarView.setBackgroundColor(Color.RED)
-                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
-                    textView.setTextColor(Color.WHITE)
-                    snackbar.show()
+//                    val snackbar = TSnackbar.make(
+//                        v!!,
+//                        "Server Response Timeout, Try Again!",
+//                        TSnackbar.LENGTH_LONG
+//                    )
+//                    val snackbarView = snackbar.view
+//                    snackbarView.setBackgroundColor(Color.RED)
+//                    val textView = snackbarView.findViewById<TextView>(R.id.snackbar_text)
+//                    textView.setTextColor(Color.WHITE)
+//                    snackbar.show()
                 } catch (e: Exception) {
                 }
             }

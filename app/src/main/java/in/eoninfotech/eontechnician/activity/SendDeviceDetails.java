@@ -68,14 +68,12 @@ public class SendDeviceDetails extends AppCompatActivity {
 
         initView();
         getContent();
-
     }
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
-
     private void initView(){
 
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -112,7 +110,9 @@ public class SendDeviceDetails extends AppCompatActivity {
                             if (list_change_values.size() > 0) {
                                 for (int i = 0; i < list_change_values.size(); i++) {
                                     Log.e("List Change Value",""+list_change_values.get(i));
-                                   value_name.add(list_change_values.get(i).getCust_name()+" "+list_change_values.get(i).getPcb_sr_no());
+                                    int val1 = 1;
+                                    String k = Integer.toString(i + val1);
+                                    value_name.add(k + ". " + list_change_values.get(i).getCust_name()+" "+list_change_values.get(i).getPcb_sr_no());
                                 }
                                 if (list_change_values.size() > 5) {
                                     binding.deviceDetailListReceive.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));
@@ -127,6 +127,13 @@ public class SendDeviceDetails extends AppCompatActivity {
                                 binding.recyclerView.setAdapter(othermaterialAdapter);
                                 binding.recyclerView.setVisibility(View.VISIBLE);
 
+                                if(response.body().getRemarks().equalsIgnoreCase("")){
+                                    binding.remarksReceive.setVisibility(View.GONE);
+                                }else{
+                                    binding.remarksReceive.setVisibility(View.VISIBLE);
+                                    binding.remarksReceive.setText(response.body().getRemarks());
+                                }
+
                             } else {
                             }
                         } catch (NullPointerException npe) {
@@ -140,7 +147,6 @@ public class SendDeviceDetails extends AppCompatActivity {
                     Toast.makeText(SendDeviceDetails.this, ""+response.body().getMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
                 t.printStackTrace();

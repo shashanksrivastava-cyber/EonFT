@@ -545,18 +545,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/vtsSpv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="67"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/vtsSpv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="67"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -607,18 +607,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/drsSpv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_gravity="end|center_vertical"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="13"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/drsSpv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="13"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -667,18 +667,18 @@
                             android:textSize="25sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/umSpv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="147"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/umSpv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="147"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -727,18 +727,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/um_workigSpv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="147"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/um_workigSpv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="147"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -787,18 +787,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/sos_Spv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="147"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/sos_Spv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="147"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -847,18 +847,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/lid_Spv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="147"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/lid_Spv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="147"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -907,18 +907,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/fuel_Spv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="147"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/fuel_Spv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="147"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -967,18 +967,18 @@
 
                     </LinearLayout>
 
-                    <com.timqi.sectorprogressview.ColorfulRingProgressView
-                        android:id="@+id/temp_Spv"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="10dp"
-                        app:bgColor="#e1e1e1"
-                        app:fgColorEnd="#ff4800"
-                        app:fgColorStart="#ffe400"
-                        app:percent="147"
-                        app:startAngle="0"
-                        app:strokeWidth="5dp" />
+<!--                    <com.timqi.sectorprogressview.ColorfulRingProgressView-->
+<!--                        android:id="@+id/temp_Spv"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_gravity="end|center_vertical"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        app:bgColor="#e1e1e1"-->
+<!--                        app:fgColorEnd="#ff4800"-->
+<!--                        app:fgColorStart="#ffe400"-->
+<!--                        app:percent="147"-->
+<!--                        app:startAngle="0"-->
+<!--                        app:strokeWidth="5dp" />-->
                 </com.google.android.material.card.MaterialCardView>
 
             </RelativeLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -282,7 +283,6 @@
         android:text="Get Live Status"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -1012,7 +1012,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="64dp"
-                            android:text="Content Unavailable!!"
+                            android:text=""
                             android:visibility="gone"
                             android:layout_marginStart="120dp"/>
 
@@ -1020,10 +1020,10 @@
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@color/eonWhite"
                             android:nestedScrollingEnabled="false"
                             android:visibility="visible"
-                            android:background="@color/eonWhite"
-                            tools:listitem="@layout/report_item"/>
+                            tools:listitem="@layout/report_item" />
                     </LinearLayout>
 
                 </androidx.core.widget.NestedScrollView>

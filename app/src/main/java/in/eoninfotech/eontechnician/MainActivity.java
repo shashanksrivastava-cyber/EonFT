@@ -69,6 +69,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -79,8 +80,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.eoninfotech.eontechnician.fragments.AddUMFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialViewFragment;
+import in.eoninfotech.eontechnician.fragments.RemoveUMFragment;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthDetail;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthResponse;
 import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
@@ -158,13 +161,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ViewPagerAdapterAtd viewPagerAdapterAtd;
     ViewPagerAdapterStock viewPagerAdapterStock;
     ViewPagerAdapterCallSheet viewPagerAdapterCallSheet;
-    //ViewPagerAdapterDashboard viewPagerAdapterDashboard;
     ViewPagerAdapterActivity viewPagerAdapterActivity;
     ViewPagerAdapterBills viewPagerAdapterBills;
-
     ViewPagerAdapterAddMaterial viewPagerAdapterAddMaterial;
     ViewPagerReturnMaterial viewPagerReturnMaterial;
     ViewPagerSendToTechnician viewPagerSendtoTechnician;
+    AddUMFragment addUMFragment;
+
+    RemoveUMFragment removeUMFragment;
+    ViewPagerAddRemoveUM viewPagerAdapterUMAddRemove;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -181,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<TechnicianMonthDetail> techList = new ArrayList<>();
     TabLayout tabLayout;
     public static int int_items = 2;
-    ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet, viewPagerBill, viewPagerMaterialReturn, viewPagertechnician, viewPagerAddMaterial;
+    ViewPager viewPager, viewpagerattendance, viewpageractivity, viewpagerstock, viewpagercallsheet, viewPagerBill, viewPagerMaterialReturn, viewPagertechnician, viewPagerAddMaterial,viewPagerAddRemoveUM;
     String tab = "1";
     int count = 0;
     private String currentVersion;
@@ -345,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPagerMaterialReturn = findViewById(R.id.viewPagerMaterialReturn);
         viewPagertechnician = findViewById(R.id.viewPagerSendtoTechnician);
         viewPagerAddMaterial = findViewById(R.id.viewPagerAddMaterial);
+        viewPagerAddRemoveUM = findViewById(R.id.viewPagerAddRemoveUM);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
@@ -383,7 +389,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
         setTitle("ADD Dashboard");
         tabLayout.setVisibility(View.VISIBLE);
-        tabLayout.setVisibility(View.VISIBLE);
         viewPager.setVisibility(View.VISIBLE);
         viewpagerattendance.setVisibility(View.GONE);
         viewpageractivity.setVisibility(View.GONE);
@@ -391,6 +396,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPagerBill.setVisibility(View.GONE);
         viewPagerMaterialReturn.setVisibility(View.GONE);
         viewPagerAddMaterial.setVisibility(View.GONE);
+        viewPagerAddRemoveUM.setVisibility(View.GONE);
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -635,7 +641,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, activityLogFragment);
             setTitle("Attendance Activity");
             tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -644,6 +649,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterAtd = new ViewPagerAdapterAtd(getSupportFragmentManager());
             viewpagerattendance.setAdapter(viewPagerAdapterAtd);
             tabLayout.setupWithViewPager(viewpagerattendance);
@@ -659,7 +665,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, fragmentCurrentMonth);
             setTitle("Incentive Activity");
             tabLayout.setVisibility(View.GONE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -669,6 +674,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -679,7 +685,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, stockFragment);
             setTitle("Stock Activity");
             tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
             viewpagerstock.setVisibility(View.VISIBLE);
             viewPager.setVisibility(View.GONE);
             viewpagerattendance.setVisibility(View.GONE);
@@ -688,6 +693,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterStock = new ViewPagerAdapterStock(getSupportFragmentManager());
             viewpagerstock.setAdapter(viewPagerAdapterStock);
             tabLayout.setupWithViewPager(viewpagerstock);
@@ -710,6 +716,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             ft.commit();
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
@@ -718,6 +725,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             liveStatusFragmentEon = new LiveStatusFragmentEon();
             liveStatusFragmentEon.setArguments(bundle);
             ft = fm.beginTransaction().replace(R.id.framelay, liveStatusFragmentEon);
+            ft.commit();
             setTitle("Live Status Eon");
             tabLayout.setVisibility(View.GONE);
             viewpagerattendance.setVisibility(View.GONE);
@@ -729,7 +737,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
-            ft.commit();
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
@@ -739,7 +747,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, installmentFragment);
             setTitle("Activities");
             tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.VISIBLE);
@@ -748,6 +755,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterActivity = new ViewPagerAdapterActivity(getSupportFragmentManager());
             viewpageractivity.setAdapter(viewPagerAdapterActivity);
             tabLayout.setupWithViewPager(viewpageractivity);
@@ -761,7 +769,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, callSheetFragment);
             setTitle("Call Sheet");
             tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -770,6 +777,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
             viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
             tabLayout.setupWithViewPager(viewpagercallsheet);
@@ -783,7 +791,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, paymentCollectionReportFragment);
             setTitle("Payment Collection Report");
             tabLayout.setVisibility(View.GONE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -792,6 +799,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerBill.setVisibility(View.GONE);
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterCallSheet = new ViewPagerAdapterCallSheet(getSupportFragmentManager());
             viewpagercallsheet.setAdapter(viewPagerAdapterCallSheet);
             tabLayout.setupWithViewPager(viewpagercallsheet);
@@ -805,7 +813,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, billIntimationFragment);
             setTitle("Bill Intimation");
             tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -815,6 +822,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.GONE);
             viewPagertechnician.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterBills = new ViewPagerAdapterBills(getSupportFragmentManager());
             viewPagerBill.setAdapter(viewPagerAdapterBills);
             tabLayout.setupWithViewPager(viewPagerBill);
@@ -828,7 +836,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft = fm.beginTransaction().replace(R.id.framelay, additionalMaterialFragment);
             setTitle("Service Stock Demand");
             tabLayout.setVisibility(View.VISIBLE);
-            tabLayout.removeAllTabs();
             viewpagerattendance.setVisibility(View.GONE);
             viewPager.setVisibility(View.GONE);
             viewpageractivity.setVisibility(View.GONE);
@@ -838,6 +845,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             viewPagerMaterialReturn.setVisibility(View.GONE);
             viewPagerAddMaterial.setVisibility(View.VISIBLE);
             viewPagertechnician.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.GONE);
             viewPagerAdapterAddMaterial = new ViewPagerAdapterAddMaterial(getSupportFragmentManager());
             viewPagerAddMaterial.setAdapter(viewPagerAdapterAddMaterial);
             tabLayout.setupWithViewPager(viewPagerAddMaterial);
@@ -845,7 +853,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             hideKeyboard();
-        } else if ((id == R.id.nav_material_return)) {
+        } else if (id == R.id.nav_um) {
+            addUMFragment = new AddUMFragment();
+            addUMFragment.setArguments(bundle);
+            ft = fm.beginTransaction().replace(R.id.framelay, addUMFragment);
+            setTitle("Add/Remove UM");
+            tabLayout.setVisibility(View.VISIBLE);
+            viewpagerattendance.setVisibility(View.GONE);
+            viewPager.setVisibility(View.GONE);
+            viewpageractivity.setVisibility(View.GONE);
+            viewpagercallsheet.setVisibility(View.GONE);
+            viewpagerstock.setVisibility(View.GONE);
+            viewPagerBill.setVisibility(View.GONE);
+            viewPagerMaterialReturn.setVisibility(View.GONE);
+            viewPagerAddMaterial.setVisibility(View.GONE);
+            viewPagertechnician.setVisibility(View.GONE);
+            viewPagerAddRemoveUM.setVisibility(View.VISIBLE);
+            viewPagerAdapterUMAddRemove = new ViewPagerAddRemoveUM(getSupportFragmentManager());
+            viewPagerAddRemoveUM.setAdapter(viewPagerAdapterUMAddRemove);
+            tabLayout.setupWithViewPager(viewPagerAddRemoveUM);
+            ft.commit();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            hideKeyboard();
+        }
+        else if ((id == R.id.nav_material_return)) {
             sendToEon();
         } else if (id == R.id.nav_material_send_to_tech) {
             sendToFT();
@@ -868,10 +900,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             if (isRunning) {
                                 Intent inteer = new Intent(MainActivity.this, LoginActivityNew.class);
                                 inteer.putExtra("username", "us");
-                                editor.putString("s_uuser", "");
-                                editor.putString("pass", "");
-                                editor.putString("logout", "logout");
-                                editor.putString("isRunning", running);
+                                editor.clear().apply();
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
@@ -879,10 +908,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             } else {
                                 Intent inteer = new Intent(MainActivity.this, LoginActivityNew.class);
                                 inteer.putExtra("username", "us");
-                                editor.putString("s_uuser", "");
-                                editor.putString("pass", "");
-                                editor.putString("logout", "logout");
-                                editor.putString("isRunning", "");
+                                editor.clear().apply();
                                 appPrefs.setLoggedIn(false);
                                 editor.commit();
                                 startActivity(inteer);
@@ -915,16 +941,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
             getDetail();
             hideKeyboard();
-        }else if(id==R.id.tm_removal){
+        } else if(id==R.id.tm_removal){
             Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
             intent.putExtra("type","tm");
             startActivity(intent);
-        }else if(id==R.id.pump_removal){
+        } else if(id==R.id.pump_removal){
             Intent intent = new Intent(MainActivity.this, VideoViewActivity.class);
             intent.putExtra("type","pump");
             startActivity(intent);
-        }
-        else if(id==R.id.device_maint){
+        } else if(id==R.id.device_maint){
             Intent intent = new Intent(MainActivity.this, DeviceMaintenance.class);
             intent.putExtra("type","maint");
             startActivity(intent);
@@ -1199,10 +1224,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public Fragment getItem(int position) {
 
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
-
             switch (position) {
                 case 0:
                     activityLogFragment = new ActivityLogFragment();
@@ -1244,10 +1265,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public Fragment getItem(int position) {
 
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
-
             switch (position) {
                 case 0:
                     stockFragment = new StockFragment();
@@ -1286,10 +1303,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
-
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
 
             switch (position) {
                 case 0:
@@ -1330,10 +1343,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
-
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
 
             switch (position) {
                 case 0:
@@ -1376,10 +1385,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public Fragment getItem(int position) {
 
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
-
             switch (position) {
                 case 0:
                     callSheetFragment = new CallSheetFragment();
@@ -1420,9 +1425,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public Fragment getItem(int position) {
 
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
             switch (position) {
                 case 0:
                     installmentFragment = new NewInstallmentFragment();
@@ -1455,53 +1457,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-//    class ViewPagerAdapterDashboard extends FragmentPagerAdapter {
-//
-//        public ViewPagerAdapterDashboard(FragmentManager fm) {
-//            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//
-//            bundle.putString("disttid", disgnid);
-//            bundle.putString("usernme", usrname);
-//            bundle.putString("version", versionname);
-//
-//            switch (position) {
-//                case 0 -> {
-//                    dashBoardFragment = new DashBoardFragment();
-//                    dashBoardFragment.setArguments(bundle);
-//                    return dashBoardFragment;
-//                }
-//                case 1 -> {
-//                    otherDashBoardFragment = new OtherDashBoardFragment();
-//                    otherDashBoardFragment.setArguments(bundle);
-//                    return otherDashBoardFragment;
-//                }
-//            }
-//
-//            return null;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return int_items;
-//        }
-//
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//
-//            switch (position) {
-//                case 0:
-//                    return "My Dashboard";
-//                case 1:
-//                    return "Other's Dashboard";
-//            }
-//            return null;
-//        }
-//    }
-
     class ViewPagerAdapterBills extends FragmentPagerAdapter {
 
         public ViewPagerAdapterBills(FragmentManager fm) {
@@ -1511,9 +1466,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public Fragment getItem(int position) {
 
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
 
             switch (position) {
                 case 0 -> {
@@ -1548,6 +1500,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+     class ViewPagerAddRemoveUM extends FragmentPagerAdapter {
+
+         public ViewPagerAddRemoveUM(FragmentManager fm) {
+             super(fm);
+         }
+
+         @Override
+         public Fragment getItem(int position) {
+
+             switch (position) {
+                 case 0 -> {
+                     addUMFragment = new AddUMFragment();
+                     addUMFragment.setArguments(bundle);
+                     return addUMFragment;
+                 }
+                 case 1 -> {
+                     removeUMFragment = new RemoveUMFragment();
+                     removeUMFragment.setArguments(bundle);
+                     return removeUMFragment;
+                 }
+             }
+             return null;
+         }
+
+         @Override
+         public int getCount() {
+             return int_items;
+         }
+
+         @Override
+         public CharSequence getPageTitle(int position) {
+
+             switch (position) {
+                 case 0:
+                     return "Add UM";
+                 case 1:
+                     return "Remove UM";
+             }
+             return null;
+         }
+    }
+
     class ViewPagerAdapterAddMaterial extends FragmentPagerAdapter {
 
         public ViewPagerAdapterAddMaterial(FragmentManager fm) {
@@ -1556,10 +1550,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
-
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
 
             switch (position) {
                 case 0 -> {
@@ -1680,4 +1670,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             }
                         });
     }
+
 }

@@ -31,25 +31,4 @@
         android:textColor="@color/eonWhite"
         android:textSize="12sp"/>
 
-    <com.github.aakira.expandablelayout.ExpandableLinearLayout
-        android:id="@+id/expandableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@id/textView"
-        android:orientation="vertical"
-        app:ael_duration="400"
-        app:ael_expanded="false">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:padding="15dp"
-            android:text="
-    sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.\n
-    "
-            android:textColor="@color/eonWhite"
-            android:textSize="16sp"/>
-    </com.github.aakira.expandablelayout.ExpandableLinearLayout>
 </RelativeLayout>

@@ -239,6 +239,9 @@ public interface ApiHolder {
     @GET("activities-list.php")
     Call<WorkTypeResponse> reqeuestworkType();
 
+//    @GET("activities-list-test.php")
+//    Call<WorkTypeResponse> reqeuestworkType();
+
     @GET("vehicle-type.php")
     Call<VehicleTypeResponse> reqeuestvehicleType();
 
@@ -247,7 +250,6 @@ public interface ApiHolder {
 //    Call<VehicleTypeResponse> reqeuestvehicleType(
 //            @Field("cust_id") String cust_id,
 //            @Field("cust_name") String cust_name);
-
 
     @GET("main_client_list.php")
     Call<MainResponse> reqeuestMainClientList();
@@ -605,7 +607,8 @@ public interface ApiHolder {
     @GET("getFaq.php")
     Call<FaqResponse> getFaqData();
 
-    @GET("get_vehicle_for_um.php")
+    @FormUrlEncoded
+    @POST("get_vehicle_for_um.php")
     Call<UmVehicleResponse> get_veh_for_um(@Field("client_id") String client_id,
                                       @Field("loc_id") String loc_id);
 
@@ -800,5 +803,31 @@ public interface ApiHolder {
             @Field("veh_no") String veh_no,
             @Field("server") String server,
             @Field("dbname") String dbname);
+
+    @FormUrlEncoded
+    @POST("get_um_vehicle.php")
+    Call<MainResponse> get_um_vehicle(
+            @Field("main_client_id") String main_client_id,
+            @Field("client_id") String client_id,
+            @Field("loc_id") String loc_id,
+            @Field("status") String status);   // 0 for non in under maintenance and 1 is under maintenance
+
+    @FormUrlEncoded
+    @POST("update_vehicle_um.php")
+    Call<MainResponse> add_vehicle_um(
+            @Field("main_client_id") String main_client_id,
+            @Field("client_id") String client_id,
+            @Field("loc_id") String loc_id,
+            @Field("status") String status,             // 0 for non in under maintenance and 1 is under maintenance
+            @Field("reg_no") String reg_no,
+            @Field("activity_type") String activity_type,
+            @Field("activity_time") String activity_time,
+            @Field("activity_date") String activity_date,
+            @Field("device_serial") String device_serial,
+            @Field("vts_type") String vts_type,
+            @Field("contact_person") String contact_person,
+            @Field("contact_no") String contact_no,
+            @Field("tech_remarks") String tech_remarks,
+            @Field("technician_id") String technician_id);
 
 }

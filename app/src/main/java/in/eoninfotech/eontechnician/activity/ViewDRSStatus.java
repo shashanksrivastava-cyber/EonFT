@@ -125,6 +125,7 @@ public class ViewDRSStatus extends AppCompatActivity {
                 binding.swipeRefresh.setRefreshing(false);
                 binding.recyclerView.setVisibility(View.GONE);
                 binding.txtContentUnavailable.setVisibility(View.VISIBLE);
+                binding.txtContentUnavailable.setText(response.getMsg());
             }
         });
     }

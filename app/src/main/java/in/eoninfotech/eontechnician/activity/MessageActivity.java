@@ -307,14 +307,14 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
                     runLayoutAnimation(recyclerView);
                     refreshLayout.setRefreshing(false);
                     recyclerView.setVisibility(View.VISIBLE);
-                    mShimmerViewContainer.stopShimmerAnimation();
+                    //mShimmerViewContainer.stopShimmerAnimation();
                     mShimmerViewContainer.setVisibility(View.GONE);
                     //ShowProgressBar(false);
                 } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
-                    mShimmerViewContainer.stopShimmerAnimation();
+                    //mShimmerViewContainer.stopShimmerAnimation();
                     mShimmerViewContainer.setVisibility(View.GONE);
                 }
             }

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <ScrollView
     android:layout_width="match_parent"
@@ -338,19 +339,19 @@
                 android:hint=""
                 android:lines="4" />
         </LinearLayout>
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/update_data"
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/selector_update"
-            android:gravity="center"
-            android:text="UPDATE DATA"
-            android:textColor="#ffffff"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content"
+            android:text="Update Data"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/eonWhite"
+            android:textSize="16sp"
+            app:elevation="12dp" />
     </LinearLayout>
 
 </ScrollView>

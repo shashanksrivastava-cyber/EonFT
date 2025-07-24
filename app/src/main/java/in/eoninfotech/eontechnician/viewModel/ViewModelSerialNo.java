@@ -6,8 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import in.eoninfotech.eontechnician.repository.SubClientRepository;
-import in.eoninfotech.eontechnician.responses.ClientResponse;
+import in.eoninfotech.eontechnician.repository.SerialNoRepository;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 
 public class ViewModelSerialNo extends AndroidViewModel {

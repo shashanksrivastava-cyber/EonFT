@@ -38,26 +38,33 @@
 
         <menu>
 
-        <item
-            android:id="@+id/nav_mark_site"
-            android:icon="@drawable/ic_mark_site_attendence_24dp"
-            android:title="Mark Attendance" />
+            <item
+                android:id="@+id/nav_mark_site"
+                android:icon="@drawable/ic_mark_site_attendence_24dp"
+                android:title="Mark Attendance" />
 
-        <item
-            android:id="@+id/nav_new_repair"
-            android:layout_width="match_parent"
-            android:icon="@drawable/install"
-            android:title="Activities" />
+            <item
+                android:id="@+id/nav_new_repair"
+                android:layout_width="match_parent"
+                android:icon="@drawable/install"
+                android:title="Activities" />
 
-        <item
-            android:id="@+id/nav_stock"
-            android:icon="@drawable/stock"
-            android:title="Stock" />
+            <item
+                android:id="@+id/nav_um"
+                android:layout_width="match_parent"
+                android:icon="@drawable/install"
+                android:title="Add/Remove UM"
+                android:visible="false"/>
 
-        <item
-            android:id="@+id/nav_call_sheet"
-            android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
-            android:title="Call Sheet" />
+            <item
+                android:id="@+id/nav_stock"
+                android:icon="@drawable/stock"
+                android:title="Stock" />
+
+            <item
+                android:id="@+id/nav_call_sheet"
+                android:icon="@drawable/ic_chrome_reader_mode_black_24dp"
+                android:title="Call Sheet" />
 
         </menu>
 
@@ -93,24 +100,24 @@
                 android:id="@+id/nav_material"
                 android:icon="@drawable/ic_receipt_black_24dp"
                 android:title="Receive Material"
-                android:visible="false"/>
+                android:visible="false" />
 
             <item
                 android:id="@+id/nav_material_return"
                 android:icon="@drawable/ic_receipt_black_24dp"
                 android:title="Send to Eon"
-                android:visible="false"/>
+                android:visible="false" />
 
             <item
                 android:id="@+id/nav_material_send_to_tech"
                 android:icon="@drawable/ic_receipt_black_24dp"
                 android:title="Send to Technician"
-                android:visible="false"/>
+                android:visible="false" />
 
             <item
                 android:id="@+id/nav_technician_of_the_month"
                 android:icon="@drawable/upd_list"
-                android:title="Technician of the Month" />
+                android:title="Service Engg of the Month" />
 
         </menu>
 

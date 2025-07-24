@@ -186,6 +186,10 @@ public class ActivityDetailAdapter extends RecyclerView.Adapter<ActivityDetailAd
             }
         }if(activity_id.equals("11")){
             holder.data.setText(activityDetailResponse.getRemarks());
+        } if (activity_id.equals("12")){
+            holder.data.setText("Vehicle Added in Under Maintenance"+" "+activityDetailResponse.getReg_no());
+        } if(activity_id.equals("13")){
+            holder.data.setText("Vehicle Remove from Under Maintenance"+" "+activityDetailResponse.getReg_no());
         }
 
         holder.verified.setText("Verified By : "+activityDetailResponse.getVerify_by() + " " +activityDetailResponse.getVerified_date());

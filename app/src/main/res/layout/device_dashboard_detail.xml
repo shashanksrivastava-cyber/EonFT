@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary">
 
     <HorizontalScrollView
         android:id="@+id/horizontal_scroll"
@@ -12,21 +14,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relayss">
+        app:layout_constraintTop_toBottomOf="@+id/relayss"
+        android:background="@color/eonWhite">
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/eonWhite">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/total"
@@ -98,7 +98,7 @@
                 android:button="@android:color/transparent"
                 android:paddingLeft="16dp"
                 android:paddingTop="3dp"
-                android:paddingRight="16dp"
+                android:paddingRight="20dp"
                 android:paddingBottom="3dp"
                 android:text="Outgoing"
                 android:layout_weight="1"

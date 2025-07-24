@@ -32,9 +32,9 @@ public class CardViewActivity extends AppCompatActivity implements CompoundButto
     private ViewPager mViewPager;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    private CardPagerAdapter mCardAdapter;
+    private in.eoninfotech.eontechnician.CardPagerAdapter mCardAdapter;
     private ShadowTransformer mCardShadowTransformer;
-    private CardFragmentPagerAdapter mFragmentCardAdapter;
+    private in.eoninfotech.eontechnician.CardFragmentPagerAdapter mFragmentCardAdapter;
     private ShadowTransformer mFragmentCardShadowTransformer;
     String  uusername, versionname, disgnid = "0",activityName="Activities";
     private boolean mShowingFragments = false;
@@ -70,8 +70,8 @@ public class CardViewActivity extends AppCompatActivity implements CompoundButto
                 Log.i("**work respnse", " " + response.body());
                 if (techList.size() == 0) {
                 } else {
-                        mCardAdapter = new CardPagerAdapter(techList,this);
-                        mFragmentCardAdapter = new CardFragmentPagerAdapter(getSupportFragmentManager(),
+                        mCardAdapter = new in.eoninfotech.eontechnician.CardPagerAdapter(techList,this);
+                        mFragmentCardAdapter = new in.eoninfotech.eontechnician.CardFragmentPagerAdapter(getSupportFragmentManager(),
                                 dpToPixels(2, this));
 
                         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
@@ -94,9 +94,6 @@ public class CardViewActivity extends AppCompatActivity implements CompoundButto
 
     @Override
     public void onBackPressed() {
-
-        Intent inteer = new Intent(CardViewActivity.this, MainActivity.class);
-        startActivity(inteer);
         finish();
     }
 
@@ -104,8 +101,6 @@ public class CardViewActivity extends AppCompatActivity implements CompoundButto
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            Intent inteer = new Intent(CardViewActivity.this, MainActivity.class);
-            startActivity(inteer);
             finish();
         }
         return super.onOptionsItemSelected(item);

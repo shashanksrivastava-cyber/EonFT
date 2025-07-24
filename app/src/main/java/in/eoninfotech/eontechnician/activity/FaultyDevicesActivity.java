@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
@@ -16,9 +19,17 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.appbar.MaterialToolbar;
+
+import org.jetbrains.annotations.NotNull;
+
 import in.eoninfotech.eontechnician.FaultyDevicesAdapter;
 import in.eoninfotech.eontechnician.FaultyDrsAdapter;
 import in.eoninfotech.eontechnician.R;
@@ -58,7 +69,9 @@ public class FaultyDevicesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         setContentView(R.layout.faulty_fragment);
+
         Intent intent = getIntent();
         device_value = intent.getStringExtra("device_value");
         tab = intent.getStringExtra("tab");
@@ -143,7 +156,6 @@ public class FaultyDevicesActivity extends AppCompatActivity {
                     refreshLayout.setRefreshing(false);
                 }
             }
-
             @Override
             public void onFailure(Call<UnderMaintenanceResponse> call, Throwable t) {
                 refreshLayout.setRefreshing(false);

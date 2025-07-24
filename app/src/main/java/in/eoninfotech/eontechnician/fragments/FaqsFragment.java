@@ -37,7 +37,7 @@ public class FaqsFragment extends Fragment {
     public GridLayoutManager layoutManager;
     CardView cv_powerdisconnect;
     LinearLayout ll1, ll2;
-    FAQFragmentAdapter faqFragmentAdapter;
+    //FAQFragmentAdapter faqFragmentAdapter;
     ArrayList<FaqResponse> faqResponses = new ArrayList<>();
 
     @Override
@@ -61,16 +61,16 @@ public class FaqsFragment extends Fragment {
         ll1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
+//                startActivity(intent);
             }
         });
 
         ll2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), FaqDetailActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -89,8 +89,8 @@ public class FaqsFragment extends Fragment {
 
                         layoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
                         recyclerView.setLayoutManager(layoutManager);
-                        faqFragmentAdapter = new FAQFragmentAdapter(faqResponses, getContext());
-                        recyclerView.setAdapter(faqFragmentAdapter);
+//                        faqFragmentAdapter = new FAQFragmentAdapter(faqResponses, getContext());
+//                        recyclerView.setAdapter(faqFragmentAdapter);
                     }
                 }
 

@@ -147,6 +147,12 @@
     <string name="select_date">Select Date</string>
     <string name="drs_details"><u>View DRS Status</u></string>
     <string name="close">CLOSE</string>
+    <string name="you_can_add_your_remarks_here">You can add your remarks here</string>
+    <string name="received_device">Received Device</string>
+    <string name="content_unavailable">Content Unavailable!!</string>
+    <string name="accept">Accept</string>
+    <string name="get_vehicles_under_maint">Get Vehicles Under Maint</string>
+    <string name="add_vehicle_um">Add Vehicle to Under Maint</string>
 
     <string-array name="vts_type">
         <item>SELECT VTS TYPE</item>

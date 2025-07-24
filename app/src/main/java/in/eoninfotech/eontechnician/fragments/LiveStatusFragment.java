@@ -115,10 +115,6 @@ public class LiveStatusFragment extends Fragment{
 
         initUI();
         initViewModels();
-        observeViewModels();
-        observeViewModelsSubClient();
-        observeViewModelsLocation();
-        observeViewModelsLiveStatus();
 
         if (checkConnection.isConnected()) {
             fetchMainClients();
@@ -153,13 +149,13 @@ public class LiveStatusFragment extends Fragment{
 
         binding.mainClient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                if (i == 0) return;
-                String selectedId = String.valueOf(mainclientList.get(i - 1).getClient_Id());
-                if (!selectedId.equals(mainClientId)) {
-                    mainClientId = selectedId;
-                    hasLoadedClients = false;
-                    fetchSubClients();
+                if (i == 0) {
+                    return;
+                } else {
+                    i = i - 1;
                 }
+                mainClientId = String.valueOf(mainclientList.get(i).getClient_Id());
+                fetchSubClients();
             }
 
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -225,50 +221,52 @@ public class LiveStatusFragment extends Fragment{
             } else {
                 mainClientDetail.clear();
                 mainClientDetail.add("NO DATA AVAILABLE");
-                //Toast.makeText(getContext(), "Failed to load main clients", Toast.LENGTH_SHORT).show();
             }
             progressDialog.dismiss();
         });
     }
 
     private void observeViewModelsSubClient() {
-        viewModelSubClient.getSubClientRepository(mainClientId).observe(getViewLifecycleOwner(), response -> {
-            if (!hasLoadedClients) {
-                hasLoadedClients = true;
-                if (response == null) {
-                    Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
-                    progressDialog.hide();
-                    return;
-                }
-                if (response.getType() == 1) {
-                    clientList.clear();
-                    clientList.addAll(response.getClientList());
-                    clientDetail.clear();
-                    clientDetail.add("SELECT CLIENT");
-                    for (ClientDetails client : clientList) {
-                        clientDetail.add(client.getClient_Name());
+        viewModelSubClient.getSubClientRepository(mainClientId)
+                .observe(getViewLifecycleOwner(), response -> {
+                    if (response == null) {
+                        Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                        progressDialog.hide();
+                        return;
                     }
-                    adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, clientDetail);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.newInClients.setAdapter(adapter);
-                } else {
-                    clientDetail.clear();
-                    clientDetail.add("NO DATA AVAILABLE");
-                }
-            }
-            progressDialog.dismiss();
-        });
+
+                    if (response.getType() == 1) {
+                        hasLoadedClients = true; // ✅ move this here after success
+                        clientList.clear();
+                        clientList.addAll(response.getClientList());
+
+                        clientDetail.clear();
+                        clientDetail.add("SELECT CLIENT");
+                        for (ClientDetails client : clientList) {
+                            clientDetail.add(client.getClient_Name());
+                        }
+                        adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, clientDetail);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        binding.newInClients.setAdapter(adapter);
+                        fetchLocations();
+                    } else {
+                        clientDetail.clear();
+                        clientDetail.add("NO DATA AVAILABLE");
+                        fetchLocations();
+                    }
+                    progressDialog.hide();
+                });
     }
 
     private void observeViewModelsLocation() {
         viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name).observe(getViewLifecycleOwner(), response -> {
-
             if (response == null) {
                 Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
                 progressDialog.hide();
                 return;
             }
             if (response.getType() == 1) {
+                hasLoadedClients = true;
                 locationList.clear();
                 locationList.addAll(response.getClientLoc());
                 locationDetail.clear();
@@ -309,6 +307,7 @@ public class LiveStatusFragment extends Fragment{
                     } else {
                         binding.recyclerView.setVisibility(View.GONE);
                         binding.txtContentUnavailable.setVisibility(View.VISIBLE);
+                        binding.txtContentUnavailable.setText(response.getMsg());
                         progressDialog.hide();
                     }
                 });
@@ -316,23 +315,22 @@ public class LiveStatusFragment extends Fragment{
 
     private void fetchMainClients() {
         progressDialog.show();
-        viewModelMainClient.getMainClientRepository(); // assumed method call
+        observeViewModels();
     }
 
     private void fetchSubClients() {
         progressDialog.show();
-        viewModelSubClient.getSubClientRepository(mainClientId);// assumed method call
+        observeViewModelsSubClient();
     }
 
     private void fetchLocations() {
         progressDialog.show();
-        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name);// assumed method call
+        observeViewModelsLocation();
     }
 
     private void loadLiveStatusData() {
         progressDialog.show();
-        viewModelLiveStatus.getLiveStatusRepository(server_name, db_name, id_dist, depo_id, connection_status, veh_type);
-        // assumed method call
+        observeViewModelsLiveStatus();
     }
 
     private void refresh() {

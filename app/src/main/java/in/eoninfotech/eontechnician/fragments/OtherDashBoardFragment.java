@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.google.android.material.snackbar.Snackbar;
-import com.timqi.sectorprogressview.ColorfulRingProgressView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -212,15 +211,6 @@ public class OtherDashBoardFragment extends Fragment {
                     binding.addValue.setTextColor(Color.parseColor(detail.getColor21().split(";")[0]));
                     binding.drsAdd.setTextColor(Color.parseColor(detail.getDrs_color().split(";")[0]));
                     binding.addTime.setTextColor(Color.parseColor(detail.getDrs_color21().split(";")[0]));
-
-                    binding.vtsSpv.setPercent(Float.parseFloat(detail.getFaulty_dev()));
-                    binding.drsSpv.setPercent(detail.getFaulty_drs());
-                    binding.umSpv.setPercent(Float.parseFloat(detail.getUmain()));
-                    binding.umWorkigSpv.setPercent(Float.parseFloat(detail.getUmain_work()));
-                    binding.sosSpv.setPercent(Float.parseFloat(detail.getFaulty_sos()));
-                    binding.lidSpv.setPercent(Float.parseFloat(detail.getFaulty_lid()));
-                    binding.fuelSpv.setPercent(Float.parseFloat("" + detail.getFaulty_fuel()));
-                    binding.tempSpv.setPercent(Float.parseFloat(detail.getFaulty_temp()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

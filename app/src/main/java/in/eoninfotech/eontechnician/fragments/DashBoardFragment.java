@@ -141,10 +141,7 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (!isDashboardLoaded && checkConnection.isConnected()) {
-            getDashBoardDetail();
-            isDashboardLoaded = true;
-        }
+        getDashBoardDetail();
     }
 
     private void hideProgress() {
@@ -180,15 +177,6 @@ public class DashBoardFragment extends Fragment {
 
                             String drsColor21 = dashboardDetail.getDrs_color21().split(";")[0];
                             binding.addTime.setTextColor(Color.parseColor(drsColor21));
-
-                            binding.vtsSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_dev()));
-                            binding.drsSpv.setPercent(dashboardDetail.getFaulty_drs());
-                            binding.umSpv.setPercent(Float.parseFloat(dashboardDetail.getUmain()));
-                            binding.umWorkigSpv.setPercent(Float.parseFloat(dashboardDetail.getUmain_work()));
-                            binding.sosSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_sos()));
-                            binding.lidSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_lid()));
-                            binding.fuelSpv.setPercent(Float.parseFloat("" + dashboardDetail.getFaulty_fuel()));
-                            binding.tempSpv.setPercent(Float.parseFloat(dashboardDetail.getFaulty_temp()));
                         }
                     } else {
                         Toast.makeText(getActivity(), "Try Again - Connection timeout", Toast.LENGTH_LONG).show();

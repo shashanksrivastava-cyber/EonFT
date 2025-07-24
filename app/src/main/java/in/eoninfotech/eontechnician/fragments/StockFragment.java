@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidadvance.topsnackbar.TSnackbar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -320,12 +319,12 @@ public class StockFragment extends Fragment {
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                    textView.setTextColor(Color.WHITE);
-                    snackbar.show();
+//                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    snackbarView.setBackgroundColor(Color.RED);
+//                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+//                    textView.setTextColor(Color.WHITE);
+//                    snackbar.show();
                 } catch (Exception e) {
                 }
             }
@@ -371,12 +370,12 @@ public class StockFragment extends Fragment {
             @Override
             public void onFailure(Call<ClientResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                    textView.setTextColor(Color.WHITE);
-                    snackbar.show();
+//                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    snackbarView.setBackgroundColor(Color.RED);
+//                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+//                    textView.setTextColor(Color.WHITE);
+//                    snackbar.show();
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), "Server Response Timeout, Try Again!", Toast.LENGTH_LONG).show();
                 }
@@ -445,12 +444,12 @@ public class StockFragment extends Fragment {
             @Override
             public void onFailure(Call<ClientDataResponse> call, Throwable t) {
                 try {
-                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
-                    View snackbarView = snackbar.getView();
-                    snackbarView.setBackgroundColor(Color.RED);
-                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-                    textView.setTextColor(Color.WHITE);
-                    snackbar.show();
+//                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
+//                    View snackbarView = snackbar.getView();
+//                    snackbarView.setBackgroundColor(Color.RED);
+//                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
+//                    textView.setTextColor(Color.WHITE);
+//                    snackbar.show();
                 } catch (Exception e) {
                     Toast.makeText(getActivity(), "Server Response Timeout, Try Again!", Toast.LENGTH_LONG).show();
                 }

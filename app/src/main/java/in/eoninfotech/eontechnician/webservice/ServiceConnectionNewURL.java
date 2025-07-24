@@ -1,10 +1,15 @@
 package in.eoninfotech.eontechnician.webservice;
 
+import static androidx.test.core.app.ApplicationProvider.getApplicationContext;
+
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,14 +21,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceConnectionNewURL {
 
-     public static final String BASE_URL = "http://mis.eon.co.in/eonmis/android/techApp/";
 
-    //public static final String BASE_URL = "https://mis.eurotrack.in/eonmis/android/techApp/";
+    //public static final String BASE_URL = "http://mis.eon.co.in/eonmis/android/techApp/";
+     public static final String BASE_URL = "https://mis.eurotrack.in/eonmis/android/techApp/";
+
+     //public static final String BASE_URL_NEW = "https://mis.eurotrack.in/eonmis/android/techApp/";
+
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(String version) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        AuthInterceptor authInterceptor = new AuthInterceptor(getApplicationContext());
         OkHttpClient okclient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES)
@@ -44,6 +53,7 @@ public class ServiceConnectionNewURL {
     public static Retrofit getClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //AuthInterceptor authInterceptor = new AuthInterceptor(getApplicationContext());
         OkHttpClient okclient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES)
@@ -61,4 +71,6 @@ public class ServiceConnectionNewURL {
         }
         return retrofit;
     }
+
 }
+

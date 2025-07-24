@@ -1,4 +1,3 @@
-//
 //package in.eoninfotech.eontechnician.fragments;
 //
 //import android.Manifest;
@@ -12,12 +11,9 @@
 //import android.content.Intent;
 //import android.content.SharedPreferences;
 //import android.content.pm.PackageManager;
-//import android.content.res.Resources;
 //import android.graphics.Bitmap;
 //import android.graphics.BitmapFactory;
-//import android.graphics.Color;
 //import android.graphics.drawable.ColorDrawable;
-//import android.graphics.drawable.Drawable;
 //import android.net.Uri;
 //import android.os.Build;
 //import android.os.Bundle;
@@ -53,7 +49,6 @@
 //import android.widget.TimePicker;
 //import android.widget.Toast;
 //
-//import com.google.android.material.snackbar.Snackbar;
 //import com.google.android.material.textfield.TextInputLayout;
 //
 //import java.io.File;
@@ -71,13 +66,10 @@
 //import androidx.core.content.FileProvider;
 //import androidx.fragment.app.Fragment;
 //import androidx.fragment.app.FragmentActivity;
-//import androidx.lifecycle.ViewModelProviders;
+//import androidx.lifecycle.ViewModelProvider;
 //
 //import dmax.dialog.SpotsDialog;
 //import in.eoninfotech.eontechnician.ImageUtil;
-//import in.eoninfotech.eontechnician.activity.DevicedashboardDetail;
-//import in.eoninfotech.eontechnician.databinding.FragmentBillIntimationBinding;
-//import in.eoninfotech.eontechnician.databinding.FragmentNewInstallBinding;
 //import in.eoninfotech.eontechnician.responses.DeviceTypeOtherAis;
 //import in.eoninfotech.eontechnician.responses.MainClientList;
 //import in.eoninfotech.eontechnician.responses.MainResponse;
@@ -122,21 +114,18 @@
 //import in.eoninfotech.eontechnician.controllers.ReceiveDeviceControllers;
 //import in.eoninfotech.eontechnician.helper.CheckConnection;
 //import in.eoninfotech.eontechnician.helper.FileUtils;
-//import in.eoninfotech.eontechnician.helper.K;
 //import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
+//import in.eoninfotech.eontechnician.utils.PermissionUtils;
 //import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 //import in.eoninfotech.eontechnician.view.MyTextView;
 //import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
-//import in.eoninfotech.eontechnician.viewModel.ViewModelCountDetails;
 //import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 //import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 //import in.eoninfotech.eontechnician.webservice.ApiHolder;
-//import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 //import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 //import in.eoninfotech.eontechnician.webservice.UmVehicleDetail;
 //import in.eoninfotech.eontechnician.webservice.UmVehicleResponse;
 //import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
-//import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
 //import okhttp3.MediaType;
 //import okhttp3.MultipartBody;
 //import okhttp3.RequestBody;
@@ -151,9 +140,6 @@
 //public class NewInstallmentFragmentUpdated extends Fragment implements ClientListener, ReceiveDeviceListener,ProgressRequestBody.UploadCallbacks {
 //
 //    View v;
-//
-//    FragmentNewInstallBinding binding;
-//
 //    private final int SELECT_PHOTO = 1;
 //    public static final String IMAGE_DIRECTORY_NAME = "android_file";
 //    public static final int MEDIA_TYPE_IMAGE = 1;
@@ -163,6 +149,7 @@
 //    int pStatus = 0, x, PERMISSION_ALL = 1, REQUEST_CODE_PERMISSION = 10, fuelVoltInt;
 //    CheckedTextView text1;
 //    ImageView checked;
+//    private boolean hasLoadedClients = false;
 //    private AlertDialog progressDialog;
 //    File file;
 //    Uri uri;
@@ -177,7 +164,7 @@
 //            s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name,replace_type="D",silo_sensor="N",device_working_status="W",sensor_working_status="W";
 //    CheckConnection chk;
 //    CheckBox check_tel_supprt, magnet_set, magnetset_install;
-//    EditText reinstallVoltage, installVoltage, vltd_sr_no_notAvail, e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
+//    EditText reinstallVoltage, installVoltage, vltd_sr_no_notAvail, e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, t_install_date, t_install_Time, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
 //            remove_sr_no, paymentDate, amount, vts_sr_no, vts_sr_no_reinst, con_in_reg_no, rep_srNo, reinst_conf_reg_no, old_sensor_veh_no, new_sensor_veh_no,con_vltd_sr_no,con_remove_sr_no,con_fault_sr_no,con_phone_sr_no,con_old_deviceidreplace,con_new_deviceid,old_vts_id_replace,new_vts_id_replace,con_old_vts_id_replace,con_new_vts_id_replace, vltd_sr_no, vltd_sr_no_fault, vltd_sr_no_miss, vltd_sr_no_phn, old_vltd_sr_no, new_vltd_sr_no, old_replace_sr_no,con_missing_sr_no,con_reinstall_sr_no,remove_vts_id,con_remove_vts_id,
 //            new_replace_sr_no, sensor_veh_no, sensor_veh_no_missing, sensor_veh_no_remove,accessory_reg_no,accessory_sr_no;
 //    MyTextView device_info, itemCollected;
@@ -237,7 +224,7 @@
 //            linearFault, linearPhoneSupport, linearSimRepalace, linearDeviceMissing, linearOthers, oldDeviceType, options, vltdOptions, oldDevicesr_no, reinstText, deviceTypeReplace, replaceSrNo, lay_sensor_veh, linear_device_sr_no,linear_device_sr_no_e_series,linear_device_sr_no_remove,linear_device_sr_no_remove_e_series,linear_device_sr_no_fault_e_series,linear_device_sr_no_fault,
 //            linear_device_sr_no_phone,linear_device_sr_no_phone_e_series,linear_device_sr_no_replace_old,linear_device_sr_no_replace_new,linear_device_sr_no_missing_e_series,linear_device_sr_no_missing,linear_device_id_replace_old,linear_device_id_replace_new,linear_device_sr_no_reinstall,linear_device_sr_no_reinstall_e_series,linear_device_sr_no_reinstall_ais;
 //    RelativeLayout relativeCableConnected, relayLocation, relMissing, circularRelative,rel_sr_no;
-//    MySearchableSpinner vehicleType, location, reason_replace, reason_remove, new_in_vehicleTypeReins, discReason, sim_replace_reason, sim_operator, vehiclenoavailSpinner, notAvailReason, removalType, missingType, payment_method, vehicleTypeFault, vehicleTypeSim, vehicle_list_um, vehicle_list_pm,sr_no,spn_remove_sr_no,spn_old_sr_no_replace,spn_new_sr_no_replace,
+//    MySearchableSpinner client,new_main_clients, vehicleType, workType, location, reason_replace, reason_remove, new_in_vehicleTypeReins, discReason, sim_replace_reason, sim_operator, vehiclenoavailSpinner, notAvailReason, removalType, missingType, payment_method, vehicleTypeFault, vehicleTypeSim, vehicle_list_um, vehicle_list_pm,sr_no,spn_remove_sr_no,spn_old_sr_no_replace,spn_new_sr_no_replace,
 //            spn_fault_sr_no,spn_phone_sr_no,spn_missing_sr_no,spn_reinstall_sr_no,spn_replace_sensor;
 //    RadioGroup radioGroup, radiogroupPay,radiodeviceType1, radioGroupReinstall, drsReplace, radiodeviceType, radiodireplace, radiogroup, radioGrouptiltReinst,radiogroupdrsReinst, radioGroupfuelSensorReinst, radioGrouptempReinst, radioGrouptransReinst, radioGroupLidReinst, radioGrouptiltRemove, radioGrouptempRemove, radioGroupPanicRemove, radioGroupfuelRemove,
 //            radiogroupDoor, radioGroupCutoff, radiogroupCutOffReinst, is_Demo, radiodrsReInstall, radiodrsInstall, radioGroups, radioGrouptransRemove, radioGroupLidRemove,radioGroupdeviceworking,radioGroupsensorworking,radioGrouptiltMissing, radioGrouptempMissing, radioGroupPanicMissing, radioGroupfuelMissing, radioGrouptransMissing, radioGroupLidMissing,
@@ -258,8 +245,6 @@
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             final Bundle savedInstanceState) {
 //        v = inflater.inflate(R.layout.fragment_new_install, container, false);
-//        binding = FragmentNewInstallBinding.inflate(getLayoutInflater(),container,false);
-//
 //        chk = new CheckConnection(v.getContext());
 //        sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
 //        uusername = sharedprefs.getString("s_uuser", "");
@@ -393,7 +378,6 @@
 //        options = v.findViewById(R.id.options);
 //        vltdOptions = v.findViewById(R.id.vltdOptions);
 //        vehicleTypeSim = v.findViewById(R.id.vehicleTypeSim);
-//        vehicle_list_um = v.findViewById(R.id.vehicle_list_um);
 //        vehicle_list_pm = v.findViewById(R.id.vehicle_list_pm);
 //        radioyesdrs = v.findViewById(R.id.radioyesdrsInstall);
 //        imageName = v.findViewById(R.id.imageName);
@@ -419,6 +403,8 @@
 //        tnew_drsid = v.findViewById(R.id.tnew_drsid);
 //        relMissing = v.findViewById(R.id.relMissing);
 //        sim_vts_id = v.findViewById(R.id.sim_vts_id);
+//        client = v.findViewById(R.id.new_in_clients);
+//        new_main_clients = v.findViewById(R.id.new_main_clients);
 //        e_reg_no = v.findViewById(R.id.new_in_reg_no);
 //        con_in_reg_no = v.findViewById(R.id.con_in_reg_no);
 //        deviceTypeReplace = v.findViewById(R.id.deviceTypeReplace);
@@ -448,15 +434,19 @@
 //        damageDevice = v.findViewById(R.id.damageDevice);
 //        fault_vts_id = v.findViewById(R.id.fault_vts_id);
 //        drsReplace = v.findViewById(R.id.radiodrsReplace);
+//        workType = v.findViewById(R.id.new_in_workType);
 //        relaydrsType = v.findViewById(R.id.relaydrsType);
 //        t_drs_veh_no = v.findViewById(R.id.t_drs_veh_no);
 //        t_drs_vts_id = v.findViewById(R.id.t_drs_vts_id);
+//        location = v.findViewById(R.id.new_in_locations);
 //        drsReInstall = v.findViewById(R.id.drsReInstall);
 //        old_deviceid = v.findViewById(R.id.old_deviceid);
 //        new_deviceid = v.findViewById(R.id.new_deviceid);
 //        sim_operator = v.findViewById(R.id.sim_operator);
 //        e_remarks = v.findViewById(R.id.new_in_remarks);
 //        update_dataa = v.findViewById(R.id.new_in_update);
+//        t_install_date = v.findViewById(R.id.installDate);
+//        t_install_Time = v.findViewById(R.id.installTime);
 //        e_device_id = v.findViewById(R.id.new_in_deviceid);
 //        vts_sr_no = v.findViewById(R.id.vts_sr_no);
 //        rep_srNo = v.findViewById(R.id.rep_srNo);
@@ -626,8 +616,8 @@
 //        lin_vts_id_remove = v.findViewById(R.id.lin_vts_id_remove);
 //        remove_vts_id = v.findViewById(R.id.remove_vts_id);
 //        con_remove_vts_id = v.findViewById(R.id.con_remove_vts_id);
-//        binding.installTime.setInputType(InputType.TYPE_NULL);
-//        binding.installDate.setInputType(InputType.TYPE_NULL);
+//        t_install_Time.setInputType(InputType.TYPE_NULL);
+//        t_install_date.setInputType(InputType.TYPE_NULL);
 //        paymentDate.setInputType(InputType.TYPE_NULL);
 //        newInstallmentController = new NewInstallmentController();
 //        receiveDeviceControllers = new ReceiveDeviceControllers();
@@ -640,11 +630,12 @@
 //        tilphnSr.setVisibility(View.GONE);
 //        tilDeviceMiss.setVisibility(View.GONE);
 //        ShowProgressBar(false);
-//        Progress(false);
+//        initViewModels();
+//        observeViewModels();
 //
 //        setDateAndTime();
-//        binding.newInLocations.setEnabled(false);
-//        binding.newInWorkType.setEnabled(false);
+//        location.setEnabled(false);
+//        workType.setEnabled(false);
 //        if (chk.isConnected()) {
 //            addMainClients();
 //            addWorkType();
@@ -663,7 +654,7 @@
 //            }
 //            return false;
 //        });
-//        binding.newMainClients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        new_main_clients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
 //                if (i == 0) {
@@ -671,6 +662,7 @@
 //                } else {
 //                    i = i - 1;
 //                }
+//
 //                mainClientId = String.valueOf(mainclientList.get(i).getClient_Id());
 //                addclients();
 //            }
@@ -680,7 +672,7 @@
 //
 //            }
 //        });
-//        binding.newInClients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //                if (i == 0) {
@@ -697,13 +689,13 @@
 //                if(s_clientname.equalsIgnoreCase("OTHERS")){
 //                    clearData();
 //                    clientLocId ="0";
-//                    binding.newInLocations.setEnabled(false);
-//                    binding.newInWorkType.setEnabled(true);
+//                    location.setEnabled(false);
+//                    workType.setEnabled(true);
 //                    drsStatus = String.valueOf(clientList.get(i).getDrs_status());
 //                }else {
 //                    clearData();
 //                    addLocation();
-//                    binding.newInLocations.setEnabled(true);
+//                    location.setEnabled(true);
 //                    drsStatus = String.valueOf(clientList.get(i).getDrs_status());
 //                }
 //            }
@@ -802,7 +794,7 @@
 //            public void onNothingSelected(AdapterView<?> adapterView) {
 //            }
 //        });
-//        binding.newInLocations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //                if (i == 0) {
@@ -811,7 +803,8 @@
 //                    i = i - 1;
 //                }
 //                clientLocId = String.valueOf((locationList.get(i).getLoc_Id()));
-//                binding.newInWorkType.setEnabled(true);
+//                workType.setEnabled(true);
+//                getSerialNo();
 //            }
 //
 //            @Override
@@ -993,7 +986,7 @@
 //            public void onNothingSelected(AdapterView<?> adapterView) {
 //            }
 //        });
-//        binding.newInWorkType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//        workType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @SuppressLint({"ClickableViewAccessibility", "NonConstantResourceId"})
 //            @Override
 //            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -3189,9 +3182,9 @@
 //                Toast.makeText(getContext(), "Please Select Client", Toast.LENGTH_LONG).show();
 //            }else if(s_clientname.equalsIgnoreCase("SELECT Client") || (s_clientname.equals(null))){
 //                Toast.makeText(getContext(), "Please Select Client", Toast.LENGTH_LONG).show();
-//            } else if (binding.newInLocations.getSelectedItem().toString().equalsIgnoreCase("Select Location")) {
+//            } else if (location.getSelectedItem().toString().equalsIgnoreCase("Select Location")) {
 //                Toast.makeText(getContext(), "Please Select Location", Toast.LENGTH_LONG).show();
-//            } else if (binding.newInWorkType.getSelectedItem().toString().equalsIgnoreCase("Select Work Type")) {
+//            } else if (workType.getSelectedItem().toString().equalsIgnoreCase("Select Work Type")) {
 //                Toast.makeText(getContext(), "Please Select Work Type", Toast.LENGTH_LONG).show();
 //            } else if (s_work_id.equalsIgnoreCase("2")) {
 //                s_drs_id = e_drs_id.getText().toString();
@@ -3200,8 +3193,8 @@
 //                }else {
 //                    s_reg_no = accessory_reg_no.getText().toString();
 //                }
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                confirmVehNo = con_in_reg_no.getText().toString();
 //                if (magnetset_install.isChecked()) {
@@ -3399,8 +3392,8 @@
 //                s_reg_no = new_vehicleRegNo.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                s_drs_id = e_drs_id.getText().toString();
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_reinst_conf_reg_no = reinst_conf_reg_no.getText().toString();
 //                if (new_deviceidReinstall.getVisibility() == View.VISIBLE) {
 //                    s_new_device_id = new_deviceidReinstall.getText().toString();
@@ -3755,8 +3748,8 @@
 //                } else {
 //                    door_sensor = "Y";
 //                }
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                int selectedType = drsReplace.getCheckedRadioButtonId();
 //                radiotype = v.findViewById(selectedType);
 //                String type = radiotype.getText().toString();
@@ -4072,8 +4065,8 @@
 //                    s_reg_no = "0";
 //                }
 //                s_remove_reason = reason_remove.getSelectedItem().toString();
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_new_drs_id = "0";
 //                s_new_device_id = "0";
 //                s_drs_id = "0";
@@ -4205,8 +4198,8 @@
 //                confirmVehNo = "";
 //                s_reinst_conf_reg_no = "";
 //                payment_type = "C";
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                String image = imageNameFault.getText().toString();
 //                SparseBooleanArray checked = lv.getCheckedItemPositions();
 //                others = "";
@@ -4305,8 +4298,8 @@
 //                } else {
 //                    veh_condition = "W";
 //                }
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                if (s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")) {
 //                    Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
@@ -4376,8 +4369,8 @@
 //                contact_person = "";
 //                contact_no = "0";
 //                payment_type = "C";
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                if (s_e_device_id.equals("")) {
 //                    sim_vts_id.setError("Vts Id can't be null");
@@ -4444,8 +4437,8 @@
 //                contact_person = "";
 //                contact_no = "0";
 //                payment_type = "C";
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                sensor_old_veh_no = sensor_veh_no_missing.getText().toString();
 //                String image = imageNameMissing.getText().toString();
@@ -4514,8 +4507,8 @@
 //                contact_person = "";
 //                contact_no = "0";
 //                payment_type = "C";
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                if ((vehDetail.getVisibility() == View.VISIBLE) && (s_e_device_id.equals(""))) {
 //                    vehNotAvailVtsID.setError("Vts Id can't be null");
@@ -4543,8 +4536,8 @@
 //                        collection_amount = abc + ".00";
 //                    }
 //                    collection_date = paymentDate.getText().toString();
-//                    s_date = binding.installDate.getText().toString();
-//                    s_Time = binding.installTime.getText().toString();
+//                    s_date = t_install_date.getText().toString();
+//                    s_Time = t_install_Time.getText().toString();
 //                    s_remarks = e_remarks.getText().toString();
 //                    String images = imageName.getText().toString();
 //                    s_vts_type = "2";
@@ -4604,8 +4597,8 @@
 //                    } else if (!followUpPersonPhone.getText().toString().matches(MobilePattern)) {
 //                        followUpPersonPhone.setError("Please enter valid mobile no");
 //                    } else {
-//                        s_date = binding.installDate.getText().toString();
-//                        s_Time = binding.installTime.getText().toString();
+//                        s_date = t_install_date.getText().toString();
+//                        s_Time = t_install_Time.getText().toString();
 //                        personName = followUpPersonName.getText().toString();
 //                        personPhone = followUpPersonPhone.getText().toString();
 //                        contact_person = personName;
@@ -4655,8 +4648,8 @@
 //                    }
 //                }
 //            } else if (s_work_id.equalsIgnoreCase("11")) {
-//                s_date = binding.installDate.getText().toString();
-//                s_Time = binding.installTime.getText().toString();
+//                s_date = t_install_date.getText().toString();
+//                s_Time = t_install_Time.getText().toString();
 //                s_remarks = e_remarks.getText().toString();
 //                if (s_remarks.equals("")) {
 //                    e_remarks.setError("Please Fill Details");
@@ -4737,6 +4730,89 @@
 //        return v;
 //    }
 //
+//    private void observeViewModels() {
+//        viewModelMainClient.getMainClientRepository().observe(getViewLifecycleOwner(), response -> {
+//            if (response == null) {
+//                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+//                progressDialog.hide();
+//                return;
+//            }
+//            if (response.getType() == 1) {
+//                mainclientList.clear();
+//                mainclientList.addAll(response.getMain_client_list());
+//                mainClientDetail.clear();
+//                mainClientDetail.add("SELECT CLIENT");
+//                for (MainClientList client : mainclientList) {
+//                    mainClientDetail.add(client.getClient_Name());
+//                }
+//                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, mainClientDetail);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                new_main_clients.setAdapter(adapter);
+//            } else {
+//                mainClientDetail.clear();
+//                mainClientDetail.add("NO DATA AVAILABLE");
+//                Toast.makeText(getContext(), "Failed to load main clients", Toast.LENGTH_SHORT).show();
+//            }
+//            progressDialog.dismiss();
+//        });
+//
+//        viewModelSubClient.getSubClientRepository(mainClientId).observe(getViewLifecycleOwner(), response -> {
+//            if (response == null) {
+//                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+//                progressDialog.hide();
+//                return;
+//            }
+//            if (response.getType() == 1) {
+//                clientList.clear();
+//                clientList.addAll(response.getClientList());
+//                clientDetail.clear();
+//                clientDetail.add("SELECT CLIENT");
+//                for (ClientDetails client : clientList) {
+//                    clientDetail.add(client.getClient_Name());
+//                }
+//                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, clientDetail);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                client.setAdapter(adapter);
+//            } else {
+//                clientDetail.clear();
+//                clientDetail.add("NO DATA AVAILABLE");
+//            }
+//            progressDialog.dismiss();
+//        });
+//
+//        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name).observe(getViewLifecycleOwner(), response -> {
+//
+//            if (response == null) {
+//                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+//                progressDialog.hide();
+//                return;
+//            }
+//
+//            if (response.getType() == 1) {
+//                locationList.clear();
+//                locationList.addAll(response.getClientLoc());
+//                locationDetail.clear();
+//                locationDetail.add("SELECT LOCATION");
+//                for (ClientLocationDetail loc : locationList) {
+//                    locationDetail.add(loc.getLoc_Name());
+//                }
+//                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, locationDetail);
+//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                location.setAdapter(adapter);
+//            } else {
+//                locationDetail.clear();
+//                locationDetail.add("NO DATA AVAILABLE");
+//            }
+//            progressDialog.dismiss();
+//        });
+//    }
+//
+//    private void initViewModels() {
+//        viewModelMainClient = new ViewModelProvider(this).get(ViewModelMainClient.class);
+//        viewModelSubClient = new ViewModelProvider(this).get(ViewModelSubClient.class);
+//        viewModelClientLocation = new ViewModelProvider(this).get(ViewModelClientLocation.class);
+//    }
+//
 //    private void getAccSerialNo(String s_reg_no) {
 //
 //        newInstallmentController.reqeuestAccVtsDetails(db_name,server_name,s_reg_no, this);
@@ -4744,31 +4820,12 @@
 //
 //    private void addMainClients() {
 //
-//        viewModelMainClient= ViewModelProviders.of(this).get(ViewModelMainClient.class);
-//        viewModelMainClient.getMainClientRepository().observe(this, movieResponse -> {
-//            mainclientList = movieResponse.getMain_client_list();
-//            if(movieResponse.getType()==1){
-//                try {
-//                    mainClientDetail.clear();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                mainClientDetail.add(" SELECT CLIENT");
-//                for (int i = 0; i < mainclientList.size(); i++) {
-//                    mainClientDetail.add(mainclientList.get(i).getClient_Name());
-//                }
-//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, mainClientDetail);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                binding.newMainClients.setAdapter(adapter);
-//                progressDialog.hide();
-//            }else {
-//                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-//                progressDialog.hide();
-//            }
-//        });
+//        progressDialog.show();
+//        viewModelMainClient.getMainClientRepository();
 //    }
 //
 //    private void getSerialNo() {
+//        progressDialog.show();
 //        receiveDeviceControllers.get_serial_no(user_id,id_dist,clientLocId,s_work_id,db_name,server_name,this);
 //    }
 //
@@ -4986,30 +5043,8 @@
 //    }
 //
 //    private void addclients() {
-//
-//        viewModelSubClient= ViewModelProviders.of(this).get(ViewModelSubClient.class);
-//        viewModelSubClient.getSubClientRepository(mainClientId).observe(this, movieResponse -> {
-//            clientList = movieResponse.getClientList();
-//            if(movieResponse.getType()==1){
-//                try {
-//                    clientDetail.clear();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                clientDetail.add(" SELECT CLIENT");
-//                for (int i = 0; i < clientList.size(); i++) {
-//                    clientDetail.add(clientList.get(i).getClient_Name());
-//                }
-//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                binding.newInClients.setAdapter(adapter);
-//                progressDialog.hide();
-//            }else {
-//                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-//                progressDialog.hide();
-//            }
-//        });
-//
+//        progressDialog.show();
+//        viewModelSubClient.getSubClientRepository(mainClientId);
 //    }
 //
 //    private void removal_type() {
@@ -5055,30 +5090,9 @@
 //    }
 //
 //    private void addLocation() {
-//        ShowProgressBar(true);
 //
-//        viewModelClientLocation= ViewModelProviders.of(this).get(ViewModelClientLocation.class);
-//        viewModelClientLocation.getClientLocationRepository(id_dist,server_name,db_name).observe(this, movieResponse -> {
-//            locationList = movieResponse.getClientLoc();
-//            if(movieResponse.getType()==1){
-//                try {
-//                    locationDetail.clear();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//                locationDetail.add("SELECT LOCATION");
-//                for (int i = 0; i < locationList.size(); i++) {
-//                    locationDetail.add(locationList.get(i).getLoc_Name());
-//                }
-//                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
-//                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                binding.newInLocations.setAdapter(adapter);
-//                progressDialog.hide();
-//            }else {
-//                Toast.makeText(getActivity(), "Something Went Wrong!!", Toast.LENGTH_SHORT).show();
-//                progressDialog.hide();
-//            }
-//        });
+//        progressDialog.show();
+//        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name);
 //    }
 //
 //    private void addActivity() {
@@ -5144,7 +5158,7 @@
 //            @Override
 //            public void onFailure(Call<UmVehicleResponse> call, Throwable t) {
 //                t.printStackTrace();
-//                failureData();
+//                 PermissionUtils.failureData(getActivity());
 //            }
 //        });
 //    }
@@ -5257,10 +5271,10 @@
 //        } else {
 //            current_date = day + "-" + month + "-" + year;
 //        }
-//        binding.installDate.setText(current_date);
+//        t_install_date.setText(current_date);
 //        paymentDate.setText(current_date);
-//        binding.installTime.setText(s_time);
-//        binding.installDate.setOnClickListener(new View.OnClickListener() {
+//        t_install_Time.setText(s_time);
+//        t_install_date.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                getDate();
@@ -5272,7 +5286,7 @@
 //                getDateforPayment();
 //            }
 //        });
-//        binding.installTime.setOnClickListener(new View.OnClickListener() {
+//        t_install_Time.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                getTime();
@@ -5285,13 +5299,14 @@
 //            @Override
 //            public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
 //                selected_totime = hours + ":" + minutes;
-//                binding.installTime.setText(selected_totime);
+//                t_install_Time.setText(selected_totime);
 //            }
 //        }, hour, minutes, false);
 //        tpd.show();
 //    }
 //
 //    private void getDate() {
+//
 //        final DatePickerDialog dpdd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
 //            @Override
 //            // TODO Auto-generated method stub
@@ -5301,7 +5316,7 @@
 //                } else {
 //                    selected_todate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
 //                }
-//                binding.installDate.setText(selected_todate);
+//                t_install_date.setText(selected_todate);
 //            }
 //        }, year, month - 1, day);
 //        dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
@@ -5670,54 +5685,10 @@
 //
 //    @Override
 //    public void clientResponse(ClientResponse response) {
-////        try {
-////            clientList = response.getClientList();
-////            try {
-////                try {
-////                    clientDetail.clear();
-////                } catch (Exception e) {
-////                    e.printStackTrace();
-////                }
-////                clientDetail.add(" SELECT CLIENT");
-////                for (int i = 0; i < clientList.size(); i++) {
-////                    clientDetail.add(clientList.get(i).getClient_Name());
-////                }
-////                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-////                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-////                binding.newInClients.setAdapter(adapter);
-////                ShowProgressBar(false);
-////            } catch (NullPointerException npe) {
-////                npe.printStackTrace();
-////            }
-////        } catch (Exception e) {
-////            e.printStackTrace();
-////        }
 //    }
 //
 //    @Override
 //    public void locationResponse(ClientLocationResponse response) {
-////        try {
-////            locationList = response.getClientLoc();
-////            try {
-////                try {
-////                    locationDetail.clear();
-////                } catch (Exception e) {
-////                    e.printStackTrace();
-////                }
-////                locationDetail.add("SELECT LOCATION");
-////                for (int i = 0; i < locationList.size(); i++) {
-////                    locationDetail.add(locationList.get(i).getLoc_Name());
-////                }
-////                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, locationDetail);
-////                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-////                binding.newInLocations.setAdapter(adapter);
-////                ShowProgressBar(false);
-////            } catch (NullPointerException npe) {
-////                npe.printStackTrace();
-////            }
-////        } catch (Exception e) {
-////            e.printStackTrace();
-////        }
 //    }
 //
 //    @Override
@@ -5736,7 +5707,7 @@
 //                }
 //                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, workDetail);
 //                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                binding.newInWorkType.setAdapter(adapter);
+//                workType.setAdapter(adapter);
 //                ShowProgressBar(false);
 //            } catch (NullPointerException npe) {
 //                npe.printStackTrace();
@@ -6269,7 +6240,6 @@
 //            Toast.makeText(getContext(), "" + response.getMessage(), Toast.LENGTH_SHORT).show();
 //            if (response.getType() == 1) {
 //                circularRelative.setVisibility(View.GONE);
-//                Progress(false);
 //                progressDialog.hide();
 //                clearData();
 //                for (int i = 0; i < lvItem.getCount(); i++) {
@@ -6391,7 +6361,7 @@
 //            @Override
 //            public void onFailure(Call<VTSTypeResponse> call, Throwable t) {
 //                t.printStackTrace();
-//                failureData();
+//                 PermissionUtils.failureData(getActivity());
 //            }
 //        });
 //    }
@@ -6436,64 +6406,15 @@
 //            @Override
 //            public void onFailure(Call<MainResponse> call, Throwable t) {
 //                t.printStackTrace();
-//                failureData();
+//                PermissionUtils.failureData(getActivity());
 //            }
 //        });
-//    }
-//
-//    private void failureData() {
-//        try {
-//            Snackbar snackbar = Snackbar.make(v, K.TRY_AGAIN, Snackbar.LENGTH_LONG);
-//            View snackbarView = snackbar.getView();
-//            snackbarView.setBackgroundColor(Color.RED);
-//            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
-//            textView.setTextColor(Color.WHITE);
-//            snackbar.show();
-//        } catch (Exception e) {
-//            try {
-//                Toast.makeText(getActivity(), K.TRY_AGAIN, Toast.LENGTH_LONG).show();
-//            } catch (Exception e1) {
-//                e1.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    private void Progress(boolean show) {
-//        Resources res = getResources();
-//        Drawable drawable = res.getDrawable(R.drawable.circular);
-//        mProgress = v.findViewById(R.id.circularProgressbar);
-//        mProgress.setProgress(0);   // Main Progress
-//        mProgress.setSecondaryProgress(100); // Secondary Progress
-//        mProgress.setMax(100); // Maximum Progress
-//        mProgress.setProgressDrawable(drawable);
-//        tv = v.findViewById(R.id.tv);
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                // TODO Auto-generated method stub
-//                while (pStatus < 100) {
-//                    pStatus += 1;
-//                    handler.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            // TODO Auto-generated method stub
-//                            mProgress.setProgress(pStatus);
-//                            tv.setText(pStatus + "%");
-//                        }
-//                    });
-//                    try {
-//                        Thread.sleep(15); //thread will take approx 1.5 seconds to finish
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }).start();
 //    }
 //
 //    @Override
 //    public void receiveDeviceResponse(MainResponse response) {
 //
+//        progressDialog.hide();
 //        try {
 //            srnoList = response.getSrno_device_list().get(0).getNew_sr_no();
 //            removesrnoList = response.getSrno_device_list().get(0).getOld_sr_no();
