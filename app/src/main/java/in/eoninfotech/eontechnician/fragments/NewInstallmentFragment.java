@@ -80,6 +80,7 @@ import in.eoninfotech.eontechnician.ImageUtil;
 import in.eoninfotech.eontechnician.UnderMaintenanceVehicles;
 import in.eoninfotech.eontechnician.databinding.ActivityAddUmBinding;
 import in.eoninfotech.eontechnician.databinding.RemovalFromUmBinding;
+import in.eoninfotech.eontechnician.helper.InstallationFormHelper;
 import in.eoninfotech.eontechnician.responses.DeviceTypeOtherAis;
 import in.eoninfotech.eontechnician.responses.MainClientList;
 import in.eoninfotech.eontechnician.responses.MainResponse;
@@ -170,7 +171,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     ReceiveDeviceControllers receiveDeviceControllers;
     TextInputLayout  con_tilsrNo,tilVoltage, til_vts_miss, til_no_avail_vts, tilsrNo_notAvail, til_new_replace, til_old_replace, til_vts_remove, til_vts_sr_no, til_remove_sr, tilDeviceMiss, told_drsid, tnew_drsid, t_drs_veh_no, t_drs_vts_id, tilvtsno, tilsrNo, tilFaultVts,
             tilFaultSr, tilphnVts, tilphnSr, til_old_vltd_sr_no, til_new_vltd_sr_no, til_id_reinst, til_id_sr, til_sr_reinst, til_new_sr_replace, til_old_sr_replace, sensor_veh, sensor_veh_missing, sensor_veh_remove, sensor_veh_reinstall;
-    String fuel_voltage = "0", path, drs_type, clientId,mainClientId="SELECT CLIENT", personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
+    String s_cust_type="",fuel_voltage = "0", path, drs_type, clientId,mainClientId="SELECT CLIENT", personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
             buttonPressed = "0", buttonPressedActivity = "0", s_reg_no, s_rep_srNo, s_reinst_conf_reg_no, s_device_id, s_drs_id, s_new_drs_id, s_clientname = "SELECT CLIENT", s_remarks, status, s_work_type, s_Time, s_vehicletype="0", s_VehicleTypeInst, s_reason_repla = "0", removalReason = "0", itemsCollected = "0", others = "", s_work_id, s_new_device_id, s_e_device_id = "0", is_drs = "N", drs_dirction = "N", disconnection_reason = "0", ignition_sensor = "N", sim_reason = "0", missing_reason = "0", cut_off = "N", serial_no = "SELECT SR.NO.", confirmVehNo, panic = "N",
             s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name,replace_type="D",silo_sensor="N",device_working_status="W",sensor_working_status="W";
     CheckConnection chk;
@@ -259,11 +260,14 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     ActivityAddUmBinding activityAddUmBinding;
     RemovalFromUmBinding removalFromUmBinding;
     ArrayAdapter<String> umVehicleAdapter;
+    InstallationFormHelper formHelper;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_new_install, container, false);
+
+        formHelper = new InstallationFormHelper(v);
 
         chk = new CheckConnection(v.getContext());
         sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
@@ -1437,6 +1441,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     ShowProgressBar(true);
                     Handler handler = new Handler();
                     handler.postDelayed(() -> {
+                        //formHelper.resetAllFields();
+
                         clearData();
                         e_device_id.setInputType(InputType.TYPE_CLASS_NUMBER);
                         linearPhoneSupport.setVisibility(View.GONE);
@@ -1541,6 +1547,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                                 i = i - 1;
                             }
                             serial_no = srnoList.get(i).getPcb_sr_no();
+                            s_cust_type = srnoList.get(i).getCust_type();
                         }
 
                         @Override
@@ -5378,6 +5385,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         RequestBody deviceworkingstatus = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(device_working_status));
         RequestBody sensorworkingstatus = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_working_status));
         RequestBody mainclientid = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(mainClientId));
+        RequestBody cust_type = RequestBody.create(MediaType.parse("text/plain"),s_cust_type);
 
         MultipartBody.Part image = null;
         if (buttonPressed.equals("0")) {
@@ -5403,7 +5411,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         }
         newInstallmentController.postInstallationsData(technician_id, activity_date, activity_time, customer, customer_location, isDemo, activity_type, vts_type, deviceType, old_device_id, new_device_id, old_serial_no, new_serial_no, reg_no, veh_type, is_DRS, old_drs, new_drs, drs_direction, Mgt_set, ignSensor, fuelSensor, doorSensor,
                 panic_button, cutOff, replacement_reason, removalType, removeReason, disconnectReason, missingType, missingReason, notAvailActivity, notAvailReason, collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected,
-                faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype,deviceworkingstatus,sensorworkingstatus,mainclientid, image, this);
+                faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype,deviceworkingstatus,sensorworkingstatus,mainclientid, cust_type,image, this);
     }
 
     private void setDateAndTime() {
@@ -5568,6 +5576,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         followUpPersonPhone.setText("");
         buttonPressed = "0";
         others = "";
+        s_cust_type="";
         e_old_sim_no.setText("");
         e_new_sim_no.setText("");
         mDevice_reg_no.setText("");
@@ -5722,6 +5731,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         followUpPersonPhone.setText("");
         buttonPressed = "0";
         others = "";
+        s_cust_type="";
         e_old_sim_no.setText("");
         e_new_sim_no.setText("");
         mDevice_reg_no.setText("");
@@ -6385,6 +6395,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     @Override
     public void updateDataResponse(MainResponse response) {
         clearData();
+        //formHelper.resetAllFields();
         pMethod();
         try {
             Toast.makeText(getContext(), "" + response.getMessage(), Toast.LENGTH_SHORT).show();
@@ -6629,7 +6640,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 srNoDetails.add(" SELECT SR.NO.");
                 removesrNoDetails.add(" SELECT SR.NO.");
                 for (int i = 0; i < srnoList.size(); i++) {
-                    srNoDetails.add(srnoList.get(i).getPcb_sr_no());
+                    //srNoDetails.add(srnoList.get(i).getPcb_sr_no());
+                    srNoDetails.add(srnoList.get(i).getPcb_sr_no()+srnoList.get(i).getCust_type());
                 }
                 adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, srNoDetails);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

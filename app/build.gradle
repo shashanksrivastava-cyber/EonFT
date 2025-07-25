@@ -155,4 +155,7 @@ dependencies {
 // Android testing (optional for Robolectric)
     testImplementation "org.robolectric:robolectric:4.15.1"
 
+    implementation 'androidx.navigation:navigation-fragment:2.8.4'
+    implementation 'androidx.navigation:navigation-ui:2.8.4'
+
 }

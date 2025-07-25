@@ -431,6 +431,7 @@ public interface ApiHolder {
                                              @Part("device_working_status") RequestBody device_working_status,
                                              @Part("sensor_working_status") RequestBody sensor_working_status,
                                              @Part("main_client_id") RequestBody main_client_id,
+                                             @Part("cust_type") RequestBody cust_type,
                                              @Part MultipartBody.Part image);
 
     @FormUrlEncoded
@@ -694,8 +695,18 @@ public interface ApiHolder {
     Call<MainResponse> removed_device_list(
             @Field("tech_id") String tech_id);
 
+//    @FormUrlEncoded
+//    @POST("get_activity_serial_no.php")
+//    Call<MainResponse> get_serial_no(
+//            @Field("tech_id") String tech_id,
+//            @Field("customer") String customer,
+//            @Field("sub_cust") String sub_cust,
+//            @Field("activity_type") String activity_type,
+//            @Field("dbname") String dbname,
+//            @Field("server") String server);
+
     @FormUrlEncoded
-    @POST("get_activity_serial_no.php")
+    @POST("get_activity_serial_no_test.php")
     Call<MainResponse> get_serial_no(
             @Field("tech_id") String tech_id,
             @Field("customer") String customer,
@@ -713,7 +724,6 @@ public interface ApiHolder {
             @Field("depo_id") String depo_id,
             @Field("status") String status,
             @Field("type") String type);
-
 
     @FormUrlEncoded
     @POST("get_live_status_report_eon.php")

@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setTitle("ADD Dashboard");
-        linearLayout = findViewById(R.id.framelay);
+//        linearLayout = findViewById(R.id.framelay);
         appPrefs = new AppPreferences(getApplicationContext());
         sharedprefs = getSharedPreferences("login_user_pass", MODE_PRIVATE);
         editor = sharedprefs.edit();
@@ -556,6 +556,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
+        //super.onBackPressed();
         super.onBackPressed();
         new MaterialAlertDialogBuilder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -570,7 +571,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .setNegativeButton("No", null)
                 .show();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
