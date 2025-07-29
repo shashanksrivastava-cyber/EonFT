@@ -248,6 +248,7 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
 
     @Override
     public void clientResponse(ClientResponse response) {
+
     }
 
     @Override
@@ -386,6 +387,5 @@ public class DevicedashboardDetail extends AppCompatActivity implements ClientLi
     public void onButtonClick(String pcb_sr_no,String change_status) {
 
     }
-
 
 }
