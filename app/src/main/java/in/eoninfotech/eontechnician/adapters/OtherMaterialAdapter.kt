@@ -25,37 +25,37 @@ class OtherMaterialAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder){
-            with(lr?.get(position)) {
+            with(lr.get(position)) {
                 val val1 = 1
-                var k = position.plus(val1)!!.toString()
-                binding!!.materialName.text= k.plus(". ").plus(this?.item)
-                binding!!.quantity.text= this?.quantity
-                binding!!.addText.text= this?.quantity
+                val k = position.plus(val1).toString()
+                binding.materialName.text= k.plus(". ").plus(this.item)
+                binding.quantity.text= this.quantity
+                binding.addText.text= this.quantity
 
-                binding!!.deleteButton.setOnClickListener {
+                binding.deleteButton.setOnClickListener {
 
-                    var value = binding!!.addText.text.toString()!!.toInt()
+                    var value = binding.addText.text.toString().toInt()
 
                     if (value > 0) {
                         value--
-                        binding!!.addText.text = value.toString()
+                        binding.addText.text = value.toString()
                     }
                 }
 
-                binding!!.addButton.setOnClickListener {
+                binding.addButton.setOnClickListener {
 
-                    var value = binding!!.addText.text.toString()!!.toInt()
+                    var value = binding.addText.text.toString().toInt()
                     value++
-                    binding!!.addText.text = value.toString()
+                    binding.addText.text = value.toString()
                 }
 
                 if(status.equals("Received")){
-                    binding!!.addCount.setVisibility(View.GONE)
+                    binding.addCount.setVisibility(View.GONE)
                 }else {
                     if(status.equals("Send")){
-                        binding!!.addCount.setVisibility(View.GONE)
+                        binding.addCount.setVisibility(View.GONE)
                     }else{
-                    binding!!.addCount.setVisibility(View.VISIBLE)
+                    binding.addCount.setVisibility(View.VISIBLE)
                     }
                 }
             }
@@ -63,11 +63,9 @@ class OtherMaterialAdapter(
     }
 
     override fun getItemCount(): Int {
-        return lr!!.size
+        return lr.size
     }
 
     inner class ViewHolder(val binding: OtherMaterialAdapterBinding)
         :RecyclerView.ViewHolder(binding.root)
-
-
 }

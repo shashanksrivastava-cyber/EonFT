@@ -2,8 +2,155 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_tech_dashboard">
 
-    <!-- Fragments -->
+    <!-- DASHBOARD -->
+    <fragment
+        android:id="@+id/nav_tech_dashboard"
+        android:name="in.eoninfotech.eontechnician.fragments.DashBoardFragment"
+        android:label="ADD Dashboard"
+        tools:layout="@layout/fragment_tech_dashboard" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/material_dashboard"-->
+<!--        android:name="in.eoninfotech.eontechnician.MaterialDashboardFragment"-->
+<!--        android:label="Live Inventory Dashboard"-->
+<!--        tools:layout="@layout/fragment_material_dashboard" />-->
+
+    <activity
+        android:id="@+id/material_dashboard"
+        android:name="in.eoninfotech.eontechnician.activity.Devicedashboard"
+        android:label="Live Inventory Dashboard" />
+
+    <fragment
+        android:id="@+id/nav_live_status"
+        android:name="in.eoninfotech.eontechnician.fragments.LiveStatusFragment"
+        android:label="Live Status (Customer)"
+        tools:layout="@layout/fragment_live_status" />
+
+    <fragment
+        android:id="@+id/nav_live_status_eon"
+        android:name="in.eoninfotech.eontechnician.fragments.LiveStatusFragmentEon"
+        android:label="Live Status (EON VTS)"
+        tools:layout="@layout/fragment_live_status_eon" />
+
+    <!-- ACTIVITIES -->
+    <fragment
+        android:id="@+id/nav_mark_site"
+        android:name="in.eoninfotech.eontechnician.fragments.ActivityLogFragment"
+        android:label="Mark Attendance"
+        tools:layout="@layout/fragment_mark_attendance" />
+
+    <fragment
+        android:id="@+id/nav_new_repair"
+        android:name="in.eoninfotech.eontechnician.fragments.NewInstallmentFragment"
+        android:label="Activities"
+        tools:layout="@layout/fragment_new_repair" />
+
+
+    <fragment
+        android:id="@+id/nav_stock"
+        android:name="in.eoninfotech.eontechnician.fragments.StockFragment"
+        android:label="Stock"
+        tools:layout="@layout/fragment_stock" />
+
+    <fragment
+        android:id="@+id/nav_call_sheet"
+        android:name="in.eoninfotech.eontechnician.fragments.CallSheetFragment"
+        android:label="Call Sheet"
+        tools:layout="@layout/fragment_call_sheet" />
+
+    <!-- OTHER -->
+    <fragment
+        android:id="@+id/nav_pay_col_report"
+        android:name="in.eoninfotech.eontechnician.fragments.PaymentCollectionReportFragment"
+        android:label="Payment Collection Report"
+        tools:layout="@layout/fragment_payment_collection_report" />
+
+    <fragment
+        android:id="@+id/nav_incentive"
+        android:name="in.eoninfotech.eontechnician.fragments.FragmentIncentiveTab"
+        android:label="Incentive"
+        tools:layout="@layout/fragment_incentive" />
+
+    <fragment
+        android:id="@+id/nav_bill"
+        android:name="in.eoninfotech.eontechnician.fragments.BillIntimationFragment"
+        android:label="Bill Intimation"
+        tools:layout="@layout/fragment_bill_intimation" />
+
+    <fragment
+        android:id="@+id/nav_additional_material"
+        android:name="in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment"
+        android:label="Service Stock Demand"
+        tools:layout="@layout/fragment_service_stock_demand" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_material"-->
+<!--        android:name="in.eoninfotech.eontechnician.fragments.Receive"-->
+<!--        android:label="Receive Material"-->
+<!--        tools:layout="@layout/fragment_receive_material" />-->
+
+    <activity
+        android:id="@+id/nav_material"
+        android:name="in.eoninfotech.eontechnician.activity.ReceiveDeviceActivity"
+        android:label="Receive Material" />
+
+    <fragment
+        android:id="@+id/nav_material_return"
+        android:name="in.eoninfotech.eontechnician.MaterialReturnFragment"
+        android:label="Send to Eon"
+        tools:layout="@layout/fragment_send_to_eon" />
+
+    <fragment
+        android:id="@+id/nav_material_send_to_tech"
+        android:name="in.eoninfotech.eontechnician.MaterialtoTechFragment"
+        android:label="Send to Technician"
+        tools:layout="@layout/fragment_send_to_technician" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_technician_of_the_month"-->
+<!--        android:name="in.eoninfotech.eontechnician.TechnicianOfMonthFragment"-->
+<!--        android:label="Service Engg of the Month"-->
+<!--        tools:layout="@layout/fragment_technician_of_month" />-->
+
+<!--    &lt;!&ndash; MAINTENANCE MANUAL &ndash;&gt;-->
+<!--    <fragment-->
+<!--        android:id="@+id/device_maint"-->
+<!--        android:name="in.eoninfotech.eontechnician.DeviceMaintenanceFragment"-->
+<!--        android:label="Device Maintenance"-->
+<!--        tools:layout="@layout/fragment_device_maintenance" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/tm_removal"-->
+<!--        android:name="in.eoninfotech.eontechnician.TMRemovalFragment"-->
+<!--        android:label="TM Removal"-->
+<!--        tools:layout="@layout/fragment_tm_removal" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/pump_removal"-->
+<!--        android:name="in.eoninfotech.eontechnician.PumpRemovalFragment"-->
+<!--        android:label="Pump Removal"-->
+<!--        tools:layout="@layout/fragment_pump_removal" />-->
+
+<!--    &lt;!&ndash; KNOWLEDGE BASE &ndash;&gt;-->
+<!--    <fragment-->
+<!--        android:id="@+id/knowldge_base"-->
+<!--        android:name="in.eoninfotech.eontechnician.KnowledgeBaseFragment"-->
+<!--        android:label="Knowledge Base"-->
+<!--        tools:layout="@layout/fragment_knowledge_base" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/faqs"-->
+<!--        android:name="in.eoninfotech.eontechnician.FaqsFragment"-->
+<!--        android:label="FAQ's"-->
+<!--        tools:layout="@layout/fragment_faqs" />-->
+
+<!--    &lt;!&ndash; LOGOUT &ndash;&gt;-->
+<!--    <activity-->
+<!--        android:id="@+id/menu_logout"-->
+<!--        android:name="in.eoninfotech.eontechnician.LogoutActivity"-->
+<!--        android:label="Logout" />-->
 
 </navigation>

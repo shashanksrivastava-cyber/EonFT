@@ -62,7 +62,6 @@ public class MaterialtoTechFragment extends Fragment implements ReceiveDeviceLis
     Button update_data,final_submit, final_cancel,addMaterial;
     EditText details,et_remarks,etQuantity;
     TickerView tickerView;
-
     ImageButton delete_button;
     Spinner type_spinner,transit_spinner,courier_spinner;
     ArrayList<TechDetails> techList = new ArrayList<>();

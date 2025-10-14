@@ -8,202 +8,212 @@
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/greyed_out"
-            android:orientation="vertical"
-            android:gravity="center|right"
-            android:layout_marginEnd="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/eonWhite"
-                android:gravity="center|right">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/edittext_back"
-                    android:ems="10"
-                    android:hint="  Search"
-                    android:drawableStart="@drawable/ic_search_black_24dp"
-                    android:focusableInTouchMode="true">
-                </EditText>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        app:duration="5000"
-        android:visibility="gone">
+        android:background="@color/eonWhite">
 
-        <!-- Adding 3 rows of placeholders -->
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:elevation="10dp"
+            android:visibility="gone">
 
-            <include layout="@layout/recipe_placeholder_item" />
-
-            <include layout="@layout/recipe_placeholder_item" />
-
-            <include layout="@layout/recipe_placeholder_item" />
-
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:layout_marginTop="5dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <EditText
-                android:id="@+id/fromDate"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/et_frame"
-                android:drawableStart="@drawable/baseline_event_black_18"
-                android:fontFamily="sans-serif-light"
-                android:hint="From Date"
-                android:drawablePadding="5dp"
-                android:imeOptions="actionNext"
-                android:padding="5dp"
-                android:textColorHint="@color/black"
-                android:textSize="14sp"
-                android:focusableInTouchMode="false"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:id="@+id/toDate"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_toRightOf="@+id/fromDate"
-                android:background="@drawable/et_frame"
-                android:drawableStart="@drawable/baseline_event_black_18"
-                android:fontFamily="sans-serif-light"
-                android:hint="To Date"
-                android:drawablePadding="5dp"
-                android:imeOptions="actionNext"
-                android:padding="5dp"
-                android:textColorHint="@color/black"
-                android:textSize="14sp"
-                android:focusableInTouchMode="false"
-                android:layout_weight="1"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginEnd="10dp"
-                android:background="@drawable/et_frame"
-                android:layout_weight="1">
-
-                <in.eoninfotech.eontechnician.view.MySearchableSpinner
-                    android:id="@+id/statusSpinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:gravity="center"
-                    android:spinnerMode="dialog"
-                    android:visibility="visible"
-                    android:entries="@array/material_status"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="6dp"
-                    android:background="@color/eonWhite"
-                    android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/addVehicle_receive"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
-        android:text="@string/dispatch"
-        android:textColor="@color/eonBlue"
-        android:visibility="visible"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:gravity="center"/>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp">
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
             <LinearLayout
-                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/greyed_out"
+                android:orientation="vertical"
+                android:gravity="center|right"
+                android:layout_marginEnd="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/eonWhite"
+                    android:gravity="center|right">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/edittext_back"
+                        android:ems="10"
+                        android:hint="  Search"
+                        android:drawableStart="@drawable/ic_search_black_24dp"
+                        android:focusableInTouchMode="true">
+                    </EditText>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            app:duration="5000"
+            android:visibility="gone">
+
+            <!-- Adding 3 rows of placeholders -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants"
                 android:orientation="vertical">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/txt_content_unavailable"
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+                <include layout="@layout/recipe_placeholder_item" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <EditText
+                    android:id="@+id/fromDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/et_frame"
+                    android:drawableStart="@drawable/baseline_event_black_18"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="From Date"
+                    android:drawablePadding="5dp"
+                    android:imeOptions="actionNext"
+                    android:padding="5dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:focusableInTouchMode="false"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/toDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@+id/fromDate"
+                    android:background="@drawable/et_frame"
+                    android:drawableStart="@drawable/baseline_event_black_18"
+                    android:fontFamily="sans-serif-light"
+                    android:hint="To Date"
+                    android:drawablePadding="5dp"
+                    android:imeOptions="actionNext"
+                    android:padding="5dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:focusableInTouchMode="false"
+                    android:layout_weight="1"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/et_frame"
+                    android:layout_weight="1">
+
+                    <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                        android:id="@+id/statusSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center"
+                        android:spinnerMode="dialog"
+                        android:visibility="visible"
+                        android:entries="@array/material_status"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="6dp"
+                        android:background="@color/eonWhite"
+                        android:src="@drawable/baseline_keyboard_arrow_down_black_24" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/addVehicle_receive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/dispatch"
+            android:textColor="@color/eonBlue"
+            android:visibility="visible"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center"/>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+                <LinearLayout
+                    android:id="@+id/llContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:gravity="center"
-                    android:text="Content Unavailable!!"
-                    android:visibility="gone" />
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"
-                    android:visibility="visible"
-                    android:background="@color/eonWhite"
-                    android:padding="10dp"/>
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/txt_content_unavailable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="64dp"
+                        android:gravity="center"
+                        android:text="Content Unavailable!!"
+                        android:visibility="gone" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="visible"
+                        android:background="@color/eonWhite"
+                        android:padding="10dp"/>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

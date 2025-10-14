@@ -27,8 +27,14 @@ android {
 //        versionCode 66 // total number of version changes on play store
 //        versionName "7.1"
 
-        versionCode 67 // total number of version changes on play store
-        versionName "7.2"
+//        versionCode 67 // total number of version changes on play store
+//        versionName "7.2"
+
+//        versionCode 68 // total number of version changes on play store
+//        versionName "7.3"
+
+        versionCode 69 // total number of version changes on play store
+        versionName "7.4"
 
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
@@ -58,6 +64,10 @@ android {
     compileOptions {
         targetCompatibility JavaVersion.VERSION_17
         sourceCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17" // Or your desired minimum Java target version, matching targetCompatibility
     }
     namespace 'in.eoninfotech.eontechnician'
 
@@ -157,5 +167,14 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment:2.8.4'
     implementation 'androidx.navigation:navigation-ui:2.8.4'
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    // RxJava3
+    implementation "io.reactivex.rxjava3:rxjava:3.1.8"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
+
+    // Retrofit adapter for RxJava3
+    implementation "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
 
 }

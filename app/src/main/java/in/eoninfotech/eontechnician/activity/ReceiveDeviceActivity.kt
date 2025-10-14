@@ -107,8 +107,8 @@ class ReceiveDeviceActivity : AppCompatActivity(), ReceiveDeviceListener {
     private fun initView() {
 
         val layoutManager = LinearLayoutManager(applicationContext)
-        binding!!.recyclerView!!.layoutManager = layoutManager
-        binding!!.recyclerView!!.setAdapter(receiveDeviceAdapter)
+        binding!!.recyclerView.layoutManager = layoutManager
+        binding!!.recyclerView.setAdapter(receiveDeviceAdapter)
 
         binding!!.fromDate.setInputType(InputType.TYPE_NULL)
         binding!!.toDate.setInputType(InputType.TYPE_NULL)
@@ -185,7 +185,7 @@ class ReceiveDeviceActivity : AppCompatActivity(), ReceiveDeviceListener {
         binding!!.statusSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 status = binding!!.statusSpinner.toString()
-                val text: String = parent?.getItemAtPosition(position).toString()
+                val text: String = parent.getItemAtPosition(position).toString()
                 if (text.equals("Received", ignoreCase = true)) {
                     status="R"
                     getReceiveData()
@@ -231,16 +231,16 @@ class ReceiveDeviceActivity : AppCompatActivity(), ReceiveDeviceListener {
         progressDialog!!.hide()
         var lr: ArrayList<DispatchDeviceList?>? = ArrayList()
         lr = response.dispatched_device_list
-        binding!!.swipeRefresh?.setRefreshing(false)
+        binding!!.swipeRefresh.setRefreshing(false)
         if(response.type==1){
             receiveDeviceAdapter = ReceiveDeviceAdapter(this@ReceiveDeviceActivity,lr)
-            binding!!.recyclerView?.setAdapter(receiveDeviceAdapter)
+            binding!!.recyclerView.setAdapter(receiveDeviceAdapter)
             receiveDeviceAdapter!!.notifyDataSetChanged()
-            binding!!.recyclerView?.setVisibility(View.VISIBLE)
-            binding!!.txtContentUnavailable?.setVisibility(View.GONE)
+            binding!!.recyclerView.setVisibility(View.VISIBLE)
+            binding!!.txtContentUnavailable.setVisibility(View.GONE)
         }else {
-            binding!!.recyclerView?.setVisibility(View.GONE)
-            binding!!.txtContentUnavailable?.setVisibility(View.VISIBLE)
+            binding!!.recyclerView.setVisibility(View.GONE)
+            binding!!.txtContentUnavailable.setVisibility(View.VISIBLE)
         }
     }
 

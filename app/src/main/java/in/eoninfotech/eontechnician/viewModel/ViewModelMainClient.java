@@ -7,7 +7,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import in.eoninfotech.eontechnician.repository.MainClientRepository;
+import in.eoninfotech.eontechnician.responses.MainClientList;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 
 
@@ -27,4 +31,5 @@ public class ViewModelMainClient extends AndroidViewModel {
         }
         return mainClientDetails;
     }
+
 }

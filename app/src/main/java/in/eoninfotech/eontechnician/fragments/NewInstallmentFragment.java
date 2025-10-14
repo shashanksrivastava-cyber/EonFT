@@ -1637,11 +1637,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             if (vltddevice.getSelectedItem().toString().equalsIgnoreCase("E124")) {
                                 s_vts_type = String.valueOf(deviceTypeOtherAis_arr.get(i).getId());
                                 tilsrNo.setVisibility(View.GONE);
-                                tilvtsno.setVisibility(View.VISIBLE);
+                                tilvtsno.setVisibility(View.GONE);
                                 oldDeviceType.setVisibility(View.VISIBLE);
                                 options.setVisibility(View.VISIBLE);
                                 vltdOptions.setVisibility(View.VISIBLE);
-                                e_device_id.setVisibility(View.VISIBLE);
+                                e_device_id.setVisibility(View.GONE);
                                 vts_sr_no.setVisibility(View.VISIBLE);
                                 til_vts_sr_no.setVisibility(View.GONE);
                                 vltd_sr_no.setVisibility(View.GONE);
@@ -3364,9 +3364,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 }
                 if (s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")) {
                     Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
-                } else if (s_new_device_id.equals("") && (e_device_id.getVisibility() == View.VISIBLE)) {
-                    e_device_id.setError("Vts Id can't be null");
-                } else if (serial_no.equals("") && (vts_sr_no.getVisibility() == View.VISIBLE)) {
+                }
+//                else if (s_new_device_id.equals("") && (e_device_id.getVisibility() == View.VISIBLE)) {
+//                    e_device_id.setError("Vts Id can't be null");
+//                }
+                else if (serial_no.equals("") && (vts_sr_no.getVisibility() == View.VISIBLE)) {
                     vts_sr_no.setError("Sr no can't be blank");
                 } else if (serial_no.equals("") && (vltd_sr_no.getVisibility() == View.VISIBLE)) {
                     vltd_sr_no.setError("Sr no can't be blank");
@@ -3857,9 +3859,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         old_deviceidreplace.setError("Sr no can't be null");
                     } else if ((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(linear_device_id_replace_new.getVisibility() == View.VISIBLE)&&(serial_no.equals("") && (!(radioButtonChecked.equalsIgnoreCase("N")))))) {
                         new_deviceid.setError("Sr no can't be null");
-                    } else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(s_old_serial_no.matches(con_old_deviceidreplace.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
-                        con_old_deviceidreplace.setError("Sr. no. not match");
-                    } else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(serial_no.matches(con_new_deviceid.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
+                    }
+//                    else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(s_old_serial_no.matches(con_old_deviceidreplace.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
+//                        con_old_deviceidreplace.setError("Sr. no. not match");
+//                    }
+                    else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(serial_no.matches(con_new_deviceid.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
                         con_new_deviceid.setError("Sr. no. not match");
                     } else if ((linear_device_sr_no_replace_old.getVisibility() == View.VISIBLE)&&(s_old_serial_no.equals("") && (til_old_sr_replace.getVisibility() == View.VISIBLE) && (!(radioButtonChecked.equalsIgnoreCase("N"))))) {
                         old_replace_sr_no.setError("Sr.no.can't be empty");
@@ -4187,9 +4191,11 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                         Toast.makeText(getContext(), "Select Reason", Toast.LENGTH_LONG).show();
                     } else if (itemsCollected.equals("") && (!removeDeviceType.equalsIgnoreCase("S"))) {
                         Toast.makeText(getActivity(), "Select Items Collected", Toast.LENGTH_SHORT).show();
-                    } else if (!(removeDeviceType.equalsIgnoreCase("D")) && ((sensor_veh_remove.getVisibility() == View.GONE))) {
-                        Toast.makeText(getContext(), "Please Select Sensor", Toast.LENGTH_SHORT).show();
-                    } else if ((sensor_veh_remove.getVisibility() == View.VISIBLE) && (sensor_veh_no_remove.getText().toString().equalsIgnoreCase("") && (!(removeDeviceType.equalsIgnoreCase("V"))))) {
+                    }
+//                    else if (!(removeDeviceType.equalsIgnoreCase("D")) && ((sensor_veh_remove.getVisibility() == View.GONE))) {
+//                        Toast.makeText(getContext(), "Please Select Sensor", Toast.LENGTH_SHORT).show();
+//                    }
+                    else if ((sensor_veh_remove.getVisibility() == View.VISIBLE) && (sensor_veh_no_remove.getText().toString().equalsIgnoreCase("") && (!(removeDeviceType.equalsIgnoreCase("V"))))) {
                         sensor_veh_no_remove.setError("Please provide vehicle no");
                     } else {
                         updateInstallationData();
@@ -6651,7 +6657,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 for (int i = 0; i < removesrnoList.size(); i++) {
                     removesrNoDetails.add(removesrnoList.get(i).getPcb_sr_no());
                 }
-
                 adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, removesrNoDetails);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spn_remove_sr_no.setAdapter(adapter);

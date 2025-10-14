@@ -175,6 +175,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (appPrefs.isLoggedIn()) {
                         Intent intee = new Intent(SplashActivity.this, MainActivity.class);
+                        //Intent intee = new Intent(SplashActivity.this, MainActivityNew.class);
                         intee.putExtra("intent","");
                         startActivity(intee);
                         finish();

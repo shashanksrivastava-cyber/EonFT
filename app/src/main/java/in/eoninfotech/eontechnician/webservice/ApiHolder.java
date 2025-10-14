@@ -42,6 +42,7 @@ import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.responses.YearListResponse;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -470,14 +471,24 @@ public interface ApiHolder {
     @POST("faulty-drs-details.php")
     Call<FaultyDevices> faultyDRSResponse(@Field("zone") String zone);
 
+//    @FormUrlEncoded
+//    @POST("login.php")
+//    Call<LoginResponse> loginResponse(
+//            @Field("username") String username,
+//            @Field("password") String password,
+//            @Field("imei_no") String imei_no,
+//            @Field("version_name") String version_name,
+//            @Field("fcm_token") String fcm_token);
+
     @FormUrlEncoded
     @POST("login.php")
-    Call<LoginResponse> loginResponse(
+    Single<LoginResponse> loginResponse(
             @Field("username") String username,
             @Field("password") String password,
             @Field("imei_no") String imei_no,
             @Field("version_name") String version_name,
             @Field("fcm_token") String fcm_token);
+
 
     @FormUrlEncoded
     @POST("log-status.php")
@@ -695,18 +706,8 @@ public interface ApiHolder {
     Call<MainResponse> removed_device_list(
             @Field("tech_id") String tech_id);
 
-//    @FormUrlEncoded
-//    @POST("get_activity_serial_no.php")
-//    Call<MainResponse> get_serial_no(
-//            @Field("tech_id") String tech_id,
-//            @Field("customer") String customer,
-//            @Field("sub_cust") String sub_cust,
-//            @Field("activity_type") String activity_type,
-//            @Field("dbname") String dbname,
-//            @Field("server") String server);
-
     @FormUrlEncoded
-    @POST("get_activity_serial_no_test.php")
+    @POST("get_activity_serial_no.php")
     Call<MainResponse> get_serial_no(
             @Field("tech_id") String tech_id,
             @Field("customer") String customer,
@@ -714,6 +715,16 @@ public interface ApiHolder {
             @Field("activity_type") String activity_type,
             @Field("dbname") String dbname,
             @Field("server") String server);
+
+//    @FormUrlEncoded
+//    @POST("get_activity_serial_no_test.php")
+//    Call<MainResponse> get_serial_no(
+//            @Field("tech_id") String tech_id,
+//            @Field("customer") String customer,
+//            @Field("sub_cust") String sub_cust,
+//            @Field("activity_type") String activity_type,
+//            @Field("dbname") String dbname,
+//            @Field("server") String server);
 
     @FormUrlEncoded
     @POST("get_live_status_report.php")
@@ -820,7 +831,7 @@ public interface ApiHolder {
             @Field("main_client_id") String main_client_id,
             @Field("client_id") String client_id,
             @Field("loc_id") String loc_id,
-            @Field("status") String status);   // 0 for non in under maintenance and 1 is under maintenance
+            @Field("status") String status);   // 0 for not in under maintenance and 1 is under maintenance
 
     @FormUrlEncoded
     @POST("update_vehicle_um.php")
@@ -828,7 +839,7 @@ public interface ApiHolder {
             @Field("main_client_id") String main_client_id,
             @Field("client_id") String client_id,
             @Field("loc_id") String loc_id,
-            @Field("status") String status,             // 0 for non in under maintenance and 1 is under maintenance
+            @Field("status") String status,             // 0 for not in under maintenance and 1 is under maintenance
             @Field("reg_no") String reg_no,
             @Field("activity_type") String activity_type,
             @Field("activity_time") String activity_time,

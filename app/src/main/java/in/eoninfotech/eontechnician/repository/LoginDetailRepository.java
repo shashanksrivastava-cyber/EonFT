@@ -9,43 +9,71 @@ import in.eoninfotech.eontechnician.responses.ActivityResponse;
 import in.eoninfotech.eontechnician.responses.LoginResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+//public class LoginDetailRepository {
+//
+//    String version;
+//    ApiHolder client_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+//
+//    private final MutableLiveData<LoginResponse> loginDetails = new MutableLiveData<>();
+//
+//    private static LoginDetailRepository loginDetailRepository;
+//
+//    public LoginDetailRepository(Application application) {
+//
+//    }
+//
+//    public static LoginDetailRepository getInstance(){
+//        if (loginDetailRepository == null){
+//            loginDetailRepository = new LoginDetailRepository(new Application());
+//        }
+//        return loginDetailRepository;
+//    }
+//
+//    public MutableLiveData<LoginResponse> getActivtyDetail(String username, String password,String imei_no,String version_name,String fcm_token) {
+//        Call<LoginResponse> listOfMovieOut = client_att.loginResponse(username,password,imei_no,version_name,fcm_token);
+//        listOfMovieOut.enqueue(new Callback<LoginResponse>() {
+//            @Override
+//            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+//                loginDetails.setValue(response.body());
+//            }
+//            @Override
+//            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+//                loginDetails.postValue(null);
+//            }
+//        });
+//        return loginDetails;
+//    }
+//
+//}
 public class LoginDetailRepository {
 
-    String version;
-    ApiHolder client_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-
-    private final MutableLiveData<LoginResponse> loginDetails = new MutableLiveData<>();
+    private final ApiHolder client_att;
 
     private static LoginDetailRepository loginDetailRepository;
 
     public LoginDetailRepository(Application application) {
-
+        // Here you can pass version dynamically if needed
+        String version = "";
+        client_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
     }
 
-    public static LoginDetailRepository getInstance(){
+    public static LoginDetailRepository getInstance(Application application){
         if (loginDetailRepository == null){
-            loginDetailRepository = new LoginDetailRepository(new Application());
+            loginDetailRepository = new LoginDetailRepository(application);
         }
         return loginDetailRepository;
     }
 
-    public MutableLiveData<LoginResponse> getActivtyDetail(String username, String password,String imei_no,String version_name,String fcm_token) {
-        Call<LoginResponse> listOfMovieOut = client_att.loginResponse(username,password,imei_no,version_name,fcm_token);
-        listOfMovieOut.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
-                loginDetails.setValue(response.body());
-            }
-            @Override
-            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
-                loginDetails.postValue(null);
-            }
-        });
-        return loginDetails;
+    // ✅ Expose Single instead of LiveData
+    public Single<LoginResponse> getActivityDetail(String username, String password,
+                                                   String imei_no, String version_name,
+                                                   String fcm_token) {
+        // Retrofit must return Single<LoginResponse>
+        return client_att.loginResponse(username, password, imei_no, version_name, fcm_token);
     }
-
 }

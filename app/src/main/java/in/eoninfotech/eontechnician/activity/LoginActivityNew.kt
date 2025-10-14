@@ -27,10 +27,12 @@ import dmax.dialog.SpotsDialog
 import `in`.eoninfotech.eontechnician.AppPreferences
 import `in`.eoninfotech.eontechnician.BuildConfig
 import `in`.eoninfotech.eontechnician.MainActivity
+import `in`.eoninfotech.eontechnician.MainActivityNew
 import `in`.eoninfotech.eontechnician.R
 import `in`.eoninfotech.eontechnician.databinding.LoginactivityBinding
 import `in`.eoninfotech.eontechnician.helper.CheckConnection
 import `in`.eoninfotech.eontechnician.responses.LoginDetail
+import `in`.eoninfotech.eontechnician.responses.LoginResponse
 import `in`.eoninfotech.eontechnician.viewModel.ViewModelLogin
 import `in`.eoninfotech.eontechnician.storage.LocationPrefs
 import kotlinx.coroutines.launch
@@ -153,43 +155,67 @@ class LoginActivityNew : AppCompatActivity() {
         }
     }
 
+
     private fun getLogin() {
         progressDialog.show()
-        lifecycleScope.launch {
-            viewModelLogin.getLoginResponse(pUsr, pPass, imsiSIM1, BuildConfig.VERSION_NAME, token)
-                .observe(this@LoginActivityNew) { response ->
+
+        viewModelLogin.login(
+            pUsr,
+            pPass,
+            imsiSIM1,
+            BuildConfig.VERSION_NAME,
+            token,
+            object : ViewModelLogin.LoginCallback {
+                override fun onSuccess(response: LoginResponse) {
                     progressDialog.dismiss()
                     if (response.type == 1 && response.loginDetails.isNotEmpty()) {
                         val loginDetail = response.loginDetails.first()
                         saveLoginDetails(loginDetail)
                         appPrefs.setLoggedIn(true)
-
                         val intent = Intent(this@LoginActivityNew, MainActivity::class.java)
+                        //val intent = Intent(this@LoginActivityNew, MainActivityNew::class.java)
                         intent.putExtra("intent", "")
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this@LoginActivityNew, "Username/Password Incorrect", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@LoginActivityNew,
+                            "Username/Password Incorrect",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-        }
+
+                override fun onError(throwable: Throwable) {
+                    progressDialog.dismiss()
+                    Toast.makeText(
+                        this@LoginActivityNew,
+                        "Login failed: ${throwable.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.e("LoginActivity", "Login error", throwable)
+                }
+            }
+        )
     }
 
     private fun saveLoginDetails(detail: LoginDetail) {
-        editor.putString("s_user_id", detail.usr_id)
-        editor.putString("s_uuser", detail.usrname)
-        editor.putString("location", detail.location)
-        editor.putString("usrtype", detail.usrtype)
-        editor.putString("zone", detail.zone)
-        editor.putString("version", detail.verno)
-        editor.putString("contact", detail.contact)
-        editor.putString("dis_user", detail.displayname)
-        editor.putString("image", detail.image)
-        editor.putString("imei1", imsiSIM1)
-        editor.putString("track_status", detail.track_status)
-        editor.putString("track_interval", detail.track_interval)
-        editor.putString("bill_amt_limit", detail.bill_amt_limit)
-        editor.apply()
+        with(sharedPrefs.edit()) {
+            putString("s_user_id", detail.usr_id)
+            putString("s_uuser", detail.usrname)
+            putString("location", detail.location)
+            putString("usrtype", detail.usrtype)
+            putString("zone", detail.zone)
+            putString("version", detail.verno)
+            putString("contact", detail.contact)
+            putString("dis_user", detail.displayname)
+            putString("image", detail.image)
+            putString("imei1", imsiSIM1)
+            putString("track_status", detail.track_status)
+            putString("track_interval", detail.track_interval)
+            putString("bill_amt_limit", detail.bill_amt_limit)
+            apply() // single apply instead of multiple
+        }
     }
 
     private fun getMacAddr(): String {

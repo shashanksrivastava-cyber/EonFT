@@ -76,7 +76,10 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
         }else if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("D")){
             holder.connection_status.setText(deviceLiveStatuses.get(position).status);
             holder.connected.setBackgroundResource(R.drawable.disconnected);
-        }else {
+        } else if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("De-Hired")){
+            holder.connection_status.setText(deviceLiveStatuses.get(position).status_type + " " +deviceLiveStatuses.get(position).status);
+            holder.connected.setBackgroundResource(R.drawable.vehicle_dehire);
+        } else {
             holder.connection_status.setText(deviceLiveStatuses.get(position).status);
             holder.connected.setBackgroundResource(R.drawable.notrack);
         }

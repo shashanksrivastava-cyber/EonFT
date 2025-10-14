@@ -49,11 +49,8 @@ public class ViewDRSStatus extends AppCompatActivity {
 
     ViewDrsStatusBinding binding;
     String usrname, zone, version, reg_no, server, dbName;
-
     private AlertDialog progressDialog;
-
     SharedPreferences sharedprefs;
-
     SharedPreferences.Editor editor;
     public LinearLayoutManager layoutManager;
     ViewModelLiveStatus viewModelLiveStatus;

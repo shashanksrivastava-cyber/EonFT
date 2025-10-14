@@ -198,10 +198,10 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-                    if (list_change_values.size > 0) {
+                    if (list_change_values.size == 0) {
                         for (i in list_change_values.indices) {
                             val val1 = 1
-                            var k = i.plus(val1)!!.toString()
+                            val k = i.plus(val1).toString()
                             value_name.add(k.plus(". ").plus((list_change_values.get(i).pcb_sr_no)))
                         }
                         if (list_change_values.size > 5) {

@@ -99,7 +99,8 @@ public class ForegroundService extends JobService {
         track_status = sharedprefs.getString("track_status", "");
         track_interval = sharedprefs.getString("track_interval", "");
         mac_address = sharedprefs.getString("MacAddress", "");
-        track = Integer.parseInt(track_interval);
+        //track = Integer.parseInt(track_interval);
+        track=5;
         if (mTimer != null) {
             mTimer.cancel();
         } else {
