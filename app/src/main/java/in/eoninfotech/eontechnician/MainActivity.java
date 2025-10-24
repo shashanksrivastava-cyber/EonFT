@@ -78,6 +78,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.fragments.AddUMFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
@@ -119,7 +120,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager fm;
@@ -364,11 +365,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         try {
-            if (intent_req.equalsIgnoreCase("toEon")) {
+//            if (intent_req.equalsIgnoreCase("toEon")) {
+//                sendToEon();
+//            } else if (intent_req.equalsIgnoreCase("toFT")) {
+//                sendToFT();
+//            } else {
+//                addDashboard();
+//            }
+            if ("toEon".equalsIgnoreCase(intent_req)) {
                 sendToEon();
-            } else if (intent_req.equalsIgnoreCase("toFT")) {
+            } else if ("toFT".equalsIgnoreCase(intent_req)) {
                 sendToFT();
-            } else {
+            }else {
                 addDashboard();
             }
         } catch (Exception e) {

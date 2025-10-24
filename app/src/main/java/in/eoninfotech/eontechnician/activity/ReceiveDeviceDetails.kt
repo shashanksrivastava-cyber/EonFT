@@ -198,7 +198,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-                    if (list_change_values.size == 0) {
+                    if (list_change_values.size > 0) {
                         for (i in list_change_values.indices) {
                             val val1 = 1
                             val k = i.plus(val1).toString()
@@ -269,7 +269,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             toast.show()
             this.finish()
         }else {
-            val toast = Toast.makeText(applicationContext, ""+response.msg, Toast.LENGTH_LONG)
+             val toast = Toast.makeText(applicationContext, ""+response.msg, Toast.LENGTH_LONG)
             toast.show()
         }
     }
