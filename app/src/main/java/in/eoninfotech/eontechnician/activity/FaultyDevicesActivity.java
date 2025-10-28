@@ -111,6 +111,14 @@ public class FaultyDevicesActivity extends AppCompatActivity {
         txtContentUnavailable = findViewById(R.id.txt_content_unavailable);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
+        faultyDevicesAdapter = new FaultyDevicesAdapter(new ArrayList<>(), this, sendData);
+        recyclerView.setAdapter(faultyDevicesAdapter);
+
+        if (faultyDevicesAdapter != null) {
+            faultyDevicesAdapter.updateList(faultyDevices);
+            runLayoutAnimation(recyclerView);
+        }
+
         refreshLayout = findViewById(R.id.refresh);
         refreshLayout.setColorSchemeColors(Color.RED, Color.BLUE);
         refreshLayout.setOnRefreshListener(this::refresh);
@@ -173,10 +181,9 @@ public class FaultyDevicesActivity extends AppCompatActivity {
                     FaultyDevices activityResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     faultyDevices = activityResponse.getFaultyDevices();
-                    faultyDevicesAdapter = new FaultyDevicesAdapter(faultyDevices, FaultyDevicesActivity.this, sendData);
-                    recyclerView.setAdapter(faultyDevicesAdapter);
+
+                    faultyDevicesAdapter.updateList(faultyDevices);
                     runLayoutAnimation(recyclerView);
-                    refreshLayout.setRefreshing(false);
                     recyclerView.setVisibility(View.VISIBLE);
                 } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
@@ -228,19 +235,19 @@ public class FaultyDevicesActivity extends AppCompatActivity {
         call.enqueue(new Callback<FaultyDevices>() {
             @Override
             public void onResponse(Call<FaultyDevices> call, Response<FaultyDevices> response) {
-                if (response.body().getType() == 1) {
+                refreshLayout.setRefreshing(false);
+                if (response.body() != null && response.body().getType() == 1) {
                     FaultyDevices activityResponse = response.body();
                     txtContentUnavailable.setVisibility(View.GONE);
                     faultyDevices = activityResponse.getFaultyDevices();
-                    faultyDevicesAdapter = new FaultyDevicesAdapter(faultyDevices, FaultyDevicesActivity.this, sendData);
-                    recyclerView.setAdapter(faultyDevicesAdapter);
+
+                    // ✅ Efficiently update list using DiffUtil
+                    faultyDevicesAdapter.updateList(faultyDevices);
                     runLayoutAnimation(recyclerView);
-                    refreshLayout.setRefreshing(false);
                     recyclerView.setVisibility(View.VISIBLE);
                 } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
-                    refreshLayout.setRefreshing(false);
                 }
             }
 

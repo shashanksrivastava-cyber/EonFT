@@ -62,15 +62,21 @@
     <string name="faqs_string"> There are many possibilities of device disconnection.
         These are explained below.\n\n
 
+
 1. If a device is showing disconnected, check its connectivity with vehicle’s battery is fine or not, if not, please connect the power cable with vehicle battery.\n\n
+
 
 2. Sometimes device has GSM and GPS related issue, so, check its LED status properly.\n\n
 
+
 3. When the vehicle is at workshop for maintenance, device will show disconnect because all the connections removed by technician during maintenance of vehicle and device has no source of power to recharge its own battery.\n\n
+
 
 4. If a vehicle is in idle position from more than 24 hours, device will show disconnect because device is not getting any power supply to recharge its own battery.\n\n
 
+
 5. Sometimes device is faulty, and it will not show any recent data.\n\n
+
 
 6. If device is missing, damage or removed from vehicle, it will show as device disconnect.</string>
     <string name="details"><u>View Details</u></string>
@@ -159,4 +165,48 @@
         <item>Standard VTS</item>
         <item>TM</item>
     </string-array>
+    <string name="add_dashboard">ADD Dashboard</string>
+    <string name="internet_connection_restored">Internet connection restored</string>
+    <string name="it_seems_internet_connection_not_available">It seems internet connection not available</string>
+    <string name="your_location_is_off">Your Location is OFF.</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="activities">Activities</string>
+    <string name="send_to_technician">Send to Technician</string>
+    <string name="update_almost_finished">Update almost finished!</string>
+    <string name="not_downloaded_yet">Not downloaded yet</string>
+    <string name="confirm_exit">Confirm Exit</string>
+    <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="incentive">Incentive</string>
+    <string name="attendance_activity">Attendance Activity</string>
+    <string name="incentive_activity">Incentive Activity</string>
+    <string name="stock_activity">Stock Activity</string>
+    <string name="live_status">Live Status</string>
+    <string name="live_status_eon">Live Status Eon</string>
+    <string name="call_sheet">Call Sheet</string>
+    <string name="payment_collection_report">Payment Collection Report</string>
+    <string name="bill_intimation">Bill Intimation</string>
+    <string name="service_stock_demand">Service Stock Demand</string>
+    <string name="add_remove_um">Add/Remove UM</string>
+    <string name="send_to_eon">Send to Eon</string>
+    <string name="confirm_logout">Confirm Logout</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout ?</string>
+    <string name="my_dashboard">My Dashboard</string>
+    <string name="mark">Mark</string>
+    <string name="view_attendance">View Attendance</string>
+    <string name="upload">Upload</string>
+    <string name="view">View</string>
+    <string name="return_to_eon">Return To Eon</string>
+    <string name="update">Update</string>
+    <string name="add_um">Add UM</string>
+    <string name="remove_um">Remove UM</string>
+    <string name="new_version_available">New Version Available, Kindly Update App from Play store</string>
+    <string name="update_button">UPDATE</string>
+    <string name="try_again_connection_timeout">Try Again-Connection timeout</string>
+    <string name="faulty_devices">Faulty Devices</string>
+    <string name="you_have">You have </string>
+    <string name="faulty_devices_please_send_to_office_immediately"> faulty devices, Please send to office immediately.</string>
+    <string name="faulty_devices_dot"> faulty devices.</string>
+    <string name="ok">OK</string>
 </resources>

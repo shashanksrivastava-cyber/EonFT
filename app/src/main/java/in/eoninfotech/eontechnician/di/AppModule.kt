@@ -20,12 +20,21 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        val prefs = context.getSharedPreferences("login_user_pass", Context.MODE_PRIVATE)
+
+        fun getUsername() = prefs.getString("s_uuser", "") ?: ""
+        fun getVersionName() = prefs.getString("version", "") ?: ""
+        fun getImage() = prefs.getString("image", "") ?: ""
+        fun getAlert() = prefs.getString("alert", "") ?: ""
+        fun getDistrictId() = prefs.getString("s_distt", "") ?: ""
+        fun getDisplayUsername() = prefs.getString("dis_user", "") ?: ""
         return context.getSharedPreferences("login_user_pass", Context.MODE_PRIVATE)
     }
 
     @Provides
     @Singleton
     fun provideAppPreferences(@ApplicationContext context: Context): AppPreferences {
+
         return AppPreferences(context)
     }
 
@@ -45,5 +54,13 @@ object AppModule {
     @Singleton
     fun provideCheckConnection(@ApplicationContext context: Context): CheckConnection {
         return CheckConnection(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferenceManager(
+        @ApplicationContext context: Context
+    ): SharedPreferenceManager {
+        return SharedPreferenceManager(context)
     }
 }

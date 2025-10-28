@@ -32,11 +32,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.databinding.DashboardNewBinding;
 import in.eoninfotech.eontechnician.databinding.FragmentOthersNewBinding;
+import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.responses.DashBoardResponse;
 import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
@@ -46,6 +48,7 @@ import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.viewModel.ViewModelAddDashboard;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import jakarta.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,9 +58,11 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Created by root on 10/11/18.
  */
-
+@AndroidEntryPoint
 public class OtherDashBoardFragment extends Fragment {
 
+    @Inject
+    SharedPreferenceManager sharedPref;
     FragmentOthersNewBinding binding;
     int year, day, month;
     Calendar calen = Calendar.getInstance();
@@ -79,9 +84,9 @@ public class OtherDashBoardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentOthersNewBinding.inflate(inflater, container, false);
 
-        sharedprefs = requireActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
-        uusername = sharedprefs.getString("s_uuser", "");
-        version = sharedprefs.getString("version", "");
+        uusername = sharedPref.getUsername();
+        version = sharedPref.getVersionName();
+        zone = sharedPref.getZone();
 
         progressDialog = new SpotsDialog(requireContext(), R.style.CustomIncentive);
         checkConnection = new CheckConnection(requireContext());
