@@ -1,3 +1,4 @@
+//
 //package in.eoninfotech.eontechnician.fragments;
 //
 //import android.Manifest;
@@ -19,6 +20,7 @@
 //import android.os.Bundle;
 //import android.os.Environment;
 //import android.os.Handler;
+//import android.os.Looper;
 //import android.provider.MediaStore;
 //import android.text.Editable;
 //import android.text.InputType;
@@ -61,7 +63,9 @@
 //import java.util.Date;
 //import java.util.Locale;
 //
+//import androidx.annotation.Nullable;
 //import androidx.annotation.RequiresApi;
+//import androidx.constraintlayout.widget.ConstraintLayout;
 //import androidx.core.app.ActivityCompat;
 //import androidx.core.content.FileProvider;
 //import androidx.fragment.app.Fragment;
@@ -69,7 +73,12 @@
 //import androidx.lifecycle.ViewModelProvider;
 //
 //import dmax.dialog.SpotsDialog;
-//import in.eoninfotech.eontechnician.ImageUtil;
+//import in.eoninfotech.eontechnician.databinding.FragmentNewInstallmentUpdatedBinding;
+//import in.eoninfotech.eontechnician.utils.ImageUtil;
+//import in.eoninfotech.eontechnician.UnderMaintenanceVehicles;
+//import in.eoninfotech.eontechnician.databinding.ActivityAddUmBinding;
+//import in.eoninfotech.eontechnician.databinding.RemovalFromUmBinding;
+//import in.eoninfotech.eontechnician.helper.InstallationFormHelper;
 //import in.eoninfotech.eontechnician.responses.DeviceTypeOtherAis;
 //import in.eoninfotech.eontechnician.responses.MainClientList;
 //import in.eoninfotech.eontechnician.responses.MainResponse;
@@ -115,21 +124,20 @@
 //import in.eoninfotech.eontechnician.helper.CheckConnection;
 //import in.eoninfotech.eontechnician.helper.FileUtils;
 //import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
-//import in.eoninfotech.eontechnician.utils.PermissionUtils;
+//import in.eoninfotech.eontechnician.utils.DialogUtils;
 //import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 //import in.eoninfotech.eontechnician.view.MyTextView;
 //import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
 //import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 //import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
+//import in.eoninfotech.eontechnician.viewModel.ViewModelUM;
 //import in.eoninfotech.eontechnician.webservice.ApiHolder;
 //import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 //import in.eoninfotech.eontechnician.webservice.UmVehicleDetail;
-//import in.eoninfotech.eontechnician.webservice.UmVehicleResponse;
 //import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
 //import okhttp3.MediaType;
 //import okhttp3.MultipartBody;
 //import okhttp3.RequestBody;
-//import pub.devrel.easypermissions.EasyPermissions;
 //import retrofit2.Call;
 //import retrofit2.Callback;
 //import retrofit2.Response;
@@ -140,6 +148,7 @@
 //public class NewInstallmentFragmentUpdated extends Fragment implements ClientListener, ReceiveDeviceListener,ProgressRequestBody.UploadCallbacks {
 //
 //    View v;
+//    private FragmentNewInstallmentUpdatedBinding binding;
 //    private final int SELECT_PHOTO = 1;
 //    public static final String IMAGE_DIRECTORY_NAME = "android_file";
 //    public static final int MEDIA_TYPE_IMAGE = 1;
@@ -159,28 +168,29 @@
 //    ReceiveDeviceControllers receiveDeviceControllers;
 //    TextInputLayout  con_tilsrNo,tilVoltage, til_vts_miss, til_no_avail_vts, tilsrNo_notAvail, til_new_replace, til_old_replace, til_vts_remove, til_vts_sr_no, til_remove_sr, tilDeviceMiss, told_drsid, tnew_drsid, t_drs_veh_no, t_drs_vts_id, tilvtsno, tilsrNo, tilFaultVts,
 //            tilFaultSr, tilphnVts, tilphnSr, til_old_vltd_sr_no, til_new_vltd_sr_no, til_id_reinst, til_id_sr, til_sr_reinst, til_new_sr_replace, til_old_sr_replace, sensor_veh, sensor_veh_missing, sensor_veh_remove, sensor_veh_reinstall;
-//    String fuel_voltage = "0", path, drs_type, clientId,mainClientId="SELECT CLIENT", personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
+//    String s_cust_type="",fuel_voltage = "0", path, drs_type, clientId,mainClientId="SELECT CLIENT", personName, personPhone, clientLocId, s_Vehicle_Name, drsStatus, device_type = "0", s_date, s_time, disttid, s_remove_reason, vts_id, user_id, uusername, version, selected_todate, selected_totime, current_date, fuel_sensor = "N", door_sensor = "N", veh_condition = "W", mgt_set = "N", sim_provider = "0", old_sim_no = "0", new_sim_no = "0", not_available_activity = "0", not_available_reason = "0", is_demo = "N", removal_type, baseImage = "", missing_type = "M", collection_amount, collection_date, collection_type, image, contact_person = "", contact_no = "0", payment_type = "C",
 //            buttonPressed = "0", buttonPressedActivity = "0", s_reg_no, s_rep_srNo, s_reinst_conf_reg_no, s_device_id, s_drs_id, s_new_drs_id, s_clientname = "SELECT CLIENT", s_remarks, status, s_work_type, s_Time, s_vehicletype="0", s_VehicleTypeInst, s_reason_repla = "0", removalReason = "0", itemsCollected = "0", others = "", s_work_id, s_new_device_id, s_e_device_id = "0", is_drs = "N", drs_dirction = "N", disconnection_reason = "0", ignition_sensor = "N", sim_reason = "0", missing_reason = "0", cut_off = "N", serial_no = "SELECT SR.NO.", confirmVehNo, panic = "N",
 //            s_old_serial_no="SELECT SR.NO.", s_vts_type = "SELECT VTS TYPE", tilt_sensor = "N", temp_sensor = "N", trans = "N", lid_status = "N", fuel_status = "N", panic_status = "N", sensor_old_veh_no, sen_vehicle_no, radioButtonChecked = "V", removeDeviceType = "D", missDeviceType = "D", reinstDevice = "D",id_dist,server_name,db_name,replace_type="D",silo_sensor="N",device_working_status="W",sensor_working_status="W";
 //    CheckConnection chk;
 //    CheckBox check_tel_supprt, magnet_set, magnetset_install;
-//    EditText reinstallVoltage, installVoltage, vltd_sr_no_notAvail, e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, t_install_date, t_install_Time, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
+//    EditText et_um_contact_person_name,et_um_contact_person_phone,reinstallVoltage, installVoltage, vltd_sr_no_notAvail, e_reg_no, followUpPersonName, followUpPersonPhone, phSupportPersonName, phSupportPersonPhone, faultPersonName, faultPersonNumber, e_device_id, e_drs_id, e_remarks, old_deviceid, new_deviceid, fault_vts_id, t_install_date, t_install_Time, new_vehicleRegNo, remove_deviceid, remove_reg_no, old_deviceidreplace, new_deviceidReinstall, old_drsid, new_drsid, phsupport_vts_id, fault_reg_no, phSupport_reg_no, regNo, drs_vts_id, drs_veh_no, sim_vts_id, e_old_sim_no, e_new_sim_no, sim_vehicle_no, mDevice_vts_id, mDevice_reg_no, vehNotAvailVtsID, vehNotAvailRegNo,
 //            remove_sr_no, paymentDate, amount, vts_sr_no, vts_sr_no_reinst, con_in_reg_no, rep_srNo, reinst_conf_reg_no, old_sensor_veh_no, new_sensor_veh_no,con_vltd_sr_no,con_remove_sr_no,con_fault_sr_no,con_phone_sr_no,con_old_deviceidreplace,con_new_deviceid,old_vts_id_replace,new_vts_id_replace,con_old_vts_id_replace,con_new_vts_id_replace, vltd_sr_no, vltd_sr_no_fault, vltd_sr_no_miss, vltd_sr_no_phn, old_vltd_sr_no, new_vltd_sr_no, old_replace_sr_no,con_missing_sr_no,con_reinstall_sr_no,remove_vts_id,con_remove_vts_id,
 //            new_replace_sr_no, sensor_veh_no, sensor_veh_no_missing, sensor_veh_no_remove,accessory_reg_no,accessory_sr_no;
 //    MyTextView device_info, itemCollected;
-//    TextView plantName, imageName, imageNameFault, imageNameMissing, tv, payValue,text_to_show,text_to_show_remove,text_to_show_missing,
+//    TextView txt_content_unavailable,plantName, imageName, imageNameFault, imageNameMissing, tv, payValue,text_to_show,text_to_show_remove,text_to_show_missing,
 //            text_to_show_fault,text_to_show_phone,text_to_show_replace_old,text_to_show_replace_new,text_to_show_reinstall,text_to_show_replace_sen;
 //    Button update_dataa, imageUpload, imageUploadfault, imageUploadMissing,delete_button,delete_button_e_series,delete_button_remove,delete_button_remove_e_series,delete_button_missing,delete_button_missing_e_series,delete_button_reinstall,
 //            delete_button_fault_e_series,delete_button_fault,delete_button_phone_e_series,delete_button_phone,delete_button_replace_old_serial,delete_button_replace_new_serial,delete_button_replace_old_id,delete_button_replace_new_id,delete_button_reinstall_ais;
 //    Calendar calen = Calendar.getInstance();
 //    int year, month, day, hour, minutes, seconds;
-//    NonScrollListView lv, lvItem;
+//    NonScrollListView lv, lvItem,device_detail_list_receive;
 //    ArrayList<DeviceTypeOtherAis> deviceTypeOtherAis_arr = new ArrayList<>();
 //    ArrayList<UmVehicleDetail> getUmVehicle = new ArrayList<>();
 //    ArrayList<RemovalList> removalList = new ArrayList<>();
 //    ArrayList<RemovalList> damageList = new ArrayList<>();
 //    ArrayList<ReplaceReasonDetail> arr_replaceReasons = new ArrayList<>();
 //    ArrayList<FaultList> list_change_values = new ArrayList<>();
+//    ArrayList<UnderMaintenanceVehicles> list_change_values_um = new ArrayList<>();
 //    ArrayList<SimDetail> simreplacereason = new ArrayList<>();
 //    ArrayList<SimOperatorDetail> simOperatorDetails = new ArrayList<>();
 //    ArrayList<VehNotAvailReasonDetail> vehNotAvailReasonDetails = new ArrayList<>();
@@ -206,6 +216,8 @@
 //    ArrayList<String> vehicleDetail = new ArrayList<>();
 //    ArrayList<String> locationDetail = new ArrayList<>();
 //    ArrayList<String> value_name = new ArrayList<>();
+//    ArrayList<String> value_name_um = new ArrayList<>();
+//    ArrayList<String> value_name_sr = new ArrayList<>();
 //    ArrayList<String> disc_reason = new ArrayList<>();
 //    ArrayList<String> simReplaceReason = new ArrayList<>();
 //    ArrayList<String> simOperator = new ArrayList<>();
@@ -217,6 +229,7 @@
 //    ArrayList<String> arr_reasons_s = new ArrayList<>();
 //    ArrayList<String> arr_device_types = new ArrayList<>();
 //    ArrayAdapter<String> adapter;
+//    StringBuilder selectedRegNo;
 //    ProgressDialog pDialog;
 //    Spinner device_reinstall, device, vltddeviceNotAvail, vltddevice, vltddeviceReinst, vltddeviceReplace, vltddeviceFault, vltddeviceMiss, vltddevicephn, vltddsimReplace, vltddeviceRemove;
 //    ProgressBar progressBar, circularProgressbar, mProgress;
@@ -239,12 +252,23 @@
 //    ViewModelMainClient viewModelMainClient;
 //    ViewModelSubClient viewModelSubClient;
 //    ViewModelClientLocation viewModelClientLocation;
-//
+//    ViewModelUM viewModelVehicleUM;
+//    ConstraintLayout remove_um_layout;
+//    ActivityAddUmBinding activityAddUmBinding;
+//    RemovalFromUmBinding removalFromUmBinding;
+//    ArrayAdapter<String> umVehicleAdapter;
+//    InstallationFormHelper formHelper;
 //    @RequiresApi(api = Build.VERSION_CODES.M)
 //    @Override
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             final Bundle savedInstanceState) {
-//        v = inflater.inflate(R.layout.fragment_new_install, container, false);
+//        //v = inflater.inflate(R.layout.fragment_new_install, container, false);
+//
+//        binding = FragmentNewInstallmentUpdatedBinding.inflate(inflater, container, false);
+//        v = binding.getRoot();
+//
+//        formHelper = new InstallationFormHelper(v);
+//
 //        chk = new CheckConnection(v.getContext());
 //        sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
 //        uusername = sharedprefs.getString("s_uuser", "");
@@ -271,6 +295,7 @@
 //        tiltNoReplace = v.findViewById(R.id.tiltNoReplace);
 //        tempNoReplace = v.findViewById(R.id.tempNoReplace);
 //        panicNoReplace = v.findViewById(R.id.panicNoReplace);
+//        remove_um_layout = v.findViewById(R.id.remove_um_layout);
 //        fuelSensorNoReplace = v.findViewById(R.id.fuelSensorNoReplace);
 //        transNoReplace = v.findViewById(R.id.transNoReplace);
 //        lidNoneReplace = v.findViewById(R.id.lidNoneReplace);
@@ -278,6 +303,7 @@
 //        sensor_veh_no = v.findViewById(R.id.sensor_veh_no);
 //        sensor_veh_no_missing = v.findViewById(R.id.sensor_veh_no_missing);
 //        sensor_veh_no_remove = v.findViewById(R.id.sensor_veh_no_remove);
+//        txt_content_unavailable = v.findViewById(R.id.txt_content_unavailable);
 //        sensor_veh = v.findViewById(R.id.sensor_veh);
 //        sensor_veh_missing = v.findViewById(R.id.sensor_veh_missing);
 //        sensor_veh_remove = v.findViewById(R.id.sensor_veh_remove);
@@ -320,6 +346,8 @@
 //        vltddeviceMiss = v.findViewById(R.id.vltddeviceMiss);
 //        refuelVoltage = v.findViewById(R.id.refuelVoltage);
 //        replaceSrNo = v.findViewById(R.id.replaceSrNo);
+//        et_um_contact_person_name = v.findViewById(R.id.um_contact_person_name);
+//        et_um_contact_person_phone = v.findViewById(R.id.um_contact_person_phone);
 //        device = v.findViewById(R.id.device);
 //        device_reinstall = v.findViewById(R.id.device_reinstall);
 //        vltddevicephn = v.findViewById(R.id.vltddevicephn);
@@ -370,6 +398,7 @@
 //        text1 = v.findViewById(R.id.text1);
 //        checked = v.findViewById(R.id.checked);
 //        lvItem = v.findViewById(R.id.item_list);
+//        device_detail_list_receive = v.findViewById(R.id.device_detail_list_receive);
 //        payValue = v.findViewById(R.id.payValue);
 //        plantName = v.findViewById(R.id.plantName);
 //        vehDetail = v.findViewById(R.id.vehDetail);
@@ -630,6 +659,7 @@
 //        tilphnSr.setVisibility(View.GONE);
 //        tilDeviceMiss.setVisibility(View.GONE);
 //        ShowProgressBar(false);
+//        //Progress(false);
 //        initViewModels();
 //        observeViewModels();
 //
@@ -889,7 +919,6 @@
 //                    linearDrs.setVisibility(View.GONE);
 //                }
 //            }
-//
 //            @Override
 //            public void onNothingSelected(AdapterView<?> adapterView) {
 //            }
@@ -1030,6 +1059,7 @@
 //                            vehDetail.setVisibility(View.GONE);
 //                            linearPayment.setVisibility(View.GONE);
 //                            linearOthers.setVisibility(View.GONE);
+//                            remove_um_layout.setVisibility(View.GONE);
 //                            imageName.setText("");
 //                            imageNameMissing.setText("");
 //                            imageNameFault.setText("");
@@ -1309,6 +1339,7 @@
 //                            vehDetail.setVisibility(View.GONE);
 //                            linearPayment.setVisibility(View.GONE);
 //                            linearOthers.setVisibility(View.GONE);
+//                            remove_um_layout.setVisibility(View.GONE);
 //                            imageName.setText("");
 //                            imageNameMissing.setText("");
 //                            imageNameFault.setText("");
@@ -1336,6 +1367,7 @@
 //                            vehDetail.setVisibility(View.GONE);
 //                            linearPayment.setVisibility(View.GONE);
 //                            linearOthers.setVisibility(View.GONE);
+//                            remove_um_layout.setVisibility(View.GONE);
 //                            imageName.setText("");
 //                            imageNameMissing.setText("");
 //                            imageNameFault.setText("");
@@ -1368,6 +1400,7 @@
 //                            vehDetail.setVisibility(View.GONE);
 //                            linearPayment.setVisibility(View.GONE);
 //                            linearOthers.setVisibility(View.GONE);
+//                            remove_um_layout.setVisibility(View.GONE);
 //                            imageName.setText("");
 //                            imageNameMissing.setText("");
 //                            imageNameFault.setText("");
@@ -1408,6 +1441,8 @@
 //                    ShowProgressBar(true);
 //                    Handler handler = new Handler();
 //                    handler.postDelayed(() -> {
+//                        //formHelper.resetAllFields();
+//
 //                        clearData();
 //                        e_device_id.setInputType(InputType.TYPE_CLASS_NUMBER);
 //                        linearPhoneSupport.setVisibility(View.GONE);
@@ -1425,6 +1460,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -1511,6 +1547,7 @@
 //                                i = i - 1;
 //                            }
 //                            serial_no = srnoList.get(i).getPcb_sr_no();
+//                            s_cust_type = srnoList.get(i).getCust_type();
 //                        }
 //
 //                        @Override
@@ -1600,11 +1637,11 @@
 //                            if (vltddevice.getSelectedItem().toString().equalsIgnoreCase("E124")) {
 //                                s_vts_type = String.valueOf(deviceTypeOtherAis_arr.get(i).getId());
 //                                tilsrNo.setVisibility(View.GONE);
-//                                tilvtsno.setVisibility(View.VISIBLE);
+//                                tilvtsno.setVisibility(View.GONE);
 //                                oldDeviceType.setVisibility(View.VISIBLE);
 //                                options.setVisibility(View.VISIBLE);
 //                                vltdOptions.setVisibility(View.VISIBLE);
-//                                e_device_id.setVisibility(View.VISIBLE);
+//                                e_device_id.setVisibility(View.GONE);
 //                                vts_sr_no.setVisibility(View.VISIBLE);
 //                                til_vts_sr_no.setVisibility(View.GONE);
 //                                vltd_sr_no.setVisibility(View.GONE);
@@ -1684,6 +1721,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -2004,6 +2042,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -2297,6 +2336,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -2483,6 +2523,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -2635,6 +2676,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -2692,6 +2734,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -2950,6 +2993,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -3007,6 +3051,7 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.VISIBLE);
 //                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
@@ -3054,13 +3099,14 @@
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
 //                        linearOthers.setVisibility(View.VISIBLE);
+//                        remove_um_layout.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
 //                        ShowProgressBar(false);
 //                    }, DELAY);
 //                } else if (s_work_id.equalsIgnoreCase("12")) {
-//                    device_info.setText("Remove From Under Maint");
+//                    device_info.setText("Add In Under Maintenance");
 //                    e_remarks.setHint("Add Remark");
 //                    int DELAY = 1000;
 //                    ShowProgressBar(true);
@@ -3083,31 +3129,47 @@
 //                        linearVehicleNotAvail.setVisibility(View.GONE);
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
-//                        linearOthers.setVisibility(View.VISIBLE);
+//                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.VISIBLE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
 //                        ShowProgressBar(false);
-//                        getUmVehicle();
+//                        loadUMData("0");
 //                    }, DELAY);
-//
-//                    vehicle_list_um.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                        @Override
-//                        public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-//                            if (i == 0) {
-//                                return;
-//                            } else {
-//                                i = i - 1;
-//                            }
-//                            sensor_old_veh_no = getUmVehicle.get(i).getReg_no();
-//                        }
-//
-//                        @Override
-//                        public void onNothingSelected(AdapterView<?> parent) {
-//
-//                        }
-//                    });
 //                } else if (s_work_id.equalsIgnoreCase("13")) {
+//                    device_info.setText("Remove From Under Maintenance");
+//                    e_remarks.setHint("Add Remark");
+//                    int DELAY = 1000;
+//                    ShowProgressBar(true);
+//                    Handler handler = new Handler();
+//                    handler.postDelayed(() -> {
+//                        clearData();
+//                        relativeCableConnected.setVisibility(View.GONE);
+//                        linearPhoneSupport.setVisibility(View.GONE);
+//                        linearReplacement.setVisibility(View.GONE);
+//                        linearReInstall.setVisibility(View.GONE);
+//                        linearInstall.setVisibility(View.GONE);
+//                        linearRemoval.setVisibility(View.GONE);
+//                        linearFault.setVisibility(View.GONE);
+//                        linearDrs.setVisibility(View.GONE);
+//                        linearSimRepalace.setVisibility(View.GONE);
+//                        magnetset_install.setVisibility(View.GONE);
+//                        drsInstall.setVisibility(View.GONE);
+//                        linearDrs.setVisibility(View.GONE);
+//                        linearDeviceMissing.setVisibility(View.GONE);
+//                        linearVehicleNotAvail.setVisibility(View.GONE);
+//                        vehDetail.setVisibility(View.GONE);
+//                        linearPayment.setVisibility(View.GONE);
+//                        linearOthers.setVisibility(View.GONE);
+//                        remove_um_layout.setVisibility(View.VISIBLE);
+//                        imageName.setText("");
+//                        imageNameMissing.setText("");
+//                        imageNameFault.setText("");
+//                        ShowProgressBar(false);
+//                        loadUMData("1");
+//                    }, DELAY);
+//                } else if (s_work_id.equalsIgnoreCase("14")) {
 //                    device_info.setText("Preventive Maintenance");
 //                    e_remarks.setHint("Add Remark");
 //                    int DELAY = 1000;
@@ -3131,12 +3193,11 @@
 //                        linearVehicleNotAvail.setVisibility(View.GONE);
 //                        vehDetail.setVisibility(View.GONE);
 //                        linearPayment.setVisibility(View.GONE);
-//                        linearOthers.setVisibility(View.VISIBLE);
+//                        linearOthers.setVisibility(View.GONE);
 //                        imageName.setText("");
 //                        imageNameMissing.setText("");
 //                        imageNameFault.setText("");
 //                        ShowProgressBar(false);
-//                        getUmVehicle();
 //                    }, DELAY);
 //
 //                    vehicle_list_pm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -3303,9 +3364,11 @@
 //                }
 //                if (s_vts_type.equalsIgnoreCase("SELECT VTS TYPE")) {
 //                    Toast.makeText(getContext(), "Please Select Device Type", Toast.LENGTH_LONG).show();
-//                } else if (s_new_device_id.equals("") && (e_device_id.getVisibility() == View.VISIBLE)) {
-//                    e_device_id.setError("Vts Id can't be null");
-//                } else if (serial_no.equals("") && (vts_sr_no.getVisibility() == View.VISIBLE)) {
+//                }
+////                else if (s_new_device_id.equals("") && (e_device_id.getVisibility() == View.VISIBLE)) {
+////                    e_device_id.setError("Vts Id can't be null");
+////                }
+//                else if (serial_no.equals("") && (vts_sr_no.getVisibility() == View.VISIBLE)) {
 //                    vts_sr_no.setError("Sr no can't be blank");
 //                } else if (serial_no.equals("") && (vltd_sr_no.getVisibility() == View.VISIBLE)) {
 //                    vltd_sr_no.setError("Sr no can't be blank");
@@ -3796,9 +3859,11 @@
 //                        old_deviceidreplace.setError("Sr no can't be null");
 //                    } else if ((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(linear_device_id_replace_new.getVisibility() == View.VISIBLE)&&(serial_no.equals("") && (!(radioButtonChecked.equalsIgnoreCase("N")))))) {
 //                        new_deviceid.setError("Sr no can't be null");
-//                    } else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(s_old_serial_no.matches(con_old_deviceidreplace.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
-//                        con_old_deviceidreplace.setError("Sr. no. not match");
-//                    } else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(serial_no.matches(con_new_deviceid.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
+//                    }
+////                    else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(s_old_serial_no.matches(con_old_deviceidreplace.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
+////                        con_old_deviceidreplace.setError("Sr. no. not match");
+////                    }
+//                    else if((vltddeviceReplace.getSelectedItem().toString().equalsIgnoreCase("E124")&&(!(serial_no.matches(con_new_deviceid.getText().toString())&&(!(radioButtonChecked.equalsIgnoreCase("N"))))))){
 //                        con_new_deviceid.setError("Sr. no. not match");
 //                    } else if ((linear_device_sr_no_replace_old.getVisibility() == View.VISIBLE)&&(s_old_serial_no.equals("") && (til_old_sr_replace.getVisibility() == View.VISIBLE) && (!(radioButtonChecked.equalsIgnoreCase("N"))))) {
 //                        old_replace_sr_no.setError("Sr.no.can't be empty");
@@ -4126,9 +4191,11 @@
 //                        Toast.makeText(getContext(), "Select Reason", Toast.LENGTH_LONG).show();
 //                    } else if (itemsCollected.equals("") && (!removeDeviceType.equalsIgnoreCase("S"))) {
 //                        Toast.makeText(getActivity(), "Select Items Collected", Toast.LENGTH_SHORT).show();
-//                    } else if (!(removeDeviceType.equalsIgnoreCase("D")) && ((sensor_veh_remove.getVisibility() == View.GONE))) {
-//                        Toast.makeText(getContext(), "Please Select Sensor", Toast.LENGTH_SHORT).show();
-//                    } else if ((sensor_veh_remove.getVisibility() == View.VISIBLE) && (sensor_veh_no_remove.getText().toString().equalsIgnoreCase("") && (!(removeDeviceType.equalsIgnoreCase("V"))))) {
+//                    }
+////                    else if (!(removeDeviceType.equalsIgnoreCase("D")) && ((sensor_veh_remove.getVisibility() == View.GONE))) {
+////                        Toast.makeText(getContext(), "Please Select Sensor", Toast.LENGTH_SHORT).show();
+////                    }
+//                    else if ((sensor_veh_remove.getVisibility() == View.VISIBLE) && (sensor_veh_no_remove.getText().toString().equalsIgnoreCase("") && (!(removeDeviceType.equalsIgnoreCase("V"))))) {
 //                        sensor_veh_no_remove.setError("Please provide vehicle no");
 //                    } else {
 //                        updateInstallationData();
@@ -4701,6 +4768,55 @@
 //                    s_reinst_conf_reg_no = "";
 //                    updateInstallationData();
 //                }
+//            } else if(s_work_id.equalsIgnoreCase("13")||(s_work_id.equalsIgnoreCase("12"))){
+//                if(et_um_contact_person_name.getText().toString().equalsIgnoreCase("")){
+//                    Toast.makeText(getActivity(), "Please provide Contact Person Name", Toast.LENGTH_SHORT).show();
+//                } else if (et_um_contact_person_phone.getText().toString().equalsIgnoreCase("")){
+//                    Toast.makeText(getActivity(), "Please provide Contact Person Phone Number", Toast.LENGTH_SHORT).show();
+//                }else {
+//                    SparseBooleanArray checked = device_detail_list_receive.getCheckedItemPositions();
+//                    StringBuilder selectedRegNos = new StringBuilder();
+//                    StringBuilder selectedSerialRegPairs = new StringBuilder();
+//
+//                    for (int i = 0; i < list_change_values_um.size(); i++) {
+//                        if (checked.get(i)) {
+//                            // Append reg_no
+//                            if (selectedRegNos.length() > 0) {
+//                                selectedRegNos.append(",");
+//                            }
+//                            selectedRegNos.append(list_change_values_um.get(i).reg_no);
+//
+//                            // Append serial_no:reg_no
+//                            if (selectedSerialRegPairs.length() > 0) {
+//                                selectedSerialRegPairs.append(",");
+//                            }
+//                            selectedSerialRegPairs.append(
+//                                    list_change_values_um.get(i).serial_no + ":" + list_change_values_um.get(i).reg_no
+//                            );
+//                        }
+//                    }
+//
+//                    if (selectedRegNos.length() == 0) {
+//                        Toast.makeText(getContext(), "Please select at least one vehicle", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    } else {
+//                        String reg_no = selectedRegNos.toString();
+//                        String serialWithReg = selectedSerialRegPairs.toString();
+//                        Log.e("SelectedVehicles", reg_no);
+//                        Log.e("SerialWithReg", serialWithReg);
+//                        if(s_work_id.equalsIgnoreCase("12")){
+//                            status="1";
+//                            String activity_type="12";
+//                            showAddVehicleConfirmationDialog(serialWithReg,reg_no,status,activity_type,et_um_contact_person_name.getText().toString(),et_um_contact_person_phone.getText().toString());
+//                        }else {
+//                            status="0";
+//                            String activity_type="13";
+//                            showAddVehicleConfirmationDialog(serialWithReg,reg_no,status,activity_type,et_um_contact_person_name.getText().toString(),et_um_contact_person_phone.getText().toString());
+//                        }
+//
+//                    }
+//                }
+//
 //            }
 //        });
 //        imageUpload.setOnClickListener(view -> {
@@ -4730,10 +4846,59 @@
 //        return v;
 //    }
 //
+//    private void showAddVehicleConfirmationDialog(String serialWithReg, String reg_no,String status,String activity_type, String um_contact_person_name, String um_contact_person_phone) {
+//        DialogUtils.showConfirmationDialog(
+//                getActivity(), // Activity context
+//                "Confirm Addition",
+//                "Are you sure you want to add the selected vehicle(s)?",
+//                () -> {
+////                    progressDialog.show();
+////                    observeViewModelAddVehicle(serialWithReg,reg_no,status,activity_type,um_contact_person_name,um_contact_person_phone);
+//                    progressDialog.show();
+//
+//                    new Handler(Looper.getMainLooper()).post(() -> {
+//                        observeViewModelAddVehicle(serialWithReg, reg_no, status, activity_type, um_contact_person_name, um_contact_person_phone);
+//                    });
+//                }
+//
+//        );
+//    }
+//
+//    private void observeViewModelAddVehicle(String serialWithReg, String regNo,String status,String activity_type, String um_contact_person_name, String um_contact_person_phone) {
+//        viewModelVehicleUM.addInUM(mainClientId, clientId, clientLocId,status, regNo,activity_type,s_time,t_install_date.getText().toString(),serialWithReg,"",um_contact_person_name,um_contact_person_phone,e_remarks.getText().toString(),user_id)
+//                .observe(getViewLifecycleOwner(), response -> {
+//                    if (response.getType() == 1) {
+//                        Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
+//                        //loadUMData();
+//                        device_detail_list_receive.clearChoices();
+//                        value_name_um.clear();
+//                        list_change_values_um.clear();
+//
+//                        // ✅ Notify adapter to reset UI immediately
+//                        if (umVehicleAdapter != null) {
+//                            umVehicleAdapter.notifyDataSetChanged();
+//                        }
+//                        // ✅ Reload the fresh list
+//                        if(status.equalsIgnoreCase("1")){
+//                            loadUMData("0");
+//                        }else {
+//                            loadUMData("1");
+//                        }
+//                        e_remarks.setText("");
+//                        et_um_contact_person_name.setText("");
+//                        et_um_contact_person_phone.setText("");
+//
+//                    } else {
+//                        Toast.makeText(getActivity(), "" + response.getMsg(), Toast.LENGTH_SHORT).show();
+//                    }
+//                    progressDialog.dismiss();
+//                });
+//    }
+//
+//
 //    private void observeViewModels() {
 //        viewModelMainClient.getMainClientRepository().observe(getViewLifecycleOwner(), response -> {
 //            if (response == null) {
-//                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
 //                progressDialog.hide();
 //                return;
 //            }
@@ -4811,6 +4976,7 @@
 //        viewModelMainClient = new ViewModelProvider(this).get(ViewModelMainClient.class);
 //        viewModelSubClient = new ViewModelProvider(this).get(ViewModelSubClient.class);
 //        viewModelClientLocation = new ViewModelProvider(this).get(ViewModelClientLocation.class);
+//        viewModelVehicleUM = new ViewModelProvider(this).get(ViewModelUM.class);
 //    }
 //
 //    private void getAccSerialNo(String s_reg_no) {
@@ -4819,9 +4985,51 @@
 //    }
 //
 //    private void addMainClients() {
-//
 //        progressDialog.show();
 //        viewModelMainClient.getMainClientRepository();
+//    }
+//    private void loadUMData(String number) {
+//        progressDialog.show();
+//        observeViewModelUmVehicles(number);
+//    }
+//
+//    private void observeViewModelUmVehicles(String number) {
+//        viewModelVehicleUM.getUmRepository(mainClientId, clientId, clientLocId, number)
+//                .observe(getViewLifecycleOwner(), response -> {
+//
+//                    if (response.getType() == 1) {
+//                        try {
+//                            list_change_values_um = response.getUm_vehicles();
+//                            try {
+//                                try {
+//                                    value_name_um.clear();
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                                if (list_change_values.size() > 0) {
+//                                    for (int i = 0; i < list_change_values_um.size(); i++) {
+//                                        String regNo = list_change_values_um.get(i).reg_no;
+//                                        value_name_um.add((i + 1) + ". " + regNo);
+//                                    }
+//                                    umVehicleAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_list_item, value_name_um);
+//                                    device_detail_list_receive.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+//                                    device_detail_list_receive.setAdapter(umVehicleAdapter);
+//                                    device_detail_list_receive.setVisibility(View.VISIBLE);
+//                                    progressDialog.hide();
+//                                } else {
+//                                    progressDialog.hide();
+//                                }
+//                            } catch (NullPointerException npe) {
+//                                npe.printStackTrace();
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        device_detail_list_receive.setVisibility(View.GONE);
+//                        progressDialog.hide();
+//                    }
+//                });
 //    }
 //
 //    private void getSerialNo() {
@@ -4848,71 +5056,22 @@
 //            buttonPressed = "2";
 //            galleryIntent();
 //        });
-//        cammera.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                buttonPressed = "1";
-//                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
-//                } else {
-//                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_PERMISSION);
-//                    if (Build.VERSION.SDK_INT < 24) {
-//                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                        uri = Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
-//                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//                        try {
-//                            //startActivityForResult(intent, REQUEST_CAMERA);
-//                            openCameraIntent();
-//                            alertDialogBuilder.dismiss();
-//                        } catch (SecurityException e) {
-//                            e.printStackTrace();
-//                            try {
-//                                if (hasPermissions(getActivity(), PERMISSIONS)) {
-//                                } else {
-//                                    EasyPermissions.requestPermissions(this, "Access for storage", 101, PERMISSIONS);
-//                                }
-//                            } catch (Exception qe) {
-//                                qe.printStackTrace();
-//                            }
-//                            openCameraIntent();
-//                            alertDialogBuilder.dismiss();
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                            alertDialogBuilder.dismiss();
-//                        }
-//                    } else {
-//                        try {
-//                            if (hasPermissions(getActivity(), PERMISSIONS)) {
-//                            } else {
-//                                EasyPermissions.requestPermissions(this, "Access for storage", 101, PERMISSIONS);
-//                            }
-//                        } catch (Exception qe) {
-//                            qe.printStackTrace();
-//                        }
-//                        openCameraIntent();
-//                        alertDialogBuilder.dismiss();
-//                    }
-//                }
+//        cammera.setOnClickListener(v -> {
+//            buttonPressed = "1";
+//            if (activity == null) return;
+//
+//            if (!ImageUtil.checkAndRequestCameraPermission(activity)) {
+//                return; // wait for user to grant permission
 //            }
 //
-//            File getOutputMediaFile(int type) {
-//                File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
-//                if (!mediaStorageDir.exists()) {
-//                    if (!mediaStorageDir.mkdirs()) {
-//                        Log.d("****", "Oops! Failed create " + IMAGE_DIRECTORY_NAME + " directory");
-//                        return null;
-//                    }
-//                }
-//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-//                File mediaFile;
-//                if (type == MEDIA_TYPE_IMAGE) {
-//                    mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
-//                    Log.d("****", "");
-//                } else {
-//                    return null;
-//                }
-//                return mediaFile;
+//            File photoFile = ImageUtil.getOutputMediaFile("MyAppImages");
+//            if (photoFile == null) {
+//                Log.e("Camera", "Error creating image file");
+//                return;
 //            }
+//            openCameraIntent();
+//
+//            alertDialogBuilder.dismiss();
 //        });
 //        cross.setOnClickListener(v -> alertDialogBuilder.dismiss());
 //    }
@@ -4992,46 +5151,21 @@
 //    }
 //
 //    private void openCameraIntent() {
-//        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (pictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-//            File photoFile = null;
-//            photoFile = createImageFile();
-//            if (photoFile != null) {
-//                uri = FileProvider.getUriForFile(getActivity(), "in.eoninfotech.eontechnician.provider", photoFile);
-//                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//                startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
-//            }
-//        }
-//    }
+//        File photoFile = ImageUtil.createImageFile(requireContext());
+//        if (photoFile != null) {
+//            path = photoFile.getAbsolutePath(); // ✅ Store here
+//            uri = FileProvider.getUriForFile(
+//                    requireContext(),
+//                    "in.eoninfotech.eontechnician.provider",
+//                    photoFile
+//            );
 //
-//    private File createImageFile() {
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-//        String imageFileName = "IMG_" + timeStamp + "_";
-//        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = null;
-//        try {
-//            image = File.createTempFile(imageFileName,/* prefix */".jpg",/* suffix */storageDir/* directory */);
-//        } catch (IOException e) {
-//            e.printStackTrace();
+//            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//            startActivityForResult(intent, REQUEST_CAPTURE_IMAGE);
+//        } else {
+//            Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show();
 //        }
-//        path = image.getAbsolutePath();
-//        return image;
-//    }
-//
-//    private File bitmapToFile(Bitmap bitmap, String fileName) {
-//        File filesDir = getActivity().getApplicationContext().getFilesDir();
-//        File imageFile = new File(filesDir, fileName + ".jpg");
-//        OutputStream os;
-//        try {
-//            os = new FileOutputStream(imageFile);
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, os);
-//            os.flush();
-//            os.close();
-//            return imageFile;
-//        } catch (Exception e) {
-//            Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
-//        }
-//        return null;
 //    }
 //
 //    private void getVTSDetails() {
@@ -5118,50 +5252,6 @@
 //        newInstallmentController.reqeuestPMethod(this);
 //    }
 //
-//    private void getUmVehicle() {
-//        ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-//        Call<UmVehicleResponse> call = get_list.get_veh_for_um(clientId, clientLocId);
-//        call.enqueue(new Callback<UmVehicleResponse>() {
-//            @Override
-//            public void onResponse(Call<UmVehicleResponse> call, Response<UmVehicleResponse> response) {
-//                try {
-//                    if (response.body().getType().equalsIgnoreCase("1")) {
-//                        getUmVehicle = response.body().getUmVehicleDetails();
-//                        try {
-//                            try {
-//                                arr_device_types.clear();
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
-//                            arr_device_types.add(" SELECT VEHICLE");
-//                            for (int i = 0; i < getUmVehicle.size(); i++) {
-//                                arr_device_types.add(getUmVehicle.get(i).getReg_no());
-//                            }
-//                            adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, arr_device_types);
-//                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                            vehicle_list_um.setAdapter(adapter);
-//                            vehicle_list_pm.setAdapter(adapter);
-//                        } catch (NullPointerException npe) {
-//                            npe.printStackTrace();
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    try {
-//                        Toast.makeText(getActivity(), "No data", Toast.LENGTH_LONG).show();
-//                    } catch (Exception e1) {
-//                        e1.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UmVehicleResponse> call, Throwable t) {
-//                t.printStackTrace();
-//                 PermissionUtils.failureData(getActivity());
-//            }
-//        });
-//    }
 //
 //    private void updateInstallationData() {
 //        progressDialog.show();
@@ -5227,13 +5317,15 @@
 //        RequestBody deviceworkingstatus = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(device_working_status));
 //        RequestBody sensorworkingstatus = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(sensor_working_status));
 //        RequestBody mainclientid = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(mainClientId));
+//        RequestBody cust_type = RequestBody.create(MediaType.parse("text/plain"),s_cust_type);
 //
 //        MultipartBody.Part image = null;
 //        if (buttonPressed.equals("0")) {
 //            image = null;
 //        } else if (buttonPressed.equals("1")) {
 //            try {
-//                File file = bitmapToFile(bmp, "image_call");
+//                //File file = bitmapToFile(bmp, "image_call");
+//                File file = ImageUtil.bitmapToFile(requireContext(),bmp, "image_call");
 //                long length = file.length();
 //                ProgressRequestBody fileBody = new ProgressRequestBody(file, this);
 //                image = MultipartBody.Part.createFormData("image", file.getName(), fileBody);
@@ -5252,7 +5344,7 @@
 //        }
 //        newInstallmentController.postInstallationsData(technician_id, activity_date, activity_time, customer, customer_location, isDemo, activity_type, vts_type, deviceType, old_device_id, new_device_id, old_serial_no, new_serial_no, reg_no, veh_type, is_DRS, old_drs, new_drs, drs_direction, Mgt_set, ignSensor, fuelSensor, doorSensor,
 //                panic_button, cutOff, replacement_reason, removalType, removeReason, disconnectReason, missingType, missingReason, notAvailActivity, notAvailReason, collectionDate, collectionType, collectionAmount, paymentType, contactPerson, contactNo, simProvider, oldSimNo, newSimNo, simReason, veh_Condition, remarks, itemCollected,
-//                faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype,deviceworkingstatus,sensorworkingstatus,mainclientid, image, this);
+//                faults_checked, fuel_reading, lid_statu, tran, temp_senso, tilt_senso, fuel_statu, panic_statu, sensor_veh_n, sensor_old_veh_n,remove_type,drs_status,replacetype,deviceworkingstatus,sensorworkingstatus,mainclientid, cust_type,image, this);
 //    }
 //
 //    private void setDateAndTime() {
@@ -5306,7 +5398,6 @@
 //    }
 //
 //    private void getDate() {
-//
 //        final DatePickerDialog dpdd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
 //            @Override
 //            // TODO Auto-generated method stub
@@ -5418,6 +5509,7 @@
 //        followUpPersonPhone.setText("");
 //        buttonPressed = "0";
 //        others = "";
+//        s_cust_type="";
 //        e_old_sim_no.setText("");
 //        e_new_sim_no.setText("");
 //        mDevice_reg_no.setText("");
@@ -5572,6 +5664,7 @@
 //        followUpPersonPhone.setText("");
 //        buttonPressed = "0";
 //        others = "";
+//        s_cust_type="";
 //        e_old_sim_no.setText("");
 //        e_new_sim_no.setText("");
 //        mDevice_reg_no.setText("");
@@ -6235,6 +6328,7 @@
 //    @Override
 //    public void updateDataResponse(MainResponse response) {
 //        clearData();
+//        //formHelper.resetAllFields();
 //        pMethod();
 //        try {
 //            Toast.makeText(getContext(), "" + response.getMessage(), Toast.LENGTH_SHORT).show();
@@ -6361,7 +6455,7 @@
 //            @Override
 //            public void onFailure(Call<VTSTypeResponse> call, Throwable t) {
 //                t.printStackTrace();
-//                 PermissionUtils.failureData(getActivity());
+//                DialogUtils.showFailureSnack(v, "Something went wrong!");
 //            }
 //        });
 //    }
@@ -6406,7 +6500,7 @@
 //            @Override
 //            public void onFailure(Call<MainResponse> call, Throwable t) {
 //                t.printStackTrace();
-//                PermissionUtils.failureData(getActivity());
+//                DialogUtils.showFailureSnack(v, "Something went wrong!");
 //            }
 //        });
 //    }
@@ -6428,7 +6522,8 @@
 //                srNoDetails.add(" SELECT SR.NO.");
 //                removesrNoDetails.add(" SELECT SR.NO.");
 //                for (int i = 0; i < srnoList.size(); i++) {
-//                    srNoDetails.add(srnoList.get(i).getPcb_sr_no());
+//                    //srNoDetails.add(srnoList.get(i).getPcb_sr_no());
+//                    srNoDetails.add(srnoList.get(i).getPcb_sr_no()+srnoList.get(i).getCust_type());
 //                }
 //                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, srNoDetails);
 //                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -6438,7 +6533,6 @@
 //                for (int i = 0; i < removesrnoList.size(); i++) {
 //                    removesrNoDetails.add(removesrnoList.get(i).getPcb_sr_no());
 //                }
-//
 //                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, removesrNoDetails);
 //                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //                spn_remove_sr_no.setAdapter(adapter);

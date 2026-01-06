@@ -1,5 +1,7 @@
 package in.eoninfotech.eontechnician.activity;
 
+import static android.content.ContentValues.TAG;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -45,6 +47,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+
 import in.eoninfotech.eontechnician.AdminMainActivity;
 import in.eoninfotech.eontechnician.AppPreferences;
 import in.eoninfotech.eontechnician.MainActivity;
@@ -83,6 +90,7 @@ public class LoginActivity extends Activity {
     AppPreferences appPrefs;
     TextView t_version;
     int PERMISSION_ALL = 1;
+    FirebaseRemoteConfig remoteConfig;
     String[] PERMISSIONS = {Manifest.permission.INTERNET, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
@@ -101,6 +109,8 @@ public class LoginActivity extends Activity {
         pp_passwrd = sharedprefs.getString("pass", "");
         e_usrnme.setText(pp_usrnmae);
         e_paswrd.setText(pp_passwrd);
+
+
         try {
             String int_val = getIntent().getStringExtra("username");
             editor.putString("pass", "");

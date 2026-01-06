@@ -14,6 +14,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthDetail;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthResponse;
 import in.eoninfotech.eontechnician.helper.K;
+import in.eoninfotech.eontechnician.utils.ImageUtils;
 import retrofit2.Callback;
 
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {

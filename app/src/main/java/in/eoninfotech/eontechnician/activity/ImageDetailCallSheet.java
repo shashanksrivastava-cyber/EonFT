@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -19,7 +18,7 @@ import com.bumptech.glide.request.target.Target;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import in.eoninfotech.eontechnician.ImageUtils;
+import in.eoninfotech.eontechnician.utils.ImageUtils;
 import in.eoninfotech.eontechnician.R;
 
 public class ImageDetailCallSheet extends AppCompatActivity {

@@ -7,8 +7,12 @@ import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 public class DialogUtils {
@@ -115,5 +119,19 @@ public class DialogUtils {
                 onPositiveClick,
                 null  // onNegativeClick (null = no action)
         );
+    }
+
+
+    public static void showFailureSnack(View view, String message) {
+        try {
+            Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
+            View snackbarView = snackbar.getView();
+            snackbarView.setBackgroundColor(Color.RED);
+            TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            snackbar.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

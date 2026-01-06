@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import in.eoninfotech.eontechnician.responses.FaultyDevicesDetails;
 import in.eoninfotech.eontechnician.activity.FaultyDeviceDetails;
@@ -24,79 +26,6 @@ import in.eoninfotech.eontechnician.activity.FaultyDevicesActivity;
  */
 
 public class FaultyDevicesAdapter extends RecyclerView.Adapter<FaultyDevicesAdapter.ActivityHolder> {
-
-//    View v;
-//    Dialog myDialog;
-//    Context context;
-//    String sendData;
-//    TextView site_veh_num,site_drs_num;
-//    private final ArrayList<FaultyDevicesDetails> faultyDevices;
-//
-//    public FaultyDevicesAdapter(ArrayList<FaultyDevicesDetails> faultyDevices, FaultyDevicesActivity faultyDevicesActivity, String sendData) {
-//        this.faultyDevices = faultyDevices;
-//        this.sendData = sendData;
-//        context = faultyDevicesActivity;
-//    }
-//    @Override
-//    public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        return new ActivityHolder(LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.adapter_faulty_devices, parent, false));
-//    }
-//    @Override
-//    public void onBindViewHolder(ActivityHolder holder, int position) {
-//
-//        final FaultyDevicesDetails faultyDevicesResponse = faultyDevices.get(position);
-//
-//        holder.site_loc.setText(faultyDevicesResponse.getLocation());
-//        holder.site_cust_name.setText(faultyDevicesResponse.getCustomer());
-//        holder.faulty_drs.setText("Faulty DRS/SOS : "+"0");
-//        holder.faulty_vts.setText("Faulty VTS : "+faultyDevicesResponse.getFaulty_dev_cnt());
-//        holder.faulty_fuel.setText("Faulty Fuel : "+faultyDevicesResponse.getFaulty_fuel_count());
-//
-//        holder.slide_card.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent intent = new Intent(context,FaultyDeviceDetails.class);
-//                intent.putExtra("Faulty VTS",faultyDevicesResponse.getFaulty_devices());
-//                intent.putExtra("Faulty DRS",faultyDevicesResponse.getFaulty_drs());
-//                intent.putExtra("Faulty fuel",faultyDevicesResponse.getFaulty_fuel());
-//                intent.putExtra("Server",faultyDevicesResponse.getServer());
-//                intent.putExtra("LocId",faultyDevicesResponse.getLoc_id());
-//                intent.putExtra("Cust_id",faultyDevicesResponse.getCust_id());
-//                intent.putExtra("Database",faultyDevicesResponse.getDatabase());
-//                intent.putExtra("CustomerName",faultyDevicesResponse.getCustomer());
-//                intent.putExtra("Location",faultyDevicesResponse.getLocation());
-//                context.startActivity(intent);
-//            }
-//        });
-//    }
-//    private String removeBr(String str1){
-//        return str1.replaceAll("\\|", " ");
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return faultyDevices.size();
-//    }
-//
-//    public class ActivityHolder extends RecyclerView.ViewHolder {
-//
-//        CardView slide_card;
-//        TextView site_loc, site_cust_name, faulty_vts, faulty_drs, quantity, tvBought,faulty_fuel;
-//
-//        public ActivityHolder(View inflate) {
-//            super(inflate);
-//            site_loc = inflate.findViewById(R.id.site_loc);
-//            site_cust_name = inflate.findViewById(R.id.site_cust_name);
-//            faulty_vts = inflate.findViewById(R.id.faulty_vts);
-//            faulty_drs = inflate.findViewById(R.id.faulty_drs);
-//            slide_card = inflate.findViewById(R.id.slide_card);
-//            quantity = inflate.findViewById(R.id.quantity);
-//            tvBought = inflate.findViewById(R.id.tvBought);
-//            faulty_fuel = inflate.findViewById(R.id.faulty_fuel);
-//        }
-//    }
 
     private final Context context;
     private final String sendData;
@@ -198,3 +127,93 @@ public class FaultyDevicesAdapter extends RecyclerView.Adapter<FaultyDevicesAdap
         diffResult.dispatchUpdatesTo(this);
     }
 }
+
+//public class FaultyDevicesAdapter extends ListAdapter<FaultyDevicesDetails, FaultyDevicesAdapter.ActivityHolder> {
+//
+//    private final Context context;
+//    private final String sendData;
+//
+//    public FaultyDevicesAdapter(Context context, String sendData) {
+//        super(DIFF_CALLBACK);
+//        this.context = context;
+//        this.sendData = sendData;
+//    }
+//
+//    /**
+//     * ✅ DiffUtil to efficiently handle updates
+//     */
+//    private static final DiffUtil.ItemCallback<FaultyDevicesDetails> DIFF_CALLBACK =
+//            new DiffUtil.ItemCallback<FaultyDevicesDetails>() {
+//                @Override
+//                public boolean areItemsTheSame(@NonNull FaultyDevicesDetails oldItem,
+//                                               @NonNull FaultyDevicesDetails newItem) {
+//                    // Use a unique field (like loc_id) to identify item
+//                    return Objects.equals(oldItem.getLoc_id(), newItem.getLoc_id());
+//                }
+//
+//                @Override
+//                public boolean areContentsTheSame(@NonNull FaultyDevicesDetails oldItem,
+//                                                  @NonNull FaultyDevicesDetails newItem) {
+//                    // Compare all relevant fields
+//                    return oldItem.equals(newItem);
+//                }
+//            };
+//
+//    @NonNull
+//    @Override
+//    public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        View view = LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.adapter_faulty_devices, parent, false);
+//        return new ActivityHolder(view);
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull ActivityHolder holder, int position) {
+//        FaultyDevicesDetails item = getItem(position);
+//
+//        holder.site_loc.setText(item.getLocation());
+//        holder.site_cust_name.setText(item.getCustomer());
+//        holder.faulty_drs.setText("Faulty DRS/SOS : 0");
+//        holder.faulty_vts.setText("Faulty VTS : " + item.getFaulty_dev_cnt());
+//        holder.faulty_fuel.setText("Faulty Fuel : " + item.getFaulty_fuel_count());
+//
+//        holder.slide_card.setOnClickListener(v -> {
+//            Intent intent = new Intent(context, FaultyDeviceDetails.class);
+//            intent.putExtra("Faulty VTS", item.getFaulty_devices());
+//            intent.putExtra("Faulty DRS", item.getFaulty_drs());
+//            intent.putExtra("Faulty fuel", item.getFaulty_fuel());
+//            intent.putExtra("Server", item.getServer());
+//            intent.putExtra("LocId", item.getLoc_id());
+//            intent.putExtra("Cust_id", item.getCust_id());
+//            intent.putExtra("Database", item.getDatabase());
+//            intent.putExtra("CustomerName", item.getCustomer());
+//            intent.putExtra("Location", item.getLocation());
+//            context.startActivity(intent);
+//        });
+//    }
+//
+//    /**
+//     * ✅ ViewHolder
+//     */
+//    public static class ActivityHolder extends RecyclerView.ViewHolder {
+//        CardView slide_card;
+//        TextView site_loc, site_cust_name, faulty_vts, faulty_drs, faulty_fuel;
+//
+//        public ActivityHolder(@NonNull View itemView) {
+//            super(itemView);
+//            slide_card = itemView.findViewById(R.id.slide_card);
+//            site_loc = itemView.findViewById(R.id.site_loc);
+//            site_cust_name = itemView.findViewById(R.id.site_cust_name);
+//            faulty_vts = itemView.findViewById(R.id.faulty_vts);
+//            faulty_drs = itemView.findViewById(R.id.faulty_drs);
+//            faulty_fuel = itemView.findViewById(R.id.faulty_fuel);
+//        }
+//    }
+//
+//    /**
+//     * ✅ Replace your old updateList() with this clean method
+//     */
+//    public void submitFaultyDevices(java.util.List<FaultyDevicesDetails> newList) {
+//        submitList(newList);
+//    }
+//}

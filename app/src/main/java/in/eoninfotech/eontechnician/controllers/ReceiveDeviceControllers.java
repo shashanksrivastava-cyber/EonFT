@@ -52,12 +52,6 @@ public class ReceiveDeviceControllers extends Controller {
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
                 try {
-//                    TSnackbar snackbar = TSnackbar.make(v, "Server Response Timeout, Try Again!", TSnackbar.LENGTH_LONG);
-//                    View snackbarView = snackbar.getView();
-//                    snackbarView.setBackgroundColor(Color.RED);
-//                    TextView textView = snackbarView.findViewById(com.androidadvance.topsnackbar.R.id.snackbar_text);
-//                    textView.setTextColor(Color.WHITE);
-//                    snackbar.show();
                 } catch (Exception e) {
 
                 }

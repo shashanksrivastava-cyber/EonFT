@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import in.eoninfotech.eontechnician.R;
@@ -20,44 +22,102 @@ import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
  * Created by root on 7/3/19.
  */
 
-public class CallSheetListAdapter extends RecyclerView.Adapter<CallSheetListAdapter.ActivityHolder>{
+//public class CallSheetListAdapter extends RecyclerView.Adapter<CallSheetListAdapter.ActivityHolder>{
+//
+//    Context context;
+//    private final ArrayList<CallSheetListDetail> callSheetDetails;
+//
+//    public CallSheetListAdapter(Context context, ArrayList<CallSheetListDetail> callSheetDetails) {
+//
+//        this.context = context;
+//        this.callSheetDetails = callSheetDetails;
+//    }
+//
+//    @NonNull
+//    @Override
+//    public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        return new CallSheetListAdapter.ActivityHolder(LayoutInflater.from(parent.getContext())
+//                .inflate(R.layout.call_sheet_adapter, parent, false));
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(CallSheetListAdapter.ActivityHolder holder, int position) {
+//
+//        final CallSheetListDetail callSheetDetail = callSheetDetails.get(position);
+//
+//        holder.date.setText(callSheetDetail.getDate());
+//        holder.image.setText("View Uploaded Image");
+//
+//        String ImageUri = ServiceConnectionNewURL.BASE_URL+callSheetDetail.getImage();
+//
+//        holder.image.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(context, ImageDetailCallSheet.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                intent.putExtra("Image",ImageUri);
+//                intent.putExtra("Date",callSheetDetail.getDate());
+//                intent.putExtra("Remarks",callSheetDetail.getRemarks());
+//                context.startActivity(intent);
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return callSheetDetails.size();
+//    }
+//
+//    public class ActivityHolder extends RecyclerView.ViewHolder {
+//
+//        TextView date,image;
+//        public ActivityHolder(View itemView) {
+//            super(itemView);
+//
+//            date = itemView.findViewById(R.id.workType);
+//            image = itemView.findViewById(R.id.textViewAttached);
+//        }
+//    }
+//}
 
-    Context context;
-    private final ArrayList<CallSheetListDetail> callSheetDetails;
+public class CallSheetListAdapter extends RecyclerView.Adapter<CallSheetListAdapter.ActivityHolder> {
 
-    public CallSheetListAdapter(Context context, ArrayList<CallSheetListDetail> callSheetDetails) {
+    private final Context context;
+    private final List<CallSheetListDetail> callSheetDetails = new ArrayList<>();
 
+    public CallSheetListAdapter(Context context, List<CallSheetListDetail> callSheetDetails) {
         this.context = context;
-        this.callSheetDetails = callSheetDetails;
+        if (callSheetDetails != null) {
+            this.callSheetDetails.addAll(callSheetDetails);
+        }
     }
 
     @NonNull
     @Override
-    public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CallSheetListAdapter.ActivityHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.call_sheet_adapter, parent, false));
+    public ActivityHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ActivityHolder(
+                LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.call_sheet_adapter, parent, false)
+        );
     }
 
     @Override
-    public void onBindViewHolder(CallSheetListAdapter.ActivityHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ActivityHolder holder, int position) {
 
-        final CallSheetListDetail callSheetDetail = callSheetDetails.get(position);
+        CallSheetListDetail item = callSheetDetails.get(position);
 
-        holder.date.setText(callSheetDetail.getDate());
+        holder.date.setText(item.getDate());
         holder.image.setText("View Uploaded Image");
 
-        String ImageUri = ServiceConnectionNewURL.BASE_URL+callSheetDetail.getImage();
+        String imageUrl = ServiceConnectionNewURL.BASE_URL + item.getImage();
 
-        holder.image.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context, ImageDetailCallSheet.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("Image",ImageUri);
-                intent.putExtra("Date",callSheetDetail.getDate());
-                intent.putExtra("Remarks",callSheetDetail.getRemarks());
-                context.startActivity(intent);
-            }
+        holder.image.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ImageDetailCallSheet.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("Image", imageUrl);
+            intent.putExtra("Date", item.getDate());
+            intent.putExtra("Remarks", item.getRemarks());
+            context.startActivity(intent);
         });
     }
 
@@ -66,14 +126,53 @@ public class CallSheetListAdapter extends RecyclerView.Adapter<CallSheetListAdap
         return callSheetDetails.size();
     }
 
-    public class ActivityHolder extends RecyclerView.ViewHolder {
+    public static class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView date,image;
-        public ActivityHolder(View itemView) {
+        TextView date, image;
+
+        public ActivityHolder(@NonNull View itemView) {
             super(itemView);
-
             date = itemView.findViewById(R.id.workType);
             image = itemView.findViewById(R.id.textViewAttached);
         }
+    }
+
+    // -----------------------------------------------------
+    // 🚀 DiffUtil Update Method
+    // -----------------------------------------------------
+    public void updateList(List<CallSheetListDetail> newList) {
+
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DiffUtil.Callback() {
+
+            @Override
+            public int getOldListSize() {
+                return callSheetDetails.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return newList.size();
+            }
+
+            @Override
+            public boolean areItemsTheSame(int oldPos, int newPos) {
+                // Unique key → Date + Image URL
+                CallSheetListDetail oldItem = callSheetDetails.get(oldPos);
+                CallSheetListDetail newItem = newList.get(newPos);
+
+                return oldItem.getDate().equals(newItem.getDate())
+                        && oldItem.getImage().equals(newItem.getImage());
+            }
+
+            @Override
+            public boolean areContentsTheSame(int oldPos, int newPos) {
+                return callSheetDetails.get(oldPos).equals(newList.get(newPos));
+            }
+        });
+
+        callSheetDetails.clear();
+        callSheetDetails.addAll(newList);
+
+        diffResult.dispatchUpdatesTo(this);
     }
 }

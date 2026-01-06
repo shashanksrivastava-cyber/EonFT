@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import androidx.annotation.NonNull;
-import in.eoninfotech.eontechnician.ImageUtils;
+import in.eoninfotech.eontechnician.utils.ImageUtils;
 import in.eoninfotech.eontechnician.R;
 import pl.droidsonroids.gif.GifImageView;
 

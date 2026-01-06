@@ -3,41 +3,26 @@ package in.eoninfotech.eontechnician.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-
 import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 
-import in.eoninfotech.eontechnician.ImageUtils;
-import in.eoninfotech.eontechnician.OtherMaterialAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.adapters.AdditionalAccessoryDetailsAdapter;
 import in.eoninfotech.eontechnician.adapters.AdditionalMaterialDeviceAdapter;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.responses.AdditionalAccessoryDetails;
 import in.eoninfotech.eontechnician.responses.AdditionalDeviceDetails;
-import in.eoninfotech.eontechnician.responses.DeviceItems;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;

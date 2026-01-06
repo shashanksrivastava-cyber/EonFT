@@ -108,19 +108,6 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
 
         getData();
 
-//        lifecycleScope.launch {
-//            // do your Coroutine Stuff here, i.e. call a suspend fun:
-//            coroutineFunction()
-//        }
-//
-//        suspend fun coroutineFunction() {
-//            // Use a different CoroutineScope, etc
-//            CoroutineScope(Dispatchers.IO).launch {
-//                // do some long running operation or something
-//                getData()
-//            }
-//        }
-
         binding!!.btnAcceptReceive.setOnClickListener{
             val checked: SparseBooleanArray = binding!!.deviceDetailListReceive.getCheckedItemPositions()
             for (i in 0 until checked.size()) {

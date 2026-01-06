@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -110,19 +111,30 @@ public class CallSheetList extends AppCompatActivity {
         call.enqueue(new Callback<CallSheetListResponse>() {
             @Override
             public void onResponse(Call<CallSheetListResponse> call, Response<CallSheetListResponse> response) {
-                if (response.body().getType() == 1) {
-                    CallSheetListResponse callSheetResponse = response.body();
+
+                refreshLayout.setRefreshing(false);
+
+                if (response.body() != null && response.body().getType() == 1) {
+
                     txtContentUnavailable.setVisibility(View.GONE);
-                    callSheetDetails = callSheetResponse.getCallsheetlist();
-                    callSheetAdapter = new CallSheetListAdapter(getApplicationContext(), callSheetDetails);
-                    recyclerView.setAdapter(callSheetAdapter);
-                    refreshLayout.setRefreshing(false);
-                    runLayoutAnimation(recyclerView);
                     recyclerView.setVisibility(View.VISIBLE);
+
+                    List<CallSheetListDetail> newList = response.body().getCallsheetlist();
+
+                    if (callSheetAdapter == null) {
+                        // create adapter first time
+                        callSheetAdapter = new CallSheetListAdapter(CallSheetList.this, newList);
+                        recyclerView.setAdapter(callSheetAdapter);
+                    } else {
+                        // update using DiffUtil
+                        callSheetAdapter.updateList(newList);
+                    }
+
+                    runLayoutAnimation(recyclerView);
+
                 } else {
                     txtContentUnavailable.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
-                    refreshLayout.setRefreshing(false);
                 }
             }
             @Override

@@ -228,6 +228,7 @@
                     android:textColor="@color/eonBlue"
                     android:text="@string/PHN"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -247,6 +248,7 @@
                     android:text="@string/support"
                     android:textColor="@color/eonBlue"/>
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

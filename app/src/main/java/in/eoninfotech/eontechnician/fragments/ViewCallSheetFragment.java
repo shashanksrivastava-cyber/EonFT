@@ -29,11 +29,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import in.eoninfotech.eontechnician.R;
+import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
+import in.eoninfotech.eontechnician.factory.YearViewModelFactory;
+import in.eoninfotech.eontechnician.repository.YearRepository;
+import in.eoninfotech.eontechnician.repository.YearViewModel;
 import in.eoninfotech.eontechnician.responses.CallSheetResponse;
 import in.eoninfotech.eontechnician.responses.MonthDetail;
 import in.eoninfotech.eontechnician.responses.MonthListResponse;
@@ -43,6 +50,7 @@ import in.eoninfotech.eontechnician.activity.CallSheetAdapter;
 import in.eoninfotech.eontechnician.helper.CallSheetDetail;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
+import in.eoninfotech.eontechnician.webservice.NewApiholder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -52,19 +60,21 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import javax.inject.Inject;
+
 /**
  * Created by root on 1/3/19.
  */
-
+@AndroidEntryPoint
 public class ViewCallSheetFragment extends Fragment {
 
+    @Inject
+    SharedPreferenceManager sharedPreferences;
     View v;
     int id = 1;
     EditText selectedMonth, selectedYear;
     private Handler handler = new Handler();
     RelativeLayout circularRelative;
-    SharedPreferences sharedprefs;
-    SharedPreferences.Editor editor;
     String username, dist_id, version;
     int year, month, day;
     String current_date, selected_todate, s_date = "0";
@@ -75,6 +85,7 @@ public class ViewCallSheetFragment extends Fragment {
     Button update_dataa;
     ImageView go;
     ProgressDialog pDialog;
+    private boolean isApiCalled = false;
     Button upload_img_view;
     String monthtobeSend = "0", yeartobeSend = "0";
     public RecyclerView recyclerView;
@@ -91,16 +102,17 @@ public class ViewCallSheetFragment extends Fragment {
     ArrayList<String> yearDetail = new ArrayList<>();
     ArrayAdapter<String> adapter;
 
+    private YearViewModel yearViewModel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_call_sheet_list, container, false);
         //Base.initialize(getActivity());
-        sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
-        editor = sharedprefs.edit();
-        username = sharedprefs.getString("usname", "");
-        dist_id = sharedprefs.getString("s_distt", "");
-        version = sharedprefs.getString("version", "");
+
+        username = sharedPreferences.getUsername();
+        dist_id = sharedPreferences.getDistrictId();
+        version = sharedPreferences.getVersionName();
 
         datee = v.findViewById(R.id.date);
         upload_img_view = v.findViewById(R.id.upload_img);
@@ -160,13 +172,14 @@ public class ViewCallSheetFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            getCallSheetData();
-        }
-    }
+
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            getCallSheetData();
+//        }
+//    }
 
     private void getYear() {
         ApiHolder uploadImage = ServiceConnectionNewURL.getClient().create(ApiHolder.class);

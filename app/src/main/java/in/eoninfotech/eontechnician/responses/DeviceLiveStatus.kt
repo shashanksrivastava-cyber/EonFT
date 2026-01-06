@@ -29,6 +29,7 @@ data class DeviceLiveStatus (
     @JvmField val plant_in: String,
     @JvmField val plant_out: String,
     @JvmField val km_per: String,
-    @JvmField val drum_rotaion_status: String
+    @JvmField val drum_rotaion_status: String,
+    @JvmField val ign_status: String
 ) {
 }

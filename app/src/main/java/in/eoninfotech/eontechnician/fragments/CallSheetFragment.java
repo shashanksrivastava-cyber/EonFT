@@ -51,7 +51,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import dmax.dialog.SpotsDialog;
-import in.eoninfotech.eontechnician.ImageUtil;
+import in.eoninfotech.eontechnician.utils.ImageUtil;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.UpdateDataResponse;
 import in.eoninfotech.eontechnician.databinding.FragmentCallSheetBinding;

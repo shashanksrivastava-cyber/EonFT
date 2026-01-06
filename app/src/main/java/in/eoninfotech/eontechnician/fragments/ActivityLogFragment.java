@@ -61,9 +61,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.BuildConfig;
-import in.eoninfotech.eontechnician.ImageUtils;
+import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
+import in.eoninfotech.eontechnician.utils.ImageUtils;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.ClientDetails;
 import in.eoninfotech.eontechnician.responses.ClientLocationDetail;
@@ -94,6 +97,7 @@ import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.AttResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import jakarta.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -166,6 +170,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         image = sharedprefs.getString("image","");
         imei = sharedprefs.getString("imei1","");
         imei1 = sharedprefs.getString("imei2","");
+
         versionName  = BuildConfig.VERSION_NAME;
         ivProfile = v.findViewById(R.id.ivProfile);
         t_techname = v.findViewById(R.id.attd_username);

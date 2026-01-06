@@ -7,29 +7,6 @@ import `in`.eoninfotech.eontechnician.responses.LoginDetail
 import javax.inject.Inject
 import javax.inject.Singleton
 
-//@Singleton
-//class SharedPreferenceManager @Inject constructor(
-//    @ApplicationContext context: Context
-//) {
-//
-//    private val prefs: SharedPreferences =
-//        context.getSharedPreferences("login_user_pass", Context.MODE_PRIVATE)
-//
-//    // ✅ Getters
-//    fun getUsername(): String = prefs.getString("s_uuser", "") ?: ""
-//    fun getVersionName(): String = prefs.getString("version", "") ?: ""
-//    fun getImage(): String = prefs.getString("image", "") ?: ""
-//    fun getAlert(): String = prefs.getString("alert", "") ?: ""
-//    fun getDistrictId(): String = prefs.getString("s_distt", "") ?: ""
-//    fun getDisplayUsername(): String = prefs.getString("dis_user", "") ?: ""
-//
-//    // ✅ Setters (optional)
-//    fun setUsername(value: String) = prefs.edit().putString("s_uuser", value).apply()
-//    fun setVersionName(value: String) = prefs.edit().putString("version", value).apply()
-//    fun clearAll() = prefs.edit().clear().apply()
-//
-//
-//}
 
 @Singleton
 class SharedPreferenceManager @Inject constructor(
@@ -84,6 +61,8 @@ class SharedPreferenceManager @Inject constructor(
     fun getDistrictId(): String = prefs.getString("s_distt", "") ?: ""
     fun getDisplayUsername(): String = prefs.getString("dis_user", "") ?: ""
     fun getZone(): String = prefs.getString("zone", "") ?: ""
+
+    fun getUserId(): String  = prefs.getString("s_user_id","")?:""
 
     fun setUsername(value: String) = editor.putString("s_uuser", value).apply()
     fun setVersionName(value: String) = editor.putString("version", value).apply()

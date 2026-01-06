@@ -15,23 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.play.core.review.ReviewInfo;
-import com.google.android.play.core.review.ReviewManager;
-import com.google.android.play.core.review.ReviewManagerFactory;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dmax.dialog.SpotsDialog;
@@ -45,22 +36,16 @@ import in.eoninfotech.eontechnician.responses.DashBoardResponse;
 import in.eoninfotech.eontechnician.responses.TechDashboardDetail;
 import in.eoninfotech.eontechnician.databinding.DashboardNewBinding;
 import in.eoninfotech.eontechnician.viewModel.ViewModelAddDashboard;
-import in.eoninfotech.eontechnician.viewModel.ViewModelDeviceDashboard;
-import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
-import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
-import jakarta.inject.Inject;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
+import jakarta.inject.Inject;
+
 
 @AndroidEntryPoint
 public class DashBoardFragment extends Fragment {
-
     @Inject
     SharedPreferenceManager sharedPref;
+    @Inject
+    CheckConnection checkConnection;
     View v;
     DashboardNewBinding binding;
     String usrname, current_date, s_time, zone, version, months;
@@ -68,14 +53,7 @@ public class DashBoardFragment extends Fragment {
     Calendar calen = Calendar.getInstance();
     ArrayList<Float> yData = new ArrayList<>();
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
-    Float achivd;
     private AlertDialog progressDialog;
-    SharedPreferences sharedprefs;
-    SharedPreferences.Editor editor;
-    private String[] xData;
-    ReviewManager reviewManager;
-    ReviewInfo reviewInfo = null;
-    private CheckConnection checkConnection;
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
 
@@ -89,8 +67,6 @@ public class DashBoardFragment extends Fragment {
         usrname = sharedPref.getUsername();
         version = sharedPref.getVersionName();
         zone = sharedPref.getZone();
-
-        checkConnection = new CheckConnection(requireContext());
 
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomIncentive);
 

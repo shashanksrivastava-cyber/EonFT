@@ -2,6 +2,8 @@ package in.eoninfotech.eontechnician;
 
 import android.os.AsyncTask;
 
+import in.eoninfotech.eontechnician.utils.ImageUtil;
+
 /**
  * Created by root on 24/1/19.
  */

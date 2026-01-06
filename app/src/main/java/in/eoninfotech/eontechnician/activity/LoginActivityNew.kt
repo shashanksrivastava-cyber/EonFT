@@ -2,6 +2,7 @@ package `in`.eoninfotech.eontechnician.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,6 +15,7 @@ import android.telephony.TelephonyManager
 import android.util.Log
 import android.view.MotionEvent
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -24,6 +26,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Firebase
+import com.google.firebase.FirebaseApp
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.remoteConfig
+import com.google.firebase.remoteconfig.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import `in`.eoninfotech.eontechnician.AppPreferences
@@ -545,6 +552,45 @@ class LoginActivityNew : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = LoginactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        FirebaseApp.initializeApp(this)
+
+        // Initialize Firebase Remote Config
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 60
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener(this) { task ->
+                // Handle the updated status if needed
+                remoteConfig.fetchAndActivate()
+                    .addOnCompleteListener(this) { task ->
+
+                        if (task.isSuccessful) {
+
+                            val appNameFromFirebase =
+                                remoteConfig.getString("app_name_text")
+                            val secondNameFromFirebase =
+                                remoteConfig.getString("second_name_text")
+
+
+                            val appNameTv: TextView = findViewById(R.id.appName)
+                            val secondNameTv: TextView = findViewById(R.id.name)
+
+                            if (appNameFromFirebase.isNotEmpty()) {
+                                appNameTv.text = appNameFromFirebase
+                                secondNameTv.text = secondNameFromFirebase
+                            }
+
+                            Log.d(TAG, "Remote app name: $appNameFromFirebase")
+
+                        } else {
+                            Log.e(TAG, "Remote config fetch failed")
+                        }
+                    }
+            }
 
         init()
         requestPermissionsIfNeeded()

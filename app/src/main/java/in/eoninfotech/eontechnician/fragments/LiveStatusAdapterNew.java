@@ -69,6 +69,7 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
         holder.speed.setText(deviceLiveStatuses.get(position).speed);
         holder.fuel.setText(deviceLiveStatuses.get(position).fuel);
         holder.silo.setText(deviceLiveStatuses.get(position).silo);
+        holder.ignStatus.setText(deviceLiveStatuses.get(position).ign_status);
 
         if(deviceLiveStatuses.get(position).status_type.equalsIgnoreCase("C")){
             holder.connection_status.setText("Connected");
@@ -90,6 +91,12 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
             holder.linear_layout.setBackgroundColor(ContextCompat.getColor(context, R.color.eonWhite));
         }
 
+        if(deviceLiveStatuses.get(position).drum_sensor.equalsIgnoreCase("N/A")){
+            holder.drs_status.setText("N/A");
+        }else {
+            //holder.drs_status.setText("View DRS Status");
+        }
+
         holder.location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,16 +110,21 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
             }
         });
 
-        holder.drs_status.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent inteer = new Intent(context, ViewDRSStatus.class);
-                inteer.putExtra("veh_no",deviceLiveStatuses.get(position).reg_no);
-                inteer.putExtra("server",server_name);
-                inteer.putExtra("db_Name",db_name);
-                context.startActivity(inteer);
-            }
-        });
+        if(holder.drs_status.getText().toString().equalsIgnoreCase("N/A")){
+            //holder.drs_status.setVisibility(View.GONE);
+        }else {
+
+            holder.drs_status.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent inteer = new Intent(context, ViewDRSStatus.class);
+                    inteer.putExtra("veh_no",deviceLiveStatuses.get(position).reg_no);
+                    inteer.putExtra("server",server_name);
+                    inteer.putExtra("db_Name",db_name);
+                    context.startActivity(inteer);
+                }
+            });
+        }
     }
 
     @Override
@@ -124,7 +136,7 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
 
         ImageView connected,disconnected,under_main;
         TextView reg_no,device_id,depo,serial_no,veh_type,gps,gsm,power,battery,drum_sensor,lid_sensor,
-                speed,connection_status,sr_no,fuel,silo,location,drs_status;
+                speed,connection_status,sr_no,fuel,silo,location,drs_status,ignStatus;
         LinearLayout linear_layout;
         public ActivityHolder(@NonNull View itemView) {
             super(itemView);
@@ -151,6 +163,7 @@ public class LiveStatusAdapterNew extends RecyclerView.Adapter<LiveStatusAdapter
             silo = itemView.findViewById(R.id.silo);
             location = itemView.findViewById(R.id.location);
             drs_status = itemView.findViewById(R.id.drs_status);
+            ignStatus = itemView.findViewById(R.id.ignStatus);
         }
     }
 }

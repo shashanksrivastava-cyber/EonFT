@@ -58,6 +58,8 @@ import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
@@ -116,6 +118,7 @@ import in.eoninfotech.eontechnician.fragments.ActivityLogFragment;
 import in.eoninfotech.eontechnician.fragments.FragmentIncentiveTab;
 import in.eoninfotech.eontechnician.helper.TelephonyInfo;
 import in.eoninfotech.eontechnician.storage.LocationPrefs;
+import in.eoninfotech.eontechnician.utils.ImageUtils;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.MessageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -137,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Inject AppPreferences appPrefs;
     @Inject
     SharedPreferenceManager sharedPref;
-
     FragmentManager fm;
     FragmentTransaction ft;
     String username, version, dis_username, image;
@@ -227,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setTitle("ADD Dashboard");
+
         username = sharedPref.getUsername();
         versionname = sharedPref.getVersionName();
         image = sharedPref.getImage();
@@ -323,6 +326,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+
         handleIntentActions();
     }
 
@@ -336,13 +340,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         try {
-//            if (intent_req.equalsIgnoreCase("toEon")) {
-//                sendToEon();
-//            } else if (intent_req.equalsIgnoreCase("toFT")) {
-//                sendToFT();
-//            } else {
-//                addDashboard();
-//            }
             if ("toEon".equalsIgnoreCase(intent_req)) {
                 sendToEon();
             } else if ("toFT".equalsIgnoreCase(intent_req)) {
@@ -830,7 +827,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             targetViewPager.setVisibility(View.VISIBLE);
             tabLayout.setupWithViewPager(targetViewPager);
         }
-        
+
         return true;
     }
 
@@ -1112,10 +1109,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         public Fragment getItem(int position) {
-
-            bundle.putString("disttid", disgnid);
-            bundle.putString("usernme", usrname);
-            bundle.putString("version", versionname);
 
             switch (position) {
                 case 0:
@@ -1579,7 +1572,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //loadContent();
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -1607,3 +1599,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 }
+

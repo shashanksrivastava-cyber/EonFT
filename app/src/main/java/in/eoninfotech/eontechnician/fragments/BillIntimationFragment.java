@@ -2,7 +2,6 @@ package in.eoninfotech.eontechnician.fragments;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -42,13 +40,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import in.eoninfotech.eontechnician.ImageUtil;
+import in.eoninfotech.eontechnician.utils.ImageUtil;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.MainResponse;
 import in.eoninfotech.eontechnician.databinding.FragmentBillIntimationBinding;
 import in.eoninfotech.eontechnician.helper.FileUtils;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
+import in.eoninfotech.eontechnician.utils.DatePickerUtil;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import okhttp3.MediaType;
@@ -108,7 +107,13 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
 
         binding.linearBill.setVisibility(View.GONE);
         binding.fromDate.setInputType(InputType.TYPE_NULL);
+        binding.fromDate.setFocusable(false);
+        binding.fromDate.setFocusableInTouchMode(false);
+
         binding.toDate.setInputType(InputType.TYPE_NULL);
+        binding.toDate.setFocusable(false);
+        binding.toDate.setFocusableInTouchMode(false);
+
         binding.billNo.setInputType(InputType.TYPE_NULL);
         progressBar = v.findViewById(R.id.progressBar);
         binding.relImage.setVisibility(View.GONE);
@@ -116,19 +121,28 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         int bill_amt = Integer.parseInt(bill_amt_limit);
         binding.amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(bill_amt) });
 
-        binding.fromDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getFromDate();
-            }
-        });
+//        binding.fromDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getFromDate();
+//            }
+//        });
+//
+//        binding.toDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getToDate();
+//            }
+//        });
 
-        binding.toDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getToDate();
-            }
-        });
+        binding.fromDate.setOnClickListener(v ->
+                DatePickerUtil.showDatePicker(getContext(), binding.fromDate, 0, 12, false)
+        );
+
+        binding.toDate.setOnClickListener(v ->
+                DatePickerUtil.showDatePicker(getContext(), binding.toDate, 0, 12, false)
+        );
+
 
         setDate();
 
@@ -381,40 +395,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void getToDate() {
-        final DatePickerDialog dpdd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            // TODO Auto-generated method stub
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                if (monthOfYear + 1 < 10) {
-                    selected_todate = dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year;
-                } else {
-                    selected_todate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                }
-                binding.toDate.setText(selected_todate);
-            }
-        }, year, month - 1, day);
-        dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
-        dpdd.show();
-    }
-
-    private void getFromDate() {
-        final DatePickerDialog dpdd = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-            @Override
-            // TODO Auto-generated method stub
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                if (monthOfYear + 1 < 10) {
-                    selected_todate = dayOfMonth + "-0" + (monthOfYear + 1) + "-" + year;
-                } else {
-                    selected_todate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                }
-                binding.fromDate.setText(selected_todate);
-            }
-        }, year, month - 1, day);
-        dpdd.getDatePicker().setMaxDate(calen.getTimeInMillis());
-        dpdd.show();
     }
 
     @Override

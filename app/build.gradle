@@ -27,14 +27,11 @@ android {
 //        versionCode 66 // total number of version changes on play store
 //        versionName "7.1"
 
-//        versionCode 67 // total number of version changes on play store
-//        versionName "7.2"
+//        versionCode 69 // total number of version changes on play store
+//        versionName "7.4"
 
-//        versionCode 68 // total number of version changes on play store
-//        versionName "7.3"
-
-        versionCode 69 // total number of version changes on play store
-        versionName "7.4"
+        versionCode 70 // total number of version changes on play store
+        versionName "7.5"
 
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
@@ -176,5 +173,13 @@ dependencies {
 
     // Retrofit adapter for RxJava3
     implementation "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+
+    implementation(platform("com.google.firebase:firebase-bom:32.4.0")) // Check for latest BoM version
+
+    // Add the dependency for the Remote Config library
+    implementation("com.google.firebase:firebase-config")
+
+    // Google Analytics is recommended for conditional targeting
+    implementation("com.google.firebase:firebase-analytics")
 
 }

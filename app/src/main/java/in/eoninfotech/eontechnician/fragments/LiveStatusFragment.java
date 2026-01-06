@@ -35,6 +35,7 @@ import in.eoninfotech.eontechnician.ActivityDetailAdapter;
 import in.eoninfotech.eontechnician.LiveFaultDataAdapter;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.databinding.FragmentLiveStatusNewBinding;
+import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
 import in.eoninfotech.eontechnician.responses.ClientDetails;
 import in.eoninfotech.eontechnician.responses.ClientLocationDetail;
 import in.eoninfotech.eontechnician.responses.ClientLocationResponse;
@@ -70,6 +71,7 @@ import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
+import jakarta.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,6 +84,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class LiveStatusFragment extends Fragment{
 
+    @Inject
+    SharedPreferenceManager sharedPref;
+    @Inject
+    CheckConnection checkConnection;
     private FragmentLiveStatusNewBinding binding;
     private AlertDialog progressDialog;
     private ProgressDialog pDialog;
@@ -102,10 +108,8 @@ public class LiveStatusFragment extends Fragment{
     private final ArrayList<String> clientDetail = new ArrayList<>();
     private final ArrayList<String> locationDetail = new ArrayList<>();
     private final ArrayList<String> vehicleDetail = new ArrayList<>();
-
     private String server_name = "", db_name = "", id_dist = "", depo_id = "", clientId = "", mainClientId = "", connection_status = "D", veh_type = "";
 
-    private CheckConnection checkConnection;
     private boolean hasLoadedClients = false;
 
     @Override
@@ -126,8 +130,6 @@ public class LiveStatusFragment extends Fragment{
     }
 
     private void initUI() {
-        sharedPrefs = requireActivity().getSharedPreferences("login_user_pass", Context.MODE_PRIVATE);
-        editor = sharedPrefs.edit();
 
         checkConnection = new CheckConnection(requireContext());
 

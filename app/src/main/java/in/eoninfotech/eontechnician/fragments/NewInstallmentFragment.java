@@ -12,12 +12,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,7 +51,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
@@ -67,6 +63,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -75,8 +72,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import dmax.dialog.SpotsDialog;
-import in.eoninfotech.eontechnician.ImageUtil;
+import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
+import in.eoninfotech.eontechnician.utils.ImageUtil;
 import in.eoninfotech.eontechnician.UnderMaintenanceVehicles;
 import in.eoninfotech.eontechnician.databinding.ActivityAddUmBinding;
 import in.eoninfotech.eontechnician.databinding.RemovalFromUmBinding;
@@ -125,11 +124,11 @@ import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.controllers.ReceiveDeviceControllers;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.helper.FileUtils;
-import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.ProgressRequestBody;
 import in.eoninfotech.eontechnician.utils.DialogUtils;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.view.MyTextView;
+import in.eoninfotech.eontechnician.viewModel.DeviceViewModel;
 import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
 import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
@@ -141,7 +140,6 @@ import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -149,8 +147,14 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 import static in.eoninfotech.eontechnician.fragments.CallSheetFragment.hasPermissions;
 
+import javax.inject.Inject;
+
+
+@AndroidEntryPoint
 public class NewInstallmentFragment extends Fragment implements ClientListener, ReceiveDeviceListener,ProgressRequestBody.UploadCallbacks {
 
+    @Inject
+    SharedPreferenceManager sharedPreferenceManager;
     View v;
     private final int SELECT_PHOTO = 1;
     public static final String IMAGE_DIRECTORY_NAME = "android_file";
@@ -256,6 +260,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     ViewModelSubClient viewModelSubClient;
     ViewModelClientLocation viewModelClientLocation;
     ViewModelUM viewModelVehicleUM;
+    DeviceViewModel deviceViewModel;
     ConstraintLayout remove_um_layout;
     ActivityAddUmBinding activityAddUmBinding;
     RemovalFromUmBinding removalFromUmBinding;
@@ -270,10 +275,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         formHelper = new InstallationFormHelper(v);
 
         chk = new CheckConnection(v.getContext());
-        sharedprefs = getActivity().getSharedPreferences("login_user_pass", MODE_PRIVATE);
-        uusername = sharedprefs.getString("s_uuser", "");
-        user_id = sharedprefs.getString("s_user_id", "");
-        version = sharedprefs.getString("version", "");
+        uusername = sharedPreferenceManager.getUsername();
+        user_id = sharedPreferenceManager.getUserId();
+        version  = sharedPreferenceManager.getVersionName();
+
         l_in = v.findViewById(R.id.l_in);
         regNo = v.findViewById(R.id.regNo);
         nodrsReplace = v.findViewById(R.id.nodrsReplace);
@@ -659,7 +664,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         tilphnSr.setVisibility(View.GONE);
         tilDeviceMiss.setVisibility(View.GONE);
         ShowProgressBar(false);
-        Progress(false);
+        //Progress(false);
         initViewModels();
         observeViewModels();
 
@@ -1441,8 +1446,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     ShowProgressBar(true);
                     Handler handler = new Handler();
                     handler.postDelayed(() -> {
-                        //formHelper.resetAllFields();
-
                         clearData();
                         e_device_id.setInputType(InputType.TYPE_CLASS_NUMBER);
                         linearPhoneSupport.setVisibility(View.GONE);
@@ -5056,71 +5059,22 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             buttonPressed = "2";
             galleryIntent();
         });
-        cammera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                buttonPressed = "1";
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_PERMISSION);
-                    if (Build.VERSION.SDK_INT < 24) {
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        uri = Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                        try {
-                            //startActivityForResult(intent, REQUEST_CAMERA);
-                            openCameraIntent();
-                            alertDialogBuilder.dismiss();
-                        } catch (SecurityException e) {
-                            e.printStackTrace();
-                            try {
-                                if (hasPermissions(getActivity(), PERMISSIONS)) {
-                                } else {
-                                    //EasyPermissions.requestPermissions(this, "Access for storage", 101, PERMISSIONS);
-                                }
-                            } catch (Exception qe) {
-                                qe.printStackTrace();
-                            }
-                            openCameraIntent();
-                            alertDialogBuilder.dismiss();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            alertDialogBuilder.dismiss();
-                        }
-                    } else {
-                        try {
-                            if (hasPermissions(getActivity(), PERMISSIONS)) {
-                            } else {
-                                //EasyPermissions.requestPermissions(this, "Access for storage", 101, PERMISSIONS);
-                            }
-                        } catch (Exception qe) {
-                            qe.printStackTrace();
-                        }
-                        openCameraIntent();
-                        alertDialogBuilder.dismiss();
-                    }
-                }
+        cammera.setOnClickListener(v -> {
+            buttonPressed = "1";
+            if (activity == null) return;
+
+            if (!ImageUtil.checkAndRequestCameraPermission(activity)) {
+                return; // wait for user to grant permission
             }
 
-            File getOutputMediaFile(int type) {
-                File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
-                if (!mediaStorageDir.exists()) {
-                    if (!mediaStorageDir.mkdirs()) {
-                        Log.d("****", "Oops! Failed create " + IMAGE_DIRECTORY_NAME + " directory");
-                        return null;
-                    }
-                }
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-                File mediaFile;
-                if (type == MEDIA_TYPE_IMAGE) {
-                    mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
-                    Log.d("****", "");
-                } else {
-                    return null;
-                }
-                return mediaFile;
+            File photoFile = ImageUtil.getOutputMediaFile("MyAppImages");
+            if (photoFile == null) {
+                Log.e("Camera", "Error creating image file");
+                return;
             }
+            openCameraIntent();
+
+            alertDialogBuilder.dismiss();
         });
         cross.setOnClickListener(v -> alertDialogBuilder.dismiss());
     }
@@ -5200,46 +5154,21 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     private void openCameraIntent() {
-        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (pictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            File photoFile = null;
-            photoFile = createImageFile();
-            if (photoFile != null) {
-                uri = FileProvider.getUriForFile(getActivity(), "in.eoninfotech.eontechnician.provider", photoFile);
-                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                startActivityForResult(pictureIntent, REQUEST_CAPTURE_IMAGE);
-            }
-        }
-    }
+        File photoFile = ImageUtil.createImageFile(requireContext());
+        if (photoFile != null) {
+            path = photoFile.getAbsolutePath(); // ✅ Store here
+            uri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "in.eoninfotech.eontechnician.provider",
+                    photoFile
+            );
 
-    private File createImageFile() {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = null;
-        try {
-            image = File.createTempFile(imageFileName,/* prefix */".jpg",/* suffix */storageDir/* directory */);
-        } catch (IOException e) {
-            e.printStackTrace();
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            startActivityForResult(intent, REQUEST_CAPTURE_IMAGE);
+        } else {
+            Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show();
         }
-        path = image.getAbsolutePath();
-        return image;
-    }
-
-    private File bitmapToFile(Bitmap bitmap, String fileName) {
-        File filesDir = getActivity().getApplicationContext().getFilesDir();
-        File imageFile = new File(filesDir, fileName + ".jpg");
-        OutputStream os;
-        try {
-            os = new FileOutputStream(imageFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, os);
-            os.flush();
-            os.close();
-            return imageFile;
-        } catch (Exception e) {
-            Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
-        }
-        return null;
     }
 
     private void getVTSDetails() {
@@ -5398,7 +5327,8 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             image = null;
         } else if (buttonPressed.equals("1")) {
             try {
-                File file = bitmapToFile(bmp, "image_call");
+                //File file = bitmapToFile(bmp, "image_call");
+                File file = ImageUtil.bitmapToFile(requireContext(),bmp, "image_call");
                 long length = file.length();
                 ProgressRequestBody fileBody = new ProgressRequestBody(file, this);
                 image = MultipartBody.Part.createFormData("image", file.getName(), fileBody);
@@ -6407,7 +6337,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             Toast.makeText(getContext(), "" + response.getMessage(), Toast.LENGTH_SHORT).show();
             if (response.getType() == 1) {
                 circularRelative.setVisibility(View.GONE);
-                Progress(false);
                 progressDialog.hide();
                 clearData();
                 for (int i = 0; i < lvItem.getCount(); i++) {
@@ -6529,7 +6458,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             @Override
             public void onFailure(Call<VTSTypeResponse> call, Throwable t) {
                 t.printStackTrace();
-                failureData();
+                DialogUtils.showFailureSnack(v, "Something went wrong!");
             }
         });
     }
@@ -6574,59 +6503,9 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             @Override
             public void onFailure(Call<MainResponse> call, Throwable t) {
                 t.printStackTrace();
-                failureData();
+                DialogUtils.showFailureSnack(v, "Something went wrong!");
             }
         });
-    }
-
-    private void failureData() {
-        try {
-            Snackbar snackbar = Snackbar.make(v, K.TRY_AGAIN, Snackbar.LENGTH_LONG);
-            View snackbarView = snackbar.getView();
-            snackbarView.setBackgroundColor(Color.RED);
-            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
-            textView.setTextColor(Color.WHITE);
-            snackbar.show();
-        } catch (Exception e) {
-            try {
-                Toast.makeText(getActivity(), K.TRY_AGAIN, Toast.LENGTH_LONG).show();
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
-        }
-    }
-
-    private void Progress(boolean show) {
-        Resources res = getResources();
-        Drawable drawable = res.getDrawable(R.drawable.circular);
-        mProgress = v.findViewById(R.id.circularProgressbar);
-        mProgress.setProgress(0);   // Main Progress
-        mProgress.setSecondaryProgress(100); // Secondary Progress
-        mProgress.setMax(100); // Maximum Progress
-        mProgress.setProgressDrawable(drawable);
-        tv = v.findViewById(R.id.tv);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                while (pStatus < 100) {
-                    pStatus += 1;
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            // TODO Auto-generated method stub
-                            mProgress.setProgress(pStatus);
-                            tv.setText(pStatus + "%");
-                        }
-                    });
-                    try {
-                        Thread.sleep(15); //thread will take approx 1.5 seconds to finish
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
     }
 
     @Override
@@ -6672,6 +6551,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @Override

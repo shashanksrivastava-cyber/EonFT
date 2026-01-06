@@ -50,7 +50,7 @@ public class BusDataAdapter extends RecyclerView.Adapter<BusDataAdapter.BusDataV
 
         String siteText = "Site In: " + (deviceLiveStatuses.get(position).site_in.isEmpty() ? "N/A" : deviceLiveStatuses.get(position).site_in) +
                 " \nSite Out " + (deviceLiveStatuses.get(position).site_out.isEmpty() ? "N/A" : deviceLiveStatuses.get(position).site_out);
-        String plantText = "Plant In: " + deviceLiveStatuses.get(position).plant_in + " \nPlant Out " + deviceLiveStatuses.get(position).plant_out;
+        String plantText = "Plant Out: " + deviceLiveStatuses.get(position).plant_in + " \nPlant In " + deviceLiveStatuses.get(position).plant_out;
 
         holder.tvSiteInOut.setText(siteText);
         holder.tvPlantInOut.setText(plantText);

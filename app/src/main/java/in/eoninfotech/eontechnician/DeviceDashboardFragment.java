@@ -17,25 +17,30 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import dmax.dialog.SpotsDialog;
 import in.eoninfotech.eontechnician.activity.DevicedashboardDetail;
 import in.eoninfotech.eontechnician.activity.ReceiveDeviceActivity;
 import in.eoninfotech.eontechnician.databinding.DeviceDashboardActivityBinding;
+import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.responses.DeviceCount;
 import in.eoninfotech.eontechnician.viewModel.ViewModelDeviceDashboard;
+import jakarta.inject.Inject;
 
+@AndroidEntryPoint
 public class DeviceDashboardFragment extends Fragment {
 
+    @Inject
+    SharedPreferenceManager sharedPref;
+    @Inject
+    CheckConnection checkConnection;
     private DeviceDashboardActivityBinding binding;
     private String usrname, zone, version;
     private AlertDialog progressDialog;
-    private SharedPreferences sharedprefs;
-    private SharedPreferences.Editor editor;
 
     private ArrayList<DeviceCount> countDetails = new ArrayList<>();
     private ViewModelDeviceDashboard viewModelDeviceDashboard;
-    private CheckConnection checkConnection;
 
     public DeviceDashboardFragment() {
         // Required empty public constructor
@@ -49,17 +54,12 @@ public class DeviceDashboardFragment extends Fragment {
         View view = binding.getRoot();
 
         // Initialize SharedPreferences
-        sharedprefs = requireActivity().getSharedPreferences("login_user_pass", Context.MODE_PRIVATE);
-        editor = sharedprefs.edit();
-        usrname = sharedprefs.getString("s_uuser", "");
-        version = sharedprefs.getString("version", "");
-        zone = sharedprefs.getString("zone", "");
+        usrname = sharedPref.getUsername();
+        version = sharedPref.getVersionName();
+        zone = sharedPref.getZone();
 
         // Initialize progress dialog
         progressDialog = new SpotsDialog(getActivity(), R.style.CustomCallSheet);
-
-        // Initialize connection checker
-        checkConnection = new CheckConnection(requireContext());
 
         // Initialize ViewModel
         viewModelDeviceDashboard = new ViewModelProvider(this).get(ViewModelDeviceDashboard.class);
@@ -71,7 +71,6 @@ public class DeviceDashboardFragment extends Fragment {
         } else {
             checkConnection.showConnectionErrorDialog();
         }
-
         // Set up click listeners
         setupClickListeners();
 
