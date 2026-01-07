@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.BuildConfig
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -34,7 +35,6 @@ import com.google.firebase.remoteconfig.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import `in`.eoninfotech.eontechnician.AppPreferences
-import `in`.eoninfotech.eontechnician.BuildConfig
 import `in`.eoninfotech.eontechnician.MainActivity
 import `in`.eoninfotech.eontechnician.MainActivityNew
 import `in`.eoninfotech.eontechnician.R
