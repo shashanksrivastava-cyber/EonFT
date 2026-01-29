@@ -30,7 +30,7 @@ import retrofit2.Response;
  * Created by root on 9/11/18.
  */
 
-public class FaultyDevicesDetailActivity extends AppCompatActivity {
+public class FaultyDevicesDetailActivity extends AppCompatActivity  {
 
     String usrname, zone, version;
     RecyclerView recyclerView;

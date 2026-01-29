@@ -26,7 +26,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CardViewActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class CardViewActivity extends AppCompatActivity  implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private Button mButton;
     private ViewPager mViewPager;

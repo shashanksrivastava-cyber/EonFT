@@ -19,7 +19,7 @@ import in.eoninfotech.eontechnician.R;
  * Created by root on 23/5/19.
  */
 
-public class MessageDetails extends AppCompatActivity {
+public class MessageDetails extends AppCompatActivity  {
 
     TextView tv,msgdate,textViewCounter,titles,clientName,cLocation,sender,message;
     FloatingActionButton fab;

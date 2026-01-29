@@ -56,7 +56,6 @@ public class DashBoardFragment extends Fragment {
     private AlertDialog progressDialog;
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
-
     ViewModelAddDashboard viewModelAddDashboard;
     boolean isDashboardLoaded = false;
 

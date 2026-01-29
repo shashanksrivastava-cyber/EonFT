@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import dmax.dialog.SpotsDialog;
+import in.eoninfotech.eontechnician.activity.BaseActivity;
 import in.eoninfotech.eontechnician.responses.ActivityResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -16,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActivityDetailActivity extends AppCompatActivity {
+public class ActivityDetailActivity extends BaseActivity {
 
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;

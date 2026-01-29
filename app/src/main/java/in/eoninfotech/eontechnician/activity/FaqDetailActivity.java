@@ -17,7 +17,7 @@
 //import androidx.recyclerview.widget.RecyclerView;
 //import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 //
-//public class FaqDetailActivity extends AppCompatActivity {
+//public class FaqDetailActivity extends AppCompatActivity  {
 //
 //    SharedPreferences sharedprefs;
 //    SharedPreferences.Editor editor;

@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FaultyDeviceDetails extends AppCompatActivity implements InstInstructionAdapter.InstInstructionAdapterListener {
+public class FaultyDeviceDetails extends AppCompatActivity  implements InstInstructionAdapter.InstInstructionAdapterListener {
 
     SharedPreferences sharedprefs;
     String usrname, zone, version;

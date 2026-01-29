@@ -75,7 +75,7 @@
 // * Created by root on 2/11/18.
 // */
 //
-//public class LoginActivityNew extends AppCompatActivity {
+//public class LoginActivityNew extends AppCompatActivity  {
 //
 //    LoginactivityBinding binding;
 //    public Button loginn;

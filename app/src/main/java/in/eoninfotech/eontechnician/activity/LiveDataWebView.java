@@ -21,7 +21,7 @@ import static org.jsoup.nodes.Document.OutputSettings.Syntax.html;
  * Created by root on 26/11/18.
  */
 
-public class LiveDataWebView extends AppCompatActivity {
+public class LiveDataWebView extends AppCompatActivity  {
 
     WebView wv;
     String html;

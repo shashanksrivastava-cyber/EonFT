@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import in.eoninfotech.eontechnician.activity.LoginActivity;
 
-public class TabNextDayPlanActivity extends AppCompatActivity {
+public class TabNextDayPlanActivity extends AppCompatActivity  {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
     public static int int_items = 2;

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.storage.LocationPrefs;
 
 
-public class SendDatatoServer extends AppCompatActivity {
+public class SendDatatoServer extends AppCompatActivity  {
 
     LocationPrefs locationPrefs;
     SharedPreferences sharedprefs;

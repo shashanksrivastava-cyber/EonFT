@@ -49,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MessageActivity extends AppCompatActivity implements MessageAdapter.MessageAdapterListener, View.OnClickListener, TextWatcher {
+public class MessageActivity extends AppCompatActivity  implements MessageAdapter.MessageAdapterListener, View.OnClickListener, TextWatcher {
 
     View v;
     SharedPreferences sharedprefs;

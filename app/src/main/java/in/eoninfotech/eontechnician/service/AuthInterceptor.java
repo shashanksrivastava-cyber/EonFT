@@ -1,12 +1,7 @@
-package in.eoninfotech.eontechnician.webservice;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+package in.eoninfotech.eontechnician.service;
 
 import java.io.IOException;
 
-import in.eoninfotech.eontechnician.activity.LoginActivityNew;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
@@ -16,9 +11,9 @@ public class AuthInterceptor implements Interceptor {
         void onLogout(String msg);
     }
 
-    private static in.eoninfotech.eontechnician.service.AuthInterceptor.LogoutListener logoutListener;
+    private static LogoutListener logoutListener;
 
-    public static void setLogoutListener(in.eoninfotech.eontechnician.service.AuthInterceptor.LogoutListener listener) {
+    public static void setLogoutListener(LogoutListener listener) {
         logoutListener = listener;
     }
 

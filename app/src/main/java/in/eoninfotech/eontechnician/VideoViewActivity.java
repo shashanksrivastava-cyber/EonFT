@@ -32,7 +32,7 @@ import in.eoninfotech.eontechnician.databinding.DeviceDashboardActivityBinding;
 import in.eoninfotech.eontechnician.responses.DeviceCount;
 import in.eoninfotech.eontechnician.viewModel.ViewModelDeviceDashboard;
 
-public class VideoViewActivity extends AppCompatActivity {
+public class VideoViewActivity extends AppCompatActivity  {
 
     ActivityVideoViewBinding binding;
     private ExoPlayer player;

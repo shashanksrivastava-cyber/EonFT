@@ -5035,7 +5035,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 });
     }
 
-    private void getSerialNo() {
+    public void getSerialNo() {
         progressDialog.show();
         receiveDeviceControllers.get_serial_no(user_id,id_dist,clientLocId,s_work_id,db_name,server_name,this);
     }
@@ -5184,44 +5184,44 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         viewModelSubClient.getSubClientRepository(mainClientId);
     }
 
-    private void removal_type() {
+    public void removal_type() {
         newInstallmentController.requestRemovalActivityResponse(this);
     }
 
-    private void addVehNotAvailReason() {
+    public void addVehNotAvailReason() {
         newInstallmentController.requestVehNotAvailReasonResponse(this);
     }
 
-    private void getSimOperator() {
+    public void getSimOperator() {
         newInstallmentController.reqeuestSimOperatorResponse(this);
     }
 
-    private void getSimReasonList() {
+    public void getSimReasonList() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestSimReplaceResponse(this);
     }
 
-    private void getFaultList() {
+    public void getFaultList() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestFaultList(this);
     }
 
-    private void getPhoneSupportList() {
+    public void getPhoneSupportList() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestDisconnection(this);
     }
 
-    private void getItemCollectList() {
+    public void getItemCollectList() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestCollectedItemList(this);
     }
 
-    private void addReasonRemove() {
+    public void addReasonRemove() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestRemovalReason(this);
     }
 
-    private void fetchReasons() {
+    public void fetchReasons() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestReplaceReason(this);
     }
@@ -5242,12 +5242,12 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         newInstallmentController.reqeuestworkType(this);
     }
 
-    private void addVehType() {
+    public void addVehType() {
         ShowProgressBar(true);
         newInstallmentController.reqeuestvehicleType(this);
     }
 
-    private void damageReason() {
+    public void damageReason() {
         newInstallmentController.reqeuestDamageReason(this);
     }
 
@@ -6019,7 +6019,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if (collected_items.size() > 0) {
+                if (!collected_items.isEmpty()) {
                     for (int i = 0; i < collected_items.size(); i++) {
                         item_name.add(collected_items.get(i).getName());
                     }
@@ -6081,7 +6081,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     e.printStackTrace();
                 }
                 simReplaceReason.add("REPLACEMENT REASON");
-                if (simreplacereason.size() > 0) {
+                if (!simreplacereason.isEmpty()) {
                     for (int i = 0; i < simreplacereason.size(); i++) {
                         simReplaceReason.add(simreplacereason.get(i).getS_name());
                     }
@@ -6136,7 +6136,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                     e.printStackTrace();
                 }
                 vehNotAvailReason.add("SELECT REASON");
-                if (vehNotAvailReasonDetails.size() > 0) {
+                if (!vehNotAvailReasonDetails.isEmpty()) {
                     for (int i = 0; i < vehNotAvailReasonDetails.size(); i++) {
                         vehNotAvailReason.add(vehNotAvailReasonDetails.get(i).getReason());
                     }
@@ -6412,7 +6412,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     public void onFinish() {
     }
 
-    void getDeviceTypes() {
+    public void getDeviceTypes() {
         ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<VTSTypeResponse> call = get_list.getVTSTypes();
         call.enqueue(new Callback<VTSTypeResponse>() {
@@ -6463,7 +6463,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         });
     }
 
-    private void getDevice() {
+    public void getDevice() {
         ApiHolder get_list = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
         Call<MainResponse> call = get_list.getDeviceTypes();
         call.enqueue(new Callback<MainResponse>() {
@@ -6551,7 +6551,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

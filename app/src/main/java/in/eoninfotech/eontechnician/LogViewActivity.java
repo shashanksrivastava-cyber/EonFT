@@ -44,7 +44,7 @@ import retrofit2.Response;
 /**
  * Created by root on 2/2/18.
  */
-public class LogViewActivity extends AppCompatActivity {
+public class LogViewActivity extends AppCompatActivity  {
 
     String disttid;
     String uusername, date, version;

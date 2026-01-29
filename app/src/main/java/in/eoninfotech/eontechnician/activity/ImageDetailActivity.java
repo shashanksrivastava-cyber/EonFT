@@ -25,7 +25,7 @@ import in.eoninfotech.eontechnician.R;
  * Created by root on 14/2/19.
  */
 
-public class ImageDetailActivity extends AppCompatActivity {
+public class ImageDetailActivity extends AppCompatActivity  {
 
     ImageView image,rotate;
     ProgressBar progressBar ;

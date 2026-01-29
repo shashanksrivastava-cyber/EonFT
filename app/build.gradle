@@ -82,6 +82,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-perf:21.0.5'
     implementation 'androidx.test.ext:junit:1.2.1'
     implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation 'androidx.benchmark:benchmark-common:1.4.1'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:5.18.0'
     implementation 'com.squareup.retrofit2:retrofit:3.0.0'
@@ -181,5 +182,21 @@ dependencies {
 
     // Google Analytics is recommended for conditional targeting
     implementation("com.google.firebase:firebase-analytics")
+
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.mockito:mockito-core:5.5.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
+
+// Instrumentation (UI)
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
+
+// Hilt testing
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.48"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.48"
+
+// Espresso intents (for navigation)
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.5.1"
+    testImplementation "org.robolectric:robolectric:4.16.1"
 
 }

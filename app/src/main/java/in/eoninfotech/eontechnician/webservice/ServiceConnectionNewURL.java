@@ -35,10 +35,10 @@ public class ServiceConnectionNewURL {
     public static Retrofit getClient(String version) {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-//        AuthInterceptor authInterceptor = new AuthInterceptor(getApplicationContext());
         OkHttpClient okclient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES)
+                .addInterceptor(new AuthInterceptor())
                 .addInterceptor(interceptor)
                 .build();
         Gson gson = new GsonBuilder()
@@ -57,10 +57,10 @@ public class ServiceConnectionNewURL {
     public static Retrofit getClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        //AuthInterceptor authInterceptor = new AuthInterceptor(getApplicationContext());
         OkHttpClient okclient = new OkHttpClient.Builder()
                 .connectTimeout(20, TimeUnit.MINUTES)
                 .readTimeout(10, TimeUnit.MINUTES)
+                .addInterceptor(new AuthInterceptor())
                 .addInterceptor(interceptor)
                 .build();
         Gson gson = new GsonBuilder()

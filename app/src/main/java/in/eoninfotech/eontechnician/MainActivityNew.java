@@ -82,7 +82,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivityNew extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivityNew extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
 
     private static final int PERMISSION_ALL = 1;
     private static final int REQUEST_CODE_PERMISSION = 1001;

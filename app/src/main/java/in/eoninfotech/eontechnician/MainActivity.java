@@ -61,6 +61,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
@@ -83,6 +84,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.eoninfotech.eontechnician.activity.BaseActivity;
 import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
 import in.eoninfotech.eontechnician.fragments.AddUMFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
@@ -129,7 +131,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     LocationPrefs locationPrefs;
@@ -325,7 +327,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
 
         handleIntentActions();
     }
@@ -587,10 +588,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         super.onBackPressed();
         new MaterialAlertDialogBuilder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)

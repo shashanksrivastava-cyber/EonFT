@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ChangePassword extends AppCompatActivity {
+public class ChangePassword extends AppCompatActivity  {
 
     EditText old_password,new_password,confirm_password;
     String old_pass , new_pass , confirm_pass;

@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SendDeviceDetails extends AppCompatActivity {
+public class SendDeviceDetails extends AppCompatActivity  {
 
     ActivitySendDeviceDetailsBinding binding;
     SharedPreferences sharedprefs;

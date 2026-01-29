@@ -5,7 +5,7 @@ import in.eoninfotech.eontechnician.R;
 
 import android.os.Bundle;
 
-public class ReturnDeviceActivity extends AppCompatActivity {
+public class ReturnDeviceActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

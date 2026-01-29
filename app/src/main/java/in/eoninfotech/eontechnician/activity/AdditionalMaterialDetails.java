@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AdditionalMaterialDetails extends AppCompatActivity {
+public class AdditionalMaterialDetails extends AppCompatActivity  {
 
     SharedPreferences sharedprefs;
     String usrname, version, id_no;

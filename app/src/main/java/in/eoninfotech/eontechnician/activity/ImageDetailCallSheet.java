@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import in.eoninfotech.eontechnician.utils.ImageUtils;
 import in.eoninfotech.eontechnician.R;
 
-public class ImageDetailCallSheet extends AppCompatActivity {
+public class ImageDetailCallSheet extends AppCompatActivity  {
 
     ImageView image,rotate;
     ProgressBar progressBar ;

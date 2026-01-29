@@ -29,7 +29,7 @@ import retrofit2.Response;
  * Created by root on 24/11/18.
  */
 
-public class LiveFaultData extends AppCompatActivity {
+public class LiveFaultData extends AppCompatActivity  {
 
     WebView wv;
     String html,usrname,version,zone;

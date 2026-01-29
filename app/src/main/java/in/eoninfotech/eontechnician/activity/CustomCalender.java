@@ -40,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CustomCalender extends AppCompatActivity implements OnDateSelectedListener, OnMonthChangedListener {
+public class CustomCalender extends AppCompatActivity  implements OnDateSelectedListener, OnMonthChangedListener {
 
     Context context;
     MaterialCalendarView mcv;

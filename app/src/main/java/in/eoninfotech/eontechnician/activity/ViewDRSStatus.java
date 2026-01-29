@@ -45,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewDRSStatus extends AppCompatActivity {
+public class ViewDRSStatus extends AppCompatActivity  {
 
     ViewDrsStatusBinding binding;
     String usrname, zone, version, reg_no, server, dbName;

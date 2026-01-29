@@ -18,7 +18,7 @@ import in.eoninfotech.eontechnician.databinding.ActivityDeviceMaintenanceBinding
 import in.eoninfotech.eontechnician.databinding.ActivityVideoViewBinding;
 
 
-public class DeviceMaintenance extends AppCompatActivity {
+public class DeviceMaintenance extends AppCompatActivity  {
 
     ActivityDeviceMaintenanceBinding binding;
     String type;

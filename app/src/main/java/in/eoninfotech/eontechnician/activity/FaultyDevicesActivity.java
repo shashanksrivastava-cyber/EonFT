@@ -13,10 +13,12 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -48,7 +50,7 @@ import retrofit2.Response;
  * Created by root on 2/11/18.
  */
 
-public class FaultyDevicesActivity extends AppCompatActivity {
+public class FaultyDevicesActivity extends AppCompatActivity  {
 
     String usrname, zone, version;
     public RecyclerView recyclerView;
@@ -140,6 +142,21 @@ public class FaultyDevicesActivity extends AppCompatActivity {
             sendData = device_value;
             getFaultyFuelData();
         }
+
+        getOnBackPressedDispatcher().addCallback(
+                this,
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        if (tab.equals("1")) {
+                            finish();
+                        } else if (tab.equals("2")) {
+                            finish();
+                        }
+                    }
+                }
+        );
+
     }
 
     private void getUmainWorkingValue() {
@@ -319,16 +336,6 @@ public class FaultyDevicesActivity extends AppCompatActivity {
 
     private void clear() {
         faultyDevices.clear();
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        if (tab.equals("1")) {
-            finish();
-        } else if (tab.equals("2")) {
-            finish();
-        }
     }
 
     @Override

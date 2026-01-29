@@ -39,7 +39,7 @@ import retrofit2.Response;
  * Created by root on 17/10/18.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity  {
 
     private static final long SPLASH_DELAY = 786;
     private CountDownTimer timer;

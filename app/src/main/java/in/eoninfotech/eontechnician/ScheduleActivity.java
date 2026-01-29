@@ -29,7 +29,7 @@ import in.eoninfotech.eontechnician.helper.DashboardDetail;
 
 /**************************************************************************/
 
-public class ScheduleActivity extends AppCompatActivity {
+public class ScheduleActivity extends AppCompatActivity  {
     ListView lv;
     ArrayList<ClientList> list_vehidetai = new ArrayList<ClientList>();
     private PieChart mChart;
