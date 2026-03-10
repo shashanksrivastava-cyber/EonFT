@@ -185,7 +185,7 @@ public class Devicedashboards extends AppCompatActivity  {
         viewModelDeviceDashboard.getDashboardCountRepository(usrname).observe(this, movieResponse -> {
 
             if (movieResponse == null) {
-                Toast.makeText(this, "Null response from server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, ""+movieResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.hide();
                 return;
             }

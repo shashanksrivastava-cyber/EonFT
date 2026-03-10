@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F6F8">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- Filters Section -->
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white">
+
+                    <LinearLayout
+                        android:id="@+id/filter_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:visibility="visible">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/dateRangeLayout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Select Date Range"
+                            app:boxBackgroundMode="outline"
+                            app:endIconDrawable="@drawable/close_icon"
+                            app:endIconMode="custom"
+                            app:startIconDrawable="@drawable/ic_calendar">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etDateRange"
+                                android:layout_width="match_parent"
+                                android:layout_height="56dp"
+                                android:clickable="true"
+                                android:cursorVisible="false"
+                                android:focusable="false"
+                                android:inputType="none" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/profile_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/header_cover_image"
+                            android:layout_margin="4dp"
+                            android:background="@android:color/white"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="4dp">
+
+                            <GridLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:columnCount="2"
+                                android:padding="4dp"
+                                android:rowCount="2">
+
+                                <!-- Main Client -->
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="48dp"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="6dp"
+                                    app:cardElevation="4dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/et_frame">
+
+                                        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                            android:id="@+id/main_client"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="8dp"
+                                            android:gravity="center_vertical"
+                                            android:spinnerMode="dialog" />
+
+                                    </RelativeLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+
+                                <!-- Sub Client -->
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="48dp"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="6dp"
+                                    app:cardElevation="4dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/et_frame">
+
+                                        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                            android:id="@+id/new_in_clients"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="8dp"
+                                            android:gravity="center_vertical"
+                                            android:spinnerMode="dialog" />
+
+
+                                    </RelativeLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+
+                                <!-- Location -->
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="48dp"
+                                    android:layout_columnWeight="1"
+                                    android:layout_margin="6dp"
+                                    app:cardElevation="4dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/et_frame">
+
+                                        <in.eoninfotech.eontechnician.view.MySearchableSpinner
+                                            android:id="@+id/new_in_locations"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="8dp"
+                                            android:gravity="center_vertical"
+                                            android:spinnerMode="dialog" />
+
+                                    </RelativeLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <!-- Status -->
+
+                            </GridLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Dropdown Filters -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <!-- Clear Filter Button -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnClearFilter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="6dp"
+                                android:text="Clear Filter"
+                                android:textColor="@color/material_green_600"
+                                app:backgroundTint="@android:color/white"
+                                app:strokeColor="@color/material_green_600"
+                                app:strokeWidth="1dp"/>
+
+                            <!-- Search Button -->
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnSearch"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginStart="6dp"
+                                android:text="Search"
+                                android:textColor="@android:color/white"
+                                app:backgroundTint="@color/material_green_600"/>
+
+                        </LinearLayout>
+
+                        <!-- Search Button -->
+<!--                        <com.google.android.material.button.MaterialButton-->
+<!--                            android:id="@+id/btnSearch"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="12dp"-->
+<!--                            android:backgroundTint="@color/material_green_600"-->
+<!--                            android:text="Search"-->
+<!--                            android:textColor="@android:color/white" />-->
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+                <!-- RecyclerView List -->
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvRequests"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:padding="6dp"-->
+<!--                    tools:listitem="@layout/service_request_adapter" />-->
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRequests"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="6dp"
+                        tools:listitem="@layout/service_request_adapter" />
+
+                    <TextView
+                        android:id="@+id/tvEmptyView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="16sp"
+                        android:textColor="#757575"
+                        android:visibility="gone"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>
+

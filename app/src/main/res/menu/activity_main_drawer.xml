@@ -97,6 +97,11 @@
                 android:title="Service Stock Demand" />
 
             <item
+                android:id="@+id/service_request"
+                android:icon="@drawable/ic_receipt_black_24dp"
+                android:title="Service Request" />
+
+            <item
                 android:id="@+id/nav_material"
                 android:icon="@drawable/ic_receipt_black_24dp"
                 android:title="Receive Material"

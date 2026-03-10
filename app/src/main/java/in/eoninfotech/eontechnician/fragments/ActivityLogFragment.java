@@ -61,11 +61,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.BuildConfig;
 import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
+import in.eoninfotech.eontechnician.responses.MainClientList;
 import in.eoninfotech.eontechnician.utils.ImageUtils;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.responses.ClientDetails;
@@ -94,6 +96,9 @@ import in.eoninfotech.eontechnician.helper.GetLocations;
 import in.eoninfotech.eontechnician.helper.K;
 import in.eoninfotech.eontechnician.helper.Location_prop;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
+import in.eoninfotech.eontechnician.viewModel.ViewModelClientLocation;
+import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
+import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.AttResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
@@ -138,14 +143,14 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     File f;
     ProgressBar progressBar;
     MaterialCalendarView mcv;
-    String image;
+    String image,mainClientId="SELECT CLIENT";
     Calendar c ;
     boolean gps_enabled = false;
     boolean network_enabled = false;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
     private LocationPrefs locationPrefs;
-    MySearchableSpinner client,location;
+    MySearchableSpinner client,location,new_main_clients;
     NewInstallmentController newInstallmentController;
     ArrayList<ClientDetails> clientList = new ArrayList<>();
     ArrayList<String> clientDetail = new ArrayList<>();
@@ -153,6 +158,11 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     ArrayList<ClientLocationDetail> locationList = new ArrayList<>();
     ArrayList<String> locationDetail = new ArrayList<>();
     int PERMISSION_ALL = 1;
+    ViewModelMainClient viewModelMainClient;
+    ViewModelSubClient viewModelSubClient;
+    ViewModelClientLocation viewModelClientLocation;
+    ArrayList<MainClientList> mainclientList = new ArrayList<>();
+    ArrayList<String> mainClientDetail = new ArrayList<>();
     String[] PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,};
     // integer for permissions results request
 
@@ -188,12 +198,16 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         client =  v.findViewById(R.id.new_in_clients);
         add_manual = v.findViewById(R.id.add_manual);
         location =   v.findViewById(R.id.new_in_locations);
+        new_main_clients = v.findViewById(R.id.new_main_clients);
         myDialog = new Dialog(getActivity());
         newInstallmentController = new NewInstallmentController();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         c= Calendar.getInstance();
         location.setEnabled(false);
+
+        initViewModels();
+        observeViewModels();
 
         String imageUri = K.Url.IMAGE_URL +"uploads/"+image;
         ImageUtils.glideImage(ivProfile, imageUri, R.drawable.user);
@@ -275,6 +289,26 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        new_main_clients.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                if (i == 0) {
+                    return;
+                } else {
+                    i = i - 1;
+                }
+
+                mainClientId = String.valueOf(mainclientList.get(i).getClient_Id());
+                addclients();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         client.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -289,12 +323,15 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                 id_dist = clientList.get(i).getId_dist();
                 server_name = clientList.get(i).getServer_name();
                 db_name = clientList.get(i).getDb_name();
-                if(clientId.equals("500")){
-                    location.setEnabled(false);
-                }else {
-                    location.setEnabled(true);
-                }
-                addLocation();
+                //addLocation();
+                    if(s_clientname.equalsIgnoreCase("OTHERS")){
+                        clientLocId ="0";
+                        location.setEnabled(false);
+                    }else {
+                        addLocation();
+                        location.setEnabled(true);
+                    }
+
             }catch(Exception e){
                 }
             }
@@ -310,7 +347,8 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
                     return;
                 } else {
                     i = i - 1;
-                }clientLocId = String.valueOf((locationList.get(i).getLoc_Id()));
+                }
+                clientLocId = String.valueOf((locationList.get(i).getLoc_Id()));
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -478,6 +516,90 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
         });
         return v;
     }
+
+
+    private void observeViewModels() {
+        viewModelMainClient.getMainClientRepository().observe(getViewLifecycleOwner(), response -> {
+            if (response == null) {
+                ShowProgressBar(false);
+                return;
+            }
+            if (response.getType() == 1) {
+                mainclientList.clear();
+                mainclientList.addAll(response.getMain_client_list());
+                mainClientDetail.clear();
+                mainClientDetail.add("SELECT CLIENT");
+                for (MainClientList client : mainclientList) {
+                    mainClientDetail.add(client.getClient_Name());
+                }
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, mainClientDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                new_main_clients.setAdapter(adapter);
+            } else {
+                mainClientDetail.clear();
+                mainClientDetail.add("NO DATA AVAILABLE");
+                Toast.makeText(getContext(), "Failed to load main clients", Toast.LENGTH_SHORT).show();
+            }
+            ShowProgressBar(false);
+        });
+
+        viewModelSubClient.getSubClientRepository(mainClientId).observe(getViewLifecycleOwner(), response -> {
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                ShowProgressBar(false);
+                return;
+            }
+            if (response.getType() == 1) {
+                clientList.clear();
+                clientList.addAll(response.getClientList());
+                clientDetail.clear();
+                clientDetail.add("SELECT CLIENT");
+                for (ClientDetails client : clientList) {
+                    clientDetail.add(client.getClient_Name());
+                }
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, clientDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                client.setAdapter(adapter);
+            } else {
+                clientDetail.clear();
+                clientDetail.add("NO DATA AVAILABLE");
+            }
+            ShowProgressBar(false);
+        });
+
+        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name).observe(getViewLifecycleOwner(), response -> {
+
+            if (response == null) {
+                Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
+                ShowProgressBar(false);
+                return;
+            }
+
+            if (response.getType() == 1) {
+                locationList.clear();
+                locationList.addAll(response.getClientLoc());
+                locationDetail.clear();
+                locationDetail.add("SELECT LOCATION");
+                for (ClientLocationDetail loc : locationList) {
+                    locationDetail.add(loc.getLoc_Name());
+                }
+                adapter = new ArrayAdapter<>(getContext(), R.layout.simple_custom_spinner_item, locationDetail);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                location.setAdapter(adapter);
+            } else {
+                locationDetail.clear();
+                locationDetail.add("NO DATA AVAILABLE");
+            }
+            ShowProgressBar(false);
+        });
+    }
+
+    private void initViewModels() {
+        viewModelMainClient = new ViewModelProvider(this).get(ViewModelMainClient.class);
+        viewModelSubClient = new ViewModelProvider(this).get(ViewModelSubClient.class);
+        viewModelClientLocation = new ViewModelProvider(this).get(ViewModelClientLocation.class);
+    }
+
     private void getLocation() {
             try {
                 mLastLocation = LocationServices.FusedLocationApi
@@ -535,12 +657,13 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     }
 
     private void addLocation() {
-        newInstallmentController.reqeuestClientLocation(id_dist,server_name,db_name,this);
+        ShowProgressBar(true);
+        viewModelClientLocation.getClientLocationRepository(id_dist, server_name, db_name);
     }
 
     private void addclients() {
         ShowProgressBar(true);
-        newInstallmentController.reqeuestClientList("",this);
+        viewModelSubClient.getSubClientRepository(mainClientId);
     }
 
     public Address getAddress(double latitude, double longitude) {
@@ -732,56 +855,10 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
     @Override
     public void clientResponse(ClientResponse response) {
-        ShowProgressBar(false);
-        if(response.getType()==1){
-        try{
-            clientList = response.getClientList();
-            try {
-                try {
-                    clientDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }   clientDetail.add(" SELECT CLIENT");
-                for (int i = 0; i < clientList.size(); i++) {
-                    clientDetail.add(clientList.get(i).getClient_Name());
-                }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, clientDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                client.setAdapter(adapter);
-                ShowProgressBar(false);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        }else {
-            Toast.makeText(getActivity(), "No Record Found", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
     public void locationResponse(ClientLocationResponse response) {
-        try{
-            locationList = response.getClientLoc();
-            try {
-                try {
-                    locationDetail.clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }locationDetail.add("SELECT LOCATION");
-                for (int i = 0; i < locationList.size(); i++) {
-                    locationDetail.add(locationList.get(i).getLoc_Name());
-                }adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item,locationDetail);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                location.setAdapter(adapter);
-                ShowProgressBar(false);
-            } catch (NullPointerException npe) {
-                npe.printStackTrace();
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -908,12 +985,18 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
 
     }
 
+    private void addMainClients() {
+        ShowProgressBar(true);
+        viewModelMainClient.getMainClientRepository();
+    }
+
     @Override
     public void onResume() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                addclients();
+                addMainClients();
+                //addclients();
             }
         }, 50);
 

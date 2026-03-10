@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import in.eoninfotech.eontechnician.LiveStatusSerialNo;
 import in.eoninfotech.eontechnician.UnderMaintenanceVehicles;
 
 
@@ -72,6 +71,13 @@ public class MainResponse {
 
     @SerializedName("um_vehicles")
     ArrayList<UnderMaintenanceVehicles> um_vehicles = new ArrayList<>();
+
+    @SerializedName("service_count_detail")
+    ArrayList<ServiceCountDetailResponse> serviceCountDetailResponses = new ArrayList<>();
+
+    @SerializedName("service_req_detail")
+    ArrayList<ServiceRequestDetailResponse> serviceRequestDetailResponses = new ArrayList<>();
+
 
     public Integer getType() {
         return type;
@@ -261,5 +267,21 @@ public class MainResponse {
 
     public void setUm_vehicles(ArrayList<UnderMaintenanceVehicles> um_vehicles) {
         this.um_vehicles = um_vehicles;
+    }
+
+    public ArrayList<ServiceCountDetailResponse> getServiceCountDetailResponses() {
+        return serviceCountDetailResponses;
+    }
+
+    public void setServiceCountDetailResponses(ArrayList<ServiceCountDetailResponse> serviceCountDetailResponses) {
+        this.serviceCountDetailResponses = serviceCountDetailResponses;
+    }
+
+    public ArrayList<ServiceRequestDetailResponse> getServiceRequestDetailResponses() {
+        return serviceRequestDetailResponses;
+    }
+
+    public void setServiceRequestDetailResponses(ArrayList<ServiceRequestDetailResponse> serviceRequestDetailResponses) {
+        this.serviceRequestDetailResponses = serviceRequestDetailResponses;
     }
 }

@@ -104,8 +104,28 @@ public class MySearchableSpinner extends Spinner implements View.OnTouchListener
                     _items.add(_arrayAdapter.getItem(i));
                 }
                 // Change end.
+//                try {
+//                    _searchableListDialog.show(scanForActivity(_context).getFragmentManager(), "TAG");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
                 try {
-                    _searchableListDialog.show(scanForActivity(_context).getFragmentManager(), "TAG");
+
+                    Activity activity = scanForActivity(_context);
+
+                    if (activity != null) {
+
+                        android.app.FragmentManager fm = activity.getFragmentManager();
+
+                        if (fm.findFragmentByTag("TAG") == null) {
+
+                            _searchableListDialog.show(fm, "TAG");
+
+                        }
+
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -28,6 +28,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import android.telephony.TelephonyManager;
@@ -129,6 +131,8 @@ import jakarta.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 
 @AndroidEntryPoint
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -187,7 +191,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     ViewPagerReturnMaterial viewPagerReturnMaterial;
     ViewPagerSendToTechnician viewPagerSendtoTechnician;
     AddUMFragment addUMFragment;
-
     RemoveUMFragment removeUMFragment;
     ViewPagerAddRemoveUM viewPagerAdapterUMAddRemove;
     ArrayList<TrackingDetail> trackingDetails = new ArrayList<>();
@@ -221,9 +224,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final int MY_REQUEST_CODE = 17326;
     private AppUpdateManager mAppUpdateManager;
     private static final int RC_APP_UPDATE = 11;
+    private Trace mainTrace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mainTrace = FirebasePerformance.getInstance().newTrace("MainActivity_Load");
+        mainTrace.start();
         Log.d("PERF_TEST", "MainActivity onCreate started at " + System.currentTimeMillis());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -246,9 +252,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         bundle.putString("version", versionname);
         bundle.putString("image", image);
 
-        monitorConnectivity();
-        initializeFirebase();
-        checkLocation();
         setupAppUpdate();
 
         try {
@@ -269,12 +272,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        new GetVersionCode().execute();
         myDialog = new Dialog(this);
         dashBoardFragment = new DashBoardFragment();
         dashBoardFragment.setArguments(bundle);
         ft = fm.beginTransaction().add(R.id.framelay, dashBoardFragment);
         ft.commit();
+        if (mainTrace != null) {
+            mainTrace.stop();
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -391,8 +396,72 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void initializeFirebase() {
+
         FirebaseApp.initializeApp(this);
+
+        FirebaseRemoteConfig remoteConfig =
+                FirebaseRemoteConfig.getInstance();
+
+        FirebaseRemoteConfigSettings configSettings =
+                new FirebaseRemoteConfigSettings.Builder()
+                        .setMinimumFetchIntervalInSeconds(60)
+                        .build();
+
+        remoteConfig.setConfigSettingsAsync(configSettings);
+
+        remoteConfig.fetchAndActivate()
+                .addOnCompleteListener(task -> {
+
+                    if (task.isSuccessful()) {
+
+                        long remoteVersion =
+                                remoteConfig.getLong("logout_version");
+
+                        long localVersion =
+                                sharedPref.getLogoutVersion();
+
+                        // Logout only if version increased
+                        if (remoteVersion > localVersion
+                                && appPrefs.isLoggedIn()) {
+
+                            logoutUser(remoteVersion);
+                        }
+                    }
+                });
     }
+
+    private void logoutUser(long remoteVersion) {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Session Expired")
+                .setMessage("Your session has expired. Please login again.")
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialog, which) -> {
+
+                    logoutMethod(remoteVersion);
+
+                })
+                .show();
+    }
+
+    private void logoutMethod(long remoteVersion) {
+
+        // Save latest version so dialog doesn't repeat
+        sharedPref.clearAll();
+        appPrefs.setLoggedIn(false);
+        sharedPref.setLogoutVersion(remoteVersion);
+
+        Intent intent =
+                new Intent(MainActivity.this, LoginActivityNew.class);
+
+        intent.putExtra("username", "us");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
+        finish();
+    }
+
 
     private void monitorConnectivity() {
         ConnectivityManager m = (ConnectivityManager) getSystemService(Service.CONNECTIVITY_SERVICE);
@@ -558,39 +627,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-    private void loadContent() {
-
-        ApiHolder log_att = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
-        Call<MessageResponse> call = log_att.messageResponse(uusername, s_date, status, msg_type);
-        call.enqueue(new Callback<MessageResponse>() {
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onResponse(Call<MessageResponse> call, Response<MessageResponse> response) {
-                if (response.body().getType() == 1) {
-                    MessageResponse activityResponse = response.body();
-                    if (activityResponse.getMsg_count().equals("0")) {
-                        panic_fab.setVisibility(View.GONE);
-                        frame.setVisibility(View.GONE);
-                    } else {
-                        panic_fab.setVisibility(View.VISIBLE);
-                        frame.setVisibility(View.VISIBLE);
-                        textCartItemCount.setText((CharSequence) activityResponse.getMsg_count());
-                    }
-                } else {
-                    panic_fab.setVisibility(View.GONE);
-                    frame.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MessageResponse> call, Throwable t) {
-            }
-        });
-    }
-
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         new MaterialAlertDialogBuilder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Confirm Exit")
@@ -760,6 +798,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 targetViewPager.setAdapter(new ViewPagerAdapterAddMaterial(getSupportFragmentManager()));
                 break;
 
+            case R.id.service_request:
+                fragment = new ServiceRequestFragment();
+                fragment.setArguments(bundle);
+                title = "Service Request";
+                break;
+
             case R.id.nav_um:
                 fragment = new AddUMFragment();
                 fragment.setArguments(bundle);
@@ -871,16 +915,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .setTitle("Confirm Logout")
                 .setMessage("Are you sure you want to logout?")
                 .setPositiveButton("Yes", (dialog, which) -> {
-                    Intent intent = new Intent(MainActivity.this, LoginActivityNew.class);
-                    intent.putExtra("username", "us");
-                    sharedPref.clearAll();
-                    appPrefs.setLoggedIn(false);
-                    startActivity(intent);
-                    finish();
+                    logoutMethodManual();
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
+
+    private void logoutMethodManual() {
+
+            sharedPref.clearAllExceptLogoutVersion();
+            appPrefs.setLoggedIn(false);
+
+            Intent intent =
+                    new Intent(MainActivity.this,
+                            LoginActivityNew.class);
+        intent.putExtra("username", "us");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            startActivity(intent);
+            finish();
+        }
 
     private void resetAllViewPagerVisibility() {
         viewPager.setVisibility(View.GONE);
@@ -1510,92 +1565,43 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-    class GetVersionCode extends AsyncTask<Void, String, String> {
-
-        Dialog dialog;
-
-        @Override
-        protected String doInBackground(Void... voids) {
-
-            String newVersion = null;
-            try {
-                org.jsoup.nodes.Document document = Jsoup.connect("https://play.google.com/store/apps/details?id=" + MainActivity.this.getPackageName() + "&hl=en")
-                        .timeout(30000)
-                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-                        .referrer("http://www.google.com")
-                        .get();
-                if (document != null) {
-                    Elements element = document.getElementsContainingOwnText("Current Version");
-                    for (org.jsoup.nodes.Element ele : element) {
-                        if (ele.siblingElements() != null) {
-                            Elements sibElemets = ele.siblingElements();
-                            for (org.jsoup.nodes.Element sibElemet : sibElemets) {
-                                newVersion = sibElemet.text();
-                            }
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return newVersion;
-        }
-
-        @Override
-        protected void onPostExecute(String onlineVersion) {
-
-            super.onPostExecute(onlineVersion);
-
-            if (onlineVersion != null && !onlineVersion.isEmpty()) {
-                if (Float.valueOf(currentVersion) < Float.valueOf(onlineVersion)) {
-                    Snackbar snackbar = Snackbar.make(linearLayout, "New Version Available, Kindly Update App from Play store", Snackbar.LENGTH_LONG)
-                            .setAction("UPDATE", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
-                                            ("https://play.google.com/store/apps/details?id=in.eoninfotech.eontechnician")));
-                                }
-                            });
-                    snackbar.setActionTextColor(Color.WHITE);
-                    snackbar.setDuration(Snackbar.LENGTH_INDEFINITE);
-                    snackbar.show();
-                }
-            }
-        }
-    }
-
     @Override
     public void onRestart() {
         super.onRestart();
         //loadContent();
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
 
+        // Existing App Update Resume logic
         appUpdateManager
                 .getAppUpdateInfo()
                 .addOnSuccessListener(
                         appUpdateInfo -> {
                             if (appUpdateInfo.updateAvailability()
                                     == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                                // If an in-app update is already running, resume the update.
                                 try {
                                     appUpdateManager.startUpdateFlowForResult(
                                             appUpdateInfo,
                                             AppUpdateType.IMMEDIATE,
-                                            // The current activity making the update request.
                                             MainActivity.this,
-                                            // Include a request code to later monitor this update request.
                                             UPDATE_REQUEST_CODE);
                                 } catch (IntentSender.SendIntentException e) {
                                     throw new RuntimeException(e);
                                 }
                             }
                         });
-    }
 
+        // ✅ Run heavy tasks AFTER UI loads
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            initializeFirebase();
+            monitorConnectivity();
+            checkLocation();
+            getFaultyVts(0);
+        }, 1000); // 1 second delay after screen visible
+    }
 }
 

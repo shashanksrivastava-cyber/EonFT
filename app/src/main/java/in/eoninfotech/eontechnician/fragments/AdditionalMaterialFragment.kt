@@ -20,7 +20,7 @@
 //
 //import `in`.eoninfotech.eontechnician.responses.CollectedItemsResponse
 //
-//import `in`.eoninfotech.eontechnician.responses.DeviceCountDetail
+//import in.eoninfotech.eontechnician.responses.DeviceCountDetail
 //
 //import `in`.eoninfotech.eontechnician.responses.DisconnectionResponse
 //

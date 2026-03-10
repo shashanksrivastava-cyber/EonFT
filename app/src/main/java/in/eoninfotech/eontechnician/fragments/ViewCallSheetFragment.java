@@ -3,7 +3,6 @@ package in.eoninfotech.eontechnician.fragments;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,9 +36,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.hilt.android.AndroidEntryPoint;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
-import in.eoninfotech.eontechnician.factory.YearViewModelFactory;
-import in.eoninfotech.eontechnician.repository.YearRepository;
-import in.eoninfotech.eontechnician.repository.YearViewModel;
+import in.eoninfotech.eontechnician.viewModel.YearViewModel;
 import in.eoninfotech.eontechnician.responses.CallSheetResponse;
 import in.eoninfotech.eontechnician.responses.MonthDetail;
 import in.eoninfotech.eontechnician.responses.MonthListResponse;
@@ -50,15 +46,12 @@ import in.eoninfotech.eontechnician.activity.CallSheetAdapter;
 import in.eoninfotech.eontechnician.helper.CallSheetDetail;
 import in.eoninfotech.eontechnician.view.MySearchableSpinner;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
-import in.eoninfotech.eontechnician.webservice.NewApiholder;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.Context.MODE_PRIVATE;
 
 import javax.inject.Inject;
 

@@ -212,4 +212,12 @@ public class SearchableListDialog extends DialogFragment implements
     public interface OnSearchTextChanged {
         void onSearchTextChanged(String strText);
     }
+
+    public void showDialog(android.app.FragmentManager fragmentManager, String tag) {
+
+        if (fragmentManager.findFragmentByTag(tag) == null) {
+            show(fragmentManager, tag);
+        }
+
+    }
 }

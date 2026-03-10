@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
-import in.eoninfotech.eontechnician.LiveStatusSerialNo;
+import in.eoninfotech.eontechnician.responses.LiveStatusSerialNo;
 import in.eoninfotech.eontechnician.R;
 import in.eoninfotech.eontechnician.databinding.FragmentLiveStatusNewEonBinding;
 import in.eoninfotech.eontechnician.helper.CheckConnection;

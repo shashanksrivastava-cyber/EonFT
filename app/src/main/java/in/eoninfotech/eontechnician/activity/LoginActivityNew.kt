@@ -1,19 +1,12 @@
 package `in`.eoninfotech.eontechnician.activity
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.telephony.TelephonyManager
-import android.util.Log
-import android.view.MotionEvent
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
@@ -21,15 +14,13 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.location.LocationServices
-import com.google.android.material.textfield.TextInputLayout
+import com.google.android.gms.common.wrappers.Wrappers.packageManager
 import com.google.firebase.BuildConfig
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseApp
+import com.google.firebase.perf.FirebasePerformance
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.remoteConfig
 import com.google.firebase.remoteconfig.remoteConfigSettings
@@ -37,18 +28,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import dmax.dialog.SpotsDialog
 import `in`.eoninfotech.eontechnician.AppPreferences
 import `in`.eoninfotech.eontechnician.MainActivity
-import `in`.eoninfotech.eontechnician.MainActivityNew
 import `in`.eoninfotech.eontechnician.R
-import `in`.eoninfotech.eontechnician.databinding.LoginactivityBinding
 import `in`.eoninfotech.eontechnician.di.SharedPreferenceManager
 import `in`.eoninfotech.eontechnician.helper.CheckConnection
-import `in`.eoninfotech.eontechnician.responses.LoginDetail
 import `in`.eoninfotech.eontechnician.responses.LoginResponse
-import `in`.eoninfotech.eontechnician.viewModel.ViewModelLogin
 import `in`.eoninfotech.eontechnician.storage.LocationPrefs
+import `in`.eoninfotech.eontechnician.viewModel.ViewModelLogin
 import jakarta.inject.Inject
 import kotlinx.coroutines.launch
-import java.net.NetworkInterface
+import com.google.firebase.perf.metrics.Trace
+import `in`.eoninfotech.eontechnician.databinding.LoginactivityBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 //----------------------------Login with updated hilt-------------------
@@ -59,11 +50,14 @@ class LoginActivityNew : BaseActivity() {
     @Inject lateinit var prefManager: SharedPreferenceManager
     @Inject lateinit var appPrefs: AppPreferences
     @Inject lateinit var locationPrefs: LocationPrefs
+
+    @Inject lateinit var sharedPref: SharedPreferenceManager
     @Inject lateinit var telephonyManager: android.telephony.TelephonyManager
     @Inject lateinit var chk: CheckConnection
 
-    private lateinit var binding: LoginactivityBinding
+    lateinit var binding: LoginactivityBinding
     private lateinit var progressDialog: SpotsDialog
+    private var loginScreenTrace: Trace? = null
 
     private val viewModelLogin: ViewModelLogin by viewModels()
 
@@ -84,48 +78,16 @@ class LoginActivityNew : BaseActivity() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        loginScreenTrace =
+            FirebasePerformance.getInstance().newTrace("login_screen_load")
+        loginScreenTrace?.start()
+
         super.onCreate(savedInstanceState)
         binding = LoginactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         FirebaseApp.initializeApp(this)
-
-        // Initialize Firebase Remote Config
-        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 60
-        }
-        remoteConfig.setConfigSettingsAsync(configSettings)
-
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener(this) { task ->
-                // Handle the updated status if needed
-                remoteConfig.fetchAndActivate()
-                    .addOnCompleteListener(this) { task ->
-
-                        if (task.isSuccessful) {
-
-                            val appNameFromFirebase =
-                                remoteConfig.getString("app_name_text")
-                            val secondNameFromFirebase =
-                                remoteConfig.getString("second_name_text")
-
-
-                            val appNameTv: TextView = findViewById(R.id.appName)
-                            val secondNameTv: TextView = findViewById(R.id.name)
-
-                            if (appNameFromFirebase.isNotEmpty()) {
-                                appNameTv.text = appNameFromFirebase
-                                secondNameTv.text = secondNameFromFirebase
-                            }
-
-                            Log.d(TAG, "Remote app name: $appNameFromFirebase")
-
-                        } else {
-                            Log.e(TAG, "Remote config fetch failed")
-                        }
-                    }
-            }
 
         init()
         requestPermissionsIfNeeded()
@@ -138,6 +100,14 @@ class LoginActivityNew : BaseActivity() {
         binding.phnnum.setOnClickListener { makePhoneCall() }
         binding.emadd.setOnClickListener { sendSupportEmail() }
 
+        // ✅ Stop startup trace
+        loginScreenTrace?.stop()
+
+        // ✅ Fetch Remote Config AFTER UI loads
+        lifecycleScope.launch {
+            initRemoteConfig()
+        }
+
         onBackPressedDispatcher.addCallback(
             this,
             object : OnBackPressedCallback(true) {
@@ -146,6 +116,43 @@ class LoginActivityNew : BaseActivity() {
                 }
             }
         )
+    }
+
+    private suspend fun initRemoteConfig() {
+
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 60
+        }
+
+        remoteConfig.setConfigSettingsAsync(configSettings)
+
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener { task ->
+
+                if (task.isSuccessful) {
+
+                    val appNameFromFirebase =
+                        remoteConfig.getString("app_name_text")
+
+                    val secondNameFromFirebase =
+                        remoteConfig.getString("second_name_text")
+
+                    val appNameTv: TextView = findViewById(R.id.appName)
+                    val secondNameTv: TextView = findViewById(R.id.name)
+
+                    if (appNameFromFirebase.isNotEmpty()) {
+                        appNameTv.text = appNameFromFirebase
+                        secondNameTv.text = secondNameFromFirebase
+                    }
+
+                    //Log.d(TAG, "Remote app name: $appNameFromFirebase")
+
+                } else {
+                    //Log.e(TAG, "Remote config fetch failed")
+                }
+            }
     }
 
     private fun init() {
@@ -188,18 +195,28 @@ class LoginActivityNew : BaseActivity() {
             return
         } else binding.pass.error = null
 
-        // Save login credentials
-        prefManager.saveLoginCredentials(pUsr, pPass)
+        lifecycleScope.launch {
+            progressDialog.show()
+            // Save credentials (IO operation)
+            prefManager.saveLoginCredentials(pUsr, pPass)
 
-        if (chk.isConnected()) {
-            getLogin()
-        } else {
-            chk.showConnectionErrorDialog()
+            if (chk.isConnected()) {
+                // 3. Switch to IO thread for the network call
+                withContext(Dispatchers.IO) {
+
+                    getLogin()
+                }
+            } else {
+                chk.showConnectionErrorDialog()
+            }
         }
     }
 
     private fun getLogin() {
-        progressDialog.show()
+
+        val loginApiTrace =
+            FirebasePerformance.getInstance().newTrace("login_api_time")
+        loginApiTrace.start()
 
         viewModelLogin.login(
             pUsr,
@@ -208,15 +225,38 @@ class LoginActivityNew : BaseActivity() {
             BuildConfig.VERSION_NAME,
             token,
             object : ViewModelLogin.LoginCallback {
+
                 override fun onSuccess(response: LoginResponse) {
+                    loginApiTrace.stop()
                     progressDialog.dismiss()
+
                     if (response.type == 1 && response.loginDetails.isNotEmpty()) {
                         val loginDetail = response.loginDetails.first()
                         prefManager.saveLoginDetails(loginDetail, imsiSIM1)
                         appPrefs.setLoggedIn(true)
-                        Log.d("PERF_TEST", "Login success: launching MainActivity at " + System.currentTimeMillis());
-                        startActivity(Intent(this@LoginActivityNew, MainActivity::class.java))
+
+                        val remoteConfig =
+                            FirebaseRemoteConfig.getInstance()
+
+                        val remoteVersion =
+                            remoteConfig.getLong("logout_version")
+
+                        sharedPref.setLogoutVersion(remoteVersion)
+
+                        val navTrace =
+                            FirebasePerformance.getInstance()
+                                .newTrace("main_navigation_time")
+                        navTrace.start()
+
+                        startActivity(
+                            Intent(
+                                this@LoginActivityNew,
+                                MainActivity::class.java
+                            )
+                        )
                         finish()
+
+                        navTrace.stop()
                     } else {
                         Toast.makeText(
                             this@LoginActivityNew,
@@ -227,13 +267,14 @@ class LoginActivityNew : BaseActivity() {
                 }
 
                 override fun onError(throwable: Throwable) {
+                    loginApiTrace.stop()
                     progressDialog.dismiss()
+
                     Toast.makeText(
                         this@LoginActivityNew,
                         "Login failed: ${throwable.message}",
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.e("LoginActivity", "Login error", throwable)
                 }
             }
         )

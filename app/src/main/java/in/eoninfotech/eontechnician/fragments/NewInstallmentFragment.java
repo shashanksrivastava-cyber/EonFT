@@ -52,6 +52,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -266,10 +268,13 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     RemovalFromUmBinding removalFromUmBinding;
     ArrayAdapter<String> umVehicleAdapter;
     InstallationFormHelper formHelper;
+    private Trace mainTrace;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              final Bundle savedInstanceState) {
+        mainTrace = FirebasePerformance.getInstance().newTrace("NewInstall_Load");
+        mainTrace.start();
         v = inflater.inflate(R.layout.fragment_new_install, container, false);
 
         formHelper = new InstallationFormHelper(v);
@@ -676,6 +681,10 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
             addWorkType();
         } else {
             chk.showConnectionErrorDialog();
+        }
+
+        if (mainTrace != null) {
+            mainTrace.stop();
         }
 
         e_remarks.setOnTouchListener((v, event) -> {
@@ -3211,7 +3220,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                             } else {
                                 i = i - 1;
                             }
-                            sensor_old_veh_no = getUmVehicle.get(i).getReg_no();
+                            sensor_old_veh_no = getUmVehicle.get(i).reg_no;
                         }
 
                         @Override
@@ -5460,7 +5469,6 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
         getSimReasonList();
         getPhoneSupportList();
         addVehType();
-        addReasonRemove();
         addVehNotAvailReason();
         getDevice();
         getItemCollectList();

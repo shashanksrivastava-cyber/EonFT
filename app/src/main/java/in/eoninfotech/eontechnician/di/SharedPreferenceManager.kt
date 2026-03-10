@@ -73,4 +73,22 @@ class SharedPreferenceManager @Inject constructor(
     // ✅ Utility
     // =========================
     fun clearAll() = editor.clear().apply()
+
+    fun setLogoutVersion(version: Long) {
+        prefs.edit().putLong("logout_version", version).apply()
+    }
+
+    fun getLogoutVersion(): Long {
+        return prefs.getLong("logout_version", 0)
+    }
+
+    fun clearAllExceptLogoutVersion() {
+        val logoutVersion = getLogoutVersion()
+
+        prefs.edit().clear().apply()
+
+        prefs.edit()
+            .putLong("logout_version", logoutVersion)
+            .apply()
+    }
 }

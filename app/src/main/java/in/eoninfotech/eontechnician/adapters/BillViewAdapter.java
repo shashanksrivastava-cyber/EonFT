@@ -64,44 +64,44 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
 
         final BillDetails billDetailsResponse = billDetails.get(position);
 
-        holder.bill_no.setText(billDetailsResponse.getBill_no());
-        holder.date.setText(billDetailsResponse.getBill_date());
-        holder.amount.setText("₹" + billDetailsResponse.getBill_amt());
-        holder.status.setText(billDetailsResponse.getStatus());
-        if(billDetailsResponse.getStatus().equalsIgnoreCase("Approved")){
+        holder.bill_no.setText(billDetailsResponse.bill_no);
+        holder.date.setText(billDetailsResponse.bill_date);
+        holder.amount.setText("₹" + billDetailsResponse.bill_amt);
+        holder.status.setText(billDetailsResponse.status);
+        if(billDetailsResponse.status.equalsIgnoreCase("Approved")){
             holder.status.setTextColor(context.getResources().getColor(R.color.green));
-        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Rejected")){
+        }else if(billDetailsResponse.status.equalsIgnoreCase("Rejected")){
             holder.status.setTextColor(context.getResources().getColor(R.color.red));
-        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Received")){
+        }else if(billDetailsResponse.status.equalsIgnoreCase("Received")){
             holder.status.setTextColor(context.getResources().getColor(R.color.c));
-        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Cancelled")){
+        }else if(billDetailsResponse.status.equalsIgnoreCase("Cancelled")){
             holder.status.setTextColor(context.getResources().getColor(R.color.dash_red));
         }else {
         }
 
-        if(billDetailsResponse.getStatus().equalsIgnoreCase("Approved")){
+        if(billDetailsResponse.status.equalsIgnoreCase("Approved")){
             holder.rej_date.setVisibility(View.GONE);
             holder.title.setVisibility(View.VISIBLE);
             holder.app_amount.setVisibility(View.VISIBLE);
             holder.app_date.setVisibility(View.VISIBLE);
-            holder.app_amount.setText("₹" + billDetailsResponse.getApp_amt());
-            holder.app_date.setText(billDetailsResponse.getApp_date());
+            holder.app_amount.setText("₹" + billDetailsResponse.app_amt);
+            holder.app_date.setText(billDetailsResponse.app_date);
             holder.ll_form.setVisibility(View.GONE);
             holder.view1.setVisibility(View.GONE);
-        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Rejected")) {
+        }else if(billDetailsResponse.status.equalsIgnoreCase("Rejected")) {
             holder.title.setVisibility(View.GONE);
             holder.app_date.setVisibility(View.VISIBLE);
             holder.app_amount.setVisibility(View.GONE);
             holder.app_date.setText("Bill Rejected");
-            holder.rej_date.setText(billDetailsResponse.getRej_date());
+            holder.rej_date.setText(billDetailsResponse.rej_date);
             holder.ll_form.setVisibility(View.GONE);
             holder.view1.setVisibility(View.GONE);
-        }else if(billDetailsResponse.getStatus().equalsIgnoreCase("Cancelled")) {
+        }else if(billDetailsResponse.status.equalsIgnoreCase("Cancelled")) {
             holder.title.setVisibility(View.GONE);
             holder.app_date.setVisibility(View.VISIBLE);
             holder.app_amount.setVisibility(View.GONE);
             holder.app_date.setText("Bill cancelled");
-            holder.rej_date.setText(billDetailsResponse.getCanc_date());
+            holder.rej_date.setText(billDetailsResponse.canc_date);
             holder.ll_form.setVisibility(View.GONE);
             holder.view1.setVisibility(View.GONE);
         }else {
@@ -109,27 +109,27 @@ public class BillViewAdapter extends RecyclerView.Adapter<BillViewAdapter.Activi
             holder.app_date.setVisibility(View.VISIBLE);
             holder.app_date.setText("Bill not processed yet");
             holder.app_amount.setVisibility(View.GONE);
-            holder.rej_date.setText(billDetailsResponse.getRec_date());
+            holder.rej_date.setText(billDetailsResponse.rec_date);
             holder.view1.setVisibility(View.VISIBLE);
             holder.ll_form.setVisibility(View.VISIBLE);
         }
-        if(billDetailsResponse.getRemarks().equalsIgnoreCase("-")){
+        if(billDetailsResponse.remarks.equalsIgnoreCase("-")){
             holder.remarks.setText("Remarks : ");
         }else {
-            holder.remarks.setText("Remarks : " + billDetailsResponse.getRemarks());
+            holder.remarks.setText("Remarks : " + billDetailsResponse.remarks);
         }
 
-        if(billDetailsResponse.getRemarks().equalsIgnoreCase("-")){
+        if(billDetailsResponse.remarks.equalsIgnoreCase("-")){
             holder.action_by.setText("Action By :" );
         }else {
-            holder.action_by.setText("Action By : " + billDetailsResponse.getAction_by());
+            holder.action_by.setText("Action By : " + billDetailsResponse.action_by);
         }
 
         holder.viewBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String s_bill_no  = billDetails.get(position).getBill_no();
-                String s_amount = billDetails.get(position).getBill_amt();
+                String s_bill_no  = billDetails.get(position).bill_no;
+                String s_amount = billDetails.get(position).bill_amt;
                 showDialog(s_bill_no,s_amount,position);
             }
         });

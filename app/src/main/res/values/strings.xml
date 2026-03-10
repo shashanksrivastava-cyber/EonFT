@@ -209,4 +209,12 @@
     <string name="faulty_devices_please_send_to_office_immediately"> faulty devices, Please send to office immediately.</string>
     <string name="faulty_devices_dot"> faulty devices.</string>
     <string name="ok">OK</string>
+    <string name="eon_ftapp">Eon FTApp</string>
+    <string name="field_activity_logger">Field Activity Logger</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="version">Version</string>
+    <string name="change_password">Change Password</string>
+    <string name="eon_infotech_limited">Eon Infotech Limited</string>
 </resources>

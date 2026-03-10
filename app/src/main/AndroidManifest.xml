@@ -121,10 +121,6 @@
             android:name=".LocationForGroundService"
             android:exported="false" />
 
-        <activity
-            android:name=".ScheduleActivity"
-            android:screenOrientation="portrait" />
-
         <provider
             android:name=".myprovider.EonContentProvider"
             android:authorities="in.eoninfotech.eontechnician.myprovider.EonContentProvider"
@@ -230,6 +226,8 @@
         <activity android:name=".activity.AdditionalMaterialDetails" />
         <activity android:name=".activity.ViewDRSStatus" />
         <activity android:name=".DeviceMaintenance" />
+        <activity android:name=".activity.ServiceRequestActivity" />
+        <activity android:name=".activity.ServiceRequestDetails" />
         <activity
             android:name=".activity.MessageActivity"
             android:icon="@drawable/ic_delete_white_24dp"

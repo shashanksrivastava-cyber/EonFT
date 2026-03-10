@@ -29,6 +29,7 @@ import in.eoninfotech.eontechnician.responses.PaymentMethodResponse;
 import in.eoninfotech.eontechnician.responses.RemovalActivityResponse;
 import in.eoninfotech.eontechnician.responses.RemovalResponse;
 import in.eoninfotech.eontechnician.responses.ReplaceReason;
+import in.eoninfotech.eontechnician.responses.ServiceCountResponse;
 import in.eoninfotech.eontechnician.responses.SimOperatorResponse;
 import in.eoninfotech.eontechnician.responses.SimReplaceResponse;
 import in.eoninfotech.eontechnician.responses.StockResponse;
