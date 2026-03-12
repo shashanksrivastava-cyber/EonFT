@@ -1,9 +1,11 @@
+
 package `in`.eoninfotech.eontechnician.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import `in`.eoninfotech.eontechnician.repository.ServiceCountRequestRepository
+import `in`.eoninfotech.eontechnician.responses.ServiceCountDetailResponse
 import `in`.eoninfotech.eontechnician.view.ServiceRequestUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,7 +28,7 @@ class ServiceRequestViewModel @Inject constructor(
     private val limit = 10
     private var isLastPage = false
     private var isLoading = false
-
+    private var currentList = mutableListOf<ServiceCountDetailResponse>()
 
     fun fetchServiceRequestDetails(
         username: String?,
@@ -48,13 +50,13 @@ class ServiceRequestViewModel @Inject constructor(
             if (!loadMore) {
                 offset = 0
                 isLastPage = false
+                currentList.clear()
                 _uiState.value = ServiceRequestUiState.Loading
             }
 
             try {
 
                 val result = withContext(Dispatchers.IO) {
-
                     repository.getServiceRequestCountDetails(
                         username,
                         zone,
@@ -74,27 +76,36 @@ class ServiceRequestViewModel @Inject constructor(
 
                         if (response.type == 1) {
 
-                            val newList =
-                                response.serviceCountDetailResponses ?: emptyList()
+                            val newList = response.serviceCountDetailResponses ?: emptyList()
 
                             if (newList.isEmpty()) {
 
                                 isLastPage = true
 
+                                if (currentList.isEmpty()) {
+                                    _uiState.value = ServiceRequestUiState.Empty("No data found")
+                                } else {
+                                    // Last page reached, keep showing existing data
+                                    _uiState.value = ServiceRequestUiState.Success(currentList.toList())
+                                }
+
                             } else {
 
+                                currentList.addAll(newList)
                                 offset += limit
+                                _uiState.value = ServiceRequestUiState.Success(currentList.toList())
 
-                                _uiState.value =
-                                    ServiceRequestUiState.Success(newList)
                             }
 
                         } else {
 
-                            _uiState.value =
-                                ServiceRequestUiState.Empty(
+                            if (currentList.isEmpty()) {
+                                _uiState.value = ServiceRequestUiState.Empty(
                                     response.msg ?: "No data found"
                                 )
+                            } else {
+                                _uiState.value = ServiceRequestUiState.Success(currentList.toList())
+                            }
 
                             isLastPage = true
                         }
@@ -102,22 +113,17 @@ class ServiceRequestViewModel @Inject constructor(
                     },
 
                     onFailure = {
-
-                        _uiState.value =
-                            ServiceRequestUiState.Error(
-                                it.message ?: "Something went wrong"
-                            )
+                        _uiState.value = ServiceRequestUiState.Error(
+                            it.message ?: "Something went wrong"
+                        )
                     }
 
                 )
 
             } catch (e: Exception) {
-
-                _uiState.value =
-                    ServiceRequestUiState.Error(
-                        e.message ?: "Unexpected error"
-                    )
-
+                _uiState.value = ServiceRequestUiState.Error(
+                    e.message ?: "Unexpected error"
+                )
             }
 
             isLoading = false

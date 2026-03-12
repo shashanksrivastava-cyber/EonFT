@@ -192,7 +192,7 @@ public class LiveStatusFragmentEon extends Fragment {
         viewModelMainClient.getMainClientRepository().observe(getViewLifecycleOwner(), response -> {
             if (response == null) {
                 Toast.makeText(getActivity(), "Null response from server", Toast.LENGTH_SHORT).show();
-                progressDialog.hide();
+                progressDialog.dismiss();
                 return;
             }
             if (response.getType() == 1) {

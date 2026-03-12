@@ -54,6 +54,7 @@ public class DashBoardFragment extends Fragment {
     ArrayList<Float> yData = new ArrayList<>();
     ArrayList<TechDashboardDetail> dashboardList = new ArrayList<>();
     private AlertDialog progressDialog;
+    private boolean hasLoadedOnce = false;
     public static final int[] BRIGHT_COLORS = {
             Color.parseColor("#D32F2F"), Color.parseColor("#F44336"), Color.parseColor("#FFC03C")};
     ViewModelAddDashboard viewModelAddDashboard;
@@ -129,6 +130,20 @@ public class DashBoardFragment extends Fragment {
         }
         //getDashBoardDetail();
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (!hasLoadedOnce) {               // ← only load on first resume
+//            hasLoadedOnce = true;
+//            if (checkConnection.isConnected()) {
+//                getDashBoardDetail();
+//            } else {
+//                checkConnection.showConnectionErrorDialog();
+//                binding.swipeRefresh.setRefreshing(false);
+//            }
+//        }
+//    }
 
     private void hideProgress() {
         if (progressDialog != null && progressDialog.isShowing()) {

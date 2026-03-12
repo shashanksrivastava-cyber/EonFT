@@ -70,6 +70,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -87,11 +88,13 @@ import androidx.viewpager.widget.ViewPager;
 import dagger.hilt.android.AndroidEntryPoint;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.eoninfotech.eontechnician.activity.BaseActivity;
+import in.eoninfotech.eontechnician.activity.ReceiveDeviceDetails;
 import in.eoninfotech.eontechnician.di.SharedPreferenceManager;
 import in.eoninfotech.eontechnician.fragments.AddUMFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialFragment;
 import in.eoninfotech.eontechnician.fragments.AdditionalMaterialViewFragment;
 import in.eoninfotech.eontechnician.fragments.LiveStatusFragmentEon;
+import in.eoninfotech.eontechnician.fragments.NewInstallmentFragmentUpdated;
 import in.eoninfotech.eontechnician.fragments.RemoveUMFragment;
 import in.eoninfotech.eontechnician.helper.CheckConnection;
 import in.eoninfotech.eontechnician.responses.TechnicianMonthDetail;
@@ -162,7 +165,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     in.eoninfotech.eontechnician.FaqsFragment faqsfragment;
     ActivityDetailFragment activityDetailFragment;
     ActivityLogFragment activityLogFragment;
-    NewInstallmentFragment installmentFragment;
+    //NewInstallmentFragment installmentFragment;
+    NewInstallmentFragmentUpdated installmentFragment;
     LiveStatusFragment liveStatusFragment;
     LiveStatusFragmentEon liveStatusFragmentEon;
     StockFragment stockFragment;
@@ -261,6 +265,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             e.printStackTrace();
         }
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+
+                new MaterialAlertDialogBuilder(MainActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Confirm Exit")
+                        .setMessage("Are you sure you want to exit?")
+                        .setPositiveButton("Yes", (dialog, which) -> finish())
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
         fab = findViewById(R.id.fab);
         panic_fab = findViewById(R.id.panic_fab);
         fab.setOnClickListener(view -> {
@@ -273,10 +291,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             e.printStackTrace();
         }
         myDialog = new Dialog(this);
-        dashBoardFragment = new DashBoardFragment();
-        dashBoardFragment.setArguments(bundle);
-        ft = fm.beginTransaction().add(R.id.framelay, dashBoardFragment);
-        ft.commit();
         if (mainTrace != null) {
             mainTrace.stop();
         }
@@ -488,9 +502,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void addDashboard() {
-        dashBoardFragment = new DashBoardFragment();
-        dashBoardFragment.setArguments(bundle);
-        ft = fm.beginTransaction().replace(R.id.framelay, dashBoardFragment);
         setTitle("ADD Dashboard");
         tabLayout.setVisibility(View.VISIBLE);
         viewPager.setVisibility(View.VISIBLE);
@@ -504,7 +515,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        ft.commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         hideKeyboard();
@@ -628,22 +638,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void onBackPressed() {
-        new MaterialAlertDialogBuilder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Confirm Exit")
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.faulty_status, menu);
@@ -652,7 +646,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         textCartItemCount = actionView.findViewById(R.id.textViewCounter);
         panic_fab = actionView.findViewById(R.id.panic_fab);
         frame = actionView.findViewById(R.id.frame);
-        setupBadge();
+        //setupBadge();
         actionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -660,16 +654,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
         return true;
-    }
-
-    private void setupBadge() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //loadContent();
-            }
-        });
-        //thread.start();
     }
 
     @Override
@@ -692,22 +676,61 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         int id = item.getItemId();
 
-        // Close drawer immediately
+        // ✅ Intercept these BEFORE any layout changes
+        if (id == R.id.menu_logout) {
+            confirmLogout();
+            return true;
+        }
+        if (id == R.id.nav_material_return) {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            sendToEon();
+            return true;
+        }
+        if (id == R.id.nav_material_send_to_tech) {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            sendToFT();
+            return true;
+        }
+        if (id == R.id.nav_material) {
+            startActivity(new Intent(MainActivity.this, ReceiveDeviceActivity.class));
+            return true;
+        }
+        if (id == R.id.material_dashboard) {
+            startActivity(new Intent(MainActivity.this, Devicedashboards.class));
+            return true;
+        }
+        if (id == R.id.nav_technician_of_the_month) {
+            showTechnicianOfMonthPopup();
+            return true;
+        }
+        if (id == R.id.tm_removal) { openVideo("tm"); return true; }
+        if (id == R.id.pump_removal) { openVideo("pump"); return true; }
+        if (id == R.id.device_maint) { openDeviceMaintenance("maint"); return true; }
+        if (id == R.id.knowldge_base) { openDeviceMaintenance("knowldge"); return true; }
+        if (id == R.id.faqs) { openDeviceMaintenance("faq"); return true; }
+        if (id == R.id.nav_tech_dashboard) {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            addDashboard();
+            return true;
+        }
+
+        // ── Only real fragment navigation reaches here ────────────────────
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        hideKeyboard();
 
-        hideKeyboard(); // always hide keyboard on navigation
         Fragment fragment = null;
         String title = "";
         boolean useTabLayout = false;
         ViewPager targetViewPager = null;
         FragmentTransaction ft = fm.beginTransaction();
 
-        // Reset all viewpager visibilities first
-        resetAllViewPagerVisibility();
+        resetAllViewPagerVisibility(); // ← now ONLY called for fragment navigation
 
         switch (id) {
-
             case R.id.nav_dashboard:
                 if (!"0".equals(disgnid)) {
                     fragment = new FragmentIncentiveTab();
@@ -717,17 +740,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.nav_mark_site:
-                fragment = new ActivityLogFragment();
-                fragment.setArguments(bundle);
                 title = "Attendance Activity";
                 useTabLayout = true;
                 targetViewPager = viewpagerattendance;
                 targetViewPager.setAdapter(new ViewPagerAdapterAtd(getSupportFragmentManager()));
                 break;
-
-            case R.id.nav_tech_dashboard:
-                addDashboard();
-                return true;
 
             case R.id.nav_incentive:
                 fragment = new in.eoninfotech.eontechnician.FragmentCurrentMonth();
@@ -757,8 +774,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.nav_new_repair:
-                fragment = new NewInstallmentFragment();
-                fragment.setArguments(bundle);
                 title = "Activities";
                 useTabLayout = true;
                 targetViewPager = viewpageractivity;
@@ -812,58 +827,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 targetViewPager = viewPagerAddRemoveUM;
                 targetViewPager.setAdapter(new ViewPagerAddRemoveUM(getSupportFragmentManager()));
                 break;
-
-            case R.id.nav_material_return:
-                sendToEon();
-                return true;
-
-            case R.id.nav_material_send_to_tech:
-                sendToFT();
-                return true;
-
-            case R.id.nav_material:
-                startActivity(new Intent(MainActivity.this, ReceiveDeviceActivity.class));
-                return true;
-
-            case R.id.material_dashboard:
-                startActivity(new Intent(MainActivity.this, Devicedashboards.class));
-                return true;
-
-            case R.id.menu_logout:
-                confirmLogout();
-                return true;
-
-            case R.id.nav_technician_of_the_month:
-                showTechnicianOfMonthPopup();
-                return true;
-
-            case R.id.tm_removal:
-                openVideo("tm");
-                return true;
-
-            case R.id.pump_removal:
-                openVideo("pump");
-                return true;
-
-            case R.id.device_maint:
-                openDeviceMaintenance("maint");
-                return true;
-
-            case R.id.knowldge_base:
-                openDeviceMaintenance("knowldge");
-                return true;
-
-            case R.id.faqs:
-                openDeviceMaintenance("faq");
-                return true;
         }
 
-        // Commit fragment if available
         if (fragment != null) {
             ft.replace(R.id.framelay, fragment).commitAllowingStateLoss();
         }
 
-        // Update UI
         setTitle(title);
         tabLayout.setVisibility(useTabLayout ? View.VISIBLE : View.GONE);
         if (targetViewPager != null) {
@@ -923,18 +892,33 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void logoutMethodManual() {
 
-            sharedPref.clearAllExceptLogoutVersion();
-            appPrefs.setLoggedIn(false);
+        sharedPref.clearAllExceptLogoutVersion();
+        appPrefs.setLoggedIn(false);
 
-            Intent intent =
-                    new Intent(MainActivity.this,
-                            LoginActivityNew.class);
+        Intent intent = new Intent(MainActivity.this, LoginActivityNew.class);
         intent.putExtra("username", "us");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                    Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            startActivity(intent);
-            finish();
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
+
+        finishAffinity();
+
+//        sharedPref.clearAllExceptLogoutVersion();
+//        appPrefs.setLoggedIn(false);
+//
+//        Intent intent = new Intent(MainActivity.this, LoginActivityNew.class);
+//        intent.putExtra("username", "us");
+//
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//
+//        startActivity(intent);
+//
+//        overridePendingTransition(0,0); // prevent white screen flash
+//        finish();
+
         }
 
     private void resetAllViewPagerVisibility() {
@@ -1408,7 +1392,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             switch (position) {
                 case 0:
-                    installmentFragment = new NewInstallmentFragment();
+                    //installmentFragment = new NewInstallmentFragment();
+                    installmentFragment = new NewInstallmentFragmentUpdated();
                     installmentFragment.setArguments(bundle);
                     return installmentFragment;
 

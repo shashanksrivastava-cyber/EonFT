@@ -95,7 +95,7 @@ class ServiceRequestAdapter(
                 else "removal"
 
             tvInstallCountBadge.text =
-                "$pendingReq out of $totalReq $typeText pending"
+                "$pendingReq/$totalReq $typeText pending"
 
             cardRoot.setOnClickListener {
 

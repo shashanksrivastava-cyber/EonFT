@@ -4,7 +4,9 @@ import android.app.AlertDialog
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.SparseBooleanArray
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.ListView
@@ -109,11 +111,28 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         getData();
 
         binding!!.btnAcceptReceive.setOnClickListener{
-            val checked: SparseBooleanArray = binding!!.deviceDetailListReceive.getCheckedItemPositions()
+
+            itemsCollected = ""     // reset
+            accessories.clear()
+
+            val checked: SparseBooleanArray =
+                binding!!.deviceDetailListReceive.checkedItemPositions
+
             for (i in 0 until checked.size()) {
-                val key: Int = checked.keyAt(i)
-                itemsCollected = itemsCollected+list_change_values.get(key).pcb_id + ":"
+
+                val position = checked.keyAt(i)
+
+                if (checked.valueAt(i) && position < list_change_values.size) {
+
+                    val device = list_change_values[position]
+
+                    if (!device.status.equals("At Technician", true)) {
+
+                        itemsCollected += device.pcb_id + ":"
+                    }
+                }
             }
+
 
             for (i in 0..lr.size-1){
 
@@ -173,7 +192,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         }
 
     override fun receiveDeviceResponse(response: MainResponse?) {
-        progressDialog!!.hide()
+        progressDialog!!.dismiss()
         if(response!!.type==1) {
             binding!!.incentiveAmt.setText("Total Device - "+response.total_received_count)
             try {
@@ -206,19 +225,37 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                                 )
                             )
                         }
-                        if(status.equals("Received")){
-                            adapter = ArrayAdapter<String>(
-                                this@ReceiveDeviceDetails,
-                                R.layout.custom_list_item_disable,
-                                value_name
-                            )
-                        }else {
-                            adapter = ArrayAdapter<String>(
-                                this@ReceiveDeviceDetails,
-                                R.layout.simple_custom_list_item,
-                                value_name
-                            )
+
+                        val deviceList = response.dispatched_device_details[0].device_list
+
+                        adapter = object : ArrayAdapter<String>(
+                            this@ReceiveDeviceDetails,
+                            R.layout.simple_custom_list_item,
+                            value_name
+                        ) {
+
+                            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+
+                                val device = deviceList[position]
+
+                                val inflater = LayoutInflater.from(context)
+
+                                val view = if (device.status.equals("In-Transit", true)) {
+
+                                    inflater.inflate(R.layout.simple_custom_list_item, parent, false)
+
+                                } else {
+
+                                    inflater.inflate(R.layout.custom_list_item_disable, parent, false)
+                                }
+
+                                val txt = view.findViewById<TextView>(R.id.text1)
+                                txt.text = value_name[position]
+
+                                return view
+                            }
                         }
+
                         binding!!.deviceDetailListReceive.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE)
                         binding!!.deviceDetailListReceive.setAdapter(adapter)
 

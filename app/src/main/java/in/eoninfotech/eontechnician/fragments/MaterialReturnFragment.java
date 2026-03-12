@@ -30,6 +30,8 @@ import android.widget.Toast;
 import com.robinhood.ticker.TickerView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import androidx.fragment.app.Fragment;
 
@@ -526,11 +528,14 @@ public class MaterialReturnFragment extends Fragment implements ReceiveDeviceLis
                             String k = Integer.toString(i + val1);
                             value_name.add(k + ". " + list_change_values.get(i).getPcb_sr_no());
                         }
-                        if (list_change_values.size() > 5) {
-                            lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));
-                        } else {
-                            lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size()));
-                        }
+//                        if (list_change_values.size() > 5) {
+//                            lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size() + 1));
+//                        } else {
+//                            lv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 80 * list_change_values.size()));
+//                        }
+                        lv.setLayoutParams(new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT));
                         adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_list_item, value_name);
                         lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                         lv.setAdapter(adapter);

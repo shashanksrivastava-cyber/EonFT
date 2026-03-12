@@ -16,6 +16,7 @@
 
     <!-- Scroll -->
     <ScrollView
+        android:id="@+id/scrollContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -353,71 +354,49 @@
                             android:scrollbars="none">
 
                             <TableLayout
+                                android:id="@+id/tableVehicle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:stretchColumns="*">
 
                                 <!-- HEADER -->
+
                                 <TableRow
                                     android:background="#EEEEEE"
                                     android:padding="8dp">
 
                                     <TextView
+                                        android:id="@+id/headerVehType"
                                         android:text="Veh Type"
                                         android:textStyle="bold"
                                         android:padding="6dp"/>
 
                                     <TextView
+                                        android:id="@+id/headerRegNo"
                                         android:text="Reg No"
                                         android:textStyle="bold"
                                         android:padding="6dp"/>
 
                                     <TextView
+                                        android:id="@+id/headerDate"
                                         android:text="Dehired Date"
                                         android:textStyle="bold"
                                         android:padding="6dp"/>
 
                                     <TextView
+                                        android:id="@+id/headerDeviceStatus"
                                         android:text="Device Status"
                                         android:textStyle="bold"
                                         android:padding="6dp"/>
 
                                     <TextView
+                                        android:id="@+id/headerRequestStatus"
                                         android:text="Request Status"
                                         android:textStyle="bold"
                                         android:padding="6dp"/>
 
                                 </TableRow>
 
-                                <!-- DATA ROW -->
-                                <TableRow>
-
-                                    <TextView
-                                        android:text="Truck"
-                                        android:gravity="center"
-                                        android:padding="10dp"/>
-
-                                    <TextView
-                                        android:text="UP32AB1234"
-                                        android:gravity="center"
-                                        android:padding="10dp"/>
-
-                                    <TextView
-                                        android:text="28 Feb"
-                                        android:gravity="center"
-                                        android:padding="10dp"/>
-
-                                    <TextView
-                                        android:text="Active"
-                                        android:gravity="center"
-                                        android:padding="10dp"/>
-
-                                    <TextView
-                                        android:text="Completed"
-                                        android:gravity="center"
-                                        android:padding="10dp"/>
-
-                                </TableRow>
 
                             </TableLayout>
 

@@ -14,6 +14,10 @@ data class ServiceRequestDetailResponse(
     @JvmField val pl_contact: String,
     @JvmField val veh_avail_date: String,
     @JvmField val status: String,
+
+    @JvmField val inst_details: List<InstallationDetails>,
+
+    @JvmField val removal_details: List<RemovalDetails>
 ) {
 
 }
