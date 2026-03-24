@@ -165,8 +165,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     in.eoninfotech.eontechnician.FaqsFragment faqsfragment;
     ActivityDetailFragment activityDetailFragment;
     ActivityLogFragment activityLogFragment;
-    //NewInstallmentFragment installmentFragment;
-    NewInstallmentFragmentUpdated installmentFragment;
+    NewInstallmentFragment installmentFragment;
+    //NewInstallmentFragmentUpdated installmentFragment;
     LiveStatusFragment liveStatusFragment;
     LiveStatusFragmentEon liveStatusFragmentEon;
     StockFragment stockFragment;
@@ -258,13 +258,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         setupAppUpdate();
 
-        try {
-            TelephonyInfo telephonyInfo = TelephonyInfo.getInstance(MainActivity.this);
-            imei = telephonyInfo.getImsiSIM1();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -285,11 +278,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             Intent intent = new Intent(MainActivity.this, MessageActivity.class);
             startActivity(intent);
         });
-        try {
-            currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
         myDialog = new Dialog(this);
         if (mainTrace != null) {
             mainTrace.stop();
@@ -1392,8 +1380,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
             switch (position) {
                 case 0:
-                    //installmentFragment = new NewInstallmentFragment();
-                    installmentFragment = new NewInstallmentFragmentUpdated();
+                    installmentFragment = new NewInstallmentFragment();
+                    //installmentFragment = new NewInstallmentFragmentUpdated();
                     installmentFragment.setArguments(bundle);
                     return installmentFragment;
 
@@ -1582,9 +1570,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         // ✅ Run heavy tasks AFTER UI loads
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
+
+            setupAppUpdate();      // moved here
             initializeFirebase();
             monitorConnectivity();
             checkLocation();
+            getFaultyVts(0);
             getFaultyVts(0);
         }, 1000); // 1 second delay after screen visible
     }

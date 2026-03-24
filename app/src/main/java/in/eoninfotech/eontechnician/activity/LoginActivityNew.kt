@@ -207,7 +207,7 @@ class LoginActivityNew : BaseActivity() {
                     getLogin()
                 }
             } else {
-                chk.showConnectionErrorDialog()
+                CheckConnection.showConnectionErrorDialog(this@LoginActivityNew)
             }
         }
     }
@@ -232,31 +232,30 @@ class LoginActivityNew : BaseActivity() {
 
                     if (response.type == 1 && response.loginDetails.isNotEmpty()) {
                         val loginDetail = response.loginDetails.first()
-                        prefManager.saveLoginDetails(loginDetail, imsiSIM1)
-                        appPrefs.setLoggedIn(true)
 
-                        val remoteConfig =
-                            FirebaseRemoteConfig.getInstance()
-
-                        val remoteVersion =
-                            remoteConfig.getLong("logout_version")
-
-                        sharedPref.setLogoutVersion(remoteVersion)
-
-                        val navTrace =
-                            FirebasePerformance.getInstance()
-                                .newTrace("main_navigation_time")
+                        // Navigate immediately
+                        val navTrace = FirebasePerformance.getInstance()
+                            .newTrace("main_navigation_time")
                         navTrace.start()
 
                         startActivity(
-                            Intent(
-                                this@LoginActivityNew,
-                                MainActivity::class.java
-                            )
+                            Intent(this@LoginActivityNew, MainActivity::class.java)
                         )
                         finish()
 
                         navTrace.stop()
+
+                        // Do heavy work in background
+                        lifecycleScope.launch(Dispatchers.IO) {
+
+                            prefManager.saveLoginDetails(loginDetail, imsiSIM1)
+                            appPrefs.setLoggedIn(true)
+
+                            val remoteConfig = FirebaseRemoteConfig.getInstance()
+                            val remoteVersion = remoteConfig.getLong("logout_version")
+
+                            sharedPref.setLogoutVersion(remoteVersion)
+                        }
                     } else {
                         Toast.makeText(
                             this@LoginActivityNew,

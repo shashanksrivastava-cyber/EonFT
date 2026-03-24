@@ -76,12 +76,19 @@ public class DashBoardFragment extends Fragment {
         binding.setViewModelAddDashboard(viewModelAddDashboard);
 
         binding.swipeRefresh.setOnRefreshListener(() -> {
-            isDashboardLoaded = false;
-            if (checkConnection.isConnected()) {
+
+            //getDashBoardDetail();
+
+            if (checkConnection.isConnected(requireContext())) {
+
+                checkConnection.dismissConnectionDialog();
+
                 getDashBoardDetail();
-                isDashboardLoaded = true;
+
             } else {
-                checkConnection.showConnectionErrorDialog();
+
+                CheckConnection.showConnectionErrorDialog(requireActivity());
+
                 binding.swipeRefresh.setRefreshing(false);
             }
         });
@@ -120,30 +127,22 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        isDashboardLoaded = false;
-        if (checkConnection.isConnected()) {
+        if (!isAdded()) return;
+
+        if (checkConnection.isConnected(requireContext())) {
+
+            checkConnection.dismissConnectionDialog();
+
             getDashBoardDetail();
-            isDashboardLoaded = true;
+
         } else {
-            checkConnection.showConnectionErrorDialog();
+
+            CheckConnection.showConnectionErrorDialog(requireActivity());
+
             binding.swipeRefresh.setRefreshing(false);
         }
-        //getDashBoardDetail();
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (!hasLoadedOnce) {               // ← only load on first resume
-//            hasLoadedOnce = true;
-//            if (checkConnection.isConnected()) {
-//                getDashBoardDetail();
-//            } else {
-//                checkConnection.showConnectionErrorDialog();
-//                binding.swipeRefresh.setRefreshing(false);
-//            }
-//        }
-//    }
 
     private void hideProgress() {
         if (progressDialog != null && progressDialog.isShowing()) {

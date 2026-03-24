@@ -399,6 +399,10 @@ class ServiceRequestDetails : AppCompatActivity() {
                         binding.tvLocation.text = "Location: ${request.location}"
                         binding.tvPlantIncharge.text = "Incharge: ${request.pl_name}"
                         binding.tvContact.text = "Contact: ${request.pl_contact}"
+                        binding.btnCall.setOnClickListener {
+                            val numberFromApi = request.pl_contact// replace with your API value
+                            makePhoneCall(numberFromApi)
+                        }
                         binding.tvVehicleDate.text =
                             "Vehicle Available Date: ${formatVehicleDate(request.veh_avail_date)}"
 
@@ -436,14 +440,13 @@ class ServiceRequestDetails : AppCompatActivity() {
                                 val row = TableRow(this@ServiceRequestDetails)
                                 row.addView(createCell(vehicle.veh_type))
                                 row.addView(createCell(vehicle.reg_no))
-                                row.addView(createCell(vehicle.dehired_date))
+                                row.addView(createCell(formatVehicleDate(vehicle.dehired_date)))
                                 row.addView(createCell(vehicle.device_status))
                                 row.addView(createCell(vehicle.removal_status))
                                 table.addView(row)
                             }
                         }
                     }
-
                     is ServiceRequestDetailUiState.Error -> {
                         // ✅ Hide progress, show actual API error message
                         binding.progressBar.isVisible = false
@@ -455,9 +458,17 @@ class ServiceRequestDetails : AppCompatActivity() {
         }
     }
 
+    private fun makePhoneCall(phoneNumber: String){
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = Uri.parse("tel:$phoneNumber")
+        }
+        startActivity(intent)
+
+    }
+
     private fun formatVehicleDate(vehAvailDate: String): String {
         return try {
-            val input = SimpleDateFormat("yyyy-dd-MM", Locale.getDefault())
+            val input = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val output = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
             val parsed = input.parse(vehAvailDate ?: "")
             output.format(parsed!!)

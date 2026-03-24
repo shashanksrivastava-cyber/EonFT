@@ -1,0 +1,14 @@
+image: gradle:8.2.1-jdk17
+
+pipelines:
+  default:
+    - step:
+        name: Build & Unit Test
+        caches:
+          - gradle
+        script:
+          - chmod +x gradlew
+          - ./gradlew clean
+          - ./gradlew testDebugUnitTest
+          - ./gradlew lint
+          - ./gradlew assembleDebug

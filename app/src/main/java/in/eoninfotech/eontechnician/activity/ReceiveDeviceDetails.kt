@@ -110,52 +110,46 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
 
         getData();
 
-        binding!!.btnAcceptReceive.setOnClickListener{
+        binding!!.btnAcceptReceive.setOnClickListener {
 
-            itemsCollected = ""     // reset
+            itemsCollected = ""
             accessories.clear()
 
-            val checked: SparseBooleanArray =
-                binding!!.deviceDetailListReceive.checkedItemPositions
+            // ✅ Safe null check — ListView may have no adapter when device_list is empty
+            val checked: SparseBooleanArray? = binding!!.deviceDetailListReceive.checkedItemPositions
 
-            for (i in 0 until checked.size()) {
-
-                val position = checked.keyAt(i)
-
-                if (checked.valueAt(i) && position < list_change_values.size) {
-
-                    val device = list_change_values[position]
-
-                    if (!device.status.equals("At Technician", true)) {
-
-                        itemsCollected += device.pcb_id + ":"
+            if (checked != null) {
+                for (i in 0 until checked.size()) {
+                    val position = checked.keyAt(i)
+                    if (checked.valueAt(i) && position < list_change_values.size) {
+                        val device = list_change_values[position]
+                        if (!device.status.equals("At Technician", true)) {
+                            itemsCollected += device.pcb_id + ":"
+                        }
                     }
                 }
             }
 
-
-            for (i in 0..lr.size-1){
-
-                accessories.add((lr.get(i).id).toString() + ":" + binding!!.recyclerView.findViewHolderForAdapterPosition(i)?.itemView?.findViewById<TextView>(R.id.addText)?.text.toString())
+            for (i in 0 until lr.size) {
+                accessories.add(
+                    "${lr[i].id}:" + binding!!.recyclerView
+                        .findViewHolderForAdapterPosition(i)
+                        ?.itemView
+                        ?.findViewById<TextView>(R.id.addText)
+                        ?.text.toString()
+                )
             }
 
-            if(list_change_values.size>0){
-                if(itemsCollected.equals("")){
-                    val toast = Toast.makeText(applicationContext, "Please select at least one device!!", Toast.LENGTH_LONG)
-                    toast.show()
-                }else {
-                    if (chk.isConnected) {
-                        submitData()
-                    } else {
-                        chk.showConnectionErrorDialog()
-                    }
-                }
-            }else {
-                if (chk.isConnected) {
-                    submitData()
+            if (list_change_values.size > 0) {
+                // Device list exists — must select at least one device
+                if (itemsCollected.equals("")) {
+                    Toast.makeText(applicationContext, "Please select at least one device!!", Toast.LENGTH_LONG).show()
                 } else {
-                    chk.showConnectionErrorDialog()
+                    if (chk.isConnected) submitData() else chk.showConnectionErrorDialog()
                 }
+            } else {
+                // ✅ No device list — only accessories, skip device selection check
+                if (chk.isConnected) submitData() else chk.showConnectionErrorDialog()
             }
         }
     }
@@ -193,93 +187,74 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
 
     override fun receiveDeviceResponse(response: MainResponse?) {
         progressDialog!!.dismiss()
-        if(response!!.type==1) {
-            binding!!.incentiveAmt.setText("Total Device - "+response.total_received_count)
+        if (response!!.type == 1) {
+            binding!!.incentiveAmt.setText("Total Device - " + response.total_received_count)
             try {
-                lr = response.dispatched_device_details.get(0).device_items
-                list_change_values = response.dispatched_device_details.get(0).device_list
-                try {
-                    try {
-                        value_name.clear()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                    if (list_change_values.size > 0) {
-                        for (i in list_change_values.indices) {
-                            val val1 = 1
-                            val k = i.plus(val1).toString()
-                            value_name.add(k.plus(". ").plus((list_change_values.get(i).pcb_sr_no)))
-                        }
-                        if (list_change_values.size > 5) {
-                            binding!!.deviceDetailListReceive.setLayoutParams(
-                                LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    80 * list_change_values.size + 1
-                                )
-                            )
-                        } else {
-                            binding!!.deviceDetailListReceive.setLayoutParams(
-                                LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT,
-                                    80 * list_change_values.size
-                                )
-                            )
-                        }
+                lr = response.dispatched_device_details[0].device_items
+                list_change_values = response.dispatched_device_details[0].device_list
 
-                        val deviceList = response.dispatched_device_details[0].device_list
-
-                        adapter = object : ArrayAdapter<String>(
-                            this@ReceiveDeviceDetails,
-                            R.layout.simple_custom_list_item,
-                            value_name
-                        ) {
-
-                            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-
-                                val device = deviceList[position]
-
-                                val inflater = LayoutInflater.from(context)
-
-                                val view = if (device.status.equals("In-Transit", true)) {
-
-                                    inflater.inflate(R.layout.simple_custom_list_item, parent, false)
-
-                                } else {
-
-                                    inflater.inflate(R.layout.custom_list_item_disable, parent, false)
-                                }
-
-                                val txt = view.findViewById<TextView>(R.id.text1)
-                                txt.text = value_name[position]
-
-                                return view
-                            }
-                        }
-
-                        binding!!.deviceDetailListReceive.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE)
-                        binding!!.deviceDetailListReceive.setAdapter(adapter)
-
-                        if (lr.size>0) {
-                            otherMaterialAdapter =
-                                OtherMaterialAdapter(this@ReceiveDeviceDetails, lr,status)
-                            binding!!.recyclerView.setAdapter(otherMaterialAdapter)
-                            otherMaterialAdapter!!.notifyDataSetChanged()
-                            binding!!.recyclerView.setVisibility(View.VISIBLE)
-                            binding!!.txtContentUnavailable.setVisibility(View.GONE)
-                        } else {
-                            binding!!.recyclerView.setVisibility(View.GONE)
-                            binding!!.txtContentUnavailable.setVisibility(View.VISIBLE)
-                        }
-
-                    } else {
-                    }
-                } catch (npe: NullPointerException) {
-                    npe.printStackTrace()
+                // ✅ Always handle device_items (accessories) regardless of device_list
+                if (lr.size > 0) {
+                    otherMaterialAdapter = OtherMaterialAdapter(this@ReceiveDeviceDetails, lr, status)
+                    binding!!.recyclerView.setAdapter(otherMaterialAdapter)
+                    otherMaterialAdapter!!.notifyDataSetChanged()
+                    binding!!.recyclerView.setVisibility(View.VISIBLE)
+                    binding!!.txtContentUnavailable.setVisibility(View.GONE)
+                } else {
+                    binding!!.recyclerView.setVisibility(View.GONE)
+                    binding!!.txtContentUnavailable.setVisibility(View.VISIBLE)
                 }
+
+                // ✅ Handle device_list separately
+                if (list_change_values.size > 0) {
+                    value_name.clear()
+
+                    for (i in list_change_values.indices) {
+                        val k = (i + 1).toString()
+                        value_name.add("$k. ${list_change_values[i].pcb_sr_no}")
+                    }
+
+                    val layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        if (list_change_values.size > 5)
+                            80 * list_change_values.size + 1
+                        else
+                            80 * list_change_values.size
+                    )
+                    binding!!.deviceDetailListReceive.setLayoutParams(layoutParams)
+
+                    adapter = object : ArrayAdapter<String>(
+                        this@ReceiveDeviceDetails,
+                        R.layout.simple_custom_list_item,
+                        value_name
+                    ) {
+                        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                            val device = list_change_values[position]
+                            val inflater = LayoutInflater.from(context)
+                            val view = if (device.status.equals("In-Transit", true)) {
+                                inflater.inflate(R.layout.simple_custom_list_item, parent, false)
+                            } else {
+                                inflater.inflate(R.layout.custom_list_item_disable, parent, false)
+                            }
+                            view.findViewById<TextView>(R.id.text1).text = value_name[position]
+                            return view
+                        }
+                    }
+
+                    binding!!.deviceDetailListReceive.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE)
+                    binding!!.deviceDetailListReceive.setAdapter(adapter)
+                    binding!!.deviceDetailListReceive.setVisibility(View.VISIBLE) // ✅ show list
+
+                } else {
+                    // ✅ Hide the device list view when empty
+                    binding!!.deviceDetailListReceive.setVisibility(View.GONE)
+                    binding!!.txtContentUnavailableSr.setVisibility(View.VISIBLE)
+                }
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-        }else {
+        } else {
             binding!!.recyclerView.setVisibility(View.GONE)
             binding!!.txtContentUnavailable.setVisibility(View.VISIBLE)
             binding!!.txtContentUnavailableSr.setVisibility(View.VISIBLE)

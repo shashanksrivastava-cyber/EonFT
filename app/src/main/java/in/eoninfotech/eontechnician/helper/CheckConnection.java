@@ -1,5 +1,6 @@
 package in.eoninfotech.eontechnician.helper;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,6 +24,8 @@ import in.eoninfotech.eontechnician.R;
 public class CheckConnection {
 
 	Context context;
+	private static AlertDialog connectionDialog;
+	private static AlertDialog locationDialog;
 
 	public CheckConnection(Context context) {
 		this.context = context;
@@ -43,6 +46,19 @@ public class CheckConnection {
 		else
 			return false;
 	}
+
+	public boolean isConnected(Context context) {
+
+		ConnectivityManager cm =
+				(ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		if (cm == null) return false;
+
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+		return activeNetwork != null && activeNetwork.isConnected();
+	}
+
 
 	public boolean isGpsOn() {
 		LocationManager locationManager = (LocationManager) context
@@ -101,5 +117,92 @@ public class CheckConnection {
 							}
 						}).setIcon(R.drawable.ic_warning_black_24dp).show()
 				.setCancelable(false);
+	}
+
+	public static void showConnectionErrorDialog(Activity activity) {
+
+		if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+			return;
+		}
+
+		if (connectionDialog != null && connectionDialog.isShowing()) {
+			return;
+		}
+
+		connectionDialog = new AlertDialog.Builder(activity)
+				.setTitle("Internet Required")
+				.setMessage("Internet must be enabled to use this app.")
+				.setCancelable(false)
+				.setPositiveButton("Enable Internet", (dialog, which) -> {
+
+					Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
+					activity.startActivity(intent);
+
+				})
+				.create();
+
+		connectionDialog.show();
+	}
+
+	public static void dismissConnectionDialog() {
+
+		if (connectionDialog != null && connectionDialog.isShowing()) {
+			connectionDialog.dismiss();
+			connectionDialog = null;
+		}
+	}
+
+	public static boolean isLocationEnabled(Context context) {
+
+		LocationManager lm =
+				(LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+		if (lm == null) return false;
+
+		boolean gpsEnabled = false;
+		boolean networkEnabled = false;
+
+		try {
+			gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		} catch (Exception ignored) {}
+
+		try {
+			networkEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		} catch (Exception ignored) {}
+
+		return gpsEnabled || networkEnabled;
+	}
+
+	public static void showLocationDialog(Activity activity) {
+
+		if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
+			return;
+		}
+
+		if (locationDialog != null && locationDialog.isShowing()) {
+			return;
+		}
+
+		locationDialog = new AlertDialog.Builder(activity)
+				.setTitle("Location Required")
+				.setMessage("Location must be enabled to use this app.")
+				.setCancelable(false)
+				.setPositiveButton("Enable Location", (dialog, which) -> {
+
+					Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					activity.startActivity(intent);
+
+				})
+				.create();
+
+		locationDialog.show();
+	}
+
+	public static void dismissLocationDialog() {
+
+		if (locationDialog != null && locationDialog.isShowing()) {
+			locationDialog.dismiss();
+			locationDialog = null;
+		}
 	}
 }
