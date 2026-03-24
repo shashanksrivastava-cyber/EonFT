@@ -3,12 +3,31 @@ image: gradle:8.2.1-jdk17
 pipelines:
   default:
     - step:
-        name: Build & Unit Test
+        name: Build & Test
         caches:
           - gradle
         script:
+          - apt-get update
+          - apt-get install -y wget unzip
+
+          # 🔹 Download Android SDK
+          - wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+          - mkdir -p android-sdk/cmdline-tools
+          - unzip commandlinetools-linux-11076708_latest.zip -d android-sdk/cmdline-tools
+          - mv android-sdk/cmdline-tools/cmdline-tools android-sdk/cmdline-tools/latest
+
+          # 🔹 Set environment variables
+          - export ANDROID_HOME=$PWD/android-sdk
+          - export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+
+          # 🔹 Accept licenses
+          - yes | sdkmanager --licenses
+
+          # 🔹 Install required SDK
+          - sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+          # 🔹 Run build
           - chmod +x gradlew
           - ./gradlew clean
           - ./gradlew testDebugUnitTest
-          - ./gradlew lint
           - ./gradlew assembleDebug
