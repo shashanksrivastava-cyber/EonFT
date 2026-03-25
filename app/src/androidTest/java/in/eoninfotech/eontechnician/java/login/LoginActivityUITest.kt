@@ -1,26 +1,14 @@
 package `in`.eoninfotech.eontechnician.java.login
 
-import androidx.test.espresso.action.ViewActions.*
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.clearText
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.hasErrorText
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import `in`.eoninfotech.eontechnician.R
-import `in`.eoninfotech.eontechnician.activity.LoginActivityNew
-import org.hamcrest.CoreMatchers.startsWith
-
-import java.util.regex.Pattern.matches
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import `in`.eoninfotech.eontechnician.R
+import `in`.eoninfotech.eontechnician.activity.LoginActivityNew
+import org.hamcrest.CoreMatchers.startsWith
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
