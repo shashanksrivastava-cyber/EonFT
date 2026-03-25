@@ -11,10 +11,10 @@ Name: BUNDLE-METADATA/com.android.tools.build.libraries/dependencies.p
 SHA-256-Digest: RAB/a6TXQOi0QJ0dqw5cvQzhqviTOLl32l5w+qnDuRI=
 
 Name: BUNDLE-METADATA/com.android.tools.build.profiles/baseline.prof
-SHA-256-Digest: R7zAqgxLkvrqf7gIQOSJSlelvQJBIJdtAQgeNnsHaak=
+SHA-256-Digest: 0vf/NcX9HnKhLnb4JlVbK+l1ustbMFvWzUDtWQ1CZJk=
 
 Name: BUNDLE-METADATA/com.android.tools.build.profiles/baseline.profm
-SHA-256-Digest: Rwe3XWzeWtxQGnXM0JvZxj/bp6dfmkrhvPit/aHCuOE=
+SHA-256-Digest: aeguXLlt8VkGtVFoaBzJj4123NFHkK29n5Y+GlIdzX4=
 
 Name: BundleConfig.pb
 SHA-256-Digest: 4AVuV++MvQjFSPHvg8d1ropkAcB1B7sL8e1ImZzZhac=
@@ -53,7 +53,7 @@ Name: base/dex/classes2.dex
 SHA-256-Digest: KgqHkc41rqJWAu7z7E/Drh5RkZ4l7jWkDvmh2n8cZTo=
 
 Name: base/dex/classes3.dex
-SHA-256-Digest: ML/YlTZMVUTNNhp3XGny9cNvX7GFGmZC7fu0sht6e64=
+SHA-256-Digest: eGbKPZj9ilMBb/koesPb7B1S2FacLkms6XaR77wCSiE=
 
 Name: base/dex/classes4.dex
 SHA-256-Digest: 2fiDPeD4Efo8s9odXXpusR1uTUd8YfXZetlfSCWkRL0=
@@ -101,7 +101,7 @@ Name: base/lib/x86_64/libpl_droidsonroids_gif.so
 SHA-256-Digest: RmUs7+b7WVqF8YrzaCP6P0Frs4bW+BmqJp8rnTGGN0s=
 
 Name: base/manifest/AndroidManifest.xml
-SHA-256-Digest: 12ojbStv08T7xW8gLBjR/UP5vBN531Bb3Bo8OURSovs=
+SHA-256-Digest: 7J+iHbCWJg9BIWrt3rCWELZjDLWolc+379xTrRgZOe0=
 
 Name: base/native.pb
 SHA-256-Digest: uGBj9sUJdpm7xXvQ0qLUafOvEfVU7DR9n4XYYRvAlvI=

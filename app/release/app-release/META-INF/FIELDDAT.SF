@@ -1,6 +1,6 @@
 Signature-Version: 1.0
 Created-By: Signflinger
-SHA-256-Digest-Manifest: oU8v6z4ora5cUMq/V47yApivQwl3oDHE0245fFCupmo=
+SHA-256-Digest-Manifest: YzPxqM8uLzIta5yfW98VdW6W9myRe+N8Mwhhmw0kivw=
 
 Name: BUNDLE-METADATA/com.android.tools.build.gradle/app-metadata.prop
  erties
@@ -11,10 +11,10 @@ Name: BUNDLE-METADATA/com.android.tools.build.libraries/dependencies.p
 SHA-256-Digest: rW2dxM6IdGRsPFFRSoB0M/QEvkTQEz8JLb4n610QcPc=
 
 Name: BUNDLE-METADATA/com.android.tools.build.profiles/baseline.prof
-SHA-256-Digest: 3O2ERMMrR9yUx/GsB2NgjvY6IG80BbfrzVPUFGcqPzI=
+SHA-256-Digest: CkbsYMKMgMAbZ8AJWuAqp90LF6ghbG+o6HCZjxIeejc=
 
 Name: BUNDLE-METADATA/com.android.tools.build.profiles/baseline.profm
-SHA-256-Digest: 8T8NVR+aD+ZP4/vuG3cAZoDbHAmhFtO9JcSh7BoLkgM=
+SHA-256-Digest: M+fFyOp4yX3xDaAl6M7yAxhtgczM60nzFELcqGCyrFg=
 
 Name: BundleConfig.pb
 SHA-256-Digest: oQcvtoU3hlQrk4bdPLTkskqUTll9QvIUU+zzrBWzobc=
@@ -53,7 +53,7 @@ Name: base/dex/classes2.dex
 SHA-256-Digest: E5/eZ4ABKDLopFMi2qx1EZQ+Ud4bvOxAfPSIurwZuA0=
 
 Name: base/dex/classes3.dex
-SHA-256-Digest: oy5QZU2vhAN1/ervZrozPzL9Ek7wD3nUuBuQVlcKO74=
+SHA-256-Digest: JZSTD4v4PNj1zI1VlgYH/aLTrEguJKk6eNXPMUHNfZE=
 
 Name: base/dex/classes4.dex
 SHA-256-Digest: pBT9zFp9/X3jE3Nu7fGWsGjPYMGouKm2P4SN53RZlPk=
@@ -101,7 +101,7 @@ Name: base/lib/x86_64/libpl_droidsonroids_gif.so
 SHA-256-Digest: S7qRpbyymw6gc4jwll+ALLU/gIG9eA3LuOvyTTna5zY=
 
 Name: base/manifest/AndroidManifest.xml
-SHA-256-Digest: wWrIaIbUzepFh792J+KJddZlikxhjjNsE0eu+EdKWlE=
+SHA-256-Digest: JXFHmUGB1iN5GwTe5WfH7DTALpyOf6VFGZJ9b9iXopY=
 
 Name: base/native.pb
 SHA-256-Digest: grFvYWfrkWJ1VtBdLaG/RxcVsAekJ7jfUyqzGSXzfMc=

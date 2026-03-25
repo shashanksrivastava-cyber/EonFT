@@ -59,26 +59,26 @@
         <item>VLTD</item>
     </string-array>
 
-    <string name="faqs_string"> There are many possibilities of device disconnection.
-        These are explained below.\n\n
+<!--    <string name="faqs_string"> There are many possibilities of device disconnection.-->
+<!--        These are explained below.\n\n-->
 
 
-1. If a device is showing disconnected, check its connectivity with vehicle’s battery is fine or not, if not, please connect the power cable with vehicle battery.\n\n
+<!--1. If a device is showing disconnected, check its connectivity with vehicle’s battery is fine or not, if not, please connect the power cable with vehicle battery.\n\n-->
 
 
-2. Sometimes device has GSM and GPS related issue, so, check its LED status properly.\n\n
+<!--2. Sometimes device has GSM and GPS related issue, so, check its LED status properly.\n\n-->
 
 
-3. When the vehicle is at workshop for maintenance, device will show disconnect because all the connections removed by technician during maintenance of vehicle and device has no source of power to recharge its own battery.\n\n
+<!--3. When the vehicle is at workshop for maintenance, device will show disconnect because all the connections removed by technician during maintenance of vehicle and device has no source of power to recharge its own battery.\n\n-->
 
 
-4. If a vehicle is in idle position from more than 24 hours, device will show disconnect because device is not getting any power supply to recharge its own battery.\n\n
+<!--4. If a vehicle is in idle position from more than 24 hours, device will show disconnect because device is not getting any power supply to recharge its own battery.\n\n-->
 
 
-5. Sometimes device is faulty, and it will not show any recent data.\n\n
+<!--5. Sometimes device is faulty, and it will not show any recent data.\n\n-->
 
 
-6. If device is missing, damage or removed from vehicle, it will show as device disconnect.</string>
+<!--6. If device is missing, damage or removed from vehicle, it will show as device disconnect.</string>-->
     <string name="details"><u>View Details</u></string>
     <string name="device_sr_no"><u>Device Sr.No.</u></string>
     <string name="other_material"><u>Other Material: </u></string>
