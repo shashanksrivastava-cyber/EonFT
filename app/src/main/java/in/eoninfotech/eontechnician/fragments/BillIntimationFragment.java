@@ -2,8 +2,10 @@ package in.eoninfotech.eontechnician.fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -39,6 +41,7 @@ import java.util.Locale;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 
 import in.eoninfotech.eontechnician.utils.ImageUtil;
 import in.eoninfotech.eontechnician.R;
@@ -61,7 +64,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static in.eoninfotech.eontechnician.fragments.CallSheetFragment.IMAGE_DIRECTORY_NAME;
 
 
-public class BillIntimationFragment extends Fragment implements ProgressRequestBody.UploadCallbacks {
+public class BillIntimationFragment extends Fragment implements ProgressRequestBody.UploadCallbacks   {
 
     FragmentBillIntimationBinding binding;
     Calendar calen = Calendar.getInstance();
@@ -86,6 +89,12 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
     Bitmap bmp;
     int PERMISSION_ALL = 1;
     private static final int REQUEST_CAPTURE_IMAGE = 100;
+
+    private MutableLiveData<String> fromDateObs = new MutableLiveData<>("");
+    private MutableLiveData<String> toDateObs = new MutableLiveData<>("");
+    private MutableLiveData<Bitmap> capturedBitmapObs = new MutableLiveData<>(null);
+
+    // Existing logic variables
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,20 +130,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         int bill_amt = Integer.parseInt(bill_amt_limit);
         binding.amount.setFilters(new InputFilter[] { new InputFilter.LengthFilter(bill_amt) });
 
-//        binding.fromDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getFromDate();
-//            }
-//        });
-//
-//        binding.toDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getToDate();
-//            }
-//        });
-
         binding.fromDate.setOnClickListener(v ->
                 DatePickerUtil.showDatePicker(getContext(), binding.fromDate, 0, 12, false)
         );
@@ -142,7 +137,6 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
         binding.toDate.setOnClickListener(v ->
                 DatePickerUtil.showDatePicker(getContext(), binding.toDate, 0, 12, false)
         );
-
 
         setDate();
 
@@ -444,7 +438,7 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
 
     @Override
     public void onProgressUpdate(int percentage) {
-        
+
     }
 
     @Override
@@ -456,4 +450,136 @@ public class BillIntimationFragment extends Fragment implements ProgressRequestB
     public void onFinish() {
 
     }
+
+//        ComposeView composeView = new ComposeView(requireContext());
+//
+//        // Clean up composition when fragment view is destroyed
+//        composeView.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed.INSTANCE);
+//
+//        // Initial Data Setup
+//        initData();
+//
+//        composeView.setContent(androidx.compose.runtime.internal.ComposableLambdaKt.composableLambdaInstance(-1, true, (composer, index) -> {
+//            // Bridge: Calling the Kotlin Composable from Java
+//            BillIntimationScreenKt.BillIntimationScreen(
+//                    fromDateObs.getValue(),
+//                    toDateObs.getValue(),
+//                    capturedBitmapObs.getValue(),
+//                    () -> { openDatePicker(true); return null; },
+//                    () -> { openDatePicker(false); return null; },
+//                    () -> { showImageSourceDialog(); return null; },
+//                    () -> { capturedBitmapObs.setValue(null); bmp = null; return null; },
+//                    (amount, remarks) -> { validateAndSubmit(amount, remarks); return null; },
+//                    composer, 0
+//            );
+//            return null;
+//        }));
+//
+//        return composeView;
+//    }
+//
+//    private void initData() {
+//        SharedPreferences sharedprefs = requireActivity().getSharedPreferences("login_user_pass", Context.MODE_PRIVATE);
+//        username = sharedprefs.getString("s_uuser", "");
+//        version = sharedprefs.getString("version", "");
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+//        current_date = sdf.format(new Date());
+//        fromDateObs.setValue(current_date);
+//        toDateObs.setValue(current_date);
+//    }
+//
+//    private void openDatePicker(boolean isFrom) {
+//        Calendar cal = Calendar.getInstance();
+//        new DatePickerDialog(requireContext(), (view, y, m, d) -> {
+//            String selected = d + "-" + (m + 1) + "-" + y;
+//            if (isFrom) fromDateObs.setValue(selected);
+//            else toDateObs.setValue(selected);
+//        }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+//    }
+//
+//    private void showImageSourceDialog() {
+//        final Dialog dialog = new Dialog(getActivity());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//        dialog.setContentView(R.layout.bottom_sheet_dialog_callsheet);
+//
+//        dialog.findViewById(R.id.menu_gallery).setOnClickListener(v -> {
+//            dialog.dismiss();
+//            galleryIntent();
+//        });
+//
+//        dialog.findViewById(R.id.menu_camera).setOnClickListener(v -> {
+//            dialog.dismiss();
+//            openCameraIntent();
+//        });
+//
+//        dialog.show();
+//    }
+//
+//    private void validateAndSubmit(String amount, String remarks) {
+//        if (amount.isEmpty()) {
+//            Toast.makeText(getActivity(), "Enter Amount", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        MultipartBody.Part imagePart = null;
+//        if (bmp != null) {
+//            File final_file = bitmapToFile(bmp, "bill_image");
+//            RequestBody fileBody = RequestBody.create(MediaType.parse("image/jpeg"), final_file);
+//            imagePart = MultipartBody.Part.createFormData("image", final_file.getName(), fileBody);
+//        }
+//
+//        submitData(amount, remarks, imagePart);
+//    }
+//
+//    private void submitData(String amount, String remarks, MultipartBody.Part imagePart) {
+//        pDialog = new ProgressDialog(getActivity());
+//        pDialog.setMessage("Loading...");
+//        pDialog.setCancelable(false);
+//        pDialog.show();
+//
+//        // Use your existing Retrofit connection
+//        // ApiHolder api = ServiceConnectionNewURL.getClient(version).create(ApiHolder.class);
+//        // ... Call enqueue logic here as per your original file
+//    }
+//
+//    private void openCameraIntent() {
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        File photoFile = new File(requireActivity().getExternalFilesDir(null), "temp_bill.jpg");
+//        path = photoFile.getAbsolutePath();
+//        // Use your FileProvider here
+//        startActivityForResult(intent, REQUEST_CAPTURE_IMAGE);
+//    }
+//
+//    private void galleryIntent() {
+//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//        intent.setType("image/*");
+//        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_PHOTO);
+//    }
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (requestCode == REQUEST_CAPTURE_IMAGE) {
+//                bmp = BitmapFactory.decodeFile(path);
+//                capturedBitmapObs.setValue(bmp);
+//            } else if (requestCode == SELECT_PHOTO && data != null) {
+//                try {
+//                    uri = data.getData();
+//                    bmp = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
+//                    capturedBitmapObs.setValue(bmp);
+//                } catch (Exception e) { e.printStackTrace(); }
+//            }
+//        }
+//    }
+//
+//    private File bitmapToFile(Bitmap bitmap, String fileName) {
+//        File imageFile = new File(requireActivity().getFilesDir(), fileName + ".jpg");
+//        try (OutputStream os = new FileOutputStream(imageFile)) {
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 60, os);
+//            return imageFile;
+//        } catch (Exception e) { return null; }
+//    }
 }

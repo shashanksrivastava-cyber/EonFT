@@ -25,38 +25,83 @@ class OtherMaterialAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder){
+
             with(lr.get(position)) {
-                val val1 = 1
-                val k = position.plus(val1).toString()
-                binding.materialName.text= k.plus(". ").plus(this.item)
-                binding.quantity.text= this.quantity
-                binding.addText.text= this.quantity
+
+                val k = (position + 1).toString()
+                binding.materialName.text = "$k. $item"
+//                binding.quantity.text = this.quantity
+//                binding.addText.text = this.quantity
+
+//                val totalQty = this.quantity.toIntOrNull() ?: 0
+//                val receivedQty = this.recv_count.toIntOrNull() ?: 0
+
+                val totalQty = this.quantity?.toIntOrNull() ?: 0
+                val receivedQty = this.recv_count?.toIntOrNull() ?: 0
+
+                //val remainingQty = totalQty - receivedQty
+
+//                binding.quantity.text = totalQty.toString()
+//                binding.addText.text = remainingQty.toString()
+
+                val maxQuantity = maxOf(0, totalQty - receivedQty)
+
+                if (this.selectedQty == 0 && maxQuantity > 0) {
+                    this.selectedQty = maxQuantity
+                }
+
+                binding.quantity.text = totalQty.toString()
+                binding.addText.text = this.selectedQty.toString()
+
+//                binding.deleteButton.setOnClickListener {
+//                    var value = binding.addText.text.toString().toIntOrNull() ?: 0
+//
+//                    if (value > 0) {
+//                        value--
+//                        binding.addText.text = value.toString()
+//                    }
+//                }
 
                 binding.deleteButton.setOnClickListener {
 
-                    var value = binding.addText.text.toString().toInt()
-
-                    if (value > 0) {
-                        value--
-                        binding.addText.text = value.toString()
+                    if (this.selectedQty > 0) {
+                        this.selectedQty--
+                        binding.addText.text = this.selectedQty.toString()
                     }
                 }
 
                 binding.addButton.setOnClickListener {
 
-                    var value = binding.addText.text.toString().toInt()
-                    value++
-                    binding.addText.text = value.toString()
+                    if (this.selectedQty < maxQuantity) {
+                        this.selectedQty++
+                        binding.addText.text = this.selectedQty.toString()
+                    } else {
+                        Toast.makeText(context, "Max quantity reached", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
-                if(status.equals("Received")){
-                    binding.addCount.setVisibility(View.GONE)
-                }else {
-                    if(status.equals("Send")){
-                        binding.addCount.setVisibility(View.GONE)
-                    }else{
-                    binding.addCount.setVisibility(View.VISIBLE)
-                    }
+//                binding.addButton.setOnClickListener {
+//                    var value = binding.addText.text.toString().toIntOrNull() ?: 0
+//
+//                    if (value < maxQuantity) {
+//                        value++
+//                        binding.addText.text = value.toString()
+//                    } else {
+//                        // Optional: show message
+//                        Toast.makeText(binding.root.context, "Max quantity reached", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+
+//                if (status == "Received" || status == "Send") {
+//                    binding.addCount.visibility = View.GONE
+//                } else {
+//                    binding.addCount.visibility = View.VISIBLE
+//                }
+
+                if (status == "Received" || status == "Send" || totalQty == receivedQty) {
+                    binding.addCount.visibility = View.GONE
+                } else {
+                    binding.addCount.visibility = View.VISIBLE
                 }
             }
         }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class RemovalList implements Serializable {
 
-    @SerializedName("r_id")
+    @SerializedName("id")
     private int removal_Id;
     @SerializedName("r_name")
     private String removal_Name;

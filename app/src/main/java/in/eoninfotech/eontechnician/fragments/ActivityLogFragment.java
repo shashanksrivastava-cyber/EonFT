@@ -101,6 +101,7 @@ import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.AttResponse;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import jakarta.inject.Inject;
 import retrofit2.Call;
@@ -897,7 +898,7 @@ public class ActivityLogFragment extends Fragment implements ClientListener,Goog
     }
 
     @Override
-    public void damageResponse(RemovalResponse response) {
+    public void damageResponse(DamageResponse response) {
 
     }
 

@@ -118,7 +118,7 @@ public class VideoViewActivity extends AppCompatActivity  {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
 }

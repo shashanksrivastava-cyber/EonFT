@@ -22,6 +22,7 @@ public class DayEnableDecorator implements DayViewDecorator {
 
         private HashSet<CalendarDay> enabledDates;
         public DayEnableDecorator(Collection<CalendarDay> enabledDates) {
+            this.context = context;
             this.enabledDates = new HashSet<>(enabledDates);
         }
         @Override
@@ -32,7 +33,13 @@ public class DayEnableDecorator implements DayViewDecorator {
 
         @Override
         public void decorate(DayViewFacade view) {
-            view.setDaysDisabled(true);
-            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.grey_circle));
+//            view.setDaysDisabled(true);
+//            view.setBackgroundDrawable(ContextCompat.getDrawable(context,R.drawable.grey_circle));
+
+            if (context != null) {
+                view.setBackgroundDrawable(
+                        ContextCompat.getDrawable(context, R.drawable.grey_circle)
+                );
+            }
         }
     }

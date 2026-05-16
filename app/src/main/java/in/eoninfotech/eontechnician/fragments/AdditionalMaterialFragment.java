@@ -64,6 +64,7 @@ import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
 import in.eoninfotech.eontechnician.webservice.AttResponse;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnection;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import retrofit2.Call;
@@ -672,7 +673,7 @@ public class AdditionalMaterialFragment extends Fragment implements ReceiveDevic
     }
 
     @Override
-    public void damageResponse(RemovalResponse response) {
+    public void damageResponse(DamageResponse response) {
 
     }
 

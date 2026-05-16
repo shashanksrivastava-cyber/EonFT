@@ -53,6 +53,7 @@ import retrofit2.Response;
 public class FaultyDevicesActivity extends AppCompatActivity  {
 
     String usrname, zone, version;
+
     public RecyclerView recyclerView;
     private FaultyDevicesAdapter faultyDevicesAdapter;
     private FaultyDrsAdapter faultyDrsAdapter;

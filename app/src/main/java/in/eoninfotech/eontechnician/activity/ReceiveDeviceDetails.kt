@@ -39,6 +39,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
     var transit_through: String? = null
     var status: String? = null
     var itemsCollected: String? = ""
+    var challan_no: String? = ""
     var techid: String? = null
     var main_id: String? = null
     var key: String = ""
@@ -93,6 +94,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
         status = intent.getStringExtra("status").toString()
         main_id = intent.getStringExtra("id").toString()
         type = intent.getStringExtra("type").toString()
+        challan_no = intent.getStringExtra("challan_no").toString()
         receiveDeviceController = ReceiveDeviceController()
         val layoutManager = LinearLayoutManager(applicationContext)
         binding!!.recyclerView.layoutManager = layoutManager
@@ -123,34 +125,61 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
                     val position = checked.keyAt(i)
                     if (checked.valueAt(i) && position < list_change_values.size) {
                         val device = list_change_values[position]
-                        if (!device.status.equals("At Technician", true)) {
+//                        if (!device.status.equals("At Technician", true)) {
+//                            itemsCollected += device.pcb_id + ":"
+//                        }
+                        if (
+                            !device.status.equals("At Technician", true) &&
+                            device.status.equals("In-Transit", true)   // ✅ only selectable ones
+                        ) {
                             itemsCollected += device.pcb_id + ":"
                         }
                     }
                 }
             }
 
-            for (i in 0 until lr.size) {
-                accessories.add(
-                    "${lr[i].id}:" + binding!!.recyclerView
-                        .findViewHolderForAdapterPosition(i)
-                        ?.itemView
-                        ?.findViewById<TextView>(R.id.addText)
-                        ?.text.toString()
-                )
+//            for (i in 0 until lr.size) {
+//                accessories.add(
+//                    "${lr[i].id}:" + binding!!.recyclerView
+//                        .findViewHolderForAdapterPosition(i)
+//                        ?.itemView
+//                        ?.findViewById<TextView>(R.id.addText)
+//                        ?.text.toString()
+//                )
+//            }
+
+            accessories.clear()  // 🔥 IMPORTANT (avoid old data)
+
+            for (item in lr) {
+
+                val totalQty = item.quantity?.toIntOrNull() ?: 0
+                val receivedQty = item.recv_count?.toIntOrNull() ?: 0
+
+                // ❌ Skip if already fully received
+                if (totalQty == receivedQty) continue
+
+                val selectedQty = item.selectedQty
+
+                // ✅ Only send if user selected something
+                if (selectedQty > 0) {
+                    val finalQty = receivedQty + selectedQty
+                    accessories.add("${item.id}:$finalQty")
+                }
             }
 
-            if (list_change_values.size > 0) {
-                // Device list exists — must select at least one device
-                if (itemsCollected.equals("")) {
-                    Toast.makeText(applicationContext, "Please select at least one device!!", Toast.LENGTH_LONG).show()
-                } else {
-                    if (chk.isConnected) submitData() else chk.showConnectionErrorDialog()
-                }
+            val hasDeviceSelected = itemsCollected?.isNotEmpty()
+
+            val hasAccessorySelected = accessories.any {
+                val qty = it.split(":").getOrNull(1)?.toIntOrNull() ?: 0
+                qty > 0
+            }
+
+            if (!hasDeviceSelected!! && !hasAccessorySelected) {
+                Toast.makeText(applicationContext, "Please select at least one device or accessory!!", Toast.LENGTH_LONG).show()
             } else {
-                // ✅ No device list — only accessories, skip device selection check
                 if (chk.isConnected) submitData() else chk.showConnectionErrorDialog()
             }
+
         }
     }
 
@@ -165,7 +194,7 @@ class ReceiveDeviceDetails : AppCompatActivity(), ReceiveDeviceListener {
             .setMessage("Are you sure you want to receive device ?")
             .setPositiveButton("Yes") { dialog, which ->
                 progressDialog!!.show()
-                receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,main_id,techid,itemsCollected,accessories.toString(),binding!!.remarksReceive.text.toString(),this)
+                receiveDeviceController?.receiveDispatchedMaterial(dispatch_id,main_id,techid,itemsCollected,accessories.toString(),binding!!.remarksReceive.text.toString(),challan_no,this)
             }
             .setNegativeButton("No", null)
             .show()

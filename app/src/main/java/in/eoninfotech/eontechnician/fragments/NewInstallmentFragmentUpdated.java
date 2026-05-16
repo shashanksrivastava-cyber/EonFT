@@ -142,6 +142,8 @@ import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelUM;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
+import in.eoninfotech.eontechnician.webservice.DamageList;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnician.webservice.UmVehicleDetail;
 import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
@@ -209,7 +211,7 @@ public class NewInstallmentFragmentUpdated extends Fragment implements ClientLis
     ArrayList<DeviceTypeOtherAis> deviceTypeOtherAis_arr = new ArrayList<>();
     ArrayList<UmVehicleDetail> getUmVehicle = new ArrayList<>();
     ArrayList<RemovalList> removalList = new ArrayList<>();
-    ArrayList<RemovalList> damageList = new ArrayList<>();
+    ArrayList<DamageList> damageList = new ArrayList<>();
     ArrayList<ReplaceReasonDetail> arr_replaceReasons = new ArrayList<>();
     ArrayList<FaultList> list_change_values = new ArrayList<>();
     ArrayList<UnderMaintenanceVehicles> list_change_values_um = new ArrayList<>();
@@ -1060,7 +1062,7 @@ public class NewInstallmentFragmentUpdated extends Fragment implements ClientLis
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position == 0) return;
                 int index = position - 1;
-                missing_reason = String.valueOf(damageList.get(index).getRemoval_Id());
+                missing_reason = String.valueOf(damageList.get(index).getDamage_Id());
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
@@ -3835,9 +3837,9 @@ private void handleWorkTypeSelected(String sWorkId) {
     }
 
     @Override
-    public void damageResponse(RemovalResponse response) {
+    public void damageResponse(DamageResponse response) {
         try {
-            damageList = response.getRemovalList();
+            damageList = response.getDamageLists();
             try {
                 try {
                     removalDetail.clear();
@@ -3846,7 +3848,7 @@ private void handleWorkTypeSelected(String sWorkId) {
                 }
                 removalDetail.add("SELECT REASON");
                 for (int i = 0; i < damageList.size(); i++) {
-                    removalDetail.add(damageList.get(i).getRemoval_Name());
+                    removalDetail.add(damageList.get(i).getDamage_Name());
                 }
                 adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, removalDetail);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

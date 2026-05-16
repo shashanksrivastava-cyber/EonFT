@@ -46,6 +46,7 @@ import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.viewModel.ViewModelCountDetails;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
 import retrofit2.Call;
@@ -288,7 +289,7 @@ public class DevicedashboardDetail extends AppCompatActivity  implements ClientL
     }
 
     @Override
-    public void damageResponse(RemovalResponse response) {
+    public void damageResponse(DamageResponse response) {
 
     }
 
@@ -369,7 +370,7 @@ public class DevicedashboardDetail extends AppCompatActivity  implements ClientL
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
 

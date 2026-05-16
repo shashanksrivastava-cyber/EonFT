@@ -77,8 +77,6 @@ public class DashBoardFragment extends Fragment {
 
         binding.swipeRefresh.setOnRefreshListener(() -> {
 
-            //getDashBoardDetail();
-
             if (checkConnection.isConnected(requireContext())) {
 
                 checkConnection.dismissConnectionDialog();
@@ -112,7 +110,6 @@ public class DashBoardFragment extends Fragment {
             } else if (id == binding.cvFourLogin.getId()) {
                 intent.putExtra("device_value", "4");
             }
-
             intent.putExtra("tab", "1");
             intent.putExtra("other", "2");
             startActivity(intent);

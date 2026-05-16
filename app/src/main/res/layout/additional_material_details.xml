@@ -5,19 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ReceiveDeviceActivity">
+    tools:context=".activity.ReceiveDeviceActivity"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary">
 
     <ScrollView
         android:id="@+id/scrollView_receive"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:layout_marginBottom="50dp">
+        android:background="@color/eonWhite">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/eonWhite">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/addVehicle_receive"

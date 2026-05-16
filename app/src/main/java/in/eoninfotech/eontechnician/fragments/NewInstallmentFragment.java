@@ -136,6 +136,8 @@ import in.eoninfotech.eontechnician.viewModel.ViewModelMainClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelSubClient;
 import in.eoninfotech.eontechnician.viewModel.ViewModelUM;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
+import in.eoninfotech.eontechnician.webservice.DamageList;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnician.webservice.UmVehicleDetail;
 import in.eoninfotech.eontechnician.webservice.VTSTypeResponse;
@@ -196,7 +198,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     ArrayList<DeviceTypeOtherAis> deviceTypeOtherAis_arr = new ArrayList<>();
     ArrayList<UmVehicleDetail> getUmVehicle = new ArrayList<>();
     ArrayList<RemovalList> removalList = new ArrayList<>();
-    ArrayList<RemovalList> damageList = new ArrayList<>();
+    ArrayList<DamageList> damageList = new ArrayList<>();
     ArrayList<ReplaceReasonDetail> arr_replaceReasons = new ArrayList<>();
     ArrayList<FaultList> list_change_values = new ArrayList<>();
      ArrayList<UnderMaintenanceVehicles> list_change_values_um = new ArrayList<>();
@@ -222,6 +224,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     ArrayList<String> removesrNoDetails = new ArrayList<>();
     ArrayList<String> workDetail = new ArrayList<>();
     ArrayList<String> removalDetail = new ArrayList<>();
+    ArrayList<String> damageDetail = new ArrayList<>();
     ArrayList<String> vehicleDetail = new ArrayList<>();
     ArrayList<String> locationDetail = new ArrayList<>();
     ArrayList<String> value_name = new ArrayList<>();
@@ -878,7 +881,7 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 } else {
                     i = i - 1;
                 }
-                missing_reason = String.valueOf((damageList.get(i).getRemoval_Id()));
+                missing_reason = String.valueOf((damageList.get(i).getDamage_Id()));
             }
 
             @Override
@@ -4280,11 +4283,30 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
                 s_date = t_install_date.getText().toString();
                 s_Time = t_install_Time.getText().toString();
                 String image = imageNameFault.getText().toString();
-                SparseBooleanArray checked = lv.getCheckedItemPositions();
+//                SparseBooleanArray checked = lv.getCheckedItemPositions();
+//                others = "";
+//                for (int i = 0; i < checked.size(); i++) {
+//                    int key = checked.keyAt(i);
+//                    others = others + (list_change_values.get(key).getId()) + ":";
+//                }
+                SparseBooleanArray checked =
+                        lv.getCheckedItemPositions();
+
                 others = "";
+
                 for (int i = 0; i < checked.size(); i++) {
+
                     int key = checked.keyAt(i);
-                    others = others + (list_change_values.get(key).getId()) + ":";
+
+                    // IMPORTANT CHECK
+
+                    if (checked.valueAt(i)) {
+
+                        others = others +
+                                list_change_values
+                                        .get(key)
+                                        .getId() + ":";
+                    }
                 }
                 if (others.contains("6")) {
                     veh_condition = "U";
@@ -5992,20 +6014,20 @@ public class NewInstallmentFragment extends Fragment implements ClientListener, 
     }
 
     @Override
-    public void damageResponse(RemovalResponse response) {
+    public void damageResponse(DamageResponse response) {
         try {
-            damageList = response.getRemovalList();
+            damageList = response.getDamageLists();
             try {
                 try {
-                    removalDetail.clear();
+                    damageDetail.clear();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                removalDetail.add("SELECT REASON");
+                damageDetail.add("SELECT REASON");
                 for (int i = 0; i < damageList.size(); i++) {
-                    removalDetail.add(damageList.get(i).getRemoval_Name());
+                    damageDetail.add(damageList.get(i).getDamage_Name());
                 }
-                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, removalDetail);
+                adapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_custom_spinner_item, damageDetail);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 missingType.setAdapter(adapter);
                 ShowProgressBar(false);

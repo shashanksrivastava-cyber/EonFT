@@ -45,6 +45,7 @@ public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<Addition
         holder.date.setText(callSheetDetail.getDate());
         holder.req_no.setText(callSheetDetail.getReq_no());
         holder.image.setText("View Detail");
+        holder.tvDispatchDate.setText(callSheetDetail.getTent_date());
 
         holder.image.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -64,13 +65,14 @@ public class AdditionalMaterialViewAdapter extends RecyclerView.Adapter<Addition
 
     public class ActivityHolder extends RecyclerView.ViewHolder {
 
-        TextView date,image,req_no;
+        TextView date,image,req_no,tvDispatchDate;
         public ActivityHolder(View itemView) {
             super(itemView);
 
             date = itemView.findViewById(R.id.workType);
             image = itemView.findViewById(R.id.textViewAttached);
             req_no = itemView.findViewById(R.id.req_no);
+            tvDispatchDate = itemView.findViewById(R.id.tvDispatchDate);
         }
     }
 }

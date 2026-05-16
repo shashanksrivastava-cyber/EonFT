@@ -285,7 +285,7 @@ public interface ApiHolder {
     Call<RemovalResponse> reqeuestRemovalReason();
 
     @GET("damage-reasons.php")
-    Call<RemovalResponse> reqeuestDamageReason();
+    Call<DamageResponse> reqeuestDamageReason();
 
     @GET("disconnection-reasons.php")
     Call<DisconnectionResponse> reqeuestDisconnection();
@@ -686,7 +686,8 @@ public interface ApiHolder {
             @Field("tech_id") String tech_id,
             @Field("items_collected") String items_collected,
             @Field("accessories_collected") String accessories_collected,
-            @Field("remarks") String remarks);
+            @Field("remarks") String remarks,
+            @Field("challan_no") String challan_no);
 
     @GET("get_item_list.php")
     Call<MainResponse> get_item_list();

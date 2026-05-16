@@ -13,6 +13,7 @@ android {
             keyAlias 'fielddata'
             keyPassword 'fielddata'
             storeFile file('/home/androidpc/Documents/JKsfiles/fielddata.jks')
+            //storeFile file('/media/hp/82699aac-cc8c-4b3a-ba19-1b2239af7196/home/andriodpc/Documents/JKsfiles/fielddata.jks')
             storePassword 'fielddata'
         }
     }
@@ -22,11 +23,11 @@ android {
         minSdkVersion 23
         targetSdkVersion 36
 
-//        versionCode 70 // total number of version changes on play store
-//        versionName "7.5"
+//        versionCode 74 // total number of version changes on play store
+//        versionName "7.7"
 
-        versionCode 73 // total number of version changes on play store
-        versionName "7.6"
+        versionCode 75 // total number of version changes on play store
+        versionName "7.8"
 
         useLibrary 'org.apache.http.legacy'
         multiDexEnabled true
@@ -213,10 +214,25 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:5.3.1'
     testImplementation 'org.mockito.kotlin:mockito-kotlin:5.1.0'
 
-//    implementation "androidx.activity:activity-compose:1.9.0"
-//    implementation "androidx.compose.ui:ui:1.6.8"
-//    implementation "androidx.compose.material3:material3:1.2.1"
-//    implementation "androidx.compose.ui:ui-tooling-preview:1.6.8"
-//    implementation "androidx.compose.ui:ui-tooling:1.6.8"
+    def room_version = "2.6.1" // Stable version for Java-based projects
 
+    implementation "androidx.room:room-runtime:$room_version"
+
+    // Use annotationProcessor for Java
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    // Optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    // Optional - Guava support for Room, if you use Guava
+    implementation "androidx.room:room-guava:$room_version"
+
+    // Optional - Paging 3 Integration
+    implementation "androidx.room:room-paging:$room_version"
+
+    implementation platform('androidx.compose:compose-bom:2024.02.00')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.lifecycle:lifecycle-runtime-compose:2.7.0'
 }

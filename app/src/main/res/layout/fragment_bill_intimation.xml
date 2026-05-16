@@ -161,8 +161,6 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/dashed_green"
-            android:clickable="false"
-            android:editable="false"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:hint="Click here to add photo"
@@ -170,7 +168,10 @@
             android:padding="15dp"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"/>
 
         <RelativeLayout
             android:id="@+id/rel_image"

@@ -17,6 +17,7 @@ import in.eoninfotech.eontechnician.responses.VTSResponse;
 import in.eoninfotech.eontechnician.responses.VehNotAvailReasonResponse;
 import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 
 /**
  * Created by root on 11/1/19.
@@ -42,7 +43,7 @@ public interface ClientListener extends ErrorCallBacks {
 
     void removalResponse(RemovalResponse response);
 
-    void damageResponse(RemovalResponse response);
+    void damageResponse(DamageResponse response);
 
     void collectItemResponse(CollectedItemsResponse response);
 

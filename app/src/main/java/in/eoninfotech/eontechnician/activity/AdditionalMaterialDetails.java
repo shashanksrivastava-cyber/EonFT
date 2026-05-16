@@ -61,10 +61,9 @@ public class AdditionalMaterialDetails extends AppCompatActivity  {
         getContent();
 
     }
-
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
 

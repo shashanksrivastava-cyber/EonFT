@@ -71,7 +71,7 @@ public class SendDeviceDetails extends AppCompatActivity  {
     }
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
     private void initView(){

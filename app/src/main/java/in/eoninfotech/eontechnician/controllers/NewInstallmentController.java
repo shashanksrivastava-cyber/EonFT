@@ -27,6 +27,7 @@ import in.eoninfotech.eontechnician.responses.VehicleTypeResponse;
 import in.eoninfotech.eontechnician.responses.WorkTypeResponse;
 import in.eoninfotech.eontechnician.callbacks.ClientListener;
 import in.eoninfotech.eontechnician.webservice.ApiHolder;
+import in.eoninfotech.eontechnician.webservice.DamageResponse;
 import in.eoninfotech.eontechnician.webservice.ServiceConnectionNewURL;
 import in.eoninfotech.eontechnicianactivity.DeviceCountDetailAdapter;
 import okhttp3.MultipartBody;
@@ -53,7 +54,7 @@ public class NewInstallmentController extends Controller {
     Call<DisconnectionResponse>discCall;
     Call<RemovalActivityResponse>removeActivityCall;
     Call<RemovalResponse>removalResponseCall;
-    Call<RemovalResponse>damageResponseCall;
+    Call<DamageResponse>damageResponseCall;
     Call<CollectedItemsResponse>collectedItemsCall;
     Call<SimOperatorResponse>simOperatorCall;
     Call<SimReplaceResponse>simReplaceCall;
@@ -297,13 +298,13 @@ public class NewInstallmentController extends Controller {
     }
     public void reqeuestDamageReason(ClientListener listener) {
         damageResponseCall = client_att.reqeuestDamageReason();
-        damageResponseCall.enqueue(new Callback<RemovalResponse>() {
+        damageResponseCall.enqueue(new Callback<DamageResponse>() {
             @Override
-            public void onResponse(Call<RemovalResponse> call, Response<RemovalResponse> response) {
+            public void onResponse(Call<DamageResponse> call, Response<DamageResponse> response) {
                 listener.damageResponse(response.body());
             }
             @Override
-            public void onFailure(Call<RemovalResponse> call, Throwable t) {
+            public void onFailure(Call<DamageResponse> call, Throwable t) {
                 try {
                     Snackbar snackbar = Snackbar.make(v, "Server Response Timeout, Try Again!", Snackbar.LENGTH_LONG);
                     View snackbarView = snackbar.getView();

@@ -28,7 +28,10 @@
             android:imeOptions="actionNext"
             android:padding="10dp"
             android:textColorHint="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"/>
 
         <EditText
             android:id="@+id/toDate"
@@ -46,7 +49,10 @@
             android:imeOptions="actionNext"
             android:padding="10dp"
             android:textColorHint="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:focusable="false"
+            android:clickable="true"
+            android:cursorVisible="false"/>
 
     </RelativeLayout>
 

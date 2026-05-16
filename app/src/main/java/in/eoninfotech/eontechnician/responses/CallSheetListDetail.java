@@ -14,12 +14,13 @@ public class CallSheetListDetail {
     private String image;
     @SerializedName("remarks")
     private String remarks;
-
     @SerializedName("id")
     private String id;
-
     @SerializedName("req_no")
     private String req_no;
+    @SerializedName("tent_date")
+    private String tent_date;
+
 
     public String getDate() {
         return date;
@@ -59,5 +60,13 @@ public class CallSheetListDetail {
 
     public void setReq_no(String req_no) {
         this.req_no = req_no;
+    }
+
+    public String getTent_date() {
+        return tent_date;
+    }
+
+    public void setTent_date(String tent_date) {
+        this.tent_date = tent_date;
     }
 }

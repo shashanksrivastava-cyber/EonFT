@@ -6,3 +6,27 @@
 .DS_Store
 /build
 /captures
+
+
+# Generated build folders
+/build
+/app/build
+/app/release
+
+# APK/AAB
+*.apk
+*.aab
+
+# Android Studio
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+
+# Local config
+local.properties
+
+# Accidentally added folders
+app-release/
+app-release (2)/

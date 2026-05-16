@@ -266,7 +266,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Confirm Exit")
                         .setMessage("Are you sure you want to exit?")
-                        .setPositiveButton("Yes", (dialog, which) -> finish())
+                        .setPositiveButton("Yes", (dialog, which) -> finishAffinity())
                         .setNegativeButton("No", null)
                         .show();
             }
@@ -891,21 +891,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         startActivity(intent);
 
         finishAffinity();
-
-//        sharedPref.clearAllExceptLogoutVersion();
-//        appPrefs.setLoggedIn(false);
-//
-//        Intent intent = new Intent(MainActivity.this, LoginActivityNew.class);
-//        intent.putExtra("username", "us");
-//
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//
-//        startActivity(intent);
-//
-//        overridePendingTransition(0,0); // prevent white screen flash
-//        finish();
 
         }
 

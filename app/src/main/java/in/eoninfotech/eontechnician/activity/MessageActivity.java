@@ -141,7 +141,7 @@ public class MessageActivity extends AppCompatActivity  implements MessageAdapte
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
     @Override

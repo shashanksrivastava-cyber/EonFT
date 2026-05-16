@@ -59,6 +59,7 @@ class ReceiveDeviceAdapter(
                     putExtra("status", item.status)
                     putExtra("id", item.id)
                     putExtra("type", item.type)
+                    putExtra("challan_no", item.ref_no)
                 }
                 context.startActivity(intent)
             }

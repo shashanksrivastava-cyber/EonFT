@@ -1,88 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/eonWhite"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:padding="6dp"
+    android:gravity="center_vertical"
+    android:background="@color/eonWhite">
 
+    <!-- 🔹 Accessory Name -->
+    <TextView
+        android:id="@+id/material_name"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="2"
+        android:background="@drawable/grey_background"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="Accessory Name Long Text Example"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:gravity="center_vertical"/>
+
+    <!-- 🔹 Quantity -->
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/grey_background"
+        android:gravity="center"
+        android:text="9999"
+        android:textSize="14sp"
+        android:textColor="@color/black"/>
+
+    <!-- 🔹 Counter Layout -->
     <LinearLayout
-        android:id="@+id/tex_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="5dp"
-        android:orientation="horizontal">
+        android:id="@+id/addCount"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="6dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@drawable/grey_background">
 
-        <TextView
-            android:id="@+id/material_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.2"
-            android:background="@drawable/grey_background"
-            android:gravity="center_vertical"
-            android:layout_gravity="center"
-            android:padding="5dp"
-            android:text=""
-            android:textSize="14sp"
-            android:textColor="@color/black" />
+        <!-- ➖ Minus -->
+        <ImageButton
+            android:id="@+id/delete_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_minus"
+            android:scaleType="centerInside"
+            android:padding="4dp"/>
 
+        <!-- 🔢 Count -->
         <TextView
-            android:id="@+id/quantity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="7dp"
-            android:layout_weight="2.2"
-            android:padding="5dp"
-            android:background="@drawable/grey_background"
+            android:id="@+id/addText"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:text="0"
             android:gravity="center"
-            android:text=""
-            android:layout_marginEnd="5dp"
-            android:textSize="14sp"
-            android:textColor="@color/black"/>
+            android:textSize="16sp"
+            android:textColor="@color/eonBlue"
+            android:maxLength="4"/>
 
-        <LinearLayout
-            android:id="@+id/addCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            android:layout_weight="2"
-            android:background="@drawable/grey_background">
-
-            <ImageButton
-                android:layout_height="30dp"
-                android:layout_width="30dp"
-                android:layout_gravity="top|left"
-                android:layout_marginStart="3dp"
-                android:id="@+id/delete_button"
-                android:visibility="visible"
-                android:background="@drawable/ic_minus"/>
-
-            <TextView
-                android:id="@+id/addText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:textColor="@color/eonBlue"
-                android:text="0"
-                android:visibility="visible"
-                android:textSize="16sp"
-                android:padding="5dp"
-                android:maxLength="4"/>
-
-            <ImageButton
-                android:layout_height="30dp"
-                android:layout_width="30dp"
-                android:layout_gravity="top|left"
-                android:layout_marginStart="3dp"
-                android:id="@+id/add_button"
-                android:visibility="visible"
-                android:background="@drawable/circle_plus"/>
-
-        </LinearLayout>
+        <!-- ➕ Plus -->
+        <ImageButton
+            android:id="@+id/add_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/circle_plus"
+            android:scaleType="centerInside"
+            android:padding="4dp"/>
 
     </LinearLayout>
 

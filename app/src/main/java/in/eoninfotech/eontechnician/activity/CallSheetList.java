@@ -162,7 +162,7 @@ public class CallSheetList extends AppCompatActivity  {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        getOnBackPressedDispatcher().onBackPressed();
         return true;
     }
 }
